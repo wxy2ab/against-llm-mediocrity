@@ -65,6 +65,25 @@ Tag: Needs governance
 Consider coding tasks. At the level of concrete implementation, things like reading and writing files, wrapping an API, building an HTML page, or filling in boilerplate are often well aligned with value, and models usually do well. But once the question becomes "what is the real business context here?", "how will this architecture evolve over time?", or "what are the real edge cases and failure modes?", the model can quickly fall back into mediocrity. In other words, coding is often not globally extraordinary; it is locally strong and only partially aligned overall.
 :::
 
+## How to resist LLM autoregressive mediocrity
+
+:::cards
+### Agent tasks
+Tag: Strengthen the environment
+
+For agentic systems, the key is not just to make the model stronger. The real move is to strengthen hard boundaries and hard feedback in the environment: which actions are clearly disallowed, which outcomes can be explicitly verified, and which failures will surface immediately. When the model can no longer continue reliably, the system should introduce a minimal human intervention point so the human supplies only the missing variable rather than taking the whole task back.
+
+### High-exploration tasks
+Tag: Build a control space
+
+For high-exploration tasks, it is often a mistake to stay in the raw semantic space and keep sampling continuations. A better move is to cut away from the original semantic surface and reconstruct the problem as a searchable control space: a hypothesis set, a state space, a constraint graph, an evaluation rubric, or a failure-mode list. Search, compare, and filter inside that control space first, then render the final answer.
+
+### Convertible tasks
+Tag: Turn them extraordinary
+
+Some tasks are not doomed to mediocrity; they can be converted. The key is to find the right method and add the missing environmental boundaries, feedback signals, and human participation points, so a task that would normally slide into autoregressive mediocrity is restructured into one where the model can behave autoregressively extraordinarily.
+:::
+
 ## Where this is going
 
 - The public layer explains the problem without requiring readers to begin with the paper.
