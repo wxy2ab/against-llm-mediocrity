@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Against LLM Mediocrity</title>
+  <desc id="desc">A structured control-space illustration for LLM governance.</desc>
+  <rect width="1200" height="630" fill="#f8f4ee"/>
+  <rect x="70" y="70" width="1060" height="490" rx="18" fill="#fffdf9" stroke="#222831" stroke-width="3"/>
+  <path d="M140 355 C250 230 385 450 505 315 S755 180 890 300 S1015 440 1060 260" fill="none" stroke="#d45d4c" stroke-width="12" stroke-linecap="round"/>
+  <path d="M145 430 L1030 430" stroke="#222831" stroke-width="3" stroke-dasharray="12 14"/>
+  <circle cx="300" cy="300" r="54" fill="#f2cc5d" stroke="#222831" stroke-width="3"/>
+  <circle cx="565" cy="315" r="54" fill="#6fb3a8" stroke="#222831" stroke-width="3"/>
+  <circle cx="825" cy="278" r="54" fill="#496a9f" stroke="#222831" stroke-width="3"/>
+  <text x="140" y="160" font-family="Inter, Arial, sans-serif" font-size="64" font-weight="800" fill="#222831">Against LLM Mediocrity</text>
+  <text x="145" y="220" font-family="Inter, Arial, sans-serif" font-size="30" fill="#3f4651">From fluent default answers to governed knowledge.</text>
+  <text x="145" y="500" font-family="Inter, Arial, sans-serif" font-size="26" fill="#222831">Science · Engineering · Human-AI Collaboration</text>
+</svg>
