@@ -67,52 +67,52 @@ export const content: Record<Lang, SiteCopy> = {
         path: "/",
         title: "Against LLM Mediocrity",
         navTitle: "Home",
-        kicker: "A science-to-engineering map for better AI use",
+        kicker: "A reader journey from intuition to mechanism to practice",
         summary:
-          "LLMs often sound coherent before they are actually correct, useful, or extraordinary. This project explains why that happens, when it does not happen, and how to design workflows that turn fluent defaults into governed knowledge.",
+          "LLMs can produce fluent answers long before they produce truly valuable answers. This project starts from that everyday experience, explains the mechanism behind it, and turns the theory into practical ways to use and build AI systems with less wasted effort.",
         heroPoints: [
-          "Name the hard limits instead of treating every failure as a prompt problem.",
-          "Separate tasks where autoregression is powerful from tasks where it hides value.",
-          "Build control spaces, validation loops, and human escalation protocols.",
+          "First, make the problem easy to recognize: fluent output can still be structurally mediocre.",
+          "Then, explain the mechanism: some tasks mismatch the model's default generation dynamics.",
+          "Finally, turn the mechanism into practice: control spaces, validation loops, and GKO-based systems.",
         ],
         sections: [
           {
-            eyebrow: "Problem",
-            title: "Fluent output is not the same as high task value.",
+            eyebrow: "Why this exists",
+            title: "The hard limit is not always intelligence. Sometimes it is task shape.",
             body:
-              "Modern LLM systems can sample, critique, revise, retrieve, plan, and use tools. Yet many high-value tasks still plateau in answers that are locally reasonable and globally mediocre. The failure is not random. It often comes from structural mismatches between the distribution the model can easily generate and the value function the task actually rewards.",
+              "A user asks for a strategy, a diagnosis, a design, a proof, or a plan. The model gives something clear, coherent, and even improved after several revisions. But the decisive variable is still missing. That is the phenomenon this project calls autoregressive mediocrity: not stupidity, not randomness, but a mismatch between what is easy to generate and what the task actually rewards.",
           },
           {
-            eyebrow: "Why it matters",
-            title: "Understanding the hard limits saves effort.",
+            eyebrow: "What changes",
+            title: "Once you understand the mechanism, you stop fighting the model in the wrong place.",
             cards: [
               {
-                title: "Avoid prompt superstition",
+                title: "Stop treating every failure as a prompt failure",
                 body:
-                  "If a task has hidden state, rare high-value structures, or nonlocal constraints, asking for another polished draft may only produce smoother mediocrity.",
-                tag: "Use fewer blind retries",
+                  "Some failures are not fixed by asking for more depth, more creativity, or a cleaner style. The task may need a different representation before generation becomes useful.",
+                tag: "Fewer blind retries",
               },
               {
-                title: "Use models where they are extraordinary",
+                title: "Use LLMs where they are naturally strong",
                 body:
-                  "Compression, transformation, taxonomy generation, edge-case enumeration, and semantic decompression often align with LLM strengths.",
-                tag: "Exploit positive alignment",
+                  "LLMs can be extraordinary at compression, transformation, comparison, edge-case generation, and rendering from a good structure. The point is to move more work into those regimes.",
+                tag: "Positive alignment",
               },
               {
-                title: "Know when humans must govern",
+                title: "Know what humans must govern",
                 body:
-                  "Humans should not merely proofread. They should set values, choose tradeoffs, authorize risk, and supply the missing control variables that tools cannot infer.",
-                tag: "Collaborate deliberately",
+                  "Humans should not merely proofread fluent drafts. They should set values, choose tradeoffs, authorize risk, and supply missing control variables.",
+                tag: "Better collaboration",
               },
             ],
           },
           {
-            eyebrow: "Project path",
-            title: "From public explanation to open systems.",
+            eyebrow: "Where this is going",
+            title: "The site is a public explanation layer for future papers and open systems.",
             bullets: [
-              "Start with a bilingual knowledge base that makes the problem understandable.",
-              "Add papers that formalize autoregressive mediocrity, extraordinary regimes, and Knowledge Governance.",
-              "Add open-source projects that implement GKO-style control objects, validation loops, and escalation protocols.",
+              "The public layer explains the problem without requiring readers to begin with the paper.",
+              "The theory layer develops autoregressive mediocrity, extraordinary regimes, four primitive mismatches, and Knowledge Governance.",
+              "The engineering layer will grow into open-source tools for GKO-style control objects, validation loops, and human escalation protocols.",
             ],
           },
         ],
@@ -120,44 +120,44 @@ export const content: Record<Lang, SiteCopy> = {
       science: {
         key: "science",
         path: "/science",
-        title: "Popular Science: Why LLMs Become Mediocre",
-        navTitle: "Science",
-        kicker: "A plain-language introduction",
+        title: "Why It Matters",
+        navTitle: "Why It Matters",
+        kicker: "A plain-language entry point",
         summary:
-          "The core issue is not that LLMs are useless or doomed. The issue is that some tasks reward exactly what LLMs generate easily, while other tasks reward structures that are rare, hidden, delayed, or underspecified.",
+          "The important point is not that LLMs are useless or doomed. The point is that fluent generation can hide the difference between an answer that sounds good and an answer that reaches the structure the task actually needs.",
         heroPoints: [
-          "Autoregressive mediocrity is a task regime, not a moral judgment.",
-          "Autoregressive extraordinary is the opposite regime, where local generation compounds into value.",
-          "The practical question is how to move a task from the first regime into the second.",
+          "A model can improve surface quality while staying inside the same wrong abstraction.",
+          "Repeated refinement can make a mediocre answer more convincing.",
+          "Understanding the hard limit tells you when to prompt, when to restructure, and when to ask a human or a tool.",
         ],
         sections: [
           {
-            title: "What is autoregressive mediocrity?",
+            title: "The everyday version of the problem",
             body:
-              "It is the condition where a model keeps producing plausible, fluent, incrementally improved outputs while staying far from what the task truly needs. The answers may be diverse and polished, but they remain inside the same low-value basin.",
+              "You ask an LLM to solve a hard task. It gives a plausible answer. You ask it to improve the answer. It becomes smoother, clearer, more complete, maybe even more persuasive. But the decisive missing thing remains missing: the hidden assumption, the rare option, the real constraint, the state change, the wrong objective, or the structure that makes the answer actually work.",
           },
           {
-            title: "What is autoregressive extraordinary?",
+            title: "Why more iteration can still fail",
             body:
-              "Some tasks naturally fit the model's strengths. Summarizing a dense context, turning notes into a structured memo, translating register, generating candidate edge cases, or expanding a good outline can become better through ordinary continuation and revision. In these cases, autoregression is not a bottleneck. It is the engine.",
+              "Iteration helps when each local improvement points toward the real goal. It fails when local polish is not the bottleneck. If the task depends on a hidden state, a low-probability insight, a global dependency, or a value criterion that was never made explicit, another fluent draft may simply decorate the same mistake.",
           },
           {
-            title: "Where people waste effort",
+            title: "Where understanding saves time",
             cards: [
               {
-                title: "Asking for more polish when the abstraction is wrong",
+                title: "Do not polish the wrong abstraction",
                 body:
-                  "A better tone cannot fix a wrong problem model. First extract variables, states, constraints, and success conditions.",
+                  "If the model represented the task incorrectly, style improvements are cosmetic. First identify the variables, constraints, states, and success conditions.",
               },
               {
-                title: "Treating missing state as missing intelligence",
+                title: "Do not confuse missing state with missing intelligence",
                 body:
-                  "If utility depends on a hidden user preference, market regime, legal boundary, or physical affordance, the system needs state discovery or a human answer.",
+                  "If the right answer depends on a user preference, market regime, legal boundary, or physical context, the system needs observation, validation, or a targeted human answer.",
               },
               {
-                title: "Using output voting when the high-value answer is rare",
+                title: "Do not vote your way into the default answer",
                 body:
-                  "Majority agreement can reinforce the default basin. Tail search, perturbation, retrieval, or structural validation may be needed.",
+                  "When the best answer is rare, majority agreement can reinforce the common answer. You need tail search, perturbation, retrieval, or structural validation.",
               },
             ],
           },
@@ -166,40 +166,54 @@ export const content: Record<Lang, SiteCopy> = {
       framework: {
         key: "framework",
         path: "/framework",
-        title: "Scientific Framework: Four Primitive Mismatches",
-        navTitle: "Framework",
-        kicker: "A diagnostic theory for when fluent generation diverges from value",
+        title: "Mechanism",
+        navTitle: "Mechanism",
+        kicker: "The paper-facing theory behind the public explanation",
         summary:
-          "The framework explains susceptibility to autoregressive mediocrity through four primitive mismatch axes: aggregation, support, state, and specification.",
+          "The theory treats autoregressive mediocrity as a task- and budget-dependent regime. It appears when the reachable distribution of fluent outputs is poorly aligned with the task's true value landscape.",
         heroPoints: [
-          "Aggregation: local improvements do not compose into global value.",
-          "Support: near-optimal solutions are low probability or hard to reach.",
-          "State: the right answer depends on hidden or changing conditions.",
-          "Specification: the accessible proxy diverges from true utility.",
+          "Autoregressive mediocrity: fluent, plausible outputs remain concentrated away from high-value regions.",
+          "Autoregressive extraordinary: local continuation and task value reinforce each other.",
+          "Four primitive mismatches explain when the first regime is likely to appear.",
         ],
         sections: [
           {
-            title: "Aggregation mismatch",
+            title: "From output fluency to value alignment",
             body:
-              "Global task value cannot be recovered by adding up local improvements. This appears in narrative payoff, strategic coherence, software architecture, multi-step reasoning, and any task where one local choice changes the meaning of another.",
+              "The central scientific question is not whether a model can generate good text. It is whether the generation process exposes and preserves the variables that determine task value. In many tasks, the fluent output space is too close to the proxy objective and too far from the real one.",
           },
           {
-            title: "Support mismatch",
-            body:
-              "The best answer may exist in the model's distribution but be too rare under practical budgets. More samples may improve the average while still missing the decisive structure.",
+            title: "The four primitive mismatches",
+            cards: [
+              {
+                title: "Aggregation",
+                body:
+                  "Local improvements do not reliably compose into global value. The task depends on long-range coordination, delayed payoff, or coupled constraints.",
+              },
+              {
+                title: "Support",
+                body:
+                  "Near-optimal solutions are low probability or hard to reach under the available inference budget and search operators.",
+              },
+              {
+                title: "State",
+                body:
+                  "The ranking of outputs depends on hidden, changing, or underspecified states that are not fully contained in the prompt.",
+              },
+              {
+                title: "Specification",
+                body:
+                  "The accessible proxy objective diverges from the true objective: the answer can satisfy the prompt while missing what actually matters.",
+              },
+            ],
           },
           {
-            title: "State mismatch",
+            title: "Why extraordinary regimes matter",
             body:
-              "The same output can be right under one latent state and wrong under another. Useful systems therefore need explicit state hypotheses, state checks, and revocation triggers.",
+              "The framework is not anti-autoregression. It also names the opposite regime: autoregressive extraordinary. When the model's local continuation tendencies align with value, tasks such as context compression, taxonomy generation, edge-case enumeration, register transfer, query formulation, and semantic decompression can become unusually effective.",
           },
           {
-            title: "Specification mismatch",
-            body:
-              "The proxy objective is not the real objective. A response can satisfy the prompt, benchmark, rubric, or evaluator while missing the tacit criterion that actually matters.",
-          },
-          {
-            title: "Compound patterns are not always new primitives",
+            title: "Derivative patterns should be explained, not endlessly renamed",
             bullets: [
               "Order-sensitive trajectories, noisy-context construal, corpus-prior dominance, and emergent specification are important patterns.",
               "They are usually better diagnosed as interactions among the four primitive mismatches, representation choice, inference budget, and control policy.",
@@ -211,29 +225,29 @@ export const content: Record<Lang, SiteCopy> = {
       engineering: {
         key: "engineering",
         path: "/engineering",
-        title: "Engineering Playbook: Knowledge Governance",
-        navTitle: "Engineering",
-        kicker: "Turn high-mismatch tasks into governed lower-mismatch workflows",
+        title: "Governance",
+        navTitle: "Governance",
+        kicker: "Concrete engineering practice based on the mechanism",
         summary:
-          "Knowledge Governance separates final rendering from the acquisition, validation, deployment, and revision of task-specific control knowledge.",
+          "The engineering move is to stop asking the model to solve every hard task directly in final-answer space. Instead, build intermediate control objects that make the task easier to generate, verify, reuse, and revise.",
         heroPoints: [
-          "Do not search only over final answers.",
-          "Search over intermediate control objects.",
-          "Validate, prioritize, weaken, and revoke what the system learns.",
+          "Reparameterize hard tasks into lower-mismatch subtasks.",
+          "Represent task-specific control knowledge outside the final prose.",
+          "Validate, prioritize, weaken, and revoke that knowledge over time.",
         ],
         sections: [
           {
-            title: "Mediocrity-to-Extraordinary Transformation",
+            title: "What to do differently tomorrow",
             body:
-              "The central engineering move is to reparameterize a hard final-output task into subtasks where the model is strong: compression, rubric generation, state enumeration, edge-case discovery, outline construction, failure-mode analysis, query formulation, and semantic decompression.",
+              "Before asking for another final answer, ask what intermediate object would change the task shape: a state matrix, rubric, dependency graph, failure-mode list, edge-case set, query plan, construal extraction, or structural outline. These are often tasks where LLMs are strong, and they give the final renderer something better to render from.",
           },
           {
-            title: "Decoupled control space",
+            title: "Knowledge Governance",
             body:
-              "Instead of asking the model to directly render the final answer from an underspecified prompt, construct a control space containing variables, constraints, invariants, states, rubrics, dependencies, and validation signals.",
+              "Knowledge Governance separates final rendering from the acquisition and management of task-specific control knowledge. The goal is not to make a heavier prompt. The goal is to create a control layer where important assumptions, constraints, preferences, and failure conditions can be tested and revised.",
           },
           {
-            title: "Governed Knowledge Objects",
+            title: "Governed Knowledge Objects in practice",
             cards: [
               {
                 title: "Condition",
@@ -460,52 +474,52 @@ export const content: Record<Lang, SiteCopy> = {
         path: "/zh/",
         title: "对抗 LLM 自回归平庸",
         navTitle: "首页",
-        kicker: "从科普到科学，再到工程实践",
+        kicker: "从直觉问题，到机制解释，再到实践方法",
         summary:
-          "LLM 很容易生成流畅、连贯、看起来合理的答案，但这不等于答案真正正确、有价值或卓越。本项目解释这种平庸如何产生、什么时候不会产生，以及怎样把默认生成改造成可治理的知识工作流。",
+          "LLM 可以很早就生成流畅答案，但很晚才真正生成高价值答案。本项目先从日常可感知的问题讲起，再解释背后的机制，最后把理论转化成更少走弯路的 AI 使用与工程方法。",
         heroPoints: [
-          "把硬局限说清楚，而不是把每次失败都归因于 prompt 没写好。",
-          "区分 LLM 原生擅长的任务与容易隐藏价值的任务。",
-          "构造控制空间、验证循环和最小充分人类问题。",
+          "先让问题可识别：流畅输出仍可能是结构性平庸。",
+          "再解释机制：有些任务与模型默认生成动力学错配。",
+          "最后进入实践：控制空间、验证循环与基于 GKO 的系统。",
         ],
         sections: [
           {
-            eyebrow: "问题",
-            title: "流畅输出不等于高任务价值。",
+            eyebrow: "为什么要做",
+            title: "硬局限不总是“智能不够”，有时是任务形状不对。",
             body:
-              "现在的 LLM 系统可以采样、批判、修订、检索、规划和调用工具。但在许多高价值任务中，系统仍会停留在局部合理、全局平庸的答案上。问题并不随机，往往来自模型容易生成的分布与任务真实价值函数之间的结构性错配。",
+              "用户让模型做战略、诊断、设计、证明或计划。模型给出清楚、连贯、甚至多轮修改后更好的答案，但决定价值的变量仍然缺失。这里说的自回归平庸，不是笨，也不是随机，而是模型容易生成的东西与任务真正奖励的东西发生了错配。",
           },
           {
-            eyebrow: "为什么重要",
-            title: "理解硬局限，才能少走弯路。",
+            eyebrow: "理解之后会改变什么",
+            title: "理解机制后，就不会在错误的位置和模型较劲。",
             cards: [
               {
-                title: "减少 prompt 迷信",
+                title: "不再把每次失败都当成 prompt 失败",
                 body:
-                  "如果任务包含隐藏状态、低概率高价值结构或非局部约束，反复要求“再优化一版”可能只会得到更顺滑的平庸。",
-                tag: "少做盲目重试",
+                  "有些失败不是靠“更深入一点”“更有创意一点”“语气更好一点”解决的。任务可能需要先换一种表示方式。",
+                tag: "减少盲目重试",
               },
               {
-                title: "在 LLM 卓越区使用 LLM",
+                title: "把 LLM 用在它天然强的地方",
                 body:
-                  "压缩、转换、分类、边界情况枚举、语义解压和提纲扩写常常与模型能力正向一致。",
+                  "LLM 在压缩、转换、比较、边界情况生成、从好结构渲染文本等任务上可能非常强。关键是把更多工作转移到这些正向对齐的任务形态里。",
                 tag: "利用正向对齐",
               },
               {
-                title: "知道人应该治理什么",
+                title: "知道人类到底要治理什么",
                 body:
-                  "人不只是校对员。人要设定价值、选择取舍、授权风险，并提供工具无法可靠推断的控制变量。",
+                  "人不只是校对流畅草稿的人。人要设定价值、选择取舍、授权风险，并提供系统无法可靠推断的控制变量。",
                 tag: "有意识地协作",
               },
             ],
           },
           {
-            eyebrow: "项目路径",
-            title: "从公开解释到开源系统。",
+            eyebrow: "项目会往哪里走",
+            title: "这个网站是未来论文和开源系统的公共解释层。",
             bullets: [
-              "先建立双语知识库，让问题本身可理解、可讨论。",
-              "继续加入论文，形式化自回归平庸、自回归卓越与 Knowledge Governance。",
-              "加入基于 GKO 原理的开源项目，实现控制对象、验证循环和人类升级协议。",
+              "公共解释层先让不读论文的人也能理解这个问题。",
+              "理论层继续展开自回归平庸、自回归卓越、四类 primitive mismatch 与 Knowledge Governance。",
+              "工程层会逐步加入基于 GKO 原理的开源工具，实现控制对象、验证循环和人类升级协议。",
             ],
           },
         ],
@@ -513,44 +527,44 @@ export const content: Record<Lang, SiteCopy> = {
       science: {
         key: "science",
         path: "/zh/science",
-        title: "科普：为什么 LLM 会平庸",
-        navTitle: "科普",
-        kicker: "用普通语言解释问题",
+        title: "为什么重要",
+        navTitle: "为什么重要",
+        kicker: "通俗解释入口",
         summary:
-          "核心不是 LLM 无用，也不是 LLM 注定失败。核心是：有些任务奖励模型容易生成的东西，有些任务奖励罕见、隐藏、延迟或未说明的结构。",
+          "关键不是说 LLM 没用，也不是说 LLM 注定失败。关键是：流畅生成会掩盖“听起来好”和“真正到达任务结构”之间的差距。",
         heroPoints: [
-          "自回归平庸是一种任务状态，不是道德评价。",
-          "自回归卓越是相反状态：局部生成会复合成真实价值。",
-          "实践问题是如何把任务从前者转化到后者。",
+          "模型可能在表面质量上进步，却仍停留在同一个错误抽象里。",
+          "多轮修改可能让平庸答案更有说服力。",
+          "理解硬局限后，才知道什么时候该提示，什么时候该重构任务，什么时候该问人或调用工具。",
         ],
         sections: [
           {
-            title: "什么是自回归平庸？",
+            title: "日常版本的问题",
             body:
-              "它指的是模型不断生成合理、流畅、逐步改进的输出，但仍然离任务真正需要的答案很远。答案可以很多样、很漂亮，却仍停留在同一个低价值盆地里。",
+              "你让 LLM 做一个困难任务。它给出一个合理答案。你让它改进，它变得更顺、更清楚、更完整，甚至更有说服力。但真正缺失的东西仍然缺失：隐藏假设、稀有选项、真实约束、状态变化、错误目标，或让答案真正成立的结构。",
           },
           {
-            title: "什么是自回归卓越？",
+            title: "为什么多轮修改仍会失败",
             body:
-              "有些任务天然符合模型优势：总结长上下文，把笔记变成结构化备忘录，转换语气，生成边界情况，或从好提纲扩写文本。此时自回归不是瓶颈，而是优势机制。",
+              "当每个局部改进都指向真实目标时，多轮迭代很有用。但如果瓶颈不是局部润色，而是隐藏状态、低概率洞察、全局依赖或没有外化的价值标准，那么另一个流畅草稿可能只是把同一个错误装饰得更漂亮。",
           },
           {
-            title: "常见弯路",
+            title: "理解之后能少走哪些弯路",
             cards: [
               {
-                title: "抽象错了却继续润色",
+                title: "不要润色错误抽象",
                 body:
-                  "更好的语气不能修复错误的问题模型。要先抽取变量、状态、约束和成功条件。",
+                  "如果模型对任务的表示方式错了，风格改进只是表层变化。要先识别变量、约束、状态和成功条件。",
               },
               {
-                title: "把缺状态误判成缺智能",
+                title: "不要把缺状态误判成缺智能",
                 body:
-                  "如果价值取决于隐藏偏好、市场状态、法律边界或物理可供性，系统需要发现状态或询问人。",
+                  "如果正确答案取决于用户偏好、市场状态、法律边界或物理环境，系统需要观察、验证或向人提出有针对性的问题。",
               },
               {
-                title: "高价值答案很罕见时还用投票",
+                title: "不要用投票强化默认答案",
                 body:
-                  "多数一致可能强化默认答案。此时需要尾部搜索、扰动、检索或结构验证。",
+                  "当最好答案很罕见时，多数一致可能强化常见答案。此时需要尾部搜索、扰动、检索或结构验证。",
               },
             ],
           },
@@ -559,40 +573,54 @@ export const content: Record<Lang, SiteCopy> = {
       framework: {
         key: "framework",
         path: "/zh/framework",
-        title: "科学框架：四类 primitive mismatch",
-        navTitle: "框架",
-        kicker: "解释为什么流畅生成会偏离真实价值",
+        title: "机制",
+        navTitle: "机制",
+        kicker: "公共解释背后的论文式理论",
         summary:
-          "这个框架用四类原始错配解释自回归平庸：aggregation、support、state 和 specification mismatch。",
+          "理论上，自回归平庸是一种与任务、表示和预算有关的状态：在可达的流畅输出分布与任务真实价值景观之间，存在系统性错配。",
         heroPoints: [
-          "Aggregation：局部改进不能组合成全局价值。",
-          "Support：近似最优答案位于低概率或难到达区域。",
-          "State：正确答案依赖隐藏或变化的状态。",
-          "Specification：可访问代理目标偏离真实效用。",
+          "自回归平庸：流畅、合理的输出仍集中在远离高价值区域的位置。",
+          "自回归卓越：局部延续倾向与任务价值相互强化。",
+          "四类 primitive mismatch 解释第一种状态何时容易出现。",
         ],
         sections: [
           {
-            title: "Aggregation mismatch",
+            title: "从输出流畅性到价值对齐",
             body:
-              "全局价值不能通过局部改进相加得到。它常出现在叙事铺垫、战略一致性、软件架构、多步推理和任何一个局部选择会改变其他选择意义的任务中。",
+              "核心科学问题不是模型能不能生成好看的文本，而是生成过程是否暴露并保留了决定任务价值的变量。很多任务里，流畅输出空间离 proxy 很近，却离真实目标很远。",
           },
           {
-            title: "Support mismatch",
-            body:
-              "最佳答案也许存在于模型分布中，但在实际预算下太罕见。更多采样可能提高平均质量，却仍错过决定性结构。",
+            title: "四类 primitive mismatch",
+            cards: [
+              {
+                title: "Aggregation",
+                body:
+                  "局部改进不能可靠组合成全局价值。任务依赖长程协调、延迟回报或耦合约束。",
+              },
+              {
+                title: "Support",
+                body:
+                  "近似最优答案在当前推理预算和搜索算子下概率很低，或者很难到达。",
+              },
+              {
+                title: "State",
+                body:
+                  "输出排序依赖隐藏、变化或未说明的状态，而这些状态没有完整包含在 prompt 里。",
+              },
+              {
+                title: "Specification",
+                body:
+                  "可访问代理目标偏离真实目标：答案可以满足 prompt，却错过真正重要的标准。",
+              },
+            ],
           },
           {
-            title: "State mismatch",
+            title: "为什么自回归卓越同样重要",
             body:
-              "同一个输出在一种潜在状态下正确，在另一种状态下错误。因此系统需要显式状态假设、状态检查和撤销触发器。",
+              "这个框架并不是反对自回归。它也命名了相反状态：自回归卓越。当模型的局部延续倾向与价值对齐时，上下文压缩、分类生成、边界情况枚举、语气转换、查询构造和语义解压都可能非常有效。",
           },
           {
-            title: "Specification mismatch",
-            body:
-              "代理目标不等于真实目标。答案可能满足 prompt、benchmark、rubric 或 evaluator，却漏掉真正重要的隐性标准。",
-          },
-          {
-            title: "复合现象不一定是新 primitive",
+            title: "复合现象应该被解释，而不是无限命名",
             bullets: [
               "顺序敏感轨迹、噪声上下文构造失败、语料先验支配和动态规格浮现都很重要。",
               "但它们通常可以拆解为四类错配与表示方式、推理预算、控制策略之间的相互作用。",
@@ -604,29 +632,29 @@ export const content: Record<Lang, SiteCopy> = {
       engineering: {
         key: "engineering",
         path: "/zh/engineering",
-        title: "工程实践：Knowledge Governance",
-        navTitle: "工程",
-        kicker: "把高错配任务转成可治理的低错配流程",
+        title: "治理方法",
+        navTitle: "治理方法",
+        kicker: "基于机制的具体工程应用",
         summary:
-          "Knowledge Governance 把最终渲染与任务特定控制知识的获取、验证、部署和修订分开。",
+          "工程上的关键动作，是不要让模型把所有困难任务都直接在最终答案空间里解决，而是构造中间控制对象，让任务更容易生成、验证、复用和修订。",
         heroPoints: [
-          "不要只在最终答案空间里搜索。",
-          "也要搜索中间控制对象。",
-          "对系统学到的东西进行验证、排序、弱化和撤销。",
+          "把高错配任务重参数化为低错配子任务。",
+          "把任务特定控制知识表示在最终文本之外。",
+          "对这些知识进行验证、排序、弱化和撤销。",
         ],
         sections: [
           {
-            title: "从平庸到卓越的任务转化",
+            title: "明天就可以改变的做法",
             body:
-              "核心工程动作是把困难的最终输出任务重参数化为模型擅长的子任务：压缩、rubric 生成、状态枚举、边界情况发现、提纲构造、失败模式分析、查询生成和语义解压。",
+              "在要求模型再给一个最终答案之前，先问：什么中间对象会改变任务形状？状态矩阵、rubric、依赖图、失败模式列表、边界情况集合、查询计划、场景抽取或结构提纲，往往都是 LLM 更擅长的任务，也能给最终渲染提供更好的依据。",
           },
           {
-            title: "解耦控制空间",
+            title: "Knowledge Governance",
             body:
-              "不要让模型直接从欠规格 prompt 渲染最终答案，而是先构造控制空间：变量、约束、不变量、状态、rubric、依赖关系和验证信号。",
+              "Knowledge Governance 把最终渲染与任务特定控制知识的获取和管理分开。它不是把 prompt 写得更长，而是建立一个控制层，让重要假设、约束、偏好和失败条件可以被测试、修订和复用。",
           },
           {
-            title: "Governed Knowledge Objects",
+            title: "Governed Knowledge Objects 的实践形态",
             cards: [
               {
                 title: "适用条件",

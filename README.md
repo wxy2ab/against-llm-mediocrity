@@ -11,12 +11,14 @@ The first version is based on four source drafts:
 
 The site does not publish those drafts verbatim. It reorganizes them into a public-facing English-first structure with Chinese mirror pages.
 
-## Site Structure
+The content is organized as a reader journey: public explanation -> theoretical mechanism -> engineering application. In other words, "popular explanation / scientific theory / engineering practice" is the logic of the writing, not a set of literal section labels.
+
+## Site Routes
 
 - `/` and `/zh/`: bilingual home pages
-- `/science` and `/zh/science`: popular science introduction
-- `/framework` and `/zh/framework`: scientific framework and mismatch taxonomy
-- `/engineering` and `/zh/engineering`: engineering playbook for Knowledge Governance
+- `/science` and `/zh/science`: Why It Matters, the plain-language entry point
+- `/framework` and `/zh/framework`: Mechanism, the paper-facing conceptual layer
+- `/engineering` and `/zh/engineering`: Governance, the engineering application layer
 - `/collaboration` and `/zh/collaboration`: human-AI collaboration patterns
 - `/learning` and `/zh/learning`: human learning in the AI era
 - `/papers` and `/zh/papers`: future papers and working manuscripts
