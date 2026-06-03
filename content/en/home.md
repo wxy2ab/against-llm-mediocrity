@@ -46,6 +46,25 @@ Tag: Better collaboration
 Humans should not merely proofread fluent drafts. They should set values, choose tradeoffs, authorize risk, and supply missing control variables.
 :::
 
+## Some intuitive examples
+
+:::cards
+### Which tasks are likely to become mediocre
+Tag: High mismatch
+
+Consider financial-market judgment. Financial markets are non-stationary systems shaped by dynamic strategic interaction. Participant preferences, risk appetite, liquidity structure, and dominant narratives keep shifting. No matter how much training a model receives, it cannot infer from static text alone what the market is currently rewarding, punishing, or preferring. The decisive variables are not in the prompt, so the model can easily produce an analysis that sounds fluent, complete, and even impressive while still missing the actual game structure of the present market.
+
+### Which tasks are often extraordinary
+Tag: Positive alignment
+
+For example: compressing a long document into a clear summary, organizing messy information into a structured outline, comparing a few options, generating edge cases from an existing rule set, or rewriting the same content in a different tone or format. In these tasks, local continuation often tracks value well, so models can be unusually strong.
+
+### Which tasks are only partially aligned
+Tag: Needs governance
+
+Consider coding tasks. At the level of concrete implementation, things like reading and writing files, wrapping an API, building an HTML page, or filling in boilerplate are often well aligned with value, and models usually do well. But once the question becomes "what is the real business context here?", "how will this architecture evolve over time?", or "what are the real edge cases and failure modes?", the model can quickly fall back into mediocrity. In other words, coding is often not globally extraordinary; it is locally strong and only partially aligned overall.
+:::
+
 ## Where this is going
 
 - The public layer explains the problem without requiring readers to begin with the paper.
