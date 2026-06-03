@@ -2,72 +2,40 @@
 
 Against LLM Mediocrity is dedicated to resisting LLM autoregressive mediocrity and improving edge performance.
 
-The first version is based on four source drafts:
+## Core Idea
 
-- `Knowledge Governance for Large Language Model Systems`
-- `Human-Assist Operational Mismatches`
-- `AI 与人的协作范式：从聊天式使用到治理式协作`
-- `AI 时代的人类学习：从技能教育到洞察、反馈与叙事的形成`
+LLMs are often able to produce fluent answers long before they produce truly high-value answers. The core idea of this project is that many hard failures are not just prompt failures. They arise because the task's real value function is not well aligned with the model's local continuation tendencies.
 
-The site does not publish those drafts verbatim. It reorganizes them into a public-facing structure centered on resisting autoregressive mediocrity and improving edge performance.
+This project focuses on three moves:
 
-The content is organized as a reader journey: public explanation -> theoretical mechanism -> engineering application. In other words, "popular explanation / scientific theory / engineering practice" is the logic of the writing, not a set of literal section labels.
+- preserve the parts of a task that are already locally aligned with autoregressive generation;
+- externalize the poorly aligned parts into explicit control objects, constraints, rubrics, state representations, or verification loops;
+- add hard environmental boundaries, hard feedback, and minimal human intervention points when the model cannot continue reliably on its own.
 
-## Editing Content
+The goal is not to reject autoregression, but to transform tasks that would otherwise plateau in fluent mediocrity into tasks where autoregressive generation becomes genuinely useful or even extraordinary.
 
-Page content lives in Markdown files:
+## Papers
 
-- `content/en/*.md`
-- `content/zh/*.md`
+- Main paper (English): `TBD`
+- Main paper (Chinese): `TBD`
+- Working manuscript in this repo (English): [docs/knowledge-governance-llm-systems-local-alignment.md](docs/knowledge-governance-llm-systems-local-alignment.md)
+- Working manuscript in this repo (Chinese): [docs/knowledge-governance-llm-systems-local-alignment.zh-CN.md](docs/knowledge-governance-llm-systems-local-alignment.zh-CN.md)
 
-Normal content edits should only require editing these Markdown files. The TypeScript code is a shared renderer for routes, navigation, hero metadata, Markdown sections, card grids, and the alignment visual.
-Adding a new page requires adding a Markdown file with frontmatter; navigation order is controlled by the `order` field.
+## Docs
 
-Each page starts with frontmatter:
+- Site home (English): [content/en/home.md](content/en/home.md)
+- Site home (Chinese): [content/zh/home.md](content/zh/home.md)
+- Mechanism: [content/en/framework.md](content/en/framework.md)
+- Governance: [content/en/engineering.md](content/en/engineering.md)
+- Collaboration: [content/en/collaboration.md](content/en/collaboration.md)
+- Learning: [content/en/learning.md](content/en/learning.md)
+- Papers page: [content/en/papers.md](content/en/papers.md)
+- Projects page: [content/en/projects.md](content/en/projects.md)
 
-```yaml
----
-key: home
-lang: en
-path: /
-title: Against LLM Mediocrity
-navTitle: Home
-kicker: A reader journey from intuition to mechanism to practice
-summary: LLMs can produce fluent answers long before they produce truly valuable answers.
-order: 0
-heroVisual: alignment
-heroPoints:
-  - When statistical probability and task value rise together, autoregression can be extraordinary.
----
-```
+## Authors
 
-For the home-page alignment diagram, add `heroVisual: alignment` and an `alignmentLabels` object in frontmatter to control the labels.
-
-Use `##` headings for page sections. Use `:::cards` blocks for card grids:
-
-```md
-:::cards
-### Card title
-Tag: Optional tag
-
-Card body.
-
-### Another card
-
-Another body.
-:::
-```
-
-## Site Routes
-
-- `/` and `/zh/`: home pages
-- `/science` and `/zh/science`: Why It Matters, the plain-language entry point
-- `/framework` and `/zh/framework`: Mechanism, the paper-facing conceptual layer
-- `/engineering` and `/zh/engineering`: Governance, the engineering application layer
-- `/collaboration` and `/zh/collaboration`: human-AI collaboration patterns
-- `/learning` and `/zh/learning`: human learning in the AI era
-- `/papers` and `/zh/papers`: future papers and working manuscripts
-- `/projects` and `/zh/projects`: future open-source projects based on GKO principles
+- Xinyun Wang: [GitHub](https://github.com/wxy2ab)
+- Shuliang Liu: [GitHub](https://github.com/MichaelLyo)
 
 ## Local Development
 
@@ -85,9 +53,3 @@ npm run build
 ## Publishing
 
 The repository is configured for GitHub Pages through `.github/workflows/pages.yml`. Pushes to `main` build the Vite site and deploy the generated `dist` directory.
-
-## Adding Future Work
-
-- Add papers by editing `content/en/papers.md` and `content/zh/papers.md`, or by adding new Markdown pages with frontmatter.
-- Add GKO-based open-source projects as cards under Projects, including repository links, status, and the governance principle they implement.
-- Keep English and Chinese pages aligned by using matching `key` values under `/zh/`.
