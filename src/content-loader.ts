@@ -49,7 +49,7 @@ const siteMeta: Record<Lang, Omit<Site, "pages">> = {
     repoLabel: "GitHub",
     repoUrl: "https://github.com/wxy2ab/against-llm-mediocrity",
     footer:
-      "Against LLM Mediocrity is an English-first bilingual project about Knowledge Governance, autoregressive mediocrity, and human-AI collaboration.",
+      "Against LLM Mediocrity is dedicated to resisting LLM autoregressive mediocrity and improving edge performance.",
   },
   zh: {
     languageName: "中文",
@@ -57,7 +57,7 @@ const siteMeta: Record<Lang, Omit<Site, "pages">> = {
     repoLabel: "GitHub",
     repoUrl: "https://github.com/wxy2ab/against-llm-mediocrity",
     footer:
-      "Against LLM Mediocrity 是一个英文优先、中文镜像的双语项目，关注 Knowledge Governance、自回归平庸与人机治理式协作。",
+      "Against LLM Mediocrity 致力于对抗 LLM 的自回归平庸，提升边缘性能。",
   },
 };
 
