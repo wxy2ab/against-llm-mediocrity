@@ -13,6 +13,51 @@ The site does not publish those drafts verbatim. It reorganizes them into a publ
 
 The content is organized as a reader journey: public explanation -> theoretical mechanism -> engineering application. In other words, "popular explanation / scientific theory / engineering practice" is the logic of the writing, not a set of literal section labels.
 
+## Editing Content
+
+Page content lives in Markdown files:
+
+- `content/en/*.md`
+- `content/zh/*.md`
+
+Normal content edits should only require editing these Markdown files. The TypeScript code is a shared renderer for routes, navigation, hero metadata, Markdown sections, card grids, and the alignment visual.
+Adding a new page requires adding a Markdown file with frontmatter; navigation order is controlled by the `order` field.
+
+Each page starts with frontmatter:
+
+```yaml
+---
+key: home
+lang: en
+path: /
+title: Against LLM Mediocrity
+navTitle: Home
+kicker: A reader journey from intuition to mechanism to practice
+summary: LLMs can produce fluent answers long before they produce truly valuable answers.
+order: 0
+heroVisual: alignment
+heroPoints:
+  - When statistical probability and task value rise together, autoregression can be extraordinary.
+---
+```
+
+For the home-page alignment diagram, add `heroVisual: alignment` and an `alignmentLabels` object in frontmatter to control the labels.
+
+Use `##` headings for page sections. Use `:::cards` blocks for card grids:
+
+```md
+:::cards
+### Card title
+Tag: Optional tag
+
+Card body.
+
+### Another card
+
+Another body.
+:::
+```
+
 ## Site Routes
 
 - `/` and `/zh/`: bilingual home pages
@@ -43,6 +88,6 @@ The repository is configured for GitHub Pages through `.github/workflows/pages.y
 
 ## Adding Future Work
 
-- Add papers as dedicated pages or metadata entries under the existing Papers route.
+- Add papers by editing `content/en/papers.md` and `content/zh/papers.md`, or by adding new Markdown pages with frontmatter.
 - Add GKO-based open-source projects as cards under Projects, including repository links, status, and the governance principle they implement.
-- Keep English as the primary version and add Chinese mirrors under the same route path in `/zh/`.
+- Keep English as the primary version and add Chinese mirrors with matching `key` values under `/zh/`.

@@ -158,7 +158,8 @@ h1 {
 }
 
 .hero-points,
-.bullet-list {
+.bullet-list,
+.content-section > ul {
   padding: 0;
   list-style: none;
 }
@@ -171,7 +172,8 @@ h1 {
 }
 
 .hero-points li,
-.bullet-list li {
+.bullet-list li,
+.content-section > ul li {
   position: relative;
   padding-left: 26px;
   color: #303846;
@@ -179,7 +181,8 @@ h1 {
 }
 
 .hero-points li::before,
-.bullet-list li::before {
+.bullet-list li::before,
+.content-section > ul li::before {
   position: absolute;
   left: 0;
   top: 0.72em;
@@ -340,7 +343,8 @@ h1 {
   line-height: 1.75;
 }
 
-.bullet-list {
+.bullet-list,
+.content-section > ul {
   display: grid;
   gap: 10px;
   max-width: 860px;
