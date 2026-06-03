@@ -16,21 +16,16 @@ The goal is not to reject autoregression, but to transform tasks that would othe
 
 ## Papers
 
-- Main paper (English): `TBD`
-- Main paper (Chinese): `TBD`
-- Working manuscript in this repo (English): [docs/knowledge-governance-llm-systems-local-alignment.md](docs/knowledge-governance-llm-systems-local-alignment.md)
-- Working manuscript in this repo (Chinese): [docs/knowledge-governance-llm-systems-local-alignment.zh-CN.md](docs/knowledge-governance-llm-systems-local-alignment.zh-CN.md)
+- [Governed Control Inference: Escaping Autoregressive Mediocrity via Validated Latent Control Knowledge]()
 
 ## Docs
 
-- Site home (English): [content/en/home.md](content/en/home.md)
-- Site home (Chinese): [content/zh/home.md](content/zh/home.md)
-- Mechanism: [content/en/framework.md](content/en/framework.md)
-- Governance: [content/en/engineering.md](content/en/engineering.md)
-- Collaboration: [content/en/collaboration.md](content/en/collaboration.md)
-- Learning: [content/en/learning.md](content/en/learning.md)
-- Papers page: [content/en/papers.md](content/en/papers.md)
-- Projects page: [content/en/projects.md](content/en/projects.md)
+- Working manuscript in this repo (English): [docs/knowledge-governance-llm-systems-local-alignment.md](docs/knowledge-governance-llm-systems-local-alignment.md)
+- Working manuscript in this repo (Chinese): [docs/knowledge-governance-llm-systems-local-alignment.zh-CN.md](docs/knowledge-governance-llm-systems-local-alignment.zh-CN.md)
+
+## Site
+
+- https://wxy2ab.github.io/against-llm-mediocrity/
 
 ## Authors
 
