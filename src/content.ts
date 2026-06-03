@@ -71,16 +71,16 @@ export const content: Record<Lang, SiteCopy> = {
         summary:
           "LLMs can produce fluent answers long before they produce truly valuable answers. This project starts from that everyday experience, explains the mechanism behind it, and turns the theory into practical ways to use and build AI systems with less wasted effort.",
         heroPoints: [
-          "First, make the problem easy to recognize: fluent output can still be structurally mediocre.",
-          "Then, explain the mechanism: some tasks mismatch the model's default generation dynamics.",
-          "Finally, turn the mechanism into practice: control spaces, validation loops, and GKO-based systems.",
+          "When statistical probability and task value rise together, autoregression can be extraordinary.",
+          "When probability and value point to different regions, fluent generation becomes mediocre.",
+          "Most real tasks are locally aligned: some subtasks are extraordinary, while others need governance.",
         ],
         sections: [
           {
             eyebrow: "Why this exists",
             title: "The hard limit is not always intelligence. Sometimes it is task shape.",
             body:
-              "A user asks for a strategy, a diagnosis, a design, a proof, or a plan. The model gives something clear, coherent, and even improved after several revisions. But the decisive variable is still missing. That is the phenomenon this project calls autoregressive mediocrity: not stupidity, not randomness, but a mismatch between what is easy to generate and what the task actually rewards.",
+              "A user asks for a strategy, a diagnosis, a design, a proof, or a plan. The model gives something clear, coherent, and even improved after several revisions. But the decisive variable is still missing. That is the phenomenon this project calls autoregressive mediocrity: not stupidity, not randomness, but a mismatch between the statistically likely continuation and the task's true value.",
           },
           {
             eyebrow: "What changes",
@@ -478,16 +478,16 @@ export const content: Record<Lang, SiteCopy> = {
         summary:
           "LLM 可以很早就生成流畅答案，但很晚才真正生成高价值答案。本项目先从日常可感知的问题讲起，再解释背后的机制，最后把理论转化成更少走弯路的 AI 使用与工程方法。",
         heroPoints: [
-          "先让问题可识别：流畅输出仍可能是结构性平庸。",
-          "再解释机制：有些任务与模型默认生成动力学错配。",
-          "最后进入实践：控制空间、验证循环与基于 GKO 的系统。",
+          "当统计概率与任务价值同向上升时，自回归可以带来卓越。",
+          "当概率与价值指向不同区域时，流畅生成会变成平庸。",
+          "绝大多数真实任务是局部对齐：部分子任务卓越，部分子任务需要治理。",
         ],
         sections: [
           {
             eyebrow: "为什么要做",
             title: "硬局限不总是“智能不够”，有时是任务形状不对。",
             body:
-              "用户让模型做战略、诊断、设计、证明或计划。模型给出清楚、连贯、甚至多轮修改后更好的答案，但决定价值的变量仍然缺失。这里说的自回归平庸，不是笨，也不是随机，而是模型容易生成的东西与任务真正奖励的东西发生了错配。",
+              "用户让模型做战略、诊断、设计、证明或计划。模型给出清楚、连贯、甚至多轮修改后更好的答案，但决定价值的变量仍然缺失。这里说的自回归平庸，不是笨，也不是随机，而是统计上容易生成的延续与任务真正奖励的价值发生了错配。",
           },
           {
             eyebrow: "理解之后会改变什么",

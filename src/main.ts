@@ -71,8 +71,26 @@ function renderNav(lang: Lang, current: Page) {
 function renderHero(page: Page, lang: Lang) {
   const visualLabels =
     lang === "en"
-      ? ["Default basin", "Control space", "Governed output"]
-      : ["默认盆地", "控制空间", "治理输出"];
+      ? {
+          probability: "statistical probability",
+          value: "task value",
+          extraordinary: "Autoregressive extraordinary",
+          mediocre: "Autoregressive mediocrity",
+          local: "Local alignment",
+          aligned: "probability and value rise together",
+          misaligned: "probability peak misses value peak",
+          partial: "some regions align, others diverge",
+        }
+      : {
+          probability: "统计概率",
+          value: "任务价值",
+          extraordinary: "自回归卓越",
+          mediocre: "自回归平庸",
+          local: "局部对齐",
+          aligned: "概率与价值同向",
+          misaligned: "概率峰值偏离价值峰值",
+          partial: "部分同向，部分背离",
+        };
 
   return `
     <section class="hero">
@@ -86,15 +104,41 @@ function renderHero(page: Page, lang: Lang) {
             : ""
         }
       </div>
-      <figure class="system-visual" aria-label="Task transformation diagram">
-        <div class="visual-grid">
-          <span></span><span></span><span></span><span></span>
+      <figure class="system-visual" aria-label="Probability and task value alignment diagram">
+        <div class="legend">
+          <span class="probability-line">${visualLabels.probability}</span>
+          <span class="value-line">${visualLabels.value}</span>
         </div>
-        <div class="path path-low"></div>
-        <div class="path path-high"></div>
-        <div class="node node-a">${visualLabels[0]}</div>
-        <div class="node node-b">${visualLabels[1]}</div>
-        <div class="node node-c">${visualLabels[2]}</div>
+        <div class="alignment-panels">
+          <article class="alignment-card is-extraordinary">
+            <svg viewBox="0 0 220 120" role="img" aria-label="${visualLabels.aligned}">
+              <path class="axis" d="M18 102H204" />
+              <path class="curve probability" d="M20 96 C52 86 78 44 108 27 C138 44 164 86 202 96" />
+              <path class="curve value" d="M22 99 C54 88 80 48 108 30 C139 47 166 88 202 99" />
+            </svg>
+            <h3>${visualLabels.extraordinary}</h3>
+            <p>${visualLabels.aligned}</p>
+          </article>
+          <article class="alignment-card is-mediocre">
+            <svg viewBox="0 0 220 120" role="img" aria-label="${visualLabels.misaligned}">
+              <path class="axis" d="M18 102H204" />
+              <path class="curve probability" d="M20 96 C44 70 64 28 92 23 C122 28 144 72 164 96" />
+              <path class="curve value" d="M72 98 C102 90 132 60 158 31 C178 49 190 78 202 96" />
+            </svg>
+            <h3>${visualLabels.mediocre}</h3>
+            <p>${visualLabels.misaligned}</p>
+          </article>
+          <article class="alignment-card is-local">
+            <svg viewBox="0 0 220 120" role="img" aria-label="${visualLabels.partial}">
+              <path class="axis" d="M18 102H204" />
+              <path class="curve probability" d="M20 96 C42 82 52 50 76 41 C98 34 116 54 132 68 C150 83 174 87 202 96" />
+              <path class="curve value" d="M20 98 C42 84 54 53 76 42 C100 31 116 55 132 73 C152 48 178 36 202 29" />
+              <rect class="aligned-zone" x="45" y="22" width="72" height="86" />
+            </svg>
+            <h3>${visualLabels.local}</h3>
+            <p>${visualLabels.partial}</p>
+          </article>
+        </div>
       </figure>
     </section>
   `;
