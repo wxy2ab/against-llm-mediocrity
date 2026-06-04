@@ -47,7 +47,7 @@ Knowledge Governance is an inference-time control layer. It separates final rend
 
 The point is not a longer prompt. The point is lifecycle management for knowledge:
 
-::::cards
+:::cards
 ### Visible
 
 Important assumptions, boundaries, preferences, constraints, and failure conditions should be pulled out of fluent prose and made inspectable.
@@ -59,13 +59,13 @@ A candidate rule should not become active just because it sounds plausible. It n
 ### Revocable
 
 A rule is valid only under conditions. When state, version, authority, objective, or evidence changes, it should be weakened, replaced, or revoked.
-::::
+:::
 
 ## What a GKO Looks Like
 
 A Governed Knowledge Object, or GKO, stores control knowledge the AI should know, obey, or check. A useful GKO should answer:
 
-::::cards
+:::cards
 ### Condition
 
 When does this knowledge apply? A locally useful rule should not silently become a universal truth.
@@ -77,7 +77,7 @@ Does it come from one example, repeated failures, a test result, a tool run, sta
 ### Priority and Revocation
 
 What happens when rules conflict? What observation weakens, overrides, or retires the rule?
-::::
+:::
 
 In an external-communication setting, a GKO might look like:
 

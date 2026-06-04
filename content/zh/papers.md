@@ -26,7 +26,7 @@ heroPoints:
 
 ## 当前工作稿
 
-::::cards
+:::cards
 ### Knowledge Governance for Large Language Model Systems
 Tag: 主文
 
@@ -46,7 +46,7 @@ Tag: 公开实践框架
 Tag: 人类侧能力
 
 这份稿件讨论当 AI 成为默认信息处理核心后，人类学习如何从技能执行转向知识底座、反馈、验证、洞察、价值判断和长期叙事。
-::::
+:::
 
 ## 后续实证方向
 

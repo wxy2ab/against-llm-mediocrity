@@ -49,7 +49,7 @@ The goal is not to become "unreplaceable" in every task. The goal is to turn AI'
 
 ## Five Core Capacities
 
-::::cards
+:::cards
 ### Knowledge Base
 
 Deep principles, mechanisms, and domain constraints. This is what lets a person identify wrong abstractions, wrong boundaries, wrong objectives, and wrong validation.
@@ -69,7 +69,7 @@ Low-probability, high-value connections beyond the default distribution. Insight
 ### Value Judgment and Narrative
 
 Deciding priorities, risks, identity, and unacceptable tradeoffs, then organizing knowledge, experience, and action into a long-term direction. AI can expand options; humans choose what kind of actor they want to be.
-::::
+:::
 
 ## The New Learning Loop
 
@@ -89,7 +89,7 @@ The point is to make each AI interaction produce reusable objects: problem model
 
 ## What Humans Should Practice Directly
 
-::::cards
+:::cards
 ### Problem Construction
 
 Do not only ask how to finish the task. Practice identifying the real problem, target carrier, hidden constraints, and success standard.
@@ -105,7 +105,7 @@ Record effective feedback you gave to AI. Which variable did it change? Why did 
 ### Insight Capture
 
 Record anomalies, counterexamples, rare connections, and new explanatory paths. Personal capability often grows from these low-probability, high-value judgments.
-::::
+:::
 
 ## Anti-Knowledge Is the Risk
 

@@ -33,7 +33,7 @@ In one sentence: AI should move the task to the point where only human-governed 
 
 Not every uncertainty should be escalated to a human. The agent should first ask whether the missing variable can be obtained from the environment, learned through feedback, or stress-tested through a constructed scenario.
 
-::::cards
+:::cards
 ### Environment-Observable
 Tag: ask the environment first
 
@@ -53,7 +53,7 @@ When direct reality feedback is unavailable, the agent can simulate competitors,
 Tag: only then ask the human
 
 When the variable cannot be observed, inferred, validated, or legitimately authorized by AI, the agent should ask the human for a fact, weight, boundary, authorization, validation signal, resource, risk owner, or stopping criterion.
-::::
+:::
 
 ## Minimal Sufficient Human Query
 
@@ -77,7 +77,7 @@ A good Minimal Sufficient Human Query has five properties:
 - It states a safe default.
 - It does not hand the entire task back to the human.
 
-::::cards
+:::cards
 ### Fact or State
 
 "Please confirm one fact: is the customer still inside the refund window? If yes, I will prepare refund options; if no, I will prepare an escalation explanation."
@@ -93,7 +93,7 @@ A good Minimal Sufficient Human Query has five properties:
 ### Validation Signal
 
 "The main unresolved risk is temporal leakage. Please confirm that all features are available before prediction time, or provide an example or test result."
-::::
+:::
 
 ## GEO: Governing When to Ask
 
@@ -111,7 +111,7 @@ A GEO should specify:
 
 ## What Humans Should Govern
 
-::::cards
+:::cards
 ### Values and Weights
 
 Speed, quality, cost, risk, relationship, reputation, and long-term direction cannot all dominate. AI can model tradeoffs, but it should not choose the final value function.
@@ -127,7 +127,7 @@ External actions such as sending, publishing, promising, deleting, buying, signi
 ### Boundaries and Stopping Criteria
 
 When does a rule apply? When should it be revoked? Is the current output an internal draft, an external final, an executable plan, or something that still needs validation?
-::::
+:::
 
 ## What Good Collaboration Measures
 

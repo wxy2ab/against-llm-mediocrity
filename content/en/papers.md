@@ -26,7 +26,7 @@ Suggested reading order:
 
 ## Current Working Manuscripts
 
-::::cards
+:::cards
 ### Knowledge Governance for Large Language Model Systems
 Tag: main manuscript
 
@@ -46,7 +46,7 @@ This draft turns the theory into a collaboration method: AI should first query t
 Tag: human-side capability
 
 This draft asks how learning changes when AI becomes the default information-processing core. It shifts the emphasis from skill execution toward knowledge base, feedback, validation, insight, value judgment, and long-term narrative.
-::::
+:::
 
 ## Future Empirical Agenda
 

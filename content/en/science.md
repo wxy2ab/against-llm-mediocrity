@@ -25,7 +25,7 @@ Iteration works when the local direction of improvement and the real direction o
 
 In high-mismatch tasks, the bottleneck is not local polish. It is the structure of the task:
 
-::::cards
+:::cards
 ### Wrong Abstraction
 
 The model answers a related-looking problem that is not the real one. It may turn a strategy question into a polished essay, a diagnosis into common advice, or an architecture problem into a code snippet.
@@ -41,7 +41,7 @@ The truly valuable answer may be low probability rather than the model's default
 ### Missing Real Standard
 
 The prompt objective is only a proxy. The answer may be clear, complete, and professional while failing the actual standard: executable, verifiable, authorized, risk-aware, and fit for context.
-::::
+:::
 
 ## A Simple Diagnostic
 
@@ -63,7 +63,7 @@ The task may need state observation, tool validation, source retrieval, countere
 
 ## What This Understanding Prevents
 
-::::cards
+:::cards
 ### Do Not Polish the Wrong Abstraction
 
 If the model represented the task incorrectly, style improvements are dangerous. First identify the goal, variables, constraints, states, and success conditions.
@@ -75,7 +75,7 @@ If the answer depends on real-world state, the system should observe, read files
 ### Do Not Vote Your Way Into the Default Answer
 
 When the best answer is rare, majority agreement is not reliable. You need tail search, perturbation, counterexamples, retrieval, or structural validation.
-::::
+:::
 
 ## What the Framework Offers
 

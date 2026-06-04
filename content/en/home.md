@@ -35,7 +35,7 @@ The response is not merely to write better prompts. The first question is diagno
 
 The project distinguishes three regimes:
 
-::::cards
+:::cards
 ### Autoregressive Mediocrity
 Tag: probability-value mismatch
 
@@ -50,11 +50,11 @@ The model can perform many local operations well, such as compression, rewriting
 Tag: probability and value align
 
 When local continuation reliably points toward task value, autoregression is not the problem; it is the advantage. Context compression, semantic expansion, structured transformation, and register transfer often live here.
-::::
+:::
 
 ## How to Read the Site
 
-::::cards
+:::cards
 ### Start With Intuition
 Tag: Why It Matters
 
@@ -69,13 +69,13 @@ If you care about the theory, read "Mechanism." It introduces the three regimes,
 Tag: Governance and collaboration
 
 If you want to use the framework, read "Governance" and "Collaboration." The practical move is to transform hard tasks into intermediate objects the model can handle well, while humans supply only the variables AI cannot reliably obtain.
-::::
+:::
 
 ## How to Resist LLM Autoregressive Mediocrity
 
 The core principle is: **preserve the parts where the model is already strong, and transform the misaligned parts into task forms that are easier to generate, verify, and govern.**
 
-::::cards
+:::cards
 ### Do Not Search Only in Final-Answer Space
 
 For hard tasks, do not immediately ask for the final answer. First produce a state matrix, rubric, dependency graph, failure-mode list, candidate set, query plan, or structured outline so the model faces lower-mismatch subtasks.
@@ -87,7 +87,7 @@ Important assumptions, constraints, boundaries, preferences, and revocation cond
 ### Let Humans Govern Missing Variables
 
 Humans should not merely proofread AI drafts. Their role is to set values, choose weights, authorize risk, provide real state, judge taste, and own responsibility. A good agent asks the minimal sufficient question instead of handing the entire task back to the human.
-::::
+:::
 
 ## Where This Is Going
 

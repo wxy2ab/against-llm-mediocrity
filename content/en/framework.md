@@ -27,7 +27,7 @@ When yes, autoregressive generation can be extremely effective. When no, fluency
 
 ## Three Alignment Regimes
 
-::::cards
+:::cards
 ### Autoregressive Mediocrity
 Tag: probability peak misses value peak
 
@@ -42,7 +42,7 @@ The model's local continuation tendencies align with part of the task value. It 
 Tag: probability and value rise together
 
 High-value outputs are no longer tail events; they are easy to reach. Context compression, semantic decompression, register transfer, surface polish, structured transformation, query formulation, and edge-case generation often live in this regime.
-::::
+:::
 
 ## Policy-Value Compression
 
@@ -61,7 +61,7 @@ Inference-time reasoning has a similar effect. Chain-of-thought, search, reflect
 
 The four mismatches are not an attempt to name every surface failure. They are diagnostic axes for predicting when ordinary final-output search is likely to plateau.
 
-::::cards
+:::cards
 ### Aggregation
 
 Local improvements do not reliably compose into global value. Stories, code architecture, strategy, customer communication, and complex reasoning often depend on long-range coordination, delayed payoff, or coupled constraints.
@@ -77,7 +77,7 @@ The ranking of answers depends on hidden, changing, or underspecified state. Use
 ### Specification
 
 The accessible proxy objective diverges from the true objective. An answer may satisfy the prompt, rubric, style, or test while missing the user's real success criterion.
-::::
+:::
 
 ## Why Derivative Patterns Should Not Multiply the Taxonomy
 
