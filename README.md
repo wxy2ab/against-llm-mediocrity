@@ -37,6 +37,11 @@ The goal is not to reject autoregression, but to transform tasks that would othe
 
 - **deepstack**: An agent runtime scaffold that provides context assembly, recursive calls, and other core runtime capabilities for agent systems.
 
+## Authors
+
+- Xinyun Wang: [GitHub](https://github.com/wxy2ab)
+- Shuliang Liu: [GitHub](https://github.com/MichaelLyo)
+
 ## Local Development
 
 ```bash

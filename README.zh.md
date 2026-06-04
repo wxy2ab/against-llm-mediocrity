@@ -37,6 +37,11 @@ LLM 往往很早就能生成流畅答案，但要晚得多才会真正生成高�
 
 - **deepstack**：一个 agent runtime scaffold，提供 context 组装、递归调用等 agent runtime 基础能力。
 
+## 作者
+
+- Xinyun Wang: [GitHub](https://github.com/wxy2ab)
+- Shuliang Liu: [GitHub](https://github.com/MichaelLyo)
+
 ## 本地开发
 
 ```bash
