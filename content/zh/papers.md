@@ -10,7 +10,7 @@ order: 6
 heroPoints:
   - 主文：Knowledge Governance for Large Language Model Systems。
   - 补充稿：Human-Assist Operational Mismatches。
-  - 实践与实现：治理式协作及由研究议程直接推导的工具方向。
+  - 延伸与实现：治理式协作、人类学习与由研究议程直接推导的工具方向。
 ---
 
 ## 深水区怎么读
@@ -22,7 +22,7 @@ heroPoints:
 1. 先读站点的“为什么重要”和“机制”，建立三种对齐区间与四类原始错配。
 2. 再读主文，理解知识治理如何把中间控制知识外化、验证和复用。
 3. 然后读协作补充稿，理解能自主推进任务的 AI agent 什么时候应该问人，以及如何构造最小充分人类问题。
-4. 最后读站点中的协作和项目页，理解这些手稿如何转化为实践和实现方向。
+4. 最后读站点中的协作、学习和项目页，理解这些手稿如何转化为实践和实现方向。
 
 ## 当前工作稿
 
@@ -49,9 +49,14 @@ Tag: 公开实践框架
 [阅读实践框架](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/governed-human-ai-collaboration.zh-CN.md)
 ::::
 
-## 实现方向
+## 延伸与实现方向
 
 ::::cards
+### AI 时代的人类学习
+Tag: 待上传配套文档
+
+学习页展开治理式协作中的人类角色上移：人从普通处理者转向问题构造、价值判断、反馈、验证、授权和治理记忆的治理者。其配套文档尚未上传。
+
 ### 开源项目
 Tag: 实现路线图
 

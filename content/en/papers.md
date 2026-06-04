@@ -10,7 +10,7 @@ order: 6
 heroPoints:
   - "Main manuscript: Knowledge Governance for Large Language Model Systems."
   - "Supplement: Human-Assist Operational Mismatches."
-  - "Practice and implementation: governed collaboration and tooling directions derived from the research agenda."
+  - "Extensions and implementation: governed collaboration, human learning, and tooling directions derived from the research agenda."
 ---
 
 ## How to Enter the Deep End
@@ -22,7 +22,7 @@ Suggested reading order:
 1. Start with "Why It Matters" and "Mechanism" to understand the three regimes and four primitive mismatches.
 2. Read the main manuscript to see how Knowledge Governance externalizes, validates, and reuses intermediate control knowledge.
 3. Read the collaboration supplement to understand when an agent should ask a human and how to construct minimal sufficient human queries.
-4. Use the site pages on collaboration and projects to see how the manuscripts translate into practice and implementation directions.
+4. Use the site pages on collaboration, learning, and projects to see how the manuscripts translate into practice and implementation directions.
 
 ## Current Working Manuscripts
 
@@ -49,9 +49,14 @@ This practice framework turns the theory into a collaboration method: AI should 
 [Read the practice framework](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/governed-human-ai-collaboration.md)
 ::::
 
-## Implementation Direction
+## Extensions and Implementation
 
 ::::cards
+### Human Learning in the AI Era
+Tag: companion document pending upload
+
+The learning page develops the human-role shift in governed collaboration: from routine processor to governor of problem construction, value judgment, feedback, validation, authorization, and governance memory. Its companion document has not yet been uploaded.
+
 ### Open-Source Projects
 Tag: implementation roadmap
 
