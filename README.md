@@ -20,8 +20,16 @@ The goal is not to reject autoregression, but to transform tasks that would othe
 
 ## Docs
 
-- Working manuscript in this repo (English): [docs/knowledge-governance-llm-systems-local-alignment.md](docs/knowledge-governance-llm-systems-local-alignment.md)
-- Working manuscript in this repo (Chinese): [docs/knowledge-governance-llm-systems-local-alignment.zh-CN.md](docs/knowledge-governance-llm-systems-local-alignment.zh-CN.md)
+### Knowledge Governance
+
+- Main working manuscript: [English](docs/knowledge-governance-llm-systems-local-alignment.md) · [中文](docs/knowledge-governance-llm-systems-local-alignment.zh-CN.md)
+
+### Governed Human-AI Collaboration
+
+- Human-assist operational mismatches, MSHQs, and GEOs: [English](docs/human-assist-operational-mismatches.md) · [中文](docs/human-assist-operational-mismatches.zh-CN.md)
+- Practical governed-collaboration framework: [English](docs/governed-human-ai-collaboration.md) · [中文](docs/governed-human-ai-collaboration.zh-CN.md)
+
+The technical supplement defines when an agent should escalate and how to restore autonomy. The practice framework explains how AI should first query the environment, construct options and proving grounds, and ask humans only for genuinely human-governed variables.
 
 ## Site
 

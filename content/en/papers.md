@@ -32,15 +32,21 @@ Tag: main manuscript
 
 The main manuscript introduces the three regimes: autoregressive mediocrity, local alignment, and autoregressive extraordinary. It explains ordinary output-space search plateaus through four primitive mismatches: aggregation, support, state, and specification. It then develops Knowledge Governance, Decoupled Control Spaces, and GKOs.
 
+[Read the main manuscript](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/knowledge-governance-llm-systems-local-alignment.md)
+
 ### Human-Assist Operational Mismatches
 Tag: collaboration supplement
 
-The supplement does not add new primitive mismatches. It describes where an agent becomes blocked during execution: observability, preference weight, authorization, verification, boundary, resource, accountability, stopping criteria, and related operational mismatches. Its central objects are MSHQs and GEOs.
+The supplement does not add new primitive mismatches. It consolidates execution blockers into five operational domains, defines hard and expected-loss escalation gates, and develops MSHQs, GEOs, answer validation, and autonomy recovery.
 
-### Human-AI Governed Collaboration
+[Read the technical supplement](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/human-assist-operational-mismatches.md)
+
+### Governed Human-AI Collaboration
 Tag: public practice framework
 
-This draft turns the theory into a collaboration method: AI should first query the environment, learn from feedback, and construct proving grounds. Only when the remaining variable is genuinely human-governed should it ask a minimal sufficient question.
+This practice framework turns the theory into a collaboration method: AI should first query the environment, learn from feedback, and construct proving grounds. Only when the remaining variable is genuinely human-governed should it ask a minimal sufficient question.
+
+[Read the practice framework](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/governed-human-ai-collaboration.md)
 
 ### Human Learning in the AI Era
 Tag: human-side capability

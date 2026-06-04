@@ -32,15 +32,21 @@ Tag: 主文
 
 主文提出三种区间：自回归平庸、局部对齐、自回归卓越；用 aggregation、support、state、specification 四类 primitive mismatch 解释为什么普通输出空间搜索会进入平台期；并提出 Knowledge Governance、Decoupled Control Space 和 GKO。
 
+[阅读主文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/knowledge-governance-llm-systems-local-alignment.zh-CN.md)
+
 ### Human-Assist Operational Mismatches
 Tag: 协作补充稿
 
-补充稿不增加新的 primitive mismatch，而是描述 agent 执行时的阻塞类型：可观测性、偏好权重、授权、验证、边界、资源、责任、停止标准等。它的核心对象是 MSHQ 和 GEO。
+补充稿不增加新的 primitive mismatch，而是把执行阻塞收紧为五个操作域，定义硬治理与预期损失升级门槛，并展开 MSHQ、GEO、回答验证和自治恢复。
 
-### AI 与人的协作范式
+[阅读技术补充稿](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/human-assist-operational-mismatches.zh-CN.md)
+
+### 治理式人机协作
 Tag: 公开实践框架
 
-这份稿件把论文框架转化为协作方法：AI 先问环境、学反馈、构造试炼场，只有当剩余变量确实由人类治理时，才提出最小充分问题。
+这份实践框架把论文理论转化为协作方法：AI 先问环境、学反馈、构造试炼场，只有当剩余变量确实由人类治理时，才提出最小充分问题。
+
+[阅读实践框架](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/governed-human-ai-collaboration.zh-CN.md)
 
 ### AI 时代的人类学习
 Tag: 人类侧能力
