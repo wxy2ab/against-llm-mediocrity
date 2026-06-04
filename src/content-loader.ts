@@ -49,7 +49,7 @@ const siteMeta: Record<Lang, Omit<Site, "pages">> = {
     repoLabel: "GitHub",
     repoUrl: "https://github.com/wxy2ab/against-llm-mediocrity",
     footer:
-      "Against LLM Mediocrity is dedicated to resisting LLM autoregressive mediocrity and improving edge performance.",
+      "Against LLM Mediocrity studies how to turn local model capability into stable task value.",
   },
   zh: {
     languageName: "中文",
@@ -57,7 +57,7 @@ const siteMeta: Record<Lang, Omit<Site, "pages">> = {
     repoLabel: "GitHub",
     repoUrl: "https://github.com/wxy2ab/against-llm-mediocrity",
     footer:
-      "Against LLM Mediocrity 致力于对抗 LLM 的自回归平庸，提升边缘性能。",
+      "Against LLM Mediocrity 研究如何把模型的局部能力转化为稳定的任务价值。",
   },
 };
 

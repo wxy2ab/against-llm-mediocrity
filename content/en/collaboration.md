@@ -17,7 +17,7 @@ heroPoints:
 
 The usual question is: which work should AI do, and which work should humans do? That is too coarse. The better unit is the **control variable**.
 
-AI is strong at processing, searching, structuring, simulating, retrieving, and validating. Humans remain essential for value functions, preference weights, authorization boundaries, taste, budget, identity, and responsibility.
+AI should advance the parts that can be processed, searched, structured, simulated, retrieved, and validated. Humans should govern value functions, preference weights, authorization boundaries, taste, budget, identity, and responsibility.
 
 Good collaboration is neither front-loading a long questionnaire nor letting the agent act without boundaries. It looks like:
 
@@ -44,7 +44,7 @@ Which missing control variable prevents reliable continuation? The blocker may b
 
 ### Escalation Protocol
 
-What is the smallest human contribution that restores autonomy? This is where MSHQs and GEOs belong.
+What is the smallest human contribution that restores autonomy? This is where Minimal Sufficient Human Queries (MSHQs) and Governed Escalation Objects (GEOs) belong.
 ::::
 
 ## First Ask Where the Variable Comes From
@@ -157,9 +157,9 @@ If you do not specify, I will ______ because it is the safest or most reversible
 "The main unresolved risk is temporal leakage. Please confirm that all features are available before prediction time, or provide an example or test result."
 :::
 
-## GEO: Governing When to Ask
+## Governed Escalation Objects: Governing When to Ask
 
-GKOs govern what the AI should know or obey. GEOs govern when the AI should ask a human, what it should ask, whom it should ask, and what to do safely if no answer arrives.
+Governed Knowledge Objects (GKOs) govern what the AI should know or obey. GEOs govern when the AI should ask a human, what it should ask, whom it should ask, and what to do safely if no answer arrives.
 
 A GEO should specify:
 

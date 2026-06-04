@@ -105,18 +105,17 @@ Does it come from one example, repeated failures, a test result, a tool run, sta
 What happens when rules conflict? What observation weakens, overrides, or retires the rule?
 :::
 
-In an external-communication setting, a GKO might look like:
+The main manuscript's car-wash task shows how a GKO can preserve a conditional construal rule:
 
 ```json
 {
-  "condition": "external communication involves refunds, pricing, delivery dates, or legal commitments",
-  "assertion": "do not make the commitment directly; obtain authorization first or prepare a draft instead",
-  "strength": "objective-grounded",
-  "priority": 0.95,
-  "lifespan": "project",
-  "revocation_trigger": "an authorized owner grants standing permission for this class of commitment",
-  "evidence": "external commitments create reputational, financial, and legal risk",
-  "source": "authority governance"
+  "condition": "the task is about receiving a service applied to an object",
+  "assertion": "identify the object whose state must change; movement of the person alone may not satisfy the goal",
+  "strength": "adversarial",
+  "priority": 0.8,
+  "lifespan": "session",
+  "revocation_trigger": "the service can be completed without moving the object",
+  "evidence": "walking to a car wash does not bring the car to be washed"
 }
 ```
 

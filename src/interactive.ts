@@ -37,7 +37,7 @@ const copy = {
     intervention: "正确干预",
     transformTitle: "不是停止自回归，<br>而是改变它正在解决的问题",
     transformCopy: "保留模型已经擅长的局部生成，把失配部分转化成显式、可验证、低失配的中间对象。",
-    flow: ["高失配输入", "直接生成最终答案", "流畅输出空间", "任务重参数化", "聚合", "依赖图 / 全局约束", "支持集", "反例 / 检索 / 稀有结构", "状态", "情景矩阵 / 条件策略", "规格", "Rubric / 对比偏好", "验证后渲染", "低失配子任务", "自回归卓越", "局部改进 → 全局价值"],
+    flow: ["高失配输入", "直接生成最终答案", "流畅输出空间", "任务重参数化", "聚合", "依赖图 / 全局约束", "支持集", "反例 / 检索 / 稀有结构", "状态", "情景矩阵 / 条件策略", "规约", "评分规约 / 对比偏好", "验证后渲染", "低失配子任务", "自回归卓越", "局部改进 → 全局价值"],
     footer: "从自回归平庸，经由局部对齐，走向自回归卓越。",
     home: "返回主页",
     high: "高",
@@ -97,7 +97,7 @@ const mismatches = {
     aggregation: ["01", "聚合失配", "每一步都更好，为什么整体仍然失败？", "训练能奖励每个局部的清晰、顺滑与正确，却看不到跨越全文的承诺、依赖和组合效果。", "若训练信号只评估局部片段，就不存在能指向全局组合关系的梯度。把局部奖励练到满分，也不能推出整体最优。", "外化全局结构：依赖图、长期约束、整体评分器。", "逐段都漂亮", "保留关键伏笔"],
     support: ["02", "支持集失配", "答案存在，为什么采样再多也碰不到？", "真正高价值的结构位于模型几乎不访问的尾部；训练只会加强已经被采到、被标注过的候选。", "若高价值结构从未进入训练与搜索的支持集，它就不会产生学习信号。零曝光乘以更多训练，仍然是零曝光。", "主动拉入尾部结构：检索、反常规搜索、反例与重组。", "常见合理答案", "罕见关键洞察"],
     state: ["03", "状态失配", "同一个回答，为什么此刻对、彼时错？", "真实价值取决于不可见或变化中的状态；输入相同，但最佳行动会随用户、环境或阶段翻转。", "没有状态信息时，同一输入对应相互冲突的最优标签。训练只能学到平均策略，无法同时为两个状态给出唯一正确答案。", "显式建模状态：情景矩阵、诊断问题、条件策略。", "立刻给方案", "先确认状态"],
-    specification: ["04", "规格失配", "分数越来越高，为什么用户越来越不满意？", "模型优化的是可见代理目标，而真正价值包含未写出的品味、后果、边界或专家判断。", "训练只会更忠实地优化它收到的目标。若代理目标与真实目标排序相反，训练越成功，真实结果可能越差。", "外化价值函数：对比样例、失败条件、动态 rubric。", "高代理分答案", "高真实价值答案"],
+    specification: ["04", "规约失配", "分数越来越高，为什么用户越来越不满意？", "模型优化的是可见代理目标，而真正价值包含未写出的品味、后果、边界或专家判断。", "训练只会更忠实地优化它收到的目标。若代理目标与真实目标排序相反，训练越成功，真实结果可能越差。", "外化价值函数：对比样例、失败条件、动态评分规约。", "高代理分答案", "高真实价值答案"],
   },
   en: {
     aggregation: ["01", "Aggregation mismatch", "Why does every better step still produce a failing whole?", "Training can reward clarity, fluency, and correctness in each part, yet cannot see commitments, dependencies, and composition across the whole artifact.", "If the training signal evaluates only local fragments, no gradient points toward the global relationship. Perfect local rewards cannot imply a global optimum.", "Externalize global structure: dependency graphs, long-range constraints, whole-artifact evaluators.", "Beautiful local sections", "Preserve the key setup"],
@@ -136,7 +136,7 @@ function renderApp() {
         <div class="trajectory-stage"><div class="stage-top"><div><span class="stage-kicker">${t.current}</span><h3 id="regime-name"></h3><p id="regime-copy"></p></div><button class="generate-button" id="generate">${t.next} <kbd>→</kbd></button></div><svg id="path-svg" viewBox="0 0 1000 360" role="img"></svg>
           <div class="meters"><div><span>${t.cumulativeProbability}</span><b id="prob-score">0</b><div class="meter"><i id="prob-meter"></i></div></div><div><span>${t.cumulativeValue}</span><b id="value-score">0</b><div class="meter value"><i id="value-meter"></i></div></div><p id="regime-insight"></p></div></div>
       </section>
-      <section class="mismatch section-shell" id="mismatch"><div class="section-heading"><div><p class="eyebrow">02 / STRUCTURAL MISMATCH</p><h2>${t.mismatchTitle}</h2></div><p>${t.mismatchCopy}</p></div>
+      <section class="mismatch section-shell" id="mismatch"><div class="section-heading"><div><p class="eyebrow">02 / FOUR PRIMITIVE MISMATCHES</p><h2>${t.mismatchTitle}</h2></div><p>${t.mismatchCopy}</p></div>
         <div class="mismatch-layout"><aside class="mismatch-tabs">${(Object.keys(mismatches[lang]) as Mismatch[]).map(key => `<button data-mismatch="${key}"><span>${mismatches[lang][key][0]}</span><b>${mismatches[lang][key][1]}</b><i>↗</i></button>`).join("")}</aside>
           <article class="mismatch-lab"><div class="mismatch-title"><span id="mismatch-index"></span><div><h3 id="mismatch-name"></h3><p id="mismatch-question"></p></div></div>
             <div class="training-console"><div class="console-head"><span><i></i> ALIGNMENT TRAINING</span><b>epoch <output id="epoch">0</output></b></div><div class="candidate-grid">

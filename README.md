@@ -1,6 +1,6 @@
 # Against LLM Mediocrity
 
-Against LLM Mediocrity is dedicated to resisting LLM autoregressive mediocrity and improving edge performance.
+Against LLM Mediocrity studies how to resist LLM autoregressive mediocrity and turn local model capability into stable task value.
 
 ## Core Idea
 
@@ -13,10 +13,6 @@ This project focuses on three moves:
 - add hard environmental boundaries, hard feedback, and minimal human intervention points when the model cannot continue reliably on its own.
 
 The goal is not to reject autoregression, but to transform tasks that would otherwise plateau in fluent mediocrity into tasks where autoregressive generation becomes genuinely useful or even extraordinary.
-
-## Papers
-
-- [Governed Control Inference: Escaping Autoregressive Mediocrity via Validated Latent Control Knowledge]()
 
 ## Docs
 
@@ -34,16 +30,6 @@ The technical supplement defines when an agent should escalate and how to restor
 ## Site
 
 - https://wxy2ab.github.io/against-llm-mediocrity/
-
-## Repos That Resist LLM Autoregressive Mediocrity
-
-- **Story Insight**: Story generation is an autoregressive mediocrity task with aggregation mismatch. By constructing and searching in a control space, Story Insight significantly improves story quality. With models such as MiniMax, it can produce stories that substantially outperform GPT-5.5 on overall story quality.
-- **Social Insight**: Real social conversation is a multi-objective coordination task and is highly prone to aggregation mismatch. Social Insight uses control-space methods to improve multi-objective coordination and enable stronger social communication.
-- **Stock Rec**: Financial tasks are a canonical state-mismatch setting. Stock Rec uses persistent search and validation so that LLM systems can better cope with the non-stationary nature of financial markets.
-
-## Infrastructure Repos
-
-- **deepstack**: An agent runtime scaffold that provides context assembly, recursive calls, and other core runtime capabilities for agent systems.
 
 ## Authors
 

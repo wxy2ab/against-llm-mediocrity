@@ -54,7 +54,7 @@ Tag: probability and value align
 When local continuation reliably points toward task value, autoregression is not the problem; it is the advantage. Context compression, semantic expansion, structured transformation, and register transfer often live here.
 :::
 
-The common case is the middle one. A product memo, code review, customer reply, learning plan, or research synthesis may contain parts that are easy for the model to handle and parts that depend on hidden state, global coordination, rare evidence, or a value choice. The question is not whether to use AI, but where the alignment boundary lies.
+The common case is the middle one. A product memo, code review, customer reply, or research synthesis may contain parts that are easy for the model to handle and parts that depend on hidden state, global coordination, rare evidence, or a value choice. The question is not whether to use AI, but where the alignment boundary lies.
 
 ## From a Fluent Draft to a Valuable Answer
 
@@ -130,7 +130,7 @@ For hard tasks, do not immediately ask for the final answer. First produce a sta
 
 ### Externalize Control Knowledge
 
-Important assumptions, constraints, boundaries, preferences, and revocation conditions should not be buried inside fluent prose. They should become checkable, reusable, weakenable, and revocable GKOs.
+Important assumptions, constraints, boundaries, preferences, and revocation conditions should not be buried inside fluent prose. They should become checkable, reusable, weakenable, and revocable Governed Knowledge Objects (GKOs).
 
 ### Let Humans Govern Missing Variables
 
@@ -143,7 +143,7 @@ In practice, this means a hard task should often move through artifacts before i
 input -> task model -> control objects -> validation / escalation -> final answer
 ```
 
-Those artifacts may include rubrics, state matrices, dependency graphs, option sets, failure-mode lists, validation checklists, GKOs, GEOs, or Minimal Sufficient Human Queries. They are not bureaucracy for its own sake. They are ways to convert a high-mismatch final-output problem into smaller operations where the model's local strengths become useful again.
+Those artifacts may include rubrics, state matrices, dependency graphs, option sets, failure-mode lists, validation checklists, GKOs, Governed Escalation Objects (GEOs), or Minimal Sufficient Human Queries (MSHQs). They are not bureaucracy for its own sake. They are ways to convert a high-mismatch final-output problem into smaller operations where the model's local strengths become useful again.
 
 ## Where This Is Going
 

@@ -10,7 +10,7 @@ order: 6
 heroPoints:
   - "Main manuscript: Knowledge Governance for Large Language Model Systems."
   - "Supplement: Human-Assist Operational Mismatches."
-  - "Site extensions: governed collaboration, human learning, and implementation directions."
+  - "Practice and implementation: governed collaboration and tooling directions derived from the research agenda."
 ---
 
 ## How to Enter the Deep End
@@ -22,7 +22,7 @@ Suggested reading order:
 1. Start with "Why It Matters" and "Mechanism" to understand the three regimes and four primitive mismatches.
 2. Read the main manuscript to see how Knowledge Governance externalizes, validates, and reuses intermediate control knowledge.
 3. Read the collaboration supplement to understand when an agent should ask a human and how to construct minimal sufficient human queries.
-4. Use the site pages on collaboration, learning, and projects to see how the manuscripts translate into practice and implementation directions.
+4. Use the site pages on collaboration and projects to see how the manuscripts translate into practice and implementation directions.
 
 ## Current Working Manuscripts
 
@@ -49,18 +49,13 @@ This practice framework turns the theory into a collaboration method: AI should 
 [Read the practice framework](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/governed-human-ai-collaboration.md)
 ::::
 
-## Site Extensions
+## Implementation Direction
 
 ::::cards
-### Human Learning in the AI Era
-Tag: site-level extension
-
-There is not yet a standalone manuscript for this page. It extends the governed collaboration argument, especially the shift from humans as processors to humans as governors of problem construction, value judgment, feedback, validation, authorization, and governance memory.
-
 ### Open-Source Projects
 Tag: implementation roadmap
 
-The project page is a roadmap for turning GKO/GEO principles into tools. It should be read as implementation direction, not as an additional theoretical claim beyond the current manuscripts.
+The project page only organizes implementation and evaluation directions already present in the manuscripts: GKO lifecycles, GEO escalation protocols, and four-mismatch diagnostics. It is not an additional theoretical claim.
 :::
 
 ## Future Empirical Agenda
