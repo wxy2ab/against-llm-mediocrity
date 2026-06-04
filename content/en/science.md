@@ -5,34 +5,78 @@ path: /science
 title: Why It Matters
 navTitle: Why It Matters
 kicker: A plain-language entry point
-summary: The important point is not that LLMs are useless or doomed. The point is that fluent generation can hide the difference between an answer that sounds good and an answer that reaches the structure the task actually needs.
+summary: "Autoregressive mediocrity does not mean LLMs are useless. It explains a common illusion: the more fluent an answer becomes, the easier it is to mistake it for one that has captured the structure the task actually needs."
 order: 1
 heroPoints:
   - A model can improve surface quality while staying inside the same wrong abstraction.
-  - Repeated refinement can make a mediocre answer more convincing.
-  - Understanding the hard limit tells you when to prompt, when to restructure, and when to ask a human or a tool.
+  - Repeated refinement can make a mediocre answer more complete and persuasive.
+  - Once you see the pattern, you know when to prompt, when to restructure, and when to use tools or ask a human.
 ---
 
-## The everyday version of the problem
+## What It Looks Like in Daily Use
 
-You ask an LLM to solve a hard task. It gives a plausible answer. You ask it to improve the answer. It becomes smoother, clearer, more complete, maybe even more persuasive. But the decisive missing thing remains missing: the hidden assumption, the rare option, the real constraint, the state change, the wrong objective, or the structure that makes the answer actually work.
+You ask an LLM to handle a hard task. It gives a plausible answer. You point out problems, and it adds detail, improves tone, creates structure, and expands the argument. After several rounds the text is better, but something still feels off.
 
-## Why more iteration can still fail
+That feeling is often not about prose. It is about task value. The missing piece may be a hidden assumption, real-world state, domain boundary, rare option, global dependency, authorization condition, or better problem model. The model is not necessarily lazy or random. It may simply be making local improvements on the wrong surface.
 
-Iteration helps when each local improvement points toward the real goal. It fails when local polish is not the bottleneck. If the task depends on a hidden state, a low-probability insight, a global dependency, or a value criterion that was never made explicit, another fluent draft may simply decorate the same mistake.
+## Why More Iteration Can Still Fail
 
-## Where understanding saves time
+Iteration works when the local direction of improvement and the real direction of value are aligned. If the task is summarizing text, changing tone, or organizing a list, local improvement often really is improvement.
 
-:::cards
-### Do not polish the wrong abstraction
+In high-mismatch tasks, the bottleneck is not local polish. It is the structure of the task:
 
-If the model represented the task incorrectly, style improvements are cosmetic. First identify the variables, constraints, states, and success conditions.
+::::cards
+### Wrong Abstraction
 
-### Do not confuse missing state with missing intelligence
+The model answers a related-looking problem that is not the real one. It may turn a strategy question into a polished essay, a diagnosis into common advice, or an architecture problem into a code snippet.
 
-If the right answer depends on a user preference, market regime, legal boundary, or physical context, the system needs observation, validation, or a targeted human answer.
+### Missing State
 
-### Do not vote your way into the default answer
+The right answer depends on the current market, user emotion, legal boundary, production environment, time window, or organizational authority. If that state is absent, the model defaults to an assumed situation.
 
-When the best answer is rare, majority agreement can reinforce the common answer. You need tail search, perturbation, retrieval, or structural validation.
-:::
+### Missing Tail Option
+
+The truly valuable answer may be low probability rather than the model's default continuation. Majority voting and repeated sampling can reinforce the conventional answer.
+
+### Missing Real Standard
+
+The prompt objective is only a proxy. The answer may be clear, complete, and professional while failing the actual standard: executable, verifiable, authorized, risk-aware, and fit for context.
+::::
+
+## A Simple Diagnostic
+
+If "make it deeper," "make it more insightful," or "make it more concrete" keeps producing better versions of the same kind of answer, the problem may not be generation quality. It may be task shape.
+
+The better question is not:
+
+```text
+How do I make the model write this better?
+```
+
+It is:
+
+```text
+What control variable is missing from this task?
+```
+
+The task may need state observation, tool validation, source retrieval, counterexamples, a rubric, a decision matrix, a failure-mode list, or a human answer about preference, authorization, boundary, or responsibility.
+
+## What This Understanding Prevents
+
+::::cards
+### Do Not Polish the Wrong Abstraction
+
+If the model represented the task incorrectly, style improvements are dangerous. First identify the goal, variables, constraints, states, and success conditions.
+
+### Do Not Confuse Missing State With Missing Intelligence
+
+If the answer depends on real-world state, the system should observe, read files, run tests, check sources, or ask a minimal sufficient human question.
+
+### Do Not Vote Your Way Into the Default Answer
+
+When the best answer is rare, majority agreement is not reliable. You need tail search, perturbation, counterexamples, retrieval, or structural validation.
+::::
+
+## What the Framework Offers
+
+This is not a universal prompt. It is a way to diagnose the task regime first, then decide whether to generate directly, create intermediate objects, verify with tools, or ask a human for the missing variable.

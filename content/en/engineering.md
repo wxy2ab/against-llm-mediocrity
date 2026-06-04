@@ -5,50 +5,108 @@ path: /engineering
 title: Governance
 navTitle: Governance
 kicker: Concrete engineering practice based on the mechanism
-summary: The engineering move is to stop asking the model to solve every hard task directly in final-answer space. Instead, build intermediate control objects that make the task easier to generate, verify, reuse, and revise.
+summary: The engineering move is not to force the model to solve every hard task in final-answer space. It is to build intermediate control objects that make the task easier to generate, verify, reuse, and revoke.
 order: 3
 heroPoints:
-  - Reparameterize hard tasks into lower-mismatch subtasks.
+  - Reparameterize high-mismatch tasks into lower-mismatch subtasks.
   - Represent task-specific control knowledge outside the final prose.
-  - Validate, prioritize, weaken, and revoke that knowledge over time.
+  - Validate, prioritize, weaken, and revoke that knowledge as conditions change.
 ---
 
-## What to do differently tomorrow
+## One Thing to Change Tomorrow
 
-Before asking for another final answer, ask what intermediate object would change the task shape: a state matrix, rubric, dependency graph, failure-mode list, edge-case set, query plan, construal extraction, or structural outline. These are often tasks where LLMs are strong, and they give the final renderer something better to render from.
+Before asking the model for another final answer, ask:
 
-## Knowledge Governance
+```text
+What intermediate object would change the shape of this task?
+```
 
-Knowledge Governance separates final rendering from the acquisition and management of task-specific control knowledge. The goal is not to make a heavier prompt. The goal is to create a control layer where important assumptions, constraints, preferences, and failure conditions can be tested and revised.
+That object may be a state matrix, rubric, dependency graph, failure-mode list, edge-case set, query plan, task model, structural outline, validation checklist, or candidate constraint. LLMs are often strong at generating these objects. Once they stabilize, final writing, expansion, formatting, and tone adjustment move closer to an autoregressive-extraordinary regime.
 
-## Why inference-time governance still matters
+## Mediocrity-to-Extraordinary Transformation
 
-RL alignment moves many valuable behaviors into the model's high-probability region. That is a powerful weight-level intervention. But it does not remove the need for task-level governance, because the model still has to express value through local autoregressive probabilities at inference time.
+Governance is not about freezing the model. It is about changing the task the model faces.
 
-When a task's value function is already locally aligned with the model's probability surface, direct generation may be enough. When only part of the task is aligned, the system should let the model handle the aligned subtasks and externalize the rest into explicit control objects: states, constraints, rubrics, evidence checks, failure modes, and revocation rules.
+Direct generation usually looks like:
 
-Knowledge Governance is therefore not a replacement for RL. It is a complementary inference-time layer for the parts of a task that were not successfully mapped into probability by training.
+```text
+input → final answer
+```
 
-## Governed Knowledge Objects in practice
+A high-mismatch task often works better as:
 
-:::cards
+```text
+input → task model → control objects → validation / weakening → final rendering
+```
+
+The goal is to turn a hard final-output problem into a sequence of easier intermediate tasks: compress context, enumerate states, generate rubrics, create counterexamples, list failure modes, formulate queries, build dependency graphs, and then render the final output from those governed objects.
+
+## What Knowledge Governance Means
+
+Knowledge Governance is an inference-time control layer. It separates final rendering from the acquisition and management of task-specific control knowledge.
+
+The point is not a longer prompt. The point is lifecycle management for knowledge:
+
+::::cards
+### Visible
+
+Important assumptions, boundaries, preferences, constraints, and failure conditions should be pulled out of fluent prose and made inspectable.
+
+### Validated
+
+A candidate rule should not become active just because it sounds plausible. It needs support from examples, tests, tool results, expert judgment, counterexamples, or environmental feedback.
+
+### Revocable
+
+A rule is valid only under conditions. When state, version, authority, objective, or evidence changes, it should be weakened, replaced, or revoked.
+::::
+
+## What a GKO Looks Like
+
+A Governed Knowledge Object, or GKO, stores control knowledge the AI should know, obey, or check. A useful GKO should answer:
+
+::::cards
 ### Condition
 
-When does this piece of knowledge apply? A useful rule should not silently become universal.
+When does this knowledge apply? A locally useful rule should not silently become a universal truth.
 
-### Strength and evidence
+### Evidence Strength
 
-Was it inferred from one example, multiple failures, a test, a tool result, or expert validation?
+Does it come from one example, repeated failures, a test result, a tool run, statistical evidence, or expert confirmation?
 
-### Priority and revocation
+### Priority and Revocation
 
-How should conflicts be resolved, and what observation should weaken or retire the rule?
-:::
+What happens when rules conflict? What observation weakens, overrides, or retires the rule?
+::::
 
-## A practical loop
+In an external-communication setting, a GKO might look like:
 
-- Diagnose mismatch profile before choosing the workflow.
-- Construct the task model and control space.
-- Generate candidate GKOs from evidence, perturbations, and failures.
-- Validate the GKOs against the strongest available signal.
-- Render the final output from governed control knowledge, then monitor and revise.
+```json
+{
+  "condition": "external communication involves refunds, pricing, delivery dates, or legal commitments",
+  "assertion": "do not make the commitment directly; obtain authorization first or prepare a draft instead",
+  "strength": "objective-grounded",
+  "priority": 0.95,
+  "lifespan": "project",
+  "revocation_trigger": "an authorized owner grants standing permission for this class of commitment",
+  "evidence": "external commitments create reputational, financial, and legal risk",
+  "source": "authority governance"
+}
+```
+
+## A Practical Loop
+
+1. Check whether the task is already autoregressive-extraordinary. If it is compression, rewriting, format conversion, or common candidate generation, direct generation may be enough.
+2. Diagnose the mismatch profile: aggregation, support, state, and specification.
+3. Construct the task model: real success condition, target carrier, constraints, noise, hidden assumptions, and evaluation standard.
+4. Build the control space: state matrix, dependency graph, rubric, failure modes, edge cases, query plan, or validation checklist.
+5. Generate candidate GKOs from evidence, failures, perturbations, contrastive examples, and tool results.
+6. Validate or weaken GKOs by separating confirmed rules, local rules, assumptions, and rejected claims.
+7. Render the final output from governed knowledge, then check whether the output preserves the control objects.
+8. Monitor failures, write new evidence back into the GKO set, and demote or revoke stale rules when needed.
+
+## Engineering Judgment
+
+Governance has a cost. Not every task needs a full control layer. Low-risk, low-mismatch, strongly validated, highly patterned tasks can stay lightweight. High-risk, high-mismatch, tacit, stateful, or reusable tasks should externalize their control knowledge.
+
+A good system does not make the model generate less. It makes the model generate in the right task shape.

@@ -4,62 +4,94 @@ lang: en
 path: /framework
 title: Mechanism
 navTitle: Mechanism
-kicker: The paper-facing theory behind the public explanation
-summary: The theory treats autoregressive mediocrity as a task- and budget-dependent regime. It appears when the reachable distribution of fluent outputs is poorly aligned with the task's true value landscape.
+kicker: The theory layer behind the public explanation
+summary: The framework treats LLM generation as a relationship between probability and task value. The key question is not whether the model can write, but whether what it easily generates is also what the task truly rewards.
 order: 2
 heroPoints:
   - "Autoregressive mediocrity: fluent, plausible outputs remain concentrated away from high-value regions."
+  - "Local alignment: the model performs useful local operations, but local value does not automatically compose into global value."
   - "Autoregressive extraordinary: local continuation and task value reinforce each other."
-  - Four primitive mismatches explain when the first regime is likely to appear.
 ---
 
-## From output fluency to value alignment
+## The Core Question: Does Probability Track Value?
 
-The central scientific question is not whether a model can generate good text. It is whether the generation process exposes and preserves the variables that determine task value. In many tasks, the fluent output space is too close to the proxy objective and too far from the real one.
+An LLM still generates through probability: the next token, reasoning step, structural move, or tool call is selected under the current context. Training, RLHF, preference optimization, and inference-time reasoning reshape this distribution, but they do not give the model direct access to the real utility function of the current task.
 
-## RL turns value into probability
+The mechanism question is therefore:
 
-Pre-training mainly fits the statistical distribution of human text. In that phase, the model learns which continuations are likely under a context; high probability mostly means "this is what text like this tends to do." Reinforcement learning from human feedback, preference optimization, and related alignment methods change the meaning of that probability space. They push up the probability of trajectories that receive higher reward and push down the probability of trajectories that receive lower reward.
+```text
+Is the model's easiest direction of continuation also the direction in which task value rises?
+```
 
-After alignment, the model still emits tokens through logits, softmax, and autoregressive sampling. The physical interface has not changed. What changes is what the probability distribution is trying to express. A high-probability continuation is no longer only a frequent continuation; it is also a continuation that the trained system expects to score well under a learned proxy for task value.
+When yes, autoregressive generation can be extremely effective. When no, fluency can make the wrong direction more convincing.
 
-This is why RL can create real local alignment. In instruction following, summarization, style transfer, polite refusal, surface helpfulness, and many formatting tasks, the local likelihood gradient can become close to the task-value gradient. The model's most natural next step is also a useful next step. That is one source of autoregressive extraordinary.
+## Three Alignment Regimes
 
-## The four primitive mismatches
+::::cards
+### Autoregressive Mediocrity
+Tag: probability peak misses value peak
 
-:::cards
+Under the available budget, reachable candidates remain concentrated in outputs that are fluent, plausible, and locally improvable but far from high-value solutions. More sampling or polishing may improve average quality without exposing the decisive structure.
+
+### Autoregressive Local Alignment
+Tag: the common practical state
+
+The model's local continuation tendencies align with part of the task value. It can compress, rewrite, enumerate, compare, outline, and produce useful fragments. But global success may still depend on hidden state, long-range dependency, true objective, or validation.
+
+### Autoregressive Extraordinary
+Tag: probability and value rise together
+
+High-value outputs are no longer tail events; they are easy to reach. Context compression, semantic decompression, register transfer, surface polish, structured transformation, query formulation, and edge-case generation often live in this regime.
+::::
+
+## Policy-Value Compression
+
+Modern aligned models should not be described as merely following raw word frequency. Pretraining gives the model language and world patterns. SFT, RLHF, DPO, process supervision, and related methods compress certain proxy values into the policy, making helpful, preferred, apparently correct, or safe trajectories more probable.
+
+This is **policy-value compression**: value is not directly read by the model; it is compressed into probability and expressed at inference time through more likely tokens, steps, and output trajectories.
+
+This explains two facts:
+
+- Models keep getting more useful because more valuable behaviors are moved into high-probability regions.
+- Mismatch remains because proxy value is not the same as the real value of the current task, especially in open-ended, dynamic, high-stakes, or underspecified situations.
+
+Inference-time reasoning has a similar effect. Chain-of-thought, search, reflection, and tool use create intermediate states that can turn the original task into more locally aligned subtasks. But if the intermediate representation is wrong, longer reasoning can simply become a longer rationalization of the wrong abstraction.
+
+## The Four Primitive Mismatches
+
+The four mismatches are not an attempt to name every surface failure. They are diagnostic axes for predicting when ordinary final-output search is likely to plateau.
+
+::::cards
 ### Aggregation
 
-Local improvements do not reliably compose into global value. The task depends on long-range coordination, delayed payoff, or coupled constraints.
+Local improvements do not reliably compose into global value. Stories, code architecture, strategy, customer communication, and complex reasoning often depend on long-range coordination, delayed payoff, or coupled constraints.
 
 ### Support
 
-Near-optimal solutions are low probability or hard to reach under the available inference budget and search operators.
+The high-value answer is hard to reach under the current model, search operator, and budget. It may involve low-salience evidence, a minority frame, rare structure, counterintuitive option, or unusual boundary condition.
 
 ### State
 
-The ranking of outputs depends on hidden, changing, or underspecified states that are not fully contained in the prompt.
+The ranking of answers depends on hidden, changing, or underspecified state. User emotion, market regime, legal jurisdiction, production environment, time window, and organizational authority can reverse the value of the same answer.
 
 ### Specification
 
-The accessible proxy objective diverges from the true objective: the answer can satisfy the prompt while missing what actually matters.
-:::
+The accessible proxy objective diverges from the true objective. An answer may satisfy the prompt, rubric, style, or test while missing the user's real success criterion.
+::::
 
-## Why RL is not enough
+## Why Derivative Patterns Should Not Multiply the Taxonomy
 
-RL aligns the model to a reward model or preference signal, not directly to the full real-world utility of every future task state. The learned reward is a proxy. It can capture broad patterns of helpfulness and harmlessness while missing tacit requirements, hidden state, domain constraints, long-range structure, or unusual high-value solutions.
+Order-sensitive trajectories, noisy-context construal failures, corpus-prior dominance, emergent specification, structure-signal gaps, and control-capacity collapse are all important. But they are usually not new primitive mismatches. They are surface patterns produced by the four mismatches interacting with representation choice, inference budget, and control policy.
 
-That means alignment is usually local rather than total. Some regions of the task become autoregressive-extraordinary because high-value continuations have been mapped into high-probability regions. Other regions remain autoregressive-mediocre because the probability surface still points toward answers that are fluent, reward-shaped, and plausible but not truly valuable for the concrete situation.
+This discipline matters because each diagnosis should imply a different intervention:
 
-The four-mismatch view explains these remaining gaps.
+- Aggregation mismatch: make global structure explicit first.
+- Support mismatch: pull tail structures into context.
+- State mismatch: enumerate states and produce conditional policies.
+- Specification mismatch: externalize the value function through rubrics, counterexamples, and acceptance criteria.
 
+## From Theory to Method
 
-## Why extraordinary regimes matter
+The mechanism leads to a practical principle: do not always ask the model to solve the high-mismatch final-output task directly. Preserve the operations that are already locally aligned, transform the misaligned parts into lower-mismatch intermediate tasks, and then verify that those intermediate objects compose into real global value.
 
-The framework is not anti-autoregression. It also names the opposite regime: autoregressive extraordinary. When the model's local continuation tendencies align with value, tasks such as context compression, taxonomy generation, edge-case enumeration, register transfer, query formulation, and semantic decompression can become unusually effective.
-
-## Derivative patterns should be explained, not endlessly renamed
-
-- Order-sensitive trajectories, noisy-context construal, corpus-prior dominance, and emergent specification are important patterns.
-- They are usually better diagnosed as interactions among the four primitive mismatches, representation choice, inference budget, and control policy.
-- This keeps the taxonomy useful: every diagnosis should imply a different intervention.
+That is the path from autoregressive mediocrity toward autoregressive extraordinary, and it is what Knowledge Governance formalizes.
