@@ -70,6 +70,7 @@ function renderNav(lang: Lang, current: Page) {
           .join("")}
       </nav>
       <div class="header-actions">
+        ${link("/interactive.html", lang === "zh" ? "交互实验" : "Interactive Lab", "ghost-button")}
         ${link(alternatePath(lang, current.key), site.switchLabel, "ghost-button")}
         ${link(site.repoUrl, site.repoLabel, "solid-button")}
       </div>
