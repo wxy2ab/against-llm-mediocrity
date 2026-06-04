@@ -29,6 +29,24 @@ System: turn reusable judgments into GKOs / GEOs
 
 In one sentence: AI should move the task to the point where only human-governed variables remain; humans should resolve variables that cannot be reliably obtained from environment, feedback, tools, or simulation.
 
+## Three-Layer Diagnostic Stack
+
+Governed collaboration sits on top of the mechanism layer. It does not add new primitive mismatches; it asks where autonomous execution is blocked.
+
+::::cards
+### Primitive Mismatch
+
+Why might ordinary generation diverge from value? The main axes are aggregation, support, state, and specification.
+
+### Operational Blocker
+
+Which missing control variable prevents reliable continuation? The blocker may be a fact, value weight, authority boundary, validation signal, resource, or representation choice.
+
+### Escalation Protocol
+
+What is the smallest human contribution that restores autonomy? This is where MSHQs and GEOs belong.
+::::
+
 ## First Ask Where the Variable Comes From
 
 Not every uncertainty should be escalated to a human. The agent should first ask whether the missing variable can be obtained from the environment, learned through feedback, or stress-tested through a constructed scenario.
@@ -55,6 +73,40 @@ Tag: only then ask the human
 When the variable cannot be observed, inferred, validated, or legitimately authorized by AI, the agent should ask the human for a fact, weight, boundary, authorization, validation signal, resource, risk owner, or stopping criterion.
 :::
 
+Before asking, the agent should attempt bounded autonomous recovery: inspect context, query tools and files, run tests, retrieve current sources, simulate scenarios, generate options, and reparameterize the task. Escalation is justified only when the remaining variable is both task-critical and genuinely human-governed.
+
+## Five Operational Domains
+
+The collaboration supplement consolidates execution blockers into five domains:
+
+::::cards
+### Information and Evidence
+
+The agent lacks a fact, fresh state, validator, source, runtime result, file, permission, or reliable evidence.
+
+### Value and Specification
+
+Several actions are feasible, but their ranking depends on objectives, taste, budget, risk tolerance, sufficiency criteria, or stakeholder priority.
+
+### Authority and Responsibility
+
+The agent may know what to do but lacks legitimate authority to send, publish, delete, pay, sign, disclose, deploy, or accept consequence.
+
+### Boundary and Timing
+
+The agent does not know when a rule applies, when it expires, whether to wait, whether to commit, or whether progress is still reversible.
+
+### Coordination and Control Representation
+
+The current decomposition, workflow, handoff, or task model may omit a decisive dependency or responsible role.
+::::
+
+## Escalation Gates
+
+Some cases require escalation even if the agent is confident. These are hard governance gates: external commitments, sensitive disclosure, deletion, payment, signing, publication, deployment, policy overrides, or legal, financial, safety, employment, privacy, or reputational responsibility.
+
+For non-mandatory cases, escalation should depend on expected loss: if the expected cost of unsupported autonomy exceeds the cost of interruption and delay, the agent should ask. Reversibility matters. A reversible draft can continue; an irreversible commitment should pause.
+
 ## Minimal Sufficient Human Query
 
 A good agent should not ask:
@@ -76,6 +128,16 @@ A good Minimal Sufficient Human Query has five properties:
 - It explains what each answer changes.
 - It states a safe default.
 - It does not hand the entire task back to the human.
+
+A reusable template is:
+
+```text
+I can continue autonomously with ______.
+The only blocking variable is ______.
+Please choose or confirm: A ______ / B ______ / C ______.
+This changes ______.
+If you do not specify, I will ______ because it is the safest or most reversible path.
+```
 
 :::cards
 ### Fact or State
@@ -108,6 +170,21 @@ A GEO should specify:
 - Human role: user, expert, approver, data owner, reviewer, or risk owner?
 - Autonomous work while waiting: what drafts, tests, or analysis can continue?
 - Revocation trigger: when does this escalation rule stop applying?
+
+If a human answer becomes durable, it may become a GKO. For example: "Any external commitment for this client requires explicit approval before sending." Conversely, a GKO may trigger a GEO when a condition appears in a future task.
+
+## Collaboration Workflow
+
+1. Route low-mismatch work directly.
+2. Diagnose the primitive mismatch and current operational blocker.
+3. Construct a task model and option space.
+4. Query the environment and available tools.
+5. Build proving grounds: scenarios, counterfactuals, stakeholder views, red-team cases, and edge cases.
+6. Identify the remaining human-governed variable.
+7. Issue an MSHQ or instantiate a GEO.
+8. Continue safe reversible work while waiting.
+9. Validate the answer, resume autonomous work, and verify the result.
+10. Preserve reusable judgment as GKOs or GEOs, and revoke stale ones when conditions change.
 
 ## What Humans Should Govern
 

@@ -31,6 +31,8 @@ That is what this project calls **autoregressive mediocrity**. It does not mean 
 
 The response is not merely to write better prompts. The first question is diagnostic: which parts of the task are already aligned with the model's generative strengths, which parts are only locally aligned, and which parts must be governed through control spaces, validation, tools, or human decisions?
 
+The practical aim is to preserve the model's real strengths while preventing local fluency from masquerading as global value.
+
 ## The One-Page Map
 
 The project distinguishes three regimes:
@@ -51,6 +53,40 @@ Tag: probability and value align
 
 When local continuation reliably points toward task value, autoregression is not the problem; it is the advantage. Context compression, semantic expansion, structured transformation, and register transfer often live here.
 :::
+
+The common case is the middle one. A product memo, code review, customer reply, learning plan, or research synthesis may contain parts that are easy for the model to handle and parts that depend on hidden state, global coordination, rare evidence, or a value choice. The question is not whether to use AI, but where the alignment boundary lies.
+
+## The Diagnostic Chain
+
+The deeper manuscripts organize the problem as a chain:
+
+```text
+probability-value regime
+-> primitive mismatch
+-> intermediate control object
+-> validation or human-governed variable
+-> final rendering
+```
+
+The four primitive mismatches are the main diagnostic axes:
+
+::::cards
+### Aggregation
+
+Local improvements do not reliably add up to global value. A strategy can read well while missing the governing tradeoff; code modules can look correct while violating dependency order.
+
+### Support
+
+The valuable answer is hard to reach under the current model, search method, and budget. The missing move may be a rare frame, low-salience evidence, or non-obvious failure mode.
+
+### State
+
+The right answer depends on hidden or changing state: market regime, production environment, user emotion, authority boundary, time window, or policy context.
+
+### Specification
+
+The accessible proxy objective diverges from the real objective. The output satisfies the prompt, style, or rubric while missing the user's true success condition.
+::::
 
 ## How to Read the Site
 
@@ -89,8 +125,17 @@ Important assumptions, constraints, boundaries, preferences, and revocation cond
 Humans should not merely proofread AI drafts. Their role is to set values, choose weights, authorize risk, provide real state, judge taste, and own responsibility. A good agent asks the minimal sufficient question instead of handing the entire task back to the human.
 :::
 
+In practice, this means a hard task should often move through artifacts before it moves into final prose:
+
+```text
+input -> task model -> control objects -> validation / escalation -> final answer
+```
+
+Those artifacts may include rubrics, state matrices, dependency graphs, option sets, failure-mode lists, validation checklists, GKOs, GEOs, or Minimal Sufficient Human Queries. They are not bureaucracy for its own sake. They are ways to convert a high-mismatch final-output problem into smaller operations where the model's local strengths become useful again.
+
 ## Where This Is Going
 
 - The public layer will explain autoregressive mediocrity, local alignment, and autoregressive extraordinary without requiring the reader to begin with the paper.
-- The theory layer will develop the four primitive mismatches, Knowledge Governance, GKO/GEO, and governance loops.
-- The engineering layer will turn control objects, validation loops, and minimal human intervention points into usable tools and templates.
+- The theory layer develops the four primitive mismatches, Knowledge Governance, GKO/GEO, and governance loops.
+- The engineering layer turns control objects, validation loops, and minimal human intervention points into usable tools and templates.
+- The collaboration layer reframes the human role: not as a processor of every task, but as the governor of value, authority, taste, budget, evidence, and responsibility.

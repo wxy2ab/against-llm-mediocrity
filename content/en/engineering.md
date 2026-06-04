@@ -41,6 +41,32 @@ input → task model → control objects → validation / weakening → final re
 
 The goal is to turn a hard final-output problem into a sequence of easier intermediate tasks: compress context, enumerate states, generate rubrics, create counterexamples, list failure modes, formulate queries, build dependency graphs, and then render the final output from those governed objects.
 
+## Decoupled Control Space
+
+A decoupled control space is an external representation layer that does not need to look like the final answer. Its job is to preserve the units and relations that fluent prose tends to blur.
+
+Depending on the task, the control space may contain:
+
+::::cards
+### Structure
+
+Story beats, dependency graphs, module boundaries, workflow states, scenario matrices, role bindings, or promise-payoff relations.
+
+### Constraints
+
+Policy rules, data availability, temporal order, budget limits, privacy boundaries, acceptance criteria, and non-negotiable conditions.
+
+### Evidence
+
+Tests, retrieved sources, examples, failed cases, counterexamples, expert judgment, tool results, and validation notes.
+
+### Governance
+
+GKOs, GEOs, priorities, lifespans, revocation triggers, safe defaults, and unresolved human-governed variables.
+::::
+
+The final answer is then rendered from this control space. This matters because final prose entangles content, style, local coherence, and hidden constraints into one object. When the control objects are separate, the system can check whether the final prose preserved them.
+
 ## What Knowledge Governance Means
 
 Knowledge Governance is an inference-time control layer. It separates final rendering from the acquisition and management of task-specific control knowledge.
@@ -94,6 +120,32 @@ In an external-communication setting, a GKO might look like:
 }
 ```
 
+The exact schema can vary by domain, but a GKO should usually separate five concerns: the condition under which it applies, the assertion it makes, the evidence supporting it, its priority relative to other rules, and the trigger that weakens or revokes it.
+
+## Validation Strength
+
+Candidate GKOs should not become active merely because they sound plausible. The main manuscript distinguishes evidence regimes that imply different confidence levels:
+
+::::cards
+### Sample-Grounded
+
+A rule is supported by paired or contrastive examples, such as preferred vs. rejected outputs or successful vs. failed dialogues.
+
+### Objective-Grounded
+
+A rule improves a measurable downstream objective, such as task completion, leakage reduction, test pass rate, or out-of-sample performance.
+
+### Statistics-Grounded
+
+A rule produces a desirable distributional shift when no single task objective is available, such as fewer contradictions, less repetition, or more diverse scenarios.
+
+### Adversarial
+
+A rule survives targeted attempts to break it, but still lacks stronger paired or objective support.
+::::
+
+Validation is the burden of proof. The model can propose hypotheses, dependencies, and candidate rules, but the system should not ask the same generation process to certify them as true.
+
 ## A Practical Loop
 
 1. Check whether the task is already autoregressive-extraordinary. If it is compression, rewriting, format conversion, or common candidate generation, direct generation may be enough.
@@ -105,8 +157,34 @@ In an external-communication setting, a GKO might look like:
 7. Render the final output from governed knowledge, then check whether the output preserves the control objects.
 8. Monitor failures, write new evidence back into the GKO set, and demote or revoke stale rules when needed.
 
+## Failure Modes to Watch
+
+Governance can also fail if the intermediate objects become the wrong target.
+
+::::cards
+### Proxy Drift
+
+The system replaces the hard task with an easier but wrong proxy. "Produce strategic insight" quietly becomes "write a clear multi-section memo."
+
+### False Artifacts
+
+The model invents a rubric, dependency, state, or invariant that sounds useful but is not supported by evidence.
+
+### Stale Knowledge
+
+A rule that was valid under one version, market regime, authority boundary, or user preference silently persists after conditions change.
+
+### Control Overhead
+
+The task was already low-risk and locally aligned, but the system adds heavy governance that costs more than it improves.
+::::
+
+Conflict is normal as the GKO set grows. When two rules apply but recommend incompatible actions, resolve by evidence strength, priority, scope specificity, recency, and measured objective impact.
+
 ## Engineering Judgment
 
 Governance has a cost. Not every task needs a full control layer. Low-risk, low-mismatch, strongly validated, highly patterned tasks can stay lightweight. High-risk, high-mismatch, tacit, stateful, or reusable tasks should externalize their control knowledge.
+
+Use the lightweight path when the task is mostly compression, formatting, register transfer, or routine candidate generation. Use the governed path when local plausibility is a weak proxy for value, when state can change the answer, when errors are costly, or when the same judgment should be reused and revoked over time.
 
 A good system does not make the model generate less. It makes the model generate in the right task shape.

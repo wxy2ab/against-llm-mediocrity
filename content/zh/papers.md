@@ -5,12 +5,12 @@ path: /zh/papers
 title: 论文与工作稿
 navTitle: 论文
 kicker: 把这套框架正式写清楚
-summary: 这里收集与自回归平庸、自回归卓越、Knowledge Governance、治理式协作和 AI 时代人类学习相关的论文、工作稿与后续实证方向。
+summary: 这里收集与自回归平庸、自回归卓越、Knowledge Governance 和治理式协作相关的当前工作稿与后续实证方向。
 order: 6
 heroPoints:
   - 主文：Knowledge Governance for Large Language Model Systems。
   - 补充稿：Human-Assist Operational Mismatches。
-  - 扩展稿：治理式协作与 AI 时代的人类学习。
+  - 站点扩展：治理式协作、人类学习与实现方向。
 ---
 
 ## 深水区怎么读
@@ -22,7 +22,7 @@ heroPoints:
 1. 先读站点的“为什么重要”和“机制”，建立三种对齐区间与四类 mismatch。
 2. 再读主文，理解 Knowledge Governance 如何把中间控制知识外化、验证和复用。
 3. 然后读协作补充稿，理解 agent 什么时候应该问人，以及如何构造最小充分人类问题。
-4. 最后读治理式协作与人类学习稿，理解这套理论在人机协作和教育中的展开。
+4. 最后读站点中的协作、学习和项目页，理解这些手稿如何转化为实践和实现方向。
 
 ## 当前工作稿
 
@@ -47,11 +47,20 @@ Tag: 公开实践框架
 这份实践框架把论文理论转化为协作方法：AI 先问环境、学反馈、构造试炼场，只有当剩余变量确实由人类治理时，才提出最小充分问题。
 
 [阅读实践框架](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/governed-human-ai-collaboration.zh-CN.md)
+::::
 
+## 站点扩展
+
+::::cards
 ### AI 时代的人类学习
-Tag: 人类侧能力
+Tag: 站点扩展
 
-这份稿件讨论当 AI 成为默认信息处理核心后，人类学习如何从技能执行转向知识底座、反馈、验证、洞察、价值判断和长期叙事。
+这一页目前没有独立手稿。它扩展的是治理式协作中的人类角色上移：人从普通处理者转向问题构造、价值判断、反馈、验证、授权和治理记忆的治理者。
+
+### 开源项目
+Tag: 实现路线图
+
+项目页是把 GKO/GEO 原理做成工具的路线图。它应被理解为实现方向，而不是当前工作稿之外的新理论主张。
 :::
 
 ## 后续实证方向
@@ -61,6 +70,7 @@ Tag: 人类侧能力
 - 研究上下文压缩、语义解压、查询构造和结构化转换这些正向对齐任务的 profile。
 - 测量 noisy natural scene 与 clean abstract form 之间的 construal gap。
 - 比较普通人机问答与 MSHQ/GEO 协作协议在中断次数、回答质量和自治恢复率上的差异。
+- 评估 GKO/GEO 存储是否能提高复用，同时避免过期治理、过度升级或习得性无助。
 
 ## 项目定位
 

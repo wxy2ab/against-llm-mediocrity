@@ -5,12 +5,12 @@ path: /papers
 title: Papers and Working Manuscripts
 navTitle: Papers
 kicker: Formalizing the framework
-summary: This section collects papers, working drafts, and future empirical directions related to autoregressive mediocrity, autoregressive extraordinary, Knowledge Governance, governed collaboration, and human learning in the AI era.
+summary: This section collects the current manuscripts and future empirical directions related to autoregressive mediocrity, autoregressive extraordinary, Knowledge Governance, and governed collaboration.
 order: 6
 heroPoints:
   - "Main manuscript: Knowledge Governance for Large Language Model Systems."
   - "Supplement: Human-Assist Operational Mismatches."
-  - "Extensions: governed collaboration and human learning in the AI era."
+  - "Site extensions: governed collaboration, human learning, and implementation directions."
 ---
 
 ## How to Enter the Deep End
@@ -22,7 +22,7 @@ Suggested reading order:
 1. Start with "Why It Matters" and "Mechanism" to understand the three regimes and four primitive mismatches.
 2. Read the main manuscript to see how Knowledge Governance externalizes, validates, and reuses intermediate control knowledge.
 3. Read the collaboration supplement to understand when an agent should ask a human and how to construct minimal sufficient human queries.
-4. Read the governed collaboration and learning drafts to see how the theory expands into human-AI collaboration and education.
+4. Use the site pages on collaboration, learning, and projects to see how the manuscripts translate into practice and implementation directions.
 
 ## Current Working Manuscripts
 
@@ -47,11 +47,20 @@ Tag: public practice framework
 This practice framework turns the theory into a collaboration method: AI should first query the environment, learn from feedback, and construct proving grounds. Only when the remaining variable is genuinely human-governed should it ask a minimal sufficient question.
 
 [Read the practice framework](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/governed-human-ai-collaboration.md)
+::::
 
+## Site Extensions
+
+::::cards
 ### Human Learning in the AI Era
-Tag: human-side capability
+Tag: site-level extension
 
-This draft asks how learning changes when AI becomes the default information-processing core. It shifts the emphasis from skill execution toward knowledge base, feedback, validation, insight, value judgment, and long-term narrative.
+There is not yet a standalone manuscript for this page. It extends the governed collaboration argument, especially the shift from humans as processors to humans as governors of problem construction, value judgment, feedback, validation, authorization, and governance memory.
+
+### Open-Source Projects
+Tag: implementation roadmap
+
+The project page is a roadmap for turning GKO/GEO principles into tools. It should be read as implementation direction, not as an additional theoretical claim beyond the current manuscripts.
 :::
 
 ## Future Empirical Agenda
@@ -61,6 +70,7 @@ This draft asks how learning changes when AI becomes the default information-pro
 - Study positive-alignment profiles for context compression, semantic decompression, query formulation, and structured transformation.
 - Measure the construal gap between noisy natural scenes and clean abstract forms.
 - Compare ordinary human-agent prompting with MSHQ/GEO collaboration protocols on interruption count, answer quality, and autonomy regained.
+- Evaluate whether GKO/GEO stores improve reuse without causing stale governance, over-escalation, or learned helplessness.
 
 ## Project Status
 

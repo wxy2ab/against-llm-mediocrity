@@ -13,18 +13,27 @@ heroPoints:
   - Benchmarks for detecting when output-space search plateaus.
 ---
 
-## Planned project types
+## Planned Project Types
 
-:::cards
-### GKO registry
+These are implementation directions derived from the current manuscripts. They are not additional theoretical claims; they are ways to test whether governed knowledge, escalation protocols, and mismatch diagnostics can become useful software objects.
 
-A local or server-backed store for governed knowledge objects with conditions, strength, lifespan, and revocation rules.
+::::cards
+### GKO Registry
 
-### Escalation workbench
+A local or server-backed store for governed knowledge objects with conditions, assertions, evidence strength, priority, lifespan, conflict handling, and revocation rules.
 
-A tool that turns operational blockers into concise human questions with defaults and continuation plans.
+### Escalation Workbench
 
-### Mismatch diagnostics
+A tool that turns operational blockers into Minimal Sufficient Human Queries, including options, safe defaults, human role, autonomous work allowed while waiting, and revocation triggers.
 
-A workflow that classifies tasks by aggregation, support, state, and specification mismatch before choosing an inference strategy.
-:::
+### Mismatch Diagnostics
+
+A workflow that classifies tasks by aggregation, support, state, and specification mismatch before choosing direct generation, control-space construction, validation, retrieval, or human escalation.
+::::
+
+## Evaluation Questions
+
+- Does the tool reduce repeated output-space sampling on high-mismatch tasks?
+- Do stored GKOs improve later outputs without becoming stale or over-general?
+- Do GEOs reduce unnecessary interruptions while preserving hard governance boundaries?
+- Can users see why the system asked a human, used a tool, or revoked a rule?
