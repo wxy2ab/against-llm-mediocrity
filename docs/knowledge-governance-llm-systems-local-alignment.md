@@ -2,8 +2,6 @@
 
 # From Autoregressive Mediocrity through Local Alignment to Autoregressive Extraordinary
 
-**Xinyun Wang**, **Shuliang Liang**
-
 ## Abstract
 
 Large language model (LLM) systems are increasingly improved at inference time through repeated sampling, critique, planning, reranking, retrieval, tool use, and iterative revision. These methods can substantially outperform one-shot generation. Yet on a class of difficult tasks they often remain concentrated in outputs that are fluent, locally coherent, and incrementally improvable while still falling short of high task value. We use **autoregressive mediocrity** as a descriptive term for this failure mode.

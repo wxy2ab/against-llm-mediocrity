@@ -20,8 +20,8 @@ LLM 往往很早就能生成流畅答案，但要晚得多才会真正生成高�
 
 ## 文档
 
-- 仓库内工作稿（英文）： [docs/knowledge-governance-llm-systems-local-alignment.md](docs/knowledge-governance-llm-systems-local-alignment.md)
-- 仓库内工作稿（中文）： [docs/knowledge-governance-llm-systems-local-alignment.zh-CN.md](docs/knowledge-governance-llm-systems-local-alignment.zh-CN.md)
+- 仓库内工作稿（英文）：[docs/knowledge-governance-llm-systems-local-alignment.md](docs/knowledge-governance-llm-systems-local-alignment.md)
+- 仓库内工作稿（中文）：[docs/knowledge-governance-llm-systems-local-alignment.zh-CN.md](docs/knowledge-governance-llm-systems-local-alignment.zh-CN.md)
 
 ## 站点
 
@@ -36,11 +36,6 @@ LLM 往往很早就能生成流畅答案，但要晚得多才会真正生成高�
 ## 基础设施项目
 
 - **deepstack**：一个 agent runtime scaffold，提供 context 组装、递归调用等 agent runtime 基础能力。
-
-## 作者
-
-- Xinyun Wang: [GitHub](https://github.com/wxy2ab)
-- Shuliang Liu: [GitHub](https://github.com/MichaelLyo)
 
 ## 本地开发
 
