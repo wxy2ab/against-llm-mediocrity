@@ -56,19 +56,31 @@ When local continuation reliably points toward task value, autoregression is not
 
 The common case is the middle one. A product memo, code review, customer reply, learning plan, or research synthesis may contain parts that are easy for the model to handle and parts that depend on hidden state, global coordination, rare evidence, or a value choice. The question is not whether to use AI, but where the alignment boundary lies.
 
-## The Diagnostic Chain
+## From a Fluent Draft to a Valuable Answer
 
-The deeper manuscripts organize the problem as a chain:
+Suppose you ask for a strategic recommendation. The model produces a polished memo, but the recommendation depends on a budget limit that was never stated. Asking it to "make the memo better" will mostly improve the prose. It will not reveal the missing budget.
+
+The useful move is to stop treating the draft as the whole problem and ask a sequence of narrower questions:
+
+1. **What regime are we in?** The model is locally aligned: it can write and compare options well, but direct generation cannot guarantee the right recommendation.
+2. **Why does local quality stop predicting success?** This is primarily state and specification mismatch: the budget is hidden, and the preferred tradeoff is unknown.
+3. **What should become explicit before writing again?** Build an option matrix showing cost, speed, risk, and expected return.
+4. **What still cannot be supplied by the model?** Validate the factual estimates, then ask the human to confirm the budget and dominant objective.
+5. **What should the model do after those variables are resolved?** Render the final memo from the validated option matrix and chosen tradeoff.
+
+That sequence is the project's diagnostic-to-delivery chain:
 
 ```text
-probability-value regime
--> primitive mismatch
--> intermediate control object
--> validation or human-governed variable
--> final rendering
+identify the probability-value regime
+-> diagnose the mismatch that blocks global value
+-> construct an intermediate object that exposes the missing structure
+-> validate evidence or obtain the human-governed variable
+-> render the final answer from the governed state
 ```
 
-The four primitive mismatches are the main diagnostic axes:
+Each arrow changes the task the model is solving. The chain is not a mandatory workflow for every request. It is a way to avoid repeatedly polishing the final answer when the real bottleneck lives upstream.
+
+The four primitive mismatches help diagnose the second step:
 
 ::::cards
 ### Aggregation
