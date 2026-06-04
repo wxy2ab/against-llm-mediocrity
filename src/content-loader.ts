@@ -100,14 +100,15 @@ ${bodyHtml}
 </article>`;
   });
 
-  return `<div class="card-grid">
+  return `<div class="card-grid cards-${cards.length}">
 ${cards.join("\n")}
 </div>`;
 }
 
 function renderMarkdown(markdown: string): string {
-  const withCards = markdown.replace(/:::cards\n([\s\S]*?)\n:::/g, (_match, block: string) =>
-    renderCards(block),
+  const withCards = markdown.replace(
+    /^(:{3,})cards[ \t]*\n([\s\S]*?)^\1[ \t]*$/gm,
+    (_match, _fence: string, block: string) => renderCards(block),
   );
   return marked.parse(withCards, { async: false }) as string;
 }
