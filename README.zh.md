@@ -27,6 +27,16 @@ LLM 往往很早就能生成流畅答案，但要晚得多才会真正生成高�
 
 - https://wxy2ab.github.io/against-llm-mediocrity/
 
+## 对抗 LLM 自回归平庸的项目
+
+- **Story Insight**：故事生成是一个带有聚合失配的自回归平庸任务。Story Insight 通过构造控制空间并在其中搜索，显著提升故事生成质量。结合 MiniMax 一类模型，它可以写出整体质量明显超过 GPT-5.5 的故事。
+- **Social Insight**：真实社交对话是一个多目标协调任务，也很容易落入聚合失配。Social Insight 通过控制空间方法提升多目标协调能力，从而实现更高水平的社交沟通。
+- **Stock Rec**：金融任务是典型的状态失配场景。Stock Rec 通过持续的搜索与验证，让 LLM 系统更好地应对金融市场的非平稳特性。
+
+## 基础设施项目
+
+- **deepstack**：一个 agent runtime scaffold，提供 context 组装、递归调用等 agent runtime 基础能力。
+
 ## 作者
 
 - Xinyun Wang: [GitHub](https://github.com/wxy2ab)
