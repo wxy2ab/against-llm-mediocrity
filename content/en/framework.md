@@ -59,6 +59,18 @@ Inference-time reasoning has a similar effect. Chain-of-thought, search, reflect
 
 The consequence is not pessimism. It is calibration. Training and inference-time thinking expand the region where probability and value are locally aligned, but they do not remove the need to ask whether the current representation actually contains the task's decisive variables.
 
+## Why Multi-Agent Collaboration Does Not Automatically Escape Autoregressive Mediocrity
+
+Many people have the intuition that if a single model is prone to mediocrity, then multiple agents can solve the problem by discussing, critiquing, dividing roles, and voting. That is only true when multi-agent collaboration actually introduces a new control space, external state, validation mechanism, or genuinely differentiated strategy. Otherwise, it often amounts to repeating the same generative process many times.
+
+If several agents share roughly the same model, corpus priors, reward shaping, and task representation, then their collaboration is mechanically closer to **repeated sampling**. Even if they are labeled proposer, critic, judge, and executor, they are still searching on roughly the same probability landscape. This can improve average quality, reduce obvious errors, and make the output more complete or robust, but it does not automatically change the fact that high-value solutions may still lie outside the high-probability region.
+
+The same applies to multi-persona collaboration. Giving one model identities such as conservative, radical, user advocate, or architect can lengthen the sampling path and create more local perturbations and corrections. But if those personas are not tied to different information sources, different state access, different control objects, or different validation criteria, then the apparent dialogue is often just one autoregressive trajectory stretched into several entangled autoregressive trajectories. A longer path does not mean escape from autoregressive gravity.
+
+The key point is this: **lengthening the sampling path is not the same as changing the search space; increasing the number of roles is not the same as changing the value function.** If the real bottleneck comes from aggregation mismatch, state mismatch, support mismatch, or specification mismatch, then more agents often expose the mismatch more thoroughly rather than repair it. They may make a mediocre answer more persuasive, or make a cluster of middling answers more consistent, while still failing to reach the decisive structure.
+
+So multi-agent collaboration is not a sufficient condition for escaping autoregressive mediocrity. It starts to become a real governance mechanism only when it genuinely rewrites the task into a different control problem by introducing explicit external state, validation loops, governed knowledge objects, differentiated tool permissions, structured control spaces, or minimal human intervention points.
+
 ## The Four Primitive Mismatches
 
 The four mismatches are not an attempt to name every surface failure. They are diagnostic axes for predicting when ordinary final-output search is likely to plateau.
