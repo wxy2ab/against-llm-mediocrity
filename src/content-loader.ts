@@ -32,6 +32,7 @@ export type Page = {
 };
 
 type PageFrontmatter = Omit<Page, "html">;
+type RawPageFrontmatter = Partial<PageFrontmatter> & Record<string, unknown>;
 
 type Site = {
   languageName: string;
@@ -67,13 +68,66 @@ const rawPages = import.meta.glob("../content/**/*.md", {
   eager: true,
 }) as Record<string, string>;
 
+function coerceText(value: unknown): string {
+  if (typeof value === "string") {
+    return value;
+  }
+
+  if (typeof value === "number" || typeof value === "boolean") {
+    return String(value);
+  }
+
+  if (Array.isArray(value)) {
+    return value.map((item) => coerceText(item)).join(", ");
+  }
+
+  if (value && typeof value === "object") {
+    const entries = Object.entries(value as Record<string, unknown>);
+    if (entries.length === 1) {
+      const [key, nestedValue] = entries[0];
+      return `${key}: ${coerceText(nestedValue)}`;
+    }
+  }
+
+  return String(value ?? "");
+}
+
+function normalizePageFrontmatter(frontmatter: RawPageFrontmatter): PageFrontmatter {
+  return {
+    key: coerceText(frontmatter.key),
+    lang: frontmatter.lang === "zh" ? "zh" : "en",
+    path: coerceText(frontmatter.path),
+    title: coerceText(frontmatter.title),
+    navTitle: coerceText(frontmatter.navTitle),
+    kicker: coerceText(frontmatter.kicker),
+    summary: coerceText(frontmatter.summary),
+    order: typeof frontmatter.order === "number" ? frontmatter.order : Number(frontmatter.order ?? 0),
+    heroPoints: Array.isArray(frontmatter.heroPoints)
+      ? frontmatter.heroPoints.map((item) => coerceText(item))
+      : undefined,
+    heroVisual: frontmatter.heroVisual === "alignment" ? "alignment" : undefined,
+    alignmentLabels: frontmatter.alignmentLabels
+      ? {
+          probability: coerceText((frontmatter.alignmentLabels as Record<string, unknown>).probability),
+          value: coerceText((frontmatter.alignmentLabels as Record<string, unknown>).value),
+          extraordinary: coerceText((frontmatter.alignmentLabels as Record<string, unknown>).extraordinary),
+          mediocre: coerceText((frontmatter.alignmentLabels as Record<string, unknown>).mediocre),
+          local: coerceText((frontmatter.alignmentLabels as Record<string, unknown>).local),
+          aligned: coerceText((frontmatter.alignmentLabels as Record<string, unknown>).aligned),
+          misaligned: coerceText((frontmatter.alignmentLabels as Record<string, unknown>).misaligned),
+          partial: coerceText((frontmatter.alignmentLabels as Record<string, unknown>).partial),
+        }
+      : undefined,
+  };
+}
+
 function parseMarkdownFile(raw: string): { frontmatter: PageFrontmatter; body: string } {
   const match = raw.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
   if (!match) {
     throw new Error("Markdown page is missing frontmatter.");
   }
 
-  const frontmatter = YAML.parse(match[1]) as PageFrontmatter;
+  const frontmatter = normalizePageFrontmatter(YAML.parse(match[1]) as RawPageFrontmatter);
   return { frontmatter, body: match[2] };
 }
 

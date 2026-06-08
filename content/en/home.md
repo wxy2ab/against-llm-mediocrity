@@ -11,7 +11,7 @@ heroVisual: alignment
 heroPoints:
   - When statistical probability and task value rise together, autoregressive generation can be exceptionally powerful.
   - When the probability peak misses the value peak, the model can produce fluent and plausible answers that are still not valuable enough.
-  - Most real tasks are locally aligned: some parts can be generated directly, while others need governance.
+  - "Most real tasks are locally aligned: some parts can be generated directly, while others need governance."
 alignmentLabels:
   probability: statistical probability
   value: task value
