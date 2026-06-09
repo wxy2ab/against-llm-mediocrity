@@ -4,7 +4,7 @@ lang: en
 path: /framework
 title: Mechanism
 navTitle: Mechanism
-kicker: The theory layer behind the public explanation
+kicker: A theoretical framework for studying resistance to autoregression
 summary: The framework treats LLM generation as a relationship between probability and task value. The key question is not whether the model can write, but whether what it easily generates is also what the task truly rewards.
 order: 2
 heroPoints:

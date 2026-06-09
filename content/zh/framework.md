@@ -4,7 +4,7 @@ lang: zh
 path: /zh/framework
 title: 机制
 navTitle: 机制
-kicker: 面向论文讨论的理论框架
+kicker: 研究对抗自回归的理论框架
 summary: 这套框架把 LLM 的生成看成概率分布与任务价值之间的关系问题。关键不是模型会不会写，而是它容易生成的东西，是否正好也是任务真正有价值的东西。
 order: 2
 heroPoints:
