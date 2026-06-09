@@ -8,182 +8,256 @@ kicker: Concrete engineering practice based on the mechanism
 summary: The engineering move is not to force the model to solve every hard task in final-answer space. It is to build intermediate control objects that make the task easier to generate, verify, reuse, and revoke.
 order: 3
 heroPoints:
-  - Reparameterize high-mismatch tasks into lower-mismatch subtasks.
-  - Represent task-specific control knowledge outside the final prose.
-  - Validate, prioritize, weaken, and revoke that knowledge as conditions change.
+  - Do not blindly add more final-answer sampling before asking whether the bottleneck is support, search, or validation.
+  - Governance works by building a control space first, then searching, projecting, validating, and writing experience back.
+  - The control space itself should be searched rather than designed once and treated as fixed.
 ---
 
-## One Thing to Change Tomorrow
+## What Governance Is Actually Doing
 
-Before asking the model for another final answer, ask:
+Governance is not about making the model behave more strictly, and it is not about writing longer prompts. What it really does is rewrite a hard final-output problem into a workflow that is easier to search, verify, and roll back.
 
-```text
-What intermediate object would change the shape of this task?
-```
-
-That object may be a state matrix, rubric, dependency graph, failure-mode list, edge-case set, query plan, task model, structural outline, validation checklist, or candidate constraint. LLMs are often strong at generating these objects. Once they stabilize, final writing, expansion, formatting, and tone adjustment move closer to an autoregressive-extraordinary regime.
-
-## Mediocrity-to-Extraordinary Transformation
-
-Governance is not about freezing the model. It is about changing the task the model faces.
-
-Direct generation usually looks like:
+Many failed tasks originally look like this:
 
 ```text
-input → final answer
+input -> direct final-answer sampling -> repeated polishing -> still wrong
 ```
 
-A high-mismatch task often works better as:
+After governance, the shape is closer to this:
 
 ```text
-input → task model → control objects → validation / weakening → final rendering
+input -> build a control space -> search in control space -> project back into output space -> validate -> write experience back
 ```
 
-The goal is to turn a hard final-output problem into a sequence of easier intermediate tasks: compress context, enumerate states, generate rubrics, create counterexamples, list failure modes, formulate queries, build dependency graphs, and then render the final output from those governed objects.
+In one line: **do not let the model struggle blindly inside final-answer space when the real move is to create a better intermediate layer.**
 
-## Decoupled Control Space
+## A More Useful Governance Workflow
 
-A decoupled control space is an external representation layer that does not need to look like the final answer. Its job is to preserve the units and relations that fluent prose tends to blur.
+The workflow can be described in seven steps:
 
-Depending on the task, the control space may contain:
+1. **Output-space sampling**: explore broadly in the original autoregressive space and collect rare but high-quality samples.
+2. **Experience extraction**: pull transferable control variables, generation operators, and failure boundaries out of those samples.
+3. **Control-space construction**: rewrite the original task into a lower-dimensional, composable, and verifiable intermediate representation.
+4. **Control-space search**: stop sampling only final answers; search the control space with beam search, tree search, evolutionary search, or local repair.
+5. **Output-space projection**: render the control plan back into final text, code, strategy, or artifact.
+6. **Layered validation**: apply hard constraints, soft scoring, reverse attacks, and external tools.
+7. **Experience write-back**: write both successes and failures into the experience base for the next round.
 
-::::cards
-### Structure
+The loop looks like this:
 
-Story beats, dependency graphs, module boundaries, workflow states, scenario matrices, role bindings, or promise-payoff relations.
+```text
+output-space sampling
+-> experience extraction
+-> control-space construction
+-> control-space search
+-> output-space projection
+-> layered validation
+-> experience write-back
+```
 
-### Constraints
+This works better than asking for "one more version" because each step changes the problem itself instead of merely changing the phrasing.
 
-Policy rules, data availability, temporal order, budget limits, privacy boundaries, acceptance criteria, and non-negotiable conditions.
+## The Control Space Should Also Be Searched
 
-### Evidence
+It is tempting to think of control space as something you design once and then keep fixed. In practice, the safer view is: **the control space itself should be searched.**
 
-Tests, retrieved sources, examples, failed cases, counterexamples, expert judgment, tool results, and validation notes.
-
-### Governance
-
-GKOs, GEOs, priorities, lifespans, revocation triggers, safe defaults, and unresolved human-governed variables.
-::::
-
-The final answer is then rendered from this control space. This matters because final prose entangles content, style, local coherence, and hidden constraints into one object. When the control objects are separate, the system can check whether the final prose preserved them.
-
-## What Knowledge Governance Means
-
-Knowledge Governance is an inference-time control layer. It separates final rendering from the acquisition and management of task-specific control knowledge.
-
-The point is not a longer prompt. The point is lifecycle management for knowledge:
+There are at least two layers here:
 
 :::cards
-### Visible
+### Inner Search
+Tag: given a control space C
 
-Important assumptions, boundaries, preferences, constraints, and failure conditions should be pulled out of fluent prose and made inspectable.
+Given a fixed control space, search for the best output inside it. For example, under one story scaffold, one rubric, or one dependency graph, which concrete candidate is best?
 
-### Validated
+### Outer Search
+Tag: compare different control spaces
 
-A candidate rule should not become active just because it sounds plausible. It needs support from examples, tests, tool results, expert judgment, counterexamples, or environmental feedback.
-
-### Revocable
-
-A rule is valid only under conditions. When state, version, authority, objective, or evidence changes, it should be weakened, replaced, or revoked.
+Do not assume one control space is already right. Compare C1, C2, C3 and ask which one more reliably produces high-quality outputs. Many breakthroughs come from changing the control space rather than searching harder inside the same one.
 :::
 
-## What a GKO Looks Like
+So governance is not "design a control space and stop." It is "search the outputs and the control spaces together."
 
-A Governed Knowledge Object, or GKO, stores control knowledge the AI should know, obey, or check. A useful GKO should answer:
+## First Ask What Is Actually Missing
+
+When a task goes wrong, "the model is not strong enough" is usually too vague. A more useful diagnosis is whether the bottleneck is **support**, **search**, or **validation**.
+
+::::cards
+### Support Deficit
+Tag: no good candidates appear
+
+No matter how much you sample, the system never reaches a good region. More search alone will not help. You need external knowledge, examples, tools, retrieval, finetuning, or a stronger model.
+
+### Search Deficit
+Tag: good samples appear, but not reliably
+
+The good answer exists, but the path to it is weak. This is where control spaces, tree search, recombination, hierarchical search, and local repair become powerful.
+
+### Validation Deficit
+Tag: good and bad candidates are mixed together
+
+The system can already produce some good candidates, but it cannot reliably identify them. What you need is a stronger judge, pairwise comparison, automatic verification, or reverse attacks.
+::::
+
+These three cases must be separated because the intervention changes completely:
+
+- If the problem is support, adding more search does not help.
+- If the problem is search, control space is often extremely effective.
+- If the problem is validation, more sampling can become dangerous because you get more candidates that merely fool the evaluator.
+
+## What Goes Into a Control Space
+
+A control space does not need to resemble the final answer. It is better understood as a set of intermediate objects that expose the variables that actually determine quality.
+
+Typical control objects include:
+
+- state matrices
+- rubrics
+- candidate frames
+- failure-mode lists
+- dependency graphs
+- query plans
+- constraint lists
+- role configurations
+- promise-payoff chains
+
+A good control space usually has three properties:
+
+- **lower-dimensional**: easier to search than final prose
+- **composable**: local structures can be recombined rather than regenerated from scratch
+- **verifiable**: constraints, evidence, and failure boundaries can be checked directly instead of inferred from surface plausibility
+
+## Separate the Generator From the Evaluator
+
+Do not let the same model in the same context generate, evaluate, and revise. That setup easily creates path dependence: the model tends to defend its earlier choices rather than seriously challenge them.
+
+A more stable arrangement separates roles:
 
 :::cards
-### Condition
+### Generator
 
-When does this knowledge apply? A locally useful rule should not silently become a universal truth.
+Produces candidates and does not defend them.
 
-### Evidence Strength
+### Critic
 
-Does it come from one example, repeated failures, a test result, a tool run, statistical evidence, or expert confirmation?
+Attacks candidates and looks for hidden failures, contradictions, pseudo-depth, and weak structure.
 
-### Priority and Revocation
+### Editor
 
-What happens when rules conflict? What observation weakens, overrides, or retires the rule?
+Repairs locally instead of reinventing the whole artifact.
+
+### Judge
+
+Makes the final selection using a different context, different prompt, and ideally a different evaluation criterion.
 :::
 
-The main manuscript's car-wash task shows how a GKO can preserve a conditional construal rule:
+Even when the underlying model is the same, separate contexts can simulate role separation. For verifiable tasks, it is even better to add a dedicated verifier or external tool. In many tasks, **verification is easier than generation**, and once the verifier improves, overall quality rises sharply.
 
-```json
-{
-  "condition": "the task is about receiving a service applied to an object",
-  "assertion": "identify the object whose state must change; movement of the person alone may not satisfy the goal",
-  "strength": "adversarial",
-  "priority": 0.8,
-  "lifespan": "session",
-  "revocation_trigger": "the service can be completed without moving the object",
-  "evidence": "walking to a car wash does not bring the car to be washed"
-}
+## Do Not Store Only Positive Experience
+
+Extracting positive experience from strong samples is valuable, but it is not enough. If you store only success patterns, the system may still repeat the same family of mistakes in slightly different surface forms.
+
+A better experience base has two parts:
+
+::::cards
+### Positive Library
+Tag: patterns that reliably improve quality
+
+Store structures, control variables, generation operators, validation moves, and search strategies that repeatedly raise quality.
+
+### Negative Library
+Tag: patterns that look impressive but often fail
+
+Store recurring pseudo-quality patterns. Negative experience is often more transferable because it cuts off large regions of low-value search.
+::::
+
+In a story task, negative experience might include:
+
+- using setting complexity as a substitute for depth
+- using twists as a substitute for character choice
+- using quotable lines as a substitute for emotional accumulation
+- using tragic events as a substitute for tragic structure
+- using grand themes as a substitute for concrete conflict
+- using "he suddenly understood" as a substitute for behavioral change
+
+These are not minor notes. They are search-pruning tools.
+
+## Search for Novelty, Not Only Quality
+
+If each round keeps only the current top-scoring samples, you can still get trapped in a larger local optimum. High score is not the same as high coverage, and it is not the same as recombination value.
+
+A better approach keeps multiple terms in the scoring function:
+
+```text
+total score = quality score + novelty score + constraint satisfaction score - risk score
 ```
 
-The exact schema can vary by domain, but a GKO should usually separate five concerns: the condition under which it applies, the assertion it makes, the evidence supporting it, its priority relative to other rules, and the trigger that weakens or revokes it.
+Novelty here is not about being strange for its own sake. It is about expanding the coverage of material available for recombination. A genuinely valuable sample may not be the current best overall sample; it may be the one with an unusually strong local structure that is not yet globally mature.
 
-## Validation Strength
+So sample selection should keep at least three kinds of candidates:
 
-Candidate GKOs should not become active merely because they sound plausible. The main manuscript distinguishes evidence regimes that imply different confidence levels:
+1. **highest total-score samples**
+2. **samples that are exceptionally strong on one local dimension**
+3. **samples most different from the current strong set**
 
-::::cards
-### Sample-Grounded
+The third group is especially important because it often supplies the material needed to escape the current local optimum.
 
-A rule is supported by paired or contrastive examples, such as preferred vs. rejected outputs or successful vs. failed dialogues.
+## Derive Control Space Backward From Failure
 
-### Objective-Grounded
+Control space does not have to be derived only from good samples. It can also be derived backward from failure modes. That is a useful form of **reverse control-space construction**.
 
-A rule improves a measurable downstream objective, such as task completion, leakage reduction, test pass rate, or out-of-sample performance.
+Common story failure modes include:
 
-### Statistics-Grounded
+- flat
+- cliche
+- shallow characters
+- weak ending
+- vague theme
 
-A rule produces a desirable distributional shift when no single task objective is available, such as fewer contradictions, less repetition, or more diverse scenarios.
-
-### Adversarial
-
-A rule survives targeted attempts to break it, but still lacks stronger paired or objective support.
-::::
-
-Validation is the burden of proof. The model can propose hypotheses, dependencies, and candidate rules, but the system should not ask the same generation process to certify them as true.
-
-## A Practical Loop
-
-1. Check whether the task is already autoregressive-extraordinary. If it is compression, rewriting, format conversion, or common candidate generation, direct generation may be enough.
-2. Diagnose the mismatch profile: aggregation, support, state, and specification.
-3. Construct the task model: real success condition, target carrier, constraints, noise, hidden assumptions, and evaluation standard.
-4. Build the control space: state matrix, dependency graph, rubric, failure modes, edge cases, query plan, or validation checklist.
-5. Generate candidate GKOs from evidence, failures, perturbations, contrastive examples, and tool results.
-6. Validate or weaken GKOs by separating confirmed rules, local rules, assumptions, and rejected claims.
-7. Render the final output from governed knowledge, then check whether the output preserves the control objects.
-8. Monitor failures, write new evidence back into the GKO set, and demote or revoke stale rules when needed.
-
-## Failure Modes to Watch
-
-Governance can also fail if the intermediate objects become the wrong target.
+Those labels are not useful if they stay at the adjective level. The productive question is what control variable is missing underneath each failure.
 
 ::::cards
-### Proxy Drift
+### Flat
 
-The system replaces the hard task with an easier but wrong proxy. "Produce strategic insight" quietly becomes "write a clear multi-section memo."
+Usually not a prose problem, but a lack of mutually incompatible choices.
 
-### False Artifacts
+### Cliche
 
-The model invents a rubric, dependency, state, or invariant that sounds useful but is not supported by evidence.
+Usually not a wording problem, but an overused conflict structure.
 
-### Stale Knowledge
+### Shallow Characters
 
-A rule that was valid under one version, market regime, authority boundary, or user preference silently persists after conditions change.
+Usually not a lack of description, but a lack of genuine tension among desire, fear, shame, and action.
 
-### Control Overhead
+### Weak Ending
 
-The task was already low-risk and locally aligned, but the system adds heavy governance that costs more than it improves.
+Usually not a pacing problem, but a lack of earlier promises or a failure to pay them off.
+
+### Vague Theme
+
+Usually not an abstractness problem, but a failure to make characters pay a cost for the theme through choice.
 ::::
 
-Conflict is normal as the GKO set grows. When two rules apply but recommend incompatible actions, resolve by evidence strength, priority, scope specificity, recency, and measured objective impact.
+If you push those failures backward, the control space should explicitly include variables such as:
 
-## Engineering Judgment
+- mutually incompatible constraints
+- internal contradiction in the character
+- cost functions
+- promise-payoff chains
+- escalating scene pressure
+- irreversible choice points
 
-Governance has a cost. Not every task needs a full control layer. Low-risk, low-mismatch, strongly validated, highly patterned tasks can stay lightweight. High-risk, high-mismatch, tacit, stateful, or reusable tasks should externalize their control knowledge.
+That is far more useful than an instruction such as "make the story deeper," because it turns a vague desire into searchable and verifiable control variables.
 
-Use the lightweight path when the task is mostly compression, formatting, register transfer, or routine candidate generation. Use the governed path when local plausibility is a weak proxy for value, when state can change the answer, when errors are costly, or when the same judgment should be reused and revoked over time.
+## A More Practical Engineering Judgment
 
-A good system does not make the model generate less. It makes the model generate in the right task shape.
+Governance should not be maximized on every task. The tasks that really justify it usually show a few signals:
+
+- repeated sampling rarely produces stable good results
+- strong outputs appear occasionally, but cannot be reproduced
+- good candidates exist, but the system cannot reliably choose them
+- the cost of error is high enough that surface plausibility is not acceptable
+- similar tasks will recur often enough that an experience base is worth building
+
+By contrast, if the task is mostly compression, rewriting, format conversion, or routine candidate generation, direct generation is often already enough and heavy governance is unnecessary.
+
+The point of governance is never to make the process feel more elaborate. It is to make search more effective, validation more reliable, and experience more cumulative. A good governed system does not make the model generate less. It makes the model generate in the right task shape.

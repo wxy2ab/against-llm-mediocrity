@@ -205,6 +205,335 @@ h1 {
   box-shadow: 18px 18px 0 rgba(34, 40, 49, 0.1);
 }
 
+.topic-visual {
+  position: relative;
+  display: grid;
+  gap: 0;
+  padding: 0;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(255, 253, 249, 0.98), rgba(246, 239, 228, 0.96)),
+    radial-gradient(circle at top right, rgba(111, 179, 168, 0.1), transparent 28%);
+}
+
+.topic-visual svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.topic-visual::before {
+  position: absolute;
+  inset: 12px;
+  content: "";
+  border: 1px dashed rgba(34, 40, 49, 0.12);
+  border-radius: 10px;
+  pointer-events: none;
+}
+
+.topic-visual-header,
+.topic-visual-footer {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  background: rgba(255, 253, 249, 0.72);
+  backdrop-filter: blur(8px);
+}
+
+.topic-visual-header {
+  border-bottom: 1px solid rgba(34, 40, 49, 0.1);
+}
+
+.topic-visual-footer {
+  justify-content: flex-start;
+  border-top: 1px solid rgba(34, 40, 49, 0.1);
+}
+
+.topic-visual-label,
+.topic-visual-title {
+  margin: 0;
+}
+
+.topic-visual-label {
+  color: var(--visual-accent, #b55243);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.topic-visual-title {
+  color: #2f3845;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.topic-visual-canvas {
+  position: relative;
+  padding: 10px;
+}
+
+.topic-visual-canvas::before {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background-image:
+    linear-gradient(rgba(34, 40, 49, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 40, 49, 0.04) 1px, transparent 1px);
+  background-size: 26px 26px;
+  pointer-events: none;
+}
+
+.topic-visual-tag {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 10px;
+  color: #33404e;
+  font-size: 12px;
+  font-weight: 700;
+  background: rgba(255, 253, 249, 0.92);
+  border: 1px solid rgba(34, 40, 49, 0.12);
+  border-radius: 999px;
+}
+
+.visual-science {
+  --visual-accent: #d45d4c;
+}
+
+.visual-framework {
+  --visual-accent: #496a9f;
+}
+
+.visual-engineering {
+  --visual-accent: #6fb3a8;
+}
+
+.visual-collaboration {
+  --visual-accent: #7d64b1;
+}
+
+.visual-learning {
+  --visual-accent: #c48d1b;
+}
+
+.visual-papers {
+  --visual-accent: #3b556f;
+}
+
+.visual-projects {
+  --visual-accent: #4f7b76;
+}
+
+.topic-visual .visual-bg {
+  fill: #f4efe7;
+}
+
+.visual-ring,
+.visual-hub,
+.visual-panel,
+.visual-card,
+.visual-stage,
+.visual-paper,
+.hub-rect {
+  stroke: rgba(34, 40, 49, 0.12);
+  stroke-width: 2;
+}
+
+.visual-ring {
+  fill: none;
+}
+
+.ring-a {
+  stroke: rgba(73, 106, 159, 0.2);
+}
+
+.ring-b {
+  stroke: rgba(212, 93, 76, 0.26);
+}
+
+.ring-c {
+  stroke: rgba(111, 179, 168, 0.4);
+}
+
+.visual-hub {
+  fill: rgba(111, 179, 168, 0.16);
+  stroke: rgba(111, 179, 168, 0.55);
+}
+
+.hub-rect {
+  fill: rgba(73, 106, 159, 0.12);
+  stroke: rgba(73, 106, 159, 0.45);
+}
+
+.visual-panel {
+  fill: rgba(34, 40, 49, 0.05);
+}
+
+.visual-card,
+.visual-stage {
+  fill: rgba(255, 253, 249, 0.96);
+}
+
+.topic-visual .visual-card,
+.topic-visual .visual-stage,
+.topic-visual .visual-paper,
+.topic-visual .visual-panel,
+.topic-visual .visual-hub,
+.topic-visual .hub-rect {
+  filter: drop-shadow(0 8px 16px rgba(34, 40, 49, 0.08));
+}
+
+.visual-card.accent,
+.accent-paper {
+  fill: rgba(111, 179, 168, 0.18);
+  stroke: rgba(111, 179, 168, 0.44);
+}
+
+.visual-stage {
+  fill: rgba(255, 253, 249, 0.92);
+}
+
+.visual-paper {
+  fill: rgba(255, 253, 249, 0.98);
+}
+
+.shadow-paper {
+  fill: rgba(73, 106, 159, 0.1);
+}
+
+.visual-chip {
+  fill: rgba(212, 93, 76, 0.18);
+}
+
+.visual-chip.chip-alt {
+  fill: rgba(73, 106, 159, 0.16);
+}
+
+.visual-track,
+.visual-link,
+.visual-stairs,
+.visual-arrow,
+.visual-stack,
+.visual-mini,
+.visual-orbit {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.visual-track {
+  stroke: #496a9f;
+  stroke-width: 10;
+}
+
+.visual-track.accent {
+  stroke: #d45d4c;
+  stroke-width: 8;
+  opacity: 0.9;
+}
+
+.visual-link {
+  stroke: rgba(34, 40, 49, 0.42);
+  stroke-width: 5;
+}
+
+.visual-link.faint {
+  stroke: rgba(34, 40, 49, 0.22);
+  stroke-dasharray: 8 10;
+  stroke-width: 4;
+}
+
+.visual-orbit {
+  stroke: rgba(34, 40, 49, 0.16);
+  stroke-dasharray: 10 12;
+  stroke-width: 3;
+}
+
+.visual-stairs {
+  stroke: rgba(34, 40, 49, 0.68);
+  stroke-width: 12;
+}
+
+.visual-arrow {
+  stroke: rgba(34, 40, 49, 0.48);
+  stroke-width: 5;
+}
+
+.visual-arrow::marker,
+.visual-track::marker {
+  display: none;
+}
+
+.visual-stack {
+  stroke: rgba(34, 40, 49, 0.34);
+  stroke-width: 6;
+}
+
+.visual-mini {
+  stroke: #496a9f;
+  stroke-width: 6;
+}
+
+.visual-mini.faint {
+  stroke: rgba(212, 93, 76, 0.64);
+  stroke-width: 4;
+}
+
+.visual-dot,
+.visual-node {
+  stroke: #222831;
+  stroke-width: 3;
+}
+
+.visual-dot.warm,
+.visual-node.warm {
+  fill: #d45d4c;
+}
+
+.visual-dot.cool,
+.visual-node.cool {
+  fill: #496a9f;
+}
+
+.visual-dot.gold,
+.visual-node.gold {
+  fill: #f2cc5d;
+}
+
+.visual-node.dark {
+  fill: #222831;
+  stroke: rgba(34, 40, 49, 0.9);
+}
+
+.visual-collaboration .visual-panel {
+  fill: rgba(125, 100, 177, 0.08);
+}
+
+.visual-learning .visual-card.accent {
+  fill: rgba(242, 204, 93, 0.22);
+  stroke: rgba(196, 141, 27, 0.42);
+}
+
+.visual-framework .visual-hub {
+  fill: rgba(73, 106, 159, 0.14);
+  stroke: rgba(73, 106, 159, 0.48);
+}
+
+.visual-projects .visual-card.accent {
+  fill: rgba(111, 179, 168, 0.16);
+}
+
+.visual-learning .visual-track,
+.visual-projects .visual-track {
+  stroke-width: 9;
+}
+
 .legend {
   display: flex;
   flex-wrap: wrap;
@@ -437,6 +766,10 @@ h1 {
     width: min(100%, 480px);
   }
 
+  .topic-visual-title {
+    width: 100%;
+  }
+
   .card-grid {
     grid-template-columns: 1fr 1fr;
   }
@@ -512,6 +845,11 @@ h1 {
   .system-visual {
     max-width: calc(100vw - 40px);
     box-shadow: 10px 10px 0 rgba(34, 40, 49, 0.1);
+  }
+
+  .topic-visual-header,
+  .topic-visual-footer {
+    padding: 12px 14px;
   }
 
   .alignment-card {

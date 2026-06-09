@@ -160,3 +160,58 @@ A local-to-global transformation has four moves:
 4. Render after stabilization: let the model produce the final fluent artifact from governed intermediate objects, then check that the control objects survived rendering.
 
 That is the path from autoregressive mediocrity toward autoregressive extraordinary, and it is what Knowledge Governance formalizes.
+
+## Four Ways to Resist Autoregressive Gravity
+
+These methods share one core move: **do not let the model slide through the raw token sequence toward familiar patterns; instead, create an intermediate layer that is searchable, evaluable, and reversible.** Once that layer exists, the task is no longer just "keep writing." It becomes "search, validate, reject, and recombine inside a control space, then render back into output."
+
+:::cards
+### Dense Sampling, Decomposition, Recombination, Then Validation
+Tag: support mismatch / escaping local optima
+
+When the high-value answer lives in the low-probability tail, asking directly for the final answer tends to pull the model back toward familiar modes. A better move is to sample heavily under autoregressive generation, collect many candidates, select the locally promising ones, and decompose them into fragments, structures, strategies, or turning points before recombining them across samples.
+
+The value of this step is not merely better collage. It is a way to extract hard high-sigma experience that usually remains implicit: rare but effective structures, hidden constraints, non-obvious transitions, unusual failure modes, or high-value expressive moves. Once extracted, those patterns should be validated back against the sample pool and against fresh generations to see whether they actually raise value in a stable way.
+
+This is fundamentally a way to fight support mismatch: pull low-probability but high-value local structure out of the tail, then turn it into a reusable control resource. Every time a new local optimum is reached, the same loop can be repeated.
+
+### Write the Control Space First, Then Generate the Output
+Tag: rewrite a mediocre task into extraordinary subtasks
+
+Tasks such as stories, long-form writing, course design, or complex proposals often become mediocre when the model is asked to generate the final artifact directly. But if the elements of excellence are written down first, such as required components, pacing, constraints, tonal boundaries, emotional arcs, character relations, foreshadowing payoffs, or acceptance criteria, then the model often becomes strong on those subtasks.
+
+In practice, this means constructing a control space first: character arcs, conflict gradients, thematic constraints, scene beats, reveal order, forbidden cliches, and evaluation rubrics. Then the model generates the story or artifact under that control space, and a relatively more reliable evaluation task checks whether the result drifts, becomes generic, violates setup, or collapses into cliche.
+
+If the result is weak, do not immediately rewrite the whole output. Modify the control space itself. This exploits the asymmetry between generation and evaluation: producing a truly excellent artifact may be unstable, but spotting defects, detecting cliche, and checking constraint violations is often much easier. A mediocre autoregressive task is thus rewritten into a sequence of autoregressive-extraordinary tasks.
+
+### Search in Control Space, Not Only in Output Space
+Tag: the most general method
+
+This is the most general strategy. For many high-mismatch tasks, the first move is to break the default path from raw semantics to direct output and construct a control space that is easier to search: a state matrix, rubric, candidate frame set, dependency graph, query plan, failure-mode list, role configuration, or decision table.
+
+The search then happens inside that control space, not just through repeated sampling of final answers. You perturb, expand, prune, and compare control objects, then project them back into output space for validation. If validation fails, do not merely patch the final prose. Return to the control space and keep searching.
+
+The point is not bureaucracy. It is a change in search geometry. In raw output space, local token fluency often fails to track task value. In control space, the search is redirected toward the variables, structures, and constraints that actually determine value.
+
+### Use Hierarchical Control Spaces to Contain Search Complexity
+Tag: coarse-to-fine search
+
+Control space is not valuable merely because it exists. If every variable, style choice, constraint, branch, and exception is dumped into one enormous search space, the result may be no better than blind repeated sampling in output space, and can easily become worse.
+
+That is why complex tasks often need hierarchical control spaces. Search first at a coarse level to determine the main direction, global structure, and governing constraints. Then search at the next level for local strategies, substructures, and concrete realizations. Only after that should the system render the final artifact. Each layer can also have its own validator, rollback point, and escalation condition.
+
+The benefit of hierarchy is that it cuts the combinatorial explosion into stages. The goal is not to find the complete answer in one shot, but to lock onto a high-value region first and refine it layer by layer. That preserves the advantages of control-space search without letting the control layer itself turn into another source of mediocrity.
+:::
+
+Taken together, the four methods suggest a more general path:
+
+```text
+raw task
+-> construct a control space
+-> sample / search / recombine inside the control space
+-> project back into output space
+-> evaluate and validate
+-> if rejected, roll back to the control space and iterate again
+```
+
+Dense sampling and recombination are especially useful for fishing rare high-value structures out of the support set. Writing the control space first is especially useful for stories, proposals, and other open-ended artifacts. Control-space search is the most general operational skeleton. Hierarchical control spaces keep the search tractable so the control layer does not collapse into a new form of mediocrity.
