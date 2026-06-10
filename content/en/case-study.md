@@ -5,12 +5,12 @@ path: /case-study
 title: Case Studies
 navTitle: Cases
 kicker: From individual examples to an extensible case library
-summary: "The case page is not one system's detail page. It is the entry point for case studies, organized by governance problem: control-space design first, then layered governance, continuity audit, plateau detection, and future cases from other domains."
+summary: "The case page is not one system's detail page. It is the entry point for case studies, organized by governance problem: control-space design first, then layered governance, continuity audit, plateau detection, financial producer governance, and hard-experience regeneration."
 order: 2
 heroPoints:
   - The case library connects the theory to real systems instead of leaving the framework abstract.
   - Each case answers the same questions: why the task is high-mismatch, which intermediate objects are made explicit, and how evaluation and revision close the loop.
-  - V4 is the control-space case, V6 is the layered-governance case, and future cases can add other task types.
+  - V4 is the control-space case, V6 is the layered-governance case, Stock Rec V3 is the financial production-authority case, and FW-Insight V3 is the hard-experience case for factor-framework regeneration.
 ---
 
 ## How To Read the Cases
@@ -35,11 +35,25 @@ Tag: Advanced case
 V6 shows the next governance problem after control-space design: under a high threshold, the system must distinguish MetaSpace, LogicSpace, text, continuity, and evaluation contracts, then detect a plateau and preserve the best state when further revision no longer helps.
 
 [Read the V6 case](/case-study-v6)
+
+### Stock Rec V3: Financial Producer Governance
+Tag: Finance / state mismatch
+
+Stock Rec V3 shows high state mismatch in a financial strategy system. Factor, base-score, excitation, and holding-processing producers evolve continuously; the LLM may only emit candidates, hints, or explanations, and new content must pass through shadow, promotion, and active lifecycle stages before it can affect the strategy.
+
+[Read the Stock Rec V3 case](/case-study-stock-rec-v3)
+
+### FW-Insight V3: Factor-Framework Regeneration and Hard Experience
+Tag: Finance / support mismatch
+
+FW-Insight V3 shows what happens after a factor-framework generator has already produced many versions. Instead of blindly sampling more, the system cuts, recombines, tests, and folds the historical sample distribution to distill a small set of hard experiences for the next regeneration cycle.
+
+[Read the FW-Insight V3 case](/case-study-fwinsight-v3)
 :::
 
-## How the Two Cases Relate
+## How the Cases Relate
 
-V4 and V6 are not two parallel story-generation demos. They are two layers of the same governance argument:
+The cases are not parallel system demos. They expand the governance argument step by step:
 
 ::::cards
 ### What V4 Solves
@@ -49,6 +63,14 @@ V4 solves the task-shape problem. Direct story writing too easily stays in fluen
 ### What V6 Solves
 
 V6 solves the layer-attribution problem. Once a control space exists, the system still has to decide whether a failure belongs to MetaSpace, LogicSpace, text, continuity, or the evaluation contract.
+
+### What Stock Rec V3 Solves
+
+Stock Rec V3 solves the production-authority problem. In a financial strategy system, the LLM cannot directly own decisions; only objects that pass through shadow, promotion, and active lifecycle stages can affect the strategy.
+
+### What FW-Insight V3 Solves
+
+FW-Insight V3 solves the hard-experience problem. Once many factor-framework samples already exist, the scarce asset is not more samples; it is a small set of experiences that penetrate the old distribution, correct directionality, and guide the next regeneration cycle.
 
 ### Why They Are Not Top-Level Peers
 
@@ -61,11 +83,10 @@ After the cases, the "Mechanism" page abstracts these engineering observations i
 
 ## What Future Cases Should Add
 
-The current two cases both come from story generation systems, so they are strongest for explaining narrative control spaces, continuity, and evaluation routing. Future cases should gradually add other task types:
+The current cases now cover narrative generation, financial strategy production, and factor-framework regeneration. Future cases should continue adding other task types:
 
 - Research synthesis: evidence selection, counterexample coverage, citation boundaries, and conclusion strength.
 - Code implementation: module dependencies, test feedback, state migration, and interface contracts.
-- Investment or strategy tasks: objective functions, constraints, backtest feedback, and risk explanation.
 - Human-AI collaboration: when to ask a human, what to ask, and how to write the answer back into governance objects.
 
 Future cases do not need to repeat the full theory. Each should add one new mismatch shape or governance move, so the case library gradually covers a wider task space.

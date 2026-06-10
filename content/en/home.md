@@ -115,9 +115,9 @@ Tag: Why It Matters
 If you want to understand why "the model is useful" and "the model fails on consequential tasks" can both be true, start with "Why It Matters." It explains the common forms of mediocrity in real tasks.
 
 ### Read the Cases
-Tag: Story Insight V4 / V6
+Tag: V4 / V6 / Stock Rec / FW-Insight
 
-If you want to see complete systems, start with "Cases." The case index gives the reading order: V4 for control-space governance, then V6 for layered governance, plateau detection, and best-state preservation under a high threshold.
+If you want to see complete systems, start with "Cases." The case index gives the reading order: V4 for control-space governance, V6 for layered governance and plateau detection, Stock Rec V3 for financial production authority, and FW-Insight V3 for hard experiences that guide factor-framework regeneration.
 
 ### Then Read the Mechanism
 Tag: Mechanism

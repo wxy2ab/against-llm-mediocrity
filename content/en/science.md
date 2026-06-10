@@ -21,7 +21,7 @@ That feeling is often not about prose. It is about task value. The missing piece
 
 This is why fluent failure is hard to notice. The answer may be useful in several local ways: it compresses context, chooses a reasonable tone, fills in missing transitions, and produces a coherent structure. The failure appears only when those local improvements do not reach the variable that determines the task's real value.
 
-This page does only the first step: it breaks the vague feeling of "still wrong" into diagnosable forms. The next page, "Cases," is the case-library entry point. It currently contains the Story Insight V4 control-space case and the Story Insight V6 layered-governance and plateau-detection case. The following "Mechanism" page then compresses the cases into more stable theoretical axes: whether probability and value point in the same direction, and which intervention follows from each primitive mismatch.
+This page does only the first step: it breaks the vague feeling of "still wrong" into diagnosable forms. The next page, "Cases," is the case-library entry point: from Story Insight V4/V6 on control-space and layered governance, to Stock Rec V3 on financial production authority, to FW-Insight V3 on hard-experience extraction. The following "Mechanism" page then compresses the cases into more stable theoretical axes: whether probability and value point in the same direction, and which intervention follows from each primitive mismatch.
 
 ## Why More Iteration Can Still Fail
 
