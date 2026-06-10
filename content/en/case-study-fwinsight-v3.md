@@ -14,9 +14,9 @@ heroPoints:
   - Folding, direction checks, and the maturity filter compress repeated soft knowledge into a small set of regeneration-ready hard experiences.
 ---
 
-## Why This Case Is Worth Adding
+## Why This Case Is Worth Studying
 
-This is worth adding because it covers a governance move that the earlier cases do not: **extracting hard experiences from a large population of historical generated samples so future generation can move differently**.
+This case is worth studying because it covers a governance move that the earlier cases do not: **extracting hard experiences from a large population of historical generated samples so future generation can move differently**.
 
 `fwinsight_v3` is not another factor generator, and it does not ask an LLM to simply invent better factor frameworks. It starts from a system that has already generated many framework versions. Sampling more can produce more variants, but most variants still come from the same generation distribution. The valuable question becomes:
 

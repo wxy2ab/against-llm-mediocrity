@@ -14,9 +14,9 @@ heroPoints:
   - Production impact requires the nightly cycle, shadow observation, champion-challenger promotion, and active activation.
 ---
 
-## Why This Case Is Worth Adding
+## Why This Case Is Worth Studying
 
-It is worth adding. The current case library already has [Story Insight V4](/case-study-v4) and [Story Insight V6](/case-study-v6), which explain control-space design, layered governance, continuity audit, and plateau detection in narrative generation. But both cases still live in a creative-writing domain.
+This case is worth studying. The current case library already has [Story Insight V4](/case-study-v4) and [Story Insight V6](/case-study-v6), which explain control-space design, layered governance, continuity audit, and plateau detection in narrative generation. But both cases still live in a creative-writing domain.
 
 `stock_rec_v3` adds a different high-mismatch system: a daily financial strategy. Financial systems make LLM state mismatch hard to ignore. Market regime changes, data coverage changes, factor validity changes, position cost and PnL change, and yesterday's governance action can affect today's holding decision. Asking an LLM to directly answer "what should we buy or sell?" is dangerous because the model can easily produce a plausible market narrative without producing a verifiable, traceable, rollback-capable strategy state.
 
