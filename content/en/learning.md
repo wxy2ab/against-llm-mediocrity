@@ -29,6 +29,8 @@ In one sentence: **AI makes shallow knowledge cheaper and deep knowledge more ne
 
 This page extends the governed collaboration argument on the human side: as AI becomes the default information-processing core, humans should move from doing every routine operation toward governing the variables that AI cannot legitimately or reliably settle.
 
+So the learning page is not a detour into education. It answers the question left by the collaboration page: if human value lies in governing variables, what should people practice so they can provide better variables, feedback, validation, and revocation judgments?
+
 ## The Learning Target Moves Up
 
 Older learning often centered on one question:

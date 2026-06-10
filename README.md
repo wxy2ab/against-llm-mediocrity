@@ -1,6 +1,6 @@
 # Against LLM Mediocrity
 
-Against LLM Mediocrity studies how to resist LLM autoregressive mediocrity and turn local model capability into stable task value.
+Against LLM Mediocrity studies how to resist LLM autoregressive mediocrity and turn local model capability into stable task value. The project includes a public explanation site, working manuscripts, and a tooling roadmap.
 
 ## Core Idea
 
@@ -13,6 +13,13 @@ This project focuses on three moves:
 - add hard environmental boundaries, hard feedback, and minimal human intervention points when the model cannot continue reliably on its own.
 
 The goal is not to reject autoregression, but to transform tasks that would otherwise plateau in fluent mediocrity into tasks where autoregressive generation becomes genuinely useful or even extraordinary.
+
+Recommended reading order:
+
+1. Start with the site home page and "Why It Matters" to recognize fluent failure in daily use.
+2. Read "Mechanism" and the main manuscript to understand the three regimes and four primitive mismatches.
+3. Read "Governance" and the collaboration supplement to understand control spaces, GKOs, MSHQs, and GEOs.
+4. Finish with "Learning" and "Projects" to see how human capability and tooling follow from the framework.
 
 ## Docs
 

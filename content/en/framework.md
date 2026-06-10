@@ -161,6 +161,8 @@ A local-to-global transformation has four moves:
 
 That is the path from autoregressive mediocrity toward autoregressive extraordinary, and it is what Knowledge Governance formalizes.
 
+The transition from mechanism to governance is therefore direct. The mechanism page explains why direct generation gets stuck; the governance page explains how to rewrite stuck tasks into searchable, verifiable, reusable engineering objects. Without that layer, the four mismatches are only diagnostic labels. With it, they become interventions.
+
 ## Four Ways to Resist Autoregressive Gravity
 
 These methods share one core move: **do not let the model slide through the raw token sequence toward familiar patterns; instead, create an intermediate layer that is searchable, evaluable, and reversible.** Once that layer exists, the task is no longer just "keep writing." It becomes "search, validate, reject, and recombine inside a control space, then render back into output."

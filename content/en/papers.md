@@ -24,6 +24,8 @@ Suggested reading order:
 3. Read the collaboration supplement to understand when an agent should ask a human and how to construct minimal sufficient human queries.
 4. Use the site pages on collaboration, learning, and projects to see how the manuscripts translate into practice and implementation directions.
 
+If you only read the site, the goal is to get an operational judgment chain. If you enter the manuscripts, the goal is to inspect the definitions, boundaries, and testability of that chain. This page connects the public explanation layer to the formal working drafts.
+
 ## Current Working Manuscripts
 
 :::cards
@@ -47,21 +49,21 @@ Tag: public practice framework
 This practice framework turns the theory into a collaboration method: AI should first query the environment, learn from feedback, and construct proving grounds. Only when the remaining variable is genuinely human-governed should it ask a minimal sufficient question.
 
 [Read the practice framework](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/governed-human-ai-collaboration.md)
-::::
+:::
 
 ## Extensions and Implementation
 
 ::::cards
 ### Human Learning in the AI Era
-Tag: companion document pending upload
+Tag: site extension
 
-The learning page develops the human-role shift in governed collaboration: from routine processor to governor of problem construction, value judgment, feedback, validation, authorization, and governance memory. Its companion document has not yet been uploaded.
+The learning page develops the human-role shift in governed collaboration: from routine processor to governor of problem construction, value judgment, feedback, validation, authorization, and governance memory. It is the human-capability extension of the main framework.
 
 ### Open-Source Projects
 Tag: implementation roadmap
 
 The project page only organizes implementation and evaluation directions already present in the manuscripts: GKO lifecycles, GEO escalation protocols, and four-mismatch diagnostics. It is not an additional theoretical claim.
-:::
+::::
 
 ## Future Empirical Agenda
 

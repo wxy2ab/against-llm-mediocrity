@@ -16,7 +16,7 @@ async function readMarkdownRoutes(dir) {
     if (!entry.name.endsWith(".md")) continue;
 
     const raw = await readFile(fullPath, "utf8");
-    const match = raw.match(/^---\n([\s\S]*?)\n---/);
+    const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---/);
     if (!match) {
       throw new Error(`Missing frontmatter in ${fullPath}`);
     }

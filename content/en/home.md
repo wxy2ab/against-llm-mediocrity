@@ -33,6 +33,8 @@ The response is not merely to write better prompts. The first question is diagno
 
 The practical aim is to preserve the model's real strengths while preventing local fluency from masquerading as global value.
 
+The site follows that chain. It starts with the everyday shape of fluent failure, then explains why probability and value diverge, then turns the divergent parts into control spaces, validation objects, and minimal human questions. In other words, these pages are not separate essays. They are a path from diagnosis to delivery.
+
 ## The One-Page Map
 
 The project distinguishes three regimes:

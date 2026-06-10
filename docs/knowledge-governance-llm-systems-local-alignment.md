@@ -1,6 +1,6 @@
 # Knowledge Governance for Large Language Model Systems
 
-# From Autoregressive Mediocrity through Local Alignment to Autoregressive Extraordinary
+## From Autoregressive Mediocrity through Local Alignment to Autoregressive Extraordinary
 
 ## Abstract
 

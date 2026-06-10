@@ -31,6 +31,8 @@ input -> build a control space -> search in control space -> project back into o
 
 In one line: **do not let the model struggle blindly inside final-answer space when the real move is to create a better intermediate layer.**
 
+This page follows directly from the mechanism page. When local fluency no longer predicts global value, the question is not "how many more versions should we sample?" but "what must be made explicit before generation?" Governance translates the four mismatches into engineering moves: construct control spaces, separate evaluators, preserve experience, and pass remaining variables to collaboration protocols when needed.
+
 ## A More Useful Governance Workflow
 
 The workflow can be described in seven steps:

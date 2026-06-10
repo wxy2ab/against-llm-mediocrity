@@ -21,6 +21,8 @@ That feeling is often not about prose. It is about task value. The missing piece
 
 This is why fluent failure is hard to notice. The answer may be useful in several local ways: it compresses context, chooses a reasonable tone, fills in missing transitions, and produces a coherent structure. The failure appears only when those local improvements do not reach the variable that determines the task's real value.
 
+This page does only the first step: it breaks the vague feeling of "still wrong" into diagnosable forms. The next page, "Mechanism," compresses those forms into more stable theoretical axes: whether probability and value point in the same direction, and which intervention follows from each primitive mismatch.
+
 ## Why More Iteration Can Still Fail
 
 Iteration works when the local direction of improvement and the real direction of value are aligned. If the task is summarizing text, changing tone, or organizing a list, local improvement often really is improvement.
