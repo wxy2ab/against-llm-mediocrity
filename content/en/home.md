@@ -4,13 +4,13 @@ lang: en
 path: /
 title: Against LLM Mediocrity
 navTitle: Home
-kicker: Start with a familiar scene
-summary: "You ask a model to improve an answer. It becomes smoother, fuller, and more professional. But the decisive constraint, true objective, or high-value option may still be missing. This project studies that failure: an answer can look better without moving closer to value."
+kicker: Start with the contradiction in real tasks
+summary: "We increasingly ask LLMs to help with strategy, research, engineering, and collaboration. But the more consequential the task is, the more visible their failures become around constraints, state, evidence, and value judgment. The contradiction is that these tasks still need LLM participation. This project studies that structural tension."
 order: 0
 heroVisual: alignment
 heroPoints:
-  - "Phenomenon: the model can elaborate a direction well without noticing that the direction itself is wrong."
-  - "Problem: fluency, plausibility, and polish may be local quality, not global task value."
+  - "Scenario: real tasks need models to help understand, decompose, generate, and collaborate, not merely write polished prose."
+  - "Contradiction: the model can be strong at many local operations while failing on global goals, hidden state, and decisive tradeoffs."
   - "Method: first separate what can be generated directly from what needs validation, tools, or human governance."
 alignmentLabels:
   probability: statistical probability
@@ -23,13 +23,15 @@ alignmentLabels:
   partial: some regions align, others diverge
 ---
 
-## Start With a Familiar Scene
+## Start With the Contradiction in Real Tasks
 
-You ask a model for a strategy, diagnosis, design, proof, code change, or plan. It quickly returns something clear, coherent, and plausible. You say it is not good enough, and the model adds context, expands the list, adjusts the tone, and makes the whole answer smoother and more professional.
+You ask a model to participate in a real task: shaping product strategy, choosing a technical direction, analyzing research material, changing complex code, designing a workflow, or helping a team make a decision. You are not merely asking for attractive prose. You want the model to move the task forward: surface constraints, compare paths, identify risks, organize complexity, and support an actionable judgment.
 
-Yet the decisive source of value may still be missing: the budget limit was never asked for, the production state was never verified, the user's real success criterion was never clarified, the rare high-value option was never searched for, or the problem was never abstracted at the right level.
+On these tasks, LLMs often underperform. They can quickly produce clear, coherent, plausible answers while missing the thing that determines success: the budget limit was never asked for, the production state was never verified, the user's real success criterion was never clarified, the rare high-value option was never searched for, or the problem was never abstracted at the right level.
 
-The issue is not that the model failed to write fluently. It is that **fluency can create the illusion of getting closer to the answer**. When the model continues along the statistically natural direction, it may only be polishing the same local direction instead of moving into the region where task value actually lives.
+The contradiction is that we cannot simply conclude that LLMs do not belong in these tasks. Much of the work inside complex tasks really does benefit from them: compressing context, expanding candidate paths, restructuring information, producing intermediate objects, calling tools, and assisting validation. The problem is that local capability does not automatically become global task value.
+
+What needs explanation is therefore more precise: why can a model that is strong across many local steps keep producing weak results on some whole tasks? Why does further generation, elaboration, or polishing often make the answer look more like an answer without moving it closer to the actual solution?
 
 That is what this project calls **autoregressive mediocrity**. It does not mean the model is useless, and it does not mean all generation is unreliable. It means that, on some tasks, the statistically natural next step is not the task-relevant next step. A model can keep generating smoothly while staying inside the same low-value basin.
 
@@ -37,7 +39,7 @@ The response is not merely to write better prompts. The first question is diagno
 
 The practical aim is to preserve the model's real strengths while preventing local fluency from masquerading as global value.
 
-The site follows that order. It starts with the everyday scene of fluent failure, then explains why probability and value diverge, then turns the divergent parts into control spaces, validation objects, and minimal human questions. In other words, these pages are not separate essays. They are a path from phenomenon to diagnosis to delivery.
+The site follows that order. It starts with the contradiction inside real tasks, then explains why probability and value diverge, then turns the divergent parts into control spaces, validation objects, and minimal human questions. In other words, these pages are not separate essays. They are a path from scene to diagnosis to delivery.
 
 ## The One-Page Map
 
@@ -112,7 +114,7 @@ The accessible proxy objective diverges from the real objective. The output sati
 ### Start With Intuition
 Tag: Why It Matters
 
-If you want to understand why "make it better" often fails, start with "Why It Matters." It explains the everyday shape of fluent but mediocre output.
+If you want to understand why "the model is useful" and "the model fails on consequential tasks" can both be true, start with "Why It Matters." It explains the common forms of mediocrity in real tasks.
 
 ### Read the Cases
 Tag: Story Insight V4 / V6
