@@ -4,14 +4,14 @@ lang: en
 path: /
 title: Against LLM Mediocrity
 navTitle: Home
-kicker: From intuitive failure to mechanism to practice
-summary: Large language models can produce fluent answers quickly, but fluency is not the same as task value. This project explains autoregressive mediocrity and turns the theory into practical methods for using, building, and collaborating with AI systems.
+kicker: Start with a familiar scene
+summary: "You ask a model to improve an answer. It becomes smoother, fuller, and more professional. But the decisive constraint, true objective, or high-value option may still be missing. This project studies that failure: an answer can look better without moving closer to value."
 order: 0
 heroVisual: alignment
 heroPoints:
-  - When statistical probability and task value rise together, autoregressive generation can be exceptionally powerful.
-  - When the probability peak misses the value peak, the model can produce fluent and plausible answers that are still not valuable enough.
-  - "Most real tasks are locally aligned: some parts can be generated directly, while others need governance."
+  - "Phenomenon: the model can elaborate a direction well without noticing that the direction itself is wrong."
+  - "Problem: fluency, plausibility, and polish may be local quality, not global task value."
+  - "Method: first separate what can be generated directly from what needs validation, tools, or human governance."
 alignmentLabels:
   probability: statistical probability
   value: task value
@@ -23,17 +23,21 @@ alignmentLabels:
   partial: some regions align, others diverge
 ---
 
-## Why This Exists
+## Start With a Familiar Scene
 
-You ask a model for a strategy, diagnosis, design, proof, code change, or plan. It quickly returns something clear, coherent, and plausible. You ask for another revision, and it becomes smoother, fuller, and more professional. Yet the decisive source of value may still be missing: a hidden state, a hard constraint, a rare high-value option, the real success criterion, or the right problem abstraction.
+You ask a model for a strategy, diagnosis, design, proof, code change, or plan. It quickly returns something clear, coherent, and plausible. You say it is not good enough, and the model adds context, expands the list, adjusts the tone, and makes the whole answer smoother and more professional.
 
-That is what this project calls **autoregressive mediocrity**. It does not mean the model is useless, and it does not mean all generation is unreliable. It means that, on some tasks, the statistically natural next step is not the task-relevant next step. A model can keep generating fluently while staying inside the same low-value basin.
+Yet the decisive source of value may still be missing: the budget limit was never asked for, the production state was never verified, the user's real success criterion was never clarified, the rare high-value option was never searched for, or the problem was never abstracted at the right level.
+
+The issue is not that the model failed to write fluently. It is that **fluency can create the illusion of getting closer to the answer**. When the model continues along the statistically natural direction, it may only be polishing the same local direction instead of moving into the region where task value actually lives.
+
+That is what this project calls **autoregressive mediocrity**. It does not mean the model is useless, and it does not mean all generation is unreliable. It means that, on some tasks, the statistically natural next step is not the task-relevant next step. A model can keep generating smoothly while staying inside the same low-value basin.
 
 The response is not merely to write better prompts. The first question is diagnostic: which parts of the task are already aligned with the model's generative strengths, which parts are only locally aligned, and which parts must be governed through control spaces, validation, tools, or human decisions?
 
 The practical aim is to preserve the model's real strengths while preventing local fluency from masquerading as global value.
 
-The site follows that chain. It starts with the everyday shape of fluent failure, then explains why probability and value diverge, then turns the divergent parts into control spaces, validation objects, and minimal human questions. In other words, these pages are not separate essays. They are a path from diagnosis to delivery.
+The site follows that order. It starts with the everyday scene of fluent failure, then explains why probability and value diverge, then turns the divergent parts into control spaces, validation objects, and minimal human questions. In other words, these pages are not separate essays. They are a path from phenomenon to diagnosis to delivery.
 
 ## The One-Page Map
 

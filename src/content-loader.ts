@@ -176,7 +176,7 @@ function prefixInternalLinks(html: string): string {
 
 function renderMarkdown(markdown: string): string {
   const withCards = markdown.replace(
-    /^(:{3,})cards[ \t]*\n([\s\S]*?)^\1[ \t]*$/gm,
+    /^(:{3,})cards[ \t]*\r?\n([\s\S]*?)^\1[ \t]*\r?$/gm,
     (_match, _fence: string, block: string) => renderCards(block),
   );
   return prefixInternalLinks(marked.parse(withCards, { async: false }) as string);
