@@ -4,14 +4,14 @@ lang: en
 path: /
 title: Against LLM Mediocrity
 navTitle: Home
-kicker: Start with the contradiction in real tasks
-summary: "We increasingly ask LLMs to help with strategy, research, engineering, and collaboration. But the more consequential the task is, the more visible their failures become around constraints, state, evidence, and value judgment. The contradiction is that these tasks still need LLM participation. This project studies that structural tension."
+kicker: Start with the most common frustration
+summary: "We increasingly depend on LLMs to help us finish tasks. Some tasks go well; others remain unsatisfying no matter how much we optimize the prompt. The desired result feels trapped behind an invisible barrier: the model keeps generating, but it never quite releases the answer. This is LLM autoregressive mediocrity."
 order: 0
 heroVisual: alignment
 heroPoints:
-  - "Scenario: real tasks need models to help understand, decompose, generate, and collaborate, not merely write polished prose."
-  - "Contradiction: the model can be strong at many local operations while failing on global goals, hidden state, and decisive tradeoffs."
-  - "Method: first separate what can be generated directly from what needs validation, tools, or human governance."
+  - "Phenomenon: some tasks go smoothly, while others remain wrong after many prompt revisions."
+  - "Cause: on some tasks, the maximum-probability path and the task-value path are not the same path."
+  - "Method: recognizing and resisting this mediocrity may be the most common task AI users face."
 alignmentLabels:
   probability: statistical probability
   value: task value
@@ -23,23 +23,21 @@ alignmentLabels:
   partial: some regions align, others diverge
 ---
 
-## Start With the Contradiction in Real Tasks
+## Start With the Most Common Frustration
 
-You ask a model to participate in a real task: shaping product strategy, choosing a technical direction, analyzing research material, changing complex code, designing a workflow, or helping a team make a decision. You are not merely asking for attractive prose. You want the model to move the task forward: surface constraints, compare paths, identify risks, organize complexity, and support an actionable judgment.
+We increasingly depend on LLMs to help us finish tasks: writing code, doing research, analyzing material, drafting plans, organizing knowledge, and supporting decisions. Some tasks go well, sometimes well enough that it feels obvious they should belong to AI from now on. But other tasks remain unsatisfying. So you optimize the prompt: add context, specify the format, tighten constraints, ask it to reflect, and request more versions.
 
-On these tasks, LLMs often underperform. They can quickly produce clear, coherent, plausible answers while missing the thing that determines success: the budget limit was never asked for, the production state was never verified, the user's real success criterion was never clarified, the rare high-value option was never searched for, or the problem was never abstracted at the right level.
+Sometimes that works. Eventually, though, you meet tasks where the prompt has been improved many times and the result is still not right. The answer becomes more complete, smoother, and better structured, but the thing you actually wanted still does not appear. It feels trapped behind an invisible barrier: you can sense that the target is nearby, but the model cannot release it.
 
-The contradiction is that we cannot simply conclude that LLMs do not belong in these tasks. Much of the work inside complex tasks really does benefit from them: compressing context, expanding candidate paths, restructuring information, producing intermediate objects, calling tools, and assisting validation. The problem is that local capability does not automatically become global task value.
+This is not simply that the model is not smart enough, and it is not only that the prompt is still wrong. The same model can perform well elsewhere: compressing context, rewriting text, generating structure, expanding candidate options, explaining code, calling tools, and assisting validation. The real problem is that local capability does not always become the task value you need.
 
-What needs explanation is therefore more precise: why can a model that is strong across many local steps keep producing weak results on some whole tasks? Why does further generation, elaboration, or polishing often make the answer look more like an answer without moving it closer to the actual solution?
+That is what this project calls **autoregressive mediocrity**: because of the autoregressive nature of LLMs, on some tasks the maximum-probability path and the task-value path are not aligned. The model moves along the direction that is statistically most natural and easiest to continue, but that direction may not lead to the answer with real value.
 
-That is what this project calls **autoregressive mediocrity**. It does not mean the model is useless, and it does not mean all generation is unreliable. It means that, on some tasks, the statistically natural next step is not the task-relevant next step. A model can keep generating smoothly while staying inside the same low-value basin.
+The response is not to keep optimizing prompts indefinitely. The first question is diagnostic: which parts of the task are already aligned with the model's generative strengths, which parts are only locally aligned, and which parts must be governed through control spaces, validation, tools, or human decisions?
 
-The response is not merely to write better prompts. The first question is diagnostic: which parts of the task are already aligned with the model's generative strengths, which parts are only locally aligned, and which parts must be governed through control spaces, validation, tools, or human decisions?
+Recognizing and resisting this mediocrity may be the most common task AI users face. The practical aim is to preserve the model's real strengths while preventing local fluency from masquerading as global value.
 
-The practical aim is to preserve the model's real strengths while preventing local fluency from masquerading as global value.
-
-The site follows that order. It starts with the contradiction inside real tasks, then explains why probability and value diverge, then turns the divergent parts into control spaces, validation objects, and minimal human questions. In other words, these pages are not separate essays. They are a path from scene to diagnosis to delivery.
+The site follows that order. It starts with this common frustration, then explains why probability and value diverge, then turns the divergent parts into control spaces, validation objects, and minimal human questions. In other words, these pages are not separate essays. They are a path from scene to diagnosis to delivery.
 
 ## The One-Page Map
 
