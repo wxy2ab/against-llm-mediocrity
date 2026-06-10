@@ -110,10 +110,15 @@ Tag: Why It Matters
 
 If you want to understand why "make it better" often fails, start with "Why It Matters." It explains the everyday shape of fluent but mediocre output.
 
+### Read a Full Case
+Tag: Story Insight V4
+
+If you want to see a complete system turn a high-mismatch task into a control space, read the case study. It shows why story generation cannot rely on fluent prose alone, and why passing scores may still fall short of governance.
+
 ### Then Read the Mechanism
 Tag: Mechanism
 
-If you care about the theory, read "Mechanism." It introduces the three regimes, policy-value compression, and the four primitive mismatches: aggregation, support, state, and specification.
+If you care about the theory, read "Mechanism." It abstracts the case into the three regimes, policy-value compression, and the four primitive mismatches: aggregation, support, state, and specification.
 
 ### Finally Move to Practice
 Tag: Governance and collaboration

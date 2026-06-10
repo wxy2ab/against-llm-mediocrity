@@ -6,7 +6,7 @@ title: Open-Source Projects
 navTitle: Projects
 kicker: Implementing GKO principles
 summary: "Future projects will turn Knowledge Governance into reusable tools: GKO stores, validation loops, escalation protocols, task-control workbenches, and domain-specific governance templates."
-order: 7
+order: 8
 heroPoints:
   - "GKO lifecycle tooling: create, validate, prioritize, weaken, revoke."
   - Human escalation protocols based on Minimal Sufficient Human Queries.

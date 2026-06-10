@@ -6,7 +6,7 @@ title: Papers and Working Manuscripts
 navTitle: Papers
 kicker: Formalizing the framework
 summary: This section collects the current manuscripts and future empirical directions related to autoregressive mediocrity, autoregressive extraordinary, Knowledge Governance, and governed collaboration.
-order: 6
+order: 7
 heroPoints:
   - "Main manuscript: Knowledge Governance for Large Language Model Systems."
   - "Supplement: Human-Assist Operational Mismatches."
@@ -19,8 +19,8 @@ The main site is the public explanation layer: intuition first, mechanism second
 
 Suggested reading order:
 
-1. Start with "Why It Matters" and "Mechanism" to understand the three regimes and four primitive mismatches.
-2. Read the main manuscript to see how Knowledge Governance externalizes, validates, and reuses intermediate control knowledge.
+1. Start with "Why It Matters" and the Story Insight V4 case study to build intuition around one complete engineering sample.
+2. Read "Mechanism" and the main manuscript to understand the three regimes, four primitive mismatches, and how Knowledge Governance externalizes, validates, and reuses intermediate control knowledge.
 3. Read the collaboration supplement to understand when an agent should ask a human and how to construct minimal sufficient human queries.
 4. Use the site pages on collaboration, learning, and projects to see how the manuscripts translate into practice and implementation directions.
 

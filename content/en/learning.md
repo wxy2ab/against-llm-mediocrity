@@ -6,7 +6,7 @@ title: Human Learning in the AI Era
 navTitle: Learning
 kicker: From skill execution to insight, feedback, and narrative
 summary: When AI becomes the default information-processing core, human learning should not abandon knowledge. It should move from shallow execution toward deep structure, feedback quality, validation, value judgment, and long-term narrative.
-order: 5
+order: 6
 heroPoints:
   - AI makes shallow knowledge cheaper and deep knowledge more necessary.
   - The scarce human capability is not doing every standard task by hand.

@@ -6,7 +6,7 @@ title: Mechanism
 navTitle: Mechanism
 kicker: A theoretical framework for studying resistance to autoregression
 summary: The framework treats LLM generation as a relationship between probability and task value. The key question is not whether the model can write, but whether what it easily generates is also what the task truly rewards.
-order: 2
+order: 3
 heroPoints:
   - "Autoregressive mediocrity: fluent, plausible outputs remain concentrated away from high-value regions."
   - "Local alignment: the model performs useful local operations, but local value does not automatically compose into global value."

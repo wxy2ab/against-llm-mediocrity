@@ -6,7 +6,7 @@ title: "Human-AI Collaboration: Govern the Missing Variable"
 navTitle: Collaboration
 kicker: From chat-style use to governed collaboration
 summary: "The best collaboration is not a mechanical split between what AI does and what humans do. It is variable governance: let AI process, search, simulate, and verify, while humans set values, supply preferences, authorize risk, and own responsibility."
-order: 4
+order: 5
 heroPoints:
   - AI should move the task forward until a human-governed variable blocks reliable continuation.
   - The human should answer the minimal sufficient question, not take the whole task back.

@@ -6,7 +6,7 @@ title: 论文与工作稿
 navTitle: 论文
 kicker: 把这套框架正式写清楚
 summary: 这里收集与自回归平庸、自回归卓越、知识治理和治理式协作相关的当前工作稿与后续实证方向。
-order: 6
+order: 7
 heroPoints:
   - 主文：Knowledge Governance for Large Language Model Systems。
   - 补充稿：Human-Assist Operational Mismatches。
@@ -19,8 +19,8 @@ heroPoints:
 
 建议阅读顺序：
 
-1. 先读站点的“为什么重要”和“机制”，建立三种对齐区间与四类原始错配。
-2. 再读主文，理解知识治理如何把中间控制知识外化、验证和复用。
+1. 先读站点的“为什么重要”和 Story Insight V4 案例，建立直觉和一个完整工程样本。
+2. 再读“机制”和主文，理解三种对齐区间、四类原始错配，以及知识治理如何把中间控制知识外化、验证和复用。
 3. 然后读协作补充稿，理解能自主推进任务的 AI agent 什么时候应该问人，以及如何构造最小充分人类问题。
 4. 最后读站点中的协作、学习和项目页，理解这些手稿如何转化为实践和实现方向。
 

@@ -6,7 +6,7 @@ title: Governance
 navTitle: Governance
 kicker: Concrete engineering practice based on the mechanism
 summary: The engineering move is not to force the model to solve every hard task in final-answer space. It is to build intermediate control objects that make the task easier to generate, verify, reuse, and revoke.
-order: 3
+order: 4
 heroPoints:
   - Do not blindly add more final-answer sampling before asking whether the bottleneck is support, search, or validation.
   - Governance works by building a control space first, then searching, projecting, validating, and writing experience back.
@@ -32,6 +32,8 @@ input -> build a control space -> search in control space -> project back into o
 In one line: **do not let the model struggle blindly inside final-answer space when the real move is to create a better intermediate layer.**
 
 This page follows directly from the mechanism page. When local fluency no longer predicts global value, the question is not "how many more versions should we sample?" but "what must be made explicit before generation?" Governance translates the four mismatches into engineering moves: construct control spaces, separate evaluators, preserve experience, and pass remaining variables to collaboration protocols when needed.
+
+For a full engineering example, return to the Story Insight V4 case study; it applies this workflow through a narrative logic space, evaluator, and defect attacker.
 
 ## A More Useful Governance Workflow
 
