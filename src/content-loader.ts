@@ -25,6 +25,7 @@ export type Page = {
   kicker: string;
   summary: string;
   order: number;
+  showInNav: boolean;
   heroPoints?: string[];
   heroVisual?: "alignment";
   alignmentLabels?: AlignmentLabels;
@@ -102,6 +103,7 @@ function normalizePageFrontmatter(frontmatter: RawPageFrontmatter): PageFrontmat
     kicker: coerceText(frontmatter.kicker),
     summary: coerceText(frontmatter.summary),
     order: typeof frontmatter.order === "number" ? frontmatter.order : Number(frontmatter.order ?? 0),
+    showInNav: frontmatter.showInNav !== false,
     heroPoints: Array.isArray(frontmatter.heroPoints)
       ? frontmatter.heroPoints.map((item) => coerceText(item))
       : undefined,
@@ -122,7 +124,7 @@ function normalizePageFrontmatter(frontmatter: RawPageFrontmatter): PageFrontmat
 }
 
 function parseMarkdownFile(raw: string): { frontmatter: PageFrontmatter; body: string } {
-  const match = raw.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
+  const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);
   if (!match) {
     throw new Error("Markdown page is missing frontmatter.");
   }
@@ -204,6 +206,7 @@ function loadPages(): Record<Lang, Site> {
 export const content = loadPages();
 
 export const navOrder = Object.values(content.en.pages)
+  .filter((page) => page.showInNav)
   .sort((a, b) => a.order - b.order)
   .map((page) => page.key);
 

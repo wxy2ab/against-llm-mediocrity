@@ -33,7 +33,7 @@ In one line: **do not let the model struggle blindly inside final-answer space w
 
 This page follows directly from the mechanism page. When local fluency no longer predicts global value, the question is not "how many more versions should we sample?" but "what must be made explicit before generation?" Governance translates the four mismatches into engineering moves: construct control spaces, separate evaluators, preserve experience, and pass remaining variables to collaboration protocols when needed.
 
-For a full engineering example, return to the Story Insight V4 case study; it applies this workflow through a narrative logic space, evaluator, and defect attacker. Story Insight V6 then shows the next layer: once a control space exists, the system must route problems across MetaSpace, LogicSpace, text, continuity, and evaluation contracts.
+For full engineering examples, return to "Cases." V4 applies this workflow through a narrative logic space, evaluator, and defect attacker. V6 then shows the next layer: once a control space exists, the system must route problems across MetaSpace, LogicSpace, text, continuity, and evaluation contracts.
 
 ## A More Useful Governance Workflow
 

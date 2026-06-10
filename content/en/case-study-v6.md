@@ -7,6 +7,7 @@ navTitle: V6 Case
 kicker: Layered governance and plateau detection under a high acceptance threshold
 summary: Story Insight V6 shows the next problem after control-space design. When a story is already fluent and highly scored, the system must still distinguish MetaSpace, LogicSpace, text, continuity, and evaluation contracts, then stop or roll back when further revision no longer improves value.
 order: 2.5
+showInNav: false
 heroPoints:
   - V4 shows why generation should be governed through a control space; V6 shows that the control space itself needs layered review, routing, and rollback.
   - A high-threshold run used final_pass_score=9.2 and ended with score_plateau rather than acceptance.
@@ -15,7 +16,7 @@ heroPoints:
 
 ## Why a Second Case Is Needed
 
-[Story Insight V4](/case-study) established the first core point: story generation should not rely on fluent text sampling alone. It needs a control space for characters, events, emotion, theme, rhythm, and reader understanding.
+[Story Insight V4](/case-study-v4) established the first core point: story generation should not rely on fluent text sampling alone. It needs a control space for characters, events, emotion, theme, rhythm, and reader understanding.
 
 Story Insight V6 addresses the next layer. Even after a system has a control space, governance is not automatically complete. The control space may itself need evaluation and revision; text-level failures should not be misdiagnosed as world-setting failures; continuity problems should not be hidden behind a strong average score; and when a high threshold cannot be reached, the system must decide whether to continue, roll back to the best version, or recognize a plateau.
 
@@ -47,26 +48,46 @@ The result is useful because it turns "iterate more" into an object of governanc
 
 ## The Layered Governance Chain
 
-The V6 run can be simplified as:
+The V6 run can be simplified into four phases:
 
-```text
-raw story task
--> MetaSpace
--> MetaSpace Critic
--> MetaSpace Modify
--> LogicSpace
--> Outline
--> Section Plan
--> Story Render
--> Ledger
--> Continuation Capsule
--> Story Critic
--> Continuity Audit
--> Defect Attack
--> Revision Router
--> Pairwise Critic
--> plateau detection / best-state preservation
-```
+<div class="process-flow" aria-label="Story Insight V6 layered governance chain">
+  <section class="process-phase">
+    <span>Task modeling</span>
+    <ol>
+      <li>Raw story task</li>
+      <li>MetaSpace</li>
+      <li>MetaSpace Critic</li>
+      <li>MetaSpace Modify</li>
+    </ol>
+  </section>
+  <section class="process-phase">
+    <span>Structure build</span>
+    <ol>
+      <li>LogicSpace</li>
+      <li>Outline</li>
+      <li>Section Plan</li>
+      <li>Story Render</li>
+    </ol>
+  </section>
+  <section class="process-phase">
+    <span>State memory</span>
+    <ol>
+      <li>Ledger</li>
+      <li>Continuation Capsule</li>
+    </ol>
+  </section>
+  <section class="process-phase">
+    <span>Evaluation and revision</span>
+    <ol>
+      <li>Story Critic</li>
+      <li>Continuity Audit</li>
+      <li>Defect Attack</li>
+      <li>Revision Router</li>
+      <li>Pairwise Critic</li>
+      <li>Plateau detection / best-state preservation</li>
+    </ol>
+  </section>
+</div>
 
 The key shift is that V6 does not only ask "what is wrong with the story text?" It asks "which layer owns this problem?" The same symptom can come from different layers:
 

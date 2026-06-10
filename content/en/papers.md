@@ -19,7 +19,7 @@ The main site is the public explanation layer: intuition first, mechanism second
 
 Suggested reading order:
 
-1. Start with "Why It Matters," the Story Insight V4 case study, and the Story Insight V6 case study to build intuition from control-space governance to layered governance.
+1. Start with "Why It Matters" and "Cases," using the case index to build intuition from control-space governance to layered governance.
 2. Read "Mechanism" and the main manuscript to understand the three regimes, four primitive mismatches, and how Knowledge Governance externalizes, validates, and reuses intermediate control knowledge.
 3. Read the collaboration supplement to understand when an agent should ask a human and how to construct minimal sufficient human queries.
 4. Use the site pages on collaboration, learning, and projects to see how the manuscripts translate into practice and implementation directions.

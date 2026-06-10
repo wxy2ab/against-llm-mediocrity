@@ -7,6 +7,7 @@ navTitle: V6 案例
 kicker: 高阈值下的分层治理与平台期判断
 summary: Story Insight V6 展示了控制空间之上的第二层问题：当故事已经足够流畅、评分也很高时，系统如何继续区分 MetaSpace、LogicSpace、文本、连续性和评价契约，并在无法有效提升时识别平台期、保留最佳状态。
 order: 2.5
+showInNav: false
 heroPoints:
   - V4 说明为什么要先治理控制空间；V6 进一步说明控制空间本身也需要分层评审、路由和回退。
   - 一次高阈值运行设置 final_pass_score=9.2，最终没有达标，而是以 score_plateau 结束。
@@ -15,7 +16,7 @@ heroPoints:
 
 ## 为什么需要第二个案例
 
-[Story Insight V4](/zh/case-study) 已经说明了一个核心判断：故事生成不能只靠流畅文本采样，必须先把角色、事件、情绪、主题、节奏和读者理解线组织成可检查的控制空间。
+[Story Insight V4](/zh/case-study-v4) 已经说明了一个核心判断：故事生成不能只靠流畅文本采样，必须先把角色、事件、情绪、主题、节奏和读者理解线组织成可检查的控制空间。
 
 Story Insight V6 解决的是下一层问题。即使系统已经有控制空间，治理也不会自动完成。控制空间本身可能需要被评价、修订和重新解释；文本层的问题不能误判成世界观问题；连续性问题不能只靠普通总分掩盖；高阈值无法达到时，系统还需要判断是继续迭代、回退到最佳版本，还是承认已经进入平台期。
 
@@ -47,26 +48,46 @@ Story Insight V6 解决的是下一层问题。即使系统已经有控制空间
 
 ## 分层治理链路
 
-V6 的运行链路可以简化成：
+V6 的运行链路可以简化成四个阶段：
 
-```text
-原始故事任务
--> MetaSpace
--> MetaSpace Critic
--> MetaSpace Modify
--> LogicSpace
--> Outline
--> Section Plan
--> Story Render
--> Ledger
--> Continuation Capsule
--> Story Critic
--> Continuity Audit
--> Defect Attack
--> Revision Router
--> Pairwise Critic
--> 平台期判断 / 最佳状态保留
-```
+<div class="process-flow" aria-label="Story Insight V6 分层治理链路">
+  <section class="process-phase">
+    <span>任务建模</span>
+    <ol>
+      <li>原始故事任务</li>
+      <li>MetaSpace</li>
+      <li>MetaSpace Critic</li>
+      <li>MetaSpace Modify</li>
+    </ol>
+  </section>
+  <section class="process-phase">
+    <span>结构生成</span>
+    <ol>
+      <li>LogicSpace</li>
+      <li>Outline</li>
+      <li>Section Plan</li>
+      <li>Story Render</li>
+    </ol>
+  </section>
+  <section class="process-phase">
+    <span>状态记忆</span>
+    <ol>
+      <li>Ledger</li>
+      <li>Continuation Capsule</li>
+    </ol>
+  </section>
+  <section class="process-phase">
+    <span>评价修订</span>
+    <ol>
+      <li>Story Critic</li>
+      <li>Continuity Audit</li>
+      <li>Defect Attack</li>
+      <li>Revision Router</li>
+      <li>Pairwise Critic</li>
+      <li>平台期判断 / 最佳状态保留</li>
+    </ol>
+  </section>
+</div>
 
 这条链路的关键变化在于：V6 不再只问“故事文本哪里不好”，而是问“问题属于哪一层”。同一个症状可能来自不同层级：
 

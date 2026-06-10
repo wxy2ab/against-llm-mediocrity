@@ -113,7 +113,7 @@ If you want to understand why "make it better" often fails, start with "Why It M
 ### Read the Cases
 Tag: Story Insight V4 / V6
 
-If you want to see complete systems, read V4 first for control-space governance, then V6 for layered governance, plateau detection, and best-state preservation under a high threshold.
+If you want to see complete systems, start with "Cases." The case index gives the reading order: V4 for control-space governance, then V6 for layered governance, plateau detection, and best-state preservation under a high threshold.
 
 ### Then Read the Mechanism
 Tag: Mechanism
