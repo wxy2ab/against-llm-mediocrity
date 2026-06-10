@@ -111,6 +111,46 @@ When the best answer is rare, majority agreement is not reliable. You need tail 
 
 If the missing variable is human-governed, the right move is not "please redo this." The right move is a small question: confirm a fact, choose a priority, authorize a boundary, validate an assumption, or define a stopping criterion.
 
+## Why This Becomes a Common Foundation for High-Value Work
+
+In the near future, most high-value work will be related in one way or another to resisting LLM autoregressive mediocrity. The reason is not just that "AI matters." The deeper reason is that the logic of information processing itself has changed.
+
+::::cards
+### AI Has Become the Default Information Engine
+
+AI is restructuring the basic way information gets processed: retrieval, compression, comparison, drafting, recombination, analysis, candidate generation, and tool use increasingly pass through AI first. Large classes of work that do not organize information processing around AI will become less important, more marginal, or disappear altogether.
+
+That means that once a workflow starts using AI as its information engine, it will eventually face the same question: how do you stop the model's default continuation path from pulling the work toward fluent but mediocre answers? Put differently, **once AI becomes the engine of information processing, interaction with autoregressive gravity becomes unavoidable.**
+
+### What Falls Into Autoregressive Extraordinary Gets Automated Fast
+
+Any task that already sits in an autoregressive-extraordinary regime is a strong candidate for productization, pipeline automation, and near-complete removal of human labor. In those tasks, local model continuation and task value already point in the same direction, so relatively little additional governance is needed.
+
+As a result, the parts that still require substantial human involvement are usually not the parts AI can already handle fluently. They are the parts where the model looks locally competent but still fails globally, behaves unstably, or cannot reliably choose the right candidate. In other words, the work that remains valuable, judgment-heavy, and organizationally important tends to cluster around autoregressive mediocrity.
+
+### High-Value Tasks Naturally Concentrate Near Autoregressive Mediocrity
+
+Research, finance, strategy, creativity, complex product decisions, and organizational governance are valuable precisely because they depend on hidden state, long-range dependency, real constraints, tail opportunities, difficult verification, and value judgment.
+
+Those are also the places where LLMs are most likely to distort the task. The more valuable the task, the less it is just "saying common patterns better." It more often depends on:
+
+- rare but decisive structure
+- global judgment that cannot be replaced by local polish
+- real validation rather than surface fluency
+- human preference, authorization, and responsibility boundaries that default distributions do not capture
+
+This also explains why, once a high-value task becomes reliably solvable in an autoregressive-extraordinary way, it quickly loses some of its scarcity. It becomes cheaper, more standardized, and often less important as a specialized human activity. What remains persistently valuable shifts toward the region where default model generation still cannot reliably win.
+::::
+
+So understanding autoregressive mediocrity is not a niche prompt-writing trick. It is becoming shared infrastructure for many kinds of work. You may not study models every day, but you increasingly need to know:
+
+- what autoregressive mediocrity looks like
+- why it appears
+- which tasks naturally fall into it
+- what methods can be used to resist it
+
+Because resisting autoregressive mediocrity is becoming a base capability for high-value work: not a narrow specialist technique, but a common foundation across research, finance, creativity, product work, and governance.
+
 ## What the Framework Offers
 
 This is not a universal prompt. It is a way to diagnose the task regime first, then decide whether to generate directly, create intermediate objects, verify with tools, or ask a human for the missing variable.
