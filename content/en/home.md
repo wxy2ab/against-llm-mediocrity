@@ -110,10 +110,10 @@ Tag: Why It Matters
 
 If you want to understand why "make it better" often fails, start with "Why It Matters." It explains the everyday shape of fluent but mediocre output.
 
-### Read a Full Case
-Tag: Story Insight V4
+### Read the Cases
+Tag: Story Insight V4 / V6
 
-If you want to see a complete system turn a high-mismatch task into a control space, read the case study. It shows why story generation cannot rely on fluent prose alone, and why passing scores may still fall short of governance.
+If you want to see complete systems, read V4 first for control-space governance, then V6 for layered governance, plateau detection, and best-state preservation under a high threshold.
 
 ### Then Read the Mechanism
 Tag: Mechanism

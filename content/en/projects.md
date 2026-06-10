@@ -17,7 +17,7 @@ heroPoints:
 
 These are implementation directions derived from the current manuscripts. They are not additional theoretical claims; they are ways to test whether governed knowledge, escalation protocols, and mismatch diagnostics can become useful software objects.
 
-The project page picks up the empirical question from the manuscripts: if Knowledge Governance is more than an explanatory framework, it must become software objects that can be stored, inspected, weakened, and revoked. These projects do not aim to build a monolithic agent first. They isolate the smallest testable components.
+The project page picks up the empirical question from the manuscripts: if Knowledge Governance is more than an explanatory framework, it must become software objects that can be stored, inspected, weakened, and revoked. The Story Insight V4 and V6 cases point to the implementation direction: make control spaces into objects, then make layered routing, continuity audit, pairwise judgment, and plateau detection observable governance processes. These projects do not aim to build a monolithic agent first. They isolate the smallest testable components.
 
 ::::cards
 ### GKO Registry
