@@ -161,12 +161,25 @@ ${cards.join("\n")}
 </div>`;
 }
 
+function withBasePath(path: string): string {
+  const base = import.meta.env.BASE_URL;
+  const normalizedBase = base.endsWith("/") ? base : `${base}/`;
+  const normalizedPath = path.replace(/^\/+/, "");
+  return `${normalizedBase}${normalizedPath}`;
+}
+
+function prefixInternalLinks(html: string): string {
+  return html.replace(/\shref="\/(?!\/)([^"#]*)(#[^"]*)?"/g, (_match, path: string, hash = "") => {
+    return ` href="${withBasePath(path)}${hash}"`;
+  });
+}
+
 function renderMarkdown(markdown: string): string {
   const withCards = markdown.replace(
     /^(:{3,})cards[ \t]*\n([\s\S]*?)^\1[ \t]*$/gm,
     (_match, _fence: string, block: string) => renderCards(block),
   );
-  return marked.parse(withCards, { async: false }) as string;
+  return prefixInternalLinks(marked.parse(withCards, { async: false }) as string);
 }
 
 function loadPages(): Record<Lang, Site> {
