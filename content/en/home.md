@@ -106,6 +106,20 @@ The right answer depends on hidden or changing state: market regime, production 
 The accessible proxy objective diverges from the real objective. The output satisfies the prompt, style, or rubric while missing the user's true success condition.
 ::::
 
+## Who This Project Is For
+
+This project is for people who already use LLMs frequently and have started to feel that "being good at prompting" is not enough.
+
+It may be useful if you have run into patterns like these:
+
+- The model can produce fluent answers, but the key judgment remains unreliable.
+- Writing, research, code, investing, product, or collaboration tasks repeatedly produce outputs that look right but are not good enough.
+- You want to understand why a task diverges from the model's generation tendency instead of collecting more prompt tricks.
+- You are building agents, workflows, evaluators, knowledge bases, or automation systems and need to put LLMs inside verifiable, reversible, governable processes.
+- You care about human-AI collaboration: what should be delegated to the model, and which variables must remain human-governed.
+
+The project does not assume the reader is an AI researcher. It is more interested in engineering experience from real tasks: how to recognize mismatch, construct intermediate objects, design validation steps, and turn the model's local capabilities into actual task value.
+
 ## How to Read the Site
 
 :::cards
@@ -129,34 +143,6 @@ Tag: Governance and collaboration
 
 If you want to use the framework, read "Governance" and "Collaboration." The practical move is to transform hard tasks into intermediate objects the model can handle well, while humans supply only the variables AI cannot reliably obtain.
 :::
-
-## Who This Project Is For
-
-This project is for people who already use LLMs frequently and have started to feel that "being good at prompting" is not enough.
-
-It may be useful if you have run into patterns like these:
-
-- The model can produce fluent answers, but the key judgment remains unreliable.
-- Writing, research, code, investing, product, or collaboration tasks repeatedly produce outputs that look right but are not good enough.
-- You want to understand why a task diverges from the model's generation tendency instead of collecting more prompt tricks.
-- You are building agents, workflows, evaluators, knowledge bases, or automation systems and need to put LLMs inside verifiable, reversible, governable processes.
-- You care about human-AI collaboration: what should be delegated to the model, and which variables must remain human-governed.
-
-The project does not assume the reader is an AI researcher. It is more interested in engineering experience from real tasks: how to recognize mismatch, construct intermediate objects, design validation steps, and turn the model's local capabilities into actual task value.
-
-## Contributions Welcome
-
-This project welcomes cases, criticism, and improvements.
-
-The most useful contributions include:
-
-- Real task cases: where LLMs look strong on the surface but final value remains unstable.
-- Engineering patterns: how you split a task into control objects, validation objects, rubrics, or human decision points.
-- Failure samples: prompts, agents, or workflows that looked reasonable but proved uncontrollable.
-- Conceptual corrections: counterexamples, extensions, or clearer wording for autoregressive mediocrity, local alignment, mismatch, control space, and related concepts.
-- Tool implementations: small components that turn these governance moves into code, templates, evaluators, or workflows.
-
-A contribution does not need to be complete at first. A concrete failure case, a reproducible process, a sharper term, or an evidence-backed objection is more valuable than generic agreement.
 
 ## How to Resist LLM Autoregressive Mediocrity
 
@@ -190,3 +176,17 @@ Those artifacts may include rubrics, state matrices, dependency graphs, option s
 - The theory layer develops the four primitive mismatches, Knowledge Governance, GKO/GEO, and governance loops.
 - The engineering layer turns control objects, validation loops, and minimal human intervention points into usable tools and templates.
 - The collaboration layer reframes the human role: not as a processor of every task, but as the governor of value, authority, taste, budget, evidence, and responsibility.
+
+## Contributions Welcome
+
+This project welcomes cases, criticism, and improvements.
+
+The most useful contributions include:
+
+- Real task cases: where LLMs look strong on the surface but final value remains unstable.
+- Engineering patterns: how you split a task into control objects, validation objects, rubrics, or human decision points.
+- Failure samples: prompts, agents, or workflows that looked reasonable but proved uncontrollable.
+- Conceptual corrections: counterexamples, extensions, or clearer wording for autoregressive mediocrity, local alignment, mismatch, control space, and related concepts.
+- Tool implementations: small components that turn these governance moves into code, templates, evaluators, or workflows.
+
+A contribution does not need to be complete at first. A concrete failure case, a reproducible process, a sharper term, or an evidence-backed objection is more valuable than generic agreement.
