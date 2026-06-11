@@ -49,6 +49,13 @@ Tag: public practice framework
 This practice framework turns the theory into a collaboration method: AI should first query the environment, learn from feedback, and construct proving grounds. Only when the remaining variable is genuinely human-governed should it ask a minimal sufficient question.
 
 [Read the practice framework](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/governed-human-ai-collaboration.md)
+
+### The Maximum Price of Models
+Tag: economics and pricing manuscript
+
+This manuscript develops a pricing envelope for LLM products. It argues that long-run willingness to pay is bounded by reliability, residual scarcity, value capture share, and the full cost stack. It then estimates ceiling price bands across software, law, healthcare, finance, support, content, education, and research.
+
+[Read the economics manuscript](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/maximum-price-of-llms.md)
 :::
 
 ## Extensions and Implementation

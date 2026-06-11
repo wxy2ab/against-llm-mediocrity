@@ -32,6 +32,10 @@ LLM 往往很早就能生成流畅答案，但要晚得多才会真正生成高�
 - 人类协助型操作失配、最小充分人类问题（MSHQ）与受治理升级对象（GEO）：[English](docs/human-assist-operational-mismatches.md) · [中文](docs/human-assist-operational-mismatches.zh-CN.md)
 - 治理式协作实践框架：[English](docs/governed-human-ai-collaboration.md) · [中文](docs/governed-human-ai-collaboration.zh-CN.md)
 
+### AI 经济学与定价
+
+- 模型最高价格：[English](docs/maximum-price-of-llms.md) · [中文](docs/maximum-price-of-llms.zh-CN.md)
+
 技术补充稿定义 agent 什么时候应该升级、如何恢复自治；实践框架则说明 AI 应如何先向环境取证、构造选项与试炼场，并只向人询问真正由人类治理的变量。
 
 ## 站点
