@@ -1,7 +1,7 @@
 # The Maximum Price of Models
 
 **A Mathematical Model of LLM Willingness to Pay, Task Commoditization, and Token Value Extraction**  
-Revised edition | 2026-06-11
+Revised edition | 2026-06-12
 
 ---
 
@@ -32,7 +32,7 @@ Chapter 2  Single-task pricing: success rate, mismatch, willingness to pay, satu
 Chapter 3  Market dynamics: commoditization and the hump curve
 Chapter 4  Maximum-price envelope: the four-ceiling formula
 Chapter 5  Industry estimates across eight sectors
-Chapter 6  Tokens are search budget, not value
+Chapter 6  Tokens are search budget, not value; router arbitrage
 Chapter 7  State oscillation in self-improving agents
 Chapter 8  Implications for model companies and buyers
 Chapter 9  Conclusion
@@ -314,6 +314,63 @@ Useful token-yield metrics are therefore things like:
 
 The common feature is that the numerator is a **verifiable state change**, not more text.
 
+### 6.1 Router Arbitrage and Token Leverage
+
+A recent pricing episode makes the cost side visible. A premium frontier model entered the market at a much higher per-token price than adjacent coding agents. Many developers responded with a two-model workflow:
+
+```text
+premium model:      compress intent, write architecture, produce specifications
+low-price agent:    expand the specification into code, tests, edits, and retries
+```
+
+This looks like rational arbitrage. The expensive model is used for the scarce, high-density part of the task; the cheaper agent absorbs the long execution tail. But it also reveals why token prices have a hard ceiling. Let:
+
+```text
+T_I = intent tokens: planning, architecture, constraints, review standards
+T_E = execution tokens: file reads, patches, tests, retries, logs
+L   = T_E / T_I       token leverage ratio
+p_I = price per intent token
+p_E = price per execution token
+```
+
+The routed cost is:
+
+```text
+K_route = p_I * T_I + p_E * T_E + K_handoff + K_verification
+        = T_I * (p_I + L * p_E) + K_handoff + K_verification
+```
+
+If `L` is 50, 100, or higher, most token volume migrates to the cheapest competent execution layer. The premium model can charge more only while its intent tokens create enough additional reliability or compression to offset the entire routed cost. Its ceiling is not:
+
+```text
+premium price ~= model intelligence
+```
+
+but:
+
+```text
+p_I^* <= [Delta verifiable value - L * p_E * T_I - K_handoff - K_verification] / T_I
+```
+
+This creates a paradox for both sides of the market.
+
+For the premium model, high per-token price suppresses throughput. If users reserve it for rare "oracle" moments and push the execution tail elsewhere, the vendor may win high unit price but lose volume, data about execution, and fixed-asset utilization. The model becomes a planning layer that is too expensive to let run.
+
+For the subsidized execution agent, low price can capture usage and workflow position, but it also imports a large cost burden. If the agent is paid per seat or bundled below marginal cost, token leverage turns adoption into a gross-margin problem. The more successful the arbitrage, the more execution tokens it must absorb.
+
+The deeper point is that value can leak across the router boundary. Architecture documents, task plans, rubrics, and planning trees are portable artifacts. Once a user feeds premium-model intent into a cheaper execution agent, the scarce part of the work is no longer fully enclosed by the premium vendor. Even without assuming any training on customer data, the operational value has moved into the execution workflow. If logs, feedback, or traces are retained under the relevant product terms, the leakage can also become an intent-to-execution data flywheel.
+
+The long-run equilibrium therefore has two stable directions:
+
+```text
+premium layer  -> stop selling naked tokens; sell closed-loop outcomes
+execution layer -> drive marginal execution cost down; sell governed throughput
+```
+
+The premium layer must bundle planning with validation, delivery, and accountability, so that users cannot easily export its highest-value intermediate states. The execution layer must reduce marginal token cost through routing, distillation, caching, local inference, and tighter tool loops, because raw execution volume is economically unforgiving.
+
+The transient two-model stack is useful, but it is not a durable pricing foundation. It is a symptom of mismatch between where task value is created and where tokens are consumed.
+
 ---
 
 ## 7. State Oscillation in Self-Improving Agents
@@ -343,6 +400,7 @@ If an iteration does not create reusable and verifiable control objects, it is s
 - Build control-space products such as rubrics, state matrices, validators, and reusable governance objects.
 - Bind deeply to proprietary data, workflows, and validation pipelines.
 - Use pricing structures that match sector validation cycles.
+- Avoid relying on naked premium-token pricing when users can export intent to cheaper execution layers.
 
 ### For Buyers
 
@@ -351,6 +409,7 @@ If an iteration does not create reusable and verifiable control objects, it is s
 - Put failure cost `F_i` into contracts.
 - Refuse to pay for oscillation and redundant sampling.
 - Include supervision cost in total cost of ownership.
+- Route models by verified marginal value, not by perceived intelligence; track the handoff cost between planning and execution.
 
 ---
 
@@ -363,3 +422,5 @@ long-run maximum price = theta x (verifiable incremental value x residual scarci
 ```
 
 Across the eight industries, no durable high-price band is sustained by pure model capability alone. Every durable high-price band sits on validation pipelines, proprietary data, IP, or organizational closed loops. Model companies should not be selling tokens. They should be selling validated state change.
+
+The same logic applies to multi-model workflows. If one model supplies dense intent and another consumes the execution tail, the price ceiling is set by the whole route, not by either model in isolation. A high-price model must keep its value inside a closed loop of outcome, validation, and accountability; a low-price agent must make execution tokens cheap enough that usage growth does not destroy margin. Otherwise, the market merely converts intelligence theater into token-accounting pressure.
