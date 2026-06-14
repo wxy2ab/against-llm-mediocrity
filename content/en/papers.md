@@ -5,12 +5,12 @@ path: /papers
 title: Papers and Working Manuscripts
 navTitle: Papers
 kicker: Formalizing the framework
-summary: This section collects the current manuscripts and future empirical directions related to autoregressive mediocrity, autoregressive extraordinary, Knowledge Governance, and governed collaboration.
+summary: This section collects the current manuscripts and future empirical directions related to autoregressive mediocrity, autoregressive extraordinary, Knowledge Governance, governed collaboration, and cognitive discipline for AI.
 order: 7
 heroPoints:
   - "Main manuscript: Knowledge Governance for Large Language Model Systems."
   - "Supplement: Human-Assist Operational Mismatches."
-  - "Extensions and implementation: governed collaboration, human learning, and tooling directions derived from the research agenda."
+  - "Extensions and implementation: governed collaboration, cognitive discipline for AI, human learning, and tooling directions derived from the research agenda."
 ---
 
 ## How to Enter the Deep End
@@ -22,7 +22,8 @@ Suggested reading order:
 1. Start with "Why It Matters" and "Cases," using the case index to build intuition from control-space governance to layered governance.
 2. Read "Mechanism" and the main manuscript to understand the three regimes, four primitive mismatches, and how Knowledge Governance externalizes, validates, and reuses intermediate control knowledge.
 3. Read the collaboration supplement to understand when an agent should ask a human and how to construct minimal sufficient human queries.
-4. Use the site pages on collaboration, learning, and projects to see how the manuscripts translate into practice and implementation directions.
+4. Read "Cognitive Discipline for AI" to understand how individual users can govern emotional projection, uncontrolled abstraction, self-confirmation, and real-world feedback.
+5. Use the site pages on collaboration, learning, and projects to see how the manuscripts translate into practice and implementation directions.
 
 If you only read the site, the goal is to get an operational judgment chain. If you enter the manuscripts, the goal is to inspect the definitions, boundaries, and testability of that chain. This page connects the public explanation layer to the formal working drafts.
 
@@ -49,6 +50,13 @@ Tag: public practice framework
 This practice framework turns the theory into a collaboration method: AI should first query the environment, learn from feedback, and construct proving grounds. Only when the remaining variable is genuinely human-governed should it ask a minimal sufficient question.
 
 [Read the practice framework](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/governed-human-ai-collaboration.md)
+
+### Cognitive Discipline for AI
+Tag: cognitive framework draft
+
+This draft turns AI use from a list of warnings into a discipline of cognition: AI is not a person but can produce personhood effects; fluency is not truth; AI tends to amplify user premises and self-confirmation; and real value must be tested through action, work, relationships, and durable judgment outside the conversation.
+
+[Read the cognitive framework](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/cognitive-discipline-for-ai.md)
 
 ### The Maximum Price of Models
 Tag: economics and pricing manuscript

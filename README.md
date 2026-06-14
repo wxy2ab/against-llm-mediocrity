@@ -31,6 +31,7 @@ Recommended reading order:
 
 - Human-assist operational mismatches, MSHQs, and GEOs: [English](docs/human-assist-operational-mismatches.md) · [中文](docs/human-assist-operational-mismatches.zh-CN.md)
 - Practical governed-collaboration framework: [English](docs/governed-human-ai-collaboration.md) · [中文](docs/governed-human-ai-collaboration.zh-CN.md)
+- Cognitive discipline for AI: [English](docs/cognitive-discipline-for-ai.md) · [中文](docs/cognitive-discipline-for-ai.zh-CN.md)
 
 ### AI Economics and Pricing
 
