@@ -5,7 +5,7 @@ path: /
 title: Against LLM Mediocrity
 navTitle: Home
 kicker: Start with the most common frustration
-summary: "We increasingly depend on LLMs to help us finish tasks. Some tasks go well; others remain unsatisfying no matter how much we optimize the prompt. The desired result feels trapped behind an invisible barrier: the model keeps generating, but it never quite releases the answer. This is LLM autoregressive mediocrity."
+summary: "We increasingly depend on LLMs to help us finish tasks. Some tasks go well; others remain unsatisfying no matter how much we optimize the prompt. The desired result feels trapped behind an invisible barrier: the model keeps generating, but it never quite releases the answer. This is LLM mediocrity."
 order: 0
 heroVisual: alignment
 heroPoints:
@@ -16,7 +16,7 @@ alignmentLabels:
   probability: statistical probability
   value: task value
   extraordinary: Autoregressive extraordinary
-  mediocre: Autoregressive mediocrity
+  mediocre: LLM mediocrity
   local: Local alignment
   aligned: probability and value rise together
   misaligned: probability peak misses value peak
@@ -31,7 +31,7 @@ Sometimes that works. Eventually, though, you meet tasks where the prompt has be
 
 This is not simply that the model is not smart enough, and it is not only that the prompt is still wrong. The same model can perform well elsewhere: compressing context, rewriting text, generating structure, expanding candidate options, explaining code, calling tools, and assisting validation. The real problem is that local capability does not always become the task value you need.
 
-That is what this project calls **autoregressive mediocrity**: because of the autoregressive nature of LLMs, on some tasks the maximum-probability path and the task-value path are not aligned. The model moves along the direction that is statistically most natural and easiest to continue, but that direction may not lead to the answer with real value.
+That is what this project calls **LLM mediocrity**: on some tasks, the language-probability system and the real problem domain are structurally mismatched. The model may move along the direction that is statistically natural, easy to continue, well supported, or broadly acceptable, while the actual value depends on global structure, hidden state, a sharper specification, or a rare low-support move.
 
 The response is not to keep optimizing prompts indefinitely. The first question is diagnostic: which parts of the task are already aligned with the model's generative strengths, which parts are only locally aligned, and which parts must be governed through control spaces, validation, tools, or human decisions?
 
@@ -44,12 +44,12 @@ The site follows that order. It starts with this common frustration, then explai
 The project distinguishes three regimes:
 
 :::cards
-### Autoregressive Mediocrity
+### LLM Mediocrity
 Tag: probability-value mismatch
 
 The answers that are easy to generate are not the answers that carry the most task value. Iteration may improve surface quality without touching the bottleneck.
 
-### Autoregressive Local Alignment
+### Local Alignment
 Tag: the common real-world regime
 
 The model can perform many local operations well, such as compression, rewriting, enumeration, comparison, and structuring. But those local successes do not automatically compose into global success.
@@ -136,7 +136,7 @@ If you want to see complete systems, start with "Cases." The case index gives th
 ### Then Read the Mechanism
 Tag: Mechanism
 
-If you care about the theory, read "Mechanism." It abstracts the case into the three regimes, policy-value compression, and the four primitive mismatches: aggregation, support, state, and specification.
+If you care about the theory, read "Mechanism." It abstracts the case into the three regimes, policy-value compression, and the four primitive mismatches: aggregation, state, specification, and support.
 
 ### Finally Move to Practice
 Tag: Governance and collaboration
@@ -144,7 +144,7 @@ Tag: Governance and collaboration
 If you want to use the framework, read "Governance" and "Collaboration." The practical move is to transform hard tasks into intermediate objects the model can handle well, while humans supply only the variables AI cannot reliably obtain.
 :::
 
-## How to Resist LLM Autoregressive Mediocrity
+## How to Resist LLM Mediocrity
 
 The core principle is: **preserve the parts where the model is already strong, and transform the misaligned parts into task forms that are easier to generate, verify, and govern.**
 
@@ -172,7 +172,7 @@ Those artifacts may include rubrics, state matrices, dependency graphs, option s
 
 ## Where This Is Going
 
-- The public layer will explain autoregressive mediocrity, local alignment, and autoregressive extraordinary without requiring the reader to begin with the paper.
+- The public layer will explain LLM mediocrity, local alignment, and autoregressive extraordinary without requiring the reader to begin with the paper.
 - The theory layer develops the four primitive mismatches, Knowledge Governance, GKO/GEO, and governance loops.
 - The engineering layer turns control objects, validation loops, and minimal human intervention points into usable tools and templates.
 - The collaboration layer reframes the human role: not as a processor of every task, but as the governor of value, authority, taste, budget, evidence, and responsibility.
@@ -186,7 +186,7 @@ The most useful contributions include:
 - Real task cases: where LLMs look strong on the surface but final value remains unstable.
 - Engineering patterns: how you split a task into control objects, validation objects, rubrics, or human decision points.
 - Failure samples: prompts, agents, or workflows that looked reasonable but proved uncontrollable.
-- Conceptual corrections: counterexamples, extensions, or clearer wording for autoregressive mediocrity, local alignment, mismatch, control space, and related concepts.
+- Conceptual corrections: counterexamples, extensions, or clearer wording for LLM mediocrity, local alignment, mismatch, control space, and related concepts.
 - Tool implementations: small components that turn these governance moves into code, templates, evaluators, or workflows.
 
 A contribution does not need to be complete at first. A concrete failure case, a reproducible process, a sharper term, or an evidence-backed objection is more valuable than generic agreement.

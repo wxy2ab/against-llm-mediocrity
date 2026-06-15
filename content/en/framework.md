@@ -8,7 +8,7 @@ kicker: A theoretical framework for studying resistance to autoregression
 summary: The framework treats LLM generation as a relationship between probability and task value. The key question is not whether the model can write, but whether what it easily generates is also what the task truly rewards.
 order: 3
 heroPoints:
-  - "Autoregressive mediocrity: fluent, plausible outputs remain concentrated away from high-value regions."
+  - "LLM mediocrity: fluent, plausible outputs remain concentrated away from high-value regions."
   - "Local alignment: the model performs useful local operations, but local value does not automatically compose into global value."
   - "Autoregressive extraordinary: local continuation and task value reinforce each other."
 ---
@@ -28,12 +28,14 @@ When yes, autoregressive generation can be extremely effective. When no, fluency
 ## Three Alignment Regimes
 
 :::cards
-### Autoregressive Mediocrity
+### LLM Mediocrity
 Tag: probability peak misses value peak
 
 Under the available budget, reachable candidates remain concentrated in outputs that are fluent, plausible, and locally improvable but far from high-value solutions. More sampling or polishing may improve average quality without exposing the decisive structure.
 
-### Autoregressive Local Alignment
+Autoregressive mediocrity is the aggregation-mismatch subcase: local token probabilities keep producing reasonable continuations while the global value structure is diluted.
+
+### Local Alignment
 Tag: the common practical state
 
 The model's local continuation tendencies align with part of the task value. It can compress, rewrite, enumerate, compare, outline, and produce useful fragments. But global success may still depend on hidden state, long-range dependency, true objective, or validation.
@@ -59,7 +61,7 @@ Inference-time reasoning has a similar effect. Chain-of-thought, search, reflect
 
 The consequence is not pessimism. It is calibration. Training and inference-time thinking expand the region where probability and value are locally aligned, but they do not remove the need to ask whether the current representation actually contains the task's decisive variables.
 
-## Why Multi-Agent Collaboration Does Not Automatically Escape Autoregressive Mediocrity
+## Why Multi-Agent Collaboration Does Not Automatically Escape LLM Mediocrity
 
 Many people have the intuition that if a single model is prone to mediocrity, then multiple agents can solve the problem by discussing, critiquing, dividing roles, and voting. That is only true when multi-agent collaboration actually introduces a new control space, external state, validation mechanism, or genuinely differentiated strategy. Otherwise, it often amounts to repeating the same generative process many times.
 
@@ -69,7 +71,7 @@ The same applies to multi-persona collaboration. Giving one model identities suc
 
 The key point is this: **lengthening the sampling path is not the same as changing the search space; increasing the number of roles is not the same as changing the value function.** If the real bottleneck comes from aggregation mismatch, state mismatch, support mismatch, or specification mismatch, then more agents often expose the mismatch more thoroughly rather than repair it. They may make a mediocre answer more persuasive, or make a cluster of middling answers more consistent, while still failing to reach the decisive structure.
 
-So multi-agent collaboration is not a sufficient condition for escaping autoregressive mediocrity. It starts to become a real governance mechanism only when it genuinely rewrites the task into a different control problem by introducing explicit external state, validation loops, governed knowledge objects, differentiated tool permissions, structured control spaces, or minimal human intervention points.
+So multi-agent collaboration is not a sufficient condition for escaping LLM mediocrity. It starts to become a real governance mechanism only when it genuinely rewrites the task into a different control problem by introducing explicit external state, validation loops, governed knowledge objects, differentiated tool permissions, structured control spaces, or minimal human intervention points.
 
 ## The Four Primitive Mismatches
 
@@ -78,7 +80,7 @@ The four mismatches are not an attempt to name every surface failure. They are d
 :::cards
 ### Aggregation
 
-Local improvements do not reliably compose into global value. Stories, code architecture, strategy, customer communication, and complex reasoning often depend on long-range coordination, delayed payoff, or coupled constraints.
+Local improvements do not reliably compose into global value. Stories, code architecture, strategy, customer communication, and complex reasoning often depend on long-range coordination, delayed payoff, or coupled constraints. This is where autoregressive mediocrity appears as a local-probability mechanism.
 
 ### Support
 
@@ -159,7 +161,7 @@ A local-to-global transformation has four moves:
 3. Govern the boundary: turn the boundary into state matrices, rubrics, constraints, counterexamples, failure modes, or GKOs.
 4. Render after stabilization: let the model produce the final fluent artifact from governed intermediate objects, then check that the control objects survived rendering.
 
-That is the path from autoregressive mediocrity toward autoregressive extraordinary, and it is what Knowledge Governance formalizes.
+That is the path from LLM mediocrity toward autoregressive extraordinary, and it is what Knowledge Governance formalizes.
 
 The transition from mechanism to governance is therefore direct. The mechanism page explains why direct generation gets stuck; the governance page explains how to rewrite stuck tasks into searchable, verifiable, reusable engineering objects. Without that layer, the four mismatches are only diagnostic labels. With it, they become interventions.
 

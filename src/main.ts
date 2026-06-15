@@ -131,7 +131,7 @@ function renderTopicVisual(page: Page) {
         case "framework":
           return {
             label: "机制层",
-            tags: ["概率与价值", "四类错配", "控制空间"],
+            tags: ["概率与价值", "四类失配", "控制空间"],
           };
         case "engineering":
           return {

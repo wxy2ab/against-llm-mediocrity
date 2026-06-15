@@ -157,7 +157,7 @@ But all of those entry points are low-authority roles:
 - The LLM can write a report narrative, but the narrative does not overwrite active specs.
 - If the LLM is unavailable, returns bad JSON, or throws, the system falls back and the nightly cycle continues.
 
-This is the engineering principle for resisting autoregressive mediocrity: do not forbid generation; constrain the authority of generated artifacts.
+This is the engineering principle for resisting LLM mediocrity: do not forbid generation; constrain the authority of generated artifacts.
 
 ## Only Active Can Affect the Strategy
 

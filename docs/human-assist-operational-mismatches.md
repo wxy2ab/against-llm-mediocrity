@@ -9,7 +9,7 @@
 
 ## Abstract
 
-The main *Knowledge Governance* manuscript explains task-value divergence through four primitive mismatches: aggregation, support, state, and specification. This supplement introduces a collaboration-layer diagnosis for agentic systems: **Human-Assist Operational Mismatches**.
+The main *Knowledge Governance* manuscript explains task-value divergence through four primitive mismatches: aggregation, state, specification, and support. This supplement introduces a collaboration-layer diagnosis for agentic systems: **Human-Assist Operational Mismatches**.
 
 An operational mismatch occurs when an agent cannot reliably continue because a task-critical control variable is unavailable, uncertain, or outside its legitimate authority, and targeted human input can resolve the blocker. Operational mismatches do not expand the primitive mismatch taxonomy. They answer a different question: not why generation diverges from value, but where autonomous execution is blocked and what minimal human contribution restores progress.
 
@@ -35,7 +35,7 @@ Only then should it ask:
 
 | Layer | Question | Examples |
 |---|---|---|
-| Primitive mismatch | Why can generation diverge from task value? | aggregation, support, state, specification |
+| Primitive mismatch | Why can generation diverge from task value? | aggregation, state, specification, support |
 | Operational blocker | What control variable prevents reliable continuation? | missing state, value choice, authority, evidence, resource |
 | Escalation protocol | What should the agent ask, and what happens next? | MSHQ, GEO, safe default, answer validation, autonomy recovery |
 

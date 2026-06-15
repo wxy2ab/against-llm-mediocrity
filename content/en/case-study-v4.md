@@ -18,7 +18,7 @@ heroPoints:
 
 Story Insight V4 is a useful case for this project because its task is not factual answering or surface rewriting. It generates and iterates short fiction. Story generation is easy to misread: the prose can be fluent, the atmosphere can work, and the sentences can be polished while the story still fails at a deeper level.
 
-That is a classic form of autoregressive mediocrity. A model can improve local expression while failing to preserve global narrative value: why characters act, why events happen, whether the theme is carried by action, whether symbols return, and whether the climax pays off earlier commitments.
+That is a classic form of LLM mediocrity. A model can improve local expression while failing to preserve global narrative value: why characters act, why events happen, whether the theme is carried by action, whether symbols return, and whether the climax pays off earlier commitments.
 
 Story Insight V4 does not ask the model to simply “write better.” It first turns the story into searchable, verifiable, revisable control objects. It is an engineering example of governing the control space before rendering the final text.
 

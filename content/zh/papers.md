@@ -5,7 +5,7 @@ path: /zh/papers
 title: 论文与工作稿
 navTitle: 论文
 kicker: 把这套框架正式写清楚
-summary: 这里收集与自回归平庸、自回归卓越、知识治理、治理式协作和 AI 认知纪律相关的当前工作稿与后续实证方向。
+summary: 这里收集与LLM 平庸、自回归卓越、知识治理、治理式协作和 AI 认知纪律相关的当前工作稿与后续实证方向。
 order: 7
 heroPoints:
   - 主文：Knowledge Governance for Large Language Model Systems。
@@ -20,7 +20,7 @@ heroPoints:
 建议阅读顺序：
 
 1. 先读站点的“为什么重要”和“案例”页，按案例索引建立从控制空间治理到分层治理的直觉。
-2. 再读“机制”和主文，理解三种对齐区间、四类原始错配，以及知识治理如何把中间控制知识外化、验证和复用。
+2. 再读“机制”和主文，理解三种对齐区间、四类原始失配，以及知识治理如何把中间控制知识外化、验证和复用。
 3. 然后读协作补充稿，理解能自主推进任务的 AI agent 什么时候应该问人，以及如何构造最小充分人类问题。
 4. 再读“AI 的认知纪律”，理解个人使用 AI 时如何管理情绪投射、抽象失控、自我确认和现实反馈。
 5. 最后读站点中的协作、学习和项目页，理解这些手稿如何转化为实践和实现方向。
@@ -33,14 +33,14 @@ heroPoints:
 ### Knowledge Governance for Large Language Model Systems
 Tag: 主文
 
-主文提出三种区间：自回归平庸、局部对齐、自回归卓越；用聚合、支持集、状态、规约四类原始错配解释为什么普通输出空间搜索会进入平台期；并提出知识治理、解耦控制空间和受治理知识对象（GKO）。
+主文提出三种区间：LLM 平庸、局部对齐、自回归卓越；用聚合、状态、规格、支持四类原始失配解释为什么普通输出空间搜索会进入平台期；并提出知识治理、解耦控制空间和受治理知识对象（GKO）。
 
 [阅读主文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/knowledge-governance-llm-systems-local-alignment.zh-CN.md)
 
 ### Human-Assist Operational Mismatches
 Tag: 协作补充稿
 
-补充稿不增加新的原始错配，而是把执行阻塞收紧为五个操作域，定义硬治理与预期损失升级门槛，并展开最小充分人类问题（MSHQ）、受治理升级对象（GEO）、回答验证和自治恢复。
+补充稿不增加新的原始失配，而是把执行阻塞收紧为五个操作域，定义硬治理与预期损失升级门槛，并展开最小充分人类问题（MSHQ）、受治理升级对象（GEO）、回答验证和自治恢复。
 
 [阅读技术补充稿](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/human-assist-operational-mismatches.zh-CN.md)
 
@@ -77,7 +77,7 @@ Tag: 站点延伸
 ### 开源项目
 Tag: 实现路线图
 
-项目页只整理当前工作稿已经提出的实现与评估方向：GKO 生命周期、GEO 升级协议和四类原始错配诊断。它不是当前工作稿之外的新理论主张。
+项目页只整理当前工作稿已经提出的实现与评估方向：GKO 生命周期、GEO 升级协议和四类原始失配诊断。它不是当前工作稿之外的新理论主张。
 ::::
 
 ## 后续实证方向

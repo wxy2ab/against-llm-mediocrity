@@ -12,7 +12,7 @@ const copy = {
   zh: {
     nav: ["路径实验", "四种失配", "如何转化"],
     switchLabel: "English",
-    introEyebrow: "AUTOREGRESSIVE ALIGNMENT LAB / 自回归对齐实验室",
+    introEyebrow: "LLM MEDIOCRITY LAB / LLM 平庸实验室",
     introTitle: "模型不是一次写出答案。<br><em>它一步一步走向答案。</em>",
     introCopy: "问题在于：每一步最容易走的方向，是否也是最终最有价值的方向？亲手改变路径、训练与隐藏条件，观察概率和真实价值何时同行，何时分叉。",
     start: "开始路径实验",
@@ -37,8 +37,8 @@ const copy = {
     intervention: "正确干预",
     transformTitle: "不是停止自回归，<br>而是改变它正在解决的问题",
     transformCopy: "保留模型已经擅长的局部生成，把失配部分转化成显式、可验证、低失配的中间对象。",
-    flow: ["高失配输入", "直接生成最终答案", "流畅输出空间", "任务重参数化", "聚合", "依赖图 / 全局约束", "支持集", "反例 / 检索 / 稀有结构", "状态", "情景矩阵 / 条件策略", "规约", "评分规约 / 对比偏好", "验证后渲染", "低失配子任务", "自回归卓越", "局部改进 → 全局价值"],
-    footer: "从自回归平庸，经由局部对齐，走向自回归卓越。",
+    flow: ["高失配输入", "直接生成最终答案", "流畅输出空间", "任务重参数化", "聚合", "依赖图 / 全局约束", "支持", "反例 / 检索 / 稀有结构", "状态", "情景矩阵 / 条件策略", "规格", "评分规约 / 对比偏好", "验证后渲染", "低失配子任务", "自回归卓越", "局部改进 → 全局价值"],
+    footer: "从 LLM 平庸，经由局部对齐，走向自回归卓越。",
     home: "返回主页",
     high: "高",
     low: "低",
@@ -46,7 +46,7 @@ const copy = {
   en: {
     nav: ["Path Experiment", "Four Mismatches", "Transformation"],
     switchLabel: "中文",
-    introEyebrow: "AUTOREGRESSIVE ALIGNMENT LAB",
+    introEyebrow: "LLM MEDIOCRITY LAB",
     introTitle: "A model does not write an answer at once.<br><em>It walks toward one token by token.</em>",
     introCopy: "The question is whether the easiest next step is also the most valuable one. Change the path, training, and hidden conditions to see when probability and true value travel together, and when they diverge.",
     start: "Start path experiment",
@@ -72,7 +72,7 @@ const copy = {
     transformTitle: "Do not stop autoregression.<br>Change the problem it is solving.",
     transformCopy: "Preserve locally aligned generation, then transform mismatched parts into explicit, verifiable, lower-mismatch intermediate objects.",
     flow: ["High-mismatch input", "Generate final answer directly", "Fluent output space", "Reparameterize task", "Aggregation", "Dependency graph / global constraints", "Support", "Counterexamples / retrieval / rare structures", "State", "Scenario matrix / conditional policy", "Specification", "Rubric / contrastive preferences", "Render after validation", "Low-mismatch subtasks", "Autoregressive extraordinary", "Local improvement → global value"],
-    footer: "From autoregressive mediocrity through local alignment to autoregressive extraordinary.",
+    footer: "From LLM mediocrity through local alignment to autoregressive extraordinary.",
     home: "Back to home",
     high: "High",
     low: "Low",
@@ -81,12 +81,12 @@ const copy = {
 
 const regimes = {
   zh: {
-    mediocre: ["自回归平庸", "容易续写 ≠ 真正有价值", "模型每一步都选择更顺、更常见、更容易解释的 token，最后稳定抵达一个流畅但普通的答案。", "局部概率持续上升，真实价值却没有随之累积。"],
+    mediocre: ["LLM 平庸", "容易续写 ≠ 真正有价值", "四类失配会让模型稳定抵达流畅但价值密度不足的答案；其中聚合失配对应自回归平庸。", "局部概率持续上升，真实价值却没有随之累积。"],
     local: ["局部对齐", "局部有用，整体未必成功", "大多数局部选择确实有价值，但一个远距离依赖、隐藏状态或隐性标准会在后段改变结果。", "前半程概率与价值同向，越过边界后开始分叉。"],
     extraordinary: ["自回归卓越", "容易续写 = 更接近高价值", "当任务结构、表示方式和成功标准都适合模型时，每一个自然的下一步都会把整体推向更好的结果。", "局部改进能够组合成全局质量，自回归成为优势。"],
   },
   en: {
-    mediocre: ["Autoregressive mediocrity", "Easy to continue ≠ truly valuable", "At every step, the model chooses the smoother, more common, easier-to-explain token and reliably reaches a fluent but ordinary answer.", "Local probability keeps rising while true value fails to accumulate."],
+    mediocre: ["LLM mediocrity", "Easy to continue ≠ truly valuable", "The four mismatches can make the model reach smooth but low-density answers; autoregressive mediocrity is the aggregation-mismatch subcase.", "Local probability keeps rising while true value fails to accumulate."],
     local: ["Local alignment", "Locally useful, globally unstable", "Most local choices are valuable, but a long-range dependency, hidden state, or tacit criterion changes the result later.", "Probability and value move together early, then diverge past a boundary."],
     extraordinary: ["Autoregressive extraordinary", "Easy to continue = closer to high value", "When task structure, representation, and success criteria fit the model, each natural next step pushes the whole toward a better result.", "Local improvements compose into global quality; autoregression becomes an advantage."],
   },
@@ -95,9 +95,9 @@ const regimes = {
 const mismatches = {
   zh: {
     aggregation: ["01", "聚合失配", "每一步都更好，为什么整体仍然失败？", "训练能奖励每个局部的清晰、顺滑与正确，却看不到跨越全文的承诺、依赖和组合效果。", "若训练信号只评估局部片段，就不存在能指向全局组合关系的梯度。把局部奖励练到满分，也不能推出整体最优。", "外化全局结构：依赖图、长期约束、整体评分器。", "逐段都漂亮", "保留关键伏笔"],
-    support: ["02", "支持集失配", "答案存在，为什么采样再多也碰不到？", "真正高价值的结构位于模型几乎不访问的尾部；训练只会加强已经被采到、被标注过的候选。", "若高价值结构从未进入训练与搜索的支持集，它就不会产生学习信号。零曝光乘以更多训练，仍然是零曝光。", "主动拉入尾部结构：检索、反常规搜索、反例与重组。", "常见合理答案", "罕见关键洞察"],
+    support: ["02", "支持失配", "答案存在，为什么采样再多也碰不到？", "真正高价值的结构位于模型几乎不访问的低支持区域；训练只会加强已经被采到、被标注过的候选。", "若高价值结构从未进入训练与搜索的支持区域，它就不会产生学习信号。零曝光乘以更多训练，仍然是零曝光。", "主动拉入尾部结构：检索、反常规搜索、反例与重组。", "常见合理答案", "罕见关键洞察"],
     state: ["03", "状态失配", "同一个回答，为什么此刻对、彼时错？", "真实价值取决于不可见或变化中的状态；输入相同，但最佳行动会随用户、环境或阶段翻转。", "没有状态信息时，同一输入对应相互冲突的最优标签。训练只能学到平均策略，无法同时为两个状态给出唯一正确答案。", "显式建模状态：情景矩阵、诊断问题、条件策略。", "立刻给方案", "先确认状态"],
-    specification: ["04", "规约失配", "分数越来越高，为什么用户越来越不满意？", "模型优化的是可见代理目标，而真正价值包含未写出的品味、后果、边界或专家判断。", "训练只会更忠实地优化它收到的目标。若代理目标与真实目标排序相反，训练越成功，真实结果可能越差。", "外化价值函数：对比样例、失败条件、动态评分规约。", "高代理分答案", "高真实价值答案"],
+    specification: ["04", "规格失配", "分数越来越高，为什么用户越来越不满意？", "模型优化的是可见代理目标，而真正价值包含未写出的品味、后果、边界或专家判断。", "训练只会更忠实地优化它收到的目标。若代理目标与真实目标排序相反，训练越成功，真实结果可能越差。", "外化价值函数：对比样例、失败条件、动态评分规约。", "高代理分答案", "高真实价值答案"],
   },
   en: {
     aggregation: ["01", "Aggregation mismatch", "Why does every better step still produce a failing whole?", "Training can reward clarity, fluency, and correctness in each part, yet cannot see commitments, dependencies, and composition across the whole artifact.", "If the training signal evaluates only local fragments, no gradient points toward the global relationship. Perfect local rewards cannot imply a global optimum.", "Externalize global structure: dependency graphs, long-range constraints, whole-artifact evaluators.", "Beautiful local sections", "Preserve the key setup"],
@@ -121,7 +121,7 @@ function renderApp() {
   const t = copy[lang];
   const f = t.flow;
   document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
-  document.title = lang === "zh" ? "自回归对齐实验室" : "Autoregressive Alignment Lab";
+  document.title = lang === "zh" ? "LLM 平庸实验室" : "LLM Mediocrity Lab";
   app.innerHTML = `
     <header class="lab-header"><a class="lab-brand" href="./"><span class="brand-dot"></span><span>Against LLM Mediocrity</span></a>
       <nav><a href="#trajectory">${t.nav[0]}</a><a href="#mismatch">${t.nav[1]}</a><a href="#transform">${t.nav[2]}</a></nav>

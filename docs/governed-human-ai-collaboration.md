@@ -125,7 +125,7 @@ See the [technical supplement](human-assist-operational-mismatches.md) for defin
 ## 5. The Governed Collaboration Workflow
 
 1. **Route low-mismatch work directly.** Complete compression, transformation, drafting, and candidate generation without unnecessary governance.
-2. **Diagnose primitive mismatch.** Identify aggregation, support, state, and specification risks.
+2. **Diagnose primitive mismatch.** Identify aggregation, state, specification, and support risks.
 3. **Construct the task model.** Make success conditions, target state, constraints, noise, assumptions, and evaluation criteria explicit.
 4. **Construct the search space.** Include conventional, unconventional, conservative, aggressive, reversible, and delayed-decision options.
 5. **Query the environment.** Inspect files, sources, tools, logs, tests, current state, and available evidence.

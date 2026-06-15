@@ -57,7 +57,7 @@ This matches the three-regime split:
 |---|---|---|
 | Autoregressive extraordinary | Direct output is already near-optimal | Commoditizes fastest |
 | Local alignment | Locally correct but globally drifting | Has real value but needs governance |
-| Autoregressive mediocrity | Even brute-force sampling rarely reaches a near-optimal result | Highest rents, but the model cannot capture them |
+| LLM mediocrity | Even brute-force sampling rarely reaches a near-optimal result | Highest rents, but the model cannot capture them |
 
 The pricing sweet spot is in the middle: **tasks that have just become reachable, are not yet widespread, and whose validation and delivery can still be bound to the tool vendor**.
 

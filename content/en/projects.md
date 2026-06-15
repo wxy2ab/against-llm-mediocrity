@@ -34,7 +34,7 @@ Core fields include trigger condition, question template, options, safe default,
 
 ### Mismatch Diagnostics
 
-A workflow for developers and high-value knowledge workers choosing an inference strategy. Inputs are task description, candidate outputs, failure history, available tools, and validation conditions. Outputs are mismatch profiles: which of aggregation, support, state, and specification dominates, and whether to generate directly, construct a control space, retrieve evidence, run validation, or escalate to a human.
+A workflow for developers and high-value knowledge workers choosing an inference strategy. Inputs are task description, candidate outputs, failure history, available tools, and validation conditions. Outputs are mismatch profiles: which of aggregation, state, specification, and support dominates, and whether to generate directly, construct a control space, retrieve evidence, run validation, or escalate to a human.
 
 Core objects include diagnostic questions, mismatch evidence, recommended intervention, validation plan, and rollback condition. The success criterion is detecting output-space plateaus earlier and replacing "try another version" with a more specific next action.
 ::::

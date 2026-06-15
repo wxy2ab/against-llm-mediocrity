@@ -5,7 +5,7 @@ path: /papers
 title: Papers and Working Manuscripts
 navTitle: Papers
 kicker: Formalizing the framework
-summary: This section collects the current manuscripts and future empirical directions related to autoregressive mediocrity, autoregressive extraordinary, Knowledge Governance, governed collaboration, and cognitive discipline for AI.
+summary: This section collects the current manuscripts and future empirical directions related to LLM mediocrity, autoregressive extraordinary, Knowledge Governance, governed collaboration, and cognitive discipline for AI.
 order: 7
 heroPoints:
   - "Main manuscript: Knowledge Governance for Large Language Model Systems."
@@ -33,7 +33,7 @@ If you only read the site, the goal is to get an operational judgment chain. If 
 ### Knowledge Governance for Large Language Model Systems
 Tag: main manuscript
 
-The main manuscript introduces the three regimes: autoregressive mediocrity, local alignment, and autoregressive extraordinary. It explains ordinary output-space search plateaus through four primitive mismatches: aggregation, support, state, and specification. It then develops Knowledge Governance, Decoupled Control Spaces, and GKOs.
+The main manuscript introduces the three regimes: LLM mediocrity, local alignment, and autoregressive extraordinary. It explains ordinary output-space search plateaus through four primitive mismatches: aggregation, state, specification, and support. It then develops Knowledge Governance, Decoupled Control Spaces, and GKOs.
 
 [Read the main manuscript](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/knowledge-governance-llm-systems-local-alignment.md)
 

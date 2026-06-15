@@ -230,4 +230,4 @@ Story Insight V6 is valuable not because every run keeps improving, but because 
 
 This high-threshold run did not reach 9.2 and did not trigger automatic escalation to MetaSpace. That does not weaken the case. It clarifies it: a mature governance system should show not only successful acceptance, but also plateau detection, version regression, layer attribution, and best-state preservation.
 
-That is part of resisting autoregressive mediocrity. Mediocrity does not only come from weak prose. It also comes from systems that cannot tell when local revision has stopped advancing real value. V6 makes that judgment explicit.
+That is part of resisting LLM mediocrity. Mediocrity does not only come from weak prose. It also comes from systems that cannot tell when local revision has stopped advancing real value. V6 makes that judgment explicit.
