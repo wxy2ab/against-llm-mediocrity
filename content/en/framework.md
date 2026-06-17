@@ -69,13 +69,13 @@ If several agents share roughly the same model, corpus priors, reward shaping, a
 
 The same applies to multi-persona collaboration. Giving one model identities such as conservative, radical, user advocate, or architect can lengthen the sampling path and create more local perturbations and corrections. But if those personas are not tied to different information sources, different state access, different control objects, or different validation criteria, then the apparent dialogue is often just one autoregressive trajectory stretched into several entangled autoregressive trajectories. A longer path does not mean escape from autoregressive gravity.
 
-The key point is this: **lengthening the sampling path is not the same as changing the search space; increasing the number of roles is not the same as changing the value function.** If the real bottleneck comes from aggregation mismatch, state mismatch, support mismatch, or specification mismatch, then more agents often expose the mismatch more thoroughly rather than repair it. They may make a mediocre answer more persuasive, or make a cluster of middling answers more consistent, while still failing to reach the decisive structure.
+The key point is this: **lengthening the sampling path is not the same as changing the search space; increasing the number of roles is not the same as changing the value function.** If the real bottleneck comes from aggregation mismatch, state mismatch, support mismatch, specification mismatch, or overfitting mismatch, then more agents often expose the mismatch more thoroughly rather than repair it. They may make a mediocre answer more persuasive, or make a cluster of middling answers more consistent, while still failing to reach the decisive structure.
 
 So multi-agent collaboration is not a sufficient condition for escaping LLM mediocrity. It starts to become a real governance mechanism only when it genuinely rewrites the task into a different control problem by introducing explicit external state, validation loops, governed knowledge objects, differentiated tool permissions, structured control spaces, or minimal human intervention points.
 
-## The Four Primitive Mismatches
+## The Five Primitive Mismatches
 
-The four mismatches are not an attempt to name every surface failure. They are diagnostic axes for predicting when ordinary final-output search is likely to plateau.
+The five mismatches are not an attempt to name every surface failure. They are diagnostic axes for predicting when ordinary final-output search is likely to plateau.
 
 :::cards
 ### Aggregation
@@ -93,6 +93,10 @@ The ranking of answers depends on hidden, changing, or underspecified state. Use
 ### Specification
 
 The accessible proxy objective diverges from the true objective. An answer may satisfy the prompt, rubric, style, or test while missing the user's real success criterion.
+
+### Overfitting
+
+The system binds too tightly to a local evidence chain, metric, scene default, role template, or feedback signal. The answer is locally reasonable but does not survive neighboring contexts.
 :::
 
 A task rarely contains only one mismatch. A useful diagnosis asks for the **mismatch profile**: which mismatch dominates, which ones are secondary, and which intervention follows from that profile.
@@ -113,11 +117,15 @@ Represent state as a first-class object: enumerate regimes, conditions of applic
 ### Specification-Dominant
 
 Externalize the value function: write rubrics, acceptance criteria, rejected examples, stakeholder priorities, and evidence requirements.
+
+### Overfitting-Dominant
+
+Test local explanations against neighboring contexts: perturb metrics, audit protocols, assumptions, role templates, and feedback sources before treating a claim as invariant.
 ::::
 
 ## Why Derivative Patterns Should Not Multiply the Taxonomy
 
-Order-sensitive trajectories, noisy-context construal failures, corpus-prior dominance, emergent specification, structure-signal gaps, and control-capacity collapse are all important. But they are usually not new primitive mismatches. They are surface patterns produced by the four mismatches interacting with representation choice, inference budget, and control policy.
+Order-sensitive trajectories, noisy-context construal failures, corpus-prior dominance, emergent specification, structure-signal gaps, and control-capacity collapse are all important. But they are usually not new primitive mismatches. They are surface patterns produced by the five mismatches interacting with representation choice, inference budget, and control policy.
 
 This discipline matters because each diagnosis should imply a different intervention:
 
@@ -125,6 +133,7 @@ This discipline matters because each diagnosis should imply a different interven
 - Support mismatch: pull tail structures into context.
 - State mismatch: enumerate states and produce conditional policies.
 - Specification mismatch: externalize the value function through rubrics, counterexamples, and acceptance criteria.
+- Overfitting mismatch: perturb nearby scenes and mark the boundary of each local claim.
 
 The same discipline also prevents taxonomy inflation. If a proposed new failure label does not predict a different intervention, it is usually better treated as a derivative pattern rather than a primitive mismatch.
 
@@ -163,7 +172,7 @@ A local-to-global transformation has four moves:
 
 That is the path from LLM mediocrity toward autoregressive extraordinary, and it is what Knowledge Governance formalizes.
 
-The transition from mechanism to governance is therefore direct. The mechanism page explains why direct generation gets stuck; the governance page explains how to rewrite stuck tasks into searchable, verifiable, reusable engineering objects. Without that layer, the four mismatches are only diagnostic labels. With it, they become interventions.
+The transition from mechanism to governance is therefore direct. The mechanism page explains why direct generation gets stuck; the governance page explains how to rewrite stuck tasks into searchable, verifiable, reusable engineering objects. Without that layer, the five mismatches are only diagnostic labels. With it, they become interventions.
 
 ## Four Ways to Resist Autoregressive Gravity
 

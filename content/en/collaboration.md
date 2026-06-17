@@ -38,7 +38,7 @@ Governed collaboration sits on top of the mechanism layer. It does not add new p
 ::::cards
 ### Primitive Mismatch
 
-Why might ordinary generation diverge from value? The main axes are aggregation, state, specification, and support.
+Why might ordinary generation diverge from value? The main axes are aggregation, state, specification, support, and overfitting.
 
 ### Operational Blocker
 

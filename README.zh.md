@@ -19,6 +19,7 @@ LLM 往往很早就能生成流畅答案，但要晚得多才会真正生成高�
 ### 知识治理
 
 - 主工作稿：[English](docs/knowledge-governance-llm-systems-local-alignment.md) · [中文](docs/knowledge-governance-llm-systems-local-alignment.zh-CN.md)
+- 第五类原始失配专题：[过拟合失配](docs/overfitting-mismatch.zh-CN.md)
 
 ### 治理式人机协作
 

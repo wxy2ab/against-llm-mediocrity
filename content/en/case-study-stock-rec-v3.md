@@ -185,9 +185,9 @@ When a candidate fails or persistence fails, the system keeps the existing champ
 
 This is where the financial case adds the most to the site's argument. In a creative system, failure may mean a weaker story. In a financial system, failure becomes real position state, transaction cost, and risk exposure. Governance authority must be stronger than generation authority.
 
-## Mapping Back to the Four Mismatches
+## Mapping Back to the Five Mismatches
 
-`stock_rec_v3` makes the four primitive mismatches more concrete.
+`stock_rec_v3` makes the five primitive mismatches more concrete.
 
 ::::cards
 ### Aggregation Mismatch
@@ -205,6 +205,10 @@ Market regime, trade date, data coverage, position cost, prior conditional actio
 ### Specification Mismatch
 
 Natural-language explanation is not a strategy specification. The system grounds specification in coverage, IC, spread, train/validation splits, transaction cost, drawdown, PnL veto, and promotion gates.
+
+### Overfitting Mismatch
+
+A locally plausible alpha story, filter, benchmark result, or audit path can bind too tightly and crowd out neighboring mechanisms. Shadow states, promotion gates, train/validation splits, and PnL vetoes force local claims to survive adjacent market, metric, and deployment checks before they gain authority.
 ::::
 
 ## Relation to the Story Insight Cases

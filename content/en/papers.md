@@ -20,7 +20,7 @@ The main site is the public explanation layer: intuition first, mechanism second
 Suggested reading order:
 
 1. Start with "Why It Matters" and "Cases," using the case index to build intuition from control-space governance to layered governance.
-2. Read "Mechanism" and the main manuscript to understand the three regimes, four primitive mismatches, and how Knowledge Governance externalizes, validates, and reuses intermediate control knowledge.
+2. Read "Mechanism" and the main manuscript to understand the three regimes, five primitive mismatches, and how Knowledge Governance externalizes, validates, and reuses intermediate control knowledge.
 3. Read the collaboration supplement to understand when an agent should ask a human and how to construct minimal sufficient human queries.
 4. Read "Cognitive Discipline for AI" to understand how individual users can govern emotional projection, uncontrolled abstraction, self-confirmation, and real-world feedback.
 5. Use the site pages on collaboration, learning, and projects to see how the manuscripts translate into practice and implementation directions.
@@ -33,7 +33,7 @@ If you only read the site, the goal is to get an operational judgment chain. If 
 ### Knowledge Governance for Large Language Model Systems
 Tag: main manuscript
 
-The main manuscript introduces the three regimes: LLM mediocrity, local alignment, and autoregressive extraordinary. It explains ordinary output-space search plateaus through four primitive mismatches: aggregation, state, specification, and support. It then develops Knowledge Governance, Decoupled Control Spaces, and GKOs.
+The main manuscript introduces the three regimes: LLM mediocrity, local alignment, and autoregressive extraordinary. It explains ordinary output-space search plateaus through five primitive mismatches: aggregation, state, specification, support, and overfitting. It then develops Knowledge Governance, Decoupled Control Spaces, and GKOs.
 
 [Read the main manuscript](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/knowledge-governance-llm-systems-local-alignment.md)
 
@@ -77,7 +77,7 @@ The learning page develops the human-role shift in governed collaboration: from 
 ### Open-Source Projects
 Tag: implementation roadmap
 
-The project page only organizes implementation and evaluation directions already present in the manuscripts: GKO lifecycles, GEO escalation protocols, and four-mismatch diagnostics. It is not an additional theoretical claim.
+The project page only organizes implementation and evaluation directions already present in the manuscripts: GKO lifecycles, GEO escalation protocols, and five-mismatch diagnostics. It is not an additional theoretical claim.
 ::::
 
 ## Future Empirical Agenda

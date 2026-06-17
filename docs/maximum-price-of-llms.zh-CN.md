@@ -97,10 +97,10 @@ K_i = K_token + K_integration + K_supervision + K_verification + K_risk
 任务成功概率不单由 C 决定，而由 C、G、B 与任务的结构性 mismatch 共同决定。mismatch 负荷写成：
 
 ```text
-L_i = w_A * A_i + w_U * U_i + w_D * D_i + w_M * M_i + sum_{j<k} w_jk * m_ij * m_ik
+L_i = w_A * A_i + w_U * U_i + w_D * D_i + w_M * M_i + w_O * O_i + sum_{j<k} w_jk * m_ij * m_ik
 ```
 
-四个分量：`A_i` 聚合失配（aggregation mismatch，最优解需要全局聚合而非局部延续）、`U_i` 支持失配（support mismatch，所需信息不在模型可见上下文中）、`D_i` 状态失配（state mismatch，任务依赖外部隐藏状态）、`M_i` 规格失配（specification mismatch，目标本身不可完全形式化）。交叉项表示 mismatch 之间是超加性的：两种失配同时出现时的难度大于各自难度之和。
+五个分量：`A_i` 聚合失配（aggregation mismatch，最优解需要全局聚合而非局部延续）、`U_i` 支持失配（support mismatch，所需信息不在模型可见上下文中）、`D_i` 状态失配（state mismatch，任务依赖外部隐藏状态）、`M_i` 规格失配（specification mismatch，目标本身不可完全形式化）、`O_i` 过拟合失配（overfitting mismatch，局部证据、指标或话术被绑定得太死，跨场景不稳健）。交叉项表示 mismatch 之间是超加性的：两种失配同时出现时的难度大于各自难度之和。
 
 成功概率建模为受 mismatch 封顶的饱和函数：
 

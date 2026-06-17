@@ -31,7 +31,7 @@ input -> build a control space -> search in control space -> project back into o
 
 In one line: **do not let the model struggle blindly inside final-answer space when the real move is to create a better intermediate layer.**
 
-This page follows directly from the mechanism page. When local fluency no longer predicts global value, the question is not "how many more versions should we sample?" but "what must be made explicit before generation?" Governance translates the four mismatches into engineering moves: construct control spaces, separate evaluators, preserve experience, and pass remaining variables to collaboration protocols when needed.
+This page follows directly from the mechanism page. When local fluency no longer predicts global value, the question is not "how many more versions should we sample?" but "what must be made explicit before generation?" Governance translates the five mismatches into engineering moves: construct control spaces, separate evaluators, preserve experience, and pass remaining variables to collaboration protocols when needed.
 
 For full engineering examples, return to "Cases." V4 applies this workflow through a narrative logic space, evaluator, and defect attacker. V6 then shows the next layer: once a control space exists, the system must route problems across MetaSpace, LogicSpace, text, continuity, and evaluation contracts.
 

@@ -145,7 +145,7 @@ Stage 01 在 1400+ 样本和 77 条 V2 claim 上做分布检验，初看有一�
 
 ## 对本站框架的映射
 
-`fwinsight_v3` 可以很清楚地映射回本站的四类失配。
+`fwinsight_v3` 可以很清楚地映射回本站的五类失配。
 
 ::::cards
 ### Support：突破旧采样分布
@@ -163,6 +163,10 @@ LLM 的解释、V2 的高 utility、甚至成功样本中的自然语言 claim�
 ### State：区分 live 与 historical
 
 经验不是永久真理。V3 用 maturity filter 把 ObservedFact、Decayed 和 Refuted 分开，避免用过期经验指导当前再生。
+
+### Overfitting：不要绑定单一解释
+
+重复出现的 claim、高 utility 分数或漂亮因子叙事，都可能只是对历史样本过拟合。V3 要求 claim 经过证据组、成熟度状态和分布改变检查，才能指导后续生成。
 ::::
 
 ## 与其他案例的关系

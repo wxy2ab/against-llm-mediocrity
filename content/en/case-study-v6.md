@@ -191,9 +191,9 @@ Representative findings included:
 
 These are not copyediting issues. Continuity checks whether story state persists across scenes, whether abilities have sources, whether objects and clues carry later responsibility, and whether readers can trust the rules of the world.
 
-## Mapping Back to the Four Mismatches
+## Mapping Back to the Five Mismatches
 
-Story Insight V6 maps directly onto this site's four primitive mismatches.
+Story Insight V6 maps directly onto this site's five primitive mismatches.
 
 ::::cards
 ### Aggregation Mismatch
@@ -211,6 +211,10 @@ High-value narrative details are often not the default template. Bodily reaction
 ### Specification Mismatch
 
 A high score is not the same as satisfying a high acceptance contract. A 9.00 average is strong, but it still falls short when `final_pass_score=9.2`; plateau detection belongs to a higher-level acceptance specification.
+
+### Overfitting Mismatch
+
+Later revisions can over-bind to the previous winning draft, a local criticism, or a scoring pattern. Plateau detection, rollback, and continuity audits keep the system from treating one locally successful path as the invariant story structure.
 ::::
 
 ## Relation to V4

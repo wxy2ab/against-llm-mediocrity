@@ -78,7 +78,7 @@ If every case enters the top navigation, the reader path fragments as the librar
 
 ### Why Mechanism Comes Next
 
-After the cases, the "Mechanism" page abstracts these engineering observations into three alignment regimes, four mismatches, and control-space governance.
+After the cases, the "Mechanism" page abstracts these engineering observations into three alignment regimes, five mismatches, and control-space governance.
 ::::
 
 ## What Future Cases Should Add

@@ -145,7 +145,7 @@ So the conclusion should not be "V3 has proven a complete factor-framework regen
 
 ## Mapping to This Site's Framework
 
-`fwinsight_v3` maps cleanly onto the four primitive mismatches.
+`fwinsight_v3` maps cleanly onto the five primitive mismatches.
 
 ::::cards
 ### Support: Move Beyond the Old Distribution
@@ -163,6 +163,10 @@ Large sample sets generate many similar claims. V3 merges them into independent 
 ### State: Separate Live From Historical
 
 Experience is not permanent truth. V3 uses a maturity filter to separate ObservedFact, Decayed, and Refuted claims before they affect regeneration.
+
+### Overfitting: Do Not Bind to One Explanation
+
+A repeated claim, high utility score, or elegant factor story can overfit the historical sample. V3 requires evidence groups, maturity states, and distribution-change checks before a claim can guide future generation.
 ::::
 
 ## Relation to the Other Cases

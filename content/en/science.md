@@ -45,9 +45,13 @@ The truly valuable answer may be low probability rather than the model's default
 ### Missing Real Standard
 
 The prompt objective is only a proxy. The answer may be clear, complete, and professional while failing the actual standard: executable, verifiable, authorized, risk-aware, and fit for context.
+
+### Local Binding
+
+The model locks onto one plausible explanation, metric, style, or early solution path. The answer feels coherent in the current scene, but nearby cases expose that it was bound too tightly.
 :::
 
-These everyday patterns correspond to the four primitive mismatches in the mechanism layer:
+These everyday patterns correspond to the five primitive mismatches in the mechanism layer:
 
 ::::cards
 ### Wrong Abstraction -> Aggregation / Specification
@@ -65,6 +69,10 @@ The best answer may not be the most statistically natural answer. The system nee
 ### Missing Real Standard -> Specification
 
 The model satisfies the stated proxy while failing the actual success condition. "Looks professional" is not the same as validated, authorized, reversible, or correct.
+
+### Local Binding -> Overfitting
+
+The model treats local support as if it were an invariant. Perturbing the scene, metric, audit path, or feedback source reveals whether the claim actually generalizes.
 ::::
 
 ## A Simple Diagnostic

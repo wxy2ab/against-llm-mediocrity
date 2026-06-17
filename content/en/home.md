@@ -86,7 +86,7 @@ identify the probability-value regime
 
 Each arrow changes the task the model is solving. The chain is not a mandatory workflow for every request. It is a way to avoid repeatedly polishing the final answer when the real bottleneck lives upstream.
 
-The four primitive mismatches help diagnose the second step:
+The five primitive mismatches help diagnose the second step:
 
 ::::cards
 ### Aggregation
@@ -104,6 +104,10 @@ The right answer depends on hidden or changing state: market regime, production 
 ### Specification
 
 The accessible proxy objective diverges from the real objective. The output satisfies the prompt, style, or rubric while missing the user's true success condition.
+
+### Overfitting
+
+The model over-binds to a local evidence chain, proxy metric, role template, or feedback signal. The answer looks reasonable in one scene but fails under nearby scene, audit, mechanism, or preference shifts.
 ::::
 
 ## Who This Project Is For
@@ -136,7 +140,7 @@ If you want to see complete systems, start with "Cases." The case index gives th
 ### Then Read the Mechanism
 Tag: Mechanism
 
-If you care about the theory, read "Mechanism." It abstracts the case into the three regimes, policy-value compression, and the four primitive mismatches: aggregation, state, specification, and support.
+If you care about the theory, read "Mechanism." It abstracts the case into the three regimes, policy-value compression, and the five primitive mismatches: aggregation, state, specification, support, and overfitting.
 
 ### Finally Move to Practice
 Tag: Governance and collaboration
@@ -173,7 +177,7 @@ Those artifacts may include rubrics, state matrices, dependency graphs, option s
 ## Where This Is Going
 
 - The public layer will explain LLM mediocrity, local alignment, and autoregressive extraordinary without requiring the reader to begin with the paper.
-- The theory layer develops the four primitive mismatches, Knowledge Governance, GKO/GEO, and governance loops.
+- The theory layer develops the five primitive mismatches, Knowledge Governance, GKO/GEO, and governance loops.
 - The engineering layer turns control objects, validation loops, and minimal human intervention points into usable tools and templates.
 - The collaboration layer reframes the human role: not as a processor of every task, but as the governor of value, authority, taste, budget, evidence, and responsibility.
 
