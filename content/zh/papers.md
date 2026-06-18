@@ -5,7 +5,7 @@ path: /zh/papers
 title: 论文与工作稿
 navTitle: 论文
 kicker: 把这套框架正式写清楚
-summary: 这里收集与LLM 平庸、自回归卓越、知识治理、治理式协作和 AI 认知纪律相关的当前工作稿与后续实证方向。
+summary: 这里收集与LLM 平庸、LLM卓越、知识治理、治理式协作和 AI 认知纪律相关的当前工作稿与后续实证方向。
 order: 7
 heroPoints:
   - 主文：Knowledge Governance for Large Language Model Systems。
@@ -33,7 +33,7 @@ heroPoints:
 ### Knowledge Governance for Large Language Model Systems
 Tag: 主文
 
-主文提出三种区间：LLM 平庸、局部对齐、自回归卓越；用聚合、状态、规格、支持、过拟合五类原始失配解释为什么普通输出空间搜索会进入平台期；并提出知识治理、解耦控制空间和受治理知识对象（GKO）。
+主文提出三种区间：LLM 平庸、局部对齐、LLM卓越；用聚合、状态、规格、支持、过拟合五类原始失配解释为什么普通输出空间搜索会进入平台期；并提出知识治理、解耦控制空间和受治理知识对象（GKO）。
 
 [阅读主文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/knowledge-governance-llm-systems-local-alignment.zh-CN.md)
 

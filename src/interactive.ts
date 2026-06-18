@@ -37,8 +37,8 @@ const copy = {
     intervention: "正确干预",
     transformTitle: "不是停止自回归，<br>而是改变它正在解决的问题",
     transformCopy: "保留模型已经擅长的局部生成，把失配部分转化成显式、可验证、低失配的中间对象。",
-    flow: ["高失配输入", "直接生成最终答案", "流畅输出空间", "任务重参数化", "聚合", "依赖图 / 全局约束", "支持", "反例 / 检索 / 稀有结构", "状态", "情景矩阵 / 条件策略", "规格", "评分规约 / 对比偏好", "验证后渲染", "低失配子任务", "自回归卓越", "局部改进 → 全局价值"],
-    footer: "从 LLM 平庸，经由局部对齐，走向自回归卓越。",
+    flow: ["高失配输入", "直接生成最终答案", "流畅输出空间", "任务重参数化", "聚合", "依赖图 / 全局约束", "支持", "反例 / 检索 / 稀有结构", "状态", "情景矩阵 / 条件策略", "规格", "评分规约 / 对比偏好", "验证后渲染", "低失配子任务", "LLM卓越", "局部改进 → 全局价值"],
+    footer: "从 LLM 平庸，经由局部对齐，走向LLM卓越。",
     home: "返回主页",
     high: "高",
     low: "低",
@@ -83,7 +83,7 @@ const regimes = {
   zh: {
     mediocre: ["LLM 平庸", "容易续写 ≠ 真正有价值", "四类失配会让模型稳定抵达流畅但价值密度不足的答案；其中聚合失配对应自回归平庸。", "局部概率持续上升，真实价值却没有随之累积。"],
     local: ["局部对齐", "局部有用，整体未必成功", "大多数局部选择确实有价值，但一个远距离依赖、隐藏状态或隐性标准会在后段改变结果。", "前半程概率与价值同向，越过边界后开始分叉。"],
-    extraordinary: ["自回归卓越", "容易续写 = 更接近高价值", "当任务结构、表示方式和成功标准都适合模型时，每一个自然的下一步都会把整体推向更好的结果。", "局部改进能够组合成全局质量，自回归成为优势。"],
+    extraordinary: ["LLM卓越", "容易续写 = 更接近高价值", "当任务结构、表示方式和成功标准都适合模型时，每一个自然的下一步都会把整体推向更好的结果。", "局部改进能够组合成全局质量，自回归成为优势。"],
   },
   en: {
     mediocre: ["LLM mediocrity", "Easy to continue ≠ truly valuable", "The four mismatches can make the model reach smooth but low-density answers; autoregressive mediocrity is the aggregation-mismatch subcase.", "Local probability keeps rising while true value fails to accumulate."],
