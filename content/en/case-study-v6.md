@@ -212,7 +212,7 @@ High-value narrative details are often not the default template. Bodily reaction
 
 A high score is not the same as satisfying a high acceptance contract. A 9.00 average is strong, but it still falls short when `final_pass_score=9.2`; plateau detection belongs to a higher-level acceptance specification.
 
-### Overfitting Mismatch
+### Fitting-Boundary Mismatch
 
 Later revisions can over-bind to the previous winning draft, a local criticism, or a scoring pattern. Plateau detection, rollback, and continuity audits keep the system from treating one locally successful path as the invariant story structure.
 ::::

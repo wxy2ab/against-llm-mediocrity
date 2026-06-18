@@ -164,7 +164,7 @@ LLM 的解释、V2 的高 utility、甚至成功样本中的自然语言 claim�
 
 经验不是永久真理。V3 用 maturity filter 把 ObservedFact、Decayed 和 Refuted 分开，避免用过期经验指导当前再生。
 
-### Overfitting：不要绑定单一解释
+### Fitting Boundary：不要绑定单一解释
 
 重复出现的 claim、高 utility 分数或漂亮因子叙事，都可能只是对历史样本过拟合。V3 要求 claim 经过证据组、成熟度状态和分布改变检查，才能指导后续生成。
 ::::

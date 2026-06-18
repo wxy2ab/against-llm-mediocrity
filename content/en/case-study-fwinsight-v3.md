@@ -164,7 +164,7 @@ Large sample sets generate many similar claims. V3 merges them into independent 
 
 Experience is not permanent truth. V3 uses a maturity filter to separate ObservedFact, Decayed, and Refuted claims before they affect regeneration.
 
-### Overfitting: Do Not Bind to One Explanation
+### Fitting Boundary: Do Not Bind to One Explanation
 
 A repeated claim, high utility score, or elegant factor story can overfit the historical sample. V3 requires evidence groups, maturity states, and distribution-change checks before a claim can guide future generation.
 ::::

@@ -69,7 +69,7 @@ If several agents share roughly the same model, corpus priors, reward shaping, a
 
 The same applies to multi-persona collaboration. Giving one model identities such as conservative, radical, user advocate, or architect can lengthen the sampling path and create more local perturbations and corrections. But if those personas are not tied to different information sources, different state access, different control objects, or different validation criteria, then the apparent dialogue is often just one autoregressive trajectory stretched into several entangled autoregressive trajectories. A longer path does not mean escape from autoregressive gravity.
 
-The key point is this: **lengthening the sampling path is not the same as changing the search space; increasing the number of roles is not the same as changing the value function.** If the real bottleneck comes from aggregation mismatch, state mismatch, support mismatch, specification mismatch, or overfitting mismatch, then more agents often expose the mismatch more thoroughly rather than repair it. They may make a mediocre answer more persuasive, or make a cluster of middling answers more consistent, while still failing to reach the decisive structure.
+The key point is this: **lengthening the sampling path is not the same as changing the search space; increasing the number of roles is not the same as changing the value function.** If the real bottleneck comes from aggregation mismatch, state mismatch, support mismatch, specification mismatch, or fitting-boundary mismatch, then more agents often expose the mismatch more thoroughly rather than repair it. They may make a mediocre answer more persuasive, or make a cluster of middling answers more consistent, while still failing to reach the decisive structure.
 
 So multi-agent collaboration is not a sufficient condition for escaping LLM mediocrity. It starts to become a real governance mechanism only when it genuinely rewrites the task into a different control problem by introducing explicit external state, validation loops, governed knowledge objects, differentiated tool permissions, structured control spaces, or minimal human intervention points.
 
@@ -94,7 +94,7 @@ The ranking of answers depends on hidden, changing, or underspecified state. Use
 
 The accessible proxy objective diverges from the true objective. An answer may satisfy the prompt, rubric, style, or test while missing the user's real success criterion.
 
-### Overfitting
+### Fitting Boundary
 
 The system binds too tightly to a local evidence chain, metric, scene default, role template, or feedback signal. The answer is locally reasonable but does not survive neighboring contexts.
 :::
@@ -118,7 +118,7 @@ Represent state as a first-class object: enumerate regimes, conditions of applic
 
 Externalize the value function: write rubrics, acceptance criteria, rejected examples, stakeholder priorities, and evidence requirements.
 
-### Overfitting-Dominant
+### Boundary-Mismatch-Dominant
 
 Test local explanations against neighboring contexts: perturb metrics, audit protocols, assumptions, role templates, and feedback sources before treating a claim as invariant.
 ::::

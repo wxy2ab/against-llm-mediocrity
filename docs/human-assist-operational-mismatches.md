@@ -45,7 +45,7 @@ Operational blockers often express primitive mismatches:
 - specification mismatch may become a preference or acceptance-criterion blocker;
 - aggregation mismatch may require confirmation of global constraints;
 - support mismatch may require access to an expert, source, tool, or unusual option.
-- overfitting mismatch may require a human or external validator to test whether a local claim survives adjacent cases.
+- fitting-boundary mismatch may require a human or external validator to test whether a local claim survives adjacent cases.
 
 ## 3. Definition and Escalation Gate
 

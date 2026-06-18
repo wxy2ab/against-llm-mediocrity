@@ -206,7 +206,7 @@ Market regime, trade date, data coverage, position cost, prior conditional actio
 
 Natural-language explanation is not a strategy specification. The system grounds specification in coverage, IC, spread, train/validation splits, transaction cost, drawdown, PnL veto, and promotion gates.
 
-### Overfitting Mismatch
+### Fitting-Boundary Mismatch
 
 A locally plausible alpha story, filter, benchmark result, or audit path can bind too tightly and crowd out neighboring mechanisms. Shadow states, promotion gates, train/validation splits, and PnL vetoes force local claims to survive adjacent market, metric, and deployment checks before they gain authority.
 ::::

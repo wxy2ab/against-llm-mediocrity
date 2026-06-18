@@ -200,7 +200,7 @@ High-value structures are often not the default template. The “sword sheath”
 
 A generic “good story” score is not the same as the qualification profile for a specific genre, length, and structure. Xianxia, linear structure, and short length should change which dimensions must be excellent.
 
-### Overfitting Mismatch
+### Fitting-Boundary Mismatch
 
 The system can over-bind to a polished scene, a symbolic image, or an early revision path. Defect attacks and control-space diagnosis force local successes to prove that they still serve the character arc, theme, and ending.
 ::::

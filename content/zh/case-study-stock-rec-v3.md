@@ -206,7 +206,7 @@ dry run 不移动 active pointer；observation-only 增强只记录观察；默�
 
 LLM 的自然语言解释不是策略规格。系统把规格落到 coverage、IC、spread、train/val、交易成本、回撤、PnL veto 和 promotion gate 上。
 
-### 过拟合失配
+### 拟合边界失配
 
 局部合理的 alpha 叙事、过滤器、benchmark 结果或审计路径，都可能绑定得太死并挤掉相邻机制。shadow 状态、promotion gate、train/val 和 PnL veto 要求局部断言先通过相邻市场、指标和部署检查，才能获得生产权。
 ::::

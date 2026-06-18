@@ -37,12 +37,12 @@ Tag: 主文
 
 [阅读主文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/knowledge-governance-llm-systems-local-alignment.zh-CN.md)
 
-### 过拟合失配
+### 拟合边界失配
 Tag: 第五类原始失配专题
 
 这份专题工作稿专门展开第五类失配：模型过度绑定局部证据链、代理指标、话术、角色期待或用户反馈，导致答案在当前场景里看似合理，却无法通过相邻场景、指标、审计协议或机制切换。它进一步拆分证据链过拟合、代理指标过拟合、场景默认值过拟合、解法路径过拟合、话术/角色过拟合、对齐偏好过拟合、用户反馈过拟合等子模式。
 
-[阅读过拟合失配专题](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/overfitting-mismatch.zh-CN.md)
+[阅读拟合边界失配专题](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/fitting-boundary-mismatch.zh-CN.md)
 
 ### Human-Assist Operational Mismatches
 Tag: 协作补充稿

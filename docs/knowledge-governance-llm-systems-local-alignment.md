@@ -8,7 +8,7 @@
 
 Large language model (LLM) systems are increasingly improved at inference time through repeated sampling, critique, planning, reranking, retrieval, tool use, and iterative revision. These methods can substantially outperform one-shot generation. Yet on a class of difficult tasks they often remain concentrated in outputs that are fluent, locally coherent, and incrementally improvable while still falling short of high task value. We use **LLM mediocrity** as the umbrella term for this failure mode.
 
-A terminological clarification is central to this version. **Autoregressive mediocrity** is too narrow to name the entire phenomenon. It accurately describes only one submechanism: **aggregation mismatch**, where locally plausible token-level continuations fail to compose into globally high-value structures. The other primitive mismatches are not primarily autoregressive. **State mismatch** is an observation-state identifiability problem. **Specification mismatch** is a problem of ambiguous, incomplete, or inconsistent task criteria in training data, prompts, and evaluators. **Support mismatch** is a probability-support/value mismatch in which high-value structures may occupy low-support regions of the policy and cannot be directly identified as valuable by probability alone. **Overfitting mismatch** is a capability-boundary problem: local training, alignment, evaluation, or inference pressure forms an attractor that helps its target region but spills into adjacent scenes. For this reason, the broader failure regime is better named LLM mediocrity, while autoregressive mediocrity becomes a special case.
+A terminological clarification is central to this version. **Autoregressive mediocrity** is too narrow to name the entire phenomenon. It accurately describes only one submechanism: **aggregation mismatch**, where locally plausible token-level continuations fail to compose into globally high-value structures. The other primitive mismatches are not primarily autoregressive. **State mismatch** is an observation-state identifiability problem. **Specification mismatch** is a problem of ambiguous, incomplete, or inconsistent task criteria in training data, prompts, and evaluators. **Support mismatch** is a probability-support/value mismatch in which high-value structures may occupy low-support regions of the policy and cannot be directly identified as valuable by probability alone. **Fitting-boundary mismatch** is a capability-routing problem: the learned activation boundary of a capability does not match its true domain of application, producing both over-triggering and under-triggering. For this reason, the broader failure regime is better named LLM mediocrity, while autoregressive mediocrity becomes a special case.
 
 This paper argues that LLM mediocrity is not a universal property of LLMs. It is a task-, representation-, state-observation-, specification-, and budget-dependent regime. Between mediocrity and extraordinary lies the regime that most often appears in real human-facing tasks: **autoregressive local alignment**, or probability-value local alignment. In this regime, the model's local continuation tendencies are genuinely aligned with parts of the task value function, but that alignment is partial, conditional, and insufficient to guarantee global success. The system can produce locally correct, fluent, useful, or even insightful components while still drifting at the level of task construal, long-range coordination, hidden state, support, or true objective.
 
@@ -16,7 +16,7 @@ At the positive pole, which we call **autoregressive extraordinary**, the model'
 
 A crucial clarification is that modern aligned LLMs are not merely following raw lexical frequency. Supervised fine-tuning, reinforcement learning from human feedback, preference optimization, process supervision, and inference-time thinking reshape the policy distribution so that many proxy values become high-probability trajectories. We call this **policy-value compression**: task value is not emitted directly, but compressed into the model's policy and expressed at inference time as probabilities over tokens, reasoning traces, and output trajectories. This explains why better training and more thinking expand the region of local alignment. It also explains why mismatch remains: proxy value compressed into policy probability is not identical to true task value in open-ended settings.
 
-We argue that susceptibility to LLM mediocrity is often predictable from five primitive mismatches between the LLM system and the task value landscape: **aggregation mismatch**, where global value is not recoverable from local improvements and which is the narrow home of autoregressive mediocrity; **support mismatch**, where high-value structures lie in low-probability or low-support regions and probability cannot by itself distinguish rare insight from rare noise; **state mismatch**, where utility depends on a dynamic latent state that is not observable or identifiable from the observation sequence; **specification mismatch**, where the accessible prompt, training-data norm, evaluator, or proxy objective diverges from the true task criterion; and **overfitting mismatch**, where the system over-adapts to local evidence, metrics, discourse patterns, role expectations, or user feedback and loses cross-scene robustness. These five mismatches are intended as primitive diagnostic axes rather than an exhaustive list of surface phenomena.
+We argue that susceptibility to LLM mediocrity is often predictable from five primitive mismatches between the LLM system and the task value landscape: **aggregation mismatch**, where global value is not recoverable from local improvements and which is the narrow home of autoregressive mediocrity; **support mismatch**, where high-value structures lie in low-probability or low-support regions and probability cannot by itself distinguish rare insight from rare noise; **state mismatch**, where utility depends on a dynamic latent state that is not observable or identifiable from the observation sequence; **specification mismatch**, where the accessible prompt, training-data norm, evaluator, or proxy objective diverges from the true task criterion; and **fitting-boundary mismatch**, where the implicit trigger boundary learned for a capability, strategy, audit structure, or behavior does not match its true application boundary. These five mismatches are intended as primitive diagnostic axes rather than an exhaustive list of surface phenomena.
 
 A key clarification is that many recurrent failures are not additional primitive mismatch classes. **Order-sensitive trajectories**, **emergent specification**, **structure-signal gaps**, **noisy-context construal failures**, **corpus-prior dominance**, and **budgeted control-capacity collapse** are better understood as derivative or compound patterns produced by the interaction of the five primitive mismatches with representation choice, inference budget, and control policy.
 
@@ -69,11 +69,11 @@ For example, instead of asking a model to directly produce a high-value strategi
 
 Each subtask is easier than the original task and may be closer to an autoregressive-extraordinary regime. The system avoids mediocrity not by making the model less autoregressive, but by presenting the model with subtasks where autoregression is well aligned with value.
 
-The core claim of this paper is therefore three-regime rather than two-sided. First, LLM mediocrity is often predictable from structural mismatches between what an LLM system can observe, specify, support, locally aggregate, and robustly generalize from local context and what the task actually rewards. We formalize this through a **five-mismatch view**: aggregation, support, state, specification, and overfitting mismatch. These five axes are not intended to label every surface failure. Instead, they define primitive sources of divergence between reachable generation and task value.
+The core claim of this paper is therefore three-regime rather than two-sided. First, LLM mediocrity is often predictable from structural mismatches between what an LLM system can observe, specify, support, locally aggregate, and robustly generalize from local context and what the task actually rewards. We formalize this through a **five-mismatch view**: aggregation, support, state, specification, and fitting-boundary mismatch. These five axes are not intended to label every surface failure. Instead, they define primitive sources of divergence between reachable generation and task value.
 
 Second, autoregressive local alignment describes the regime in which most deployed tasks actually live: local model strengths are real, but they are not sufficient to guarantee global task value. Third, autoregressive extraordinary provides the central design principle for intervention. A system can mitigate mediocrity by transforming high-mismatch or only locally aligned final-output tasks into lower-mismatch, positively aligned intermediate tasks. Knowledge Governance is a disciplined implementation of this transformation: it creates explicit control artifacts, validates them, stores them as governed knowledge, and uses them to guide fluent rendering.
 
-This distinction matters because many intuitive failure categories are tempting but not primitive. For example, order-sensitive trajectories are important, but the mere fact that a task has a correct sequence is not itself a mismatch. It becomes a mismatch only when the generation or search procedure cannot reliably recover, preserve, or validate the required trajectory. Similarly, some goals are not fully known before candidate outputs are inspected; this is a dynamic source of specification mismatch, not a new primitive class. Real-world reasoning tasks often require extracting relevant variables from noisy scenes; this is a compound construal failure involving specification, state, support, and sometimes aggregation mismatch. Training data source imbalance can strongly shape default narratives; when that prior makes one locally plausible explanation dominate adjacent alternatives, it often appears as overfitting mismatch, sometimes interacting with support, specification, state, and aggregation effects.
+This distinction matters because many intuitive failure categories are tempting but not primitive. For example, order-sensitive trajectories are important, but the mere fact that a task has a correct sequence is not itself a mismatch. It becomes a mismatch only when the generation or search procedure cannot reliably recover, preserve, or validate the required trajectory. Similarly, some goals are not fully known before candidate outputs are inspected; this is a dynamic source of specification mismatch, not a new primitive class. Real-world reasoning tasks often require extracting relevant variables from noisy scenes; this is a compound construal failure involving specification, state, support, and sometimes aggregation mismatch. Training data source imbalance can strongly shape default narratives; when that prior makes one locally plausible explanation dominate adjacent alternatives, it often appears as fitting-boundary mismatch, sometimes interacting with support, specification, state, and aggregation effects.
 
 This paper makes eight contributions.
 
@@ -345,20 +345,17 @@ A special case is **emergent specification**. In some tasks, the principal canno
 
 This is a dynamic source of specification mismatch, not an additional primitive mismatch. If the true utility itself changes with interaction state rather than merely being discovered, the phenomenon additionally involves state mismatch.
 
-#### 3.2.5 Overfitting Mismatch
+#### 3.2.5 Fitting-Boundary Mismatch
 
-**Overfitting mismatch** occurs when training, fine-tuning, alignment, or inference adapts the system too strongly to a local capability, objective, preference function, evaluation metric, or scene structure, forming a high-dimensional attractor that improves performance in its target region but spills beyond its valid support into adjacent tasks, similar contexts, alternative specifications, or different reasoning paths.
-
-In classical machine learning, overfitting means that a model performs well on the training sample while failing to generalize. In LLM systems the same structure appears both during capability shaping and at inference time. A learned capability is not a clean software module with a precise boundary. It is a probability field formed inside shared parameters and shared representations. It may improve behavior in capability region $X$ while incorrectly pulling neighboring $X_t$, Y, or Z contexts into the same mode.
-
-A useful template is:
+Let $X$ denote a learned capability, strategy, audit structure, or behavior. Let $T_X$ be the true task region in which $X$ should be used, and let $M_X$ be the region in which the model actually activates $X$. **Fitting-boundary mismatch** occurs when
 
 \[
-E_A \Rightarrow H_A \quad \text{locally}, \qquad
-H_A \not\Rightarrow I_{A:B:C}
+M_X \ne T_X.
 \]
 
-where $E_A$ is local evidence in scene $A$, $H_A$ is the hypothesis or answer structure selected by the model, and $I_{A:B:C}$ denotes the cross-scene invariant that should survive neighboring perturbations. The failure is not that $H_A$ has no support. The failure is that the model mistakes local support for invariant support.
+Its overfitting or over-triggering side is $M_X \setminus T_X$: the model activates $X$ where it should not. Its underfitting or under-triggering side is $T_X \setminus M_X$: the model already possesses or approximately possesses $X$ but fails to activate it where it should.
+
+A learned capability is not a clean software module with a precise boundary. It is a probability field formed inside shared parameters and representations, together with an implicit router that decides when to activate it. Training, fine-tuning, alignment, and inference can shift this decision boundary in either direction. Tight boundaries reduce false positives but may increase false negatives; broad boundaries increase recall but may increase hallucination, spurious mechanisms, or inappropriate capability use.
 
 This includes several recurring subtypes:
 
@@ -368,9 +365,10 @@ This includes several recurring subtypes:
 - **Solution-path overfitting:** an early reasoning path becomes self-reinforcing, and later analysis is recruited to defend it.
 - **Role or discourse overfitting:** professional caution, safety language, legalistic balance, or domain jargon substitutes for continued search.
 - **Capability-attractor spillover:** a useful learned capability, such as safety refusal, scientific caution, expert style, or structured reasoning, activates outside its proper boundary.
+- **Capability under-triggering:** a capability already available to the model, such as search expansion, state enumeration, source checking, or tool use, is not activated where it should be.
 - **User-feedback overfitting:** local preference adaptation becomes sycophancy or overcorrection rather than task alignment.
 
-This axis is distinct from aggregation mismatch. Aggregation mismatch over-smooths many cases into an average answer; overfitting mismatch over-binds to one local capability, objective, or case. It is also distinct from support mismatch: the relevant alternative may be in support, but the selected local explanation or capability attractor blocks the search path. It is distinct from specification mismatch: the target may be sufficiently specified, but the model over-optimizes a local proxy, template, or hypothesis within that target. The operational test is simple: if the answer is locally reasonable in $A$ but collapses under small changes to scene, metric, audit protocol, mechanism, or feedback source, the task has overfitting mismatch.
+This axis is distinct from aggregation mismatch because it concerns capability routing rather than local-to-global composition. It is distinct from support mismatch because the relevant capability must already exist or be approximately available, but its activation boundary is wrong. It is distinct from specification and state mismatch because the target and state may already be sufficiently clear. The strict operational test is whether changing the capability router, trigger threshold, or boundary calibration can repair the failure without supplying fundamentally new knowledge, a new objective, or previously unavailable state.
 
 ### 3.3 Criterion for Adding New Mismatch Classes
 
@@ -403,17 +401,17 @@ For a task instance $(x,s)$, define the **mismatch profile** as a conceptual vec
 \mathsf{S}_{\tau}(x,s),
 \mathsf{D}(x),
 \mathsf{M}(x,s),
-\mathsf{O}(x,s)
+\mathsf{F}(x,s)
 \big),
 \]
 
-where the five components correspond to aggregation, support, state, specification, and overfitting mismatch. The aggregation component is measured through the window-limited score $\alpha_k$ of Section 3.2.1, and the support component is measured on the base policy $p_\theta$ via $\sigma_\tau$ of Section 3.2.2; neither component depends on the inference procedure $\Pi_B$. The state, specification, and overfitting components are likewise properties of the task, the utility, the accessible proxy, and the stability of the selected explanation under local perturbation. The mismatch profile is therefore defined independently of the search procedure whose success it is meant to predict. In practice, these quantities may be approximated through sampled candidate pools, task probes, perturbation tests, failure analysis, human diagnosis, or domain-specific validators. Their value is conceptual and predictive rather than perfectly measurable in every setting.
+where the five components correspond to aggregation, support, state, specification, and fitting-boundary mismatch. The aggregation component is measured through the window-limited score $\alpha_k$ of Section 3.2.1, and the support component is measured on the base policy $p_\theta$ via $\sigma_\tau$ of Section 3.2.2. The fitting-boundary component concerns the divergence between a capability's actual trigger region $M_X$ and true application region $T_X$, including false-positive and false-negative routing. In practice, these quantities may be approximated through candidate pools, task probes, perturbation tests, capability-routing confusion matrices, failure analysis, human diagnosis, or domain-specific validators.
 
 Our central hypothesis is:
 
 > **Predictive Hypothesis.** For a fixed model class and inference budget, the reachability $r_{\tau,B}(x,s)$ achieved by output-space search decreases as the procedure-independent mismatch profile $\mathbf{m}(x,s)$ becomes more severe; interactions among mismatch components are often super-additive.
 
-Because the profile is defined over $(p_\theta, U, \tilde{U}, \mathcal{S})$ and local-stability tests while reachability is defined over $q_{\Pi_B}$, the hypothesis relates two distinct objects and is falsifiable rather than definitional. The super-additivity has a mechanism: the mismatches interfere with each other's repair channels. Specification mismatch corrupts the reranker or evaluator that a search procedure would use to recognize and amplify tail candidates; state mismatch corrupts the validation signal needed to confirm a recovered rare structure; aggregation mismatch prevents locally good pieces from being assembled into the rare global structure even after its components have been surfaced; overfitting mismatch locks the procedure onto one locally plausible explanation and suppresses neighboring alternatives. One severe mismatch may degrade performance; several severe mismatches together disable the very operators that would repair any one of them, which is the condition under which LLM mediocrity becomes persistent.
+Because the profile is defined over $(p_\theta, U, \tilde{U}, \mathcal{S})$ and capability-routing tests while reachability is defined over $q_{\Pi_B}$, the hypothesis relates two distinct objects and is falsifiable rather than definitional. The super-additivity has a mechanism: specification mismatch corrupts the evaluator; state mismatch corrupts validation; aggregation mismatch prevents composition; and fitting-boundary mismatch either over-triggers the wrong repair operator or fails to trigger the right one. One severe mismatch may degrade performance; several together can disable the operators that would repair any one of them.
 
 This yields a practical heuristic:
 
@@ -488,7 +486,7 @@ This is best understood as **corpus-prior dominance** rather than a sixth primit
 - specification mismatch: the model treats the mainstream narrative as the evaluation standard;
 - state mismatch: the correct evaluation depends on period, institutional role, development stage, or background condition;
 - aggregation mismatch: local costs or visible failures obscure system-level effects.
-- overfitting mismatch: a high-frequency narrative or local explanatory template becomes over-bound and suppresses adjacent alternatives.
+- fitting-boundary mismatch: a high-frequency narrative or local explanatory template becomes over-bound and suppresses adjacent alternatives.
 
 The appropriate intervention is source-prior governance: separate dominant narrative, counter-narrative, evidence base, causal mechanism, evaluation metric, and counterfactual comparison.
 
@@ -500,7 +498,7 @@ On sufficiently complex tasks, some systems collapse rapidly into low-quality ou
 C_{\mathrm{eff}}(M,\Pi_B,R) < L_{\mathrm{mismatch}}(x,s),
 \]
 
-where $M$ is the model, $\Pi_B$ is the inference procedure and budget, $R$ is the active representation, and $L_{\mathrm{mismatch}}$ is the combined load created by aggregation, support, state, specification, and overfitting mismatch.
+where $M$ is the model, $\Pi_B$ is the inference procedure and budget, $R$ is the active representation, and $L_{\mathrm{mismatch}}$ is the combined load created by aggregation, support, state, specification, and fitting-boundary mismatch.
 
 The same task may not collapse under a system with stronger adaptive compute, better task routing, a more stable control state, or a better representation. This is why complex-task collapse should be treated as a model-budget-control regime rather than a primitive mismatch. Its intervention is to increase effective control capacity or transform the task into lower-mismatch subtasks.
 
@@ -626,7 +624,7 @@ Local alignment can be analyzed through the same five primitive mismatch axes.
 | Support | Some useful structures are easy, but the decisive structure is rare. | The model circles near the answer without surfacing the key invariant. |
 | State | The answer is locally plausible under one state but wrong under another. | The model gives a reasonable response for the wrong regime. |
 | Specification | The prompt proxy captures part of value but misses the tacit criterion. | The model optimizes clarity, tone, or format while missing success. |
-| Overfitting | A local explanation, proxy, or role template works in one scene but does not survive neighboring perturbations. | The model treats "locally supported" as "globally invariant." |
+| Fitting boundary | A useful capability is activated outside its proper region or omitted inside it. | The wrong capability is triggered, or the right capability is not triggered. |
 
 This table clarifies why local alignment should not be treated as a sixth primitive mismatch. It is a regime produced by partial positive alignment plus residual mismatch. The primitive question remains: where does the local alignment stop, and which mismatch prevents it from becoming global alignment?
 
@@ -1021,7 +1019,7 @@ Z ← ∅
 A ← {x, c}
 
 1. Diagnose mismatch
-   Identify likely aggregation, support, state, specification, and overfitting mismatch.
+   Identify likely aggregation, support, state, specification, and fitting-boundary mismatch.
 
 2. Select transformation operators
    Choose subtasks that are likely autoregressive-extraordinary:
@@ -1725,9 +1723,9 @@ For autoregressive local alignment, empirical work should measure where local va
 
 ## 12. Conclusion
 
-As LLM systems increasingly rely on inference-time compute, it becomes important to ask not only how to generate more candidates, but also what kind of task the model is being asked to perform. Some tasks induce **LLM mediocrity**: a high-probability, low-value regime in which fluent, locally coherent, incrementally improved outputs remain far from the near-optimal set. We argued that susceptibility to this failure mode can often be understood through five primitive sources of mismatch: aggregation, support, state, specification, and overfitting mismatch.
+As LLM systems increasingly rely on inference-time compute, it becomes important to ask not only how to generate more candidates, but also what kind of task the model is being asked to perform. Some tasks induce **LLM mediocrity**: a high-probability, low-value regime in which fluent, locally coherent, incrementally improved outputs remain far from the near-optimal set. We argued that susceptibility to this failure mode can often be understood through five primitive sources of mismatch: aggregation, support, state, specification, and fitting-boundary mismatch.
 
-A central revision of this version is terminological. **Autoregressive mediocrity** should not name the whole phenomenon. It is the narrower subcase created by aggregation mismatch: locally plausible token-level continuation fails to compose into global task value. LLM mediocrity is broader. It also includes state mismatch, where observations are not states and hidden Markov or partially observable variables cannot be identified from text alone; specification mismatch, where the prompt, training-data norm, evaluator, or proxy reward fails to define what counts as good; support mismatch, where rare high-value structures cannot be reliably distinguished from rare noise by probability support alone; and overfitting mismatch, where local evidence, metrics, templates, or feedback are bound too tightly and fail to generalize across adjacent scenes.
+A central revision of this version is terminological. **Autoregressive mediocrity** should not name the whole phenomenon. It is the narrower subcase created by aggregation mismatch: locally plausible token-level continuation fails to compose into global task value. LLM mediocrity is broader. It also includes state mismatch, where observations are not states and hidden Markov or partially observable variables cannot be identified from text alone; specification mismatch, where the prompt, training-data norm, evaluator, or proxy reward fails to define what counts as good; support mismatch, where rare high-value structures cannot be reliably distinguished from rare noise by probability support alone; and fitting-boundary mismatch, where local evidence, metrics, templates, or feedback are bound too tightly and fail to generalize across adjacent scenes.
 
 The paper also introduced **autoregressive local alignment** as the common middle regime. In this regime, probability and task value are aligned over local operations, fragments, or subtasks, but the alignment does not automatically compose into global task success. This is the regime most users actually face: the model is useful enough to create real local value, but not governed enough to ensure that local value satisfies the task's true objective.
 

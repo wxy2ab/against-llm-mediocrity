@@ -105,7 +105,7 @@ The right answer depends on hidden or changing state: market regime, production 
 
 The accessible proxy objective diverges from the real objective. The output satisfies the prompt, style, or rubric while missing the user's true success condition.
 
-### Overfitting
+### Fitting Boundary
 
 The model over-binds to a local evidence chain, proxy metric, role template, or feedback signal. The answer looks reasonable in one scene but fails under nearby scene, audit, mechanism, or preference shifts.
 ::::
