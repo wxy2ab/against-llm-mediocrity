@@ -44,6 +44,13 @@ Tag: 第五类原始失配专题
 
 [阅读拟合边界失配专题](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/fitting-boundary-mismatch.zh-CN.md)
 
+### LLM 失败的形式化机制层
+Tag: 干预定位工作稿
+
+这份工作稿把 LLM 系统写成部分可观测环境中的近似决策系统，并用八类可干预组件定位失败：规格 / 奖励、观测可得性、信念 / 表征、动态 / 世界模型、行动 / 接口、策略先验 / 能力支持、拟合边界 / 能力路由，以及搜索 / 执行。它不替代五类原始失配，而是把“为什么失败”进一步转化为“该改哪个组件”。
+
+[阅读形式化机制层](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/formal-mechanism-layer.zh-CN.md)
+
 ### Human-Assist Operational Mismatches
 Tag: 协作补充稿
 
