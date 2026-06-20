@@ -35,6 +35,10 @@ heroPoints:
 
 如果你想先看完整工程实例，可以回到“案例”页。V4 把这一流程落在故事生成的逻辑空间、评估器和缺陷攻击上；V6 进一步展示，当控制空间已经存在时，系统如何把问题路由到 MetaSpace、LogicSpace、文本、连续性和评价契约等不同层级。
 
+这套验证与回写机制可以进一步独立为 **Audit Engineering（审计工程）**：它不把审计当作生成后的打分，而是把审计发现结构化为缺陷证据、修复路由、控制增量和回归测试，从而让尚未充分说明的用户价值在迭代中逐步外化。
+
+[阅读《Audit Engineering：从生成—验证不对称到通用 Agent 治理》](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/audit-engineering.zh-CN.md)
+
 ## 一个更像工程的治理流程
 
 可以把治理流程理解为七步：

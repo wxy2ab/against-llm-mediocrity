@@ -21,6 +21,7 @@ LLM 往往很早就能生成流畅答案，但要晚得多才会真正生成高�
 - 主工作稿：[English](docs/knowledge-governance-llm-systems-local-alignment.md) · [中文](docs/knowledge-governance-llm-systems-local-alignment.zh-CN.md)
 - 干预定位层：[LLM 失败的形式化机制层](docs/formal-mechanism-layer.zh-CN.md)
 - 第五类原始失配专题：[拟合边界失配](docs/fitting-boundary-mismatch.zh-CN.md)
+- 审计—回写—治理工程：[Audit Engineering](docs/audit-engineering.zh-CN.md)
 
 ### 治理式人机协作
 
