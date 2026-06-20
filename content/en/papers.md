@@ -22,8 +22,9 @@ Suggested reading order:
 1. Start with "Why It Matters" and "Cases," using the case index to build intuition from control-space governance to layered governance.
 2. Read "Mechanism" and the main manuscript to understand the three regimes, five primitive mismatches, and how Knowledge Governance externalizes, validates, and reuses intermediate control knowledge.
 3. Read the collaboration supplement to understand when an agent should ask a human and how to construct minimal sufficient human queries.
-4. Read "Cognitive Discipline for AI" to understand how individual users can govern emotional projection, uncontrolled abstraction, self-confirmation, and real-world feedback.
-5. Use the site pages on collaboration, learning, and projects to see how the manuscripts translate into practice and implementation directions.
+4. Read "Audit Engineering" to understand how systems route post-generation failure signals back into control space and prevent regression.
+5. Read "Cognitive Discipline for AI" to understand how individual users can govern emotional projection, uncontrolled abstraction, self-confirmation, and real-world feedback.
+6. Use the site pages on collaboration, learning, and projects to see how the manuscripts translate into practice and implementation directions.
 
 If you only read the site, the goal is to get an operational judgment chain. If you enter the manuscripts, the goal is to inspect the definitions, boundaries, and testability of that chain. This page connects the public explanation layer to the formal working drafts.
 
@@ -43,6 +44,13 @@ Tag: collaboration supplement
 The supplement does not add new primitive mismatches. It consolidates execution blockers into five operational domains, defines hard and expected-loss escalation gates, and develops MSHQs, GEOs, answer validation, and autonomy recovery.
 
 [Read the technical supplement](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/human-assist-operational-mismatches.md)
+
+### Audit Engineering
+Tag: audit–write-back–governance engineering
+
+This manuscript develops generation–verification asymmetry into an independent engineering paradigm. Candidate artifacts expose failures; an independent auditor localizes mismatch; a repair router writes findings back into the prompt, context, control space, tools, evaluator, or human-governed boundary; and regression audit prevents old defects from returning. Its concern is not the score itself, but how failure signals become explicit, actionable, and revocable control deltas.
+
+[Read the Audit Engineering manuscript](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/audit-engineering.md)
 
 ### Governed Human-AI Collaboration
 Tag: public practice framework

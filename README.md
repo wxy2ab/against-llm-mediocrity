@@ -19,6 +19,7 @@ The goal is not to reject autoregression, but to transform tasks that would othe
 ### Knowledge Governance
 
 - Main working manuscript: [English](docs/knowledge-governance-llm-systems-local-alignment.md) · [中文](docs/knowledge-governance-llm-systems-local-alignment.zh-CN.md)
+- Audit–write-back–governance engineering: [English](docs/audit-engineering.md) · [中文](docs/audit-engineering.zh-CN.md)
 
 ### Governed Human-AI Collaboration
 

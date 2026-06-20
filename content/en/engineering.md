@@ -35,6 +35,10 @@ This page follows directly from the mechanism page. When local fluency no longer
 
 For full engineering examples, return to "Cases." V4 applies this workflow through a narrative logic space, evaluator, and defect attacker. V6 then shows the next layer: once a control space exists, the system must route problems across MetaSpace, LogicSpace, text, continuity, and evaluation contracts.
 
+This verification and write-back mechanism can be developed into an independent discipline: **Audit Engineering**. It treats audit not as post-generation scoring but as a structured process that turns findings into defect evidence, repair routes, control deltas, and regression tests—allowing underspecified user value to become explicit through iteration.
+
+[Read “Audit Engineering: From Generation–Verification Asymmetry to General Agent Governance”](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/audit-engineering.md)
+
 ## A More Useful Governance Workflow
 
 The workflow can be described in seven steps:
