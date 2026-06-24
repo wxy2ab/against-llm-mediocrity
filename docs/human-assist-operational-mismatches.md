@@ -5,15 +5,16 @@
 **Status:** Working draft  
 **Version:** 1.1  
 **Companion practice framework:** [Governed Human-AI Collaboration](governed-human-ai-collaboration.md)  
-**Main manuscript:** [Knowledge Governance for Large Language Model Systems](knowledge-governance-llm-systems-local-alignment.md)
+**Main manuscript:** [Knowledge Governance for Large Language Model Systems](knowledge-governance-llm-systems-local-alignment.md)  
+**Agent-state supplement:** [State-Governed Agent Regime](state-governed-agent-regime.md)
 
 ## Abstract
 
-The main *Knowledge Governance* manuscript explains task-value divergence through five primitive mismatches: aggregation, state, specification, support, and overfitting. This supplement introduces a collaboration-layer diagnosis for agentic systems: **Human-Assist Operational Mismatches**.
+The main *Knowledge Governance* manuscript explains task-value divergence through six primitive mismatches: aggregation, support, state, specification, fitting-boundary, and observation-representation mismatch. This supplement introduces a collaboration-layer diagnosis for agentic systems: **Human-Assist Operational Mismatches**.
 
 An operational mismatch occurs when an agent cannot reliably continue because a task-critical control variable is unavailable, uncertain, or outside its legitimate authority, and targeted human input can resolve the blocker. Operational mismatches do not expand the primitive mismatch taxonomy. They answer a different question: not why generation diverges from value, but where autonomous execution is blocked and what minimal human contribution restores progress.
 
-The central objects are the **Minimal Sufficient Human Query (MSHQ)** and the **Governed Escalation Object (GEO)**. An MSHQ asks only for the missing human-governed variable. A GEO records when escalation is required, who should answer, what safe default applies, what work may continue, and how the rule expires or is revoked.
+The central objects are the **Minimal Sufficient Human Query (MSHQ)** and the **Governed Escalation Object (GEO)**. An MSHQ asks only for the missing human-governed variable. A GEO records when escalation is required, who should answer, what safe default applies, what work may continue, and how the rule expires or is revoked. In a long-horizon agent, the answer should then be committed into hard state rather than left as context-only memory.
 
 ## 1. Scope and Core Claim
 
@@ -35,7 +36,7 @@ Only then should it ask:
 
 | Layer | Question | Examples |
 |---|---|---|
-| Primitive mismatch | Why can generation diverge from task value? | aggregation, state, specification, support, overfitting |
+| Primitive mismatch | Why can generation diverge from task value? | aggregation, support, state, specification, fitting-boundary, observation-representation |
 | Operational blocker | What control variable prevents reliable continuation? | missing state, value choice, authority, evidence, resource |
 | Escalation protocol | What should the agent ask, and what happens next? | MSHQ, GEO, safe default, answer validation, autonomy recovery |
 
@@ -46,6 +47,7 @@ Operational blockers often express primitive mismatches:
 - aggregation mismatch may require confirmation of global constraints;
 - support mismatch may require access to an expert, source, tool, or unusual option.
 - fitting-boundary mismatch may require a human or external validator to test whether a local claim survives adjacent cases.
+- observation-representation mismatch may require measurement, raw evidence, a richer modality, tool feedback, logs, sensors, or a structured control representation before human escalation is useful.
 
 ## 3. Definition and Escalation Gate
 
@@ -229,8 +231,9 @@ A GEO stores a reusable escalation rule.
 8. If ambiguous, ask one narrower follow-up or route to the correct role.
 9. Resume autonomous work under the resolved variable.
 10. Verify the resulting action or artifact.
-11. Store durable answers as GKOs; retain recurring escalation rules as GEOs.
-12. Revoke stale GKOs and GEOs when state, policy, authority, or tools change.
+11. Commit the resolved variable as a hard-state transition when it changes the recognized task state, authorization, boundary, or obligation.
+12. Store durable answers as GKOs; retain recurring escalation rules as GEOs.
+13. Revoke stale GKOs and GEOs when state, policy, authority, or tools change.
 ```
 
 If no answer arrives:
@@ -246,6 +249,7 @@ If no answer arrives:
 |---|---|---|
 | GKO | knowledge, constraints, conditions, diagnostics | What should the agent know or obey? |
 | GEO | escalation, missing variables, authority, handoff | When should the agent ask, whom, and what next? |
+| SGAR state | recognized position, transition, recovery, audit | What changed in the agent's operative state? |
 
 A human answer to a GEO may become a GKO:
 
@@ -254,6 +258,10 @@ A human answer to a GEO may become a GKO:
 A GKO may trigger a GEO:
 
 > Any external commitment requires explicit approval before sending.
+
+A GEO answer may also trigger a hard-state transition:
+
+> The account owner approved the revised commitment wording; the agent may now send exactly that version, and the approval expires after this message.
 
 ## 9. Evaluation
 
@@ -267,7 +275,8 @@ A human-assist system should be evaluated on both task outcomes and collaboratio
 - **wrong-autonomy incidents:** the agent acts when it should escalate;
 - **unnecessary escalation incidents:** the agent asks when tools or context suffice;
 - **answer-resolution rate:** the response actually resolves the blocker;
-- **GEO reuse and revocation quality:** recurring rules help without becoming stale.
+- **GEO reuse and revocation quality:** recurring rules help without becoming stale;
+- **hard-state uptake:** resolved variables become recoverable state rather than disappearing into chat.
 
 ## 10. Limitations and Research Agenda
 
@@ -284,6 +293,6 @@ Important open questions include:
 
 ## Conclusion
 
-Human assistance is most valuable when it injects a small number of control variables that an agent cannot reliably observe, infer, validate, or authorize. The agent should first exhaust reasonable autonomous recovery, then ask a minimal, structured question, respect hard governance boundaries, validate the response, and resume autonomy.
+Human assistance is most valuable when it injects a small number of control variables that an agent cannot reliably observe, infer, validate, or authorize. The agent should first exhaust reasonable autonomous recovery, then ask a minimal, structured question, respect hard governance boundaries, validate the response, commit the resolved variable when it changes operative state, and resume autonomy.
 
 Reliable delegation is not full automation and not constant supervision. It is governed movement between autonomous work and precise human intervention.

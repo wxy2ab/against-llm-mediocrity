@@ -86,7 +86,7 @@ identify the probability-value regime
 
 Each arrow changes the task the model is solving. The chain is not a mandatory workflow for every request. It is a way to avoid repeatedly polishing the final answer when the real bottleneck lives upstream.
 
-The five primitive mismatches help diagnose the second step:
+The six primitive mismatches help diagnose the second step:
 
 ::::cards
 ### Aggregation
@@ -108,6 +108,10 @@ The accessible proxy objective diverges from the real objective. The output sati
 ### Fitting Boundary
 
 The model over-binds to a local evidence chain, proxy metric, role template, or feedback signal. The answer looks reasonable in one scene but fails under nearby scene, audit, mechanism, or preference shifts.
+
+### Observation-Representation
+
+The decisive world variable never enters the model-accessible representation. The system needs measurement, raw evidence, tool feedback, richer modality, logs, tests, or a structured control object before reasoning can close.
 ::::
 
 ## Who This Project Is For
@@ -140,12 +144,12 @@ If you want to see complete systems, start with "Cases." The case index gives th
 ### Then Read the Mechanism
 Tag: Mechanism
 
-If you care about the theory, read "Mechanism." It abstracts the case into the three regimes, policy-value compression, and the five primitive mismatches: aggregation, state, specification, support, and overfitting.
+If you care about the theory, read "Mechanism." It abstracts the case into the three regimes, policy-value compression, and the six primitive mismatches: aggregation, support, state, specification, fitting-boundary, and observation-representation.
 
 ### Finally Move to Practice
 Tag: Governance and collaboration
 
-If you want to use the framework, read "Governance" and "Collaboration." The practical move is to transform hard tasks into intermediate objects the model can handle well, while humans supply only the variables AI cannot reliably obtain.
+If you want to use the framework, read "Governance" and "Collaboration." The practical move is to transform hard tasks into intermediate objects the model can handle well, commit long-horizon agent progress into hard state, and let humans supply only the variables AI cannot reliably obtain.
 :::
 
 ## How to Resist LLM Mediocrity
@@ -172,13 +176,13 @@ In practice, this means a hard task should often move through artifacts before i
 input -> task model -> control objects -> validation / escalation -> final answer
 ```
 
-Those artifacts may include rubrics, state matrices, dependency graphs, option sets, failure-mode lists, validation checklists, GKOs, Governed Escalation Objects (GEOs), or Minimal Sufficient Human Queries (MSHQs). They are not bureaucracy for its own sake. They are ways to convert a high-mismatch final-output problem into smaller operations where the model's local strengths become useful again.
+Those artifacts may include rubrics, state matrices, hard-state ledgers, dependency graphs, option sets, failure-mode lists, validation checklists, GKOs, Governed Escalation Objects (GEOs), or Minimal Sufficient Human Queries (MSHQs). They are not bureaucracy for its own sake. They are ways to convert a high-mismatch final-output problem into smaller operations where the model's local strengths become useful again.
 
 ## Where This Is Going
 
 - The public layer will explain LLM mediocrity, local alignment, and autoregressive extraordinary without requiring the reader to begin with the paper.
-- The theory layer develops the five primitive mismatches, Knowledge Governance, GKO/GEO, and governance loops.
-- The engineering layer turns control objects, validation loops, and minimal human intervention points into usable tools and templates.
+- The theory layer develops the six primitive mismatches, Knowledge Governance, GKO/GEO, SGAR, and governance loops.
+- The engineering layer turns control objects, hard-state ledgers, validation loops, and minimal human intervention points into usable tools and templates.
 - The collaboration layer reframes the human role: not as a processor of every task, but as the governor of value, authority, taste, budget, evidence, and responsibility.
 
 ## Contributions Welcome

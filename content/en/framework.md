@@ -73,9 +73,9 @@ The key point is this: **lengthening the sampling path is not the same as changi
 
 So multi-agent collaboration is not a sufficient condition for escaping LLM mediocrity. It starts to become a real governance mechanism only when it genuinely rewrites the task into a different control problem by introducing explicit external state, validation loops, governed knowledge objects, differentiated tool permissions, structured control spaces, or minimal human intervention points.
 
-## The Five Primitive Mismatches
+## The Six Primitive Mismatches
 
-The five mismatches are not an attempt to name every surface failure. They are diagnostic axes for predicting when ordinary final-output search is likely to plateau.
+The six mismatches are not an attempt to name every surface failure. They are diagnostic axes for predicting when ordinary final-output search is likely to plateau.
 
 :::cards
 ### Aggregation
@@ -97,6 +97,10 @@ The accessible proxy objective diverges from the true objective. An answer may s
 ### Fitting Boundary
 
 The system binds too tightly to a local evidence chain, metric, scene default, role template, or feedback signal. The answer is locally reasonable but does not survive neighboring contexts.
+
+### Observation-Representation
+
+The decisive world variable never reaches the model in a task-sufficient form. The system may need measurement, raw logs, tool feedback, richer modality, sensor data, or a structured control representation before reasoning can close.
 :::
 
 A task rarely contains only one mismatch. A useful diagnosis asks for the **mismatch profile**: which mismatch dominates, which ones are secondary, and which intervention follows from that profile.
@@ -121,11 +125,15 @@ Externalize the value function: write rubrics, acceptance criteria, rejected exa
 ### Boundary-Mismatch-Dominant
 
 Test local explanations against neighboring contexts: perturb metrics, audit protocols, assumptions, role templates, and feedback sources before treating a claim as invariant.
+
+### Observation-Representation-Dominant
+
+Repair the channel before reasoning harder: add measurements, inspect raw evidence, run tests, query the environment, or encode physical, social, temporal, and verification variables explicitly.
 ::::
 
 ## Why Derivative Patterns Should Not Multiply the Taxonomy
 
-Order-sensitive trajectories, noisy-context construal failures, corpus-prior dominance, emergent specification, structure-signal gaps, and control-capacity collapse are all important. But they are usually not new primitive mismatches. They are surface patterns produced by the five mismatches interacting with representation choice, inference budget, and control policy.
+Order-sensitive trajectories, noisy-context construal failures, corpus-prior dominance, emergent specification, structure-signal gaps, and control-capacity collapse are all important. But they are usually not new primitive mismatches. They are surface patterns produced by the six mismatches interacting with representation choice, inference budget, and control policy.
 
 This discipline matters because each diagnosis should imply a different intervention:
 
@@ -133,7 +141,8 @@ This discipline matters because each diagnosis should imply a different interven
 - Support mismatch: pull tail structures into context.
 - State mismatch: enumerate states and produce conditional policies.
 - Specification mismatch: externalize the value function through rubrics, counterexamples, and acceptance criteria.
-- Overfitting mismatch: perturb nearby scenes and mark the boundary of each local claim.
+- Fitting-boundary mismatch: perturb nearby scenes and mark the boundary of each local claim.
+- Observation-representation mismatch: acquire or encode the variables the current channel dropped.
 
 The same discipline also prevents taxonomy inflation. If a proposed new failure label does not predict a different intervention, it is usually better treated as a derivative pattern rather than a primitive mismatch.
 
@@ -172,7 +181,7 @@ A local-to-global transformation has four moves:
 
 That is the path from LLM mediocrity toward autoregressive extraordinary, and it is what Knowledge Governance formalizes.
 
-The transition from mechanism to governance is therefore direct. The mechanism page explains why direct generation gets stuck; the governance page explains how to rewrite stuck tasks into searchable, verifiable, reusable engineering objects. Without that layer, the five mismatches are only diagnostic labels. With it, they become interventions.
+The transition from mechanism to governance is therefore direct. The mechanism page explains why direct generation gets stuck; the governance page explains how to rewrite stuck tasks into searchable, verifiable, reusable engineering objects. Without that layer, the six mismatches are only diagnostic labels. With it, they become interventions.
 
 ## Four Ways to Resist Autoregressive Gravity
 

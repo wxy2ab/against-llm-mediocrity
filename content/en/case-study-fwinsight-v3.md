@@ -145,7 +145,7 @@ So the conclusion should not be "V3 has proven a complete factor-framework regen
 
 ## Mapping to This Site's Framework
 
-`fwinsight_v3` maps cleanly onto the five primitive mismatches.
+`fwinsight_v3` maps cleanly onto the primitive mismatch framework.
 
 ::::cards
 ### Support: Move Beyond the Old Distribution

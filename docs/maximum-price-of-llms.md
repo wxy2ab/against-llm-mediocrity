@@ -93,7 +93,7 @@ K_i = K_token + K_integration + K_supervision + K_verification + K_risk
 Success is jointly determined by `C`, `G`, `B`, and the task's mismatch load:
 
 ```text
-L_i = w_A * A_i + w_U * U_i + w_D * D_i + w_M * M_i + sum_{j<k} w_jk * m_ij * m_ik
+L_i = w_A * A_i + w_U * U_i + w_D * D_i + w_M * M_i + w_F * F_i + w_R * R_i + sum_{j<k} w_jk * m_ij * m_ik
 ```
 
 where:
@@ -102,6 +102,8 @@ where:
 - `U_i`: support mismatch
 - `D_i`: state mismatch
 - `M_i`: specification mismatch
+- `F_i`: fitting-boundary mismatch
+- `R_i`: observation-representation mismatch
 
 Success probability is capped by effective mismatch:
 

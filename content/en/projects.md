@@ -5,17 +5,18 @@ path: /projects
 title: Open-Source Projects
 navTitle: Projects
 kicker: Implementing GKO principles
-summary: "Future projects will turn Knowledge Governance into reusable tools: GKO stores, validation loops, escalation protocols, task-control workbenches, and domain-specific governance templates."
+summary: "Future projects will turn Knowledge Governance into reusable tools: GKO stores, validation loops, escalation protocols, hard-state agent ledgers, task-control workbenches, and domain-specific governance templates."
 order: 8
 heroPoints:
   - "GKO lifecycle tooling: create, validate, prioritize, weaken, revoke."
   - Human escalation protocols based on Minimal Sufficient Human Queries.
+  - Hard-state ledgers for recoverable long-horizon agents.
   - Benchmarks for detecting when output-space search plateaus.
 ---
 
 ## Planned Project Types
 
-These are implementation directions derived from the current manuscripts. They are not additional theoretical claims; they are ways to test whether governed knowledge, escalation protocols, and mismatch diagnostics can become useful software objects.
+These are implementation directions derived from the current manuscripts. They are not additional theoretical claims; they are ways to test whether governed knowledge, hard-state transitions, escalation protocols, and mismatch diagnostics can become useful software objects.
 
 The project page picks up the empirical question from the manuscripts: if Knowledge Governance is more than an explanatory framework, it must become software objects that can be stored, inspected, weakened, and revoked. The current case library points to the implementation direction: make control spaces into objects, then make layered routing, continuity audit, pairwise judgment, and plateau detection observable governance processes. These projects do not aim to build a monolithic agent first. They isolate the smallest testable components.
 
@@ -32,9 +33,15 @@ A workflow surface for agents that should keep moving without taking unauthorize
 
 Core fields include trigger condition, question template, options, safe default, human role, autonomous work allowed while waiting, answer validation, and revocation trigger. The success criterion is fewer useless interruptions while preserving hard boundaries around authorization, privacy, finance, law, reputation, and deployment.
 
+### Hard-State Agent Ledger
+
+A state substrate for long-horizon agents that should recover after interruption and avoid false completion. Inputs are current state, admissible actions, observations, verification results, human answers, audit findings, and rollback events. Outputs are committed or rejected state transitions.
+
+Core fields include state id, preconditions, action, observation, verifier, transition rule, commit record, rollback rule, provenance, and revoked assumptions. The success criterion is lower state drift, fewer unsupported completion claims, and better replayability across sessions or agents.
+
 ### Mismatch Diagnostics
 
-A workflow for developers and high-value knowledge workers choosing an inference strategy. Inputs are task description, candidate outputs, failure history, available tools, and validation conditions. Outputs are mismatch profiles: which of aggregation, state, specification, support, and overfitting dominates, and whether to generate directly, construct a control space, retrieve evidence, run validation, or escalate to a human.
+A workflow for developers and high-value knowledge workers choosing an inference strategy. Inputs are task description, candidate outputs, failure history, available tools, and validation conditions. Outputs are mismatch profiles: which of aggregation, support, state, specification, fitting-boundary, and observation-representation dominates, and whether to generate directly, construct a control space, retrieve evidence, add measurement, run validation, or escalate to a human.
 
 Core objects include diagnostic questions, mismatch evidence, recommended intervention, validation plan, and rollback condition. The success criterion is detecting output-space plateaus earlier and replacing "try another version" with a more specific next action.
 ::::

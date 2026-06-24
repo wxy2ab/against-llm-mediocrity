@@ -185,9 +185,9 @@ When a candidate fails or persistence fails, the system keeps the existing champ
 
 This is where the financial case adds the most to the site's argument. In a creative system, failure may mean a weaker story. In a financial system, failure becomes real position state, transaction cost, and risk exposure. Governance authority must be stronger than generation authority.
 
-## Mapping Back to the Five Mismatches
+## Mapping Back to the Six Mismatches
 
-`stock_rec_v3` makes the five primitive mismatches more concrete.
+`stock_rec_v3` makes the primitive mismatch framework more concrete.
 
 ::::cards
 ### Aggregation Mismatch

@@ -2,7 +2,7 @@
 
 > 在最常见的挫败里发现 LLM 的真实边界。
 
-`against-llm-mediocrity` 是一个关于"为什么 LLM 经常给出流畅但平庸的答案"的研究与开源项目。我们把这种现象归为 **LLM 平庸**——模型表面表现很好，却一直无法真正完成高价值任务。围绕它，我们提出了 **局部对齐**、**LLM卓越**、**五类原始失配**、**知识治理**、**受治理知识对象（GKO）/ 受治理升级对象（GEO）**、**审计工程** 和 **治理式人机协作** 这套语言，并把它落到故事生成、金融策略和因子框架再生等案例里。
+`against-llm-mediocrity` 是一个关于"为什么 LLM 经常给出流畅但平庸的答案"的研究与开源项目。我们把这种现象归为 **LLM 平庸**——模型表面表现很好，却一直无法真正完成高价值任务。围绕它，我们提出了 **局部对齐**、**LLM卓越**、**六类原始失配**、**知识治理**、**受治理知识对象（GKO）/ 受治理升级对象（GEO）**、**审计工程**、**状态治理型 Agent 体制（SGAR）** 和 **治理式人机协作** 这套语言，并把它落到故事生成、金融策略和因子框架再生等案例里。
 
 站点地址：<https://wxy2ab.github.io/against-llm-mediocrity/>
 
@@ -28,7 +28,7 @@ LLM 已经很擅长写代码、写邮件、做总结、解释概念、起草方�
 - **局部对齐**：模型的局部操作（压缩、改写、列举、比较、生成结构）与任务价值的某些部分对齐，但这种一致是局部的、有条件的，还不足以保证全局成功。这也是现实中最常见的区间。
 - **LLM卓越**：局部续写倾向、流畅性、习得的语义表征与任务价值在整条任务链上同向发力。自回归不再拖后腿，反而成为优势。上下文压缩、语义映射、语体迁移、结构化转换等任务经常属于这一区间。
 
-### 五类原始失配
+### 六类原始失配
 
 它们不是给失败贴标签，而是用来预测普通输出空间搜索何时会进入平台期：
 
@@ -37,6 +37,7 @@ LLM 已经很擅长写代码、写邮件、做总结、解释概念、起草方�
 - **状态失配**：真实价值依赖隐藏、动态或部分可观测的状态。
 - **规格失配**：系统能优化的代理目标偏离真实目标。
 - **拟合边界失配**：模型已学能力的隐式触发边界与它的真实适用边界不一致，因而同时出现过触发与欠触发。
+- **观测-表征失配**：决定性世界变量没有通过观测、编码、上下文、工具或控制表征通道进入模型可操作表征。
 
 ### 知识治理
 
@@ -49,6 +50,10 @@ LLM 已经很擅长写代码、写邮件、做总结、解释概念、起草方�
 ### 治理式协作
 
 不再围绕"任务分工"组织协作，而围绕"控制变量"组织协作。AI 推进可处理、可搜索、可验证的部分；人治理价值、偏好、授权、品味和责任；系统把可复用判断沉淀为 GKO/GEO。
+
+### 状态治理型 Agent 体制（SGAR）
+
+把长程 agent 的运行基础从上下文叙事转移到外部硬状态：LLM 负责理解、提案、探索和执行；硬状态层负责定位、约束、验证、提交、恢复和审计。这样，计划、行动、验证、升级和审计发现都进入受治理状态转移，而不是只停留在聊天记录里。
 
 ---
 
@@ -101,9 +106,11 @@ against-llm-mediocrity/
 
 - [Knowledge Governance for Large Language Model Systems](./docs/knowledge-governance-llm-systems-local-alignment.zh-CN.md)：主文。
 - [拟合边界失配](./docs/fitting-boundary-mismatch.zh-CN.md)：第五类原始失配的专题。
+- [观测-表征失配](./docs/observation-representation-mismatch.zh-CN.md)：第六类原始失配的专题。
 - [LLM 失败的形式化机制层](./docs/formal-mechanism-layer.zh-CN.md)：八类可干预机制。
 - [Human-Assist Operational Mismatches](./docs/human-assist-operational-mismatches.zh-CN.md)：协作层失配与升级协议。
 - [Audit Engineering](./docs/audit-engineering.zh-CN.md)：从生成-验证不对称到 Agent 治理。
+- [状态治理型 Agent 体制（SGAR）](./docs/state-governed-agent-regime.zh-CN.md)：长程 Agent 的硬状态治理。
 - [治理式人机协作](./docs/governed-human-ai-collaboration.zh-CN.md)：从聊天式使用到变量治理。
 - [AI 的认知纪律](./docs/cognitive-discipline-for-ai.zh-CN.md)：AI 使用侧的认知框架。
 - [模型最高价格](./docs/maximum-price-of-llms.zh-CN.md)：LLM 定价与商品化的数学。

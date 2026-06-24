@@ -191,9 +191,9 @@ Representative findings included:
 
 These are not copyediting issues. Continuity checks whether story state persists across scenes, whether abilities have sources, whether objects and clues carry later responsibility, and whether readers can trust the rules of the world.
 
-## Mapping Back to the Five Mismatches
+## Mapping Back to the Six Mismatches
 
-Story Insight V6 maps directly onto this site's five primitive mismatches.
+Story Insight V6 maps directly onto this site's primitive mismatch framework.
 
 ::::cards
 ### Aggregation Mismatch

@@ -2,11 +2,11 @@
 
 ## 摘要
 
-Audit Engineering，中文可称为**审计工程**，是一种面向 LLM 与 Agent 系统的推理时工程范式。它不把高质量产物主要寄托于一次性写出完美提示词，也不把审计理解为生成之后的简单打分；它把审计循环设计成一套发现真实目标、定位失配、回写控制对象、保留历史轨迹并防止下一轮退化的机制。
+Audit Engineering，中文可称为**审计工程**，是一种面向 LLM 与 Agent 系统的推理时工程范式。它不把高质量产物主要寄托于一次性写出完美提示词，也不把审计理解为生成之后的简单打分；它把审计循环设计成一套发现真实目标、定位失配、回写控制对象、保留历史轨迹、在必要时更新硬状态并防止下一轮退化的机制。
 
 它的基本判断是：在大量开放式、高失配、隐含标准强的任务里，直接生成优质产物很难，但识别产物哪里不对、哪里不完整、哪里偏离真实目标，往往相对容易。审计工程把这种**生成—验证不对称**工程化：
 
-> 让生成暴露问题，让审计把问题转化为可执行的控制增量，再让 Agent 沿着这些增量继续迭代。
+> 让生成暴露问题，让审计把问题转化为可执行的控制增量，提交必要的状态转移，再让 Agent 沿着这些增量继续迭代。
 
 这使它有资格与 Prompt Engineering、Context Engineering 和 Hardness Engineering 并列：Prompt Engineering 控制"怎么问"，Context Engineering 控制"给什么信息"，Hardness Engineering 控制"任务、环境与验收边界有多硬"，Audit Engineering 则控制"生成之后如何发现真实目标、定位失败、回写控制空间，并防止下一轮退化"。
 
@@ -38,6 +38,7 @@ Audit Engineering，中文可称为**审计工程**，是一种面向 LLM 与 Ag
 | Context Engineering | 信息状态 | 模型应该看到什么 | 文档、检索、记忆、上下文窗口 | 信息充分不等于目标正确 |
 | Hardness Engineering | 任务难度与边界 | 如何避免低难度代理任务骗过系统 | 难例、强约束、环境反馈、硬验收 | 提高硬度后仍需定位失败 |
 | Audit Engineering | 审计循环与失败回写 | 如何从失败中发现目标并指导下一轮 | 审计契约、缺陷账本、控制增量、回归测试 | 审计器也可能继承规格失配 |
+| State-Governed Agent Regime | 硬状态权威 | agent 当前承认什么，哪些转移有效 | 状态账本、转移记录、恢复点、回滚规则 | 硬状态可能固化错误抽象 |
 
 它具有独立地位，因为它具备四个条件：
 
@@ -53,6 +54,7 @@ Prompt Engineering   = 输入指令工程
 Context Engineering  = 观察状态工程
 Hardness Engineering = 任务边界工程
 Audit Engineering    = 验证—回写工程
+SGAR                 = 硬状态治理
 ```
 
 ## 3. 定义与形式化
@@ -76,7 +78,7 @@ Gate:      accept | continue | escalate | stop
 {
   "finding": "发现的问题",
   "evidence": "来自产物、上下文或外部数据的证据",
-  "mismatch_type": "aggregation | support | state | specification | fitting_boundary",
+  "mismatch_type": "aggregation | support | state | specification | fitting_boundary | observation_representation",
   "severity": "blocker | major | minor | note",
   "repair_target": "prompt | context | control_space | data | tool | evaluator | renderer | human",
   "control_delta": "建议写回的控制状态变化",
@@ -110,7 +112,7 @@ Audit Engineering 是其中可以独立命名的一层，专门处理三件事�
 
 1. **如何审计**：审计哪些维度、使用什么强度、按什么顺序、是否需要对抗性审计。
 2. **如何定位**：问题来自规格、状态、支持、聚合、拟合边界，还是渲染损失。
-3. **如何回写**：如何把发现变成控制对象、约束、禁用模式、验收门槛、撤销规则或人工决策点。
+3. **如何回写**：如何把发现变成控制对象、约束、禁用模式、验收门槛、撤销规则、人工决策点或硬状态转移。
 
 二者的区别可以概括为：
 
@@ -120,6 +122,8 @@ Audit Engineering 关心：怎样让失败信号受治理。
 ```
 
 前者保存"什么应该被用于生成"，后者保存"什么失败不能再发生，以及为什么"。
+
+对于长程 agent，这一点直接连接到 [状态治理型 Agent 体制](state-governed-agent-regime.zh-CN.md)：审计发现不应只是在下一轮 prompt 里提供建议。当它改变被承认的任务状态、可执行行动、证据要求、回滚义务或完成门槛时，它应被提交进硬状态。
 
 ## 6. 一般流程
 
@@ -280,10 +284,11 @@ open -> patched -> regression_passed -> accepted_risk -> revoked
 | Structural Audit | 局部好内容是否组成整体价值？ |
 | Evidence Audit | 事实来源、数据口径、时间点和推理链是否可靠？ |
 | State Audit | 答案是否依赖隐藏、变化或未说明的状态？ |
+| Channel Audit | 决定性变量是否进入可用观测、证据、工具、日志、传感器或控制表征？ |
 | Adversarial Audit | 是否存在"看起来高级但实际失败"的模式？ |
 | Audit-of-Audit | 审计器是否把偏好当标准、提出不可执行建议或只会增加复杂度？ |
 
-## 9. 与五类失配的映射
+## 9. 与六类失配的映射
 
 | 失配类型 | 审计工程的处理方式 |
 | --- | --- |
@@ -292,8 +297,9 @@ open -> patched -> regression_passed -> accepted_risk -> revoked
 | State，状态失配 | 检查适用状态、触发条件、时间窗口、市场、组织和用户状态 |
 | Specification，规格失配 | 检查提示词、评分规约和显式目标是否偏离真实成功标准 |
 | Fitting Boundary，拟合边界失配 | 检查模式、指标、模板、角色或反馈是否被过度泛化 |
+| Observation-Representation，观测-表征失配 | 检查决定性变量是否进入观测、证据、工具、日志、传感器、验证器或编码后的控制表征 |
 
-五类失配的价值不只是给失败命名，而是让不同失配指向不同干预：
+六类失配的价值不只是给失败命名，而是让不同失配指向不同干预：
 
 ```text
 发现失配 -> 定位失配 -> 修改控制对象 -> 回归检查失配是否消失

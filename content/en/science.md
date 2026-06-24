@@ -38,6 +38,10 @@ The model answers a related-looking problem that is not the real one. It may tur
 
 The right answer depends on the current market, user emotion, legal boundary, production environment, time window, or organizational authority. If that state is absent, the model defaults to an assumed situation.
 
+### Missing Channel Variable
+
+The decisive variable exists in the world but is not preserved by the current channel. A photo may not show weight or heat; a transcript may not preserve tone; a summary may omit the log line that determines the diagnosis.
+
 ### Missing Tail Option
 
 The truly valuable answer may be low probability rather than the model's default continuation. Majority voting and repeated sampling can reinforce the conventional answer.
@@ -51,7 +55,7 @@ The prompt objective is only a proxy. The answer may be clear, complete, and pro
 The model locks onto one plausible explanation, metric, style, or early solution path. The answer feels coherent in the current scene, but nearby cases expose that it was bound too tightly.
 :::
 
-These everyday patterns correspond to the five primitive mismatches in the mechanism layer:
+These everyday patterns correspond to the six primitive mismatches in the mechanism layer:
 
 ::::cards
 ### Wrong Abstraction -> Aggregation / Specification
@@ -62,6 +66,10 @@ The model improves pieces of the answer while missing the global structure or th
 
 The model answers as if the world were stable and known. But a refund policy, deployment plan, or market recommendation can reverse depending on current state.
 
+### Missing Channel Variable -> Observation-Representation
+
+The model reasons over a visible proxy because the task-sufficient variable never entered its representation. The system needs measurement, raw data, logs, tests, tool feedback, or richer modality before reasoning can close.
+
 ### Missing Tail Option -> Support
 
 The best answer may not be the most statistically natural answer. The system needs retrieval, perturbation, counterexamples, or explicit tail search to bring the rare structure into view.
@@ -70,7 +78,7 @@ The best answer may not be the most statistically natural answer. The system nee
 
 The model satisfies the stated proxy while failing the actual success condition. "Looks professional" is not the same as validated, authorized, reversible, or correct.
 
-### Local Binding -> Overfitting
+### Local Binding -> Fitting Boundary
 
 The model treats local support as if it were an invariant. Perturbing the scene, metric, audit path, or feedback source reveals whether the claim actually generalizes.
 ::::
@@ -91,11 +99,12 @@ It is:
 What control variable is missing from this task?
 ```
 
-The task may need state observation, tool validation, source retrieval, counterexamples, a rubric, a decision matrix, a failure-mode list, or a human answer about preference, authorization, boundary, or responsibility.
+The task may need state observation, missing-channel measurement, tool validation, source retrieval, counterexamples, a rubric, a decision matrix, a failure-mode list, or a human answer about preference, authorization, boundary, or responsibility.
 
 A useful check is to ask what kind of object would change the next generation:
 
 - A state matrix changes hidden assumptions into explicit cases.
+- A measurement or raw-signal request moves missing channel variables into representation.
 - A rubric changes vague quality into testable criteria.
 - A failure-mode list exposes how a plausible answer could fail.
 - A query plan moves missing facts out of imagination and into retrieval.
@@ -108,9 +117,9 @@ A useful check is to ask what kind of object would change the next generation:
 
 If the model represented the task incorrectly, style improvements are dangerous. First identify the goal, variables, constraints, states, and success conditions.
 
-### Do Not Confuse Missing State With Missing Intelligence
+### Do Not Confuse Missing State or Missing Channel With Missing Intelligence
 
-If the answer depends on real-world state, the system should observe, read files, run tests, check sources, or ask a minimal sufficient human question.
+If the answer depends on real-world state or a variable absent from the current representation, the system should observe, measure, read files, run tests, check sources, inspect logs, or ask a minimal sufficient human question.
 
 ### Do Not Vote Your Way Into the Default Answer
 

@@ -24,10 +24,10 @@ Good collaboration is neither front-loading a long questionnaire nor letting the
 ```text
 AI: Process → Search → Structure → Simulate → Verify
 Human: Govern → Set values → Authorize → Judge taste → Own responsibility
-System: turn reusable judgments into GKOs / GEOs
+System: turn reusable judgments into GKOs / GEOs and hard-state transitions
 ```
 
-In one sentence: AI should move the task to the point where only human-governed variables remain; humans should resolve variables that cannot be reliably obtained from environment, feedback, tools, or simulation.
+In one sentence: AI should move the task to the point where only human-governed variables remain; humans should resolve variables that cannot be reliably obtained from environment, feedback, tools, or simulation; the system should commit the resolved variable into hard state rather than leave it as chat history.
 
 This page picks up the last step of the governance page. Control spaces and validation loops solve many structural problems, but value, authorization, responsibility, taste, and real-world state can still block autonomy. The collaboration question is not how to involve humans more. It is how to make human input small, precise, and sufficient for AI to resume autonomous progress.
 
@@ -38,7 +38,7 @@ Governed collaboration sits on top of the mechanism layer. It does not add new p
 ::::cards
 ### Primitive Mismatch
 
-Why might ordinary generation diverge from value? The main axes are aggregation, state, specification, support, and overfitting.
+Why might ordinary generation diverge from value? The main axes are aggregation, support, state, specification, fitting-boundary, and observation-representation.
 
 ### Operational Blocker
 
@@ -175,6 +175,8 @@ A GEO should specify:
 
 If a human answer becomes durable, it may become a GKO. For example: "Any external commitment for this client requires explicit approval before sending." Conversely, a GKO may trigger a GEO when a condition appears in a future task.
 
+For long-horizon agents, the answer should also update the agent's hard state: which fact was confirmed, which boundary now applies, which authorization was granted or denied, and which transition is now allowed. This is the collaboration-side link to State-Governed Agent Regime (SGAR).
+
 ## Collaboration Workflow
 
 1. Route low-mismatch work directly.
@@ -186,7 +188,8 @@ If a human answer becomes durable, it may become a GKO. For example: "Any extern
 7. Issue an MSHQ or instantiate a GEO.
 8. Continue safe reversible work while waiting.
 9. Validate the answer, resume autonomous work, and verify the result.
-10. Preserve reusable judgment as GKOs or GEOs, and revoke stale ones when conditions change.
+10. Commit resolved variables into hard state.
+11. Preserve reusable judgment as GKOs or GEOs, and revoke stale ones when conditions change.
 
 ## What Humans Should Govern
 
@@ -217,5 +220,6 @@ Good human-AI collaboration is not measured by minimizing all human involvement.
 - After the human answers, can the AI resume autonomous work?
 - Does the AI avoid unauthorized external actions?
 - Are reusable judgments stored as GKOs or GEOs instead of disappearing into the chat?
+- Can the agent recover the recognized state after interruption?
 
 That is the move from chat-style use to governed collaboration: AI handles processing, search, and expression; humans govern the variables that probability alone cannot replace.
