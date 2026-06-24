@@ -97,10 +97,10 @@ K_i = K_token + K_integration + K_supervision + K_verification + K_risk
 任务成功概率不单由 C 决定，而由 C、G、B 与任务的结构性 mismatch 共同决定。mismatch 负荷写成：
 
 ```text
-L_i = w_A * A_i + w_U * U_i + w_D * D_i + w_M * M_i + w_O * O_i + sum_{j<k} w_jk * m_ij * m_ik
+L_i = w_A * A_i + w_U * U_i + w_D * D_i + w_M * M_i + w_F * F_i + w_R * R_i + sum_{j<k} w_jk * m_ij * m_ik
 ```
 
-五个分量：`A_i` 聚合失配（aggregation mismatch，最优解需要全局聚合而非局部延续）、`U_i` 支持失配（support mismatch，所需信息不在模型可见上下文中）、`D_i` 状态失配（state mismatch，任务依赖外部隐藏状态）、`M_i` 规格失配（specification mismatch，目标本身不可完全形式化）、`O_i` 拟合边界失配（fitting-boundary mismatch，局部证据、指标或话术被绑定得太死，跨场景不稳健）。交叉项表示 mismatch 之间是超加性的：两种失配同时出现时的难度大于各自难度之和。
+六个分量：`A_i` 聚合失配（aggregation mismatch，最优解需要全局聚合而非局部延续）、`U_i` 支持失配（support mismatch，高价值结构位于低支持区域）、`D_i` 状态失配（state mismatch，任务依赖当前通道下不可识别的外部隐藏状态）、`M_i` 规格失配（specification mismatch，目标本身不可完全形式化）、`F_i` 拟合边界失配（fitting-boundary mismatch，局部证据、指标或话术被绑定得太死，跨场景不稳健）、`R_i` 观测-表征失配（observation-representation mismatch，决定性变量没有进入模型可操作表征）。交叉项表示 mismatch 之间是超加性的：两种失配同时出现时的难度大于各自难度之和。
 
 成功概率建模为受 mismatch 封顶的饱和函数：
 
@@ -114,7 +114,7 @@ L_i^eff(G) = L_irreducible + L_transformable * exp(-phi_i * G)
 三个要点：
 
 1. `r_max` 不是 1。即使 C 趋于无穷，纯自回归直接输出的成功率也会被有效 mismatch 卡住。
-2. 工程治理 G 的作用，不是"增加模型能力"，而是**把可转化的 mismatch 转出模型**（外部记忆解 U_i、状态注入解 D_i、规格化 rubric 解 M_i），也就是降低 `L_i^eff`。
+2. 工程治理 G 的作用，不是"增加模型能力"，而是**把可转化的 mismatch 转出模型**（检索和经验沉淀解 U_i、状态注入解 D_i、规格化 rubric 解 M_i、路由边界治理解 F_i、补测量与控制表征解 R_i），也就是降低 `L_i^eff`。
 3. 推理预算 B 进入 `r_max` 的方式是对数的——这为第 6 章的 token 边际递减埋下伏笔。
 
 ### 2.3 支付意愿

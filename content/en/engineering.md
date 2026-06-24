@@ -5,7 +5,7 @@ path: /engineering
 title: Governance
 navTitle: Governance
 kicker: Concrete engineering practice based on the mechanism
-summary: The engineering move is not to force the model to solve every hard task in final-answer space. It is to build intermediate control objects that make the task easier to generate, verify, reuse, and revoke.
+summary: The engineering move is not to force the model to solve every hard task in final-answer space. It is to build intermediate control and hard-state objects that make the task easier to generate, verify, reuse, recover, and revoke.
 order: 4
 heroPoints:
   - Do not blindly add more final-answer sampling before asking whether the bottleneck is support, search, or validation.
@@ -31,13 +31,17 @@ input -> build a control space -> search in control space -> project back into o
 
 In one line: **do not let the model struggle blindly inside final-answer space when the real move is to create a better intermediate layer.**
 
-This page follows directly from the mechanism page. When local fluency no longer predicts global value, the question is not "how many more versions should we sample?" but "what must be made explicit before generation?" Governance translates the five mismatches into engineering moves: construct control spaces, separate evaluators, preserve experience, and pass remaining variables to collaboration protocols when needed.
+This page follows directly from the mechanism page. When local fluency no longer predicts global value, the question is not "how many more versions should we sample?" but "what must be made explicit before generation?" Governance translates the six mismatches into engineering moves: construct control spaces, add measurement or raw evidence, separate evaluators, preserve experience, govern agent state, and pass remaining variables to collaboration protocols when needed.
 
 For full engineering examples, return to "Cases." V4 applies this workflow through a narrative logic space, evaluator, and defect attacker. V6 then shows the next layer: once a control space exists, the system must route problems across MetaSpace, LogicSpace, text, continuity, and evaluation contracts.
 
 This verification and write-back mechanism can be developed into an independent discipline: **Audit Engineering**. It treats audit not as post-generation scoring but as a structured process that turns findings into defect evidence, repair routes, control deltas, and regression tests—allowing underspecified user value to become explicit through iteration.
 
 [Read “Audit Engineering: From Generation–Verification Asymmetry to General Agent Governance”](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/audit-engineering.md)
+
+For long-horizon agents, these control objects also need a hard-state layer. **State-Governed Agent Regime (SGAR)** treats plans, tool calls, observations, verification results, human answers, audit findings, and rollback decisions as state transitions rather than loose chat history. The point is not to make the LLM less capable; it is to stop asking the same context that acted to be the sole authority on whether the task advanced.
+
+[Read “State-Governed Agent Regime”](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime.md)
 
 ## A More Useful Governance Workflow
 
@@ -119,6 +123,7 @@ A control space does not need to resemble the final answer. It is better underst
 Typical control objects include:
 
 - state matrices
+- hard-state ledgers
 - rubrics
 - candidate frames
 - failure-mode lists
@@ -127,6 +132,7 @@ Typical control objects include:
 - constraint lists
 - role configurations
 - promise-payoff chains
+- transition records
 
 A good control space usually has three properties:
 

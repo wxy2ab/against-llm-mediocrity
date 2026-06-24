@@ -2,11 +2,11 @@
 
 ## Abstract
 
-Audit Engineering is an inference-time engineering paradigm for LLM and agent systems. It does not place the burden of quality on writing a perfect prompt in advance, nor does it reduce auditing to a score assigned after generation. Instead, it treats the audit loop as the mechanism for discovering the real objective, localizing mismatch, writing findings back into control objects, preserving history, and preventing regression.
+Audit Engineering is an inference-time engineering paradigm for LLM and agent systems. It does not place the burden of quality on writing a perfect prompt in advance, nor does it reduce auditing to a score assigned after generation. Instead, it treats the audit loop as the mechanism for discovering the real objective, localizing mismatch, writing findings back into control objects, preserving history, updating hard state when needed, and preventing regression.
 
 Its starting claim is simple: in many open-ended tasks with severe mismatch and tacit standards, generating an excellent artifact directly is difficult, while identifying where an artifact is wrong, incomplete, or misaligned with the real objective is often easier. Audit Engineering turns that **generation–verification asymmetry** into an engineering loop:
 
-> Let generation expose the problem, let audit convert the problem into an actionable control delta, and let the agent continue from that delta.
+> Let generation expose the problem, let audit convert the problem into an actionable control delta, commit any necessary state transition, and let the agent continue from that delta.
 
 This gives Audit Engineering a position alongside Prompt Engineering, Context Engineering, and Hardness Engineering. Prompt Engineering controls how the task is asked. Context Engineering controls what information is visible. Hardness Engineering controls how demanding the task, environment, and acceptance boundary are. Audit Engineering controls how the system discovers the real objective after generation, localizes failure, writes it back into the control space, and prevents the next iteration from regressing.
 
@@ -38,6 +38,7 @@ Audit Engineering does not replace the other three paradigms. It adds a fourth, 
 | Context Engineering | Information state | What should the model see? | Documents, retrieval, memory, context windows | Sufficient information does not guarantee the right objective |
 | Hardness Engineering | Task difficulty and boundaries | How do we prevent weak proxy tasks from fooling the system? | Hard cases, strong constraints, environment feedback, hard gates | Harder tests still require failure localization |
 | Audit Engineering | Audit loop and failure write-back | How does failure reveal the objective and direct the next iteration? | Audit contracts, defect ledgers, control deltas, regression tests | The auditor can inherit specification mismatch |
+| State-Governed Agent Regime | Hard-state authority | What does the agent currently recognize, and which transitions are valid? | State ledgers, transition records, recovery points, rollback rules | Hard state can institutionalize the wrong abstraction |
 
 It qualifies as an independent paradigm for four reasons:
 
@@ -53,6 +54,7 @@ Prompt Engineering   = instruction engineering
 Context Engineering  = observation-state engineering
 Hardness Engineering = task-boundary engineering
 Audit Engineering    = verification–write-back engineering
+SGAR                 = hard-state governance
 ```
 
 ## 3. Definition and Formalization
@@ -76,7 +78,7 @@ The audit output `a_t` should not be an unstructured review. A minimal schema is
 {
   "finding": "what is wrong",
   "evidence": "evidence from the artifact, context, or external data",
-  "mismatch_type": "aggregation | support | state | specification | fitting_boundary",
+  "mismatch_type": "aggregation | support | state | specification | fitting_boundary | observation_representation",
   "severity": "blocker | major | minor | note",
   "repair_target": "prompt | context | control_space | data | tool | evaluator | renderer | human",
   "control_delta": "the proposed change to the control state",
@@ -110,7 +112,7 @@ Audit Engineering is an independently nameable layer within that framework. It f
 
 1. **How to audit:** which dimensions, in what order and intensity, and whether adversarial auditing is required.
 2. **How to localize:** whether the problem comes from specification, state, support, aggregation, fitting boundary, or rendering loss.
-3. **How to write back:** how to turn the finding into a control object, constraint, banned pattern, acceptance threshold, revocation rule, or human decision point.
+3. **How to write back:** how to turn the finding into a control object, constraint, banned pattern, acceptance threshold, revocation rule, human decision point, or hard-state transition.
 
 The distinction is:
 
@@ -120,6 +122,8 @@ Audit Engineering asks: how should failure signals be governed?
 ```
 
 The former stores what should guide generation. The latter stores which failures must not recur, and why.
+
+For long-horizon agents, this connects directly to [State-Governed Agent Regime](state-governed-agent-regime.md): an audit finding should not merely advise the next prompt. When it changes the recognized task state, admissible actions, evidence requirements, rollback obligations, or completion gate, it should be committed into hard state.
 
 ## 6. The General Workflow
 
@@ -280,10 +284,11 @@ Audit Memory stores reusable failure patterns, not only successful templates. Ne
 | Structural Audit | Do good local parts compose into global value? |
 | Evidence Audit | Are sources, definitions, timestamps, and inference chains reliable? |
 | State Audit | Does the answer depend on hidden, changing, or unstated state? |
+| Channel Audit | Did decisive variables enter the available observation, evidence, tool, log, sensor, or control representation? |
 | Adversarial Audit | Does the artifact look sophisticated while failing in substance? |
 | Audit-of-Audit | Is the auditor mistaking preference for criteria, producing non-actionable advice, or adding complexity without value? |
 
-## 9. Mapping to the Five Mismatches
+## 9. Mapping to the Six Mismatches
 
 | Mismatch | Audit Engineering intervention |
 | --- | --- |
@@ -292,8 +297,9 @@ Audit Memory stores reusable failure patterns, not only successful templates. Ne
 | State | Audit applicable state, triggers, time windows, markets, organizations, and user conditions |
 | Specification | Test whether the prompt, rubric, and explicit objective match the real success criterion |
 | Fitting Boundary | Test whether a pattern, metric, template, role, or feedback signal has been generalized beyond its valid boundary |
+| Observation-Representation | Check whether decisive variables entered the observation, evidence, tool, log, sensor, verifier, or encoded control representation |
 
-The five mismatches are useful not merely as labels but because they imply different interventions:
+The six mismatches are useful not merely as labels but because they imply different interventions:
 
 ```text
 detect mismatch -> localize mismatch -> modify control object -> regression-test the mismatch

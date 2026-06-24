@@ -5,12 +5,12 @@ path: /papers
 title: Papers and Working Manuscripts
 navTitle: Papers
 kicker: Formalizing the framework
-summary: This section collects the current manuscripts and future empirical directions related to LLM mediocrity, autoregressive extraordinary, Knowledge Governance, governed collaboration, and cognitive discipline for AI.
+summary: This section collects the current manuscripts and future empirical directions related to LLM mediocrity, autoregressive extraordinary, Knowledge Governance, hard-state agent governance, governed collaboration, and cognitive discipline for AI.
 order: 7
 heroPoints:
   - "Main manuscript: Knowledge Governance for Large Language Model Systems."
-  - "Supplement: Human-Assist Operational Mismatches."
-  - "Extensions and implementation: governed collaboration, cognitive discipline for AI, human learning, and tooling directions derived from the research agenda."
+  - "Supplements: Observation-Representation Mismatch, Human-Assist Operational Mismatches, and State-Governed Agent Regime."
+  - "Extensions and implementation: governed collaboration, hard-state agent governance, cognitive discipline for AI, human learning, and tooling directions derived from the research agenda."
 ---
 
 ## How to Enter the Deep End
@@ -20,11 +20,12 @@ The main site is the public explanation layer: intuition first, mechanism second
 Suggested reading order:
 
 1. Start with "Why It Matters" and "Cases," using the case index to build intuition from control-space governance to layered governance.
-2. Read "Mechanism" and the main manuscript to understand the three regimes, five primitive mismatches, and how Knowledge Governance externalizes, validates, and reuses intermediate control knowledge.
+2. Read "Mechanism" and the main manuscript to understand the three regimes, six primitive mismatches, and how Knowledge Governance externalizes, validates, and reuses intermediate control knowledge.
 3. Read the collaboration supplement to understand when an agent should ask a human and how to construct minimal sufficient human queries.
-4. Read "Audit Engineering" to understand how systems route post-generation failure signals back into control space and prevent regression.
-5. Read "Cognitive Discipline for AI" to understand how individual users can govern emotional projection, uncontrolled abstraction, self-confirmation, and real-world feedback.
-6. Use the site pages on collaboration, learning, and projects to see how the manuscripts translate into practice and implementation directions.
+4. Read "State-Governed Agent Regime" to understand why long-horizon agents need hard state rather than context-maintained continuity.
+5. Read "Audit Engineering" to understand how systems route post-generation failure signals back into control space and prevent regression.
+6. Read "Cognitive Discipline for AI" to understand how individual users can govern emotional projection, uncontrolled abstraction, self-confirmation, and real-world feedback.
+7. Use the site pages on collaboration, learning, and projects to see how the manuscripts translate into practice and implementation directions.
 
 If you only read the site, the goal is to get an operational judgment chain. If you enter the manuscripts, the goal is to inspect the definitions, boundaries, and testability of that chain. This page connects the public explanation layer to the formal working drafts.
 
@@ -34,9 +35,16 @@ If you only read the site, the goal is to get an operational judgment chain. If 
 ### Knowledge Governance for Large Language Model Systems
 Tag: main manuscript
 
-The main manuscript introduces the three regimes: LLM mediocrity, local alignment, and autoregressive extraordinary. It explains ordinary output-space search plateaus through five primitive mismatches: aggregation, state, specification, support, and overfitting. It then develops Knowledge Governance, Decoupled Control Spaces, and GKOs.
+The main manuscript introduces the three regimes: LLM mediocrity, local alignment, and autoregressive extraordinary. It explains ordinary output-space search plateaus through six primitive mismatches: aggregation, support, state, specification, fitting-boundary, and observation-representation. It then develops Knowledge Governance, Decoupled Control Spaces, and GKOs.
 
 [Read the main manuscript](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/knowledge-governance-llm-systems-local-alignment.md)
+
+### Observation-Representation Mismatch
+Tag: sixth primitive mismatch supplement
+
+This working draft develops the sixth primitive mismatch: decisive world variables may be lost before they enter the model-accessible representation. It distinguishes channel insufficiency from state uncertainty and capability routing, then gives signatures and interventions such as measurement, raw evidence, tools, logs, sensors, environmental queries, and richer control representations.
+
+[Read the Observation-Representation supplement](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/observation-representation-mismatch.md)
 
 ### Human-Assist Operational Mismatches
 Tag: collaboration supplement
@@ -51,6 +59,13 @@ Tag: audit–write-back–governance engineering
 This manuscript develops generation–verification asymmetry into an independent engineering paradigm. Candidate artifacts expose failures; an independent auditor localizes mismatch; a repair router writes findings back into the prompt, context, control space, tools, evaluator, or human-governed boundary; and regression audit prevents old defects from returning. Its concern is not the score itself, but how failure signals become explicit, actionable, and revocable control deltas.
 
 [Read the Audit Engineering manuscript](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/audit-engineering.md)
+
+### State-Governed Agent Regime
+Tag: hard-state agent governance
+
+This working draft names SGAR as the regime in which agent state is externalized, verifiable, recoverable, and authoritative outside the LLM context. It argues that long-horizon agents need hard state so that planning, action, observation, verification, escalation, and audit findings become governed state transitions rather than loose narrative continuity.
+
+[Read the SGAR working draft](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime.md)
 
 ### Governed Human-AI Collaboration
 Tag: public practice framework
@@ -85,7 +100,7 @@ The learning page develops the human-role shift in governed collaboration: from 
 ### Open-Source Projects
 Tag: implementation roadmap
 
-The project page only organizes implementation and evaluation directions already present in the manuscripts: GKO lifecycles, GEO escalation protocols, and five-mismatch diagnostics. It is not an additional theoretical claim.
+The project page only organizes implementation and evaluation directions already present in the manuscripts: GKO lifecycles, GEO escalation protocols, hard-state agent ledgers, and six-mismatch diagnostics. It is not an additional theoretical claim.
 ::::
 
 ## Future Empirical Agenda
@@ -96,6 +111,7 @@ The project page only organizes implementation and evaluation directions already
 - Measure the construal gap between noisy natural scenes and clean abstract forms.
 - Compare ordinary human-agent prompting with MSHQ/GEO collaboration protocols on interruption count, answer quality, and autonomy regained.
 - Evaluate whether GKO/GEO stores improve reuse without causing stale governance, over-escalation, or learned helplessness.
+- Evaluate whether SGAR-style hard state reduces false completion, state drift, unrecoverable interruptions, and unauditable action loops in long-horizon agents.
 
 ## Project Status
 

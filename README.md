@@ -19,7 +19,9 @@ The goal is not to reject autoregression, but to transform tasks that would othe
 ### Knowledge Governance
 
 - Main working manuscript: [English](docs/knowledge-governance-llm-systems-local-alignment.md) · [中文](docs/knowledge-governance-llm-systems-local-alignment.zh-CN.md)
+- Observation-representation mismatch: [English](docs/observation-representation-mismatch.md) · [中文](docs/observation-representation-mismatch.zh-CN.md)
 - Audit–write-back–governance engineering: [English](docs/audit-engineering.md) · [中文](docs/audit-engineering.zh-CN.md)
+- State-Governed Agent Regime: [English](docs/state-governed-agent-regime.md) · [中文](docs/state-governed-agent-regime.zh-CN.md)
 
 ### Governed Human-AI Collaboration
 
@@ -31,7 +33,7 @@ The goal is not to reject autoregression, but to transform tasks that would othe
 
 - The maximum price of models: [English](docs/maximum-price-of-llms.md) · [中文](docs/maximum-price-of-llms.zh-CN.md)
 
-The technical supplement defines when an agent should escalate and how to restore autonomy. The practice framework explains how AI should first query the environment, construct options and proving grounds, and ask humans only for genuinely human-governed variables.
+The technical supplement defines when an agent should escalate and how to restore autonomy. The practice framework explains how AI should first query the environment, construct options and proving grounds, and ask humans only for genuinely human-governed variables. The SGAR draft explains why long-horizon agents need an external hard-state layer so that plans, actions, verification, escalation, and audit findings become governed state transitions rather than loose context narrative.
 
 ## Site
 
