@@ -82,16 +82,22 @@ Gate:      accept | continue | escalate | stop
   "severity": "blocker | major | minor | note",
   "repair_target": "prompt | context | control_space | data | tool | evaluator | renderer | human",
   "control_delta": "建议写回的控制状态变化",
-  "regression_test": "下一轮必须检查什么，防止复发",
+  "regression_test": {
+    "guard": "下一轮必须检查什么，防止复发",
+    "kind": "code | nl_rule | external_check",
+    "teeth_proven": true,
+    "proof_obligation": "重新引入代表性缺陷或 mutation，且该测试必须失败"
+  },
   "confidence": 0.0
 }
 ```
 
-三个判断可以区分"审计"与普通评论：
+四个判断可以区分"审计"与普通评论：
 
 - 如果不能产生可执行的 `control_delta`，它只是评论。
 - 如果不能声明 `repair_target`，它不能指导 Agent 下一步行动。
 - 如果不能产生 `regression_test`，它不能防止系统反复踩坑。
+- 如果 `regression_test` 没有被证明“有牙齿”，它就无法证明自己真的能抓住所声称防止的缺陷。
 
 ## 4. 第一原理：生成—验证不对称
 
@@ -153,7 +159,7 @@ Weak Brief -> Candidate v0
 
 ### 6.4 独立审计候选
 
-审计器负责发现、定位与路由问题，不负责直接重写产物。生成器与审计器应尽量隔离；即使底层使用同一模型，也应使用不同上下文，并在可验证任务中引入外部工具或专门 verifier。
+审计器负责发现、定位与路由问题，不负责直接重写产物。生成器与审计器应尽量在接口层隔离，而不只是停留在“最好如此”的建议上；即使底层使用同一模型，也应使用不同上下文，并在可验证任务中引入外部工具或专门 verifier。产出修复的模型不应通过任何 fallback 路径自行编写自己的 acceptance test 或自己的 mutation 集；如果这些对象是 promotion 的前提，它们就必须作为独立的操作员输入或 verifier 输入进入系统。
 
 最小审计范围包括：
 
@@ -201,15 +207,28 @@ Weak Brief -> Candidate v0
 - 旧约束是否被破坏？
 - 新增内容是否与旧内容冲突？
 - 是否为了修一个问题牺牲了更重要目标？
+- 每个新增回归测试在重新引入代表性缺陷或 mutation 时，是否会真实变红？
 
-### 6.8 结束循环
+在这个阶段，机械检查应构成验证地板。只要可复现检查失败，发现就不能 promotion。LLM 判断仍可在机械检查通过后参与复核，但它只能降低置信度或要求进一步复审，不能凭自身权威把 red 改成 green，也不能把 green 单独改成 red。
+
+### 6.8 将发现 promotion 为常驻守卫
+
+如果发现只停留在一次性的文字记录里，回归治理仍然是不完整的。一个缺陷只有经过 promotion ratchet，才算真正进入受治理状态：
+
+```text
+finding -> 搭建候选 guard -> 证明 guard 有牙齿 -> 记入 defect ledger -> 后续要求稳定通过
+```
+
+如果回归测试是空洞的、重新引入代表性缺陷后仍不失败，或者 guard 只存在于当前会话而没有成为常驻控制对象，那么 promotion 必须被拒绝。
+
+### 6.9 结束循环
 
 停止不是"产物没有任何缺点"，而是"剩余缺点已经被显式管理"。可用停止条件包括：
 
 - 无 blocker 缺陷；
 - major 缺陷均已解决、降级或转为显式风险；
 - 连续两轮没有新增高价值控制增量；
-- 回归测试稳定通过；
+- 已证明有牙齿的回归测试稳定通过；
 - 外部验证或人工验收通过；
 - 审计的边际收益低于成本阈值。
 
@@ -243,13 +262,18 @@ Weak Brief -> Candidate v0
   "severity": "major",
   "repair_target": "control_space",
   "control_delta": "在 thesis_map 中加入 margin_driver_tree",
-  "regression_test": "检查每个关键财务假设是否存在驱动、证据和敏感性"
+  "regression_test": {
+    "guard": "检查每个关键财务假设是否存在驱动、证据和敏感性",
+    "kind": "nl_rule",
+    "teeth_proven": true,
+    "proof_obligation": "从一个代表性假设中删除驱动解释，并要求该 guard 失败"
+  }
 }
 ```
 
 ### 7.3 Defect Ledger
 
-缺陷账本保存历史问题、修复轮次、当前状态和复发记录。
+缺陷账本保存历史问题、修复轮次、当前状态和复发记录。要看见复发，账本必须有稳定的 join key。对代码来说，这通常是 `(file, function, defect_family)` 之类的位置轴，而不是按 run 或 session 编号；对文档或方案，也应使用同样稳定的结构位置。如果账本只按会话编号记录，复犯会被系统性隐藏。
 
 ```text
 open -> patched -> regression_passed -> accepted_risk -> revoked
@@ -271,7 +295,31 @@ open -> patched -> regression_passed -> accepted_risk -> revoked
 
 回归测试不一定是代码测试，也可以是可重复执行的自然语言验收项。例如：所有核心结论都必须回链到事实证据、明确假设、反方解释和触发失效的条件。
 
-### 7.6 Audit Memory
+它的强制属性是：必须**被证明有牙齿**。一个 guard 如果永远是绿的，或者无法证明在重新引入缺陷后会失败，那它就不是回归测试，而是回归剧场。
+
+```json
+{
+  "guard": "检查每个关键结论是否都具备证据、假设、反方解释和失效条件",
+  "kind": "code | nl_rule | external_check",
+  "teeth_proven": true,
+  "proof_obligation": "重新引入代表性缺陷或 mutation，且该 guard 必须失败"
+}
+```
+
+只要条件允许，这种证明就应通过 mutation、重放或缺陷回注等机械方式完成，而不是停留在语言保证上。也正因为如此，瞬时发现才能被 promotion 为常驻 guard。
+
+### 7.6 Verification Hierarchy
+
+验证必须有信任层级：
+
+- 机械检查在其可判定范围内拥有权威；
+- LLM 判断只在检查通过后运行；
+- 当证据不足时，LLM 判断默认不满足；
+- LLM 判断只能 downgrade，不能作为 override 通道。
+
+这是对“agent 学会迎合 auditor”的结构性回应。系统可以迎合一个文本裁判，但不能把失败的退出码说服成成功。
+
+### 7.7 Audit Memory
 
 审计记忆保存可复用的失败模式。它不只记录成功模板，还记录哪些模式看起来高级却经常失败。负经验能大面积剪掉低价值搜索分支。
 
@@ -287,6 +335,8 @@ open -> patched -> regression_passed -> accepted_risk -> revoked
 | Channel Audit | 决定性变量是否进入可用观测、证据、工具、日志、传感器或控制表征？ |
 | Adversarial Audit | 是否存在"看起来高级但实际失败"的模式？ |
 | Audit-of-Audit | 审计器是否把偏好当标准、提出不可执行建议或只会增加复杂度？ |
+
+这里最好再落地一些具名的 anti-theater detector。像 performative completion、degraded completion 这样的命名检查，能够把“看起来很高级但其实失败”的抽象风险压到机械可检查层。
 
 ## 9. 与六类失配的映射
 
@@ -364,9 +414,15 @@ open -> patched -> regression_passed -> accepted_risk -> revoked
 | Auditor | 发现并定位问题，不直接修复 |
 | Repair Router | 把问题路由到 prompt、context、control、evaluator、tool 或 human |
 | Editor | 执行局部修复，不默认全文重写 |
-| Regression Judge | 检查旧问题、约束保持与验收门槛 |
+| Mechanical Checker | 执行具权威的可复现检查，失败时硬失败 |
+| LLM Judge | 仅在检查通过后复核；对非机械维度执行 downgrade-only 判断 |
+| Promotion Gate | 只有当候选回归 guard 成为常驻对象且已证明有牙齿时才允许 promotion |
 
 它还需要六类状态存储：Artifact Store、Audit Ledger、Control State、Rubric Store、Regression Suite 和 Decision Log。
+
+Verifier integrity 也是架构的一部分，而不是脚注。一个 agent 可以污染的 verifier 不提供任何有效信号。对代码任务和工具驱动任务，检查应尽量 hermetic，或运行在可信根之下，避免被审计对象静默改写“pass”的含义。
+
+审计机制也应具备运维上的 gateability。较重的审计原语需要 default-off，并且在关闭时保持 byte-equivalent，这样验证成本只在需要时支付，而不是强加给每次运行。
 
 ```text
 Brief
@@ -405,7 +461,7 @@ Brief
 - severity
 - repair_target
 - control_delta
-- regression_test
+- 一个已证明有牙齿的 regression_test 对象
 - confidence
 
 禁止只给笼统评价、用"更深入"替代定位、直接重写全文、
@@ -428,12 +484,16 @@ accept_delta | reject_delta | downgrade | ask_human | require_data | audit_audit
 ### Regression Auditor
 
 ```text
+机械检查具备权威，只有在其通过后才进入复核。
+LLM 判断只能 downgrade 或要求复审，不能把失败检查改判为通过。
+
 只检查：
 1. 上一轮 blocker 是否已解决。
 2. 上一轮 major 是否已解决、降级或显式接受。
 3. 新版本是否破坏旧约束。
 4. 是否为修复旧问题引入新 blocker。
-5. 是否还有高价值控制增量值得继续迭代。
+5. 每个已 promotion 的回归 guard 是否已通过代表性缺陷回注或 mutation 证明其有牙齿。
+6. 是否还有高价值控制增量值得继续迭代。
 ```
 
 ## 13. 常见失败模式
@@ -452,7 +512,15 @@ accept_delta | reject_delta | downgrade | ask_human | require_data | audit_audit
 
 ### Agent 学会迎合审计器
 
-系统可能开始优化 audit score，而不是真实价值。可使用对抗审计、隐藏测试、外部验证、人类验收和标准轮换缓解 Goodhart 问题。
+系统可能开始优化 audit score，而不是真实价值。可使用对抗审计、隐藏测试、外部验证、人类验收和标准轮换缓解 Goodhart 问题，但更强的防线是结构性的：机械检查定义地板，LLM 判断只能 downgrade。
+
+### 空洞回归测试 / 回归剧场
+
+系统可能形式上提供了 regression_test，却完全没有保护作用。如果所谓 guard 在重新引入缺陷后依然保持绿色，那么系统得到的不是治理，而是表演。这类发现不得 promotion。
+
+### Verifier 污染
+
+框架可能默认 verifier 是可信的，但在 agent 具备文件与工具权限时，verifier 本身可能被篡改。被污染的 verifier 什么都检测不到。因此，hermetic 执行、可信根与外部化检查权威，都是一等公民要求。
 
 ### 只修表面，不修控制空间
 
@@ -472,9 +540,11 @@ accept_delta | reject_delta | downgrade | ask_human | require_data | audit_audit
 | Localization Rate | 审计发现能否定位到明确 repair target |
 | Recurrence Rate | 同类缺陷是否反复出现 |
 | Regression Pass Rate | 旧问题是否稳定不复发 |
+| Teeth-Proof Rate | 已 promotion 的 guard 中，有多少被代表性缺陷回注证明会真实失败 |
 | Control Delta Precision | 写回控制空间的改动是否真的提升产物 |
 | Over-Audit Rate | 无价值或过度复杂建议所占比例 |
 | External Validity | 外部工具、人类或真实环境是否支持结果 |
+| Verifier Integrity | 被审计系统能否污染 verifier，以及污染难度有多高 |
 | Cost per Accepted Artifact | 达到验收所需轮次、Token、时间和人工成本 |
 
 ## 15. 适用边界

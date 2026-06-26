@@ -82,16 +82,22 @@ The audit output `a_t` should not be an unstructured review. A minimal schema is
   "severity": "blocker | major | minor | note",
   "repair_target": "prompt | context | control_space | data | tool | evaluator | renderer | human",
   "control_delta": "the proposed change to the control state",
-  "regression_test": "what the next round must verify",
+  "regression_test": {
+    "guard": "what the next round must verify",
+    "kind": "code | nl_rule | external_check",
+    "teeth_proven": true,
+    "proof_obligation": "reintroduce a representative defect or mutation and require the test to fail"
+  },
   "confidence": 0.0
 }
 ```
 
-Three tests distinguish an audit from ordinary commentary:
+Four tests distinguish an audit from ordinary commentary:
 
 - Without an actionable `control_delta`, it is only commentary.
 - Without a declared `repair_target`, it cannot direct the agent's next action.
 - Without a `regression_test`, it cannot prevent repeated failure.
+- Without a teeth-proven `regression_test`, it cannot demonstrate that the proposed guard would actually catch the defect it claims to prevent.
 
 ## 4. First Principle: Generation–Verification Asymmetry
 
@@ -153,7 +159,7 @@ The contract itself remains auditable because the real standard is rarely comple
 
 ### 6.4 Audit the candidate independently
 
-The auditor finds, localizes, and routes defects; it does not rewrite the artifact. Generator and auditor should be isolated where possible. Even if they use the same underlying model, they should use separate contexts, with external tools or dedicated verifiers added for verifiable tasks.
+The auditor finds, localizes, and routes defects; it does not rewrite the artifact. Generator and auditor should be isolated by interface, not merely by guideline, whenever the task admits such separation. Even if they use the same underlying model, they should use separate contexts, with external tools or dedicated verifiers added for verifiable tasks. The producer should not be able to author its own acceptance test or its own mutation set through a fallback path; if those artifacts are required for promotion, they must enter as independent operator or verifier inputs.
 
 A minimal audit covers:
 
@@ -201,15 +207,28 @@ Every repair can introduce new failures. Regression audit asks:
 - Were old constraints preserved?
 - Does new material conflict with existing material?
 - Did the repair sacrifice a more important objective?
+- Does each new regression test go red when a representative defect or mutation is reintroduced?
 
-### 6.8 End the loop
+Mechanical checks should form the verification floor in this stage. If a reproducible check fails, the finding does not promote. LLM judgment can still review the result, but only after mechanical checks pass, and only to downgrade confidence or request further review. It must never override red to green or green to red on its own authority.
+
+### 6.8 Promote the finding into a resident guard
+
+The theory of regression governance remains incomplete if findings stay as ephemeral prose. A defect becomes governed only when it passes a promotion ratchet:
+
+```text
+finding -> scaffold candidate guard -> teeth-proof the guard -> register in defect ledger -> require stable passage thereafter
+```
+
+Promotion should be refused if the regression test is vacuous, if the representative defect can be reintroduced without the guard failing, or if the guard exists only for the current session and is not committed as a resident control object.
+
+### 6.9 End the loop
 
 Stopping does not mean “the artifact has no flaws.” It means “the remaining flaws are explicitly governed.” Useful stopping conditions include:
 
 - no blocker findings;
 - all major findings resolved, downgraded, or converted into accepted risks;
 - no high-value control delta appears for two consecutive rounds;
-- regression tests remain stable;
+- teeth-proven regression tests remain stable;
 - external verification or human acceptance passes;
 - marginal audit benefit falls below its cost.
 
@@ -243,13 +262,18 @@ Each finding must be traceable, localizable, and regression-testable.
   "severity": "major",
   "repair_target": "control_space",
   "control_delta": "add margin_driver_tree to thesis_map",
-  "regression_test": "check every material financial assumption for drivers, evidence, and sensitivity"
+  "regression_test": {
+    "guard": "check every material financial assumption for drivers, evidence, and sensitivity",
+    "kind": "nl_rule",
+    "teeth_proven": true,
+    "proof_obligation": "remove one driver explanation from a representative assumption and require the guard to fail"
+  }
 }
 ```
 
 ### 7.3 Defect Ledger
 
-The ledger preserves historical defects, repair rounds, current status, and recurrence.
+The ledger preserves historical defects, repair rounds, current status, and recurrence. Recurrence tracking needs a stable join key. For code this is often a location axis such as `(file, function, defect_family)` rather than a per-run identifier; for documents or plans it should use an equally stable structural location. If the ledger keys only by session or run, recidivism becomes invisible.
 
 ```text
 open -> patched -> regression_passed -> accepted_risk -> revoked
@@ -271,7 +295,31 @@ A control delta states how the finding changes the next generation space.
 
 A regression test need not be code. It may be a repeatable natural-language acceptance rule—for example: every core conclusion must link to factual evidence, an explicit assumption, a counterargument, and a falsification condition.
 
-### 7.6 Audit Memory
+Its mandatory property is that it is **teeth-proven**. A guard that always stays green, or that cannot be shown to fail when the defect is reintroduced, is not a regression test but regression theater.
+
+```json
+{
+  "guard": "check every material claim for evidence, assumption, counterargument, and falsification condition",
+  "kind": "code | nl_rule | external_check",
+  "teeth_proven": true,
+  "proof_obligation": "reintroduce a representative defect or mutation and require the guard to fail"
+}
+```
+
+Wherever possible, proof should be demonstrated mechanically by mutation, replay, or defect reintroduction rather than by verbal assurance. Passing this proof is what allows a transient finding to be promoted into a resident guard.
+
+### 7.6 Verification Hierarchy
+
+Verification needs a trust hierarchy:
+
+- mechanical checks are authoritative on what they can decide;
+- LLM judgment runs after checks pass;
+- LLM judgment defaults to not met when evidence is weak;
+- LLM judgment is downgrade-only and advisory, not an override channel.
+
+This is a structural defense against the agent learning to please the auditor. A system can flatter a textual judge; it cannot negotiate a failed exit code into success.
+
+### 7.7 Audit Memory
 
 Audit Memory stores reusable failure patterns, not only successful templates. Negative experience is especially valuable because it prunes large low-value regions of search.
 
@@ -287,6 +335,8 @@ Audit Memory stores reusable failure patterns, not only successful templates. Ne
 | Channel Audit | Did decisive variables enter the available observation, evidence, tool, log, sensor, or control representation? |
 | Adversarial Audit | Does the artifact look sophisticated while failing in substance? |
 | Audit-of-Audit | Is the auditor mistaking preference for criteria, producing non-actionable advice, or adding complexity without value? |
+
+Concrete anti-theater detectors are valuable here. Named checks for performative completion and degraded completion give the abstract risk of “looks sophisticated but fails” a mechanical foothold.
 
 ## 9. Mapping to the Six Mismatches
 
@@ -362,9 +412,15 @@ The user may not yet be able to state the complete objective, but the audit loop
 | Auditor | Find and localize defects without repairing them |
 | Repair Router | Route findings to prompt, context, control, evaluator, tool, or human |
 | Editor | Apply local repairs rather than defaulting to a full rewrite |
-| Regression Judge | Test old defects, preserved constraints, and acceptance gates |
+| Mechanical Checker | Execute authoritative reproducible checks and fail hard when they fail |
+| LLM Judge | Review only after checks pass; downgrade-only on ambiguous or non-mechanical dimensions |
+| Promotion Gate | Refuse promotion until a candidate regression guard is resident and teeth-proven |
 
 The system also needs Artifact Store, Audit Ledger, Control State, Rubric Store, Regression Suite, and Decision Log.
+
+Verifier integrity is part of the architecture, not a footnote. A verifier the agent can poison provides no signal. For code and tool-mediated tasks, checks should run hermetically or under a trusted root so the audited system cannot silently rewrite the meaning of “pass.”
+
+Audit machinery should also be operationally gateable. Heavy audit primitives need a default-off mode that is byte-equivalent when disabled, so governance cost is paid when needed rather than imposed on every run.
 
 ```text
 Brief
@@ -399,7 +455,7 @@ You are an independent Auditor. Do not rewrite the artifact.
 
 Every finding must contain:
 finding, evidence, mismatch_type, severity, repair_target,
-control_delta, regression_test, and confidence.
+control_delta, a teeth-proven regression_test object, and confidence.
 
 Do not provide vague advice, use “go deeper” as localization,
 rewrite the whole artifact, disguise preference as a task criterion,
@@ -422,12 +478,16 @@ Return:
 ### Regression Auditor
 
 ```text
+Mechanical checks are authoritative. Review only after they pass.
+LLM judgment may downgrade or require review; it must not override a failing check into a pass.
+
 Check only:
 1. whether previous blockers are resolved;
 2. whether previous majors are resolved, downgraded, or accepted;
 3. whether old constraints were broken;
 4. whether a repair introduced a new blocker;
-5. whether another high-value control delta remains.
+5. whether each promoted regression guard is teeth-proven by representative defect reintroduction or mutation;
+6. whether another high-value control delta remains.
 ```
 
 ## 13. Common Failure Modes
@@ -446,7 +506,15 @@ An auditor may propose more dimensions every round until the control space suffe
 
 ### The agent learns to please the auditor
 
-The system may optimize audit score rather than real value. Adversarial audits, hidden tests, external validation, human acceptance, and rotating criteria can reduce this Goodhart failure.
+The system may optimize audit score rather than real value. Adversarial audits, hidden tests, external validation, human acceptance, and rotating criteria can reduce this Goodhart failure, but the stronger defense is structural: mechanical checks define the floor, and LLM judgment is downgrade-only.
+
+### Vacuous regression test / regression theater
+
+A declared regression test may satisfy the process while protecting nothing. If the alleged guard stays green when the defect is reintroduced, the system has produced theater rather than governance. Such findings must not be promoted.
+
+### Verifier poisoning
+
+The framework may assume the verifier is trustworthy when it is in fact mutable by the agent under audit. A poisoned verifier does not detect anything. Hermetic execution, trusted roots, and externalized check authority are therefore first-order requirements.
 
 ### Surface repair replaces control repair
 
@@ -466,9 +534,11 @@ Audit Engineering should be evaluated not only by final score but by whether the
 | Localization Rate | Share of findings mapped to a clear repair target |
 | Recurrence Rate | Frequency with which defect families return |
 | Regression Pass Rate | Stability with which old failures remain resolved |
+| Teeth-Proof Rate | Share of promoted guards that have been shown to fail under representative defect reintroduction |
 | Control Delta Precision | Share of write-backs that actually improve the artifact |
 | Over-Audit Rate | Share of low-value or complexity-inflating findings |
 | External Validity | Agreement with tools, humans, or the real environment |
+| Verifier Integrity | Degree to which the audited system can or cannot tamper with the verifier |
 | Cost per Accepted Artifact | Rounds, tokens, time, and human effort required for acceptance |
 
 ## 15. Applicability Boundary
