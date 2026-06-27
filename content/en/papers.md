@@ -9,7 +9,7 @@ summary: This section collects the current manuscripts and future empirical dire
 order: 7
 heroPoints:
   - "Main manuscript: Knowledge Governance for Large Language Model Systems."
-  - "Working drafts: Structural Theory of Value Preservation, Governed LLM Object Model, Audit Engineering, State-Governed Agent Regime, Fitting-Boundary Mismatch, Observation-Representation Mismatch, and Human-Assist Operational Mismatches."
+  - "Working drafts: Structural Theory of Value Preservation, Governed LLM Object Model, Audit Engineering, State-Governed Agent Regime, Channel Governance, Fitting-Boundary Mismatch, Observation-Representation Mismatch, and Human-Assist Operational Mismatches."
   - "Extensions and implementation: governed collaboration, hard-state agent governance, cognitive discipline for AI, human learning, and tooling directions derived from the research agenda."
 ---
 
@@ -66,6 +66,13 @@ Tag: runtime governance working draft
 This working draft defines SGAR as the runtime layer where progress is admitted only through verified hard-state transitions. It covers context demotion, state surfaces, transition contracts, verifier stratification, runtime loops, memory writes, completion governance, multi-agent permissions, rollback, revocation, and state-rendered context.
 
 [Read the SGAR governed-systems draft](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime-for-governed-llm-systems.md)
+
+### Observation-Representation Mismatch and Channel Governance in LLM Systems
+Tag: channel governance technical report
+
+This technical report develops observation-representation mismatch as the first primitive mismatch and defines channel governance as pre-governance repair for variable entry, representation ceilings, binding, provenance, freshness, authority, and operational control.
+
+[Read the channel governance report](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/observation-representation-mismatch-channel-governance-llm-systems.md)
 
 ### Fitting-Boundary Mismatch
 Tag: fifth primitive mismatch supplement

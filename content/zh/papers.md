@@ -9,7 +9,7 @@ summary: 这里收集与LLM 平庸、LLM卓越、知识治理、硬状态 Agent 
 order: 7
 heroPoints:
   - 主文：Knowledge Governance for Large Language Model Systems。
-  - 工作稿：价值保存结构理论、受治理 LLM 对象模型、审计工程、状态治理型 Agent 体制、Observation-Representation Mismatch 与 Human-Assist Operational Mismatches。
+  - 工作稿：价值保存结构理论、受治理 LLM 对象模型、审计工程、状态治理型 Agent 体制、通道治理、Observation-Representation Mismatch 与 Human-Assist Operational Mismatches。
   - 延伸与实现：治理式协作、硬状态 Agent 治理、AI 认知纪律、人类学习与由研究议程直接推导的工具方向。
 ---
 
@@ -66,6 +66,13 @@ Tag: 运行时治理工作稿
 这份工作稿把 SGAR 定义为运行时层：进展只有通过已验证硬状态转移才被准入。它覆盖上下文降权、状态表面、转移契约、验证器分层、运行时循环、记忆写入、完成治理、多 agent 权限、回滚、撤销和从状态渲染上下文。
 
 [阅读 SGAR 受治理系统工作稿](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)
+
+### LLM 系统中的观测-表征失配与通道治理
+Tag: 通道治理技术报告
+
+这份技术报告把观测-表征失配展开为第一类原始失配，并把通道治理定义为知识治理之前的前治理修复：确保变量进入、保留、绑定、可区分，并能用于路由、搜索、审计、渲染、验证和状态更新。
+
+[阅读通道治理技术报告](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/observation-representation-mismatch-channel-governance-llm-systems.zh-CN.md)
 
 ### 观测-表征失配
 Tag: 第六类原始失配专题
