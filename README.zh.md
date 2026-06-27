@@ -106,6 +106,9 @@ against-llm-mediocrity/
 
 - [Knowledge Governance for Large Language Model Systems](./docs/knowledge-governance-llm-systems-local-alignment.zh-CN.md)：主文。
 - [LLM 系统中价值保存的结构理论](./docs/structural-theory-value-preservation-llm-systems.zh-CN.md)：新的结构理论工作稿。
+- [受治理 LLM 对象模型与接口规范](./docs/governed-llm-object-model-interface-specification.zh-CN.md)：价值保存结构理论的配套实现规范。
+- [面向受治理 LLM 系统的审计工程](./docs/audit-engineering-failure-localization-control-space-writeback.zh-CN.md)：失败定位、控制空间写回与回归治理的配套技术报告。
+- [面向受治理 LLM 系统的状态治理型 Agent 体制](./docs/state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)：硬状态权威、转移契约与运行时治理的新工作稿。
 - [拟合边界失配](./docs/fitting-boundary-mismatch.zh-CN.md)：第五类原始失配的专题。
 - [观测-表征失配](./docs/observation-representation-mismatch.zh-CN.md)：第六类原始失配的专题。
 - [LLM 失败的形式化机制层](./docs/formal-mechanism-layer.zh-CN.md)：八类可干预机制。

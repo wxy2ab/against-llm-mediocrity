@@ -9,7 +9,7 @@ summary: 这里收集与LLM 平庸、LLM卓越、知识治理、硬状态 Agent 
 order: 7
 heroPoints:
   - 主文：Knowledge Governance for Large Language Model Systems。
-  - 工作稿：价值保存结构理论、Observation-Representation Mismatch、Human-Assist Operational Mismatches 与 State-Governed Agent Regime。
+  - 工作稿：价值保存结构理论、受治理 LLM 对象模型、审计工程、状态治理型 Agent 体制、Observation-Representation Mismatch 与 Human-Assist Operational Mismatches。
   - 延伸与实现：治理式协作、硬状态 Agent 治理、AI 认知纪律、人类学习与由研究议程直接推导的工具方向。
 ---
 
@@ -45,6 +45,27 @@ Tag: 结构理论工作稿
 这份工作稿把框架重写为世界到输出管线中的价值保存问题：任务价值必须穿过观测、表征、状态识别、能力路由、候选支持、聚合与评估。它从管线站点推出六类原始失配，解释修复算子耦合和超加性复合失败，并把知识治理、审计工程和状态治理型 Agent 体制统一为价值保存机制。
 
 [阅读价值保存结构理论工作稿](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/structural-theory-value-preservation-llm-systems.zh-CN.md)
+
+### 受治理 LLM 对象模型与接口规范
+Tag: 实现规范工作稿
+
+这份配套规范定义受治理 LLM 系统的对象契约与接口语义。它把 GKO、GEO、审计发现、控制增量、回归护栏、缺陷账本、状态记录、转移契约、验证器对象和证据对象统一到一个生命周期中，用于审计写回、回归防护和硬状态提交。
+
+[阅读对象模型与接口规范](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/governed-llm-object-model-interface-specification.zh-CN.md)
+
+### 面向受治理 LLM 系统的审计工程
+Tag: 技术报告工作稿
+
+这份技术报告把审计工程定义为把失败转化为持久控制改进的循环。它覆盖失败定位、审计发现、控制增量、回归护栏、缺陷账本、验证器权威、失配特定审计模式、反模式、风险分层审计强度和审计关闭标准。
+
+[阅读审计工程技术报告](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/audit-engineering-failure-localization-control-space-writeback.zh-CN.md)
+
+### 面向受治理 LLM 系统的状态治理型 Agent 体制
+Tag: 运行时治理工作稿
+
+这份工作稿把 SGAR 定义为运行时层：进展只有通过已验证硬状态转移才被准入。它覆盖上下文降权、状态表面、转移契约、验证器分层、运行时循环、记忆写入、完成治理、多 agent 权限、回滚、撤销和从状态渲染上下文。
+
+[阅读 SGAR 受治理系统工作稿](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)
 
 ### 观测-表征失配
 Tag: 第六类原始失配专题
