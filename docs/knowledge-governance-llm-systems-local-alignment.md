@@ -138,7 +138,7 @@ This paper makes that observation explicit through two concepts: autoregressive 
 
 ---
 
-## 3. LLM Mediocrity as a Five-Mismatch Problem
+## 3. LLM Mediocrity as a Six-Mismatch Problem
 
 We now formalize LLM mediocrity as a predictable consequence of mismatches between an LLM system's policy distribution, observation channel, accessible specification, and the task value landscape.
 
@@ -371,6 +371,8 @@ This includes several recurring subtypes:
 - **User-feedback overfitting:** local preference adaptation becomes sycophancy or overcorrection rather than task alignment.
 
 This axis is distinct from aggregation mismatch because it concerns capability routing rather than local-to-global composition. It is distinct from support mismatch because the relevant capability must already exist or be approximately available, but its activation boundary is wrong. It is distinct from specification and state mismatch because the target and state may already be sufficiently clear. The strict operational test is whether changing the capability router, trigger threshold, or boundary calibration can repair the failure without supplying fundamentally new knowledge, a new objective, or previously unavailable state.
+
+This class contains both an overfitting side and an underfitting side. The former includes capability-attractor spillover, evidence-chain overfitting, proxy-metric overfitting, scene-default overfitting, and path lock-in. The latter includes under-triggering of search, audit, mechanism translation, tool use, and conditioning capabilities. For a fuller treatment, see the supplement: [Fitting-Boundary Mismatch](fitting-boundary-mismatch.md).
 
 #### 3.2.6 Observation-Representation Mismatch
 
@@ -1707,7 +1709,7 @@ This paper advances a framework and a set of hypotheses. It does not claim a uni
 
 A major risk for any diagnostic taxonomy is category inflation. If every recurring surface failure becomes a new primitive mismatch, the framework loses explanatory power. We therefore distinguish primitive mismatches from derivative and compound phenomena.
 
-The practical rule is strict: a new primitive class should be added only when it cannot be reduced to the five existing classes or their interactions, adds predictive power, and requires a distinct intervention. Under this standard, order-sensitive trajectories, emergent specification, noisy-context construal failure, corpus-prior dominance, and control-capacity collapse are important but not primitive. They should be analyzed as recurring patterns that decompose into the five mismatch axes plus representation, budget, and control-policy effects.
+The practical rule is strict: a new primitive class should be added only when it cannot be reduced to the six existing classes or their interactions, adds predictive power, and requires a distinct intervention. Under this standard, order-sensitive trajectories, emergent specification, noisy-context construal failure, corpus-prior dominance, and control-capacity collapse are important but not primitive. They should be analyzed as recurring patterns that decompose into the six mismatch axes plus representation, budget, and control-policy effects.
 
 ### 11.3 Local Alignment and Extraordinary Are Not Guarantees
 

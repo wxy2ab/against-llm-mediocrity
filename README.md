@@ -19,6 +19,7 @@ The goal is not to reject autoregression, but to transform tasks that would othe
 ### Knowledge Governance
 
 - Main working manuscript: [English](docs/knowledge-governance-llm-systems-local-alignment.md) · [中文](docs/knowledge-governance-llm-systems-local-alignment.zh-CN.md)
+- Fitting-boundary mismatch: [English](docs/fitting-boundary-mismatch.md) · [中文](docs/fitting-boundary-mismatch.zh-CN.md)
 - Observation-representation mismatch: [English](docs/observation-representation-mismatch.md) · [中文](docs/observation-representation-mismatch.zh-CN.md)
 - Audit–write-back–governance engineering: [English](docs/audit-engineering.md) · [中文](docs/audit-engineering.zh-CN.md)
 - State-Governed Agent Regime: [English](docs/state-governed-agent-regime.md) · [中文](docs/state-governed-agent-regime.zh-CN.md)
