@@ -9,7 +9,7 @@ summary: 这里收集与LLM 平庸、LLM卓越、知识治理、硬状态 Agent 
 order: 7
 heroPoints:
   - 主文：Knowledge Governance for Large Language Model Systems。
-  - 工作稿：价值保存结构理论、受治理 LLM 对象模型、审计工程、状态治理型 Agent 体制、通道治理、能力路由、Observation-Representation Mismatch 与 Human-Assist Operational Mismatches。
+  - 工作稿：价值保存结构理论、受治理 LLM 对象模型、审计工程、状态治理型 Agent 体制、通道治理、能力路由、控制空间搜索、Observation-Representation Mismatch 与 Human-Assist Operational Mismatches。
   - 延伸与实现：治理式协作、硬状态 Agent 治理、AI 认知纪律、人类学习与由研究议程直接推导的工具方向。
 ---
 
@@ -80,6 +80,13 @@ Tag: 能力路由技术报告
 这份技术报告把拟合边界失配展开为能力路由失败：有用能力可能在适用时没有激活，也可能在真实领域之外过度激活。它定义触发证据、抑制器、吸引子、路由 GKO、路由增量和边界回归护栏。
 
 [阅读能力路由技术报告](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/fitting-boundary-mismatch-capability-routing-llm-systems.zh-CN.md)
+
+### LLM 系统中的支持失配与控制空间搜索
+Tag: 控制空间搜索技术报告
+
+这份技术报告把支持失配展开为候选可达性失败：高价值结构可能原则上可表达且有价值，却在已部署策略、搜索算子、剪枝规则、识别机制和预算下获得太少有效支持。它定义控制空间搜索、支持提升、support map、search warrant、coverage ledger、support delta 和支持回归护栏。
+
+[阅读控制空间搜索技术报告](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/support-mismatch-control-space-search-llm-systems.zh-CN.md)
 
 ### 观测-表征失配
 Tag: 第六类原始失配专题
