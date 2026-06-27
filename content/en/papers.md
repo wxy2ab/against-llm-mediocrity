@@ -9,7 +9,7 @@ summary: This section collects the current manuscripts and future empirical dire
 order: 7
 heroPoints:
   - "Main manuscript: Knowledge Governance for Large Language Model Systems."
-  - "Supplements: Observation-Representation Mismatch, Human-Assist Operational Mismatches, and State-Governed Agent Regime."
+  - "Supplements: Fitting-Boundary Mismatch, Observation-Representation Mismatch, Human-Assist Operational Mismatches, and State-Governed Agent Regime."
   - "Extensions and implementation: governed collaboration, hard-state agent governance, cognitive discipline for AI, human learning, and tooling directions derived from the research agenda."
 ---
 
@@ -38,6 +38,13 @@ Tag: main manuscript
 The main manuscript introduces the three regimes: LLM mediocrity, local alignment, and autoregressive extraordinary. It explains ordinary output-space search plateaus through six primitive mismatches: aggregation, support, state, specification, fitting-boundary, and observation-representation. It then develops Knowledge Governance, Decoupled Control Spaces, and GKOs.
 
 [Read the main manuscript](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/knowledge-governance-llm-systems-local-alignment.md)
+
+### Fitting-Boundary Mismatch
+Tag: fifth primitive mismatch supplement
+
+This working draft develops the fifth primitive mismatch: a learned capability's implicit trigger boundary may fail to match its true domain of application. It distinguishes over-triggering from under-triggering, then expands subpatterns such as evidence-chain overfitting, proxy-metric overfitting, scene-default overfitting, solution-path overfitting, role-language overfitting, alignment-preference overfitting, and user-feedback overfitting.
+
+[Read the Fitting-Boundary supplement](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/fitting-boundary-mismatch.md)
 
 ### Observation-Representation Mismatch
 Tag: sixth primitive mismatch supplement
