@@ -105,6 +105,7 @@ against-llm-mediocrity/
 ### 工作稿（[docs](./docs)）
 
 - [Knowledge Governance for Large Language Model Systems](./docs/knowledge-governance-llm-systems-local-alignment.zh-CN.md)：主文。
+- [LLM 系统中价值保存的结构理论](./docs/structural-theory-value-preservation-llm-systems.zh-CN.md)：新的结构理论工作稿。
 - [拟合边界失配](./docs/fitting-boundary-mismatch.zh-CN.md)：第五类原始失配的专题。
 - [观测-表征失配](./docs/observation-representation-mismatch.zh-CN.md)：第六类原始失配的专题。
 - [LLM 失败的形式化机制层](./docs/formal-mechanism-layer.zh-CN.md)：八类可干预机制。

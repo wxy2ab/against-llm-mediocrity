@@ -9,7 +9,7 @@ summary: 这里收集与LLM 平庸、LLM卓越、知识治理、硬状态 Agent 
 order: 7
 heroPoints:
   - 主文：Knowledge Governance for Large Language Model Systems。
-  - 补充稿：Observation-Representation Mismatch、Human-Assist Operational Mismatches 与 State-Governed Agent Regime。
+  - 工作稿：价值保存结构理论、Observation-Representation Mismatch、Human-Assist Operational Mismatches 与 State-Governed Agent Regime。
   - 延伸与实现：治理式协作、硬状态 Agent 治理、AI 认知纪律、人类学习与由研究议程直接推导的工具方向。
 ---
 
@@ -38,6 +38,13 @@ Tag: 主文
 主文提出三种区间：LLM 平庸、局部对齐、LLM卓越；用聚合、支持、状态、规格、拟合边界、观测-表征六类原始失配解释为什么普通输出空间搜索会进入平台期；并提出知识治理、解耦控制空间和受治理知识对象（GKO）。
 
 [阅读主文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/knowledge-governance-llm-systems-local-alignment.zh-CN.md)
+
+### LLM 系统中价值保存的结构理论
+Tag: 结构理论工作稿
+
+这份工作稿把框架重写为世界到输出管线中的价值保存问题：任务价值必须穿过观测、表征、状态识别、能力路由、候选支持、聚合与评估。它从管线站点推出六类原始失配，解释修复算子耦合和超加性复合失败，并把知识治理、审计工程和状态治理型 Agent 体制统一为价值保存机制。
+
+[阅读价值保存结构理论工作稿](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/structural-theory-value-preservation-llm-systems.zh-CN.md)
 
 ### 观测-表征失配
 Tag: 第六类原始失配专题

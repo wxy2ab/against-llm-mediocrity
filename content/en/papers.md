@@ -9,7 +9,7 @@ summary: This section collects the current manuscripts and future empirical dire
 order: 7
 heroPoints:
   - "Main manuscript: Knowledge Governance for Large Language Model Systems."
-  - "Supplements: Fitting-Boundary Mismatch, Observation-Representation Mismatch, Human-Assist Operational Mismatches, and State-Governed Agent Regime."
+  - "Working drafts: Structural Theory of Value Preservation, Fitting-Boundary Mismatch, Observation-Representation Mismatch, Human-Assist Operational Mismatches, and State-Governed Agent Regime."
   - "Extensions and implementation: governed collaboration, hard-state agent governance, cognitive discipline for AI, human learning, and tooling directions derived from the research agenda."
 ---
 
@@ -38,6 +38,13 @@ Tag: main manuscript
 The main manuscript introduces the three regimes: LLM mediocrity, local alignment, and autoregressive extraordinary. It explains ordinary output-space search plateaus through six primitive mismatches: aggregation, support, state, specification, fitting-boundary, and observation-representation. It then develops Knowledge Governance, Decoupled Control Spaces, and GKOs.
 
 [Read the main manuscript](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/knowledge-governance-llm-systems-local-alignment.md)
+
+### A Structural Theory of Value Preservation in LLM Systems
+Tag: structural theory working draft
+
+This working draft reframes the framework around value preservation across a world-to-output pipeline. It derives the six primitive mismatches from pipeline stations, explains repair-operator coupling and super-additive compound failure, and unifies Knowledge Governance, Audit Engineering, and State-Governed Agent Regime as mechanisms for preserving task value.
+
+[Read the structural theory draft](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/structural-theory-value-preservation-llm-systems.md)
 
 ### Fitting-Boundary Mismatch
 Tag: fifth primitive mismatch supplement
