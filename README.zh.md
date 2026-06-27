@@ -110,6 +110,7 @@ against-llm-mediocrity/
 - [面向受治理 LLM 系统的审计工程](./docs/audit-engineering-failure-localization-control-space-writeback.zh-CN.md)：失败定位、控制空间写回与回归治理的配套技术报告。
 - [面向受治理 LLM 系统的状态治理型 Agent 体制](./docs/state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)：硬状态权威、转移契约与运行时治理的新工作稿。
 - [LLM 系统中的观测-表征失配与通道治理](./docs/observation-representation-mismatch-channel-governance-llm-systems.zh-CN.md)：变量进入、表征上限与前治理修复的配套技术报告。
+- [LLM 系统中的拟合边界失配与能力路由](./docs/fitting-boundary-mismatch-capability-routing-llm-systems.zh-CN.md)：能力领域、触发边界与路由治理的配套技术报告。
 - [拟合边界失配](./docs/fitting-boundary-mismatch.zh-CN.md)：第五类原始失配的专题。
 - [观测-表征失配](./docs/observation-representation-mismatch.zh-CN.md)：第六类原始失配的专题。
 - [LLM 失败的形式化机制层](./docs/formal-mechanism-layer.zh-CN.md)：八类可干预机制。
