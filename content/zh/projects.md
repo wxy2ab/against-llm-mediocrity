@@ -5,20 +5,33 @@ path: /zh/projects
 title: 开源项目
 navTitle: 项目
 kicker: 把知识治理原理做成工具
-summary: 未来的项目会把知识治理做成可复用的工具：受治理知识对象存储、验证循环、升级协议、硬状态 agent ledger、任务控制工作台，以及面向具体领域的治理模板。
+summary: 已发布的第一个项目是 sgar：一个把长程代码编辑、自动化修复、状态治理、阶段推进、审计验证和运行痕迹组合起来的 embedded coding agent。后续项目会继续把知识治理做成可复用的软件对象。
 order: 8
 heroPoints:
-  - 受治理知识对象（GKO）生命周期工具：创建、验证、排序、弱化、撤销。
-  - 基于最小充分人类问题（MSHQ）与受治理升级对象（GEO）的升级协议。
-  - 面向可恢复长程 agent 的硬状态 ledger。
+  - sgar：用于长程代码编辑、自动化修复和可治理运维的状态治理型 coding agent。
+  - 将审计工程和状态治理 agent 模式落到 CLI、runtime、trace 与验证记录。
+  - 后续工具会继续覆盖 GKO lifecycle、升级协议和任务控制工作台。
   - 用于检测输出空间搜索何时进入平台期的基准测试。
 ---
 
+## 已发布项目
+
+::::cards
+### sgar
+Tag: State-Governed Agent Regime
+
+[sgar](https://github.com/wxy2ab/sgar) 是一个 embedded coding agent，用来把自动化修复、自动化运维与长程代码编辑能力嵌入到系统中。它同时提供 standalone CLI、可嵌入的 agent runtime，以及面向 OpenClaw 的长程代码编辑技能。
+
+项目的核心不是“一次调用 LLM 写点代码”，而是把代码编辑、状态治理、阶段推进、审计验证和运行痕迹组合成可长期运行的 agent 模型。它基于 [审计工程](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/audit-engineering.zh-CN.md) 与 [状态治理 agent 模式](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime.zh-CN.md)：用外部化硬状态、action/delta、trace、验证记录和 `.sgar/` 工作区来降低长程运行中的漂移、跳步和虚假完成。
+
+当前入口包括 `pip install sgar`、`sgar --help`、`sgar init`、`sgar status`、`sgar doctor`、`sgar trace`，以及 `validate`、`verify`、`mission` 等治理型命令。仓库文档还提供 [架构](https://github.com/wxy2ab/sgar/blob/main/docs/architecture.md)、[使用](https://github.com/wxy2ab/sgar/blob/main/docs/usage.md)、[API](https://github.com/wxy2ab/sgar/blob/main/docs/api.md) 与 [集成](https://github.com/wxy2ab/sgar/blob/main/docs/integration.md) 说明。
+::::
+
 ## 计划中的项目类型
 
-这些是从当前工作稿推导出的实现方向，不是额外理论主张。它们用于测试受治理知识、硬状态转移、升级协议和失配诊断能否变成有用的软件对象。
+这些是从当前工作稿推导出的后续实现方向，不是额外理论主张。它们用于测试受治理知识、硬状态转移、升级协议和失配诊断能否变成有用的软件对象。
 
-项目页承接论文页的实证问题：如果知识治理不只是一个解释框架，它就必须能落到可保存、可检查、可撤销的软件对象上。案例库当前给出的方向是：先把控制空间做成对象，再把分层路由、连续性审计、pairwise 判断和平台期判断做成可观察的治理过程；进入金融系统后，还要把生产权生命周期和硬经验提取做成可验证对象。这里的项目不追求一次性做出"大而全 agent"，而是拆出最小可验证组件。
+项目页承接论文页的实证问题：如果知识治理不只是一个解释框架，它就必须能落到可保存、可检查、可撤销的软件对象上。`sgar` 已经先把硬状态、阶段推进、验证和 trace 做成可运行对象；后续项目会继续把控制空间、分层路由、连续性审计、pairwise 判断和平台期判断做成可观察的治理过程。这里的项目不追求一次性做出"大而全 agent"，而是拆出最小可验证组件。
 
 ::::cards
 ### GKO 登记库

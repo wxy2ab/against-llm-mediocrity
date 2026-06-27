@@ -5,20 +5,33 @@ path: /projects
 title: Open-Source Projects
 navTitle: Projects
 kicker: Implementing GKO principles
-summary: "Future projects will turn Knowledge Governance into reusable tools: GKO stores, validation loops, escalation protocols, hard-state agent ledgers, task-control workbenches, and domain-specific governance templates."
+summary: "The first published project is sgar: an embedded coding agent that combines long-range code editing, automated repair, state governance, staged execution, audit verification, and persistent traces. Future projects will keep turning Knowledge Governance into reusable software objects."
 order: 8
 heroPoints:
-  - "GKO lifecycle tooling: create, validate, prioritize, weaken, revoke."
-  - Human escalation protocols based on Minimal Sufficient Human Queries.
-  - Hard-state ledgers for recoverable long-horizon agents.
+  - "sgar: a state-governed coding agent for long-range code editing, automated repair, and governed operations."
+  - Audit Engineering and State-Governed Agent Regime implemented as CLI, runtime, traces, and verification records.
+  - Future tools will cover GKO lifecycle, escalation protocols, and task-control workbenches.
   - Benchmarks for detecting when output-space search plateaus.
 ---
 
+## Published Project
+
+::::cards
+### sgar
+Tag: State-Governed Agent Regime
+
+[sgar](https://github.com/wxy2ab/sgar) is an embedded coding agent for automated repair, automated operations, and long-range code editing inside other systems. It is also a standalone CLI, an embeddable agent runtime, and an OpenClaw long-range coding skill.
+
+The project is not a one-shot "ask an LLM to write code" wrapper. It combines code editing, state governance, staged execution, audit verification, and persistent traces into a long-running agent model. Its design is grounded in [Audit Engineering](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/audit-engineering.md) and [State-Governed Agent Regime](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime.md): externalized hard state, action/delta progression, traces, verification records, and the `.sgar/` workspace reduce drift, skipped steps, and unsupported completion claims in long-horizon coding work.
+
+Current entry points include `pip install sgar`, `sgar --help`, `sgar init`, `sgar status`, `sgar doctor`, `sgar trace`, plus governance commands such as `validate`, `verify`, and `mission`. The repository also includes [architecture](https://github.com/wxy2ab/sgar/blob/main/docs/architecture.en.md), [usage](https://github.com/wxy2ab/sgar/blob/main/docs/usage.en.md), [API](https://github.com/wxy2ab/sgar/blob/main/docs/api.en.md), and [integration](https://github.com/wxy2ab/sgar/blob/main/docs/integration.en.md) documentation.
+::::
+
 ## Planned Project Types
 
-These are implementation directions derived from the current manuscripts. They are not additional theoretical claims; they are ways to test whether governed knowledge, hard-state transitions, escalation protocols, and mismatch diagnostics can become useful software objects.
+These are follow-on implementation directions derived from the current manuscripts. They are not additional theoretical claims; they are ways to test whether governed knowledge, hard-state transitions, escalation protocols, and mismatch diagnostics can become useful software objects.
 
-The project page picks up the empirical question from the manuscripts: if Knowledge Governance is more than an explanatory framework, it must become software objects that can be stored, inspected, weakened, and revoked. The current case library points to the implementation direction: make control spaces into objects, then make layered routing, continuity audit, pairwise judgment, and plateau detection observable governance processes. These projects do not aim to build a monolithic agent first. They isolate the smallest testable components.
+The project page picks up the empirical question from the manuscripts: if Knowledge Governance is more than an explanatory framework, it must become software objects that can be stored, inspected, weakened, and revoked. `sgar` has already made hard state, staged progression, verification, and traces into runnable objects. Future projects will continue by making control spaces, layered routing, continuity audit, pairwise judgment, and plateau detection observable governance processes. These projects do not aim to build a monolithic agent first. They isolate the smallest testable components.
 
 ::::cards
 ### GKO Registry

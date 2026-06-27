@@ -777,6 +777,11 @@ h1 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.card-grid.cards-1 {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 880px;
+}
+
 .info-card {
   min-width: 0;
   min-height: 190px;
@@ -805,6 +810,15 @@ h1 {
   margin: 14px 0 0;
   color: #465260;
   line-height: 1.62;
+}
+
+.info-card a,
+.content-section > p a {
+  color: #b55243;
+  font-weight: 800;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
 }
 
 .footer {
