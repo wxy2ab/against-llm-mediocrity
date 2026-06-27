@@ -9,7 +9,7 @@ summary: This section collects the current manuscripts and future empirical dire
 order: 7
 heroPoints:
   - "Main manuscript: Knowledge Governance for Large Language Model Systems."
-  - "Working drafts: Structural Theory of Value Preservation, Governed LLM Object Model, Audit Engineering, State-Governed Agent Regime, Channel Governance, Fitting-Boundary Mismatch, Observation-Representation Mismatch, and Human-Assist Operational Mismatches."
+  - "Working drafts: Structural Theory of Value Preservation, Governed LLM Object Model, Audit Engineering, State-Governed Agent Regime, Channel Governance, Capability Routing, Fitting-Boundary Mismatch, Observation-Representation Mismatch, and Human-Assist Operational Mismatches."
   - "Extensions and implementation: governed collaboration, hard-state agent governance, cognitive discipline for AI, human learning, and tooling directions derived from the research agenda."
 ---
 
@@ -73,6 +73,13 @@ Tag: channel governance technical report
 This technical report develops observation-representation mismatch as the first primitive mismatch and defines channel governance as pre-governance repair for variable entry, representation ceilings, binding, provenance, freshness, authority, and operational control.
 
 [Read the channel governance report](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/observation-representation-mismatch-channel-governance-llm-systems.md)
+
+### Fitting-Boundary Mismatch and Capability Routing in LLM Systems
+Tag: capability routing technical report
+
+This technical report develops fitting-boundary mismatch as a capability-routing failure: useful capabilities may fail to activate where they apply, or activate outside their true domain. It defines trigger evidence, suppressors, attractors, routing GKOs, router deltas, and boundary regression guards.
+
+[Read the capability routing report](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/fitting-boundary-mismatch-capability-routing-llm-systems.md)
 
 ### Fitting-Boundary Mismatch
 Tag: fifth primitive mismatch supplement
