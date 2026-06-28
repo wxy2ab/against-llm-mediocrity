@@ -9,7 +9,7 @@ summary: This section collects the current manuscripts and future empirical dire
 order: 7
 heroPoints:
   - "Current synthesis: Structural Theory of Value Preservation and Six Primitive Mismatches."
-  - "Working drafts: Formal Mechanism Layer for Governed LLM Systems, Diagnostic-Mechanism Bridge, Mechanism-Driven Training, Governed LLM Object Model, Audit Engineering, State-Governed Agent Regime, Channel Governance, State Governance, Capability Routing, Control-Space Search, Compositional Governance, Objective Governance, and Human-Assist Operational Mismatches."
+  - "Working drafts: Formal Mechanism Layer for Governed LLM Systems, Diagnostic-Mechanism Bridge, Mechanism-Driven Training, Governed LLM Object Model, Audit Engineering, Oracle Classification and Engine Routing, State-Governed Agent Regime, Channel Governance, State Governance, Capability Routing, Control-Space Search, Compositional Governance, Objective Governance, and Human-Assist Operational Mismatches."
   - "Extensions and implementation: governed collaboration, hard-state agent governance, cognitive discipline for AI, human learning, and tooling directions derived from the research agenda."
 ---
 
@@ -80,6 +80,13 @@ Tag: technical report
 This technical report defines Audit Engineering as the loop that turns failures into durable control improvements. It covers failure localization, Audit Findings, Control Deltas, Regression Guards, Defect Ledgers, verifier authority, mismatch-specific audit patterns, anti-patterns, risk-tiered audit intensity, and audit closure criteria.
 
 [Read the Audit Engineering technical report](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/audit-engineering-failure-localization-control-space-writeback.md)
+
+### Oracle, Audit Agent, and SGAR
+Tag: oracle routing working draft
+
+This working draft unifies audit, SGAR, gate hardening, and No-Go into a single oracle-classification and engine-routing framework. It explains when systems should use high-bandwidth failure localization, when they should rely on high-fidelity boundary gates, and when honest progress requires acquiring a new fidelity source instead of iterating blindly.
+
+[Read the oracle-classification and engine-routing draft](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/oracle-classification-audit-agent-sgar-engine-routing.md)
 
 ### State-Governed Agent Regime for Governed LLM Systems
 Tag: runtime governance working draft

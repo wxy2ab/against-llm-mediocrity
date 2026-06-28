@@ -11,7 +11,7 @@
 
 LLM 系统越来越多地围绕迭代生成、批判、检索、工具使用、执行反馈和修订来构建。这些循环常常能提升表面质量，但它们不会自动产生持久的系统学习。模型可能批判一个答案、生成更好的候选，却仍然没有触及底层失败模式。下一个类似任务可能再次失败，因为缺陷从未被定位、写回控制空间、加上回归护栏，或提交进状态。
 
-本文提出 **审计工程**：一种把失败转换为受治理 LLM 系统中持久控制改进的纪律。审计不是分数、偏好判断或通用批评。有用的审计会识别局部缺陷，用证据支撑它，把它映射到失配类型，选择修复目标，产生控制增量，并创建一个在该缺陷家族复发时会失败的回归护栏。
+本文提出 **审计工程**：一种把失败转换为受治理 LLM 系统中持久控制改进的纪律。审计不是分数、偏好判断或通用批评。有用的审计会识别局部缺陷，用证据支撑它，把它映射到失配类型，识别真正要改变的任务特定控制对象，在已可操作化时记录机制归因，产生控制增量，并创建一个在该缺陷家族复发时会失败的回归护栏。
 
 审计工程建立在两个不对称性之上。第一，生成卓越产物往往比识别具体缺陷更难。第二，提前写出完整规格往往比通过反例修复规格更难。高价值系统应利用这些不对称性，把候选失败转换为任务表征、能力路由、支持搜索、聚合约束、规格、验证和硬状态中的改进。
 
@@ -20,7 +20,9 @@ LLM 系统越来越多地围绕迭代生成、批判、检索、工具使用、�
 ```text
 Candidate Artifact
   → Audit
-  → Failure Localization
+  → Primitive Mismatch Diagnosis
+  → Task-Specific Control Object
+  → Mechanism Attribution
   → Control Delta
   → GKO / GEO / Verifier / State Update
   → Regression Guard
@@ -85,8 +87,8 @@ The code may fail.
 The output joined table A to table C directly, but the schema requires A → B → C.
 Evidence: foreign-key graph shows no A.c_id; execution error references missing column C.id.
 Mismatch: aggregation + observation-representation.
-Repair target: capability_routing.
-Repair object: join-path control object.
+Control object: join-path control object.
+Mechanism attribution: capability_routing.
 Control delta: add join_path_constraint for this schema family.
 Regression guard: re-run representative query requiring A → B → C and fail if direct A → C join appears.
 ```
@@ -230,7 +232,7 @@ S_world
 
 ## 6. 审计发现
 
-**审计发现** 是审计工程的原子对象。它记录局部失败，并把失败连接到证据、机制、修复和回归治理。
+**审计发现** 是审计工程的原子对象。它记录局部失败，并把失败连接到证据、任务对象、机制归因、修复和回归治理。
 
 最小 Audit Finding schema：
 
@@ -244,9 +246,12 @@ S_world
     "observation_representation | state | fitting_boundary | support | aggregation | specification | compound"
   ],
   "severity": "low | medium | high | critical",
-  "repair_target": "specification_reward | observation_availability | belief_representation | dynamics_world_model | action_interface | capability_support | capability_routing | search_execution | unknown",
+  "control_object_ref": "object.id",
+  "control_object_type": "sql_dag | claim_evidence_map | state_table | router_rule | rubric | other",
+  "mechanism_axis": "specification_reward | observation_availability | belief_representation | dynamics_world_model | action_interface | capability_support | capability_routing | search_execution | unknown | not_operationalized",
+  "operationalization_status": "direct | derived | partial | not_operationalized",
   "repair_layer": "agent | training | hybrid | unknown",
-  "repair_target_role": "primary | amplifier | downstream | unknown",
+  "mechanism_role": "primary | amplifier | downstream | unknown",
   "repair_object": "gko | geo | verifier | transition_contract | state_record | regression_guard | unknown",
   "control_delta": "proposed change to governed control space",
   "regression_guard": "test or condition that should fail if the defect recurs",
@@ -262,7 +267,7 @@ S_world
 localized: it names a specific defect, not general dissatisfaction
 evidenced: it points to observable support
 mechanistic: it maps to a mismatch or system station
-actionable: it identifies a repair target
+actionable: it identifies the object that should change
 regressable: it yields a future guard
 ```
 
@@ -303,7 +308,7 @@ What guard will check whether the change works?
 }
 ```
 
-控制增量重要，因为它防止审计沦为一次性评论。系统只有在发现成为表征、路由、搜索、规格、验证或状态中的改变时才真正改善。
+控制增量重要，因为它防止审计沦为一次性评论。系统只有在发现变成某个治理对象上的变化时才真正改善。硬审计修的是对象，而不是抽象机制名。
 
 ---
 
@@ -666,9 +671,12 @@ For schema graphs where referenced columns lie on non-adjacent tables, require t
   "mismatch_profile": ["mismatch types"],
   "control_deltas": ["delta ids"],
   "regression_guards": ["guard ids"],
-  "status": "open | mitigated | guarded | recurring | revoked | accepted_risk",
+  "status": "open | mitigated | guarded | recurring | promoted | revoked | accepted_risk",
   "recurrence_count": 0,
   "last_seen": "timestamp or version",
+  "promoted_to_training": false,
+  "training_corpus_refs": ["dataset or curriculum ids"],
+  "retirement_condition": "when runtime governance can stop carrying this defect family",
   "owner": "system | human | team | component",
   "notes": "additional context"
 }
@@ -682,6 +690,7 @@ merge duplicate findings
 track repair effectiveness
 identify stale guards
 escalate unresolved defect families
+promote recurrent learning-side defects into training
 record accepted risk
 support postmortems
 ```
@@ -948,7 +957,34 @@ superseded
 revoked
 committed
 rolled_back
+promoted
 ```
+
+### 17.1 从 Defect Ledger 升格到训练
+
+审计工程不应把每个反复出现的缺陷都长期当作运行时补丁来处理。当某个 defect family 持续复发，且其主导 `repair_layer` 是 `training` 或 `hybrid` 时，账本应支持把它升格进机制驱动训练。
+
+基本棘轮是：
+
+```text
+Audit Finding
+  -> Defect Ledger recurrence
+  -> repair_layer = training | hybrid
+  -> promotion decision
+  -> training corpus / curriculum update
+  -> runtime guard retained until retirement condition is met
+```
+
+典型升格条件包括：
+
+```text
+同一家族失败跨任务复发
+主导机制目标带有学习侧分量
+Agent 层修复成本高或不稳定
+该缺陷可以通过数据、奖励、路由或世界模型训练被摊销
+```
+
+升格不应立即移除运行时治理。账本应继续保留 guard、delta 与 owner，直到满足 retirement condition，例如在代表性评估下反复证明该缺陷不再复发。
 
 ---
 
@@ -1015,9 +1051,11 @@ The SQL may have an incorrect join and should be checked.
   ],
   "mismatch_type": ["aggregation", "observation_representation"],
   "severity": "high",
-  "repair_target": "capability_routing",
+  "control_object_ref": "join_path_control_object",
+  "control_object_type": "sql_dag",
+  "mechanism_axis": "capability_routing",
   "repair_layer": "agent",
-  "repair_target_role": "primary",
+  "mechanism_role": "primary",
   "repair_object": "gko",
   "control_delta": "Create join-path constraint requiring schema-graph path coverage for all question-bound entities.",
   "regression_guard": "For questions binding departments, employees, and training_records, fail if generated SQL lacks employees in the join path.",
@@ -1073,9 +1111,11 @@ Failure condition: any bound entity is absent or connected through an invalid ed
   ],
   "mismatch_type": ["aggregation", "specification"],
   "severity": "critical",
-  "repair_target": "search_execution",
+  "control_object_ref": "state_isolation_invariant",
+  "control_object_type": "rubric",
+  "mechanism_axis": "search_execution",
   "repair_layer": "agent",
-  "repair_target_role": "downstream",
+  "mechanism_role": "downstream",
   "repair_object": "regression_guard",
   "control_delta": "Add order-randomized test guard and state-isolation invariant.",
   "regression_guard": "Run affected test suite under randomized order and fail on global cache mutation outside allowed lifecycle.",
@@ -1255,9 +1295,12 @@ defect-ledger entry
   "evidence": ["specific evidence"],
   "mismatch_type": ["observation_representation | state | fitting_boundary | support | aggregation | specification | compound"],
   "severity": "low | medium | high | critical",
-  "repair_target": "specification_reward | observation_availability | belief_representation | dynamics_world_model | action_interface | capability_support | capability_routing | search_execution | unknown",
+  "control_object_ref": "object.id",
+  "control_object_type": "sql_dag | claim_evidence_map | state_table | router_rule | rubric | other",
+  "mechanism_axis": "specification_reward | observation_availability | belief_representation | dynamics_world_model | action_interface | capability_support | capability_routing | search_execution | unknown | not_operationalized",
+  "operationalization_status": "direct | derived | partial | not_operationalized",
   "repair_layer": "agent | training | hybrid | unknown",
-  "repair_target_role": "primary | amplifier | downstream | unknown",
+  "mechanism_role": "primary | amplifier | downstream | unknown",
   "repair_object": "gko | geo | verifier | transition_contract | state_record | regression_guard | unknown",
   "control_delta": "proposed change",
   "regression_guard": "future recurrence check",
@@ -1315,9 +1358,12 @@ defect-ledger entry
   "mismatch_profile": ["mismatch types"],
   "control_deltas": ["delta ids"],
   "regression_guards": ["guard ids"],
-  "status": "open | mitigated | guarded | recurring | revoked | accepted_risk",
+  "status": "open | mitigated | guarded | recurring | promoted | revoked | accepted_risk",
   "recurrence_count": 0,
   "last_seen": "timestamp or version",
+  "promoted_to_training": false,
+  "training_corpus_refs": ["dataset or curriculum ids"],
+  "retirement_condition": "condition for removing the runtime carry cost",
   "owner": "system | human | team | component",
   "notes": "additional context"
 }
@@ -1333,7 +1379,7 @@ defect-ledger entry
 1. What exactly failed?
 2. What evidence supports the finding?
 3. Which primitive mismatch or compound mismatch is involved?
-4. Which pipeline station should be repaired?
+4. Which governed task object should change, and which mechanism axis is implicated?
 5. Is the defect a one-off or a family?
 6. What control object should change?
 7. What regression guard would fail if the defect recurs?

@@ -210,6 +210,25 @@ For example, if a decisive variable is missing from the representation, support 
 
 The failure must admit a minimal pair: a pair of systems or task instances that differ primarily at that station while other stations are held fixed, and where the perturbation changes task value.
 
+### 5.4 Irreducibility / Atomicity Criterion
+
+A proposed refinement does not count as a new primitive mismatch merely because it is descriptively useful.
+
+```text
+If two subcases occupy the same pipeline station
+and share the same effective repair target,
+then the split is not primitive.
+```
+
+A new primitive mismatch requires both:
+
+```text
+1. a structurally distinct station in the value-preservation pipeline, and
+2. an irreducibly distinct repair target under controlled perturbation.
+```
+
+This is why the count stops at six. Each station may have many subtypes, but a subtype becomes primitive only if it creates a new intervention-distinguishable station rather than a finer description of the same one.
+
 This criterion makes independence operational. The taxonomy is not merely semantic; it is tied to possible counterfactual interventions.
 
 ---
@@ -765,6 +784,17 @@ But when those failures matter because they distort task value in an LLM pipelin
 Most real failures are compound. A text-to-SQL failure may involve missing schema values, wrong state assumptions, low-support joins, local clause inconsistency, and benchmark proxy issues. This does not refute the taxonomy. It confirms that primitive failures combine.
 
 The taxonomy is not a requirement that every failure be assigned a single label. It is a decomposition basis.
+
+### 13.4 Forward-Pass Boundary of the Completeness Claim
+
+The completeness claim is feed-forward rather than fully dynamical.
+
+```text
+It applies to a single forward pass:
+S_world -> O -> Z -> C -> K -> Y -> U_hat
+```
+
+Cross-turn feedback, oscillation, retry loops, state accumulation, and commitment dynamics are runtime phenomena. They matter greatly in deployed systems, but they are governed by SGAR and related runtime objects rather than being additional primitive stations in this taxonomy.
 
 ---
 
@@ -1467,6 +1497,19 @@ For example, fitting-boundary mismatch would lose primitive status if every rout
 The super-additive coupling claim should be weakened if compound failures can generally be repaired by independent station repairs whose effects do not depend on the fidelity of other stations.
 
 The current theory predicts that this will often be false in high-value tasks.
+
+### 31.4 Revocation Trigger for Atomicity
+
+The atomicity claim should be weakened if a proposed subdivision:
+
+```text
+1. occupies a structurally distinct pipeline station,
+2. admits minimal pairs independent of the current six,
+3. requires an irreducibly distinct repair target, and
+4. cannot be reduced to an existing station without losing intervention specificity.
+```
+
+If those conditions are met, the current count of six would no longer be stable.
 
 ---
 

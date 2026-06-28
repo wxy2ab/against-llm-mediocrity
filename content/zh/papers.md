@@ -9,7 +9,7 @@ summary: 这里收集与LLM 平庸、LLM卓越、知识治理、硬状态 Agent 
 order: 7
 heroPoints:
   - 当前总稿：价值保存结构理论与六类原始失配总图。
-  - 工作稿：面向受治理 LLM 系统的形式化机制层、诊断-机制桥接、机制驱动训练、受治理 LLM 对象模型、审计工程、状态治理型 Agent 体制、通道治理、状态治理、能力路由、控制空间搜索、组合治理、目标治理与 Human-Assist Operational Mismatches。
+  - 工作稿：面向受治理 LLM 系统的形式化机制层、诊断-机制桥接、机制驱动训练、受治理 LLM 对象模型、审计工程、Oracle 分类与引擎路由、状态治理型 Agent 体制、通道治理、状态治理、能力路由、控制空间搜索、组合治理、目标治理与 Human-Assist Operational Mismatches。
   - 延伸与实现：治理式协作、硬状态 Agent 治理、AI 认知纪律、人类学习与由研究议程直接推导的工具方向。
 ---
 
@@ -59,6 +59,13 @@ Tag: 技术报告工作稿
 这份技术报告把审计工程定义为把失败转化为持久控制改进的循环。它覆盖失败定位、审计发现、控制增量、回归护栏、缺陷账本、验证器权威、失配特定审计模式、反模式、风险分层审计强度和审计关闭标准。
 
 [阅读审计工程技术报告](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/audit-engineering-failure-localization-control-space-writeback.zh-CN.md)
+
+### Oracle、Audit Agent 与 SGAR
+Tag: oracle 路由工作稿
+
+这份工作稿把 audit、SGAR、gate hardening 与 No-Go 收束到同一个 oracle 分类与引擎路由框架里。它解释系统什么时候应使用高带宽失败定位，什么时候应依赖高保真边界 gate，以及什么时候真正负责任的进展不是盲目迭代，而是先去获取新的 fidelity source。
+
+[阅读 oracle 分类与引擎路由工作稿](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/oracle-classification-audit-agent-sgar-engine-routing.zh-CN.md) / [English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/oracle-classification-audit-agent-sgar-engine-routing.md)
 
 ### 面向受治理 LLM 系统的状态治理型 Agent 体制
 Tag: 运行时治理工作稿

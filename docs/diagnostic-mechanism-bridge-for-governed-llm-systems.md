@@ -11,23 +11,24 @@
 
 The theory of governed LLM systems contains two complementary diagnostic layers. The first layer is the **six primitive mismatch taxonomy**: observation-representation, state, fitting-boundary, support, aggregation, and specification mismatch. This layer explains where task value is structurally lost along a value-preservation pipeline. It answers the question: **why did the system fail in task-value terms?**
 
-The second layer is the **formal mechanism layer**: specification/reward, observation availability, belief/representation, dynamics/world model, action/interface, capability support, capability routing, and search/execution. This layer identifies which intervenable component of an approximate LLM decision system should be changed. It answers the question: **where should the system be repaired?**
+The second layer is the **formal mechanism layer**: specification/reward, observation availability, belief/representation, dynamics/world model, action/interface, capability support, capability routing, and search/execution. This layer identifies which intervenable component of an approximate LLM decision system best explains or amplifies failure once the task has already been turned into governable control objects. It answers the question: **which component-level mechanism does the failure point to?**
 
-These two layers are not competing taxonomies. They are orthogonal coordinate systems. The six primitive mismatches are **value-preservation diagnostic axes**; the eight mechanism axes are **intervention-localization axes**. A failure should therefore be represented by at least three fields:
+These two layers are not competing taxonomies. They are orthogonal coordinate systems. The six primitive mismatches are **value-preservation diagnostic axes** and practical engineering entry points; the eight mechanism axes are **derived component-attribution axes**. A failure should therefore be represented by at least four fields:
 
 ```text
 mismatch_type ∈ six primitive mismatches
-repair_target ∈ eight mechanism axes
+control_object ∈ task-specific governed object
+mechanism_axis ∈ eight mechanism axes | unknown | not_operationalized
 repair_layer  ∈ agent | training | hybrid
 ```
 
-This document defines the bridge between the two layers. It introduces a six-by-eight crosswalk matrix, a mechanism-profile object, a repair-layer selection rule, and an audit-to-training feedback loop. It also clarifies how the mechanism layer relates to Audit Engineering, the Governed Object Model, and the State-Governed Agent Regime (SGAR). The result is a unified diagnostic and repair architecture: primitive mismatches explain value failure; mechanism profiles localize repair; audit findings produce control deltas; governed objects store repair knowledge; SGAR commits verified changes into hard state; recurrent learning-component failures can be promoted into training curricula.
+This document defines the bridge between the two layers. It introduces a six-by-eight crosswalk matrix, a mechanism-profile object, an operationalization gate, a repair-layer selection rule, and an audit-to-training feedback loop. It also clarifies how the mechanism layer relates to Audit Engineering, the Governed Object Model, and the State-Governed Agent Regime (SGAR). The result is a unified diagnostic and repair architecture: primitive mismatches explain value failure; task-specific control objects expose what is directly repaired; mechanism profiles localize component attribution; audit findings produce control deltas; governed objects store repair knowledge; SGAR commits verified changes into hard state; recurrent operationalized learning-component failures can be promoted into training curricula.
 
-The central sentence is:
+The corrected central sentence is:
 
 ```text
-The primitive-mismatch layer explains structure;
-the mechanism layer chooses the scalpel.
+Engineering enters through primitive mismatches;
+formal mechanism analysis follows operationalization.
 ```
 
 ---
@@ -56,15 +57,15 @@ It establishes four claims.
 First, the two layers are orthogonal rather than redundant:
 
 ```text
-Six primitive mismatches = where value is structurally lost.
-Eight mechanism axes     = which system component should be changed.
+Six primitive mismatches = where task value is structurally lost and where engineering enters.
+Eight mechanism axes     = which system component the failure may ultimately localize to.
 ```
 
 Second, a single failure may have one primitive mismatch diagnosis but multiple mechanism causes. Conversely, a single mechanism defect may manifest as several primitive mismatch symptoms.
 
-Third, the mechanism layer is the missing bridge between inference-time governance and training-time improvement. Agent-layer repair handles local, reversible, task-specific failures. Training-layer repair handles recurrent, cross-task, amortizable learning-component failures.
+Third, the mechanism layer is the missing bridge between inference-time governance and training-time improvement, but only after task failures have been operationalized through governed control objects. Agent-layer repair handles local, reversible, task-specific failures. Training-layer repair handles recurrent, cross-task, amortizable learning-component failures.
 
-Fourth, the bridge should be formalized in the object model through `mismatch_type`, `repair_target`, `repair_layer`, and `mechanism_profile` fields.
+Fourth, the bridge should be formalized in the object model through `mismatch_type`, `control_object_ref`, `control_object_type`, `mechanism_axis`, `operationalization_status`, `repair_layer`, and `mechanism_profile` fields.
 
 This document is not a replacement for the six-mismatch taxonomy, the formal-mechanism-layer document, the object-model specification, Audit Engineering, or SGAR. It is the wiring layer that makes them operate as one system.
 
@@ -108,7 +109,7 @@ What kind of value-preservation failure occurred?
 The mechanism-intervention cut asks:
 
 ```text
-Which component of the system should be repaired?
+Which component-level mechanism explains or amplifies the failure once a task object exists?
 ```
 
 This cut yields eight mechanism axes:
@@ -124,14 +125,14 @@ This cut yields eight mechanism axes:
 8. Search / execution
 ```
 
-These are **repair-localization axes**. They classify the component to be changed.
+These are **repair-localization axes**. They classify the component-level anatomy behind a failure, not the first object an engineer directly edits.
 
 For example, the same Text-to-SQL failure may require changing the observation channel, the schema representation, the SQL capability support, the router that decides whether to use join-path search, the execution-guided search procedure, or the evaluation rubric. The primitive mismatch alone does not determine which of these components is the actual repair target.
 
 The mechanism layer therefore answers:
 
 ```text
-What should be changed, and at which layer?
+Which component-level mechanism is implicated, and when is it operationalized enough to justify direct repair or training promotion?
 ```
 
 ### 2.3 The Bridge
@@ -141,13 +142,14 @@ The bridge between the two cuts is:
 ```text
 Failure
   → primitive mismatch diagnosis
+  → task-specific control object
   → mechanism profile
-  → repair target
+  → mechanism axis
   → repair layer
   → control delta / training item / state transition
 ```
 
-The primitive mismatch explains the failure in value terms. The mechanism profile localizes the intervention. The repair layer determines whether the repair belongs in agent-layer governance, training-layer improvement, or a hybrid of both.
+The primitive mismatch explains the failure in value terms. The task-specific control object exposes what is directly modified. The mechanism profile localizes the component-level attribution. The repair layer determines whether the repair belongs in agent-layer governance, training-layer improvement, or a hybrid of both.
 
 ---
 
@@ -161,43 +163,47 @@ Layer 0: World-to-output value-preservation pipeline
 Layer 1: Six Primitive Mismatches
   What kind of task-value failure occurred?
 
-Layer 2: Formal Mechanism Layer
-  Which system component caused or amplified the failure?
+Layer 2: Task-Specific Control Objects
+  What governed task object must be constructed or revised?
 
-Layer 3: Diagnostic–Mechanism Bridge
-  How does a value diagnosis become a repair localization?
+Layer 3: Formal Mechanism Layer
+  Which system component caused or amplified failure in that task object?
 
-Layer 4: Knowledge Governance
+Layer 4: Diagnostic–Mechanism Bridge
+  How does a value diagnosis become object repair, mechanism attribution, and repair-layer selection?
+
+Layer 5: Knowledge Governance
   Which control objects should be induced, revised, revoked, or reused?
 
-Layer 5: Audit Engineering
+Layer 6: Audit Engineering
   How are failures localized and written back into the control space?
 
-Layer 6: Governed Object Model
+Layer 7: Governed Object Model
   How are mismatch diagnoses, mechanism profiles, control deltas, and state records stored?
 
-Layer 7: SGAR
+Layer 8: SGAR
   Which repairs, actions, verifier results, and state changes are formally committed?
 
-Layer 8: Mechanism-Driven Training
-  Which recurrent learning-component failures should be promoted into training curricula?
+Layer 9: Mechanism-Driven Training
+  Which recurrent operationalized learning-component failures should be promoted into training curricula?
 ```
 
 The key transition is:
 
 ```text
 primitive mismatch diagnosis
+  → task-specific control object
   → mechanism localization
   → repair-layer selection
 ```
 
-Without this transition, the system may correctly diagnose that a failure is, for example, a support mismatch, but still choose the wrong repair. It may increase sampling when the true problem is capability routing; add retrieval when the true problem is action-interface absence; revise the rubric when the decisive variable never entered the representation; or perform agent-layer patching forever when the real issue is a recurrent learning-component failure that should be amortized through training.
+Without this transition, the system may correctly diagnose that a failure is, for example, a support mismatch, but still choose the wrong repair. It may increase sampling when the true problem is capability routing; add retrieval when the true problem is action-interface absence; revise the rubric when the decisive variable never entered the representation; or talk abstractly about `belief_representation` before a concrete task object exists that can actually be audited and changed.
 
 ---
 
 ## 4. The Six Primitive Mismatches
 
-The six primitive mismatches are value-preservation diagnostic axes. They are derived from structurally distinct stations in the world-to-output pipeline.
+The six primitive mismatches are value-preservation diagnostic axes. They are derived from structurally distinct stations in the world-to-output pipeline. They are not merely explanatory labels. In engineering practice they are the first task-anchored entry points for constructing governed task objects.
 
 | Primitive mismatch | Value-preservation question | Typical diagnostic sign |
 |---|---|---|
@@ -208,13 +214,13 @@ The six primitive mismatches are value-preservation diagnostic axes. They are de
 | Aggregation | Do locally good parts compose into global value? | Local clauses, steps, or edits are plausible but globally inconsistent. |
 | Specification | Does the accessible objective represent true utility? | The system optimizes a rubric, metric, prompt, or proxy that misranks candidates. |
 
-The six mismatches explain the form of value failure. They do not, by themselves, enumerate every component that may need to be modified.
+The six mismatches explain the form of value failure and force the first question of repair engineering: what governed task object must exist so that this failure becomes observable, auditable, and modifiable?
 
 ---
 
 ## 5. The Eight Mechanism Axes
 
-The eight mechanism axes are intervention-localization axes. They identify which component of the approximate LLM system should be changed.
+The eight mechanism axes are intervention-localization axes. They identify which component of the approximate LLM system is implicated once a failure has already been operationalized through task-specific objects.
 
 | Mechanism axis | Component | Core question | Typical repair layer |
 |---|---|---|---|
@@ -227,7 +233,22 @@ The eight mechanism axes are intervention-localization axes. They identify which
 | Capability routing | `r_θ` | Is the right capability activated under the right conditions? | Training, with agent patches |
 | Search / execution | `D` | Does the inference-time procedure search, branch, execute, verify, or backtrack correctly? | Agent |
 
-The eight axes are not eight new primitive value mismatches. They are the repair coordinates used after a value-preservation mismatch has been diagnosed.
+The eight axes are not eight new primitive value mismatches. They are derived repair coordinates used after a value-preservation mismatch has been diagnosed and turned into task-specific governed objects.
+
+## 5.1 Primitive Mismatch as Engineering Entry
+
+Each primitive mismatch asks a distinct engineering-entry question and suggests a characteristic family of governed task objects.
+
+| Primitive mismatch | Engineering-entry question | Typical control objects |
+|---|---|---|
+| Observation-representation | Did the decisive variable enter the task representation at all? | evidence map, schema view, reader simulator, value-binding table |
+| State | What latent state must be tracked explicitly? | state machine, world ledger, role-state table, task-state table |
+| Fitting-boundary | Which capability should trigger or be suppressed? | router rule, mode boundary, pacing or density controller |
+| Support | Which candidate family must become reachable? | candidate generator, technique library, retrieval operator |
+| Aggregation | What object preserves global composition? | DAG, outline graph, dependency tracker, narrative skeleton |
+| Specification | What object defines what counts as good? | rubric, style guard, success condition, reader-response criterion |
+
+These objects are what hard audit actually repairs. Mechanism attribution comes after the object exists.
 
 ---
 
@@ -503,7 +524,37 @@ Examples:
 | Capability routing | Add a router rule, trigger boundary, mode switch, or role separation. |
 | Search / execution | Add branching, backtracking, candidate ranking, verifier calls, or execution-guided search. |
 
-Minimal intervention probes are not benchmark experiments in the usual empirical sense. They are causal repair-localization probes. Their purpose is to determine which repair target is responsible for the observed failure.
+Minimal intervention probes are not benchmark experiments in the usual empirical sense. They are causal repair-localization probes. Their purpose is to determine which mechanism axis is responsible for the observed failure once the task object and intervention operator are already clear.
+
+## 9.3 Operationalization Gate
+
+A mechanism axis should be treated as a direct repair target only when all of the following hold:
+
+```text
+1. Observable symptom
+   The mechanism failure is visible in task behavior.
+
+2. Task-specific control object
+   A concrete governed object carries the repair.
+
+3. Intervention operator
+   There is a known way to modify the object or component.
+
+4. Success / failure signal
+   The intervention can be evaluated.
+
+5. Regression guard
+   Recurrence can be caught reliably.
+```
+
+If these conditions are not met, record:
+
+```text
+mechanism_axis = suspected axis
+operationalization_status = not_operationalized
+```
+
+rather than pretending that an abstract component name is already a runtime repair target.
 
 ### 9.1 Probe Outcomes
 
@@ -580,6 +631,7 @@ A **Mechanism Profile** is the object that bridges primitive mismatch diagnosis 
   "primary_mechanism": "one of the eight mechanism axes",
   "secondary_mechanisms": ["zero or more mechanism axes"],
   "repair_layer": "agent | training | hybrid",
+  "operationalization_status": "direct | derived | partial | not_operationalized",
   "minimal_intervention_probe": "probe used or proposed",
   "probe_result": "resolved | partially_resolved | unchanged | worse | not_run",
   "remaining_bottleneck": "what still appears to block repair",
@@ -600,9 +652,12 @@ An Audit Finding should include or reference a Mechanism Profile.
   "finding": "localized defect statement",
   "evidence": "specific evidence for the defect",
   "mismatch_type": "observation_representation | state | fitting_boundary | support | aggregation | specification | compound",
+  "control_object_ref": "object.id",
+  "control_object_type": "sql_dag | claim_evidence_map | state_table | router_rule | rubric | other",
   "mechanism_profile": "mechanism_profile.unique_id",
-  "repair_target": "specification_reward | observation_availability | belief_representation | dynamics_world_model | action_interface | capability_support | capability_routing | search_execution",
-  "repair_target_role": "primary | amplifier | downstream | unknown",
+  "mechanism_axis": "specification_reward | observation_availability | belief_representation | dynamics_world_model | action_interface | capability_support | capability_routing | search_execution | unknown | not_operationalized",
+  "operationalization_status": "direct | derived | partial | not_operationalized",
+  "mechanism_role": "primary | amplifier | downstream | unknown",
   "repair_layer": "agent | training | hybrid",
   "control_delta": "control_delta.unique_id",
   "regression_guard": "regression_guard.unique_id",
@@ -610,17 +665,20 @@ An Audit Finding should include or reference a Mechanism Profile.
 }
 ```
 
-This prevents Audit Engineering from jumping directly from symptom to repair. The audit first diagnoses value failure, then localizes the mechanism, then writes the control delta.
+This prevents Audit Engineering from jumping directly from symptom to abstract mechanism naming. The audit first diagnoses value failure, then identifies the governed task object to change, then localizes the mechanism, and only then writes the control delta.
 
 ### 10.3 Relationship to Control Delta
 
-Control Deltas should target mechanism axes, not primitive mismatches.
+Control Deltas should target governed task objects first and record mechanism axes as attribution.
 
 ```json
 {
   "id": "control_delta.unique_id",
   "source_finding": "finding.unique_id",
-  "target_mechanism": "specification_reward | observation_availability | belief_representation | dynamics_world_model | action_interface | capability_support | capability_routing | search_execution",
+  "target_object_ref": "object.id",
+  "target_object_type": "sql_dag | claim_evidence_map | state_table | router_rule | rubric | other",
+  "mechanism_axis": "specification_reward | observation_availability | belief_representation | dynamics_world_model | action_interface | capability_support | capability_routing | search_execution | unknown | not_operationalized",
+  "operationalization_status": "direct | derived | partial | not_operationalized",
   "target_layer": "agent | training | hybrid",
   "delta_type": "SpecificationDelta | ObservationDelta | BeliefRepresentationDelta | DynamicsWorldModelDelta | ActionInterfaceDelta | CapabilitySupportDelta | CapabilityRoutingDelta | SearchExecutionDelta",
   "change": "specific change to be applied",
@@ -743,7 +801,23 @@ unknown
 
 This field belongs to the primitive-mismatch layer.
 
-### 12.2 `repair_target`
+### 12.2 `control_object_type`
+
+```text
+sql_dag
+claim_evidence_map
+state_table
+router_rule
+rubric
+schema_view
+value_binding_table
+dependency_graph
+other
+```
+
+This field belongs to the task-object layer.
+
+### 12.3 `mechanism_axis`
 
 ```text
 specification_reward
@@ -755,11 +829,23 @@ capability_support
 capability_routing
 search_execution
 unknown
+not_operationalized
 ```
 
 This field belongs to the mechanism layer.
 
-### 12.3 `repair_layer`
+### 12.4 `operationalization_status`
+
+```text
+direct
+derived
+partial
+not_operationalized
+```
+
+This field records whether the mechanism axis is already actionable enough to serve as a direct repair target.
+
+### 12.5 `repair_layer`
 
 ```text
 agent
@@ -770,7 +856,7 @@ unknown
 
 This field belongs to the repair-layer selection system.
 
-### 12.4 `repair_target_role`
+### 12.6 `mechanism_role`
 
 ```text
 primary
@@ -781,7 +867,7 @@ unknown
 
 This field captures causal role within a compound failure chain.
 
-### 12.5 Canonical Bridged Audit Finding
+### 12.7 Canonical Bridged Audit Finding
 
 ```json
 {
@@ -790,8 +876,11 @@ This field captures causal role within a compound failure chain.
   "finding": "The query uses a locally plausible join path that cannot produce the requested entity relation.",
   "evidence": "Execution result is empty; schema graph shows required relation through table X rather than table Y.",
   "mismatch_type": "aggregation",
-  "repair_target": "belief_representation",
-  "repair_target_role": "primary",
+  "control_object_ref": "sql_dag.join_path_001",
+  "control_object_type": "sql_dag",
+  "mechanism_axis": "belief_representation",
+  "operationalization_status": "direct",
+  "mechanism_role": "primary",
   "repair_layer": "agent",
   "mechanism_profile": "mechanism_profile.sql.join_path_001",
   "control_delta": "control_delta.add_schema_graph_join_constraint",
@@ -800,7 +889,7 @@ This field captures causal role within a compound failure chain.
 }
 ```
 
-### 12.6 Canonical Training-Promoted Finding
+### 12.8 Canonical Training-Promoted Finding
 
 ```json
 {
@@ -809,8 +898,11 @@ This field captures causal role within a compound failure chain.
   "finding": "The model repeatedly fails to activate schema-audit mode when surface lexical overlap suggests a direct answer.",
   "evidence": "Observed across multiple databases and tasks; agent-level router rules repair the issue but must be reintroduced repeatedly.",
   "mismatch_type": "fitting_boundary",
-  "repair_target": "capability_routing",
-  "repair_target_role": "primary",
+  "control_object_ref": "router_rule.schema_audit_trigger",
+  "control_object_type": "router_rule",
+  "mechanism_axis": "capability_routing",
+  "operationalization_status": "direct",
+  "mechanism_role": "primary",
   "repair_layer": "training",
   "mechanism_profile": "mechanism_profile.router.schema_audit_undertrigger",
   "control_delta": "control_delta.runtime_router_patch",
@@ -972,7 +1064,7 @@ The loop is:
 Agent-layer audit finds a failure
   → primitive mismatch diagnosis
   → mechanism profile
-  → repair target is classified as system or learning component
+  → mechanism axis is classified as system or learning component
   → system component: repair at agent layer
   → learning component: patch at agent layer if needed
   → recurrent learning-component defect enters defect ledger
@@ -1060,25 +1152,25 @@ A support mismatch in Text-to-SQL might have several mechanism profiles.
 ```text
 Profile A:
   mismatch_type = support
-  repair_target = capability_support
+  mechanism_axis = capability_support
   repair_layer = training or hybrid
   interpretation = the model lacks support for a rare SQL pattern
 
 Profile B:
   mismatch_type = support
-  repair_target = capability_routing
+  mechanism_axis = capability_routing
   repair_layer = agent or training
   interpretation = the model has schema-audit capability but does not activate it
 
 Profile C:
   mismatch_type = support
-  repair_target = search_execution
+  mechanism_axis = search_execution
   repair_layer = agent
   interpretation = the correct join path could be found through controlled search but direct generation prunes it
 
 Profile D:
   mismatch_type = support
-  repair_target = observation_availability
+  mechanism_axis = observation_availability
   repair_layer = agent
   interpretation = the relevant schema/value evidence was unavailable
 ```
@@ -1191,7 +1283,7 @@ The six primitive mismatches and eight mechanism axes answer different questions
 
 ```text
 Six: What kind of value failure occurred?
-Eight: Which component should be repaired?
+Eight: Which component-level mechanism is implicated?
 ```
 
 Collapsing them into one taxonomy makes both less useful.
@@ -1234,7 +1326,8 @@ It should introduce:
 
 ```text
 mismatch_type ∈ six
-repair_target ∈ eight
+control_object ∈ task-specific governed object
+mechanism_axis ∈ eight | unknown | not_operationalized
 repair_layer ∈ agent | training | hybrid
 ```
 
@@ -1270,7 +1363,9 @@ Canonicalize:
 
 ```text
 mismatch_type = six-mismatch enum
-repair_target = eight-mechanism enum
+control_object_ref / control_object_type = task-object fields
+mechanism_axis = eight-mechanism enum plus not_operationalized
+operationalization_status = direct | derived | partial | not_operationalized
 repair_layer = agent | training | hybrid
 mechanism_profile = first-class object
 ```
@@ -1316,16 +1411,16 @@ The six primitive mismatches and the eight mechanism axes are two orthogonal vie
 
 ```text
 Six primitive mismatches:
-  diagnose where task value is lost.
+  diagnose where task value is lost and where engineering enters.
+
+Task-specific control objects:
+  record what is directly repaired.
 
 Eight mechanism axes:
-  localize which system component should be repaired.
+  explain which component-level mechanism is implicated.
 
-mismatch_type:
-  records the value-preservation diagnosis.
-
-repair_target:
-  records the intervenable mechanism.
+mechanism_axis:
+  records component attribution, not necessarily a direct runtime repair target.
 
 repair_layer:
   decides whether the repair belongs at the agent layer, the training layer, or both.
@@ -1346,12 +1441,13 @@ primitive mismatch diagnosis
   → model improvement when recurrent learning defects justify training
 ```
 
-The primitive-mismatch layer explains structure.  
-The mechanism layer chooses the scalpel.  
+Primitive mismatches find the lesion.  
+Task objects expose the tissue.  
+Mechanism axes explain the anatomy.  
+Audit Engineering performs the cut.  
 The object model records the cut.  
-Audit Engineering checks whether it worked.  
 SGAR decides whether it becomes state.  
-The training loop decides whether the scar should become learning.
+The training loop decides whether the recurrent scar should become learning.
 
 ---
 
@@ -1370,7 +1466,21 @@ compound
 unknown
 ```
 
-### A.2 Mechanism Axis Enum
+### A.2 Task Object Type Enum
+
+```text
+sql_dag
+claim_evidence_map
+state_table
+router_rule
+rubric
+schema_view
+value_binding_table
+dependency_graph
+other
+```
+
+### A.3 Mechanism Axis Enum
 
 ```text
 specification_reward
@@ -1382,9 +1492,19 @@ capability_support
 capability_routing
 search_execution
 unknown
+not_operationalized
 ```
 
-### A.3 Repair Layer Enum
+### A.4 Operationalization Status Enum
+
+```text
+direct
+derived
+partial
+not_operationalized
+```
+
+### A.5 Repair Layer Enum
 
 ```text
 agent
@@ -1393,7 +1513,7 @@ hybrid
 unknown
 ```
 
-### A.4 Mechanism Role Enum
+### A.6 Mechanism Role Enum
 
 ```text
 primary
@@ -1402,7 +1522,7 @@ downstream
 unknown
 ```
 
-### A.5 Control Delta Type Enum
+### A.7 Control Delta Type Enum
 
 ```text
 SpecificationDelta
@@ -1518,9 +1638,12 @@ A complete bridge-aware failure record should contain:
   "audit_finding": {
     "id": "finding.example",
     "mismatch_type": "support",
-    "repair_target": "capability_routing",
+    "control_object_ref": "router_rule.schema_audit_trigger",
+    "control_object_type": "router_rule",
+    "mechanism_axis": "capability_routing",
+    "operationalization_status": "direct",
     "repair_layer": "hybrid",
-    "repair_target_role": "primary",
+    "mechanism_role": "primary",
     "mechanism_profile": "mechanism_profile.example",
     "control_delta": "control_delta.example",
     "regression_guard": "regression_guard.example"
@@ -1536,7 +1659,9 @@ A complete bridge-aware failure record should contain:
   },
   "control_delta": {
     "id": "control_delta.example",
-    "target_mechanism": "capability_routing",
+    "target_object_ref": "router_rule.schema_audit_trigger",
+    "target_object_type": "router_rule",
+    "mechanism_axis": "capability_routing",
     "target_layer": "hybrid",
     "delta_type": "CapabilityRoutingDelta",
     "change": "Activate schema-audit mode when lexical overlap is high but join path is uncertain."

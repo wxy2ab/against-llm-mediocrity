@@ -19,17 +19,18 @@ The current governed-LLM theory stack primarily describes **runtime governance**
 
 This leaves a training-side gap. When a recurring failure is caused by a **learned component** of the approximate LLM system—belief/representation `B_θ`, world model `T̂_θ`, capability support `π_θ`, capability routing `r_θ`, or learned reward/proxy `R̂_θ / R_proxy`—runtime governance can often patch the failure, but repeated patches become a treadmill. The system keeps paying inference-time cost for a defect that should be amortized into the model.
 
-This document defines **Mechanism-Driven Training**: the training-side counterpart of runtime governance. Its central claim is that the same eight-axis mechanism diagnosis used for repair localization should also drive training intervention. The difference is not the diagnosis; the difference is the **repair layer**.
+This document defines **Mechanism-Driven Training**: the training-side counterpart of runtime governance. Its central claim is that the same eight-axis mechanism diagnosis used for repair localization should also drive training intervention, but only after recurring failures have been operationalized through task-specific control objects and mechanism-aware evaluation. The difference is not the diagnosis alone; the difference is the **repair layer** and the operationalization threshold.
 
 The canonical record is:
 
 ```text
 mismatch_type ∈ six primitive value-preservation mismatches
-repair_target ∈ eight intervention mechanism axes
+control_object ∈ task-specific governed object
+mechanism_axis ∈ eight intervention mechanism axes | unknown | not_operationalized
 repair_layer ∈ agent | training | hybrid
 ```
 
-Runtime governance repairs local, reversible, task-specific failures. Mechanism-driven training promotes recurrent, cross-task, learning-component failures from the Defect Ledger into training curricula, boundary data, grounding data, reward corrections, or capability-support data.
+Runtime governance repairs local, reversible, task-specific failures. Mechanism-driven training promotes recurrent, cross-task, operationalized learning-component failures from the Defect Ledger into training curricula, boundary data, grounding data, reward corrections, or capability-support data.
 
 In one sentence:
 
@@ -49,8 +50,8 @@ Eight Mechanism Axes:
   localize which system component should be changed.
 
 Mechanism-Driven Training:
-  handles the subset of mechanism failures whose repair target is a learned component
-  and whose recurrence justifies amortizing the repair into model training.
+  handles the subset of mechanism failures whose learned component is operationalized enough
+  that recurrence justifies amortizing the repair into model training.
 ```
 
 The six primitive mismatches answer:
@@ -64,14 +65,14 @@ The eight mechanism axes answer:
 
 ```text
 Which component caused or amplified the failure?
-Which repair target should be changed?
+Which mechanism axis is implicated after the task object is known?
 ```
 
 Mechanism-driven training answers:
 
 ```text
-When the repair target is a learned component, should this failure remain a runtime patch
-or be promoted into training?
+When the mechanism axis is a learned component and the failure family is operationalized,
+should this failure remain a runtime patch or be promoted into training?
 ```
 
 ---
@@ -152,6 +153,7 @@ Mechanism-driven training therefore follows this discipline:
 ```text
 surface failure
   → primitive mismatch diagnosis
+  → task-specific control object
   → mechanism profile
   → learned-component or system-component split
   → if learned-component and recurrent:
@@ -161,7 +163,7 @@ surface failure
 
 The rule is:
 
-> Do not train the symptom. Train the mechanism that made the symptom recur.
+> Do not train the symptom. Train the operationalized mechanism failure family that made the symptom recur.
 
 Examples:
 
@@ -213,7 +215,7 @@ The goal is not merely to expose information in the prompt. The goal is to make 
 Mechanism profiles with:
 
 ```text
-repair_target = belief_representation
+mechanism_axis = belief_representation
 repair_layer = training | hybrid
 ```
 
@@ -302,7 +304,7 @@ This is crucial when the system acts in code, SQL, browsers, APIs, tools, market
 Mechanism profiles with:
 
 ```text
-repair_target = dynamics_world_model
+mechanism_axis = dynamics_world_model
 repair_layer = training | hybrid
 ```
 
@@ -385,7 +387,7 @@ Can the model produce the required operator, structure, proof move, join pattern
 Mechanism profiles with:
 
 ```text
-repair_target = capability_support
+mechanism_axis = capability_support
 repair_layer = training | hybrid
 ```
 
@@ -472,7 +474,7 @@ under-triggering: T_X \ M_X
 Mechanism profiles with:
 
 ```text
-repair_target = capability_routing
+mechanism_axis = capability_routing
 repair_layer = training | hybrid
 ```
 
@@ -553,7 +555,7 @@ rank_R̂(Y1, Y2) ≠ rank_U(Y1, Y2)
 Mechanism profiles with:
 
 ```text
-repair_target = specification_reward
+mechanism_axis = specification_reward
 repair_layer = training | hybrid
 ```
 
@@ -625,6 +627,8 @@ repair locally when local repair is sufficient
 promote only when recurrence makes runtime repair a treadmill
 ```
 
+Mechanism-driven training never trains an abstract mechanism name directly. It trains operationalized failure families extracted from governed task objects, defect-ledger evidence, mechanism evals, and boundary regressions.
+
 A training intervention is justified when the defect is:
 
 ```text
@@ -648,8 +652,9 @@ Mechanism-driven training extends Audit Engineering from runtime write-back into
 ```text
 agent-layer audit finding
   → primitive mismatch diagnosis
+  → task-specific control object
   → mechanism profile
-  → repair_target ∈ eight mechanism axes
+  → mechanism_axis ∈ eight mechanism axes
   → repair_layer ∈ agent | training | hybrid
   → if system component:
        repair through agent-layer governance
@@ -668,17 +673,18 @@ A finding should be promoted to training only if all of the following hold:
 
 ```text
 1. repair_layer is training or hybrid.
-2. repair_target is a learned component:
+2. mechanism_axis is a learned component:
      belief_representation
      dynamics_world_model
      capability_support
      capability_routing
      specification_reward
-3. recurrence_count exceeds threshold.
-4. recurrence appears across tasks, schemas, users, or environments.
-5. agent-layer patching is repetitive or expensive.
-6. a mechanism-specific held-out eval can be constructed.
-7. boundary regression risk is acceptable.
+3. the failure family is operationalized through a task-specific control object.
+4. recurrence_count exceeds threshold.
+5. recurrence appears across tasks, schemas, users, or environments.
+6. agent-layer patching is repetitive or expensive.
+7. a mechanism-specific held-out eval can be constructed.
+8. boundary regression risk is acceptable.
 ```
 
 ### 6.3 Rejection Conditions
@@ -709,9 +715,12 @@ An Audit Finding should include:
 ```json
 {
   "mismatch_type": "observation_representation | state | fitting_boundary | support | aggregation | specification | compound | unknown",
-  "repair_target": "specification_reward | observation_availability | belief_representation | dynamics_world_model | action_interface | capability_support | capability_routing | search_execution | unknown",
+  "control_object_ref": "object.id",
+  "control_object_type": "sql_dag | claim_evidence_map | state_table | router_rule | rubric | other",
+  "mechanism_axis": "specification_reward | observation_availability | belief_representation | dynamics_world_model | action_interface | capability_support | capability_routing | search_execution | unknown | not_operationalized",
+  "operationalization_status": "direct | derived | partial | not_operationalized",
   "repair_layer": "agent | training | hybrid | unknown",
-  "repair_target_role": "primary | amplifier | downstream | unknown",
+  "mechanism_role": "primary | amplifier | downstream | unknown",
   "mechanism_profile_ref": "mechanism_profile.id"
 }
 ```
@@ -767,7 +776,7 @@ The Defect Ledger should track promotion state:
 {
   "id": "defect_family.schema_audit_undertrigger",
   "recurrence_count": 37,
-  "repair_target": "capability_routing",
+  "mechanism_axis": "capability_routing",
   "repair_layer": "hybrid",
   "promoted_to_training": true,
   "training_corpus_refs": ["corpus.schema_audit_boundary_v1"],
@@ -1126,7 +1135,8 @@ R̂_θ / R_proxy reward side
 A defect family can be promoted to training only if the answer to every item is yes:
 
 ```text
-[ ] Is the repair target a learned component?
+[ ] Is the mechanism axis a learned component?
+[ ] Is there a governed task object that makes the failure family reproducible and auditable?
 [ ] Is the defect recurrent?
 [ ] Does recurrence appear across tasks, schemas, users, or environments?
 [ ] Is runtime patching becoming a treadmill?

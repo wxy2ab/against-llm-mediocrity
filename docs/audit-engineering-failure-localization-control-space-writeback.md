@@ -11,7 +11,7 @@
 
 LLM systems are increasingly built around iterative generation, critique, retrieval, tool use, execution feedback, and revision. These loops often improve surface quality, but they do not automatically create durable system learning. A model may critique an answer, produce a better candidate, and still leave the underlying failure mode untouched. The next similar task may fail again because the defect was never localized, written back into the control space, guarded against, or committed into state.
 
-This report introduces **Audit Engineering** as the discipline of converting failures into durable control improvements for governed LLM systems. An audit is not a score, a preference judgment, or a generic critique. A useful audit identifies a localized defect, grounds it in evidence, maps it to a mismatch type, selects a repair target, produces a control delta, and creates a regression guard that will fail if the defect family recurs.
+This report introduces **Audit Engineering** as the discipline of converting failures into durable control improvements for governed LLM systems. An audit is not a score, a preference judgment, or a generic critique. A useful audit identifies a localized defect, grounds it in evidence, maps it to a mismatch type, identifies the task-specific control object that should change, records mechanism attribution when operationalized, produces a control delta, and creates a regression guard that will fail if the defect family recurs.
 
 Audit Engineering is built on two asymmetries. First, excellent generation is often harder than defect identification. Second, complete upfront specification is often harder than counterexample-driven specification repair. High-value systems should exploit these asymmetries by turning candidate failures into improvements in task representation, capability routing, support search, aggregation constraints, specification, verification, and hard state.
 
@@ -20,7 +20,9 @@ The report defines the core audit lifecycle:
 ```text
 Candidate Artifact
   → Audit
-  → Failure Localization
+  → Primitive Mismatch Diagnosis
+  → Task-Specific Control Object
+  → Mechanism Attribution
   → Control Delta
   → GKO / GEO / Verifier / State Update
   → Regression Guard
@@ -85,8 +87,8 @@ An audit finding should instead say:
 The output joined table A to table C directly, but the schema requires A → B → C.
 Evidence: foreign-key graph shows no A.c_id; execution error references missing column C.id.
 Mismatch: aggregation + observation-representation.
-Repair target: capability_routing.
-Repair object: join-path control object.
+Control object: join-path control object.
+Mechanism attribution: capability_routing.
 Control delta: add join_path_constraint for this schema family.
 Regression guard: re-run representative query requiring A → B → C and fail if direct A → C join appears.
 ```
@@ -232,7 +234,7 @@ This table is the core diagnostic map. A useful audit finding does not stop at �
 
 ## 6. Audit Finding
 
-An **Audit Finding** is the atomic object of Audit Engineering. It records a localized failure and connects that failure to evidence, mechanism, repair, and regression governance.
+An **Audit Finding** is the atomic object of Audit Engineering. It records a localized failure and connects that failure to evidence, a task-specific control object, mechanism attribution, repair, and regression governance.
 
 A minimal Audit Finding schema is:
 
@@ -246,9 +248,12 @@ A minimal Audit Finding schema is:
     "observation_representation | state | fitting_boundary | support | aggregation | specification | compound"
   ],
   "severity": "low | medium | high | critical",
-  "repair_target": "specification_reward | observation_availability | belief_representation | dynamics_world_model | action_interface | capability_support | capability_routing | search_execution | unknown",
+  "control_object_ref": "object.id",
+  "control_object_type": "sql_dag | claim_evidence_map | state_table | router_rule | rubric | other",
+  "mechanism_axis": "specification_reward | observation_availability | belief_representation | dynamics_world_model | action_interface | capability_support | capability_routing | search_execution | unknown | not_operationalized",
+  "operationalization_status": "direct | derived | partial | not_operationalized",
   "repair_layer": "agent | training | hybrid | unknown",
-  "repair_target_role": "primary | amplifier | downstream | unknown",
+  "mechanism_role": "primary | amplifier | downstream | unknown",
   "repair_object": "gko | geo | verifier | transition_contract | state_record | regression_guard | unknown",
   "control_delta": "proposed change to governed control space",
   "regression_guard": "test or condition that should fail if the defect recurs",
@@ -264,7 +269,7 @@ A strong finding has five properties:
 localized: it names a specific defect, not general dissatisfaction
 evidenced: it points to observable support
 mechanistic: it maps to a mismatch or system station
-actionable: it identifies a repair target
+actionable: it identifies the object that should change
 regressable: it yields a future guard
 ```
 
@@ -295,6 +300,8 @@ A minimal schema is:
   "operation": "create | update | weaken | strengthen | revoke | split | merge | reorder | escalate",
   "target_type": "GKO | GEO | verifier | representation | router | state_record | transition_contract | regression_guard",
   "target_id": "object being modified, if any",
+  "mechanism_axis": "specification_reward | observation_availability | belief_representation | dynamics_world_model | action_interface | capability_support | capability_routing | search_execution | unknown | not_operationalized",
+  "operationalization_status": "direct | derived | partial | not_operationalized",
   "proposed_change": "precise change description",
   "condition": "when this delta should apply",
   "priority": "conflict-resolution priority",
@@ -305,7 +312,7 @@ A minimal schema is:
 }
 ```
 
-Control deltas are important because they prevent audits from becoming one-time comments. The system improves only when a finding becomes a change in representation, routing, search, specification, verification, or state.
+Control deltas are important because they prevent audits from becoming one-time comments. The system improves only when a finding becomes a change in a governed object. Mechanism attribution can guide that change, but hard audit repairs objects, not abstractions.
 
 ---
 
@@ -318,13 +325,15 @@ The reference lifecycle is:
 2. Select audit lenses based on task risk and mismatch profile.
 3. Generate audit findings.
 4. Ground findings in evidence and verifier hierarchy.
-5. Accept, reject, merge, or escalate findings.
-6. Convert accepted findings into control deltas.
-7. Apply deltas to governed objects or state.
-8. Create regression guards for defect families.
-9. Record the defect in a ledger.
-10. Regenerate or continue under the updated control space.
-11. Monitor for recurrence and guard health.
+5. Identify the task-specific control object to be constructed or revised.
+6. Add mechanism attribution if operationalized enough to be meaningful.
+7. Accept, reject, merge, or escalate findings.
+8. Convert accepted findings into control deltas.
+9. Apply deltas to governed objects or state.
+10. Create regression guards for defect families.
+11. Record the defect in a ledger.
+12. Regenerate or continue under the updated control space.
+13. Monitor for recurrence and guard health.
 ```
 
 Pseudocode:
@@ -354,7 +363,7 @@ function AUDIT_ENGINEERING_LOOP(task, artifact, control_state):
     return updated_control_state, guards, ledger_update
 ```
 
-The loop may be automated, human-mediated, or hybrid. The important property is that accepted failures are written back.
+The loop may be automated, human-mediated, or hybrid. The important property is that accepted failures are written back through governed task objects rather than left as abstract commentary.
 
 ---
 
@@ -861,9 +870,12 @@ A minimal defect ledger entry is:
   "mismatch_profile": ["mismatch types"],
   "control_deltas": ["delta ids"],
   "regression_guards": ["guard ids"],
-  "status": "open | mitigated | guarded | recurring | revoked | accepted_risk",
+  "status": "open | mitigated | guarded | recurring | promoted | revoked | accepted_risk",
   "recurrence_count": 0,
   "last_seen": "timestamp or version",
+  "promoted_to_training": false,
+  "training_corpus_refs": ["dataset or curriculum ids"],
+  "retirement_condition": "when runtime governance can stop carrying this defect family",
   "owner": "system | human | team | component",
   "notes": "additional context"
 }
@@ -877,6 +889,7 @@ merge duplicate findings
 track repair effectiveness
 identify stale guards
 escalate unresolved defect families
+promote recurrent learning-side defects into training
 record accepted risk
 support postmortems
 ```
@@ -1248,7 +1261,34 @@ superseded
 revoked
 committed
 rolled_back
+promoted
 ```
+
+### 17.1 Promotion from Defect Ledger to Training
+
+Audit Engineering should not treat every recurrent defect as a forever-runtime patch. When a defect family keeps recurring and its dominant `repair_layer` is `training` or `hybrid`, the ledger should support promotion into mechanism-driven training.
+
+The basic ratchet is:
+
+```text
+Audit Finding
+  -> Defect Ledger recurrence
+  -> repair_layer = training | hybrid
+  -> promotion decision
+  -> training corpus / curriculum update
+  -> runtime guard retained until retirement condition is met
+```
+
+Typical promotion conditions are:
+
+```text
+the same failure family recurs across tasks
+the dominant mechanism target has a learned-side component
+agent-layer repair is costly or unstable
+the defect is amortizable through data, reward, routing, or world-model training
+```
+
+Promotion should not immediately remove runtime governance. The ledger should retain the guard, delta, and owner until a retirement condition is satisfied, such as repeated non-recurrence under representative evaluation.
 
 ---
 
@@ -1315,9 +1355,11 @@ This is not enough.
   ],
   "mismatch_type": ["aggregation", "observation_representation"],
   "severity": "high",
-  "repair_target": "capability_routing",
+  "control_object_ref": "join_path_control_object",
+  "control_object_type": "sql_dag",
+  "mechanism_axis": "capability_routing",
   "repair_layer": "agent",
-  "repair_target_role": "primary",
+  "mechanism_role": "primary",
   "repair_object": "gko",
   "control_delta": "Create join-path constraint requiring schema-graph path coverage for all question-bound entities.",
   "regression_guard": "For questions binding departments, employees, and training_records, fail if generated SQL lacks employees in the join path.",
@@ -1373,9 +1415,11 @@ A model generates a patch that fixes a failing test but introduces a hidden stat
   ],
   "mismatch_type": ["aggregation", "specification"],
   "severity": "critical",
-  "repair_target": "search_execution",
+  "control_object_ref": "state_isolation_invariant",
+  "control_object_type": "rubric",
+  "mechanism_axis": "search_execution",
   "repair_layer": "agent",
-  "repair_target_role": "downstream",
+  "mechanism_role": "downstream",
   "repair_object": "regression_guard",
   "control_delta": "Add order-randomized test guard and state-isolation invariant.",
   "regression_guard": "Run affected test suite under randomized order and fail on global cache mutation outside allowed lifecycle.",
@@ -1555,9 +1599,12 @@ In governed LLM systems, failure is not only an error. It is one of the primary 
   "evidence": ["specific evidence"],
   "mismatch_type": ["observation_representation | state | fitting_boundary | support | aggregation | specification | compound"],
   "severity": "low | medium | high | critical",
-  "repair_target": "specification_reward | observation_availability | belief_representation | dynamics_world_model | action_interface | capability_support | capability_routing | search_execution | unknown",
+  "control_object_ref": "object.id",
+  "control_object_type": "sql_dag | claim_evidence_map | state_table | router_rule | rubric | other",
+  "mechanism_axis": "specification_reward | observation_availability | belief_representation | dynamics_world_model | action_interface | capability_support | capability_routing | search_execution | unknown | not_operationalized",
+  "operationalization_status": "direct | derived | partial | not_operationalized",
   "repair_layer": "agent | training | hybrid | unknown",
-  "repair_target_role": "primary | amplifier | downstream | unknown",
+  "mechanism_role": "primary | amplifier | downstream | unknown",
   "repair_object": "gko | geo | verifier | transition_contract | state_record | regression_guard | unknown",
   "control_delta": "proposed change",
   "regression_guard": "future recurrence check",
@@ -1615,9 +1662,12 @@ In governed LLM systems, failure is not only an error. It is one of the primary 
   "mismatch_profile": ["mismatch types"],
   "control_deltas": ["delta ids"],
   "regression_guards": ["guard ids"],
-  "status": "open | mitigated | guarded | recurring | revoked | accepted_risk",
+  "status": "open | mitigated | guarded | recurring | promoted | revoked | accepted_risk",
   "recurrence_count": 0,
   "last_seen": "timestamp or version",
+  "promoted_to_training": false,
+  "training_corpus_refs": ["dataset or curriculum ids"],
+  "retirement_condition": "condition for removing the runtime carry cost",
   "owner": "system | human | team | component",
   "notes": "additional context"
 }
@@ -1633,7 +1683,7 @@ For any serious candidate artifact, ask:
 1. What exactly failed?
 2. What evidence supports the finding?
 3. Which primitive mismatch or compound mismatch is involved?
-4. Which pipeline station should be repaired?
+4. Which governed task object should change, and which mechanism axis is implicated?
 5. Is the defect a one-off or a family?
 6. What control object should change?
 7. What regression guard would fail if the defect recurs?

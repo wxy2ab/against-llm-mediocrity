@@ -9,9 +9,9 @@
 
 ## 摘要
 
-本文定义了受治理 LLM 系统的 **形式化机制层**（Formal Mechanism Layer）。它是价值保存结构理论、六类原始失配、受治理 LLM 对象模型、审计工程，以及状态治理代理机制（SGAR）的配套文档。它的目的，是把结构性诊断连接到具体修复。
+本文定义了受治理 LLM 系统的 **形式化机制层**（Formal Mechanism Layer）。它是价值保存结构理论、六类原始失配、受治理 LLM 对象模型、审计工程，以及状态治理代理机制（SGAR）的配套文档。它的目的，是在任务失败已经被转化为可治理控制对象之后，把结构性诊断连接到组件级归因与修复定位。
 
-六类原始失配解释了任务价值在哪里发生结构性扭曲：观测-表征、状态、拟合边界、支持、聚合，以及规格失配。它们是 **任务价值的结构性诊断轴**。相比之下，形式化机制层回答的是另一个问题：一旦失败已经被观察到，实际的 LLM 系统中究竟应当修改哪个组件？
+六类原始失配解释了任务价值在哪里发生结构性扭曲：观测-表征、状态、拟合边界、支持、聚合，以及规格失配。它们是 **任务价值的结构性诊断轴**，也是实践中的第一工程入口。相比之下，形式化机制层回答的是另一个问题：一旦失败已经被观察到，并且已经被对象化为任务特定控制对象，实际的 LLM 系统中究竟是哪类组件机制在解释或放大这一失败？
 
 我们把 LLM 系统建模为一个在部分可观测环境中运行的近似决策系统。系统并不直接拥有真实状态、真实转移函数、真实奖励、完整动作空间或完整观测通道。它通过一组近似组件行动：规格与奖励代理、观测接口、信念与表征状态、世界模型、动作接口、策略与能力支持、能力路由，以及搜索或执行算法。
 
@@ -30,11 +30,11 @@
 
 这八条轴并不是八类新的原始失配。它们也不是对六失配分类法的替代。它们是 **系统干预轴**。一个原始失配可能由多个机制故障产生，而一个机制故障也可能表现为多个原始失配。因此，恰当的诊断单位不是被迫选出的单一标签，而是 **机制画像**（Mechanism Profile）。
 
-核心原则是：
+修正后的定位是：
 
-> 原始失配层解释结构；机制层选择手术刀。
+> 形式化机制层是一个派生出来的组件分析层，而不是默认的一线工程入口。
 
-本文形式化定义这八条轴，将机制画像定义为治理对象，给出用于因果定位的最小干预探针，把原始失配映射到机制来源，并展示机制级诊断如何与审计工程、控制增量、回归护栏、缺陷台账以及 SGAR 的硬状态转移相集成。
+本文形式化定义这八条轴，将机制画像定义为治理对象，给出用于因果定位的最小干预探针，把原始失配映射到机制来源，并展示机制级诊断如何与任务特定控制对象、审计工程、控制增量、回归护栏、缺陷台账以及 SGAR 的硬状态转移相集成。
 
 ---
 
@@ -45,13 +45,14 @@
 ```text
 Layer 0: 世界到输出的价值保存管线
 Layer 1: 六类原始失配
-Layer 2: 形式化机制层
-Layer 3: 诊断-机制桥接
-Layer 4: 知识治理
-Layer 5: 审计工程
-Layer 6: 受治理对象模型
-Layer 7: 状态治理代理机制（SGAR）
-Layer 8: 机制驱动训练
+Layer 2: 任务特定控制对象
+Layer 3: 形式化机制层
+Layer 4: 诊断-机制桥接
+Layer 5: 知识治理
+Layer 6: 审计工程
+Layer 7: 受治理对象模型
+Layer 8: 状态治理代理机制（SGAR）
+Layer 9: 机制驱动训练
 ```
 
 每一层回答一个不同的问题。
@@ -60,13 +61,14 @@ Layer 8: 机制驱动训练
 |---|---|
 | 价值保存管线 | 任务价值必须经过哪些站点才能存活？ |
 | 六类原始失配 | 任务价值在何处发生结构性扭曲？ |
-| 形式化机制层 | 应当修改哪个可干预的系统组件？ |
-| 诊断-机制桥接 | 价值诊断如何转化为修复定位与修复层选择？ |
+| 任务特定控制对象 | 应先构造或修订哪个受治理任务对象？ |
+| 形式化机制层 | 是哪类组件机制在解释该任务对象上的失败？ |
+| 诊断-机制桥接 | 价值诊断如何转化为对象修复、机制归因与修复层选择？ |
 | 知识治理 | 哪些控制知识应被对象化、定域、修订与撤销？ |
 | 审计工程 | 应如何定位失败并把结果写回控制空间？ |
 | 受治理对象模型 | 发现、增量、GKO、护栏与状态记录应如何表示？ |
 | SGAR | 哪些动作、修复、记忆与状态更新会被真正提交？ |
-| 机制驱动训练 | 哪些反复出现的学习组件失败应被提升到训练中？ |
+| 机制驱动训练 | 哪些反复出现且已操作化的学习组件失败应被提升到训练中？ |
 
 机制层位于结构理论与修复之间。它防止 LLM 系统设计中一种常见失败：从表面症状直接跳到自己偏爱的修法，而没有先识别组件级瓶颈。
 
@@ -83,7 +85,7 @@ schema 已在上下文中但不可操作        → 信念 / 表征
 成功标准设错                        → 规格 / 奖励
 ```
 
-原始失配告诉我们，发生的是哪种价值保存失败。机制画像告诉我们，应当在哪里动刀。
+原始失配告诉我们，发生的是哪种价值保存失败。任务特定控制对象告诉我们，真正应修改的对象是什么。机制画像告诉我们，这个对象背后是哪类组件机制在起作用。
 
 ---
 
@@ -199,6 +201,59 @@ unknown / not yet distinguished
 ```
 
 目标不是把失败命名得很漂亮，而是识别出成本最低、信息量最高、杠杆最大的修复。
+
+### 1.5 范围修正：派生的组件分析层，而不是一线工程入口
+
+形式化机制层不应被当作第一步工程动作。真正的工程入口，通常来自原始失配所迫使我们构造出的任务特定治理对象：
+
+```text
+观测-表征
+  → evidence map、schema view、reader simulator、value-binding table
+
+状态
+  → state machine、world ledger、role-state table、task-state table
+
+拟合边界
+  → router rule、mode boundary、pacing / density controller
+
+支持
+  → candidate generator、technique library、retrieval operator
+
+聚合
+  → DAG、outline graph、dependency tracker、narrative skeleton
+
+规格
+  → rubric、style guard、success condition、reader-response criterion
+```
+
+这些任务对象才是审计与 control delta 直接修改的东西。形式化机制层是在这些对象已经存在之后，解释它们背后更稳定的组件归因。
+
+### 1.6 可操作化门槛
+
+一条机制轴只有在同时满足以下五个条件时，才应被当作直接 repair target：
+
+```text
+1. Observable symptom
+   该机制失败能在任务行为中被观察到。
+
+2. Task-specific control object
+   有一个具体治理对象承载修复。
+
+3. Intervention operator
+   已知如何修改该对象或组件。
+
+4. Success / failure signal
+   能判断修复是否有效。
+
+5. Regression guard
+   同类失败复发时可以被可靠捕获。
+```
+
+如果这些条件还不成立，就应把机制标签记录为假设、诊断视角或训练侧归因，而不是直接把抽象组件名写成运行时修复对象。
+
+### 1.7 开放任务边界
+
+形式化机制层在观测、状态、验证器、执行轨迹、候选空间和路由边界都较稳定的任务上最可操作。在开放式创作任务中，如果尚未先把失败转化为角色状态机、叙事骨架、伏笔账本、风格守卫、节奏控制器或读者模拟器等治理对象，那么直接讨论 `dynamics_world_model` 或 `specification_reward` 往往会显得伪精确。对这类任务，应先有六类失配驱动的对象构造，再有机制归因。
 
 ---
 
@@ -1146,7 +1201,7 @@ Candidate Artifact
   "finding": "The SQL query joins orders to customers through the wrong bridge table.",
   "primitive_mismatch": ["aggregation", "support"],
   "mechanism_profile": "mechanism_profile.sql_join_path_001",
-  "repair_target": "belief_representation + search_execution",
+  "mechanism_axis": "belief_representation + search_execution",
   "control_delta": "externalize schema graph and enumerate join paths before SQL rendering"
 }
 ```
@@ -1929,7 +1984,7 @@ What exactly must be changed so that the same failure family does not recur?
 
 最简短地说：
 
-> 原始失配层解释结构；机制层选择手术刀。
+> 六类原始失配先找到病灶；任务对象把病灶暴露成可审计组织；机制层解释系统解剖；审计 delta 执行动刀。
 
 ---
 
@@ -2034,7 +2089,7 @@ Search / Execution
   "primitive_mismatch": ["..."],
   "mechanism_profile": "mechanism_profile.id",
   "severity": "low | medium | high | critical",
-  "repair_target": "...",
+  "mechanism_axis": "...",
   "control_delta": "control_delta.id",
   "regression_guard": "regression_guard.id",
   "confidence": "low | medium | high"

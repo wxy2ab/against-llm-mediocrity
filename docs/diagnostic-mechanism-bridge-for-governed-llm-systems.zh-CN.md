@@ -11,23 +11,24 @@
 
 受治理 LLM 系统的理论中包含两个互补的诊断层。第一层是 **六类原始失配分类法**：观测-表征失配、状态失配、拟合边界失配、支持失配、聚合失配和规格失配。这一层解释任务价值沿价值保存管线在哪些结构位置发生了丢失。它回答的问题是：**系统为什么会在任务价值意义上失败？**
 
-第二层是 **形式化机制层**：规格 / 奖励、观测可得性、信念 / 表征、动态 / 世界模型、行动 / 接口、能力支持、能力路由，以及搜索 / 执行。这一层识别一个近似 LLM 决策系统中哪个可干预组件应当被改变。它回答的问题是：**系统应该在哪里修？**
+第二层是 **形式化机制层**：规格 / 奖励、观测可得性、信念 / 表征、动态 / 世界模型、行动 / 接口、能力支持、能力路由，以及搜索 / 执行。这一层识别一个近似 LLM 决策系统中，在哪个组件层面可以解释或放大已经对象化的失败。它回答的问题是：**这个失败背后更像哪类组件机制问题？**
 
-这两层不是彼此竞争的分类法，而是正交坐标系。六类原始失配是 **价值保存诊断轴**；八条机制轴是 **干预定位轴**。因此，一次失败至少应由三个字段来表示：
+这两层不是彼此竞争的分类法，而是正交坐标系。六类原始失配是 **价值保存诊断轴**，也是任务侧工程入口；八条机制轴是 **派生的组件归因轴**。因此，一次失败至少应由四个字段来表示：
 
 ```text
 mismatch_type ∈ six primitive mismatches
-repair_target ∈ eight mechanism axes
+control_object ∈ task-specific governed object
+mechanism_axis ∈ eight mechanism axes | unknown | not_operationalized
 repair_layer  ∈ agent | training | hybrid
 ```
 
 本文定义这两层之间的桥接关系。它引入一个六乘八的交叉映射矩阵、一个机制画像对象、一条修复层选择规则，以及一个从审计到训练的反馈闭环。它还澄清机制层与审计工程、受治理对象模型以及状态治理型 Agent 体制（SGAR）之间的关系。结果是一个统一的诊断与修复架构：原始失配解释价值失败；机制画像定位修复；审计发现产出控制增量；受治理对象存储修复知识；SGAR 把已验证变化提交进硬状态；反复出现的学习组件失败则可被提升为训练课程。
 
-中心句是：
+修正后的中心句是：
 
 ```text
-原始失配层解释结构；
-机制层选择手术刀。
+工程从原始失配进入；
+形式化机制分析在对象完成可操作化之后跟进。
 ```
 
 ---
@@ -56,15 +57,15 @@ M_θ = (R̂_θ, Ω_sys, B_θ, T̂_θ, A_sys, π_θ, r_θ, D)
 第一，这两层是正交关系，而不是冗余关系：
 
 ```text
-六类原始失配 = 价值在何处结构性流失。
-八条机制轴   = 应该改变哪个系统组件。
+六类原始失配 = 任务价值在何处结构性流失，以及工程应从哪里进入。
+八条机制轴   = 该失败最终可能归属到哪个系统组件。
 ```
 
 第二，一次失败可能只有一种原始失配诊断，却有多个机制成因。反过来，一个单一机制缺陷也可能表现为若干种原始失配症状。
 
 第三，机制层是推理时治理与训练时改进之间缺失的桥梁。Agent 层修复处理局部、可逆、任务特定的失败。训练层修复处理反复出现、跨任务、可摊销的学习组件失败。
 
-第四，这座桥应通过 `mismatch_type`、`repair_target`、`repair_layer` 和 `mechanism_profile` 字段在对象模型中被形式化。
+第四，这座桥应通过 `mismatch_type`、`control_object_ref`、`control_object_type`、`mechanism_axis`、`operationalization_status`、`repair_layer` 和 `mechanism_profile` 字段在对象模型中被形式化。
 
 本文并不替代六类失配分类法、形式化机制层文档、对象模型规范、审计工程或 SGAR。它是把它们接成同一系统的布线层。
 
@@ -131,7 +132,7 @@ M_θ = (R̂_θ, Ω_sys, B_θ, T̂_θ, A_sys, π_θ, r_θ, D)
 因此，机制层回答的是：
 
 ```text
-应该改什么，以及应当在哪一层改？
+在任务对象已经明确之后，哪类组件机制被牵涉，以及它是否已经足够可操作化，值得直接修复或提升到训练？
 ```
 
 ### 2.3 桥接
@@ -141,13 +142,14 @@ M_θ = (R̂_θ, Ω_sys, B_θ, T̂_θ, A_sys, π_θ, r_θ, D)
 ```text
 Failure
   → primitive mismatch diagnosis
+  → task-specific control object
   → mechanism profile
-  → repair target
+  → mechanism axis
   → repair layer
   → control delta / training item / state transition
 ```
 
-原始失配用价值语义解释失败。机制画像定位干预。修复层则决定修复属于 Agent 层治理、训练层改进，还是二者的混合。
+原始失配用价值语义解释失败。任务特定控制对象暴露真正要修改的对象。机制画像给出组件级归因。修复层则决定修复属于 Agent 层治理、训练层改进，还是二者的混合。
 
 ---
 
@@ -161,32 +163,36 @@ Layer 0: World-to-output value-preservation pipeline
 Layer 1: Six Primitive Mismatches
   发生的是哪一种任务价值失败？
 
-Layer 2: Formal Mechanism Layer
-  是哪个系统组件造成或放大了失败？
+Layer 2: Task-Specific Control Objects
+  应先构造或修订哪个受治理任务对象？
 
-Layer 3: Diagnostic-Mechanism Bridge
-  一个价值诊断如何转化为修复定位？
+Layer 3: Formal Mechanism Layer
+  是哪类系统组件机制在解释该任务对象上的失败？
 
-Layer 4: Knowledge Governance
+Layer 4: Diagnostic-Mechanism Bridge
+  一个价值诊断如何转化为对象修复、机制归因与修复层选择？
+
+Layer 5: Knowledge Governance
   哪些控制对象应被诱导、修订、撤销或复用？
 
-Layer 5: Audit Engineering
+Layer 6: Audit Engineering
   失败如何被定位并写回控制空间？
 
-Layer 6: Governed Object Model
+Layer 7: Governed Object Model
   失配诊断、机制画像、控制增量和状态记录如何存储？
 
-Layer 7: SGAR
+Layer 8: SGAR
   哪些修复、行动、验证结果与状态变化被形式提交？
 
-Layer 8: Mechanism-Driven Training
-  哪些反复出现的学习组件失败应被提升为训练课程？
+Layer 9: Mechanism-Driven Training
+  哪些反复出现且已操作化的学习组件失败应被提升为训练课程？
 ```
 
 关键过渡是：
 
 ```text
 primitive mismatch diagnosis
+  → task-specific control object
   → mechanism localization
   → repair-layer selection
 ```
@@ -208,7 +214,7 @@ primitive mismatch diagnosis
 | 聚合 | 局部好的部分能否组合成全局价值？ | 局部 clauses、步骤或 edits 看似合理，但全局不一致。 |
 | 规格 | 可访问目标是否代表真实效用？ | 系统优化了一个会把候选排错序的 rubric、指标、prompt 或代理。 |
 
-六类失配解释的是价值失败的形式。它们本身并不枚举所有可能需要修改的系统组件。
+六类失配解释的是价值失败的形式，也逼出第一个工程问题：应当先构造哪个治理对象，才能让这个失败变成可审计、可修改、可写回的对象。
 
 ---
 
@@ -227,7 +233,7 @@ primitive mismatch diagnosis
 | Capability routing | `r_θ` | 正确能力是否在正确条件下被激活？ | 训练，辅以 Agent 补丁 |
 | Search / execution | `D` | 推理时过程是否正确搜索、分支、执行、验证或回溯？ | Agent |
 
-这八条轴不是八个新的原始价值失配。它们是在价值保存失配已经被诊断之后使用的修复坐标。
+这八条轴不是八个新的原始价值失配。它们是在价值保存失配已经被诊断，并且已经通过任务特定控制对象被操作化之后，才使用的派生修复坐标。
 
 ---
 
@@ -593,6 +599,36 @@ Interpretation:
 }
 ```
 
+### 10.1.1 可操作化门槛
+
+只有当以下五个条件同时满足时，机制轴才应被当作直接 repair target：
+
+```text
+1. Observable symptom
+   该机制失败能在任务行为中被观察到。
+
+2. Task-specific control object
+   已存在承载修复的具体治理对象。
+
+3. Intervention operator
+   已知如何修改该对象或组件。
+
+4. Success / failure signal
+   能判断修复是否有效。
+
+5. Regression guard
+   同类失败复发时可以被可靠捕获。
+```
+
+如果上述条件不满足，应记录：
+
+```text
+mechanism_axis = suspected axis
+operationalization_status = not_operationalized
+```
+
+而不是把抽象机制名直接写成运行时修复对象。
+
 ### 10.2 与 Audit Finding 的关系
 
 一个 Audit Finding 应包含或引用一个 Mechanism Profile。
@@ -603,9 +639,12 @@ Interpretation:
   "finding": "localized defect statement",
   "evidence": "specific evidence for the defect",
   "mismatch_type": "observation_representation | state | fitting_boundary | support | aggregation | specification | compound",
+  "control_object_ref": "object.id",
+  "control_object_type": "sql_dag | claim_evidence_map | state_table | router_rule | rubric | other",
   "mechanism_profile": "mechanism_profile.unique_id",
-  "repair_target": "specification_reward | observation_availability | belief_representation | dynamics_world_model | action_interface | capability_support | capability_routing | search_execution",
-  "repair_target_role": "primary | amplifier | downstream | unknown",
+  "mechanism_axis": "specification_reward | observation_availability | belief_representation | dynamics_world_model | action_interface | capability_support | capability_routing | search_execution | unknown | not_operationalized",
+  "operationalization_status": "direct | derived | partial | not_operationalized",
+  "mechanism_role": "primary | amplifier | downstream | unknown",
   "repair_layer": "agent | training | hybrid",
   "control_delta": "control_delta.unique_id",
   "regression_guard": "regression_guard.unique_id",
@@ -613,17 +652,20 @@ Interpretation:
 }
 ```
 
-这可以防止审计工程从症状直接跳到修复。审计必须先诊断价值失败，再定位机制，然后才写出控制增量。
+这可以防止审计工程从症状直接跳到抽象机制名。审计必须先诊断价值失败，识别要改的任务对象，再定位机制，然后才写出控制增量。
 
 ### 10.3 与 Control Delta 的关系
 
-Control Delta 应面向机制轴，而不是原始失配。
+Control Delta 应首先面向受治理任务对象，并把机制轴记录为归因。
 
 ```json
 {
   "id": "control_delta.unique_id",
   "source_finding": "finding.unique_id",
-  "target_mechanism": "specification_reward | observation_availability | belief_representation | dynamics_world_model | action_interface | capability_support | capability_routing | search_execution",
+  "target_object_ref": "object.id",
+  "target_object_type": "sql_dag | claim_evidence_map | state_table | router_rule | rubric | other",
+  "mechanism_axis": "specification_reward | observation_availability | belief_representation | dynamics_world_model | action_interface | capability_support | capability_routing | search_execution | unknown | not_operationalized",
+  "operationalization_status": "direct | derived | partial | not_operationalized",
   "target_layer": "agent | training | hybrid",
   "delta_type": "SpecificationDelta | ObservationDelta | BeliefRepresentationDelta | DynamicsWorldModelDelta | ActionInterfaceDelta | CapabilitySupportDelta | CapabilityRoutingDelta | SearchExecutionDelta",
   "change": "specific change to be applied",
@@ -746,7 +788,23 @@ unknown
 
 这个字段属于原始失配层。
 
-### 12.2 `repair_target`
+### 12.2 `control_object_type`
+
+```text
+sql_dag
+claim_evidence_map
+state_table
+router_rule
+rubric
+schema_view
+value_binding_table
+dependency_graph
+other
+```
+
+这个字段属于任务对象层。
+
+### 12.3 `mechanism_axis`
 
 ```text
 specification_reward
@@ -758,11 +816,23 @@ capability_support
 capability_routing
 search_execution
 unknown
+not_operationalized
 ```
 
 这个字段属于机制层。
 
-### 12.3 `repair_layer`
+### 12.4 `operationalization_status`
+
+```text
+direct
+derived
+partial
+not_operationalized
+```
+
+这个字段记录机制轴当前是否已足够可操作化，可以成为直接修复目标。
+
+### 12.5 `repair_layer`
 
 ```text
 agent
@@ -773,7 +843,7 @@ unknown
 
 这个字段属于修复层选择系统。
 
-### 12.4 `repair_target_role`
+### 12.6 `mechanism_role`
 
 ```text
 primary
@@ -784,7 +854,7 @@ unknown
 
 这个字段用于描述复合失败链中的因果角色。
 
-### 12.5 规范桥接版 Audit Finding
+### 12.7 规范桥接版 Audit Finding
 
 ```json
 {
@@ -793,8 +863,11 @@ unknown
   "finding": "The query uses a locally plausible join path that cannot produce the requested entity relation.",
   "evidence": "Execution result is empty; schema graph shows required relation through table X rather than table Y.",
   "mismatch_type": "aggregation",
-  "repair_target": "belief_representation",
-  "repair_target_role": "primary",
+  "control_object_ref": "sql_dag.join_path_001",
+  "control_object_type": "sql_dag",
+  "mechanism_axis": "belief_representation",
+  "operationalization_status": "direct",
+  "mechanism_role": "primary",
   "repair_layer": "agent",
   "mechanism_profile": "mechanism_profile.sql.join_path_001",
   "control_delta": "control_delta.add_schema_graph_join_constraint",
@@ -803,7 +876,7 @@ unknown
 }
 ```
 
-### 12.6 规范训练提升版 Finding
+### 12.8 规范训练提升版 Finding
 
 ```json
 {
@@ -812,8 +885,11 @@ unknown
   "finding": "The model repeatedly fails to activate schema-audit mode when surface lexical overlap suggests a direct answer.",
   "evidence": "Observed across multiple databases and tasks; agent-level router rules repair the issue but must be reintroduced repeatedly.",
   "mismatch_type": "fitting_boundary",
-  "repair_target": "capability_routing",
-  "repair_target_role": "primary",
+  "control_object_ref": "router_rule.schema_audit_trigger",
+  "control_object_type": "router_rule",
+  "mechanism_axis": "capability_routing",
+  "operationalization_status": "direct",
+  "mechanism_role": "primary",
   "repair_layer": "training",
   "mechanism_profile": "mechanism_profile.router.schema_audit_undertrigger",
   "control_delta": "control_delta.runtime_router_patch",
@@ -1238,7 +1314,8 @@ From Value-Preservation Diagnosis to Mechanism Localization
 
 ```text
 mismatch_type ∈ six
-repair_target ∈ eight
+control_object ∈ task-specific governed object
+mechanism_axis ∈ eight | unknown | not_operationalized
 repair_layer ∈ agent | training | hybrid
 ```
 
@@ -1275,7 +1352,9 @@ This document defines the intervention-localization layer orthogonal to the six 
 
 ```text
 mismatch_type = six-mismatch enum
-repair_target = eight-mechanism enum
+control_object_ref / control_object_type = task-object fields
+mechanism_axis = eight-mechanism enum plus not_operationalized
+operationalization_status = direct | derived | partial | not_operationalized
 repair_layer = agent | training | hybrid
 mechanism_profile = first-class object
 ```
@@ -1321,16 +1400,16 @@ From Audit Findings to Training Curricula
 
 ```text
 Six primitive mismatches:
-  diagnose where task value is lost.
+  diagnose where task value is lost and where engineering enters.
+
+Task-specific control objects:
+  record what is directly repaired.
 
 Eight mechanism axes:
-  localize which system component should be repaired.
+  explain which component-level mechanism is implicated.
 
-mismatch_type:
-  records the value-preservation diagnosis.
-
-repair_target:
-  records the intervenable mechanism.
+mechanism_axis:
+  records component attribution, not necessarily a direct runtime repair target.
 
 repair_layer:
   decides whether the repair belongs at the agent layer, the training layer, or both.
@@ -1351,12 +1430,13 @@ primitive mismatch diagnosis
   → model improvement when recurrent learning defects justify training
 ```
 
-原始失配层解释结构。  
-机制层选择手术刀。  
+六类原始失配先找到病灶。  
+任务对象把病灶暴露成可审计组织。  
+机制层解释系统解剖。  
 对象模型记录这次切口。  
 审计工程检查它是否有效。  
 SGAR 决定它是否成为状态。  
-训练闭环决定这道疤是否应变成学习。
+训练闭环决定这道反复出现的疤是否应变成学习。
 
 ---
 

@@ -333,11 +333,15 @@ Any system failure that affects task value must either occur at one of these sta
 
 This is a deliberately bounded claim. It does not assert that every surface error is easy to classify. It does not assert that every failure has a single cause. It does not deny implementation bugs, resource failures, or adversarial interference. It says that when the question is how task value is lost in an LLM-mediated pipeline, these are the primitive value-preservation stations.
 
+This completeness claim is feed-forward. It concerns a single forward value-preservation pass from `S_world` to output and accessible evaluation. Closed-loop dynamics across turns, oscillation, retry policies, and state accumulation are governed at runtime by SGAR and are not exhausted by the six stations alone.
+
 ### 4.2 Independence
 
 The six mismatches are independent in the following operational sense:
 
 > A mismatch is primitive if one can construct a minimal pair in which that station is perturbed while the remaining stations are held fixed, and the perturbation changes task value in a way that requires a distinct repair target.
+
+Equivalently, a proposed subdivision does not become a new primitive mismatch if its subcases remain at the same pipeline station and share the same effective repair target. A new primitive requires an irreducible intervention distinction, not merely a finer description.
 
 For example:
 
