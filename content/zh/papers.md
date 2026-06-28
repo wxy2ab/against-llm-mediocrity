@@ -9,7 +9,7 @@ summary: 这里收集与LLM 平庸、LLM卓越、知识治理、硬状态 Agent 
 order: 7
 heroPoints:
   - 当前总稿：价值保存结构理论与六类原始失配总图。
-  - 工作稿：形式化机制层、受治理 LLM 对象模型、审计工程、状态治理型 Agent 体制、通道治理、状态治理、能力路由、控制空间搜索、组合治理、目标治理与 Human-Assist Operational Mismatches。
+  - 工作稿：面向受治理 LLM 系统的形式化机制层、诊断-机制桥接、受治理 LLM 对象模型、审计工程、状态治理型 Agent 体制、通道治理、状态治理、能力路由、控制空间搜索、组合治理、目标治理与 Human-Assist Operational Mismatches。
   - 延伸与实现：治理式协作、硬状态 Agent 治理、AI 认知纪律、人类学习与由研究议程直接推导的工具方向。
 ---
 
@@ -109,12 +109,19 @@ Tag: 目标治理技术报告
 
 [阅读目标治理技术报告](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/specification-mismatch-objective-governance-llm-systems.zh-CN.md)
 
-### LLM 失败的形式化机制层
+### 面向受治理 LLM 系统的形式化机制层
 Tag: 干预定位工作稿
 
-这份工作稿把 LLM 系统写成部分可观测环境中的近似决策系统，并用八类可干预组件定位失败：规格 / 奖励、观测可得性、信念 / 表征、动态 / 世界模型、行动 / 接口、策略先验 / 能力支持、拟合边界 / 能力路由，以及搜索 / 执行。它不替代六类原始失配，而是把"为什么失败"进一步转化为"该改哪个组件"。
+这份工作稿定义了受治理 LLM 系统的形式化机制层。它把修复定位拆成八条可干预轴，把诊断单位从单一标签改为机制画像，并说明机制级定位如何接入审计工程、控制增量、回归护栏、缺陷台账与 SGAR 硬状态转移。
 
-[阅读形式化机制层](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/formal-mechanism-layer.zh-CN.md) / [English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/formal-mechanism-layer.md)
+[阅读受治理系统版形式化机制层](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/formal-mechanism-layer-for-governed-llm-systems.zh-CN.md) / [English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/formal-mechanism-layer-for-governed-llm-systems.md)
+
+### 面向受治理 LLM 系统的诊断-机制桥接
+Tag: 诊断桥接工作稿
+
+这份工作稿把六类原始失配与八条机制轴接到同一诊断与修复链路里。它定义从价值失败诊断走向修复定位的桥：机制画像、修复层选择、审计写回、受治理对象、SGAR 提交，以及由机制驱动的训练提升。
+
+[阅读诊断-机制桥接](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/diagnostic-mechanism-bridge-for-governed-llm-systems.zh-CN.md) / [English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/diagnostic-mechanism-bridge-for-governed-llm-systems.md)
 
 ### Human-Assist Operational Mismatches
 Tag: 协作补充稿
@@ -148,6 +155,13 @@ Tag: AI 经济学与定价工作稿
 ## 旧版本
 
 :::cards
+### LLM 失败的形式化机制层
+Tag: 旧版干预定位稿
+
+这份早期机制层工作稿首次把失败拆成八类可干预组件，并服务于更早一版主文栈。当前版本已经由上方当前工作稿中的面向受治理 LLM 系统的形式化机制层承接。
+
+[阅读旧版形式化机制层](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/formal-mechanism-layer.zh-CN.md) / [English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/formal-mechanism-layer.md)
+
 ### Knowledge Governance for Large Language Model Systems
 Tag: 旧版主文
 
