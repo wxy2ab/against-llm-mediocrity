@@ -16,6 +16,30 @@ The central intervention is **control-space search**. Instead of repeatedly samp
 
 This paper defines support mismatch formally, distinguishes its subtypes, explains why naive sampling and self-consistency often fail under shared support blind spots, and presents a governance architecture for support repair: support diagnosis, control-axis construction, candidate expansion, coverage accounting, anti-pruning, verifier coupling, and support deltas. It also introduces support-specific objects such as Support Maps, Search Warrants, Candidate Generation Contracts, Coverage Ledgers, and Support Regression Guards. The paper situates support mismatch within the broader unified theory: support governance is the candidate-space counterpart to channel governance, capability routing governance, audit engineering, and hard-state runtime governance.
 
+### Relationship to the Diagnostic–Mechanism Bridge
+
+This document uses support mismatch as a value-preservation diagnosis. When a failure requires repair, the Diagnostic–Mechanism Bridge maps that diagnosis to an eight-axis mechanism target and a repair layer:
+
+```text
+mismatch_type ∈ six primitive mismatches
+repair_target ∈ eight mechanism axes
+repair_layer ∈ agent | training | hybrid
+```
+
+### Mechanism-Layer Mapping
+
+Support mismatch maps primarily to `capability_support` and `search_execution`, and in some cases secondarily to `capability_routing`.
+
+```text
+missing candidate structure under the active policy
+  → repair_target = capability_support
+
+candidate exists but search, pruning, or budget fails to preserve it
+  → repair_target = search_execution
+```
+
+In mechanism terms, support mismatch is about insufficient reachability under `π_θ` and `D`, rather than about missing observations or wrong objectives. Agent-layer repair uses control-space search, anti-pruning rules, and support governance objects; recurrent learned-component failures can be promoted into mechanism-driven training.
+
 ---
 
 ## 1. Introduction

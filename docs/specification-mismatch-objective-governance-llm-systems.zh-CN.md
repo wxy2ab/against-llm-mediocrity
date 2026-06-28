@@ -18,6 +18,28 @@
 
 在统一的受治理 LLM 架构中，观测治理确保任务相关变量进入表征；状态治理区分潜在体制；路由治理激活正确能力；支持治理让高价值候选可达；组合治理保存全局结构；目标治理决定什么算成功，并防止整个系统优化错误目标。
 
+### 与 Diagnostic–Mechanism Bridge 的关系
+
+本文使用规格失配作为一种价值保存诊断。当失败进入修复阶段时，Diagnostic–Mechanism Bridge 会把这一诊断映射到八轴机制目标与修复层：
+
+```text
+mismatch_type ∈ six primitive mismatches
+repair_target ∈ eight mechanism axes
+repair_layer ∈ agent | training | hybrid
+```
+
+### 机制层映射
+
+规格失配主要映射到 `specification_reward`，其学习侧与运行时侧分量包括 `R̂_θ`、代理目标、rubric、evaluator、verifier 与验收标准。
+
+```text
+wrong criterion of success
+  → repair_target = specification_reward
+  → repair_layer = agent | training | hybrid
+```
+
+目标治理工作在治理对象层，而 `specification_reward` 指的是机制轴。两者是正交坐标：前者说明哪些目标对象需要被治理，后者说明哪个机制目标需要被修复。
+
 ---
 
 ## 1. 在统一理论中的位置
@@ -1758,6 +1780,8 @@ SGAR:
 ```
 
 这些层相互作用。目标治理常提供其他层使用的标准。但它也依赖其他层：若决定性变量缺席、状态错误、能力未触发、候选不可达或 artifact 组合破坏，好目标也无法应用。
+
+治理层与八条机制轴是正交坐标。目标治理说的是在哪一层归纳和修订目标对象；`specification_reward` 说的是应修补哪条机制轴。
 
 ---
 

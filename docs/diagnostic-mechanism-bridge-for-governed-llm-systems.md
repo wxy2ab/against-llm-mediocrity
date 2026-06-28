@@ -42,7 +42,7 @@ S_world → O → Z → routing → support → aggregation → evaluation
 
 Mechanism-layer decision model:
 E = (S, A, T, R*, Ω, O, γ)
-M_θ = (B_θ, T̂_θ, R̂_θ, π_θ, r_θ, D, A_sys)
+M_θ = (R̂_θ, Ω_sys, B_θ, T̂_θ, A_sys, π_θ, r_θ, D)
 ```
 
 The first formalism supports the six primitive mismatches. It describes where task value is lost as the system moves from world state to output. It is primarily a **diagnostic ontology of value leakage**.
@@ -119,7 +119,7 @@ This cut yields eight mechanism axes:
 3. Belief / representation
 4. Dynamics / world model
 5. Action / interface
-6. Policy prior / capability support
+6. Capability support / policy prior
 7. Fitting boundary / capability routing
 8. Search / execution
 ```
@@ -905,7 +905,7 @@ The mechanism layer is also the natural home for a formal information-preservati
 
 ### 14.1 Proposition: Representation-Induced Value Ceiling
 
-Let `S` be a world state, `O` an observation, and `Z = ψ(O)` an operational representation. Let policies over `S`, `O`, and `Z` be denoted by `Π_S`, `Π_O`, and `Π_Z`, respectively. Let `V_X` be the best achievable expected utility by policies restricted to information `X`.
+Let `S` be a world state, `O` an observation, and `Z = ψ(O)` an operational representation. Let `Π_X` denote the class of policies restricted to information `X`, and let `V_X = \max_{\pi \in \Pi_X}\mathbb{E}[\text{utility} \mid \pi]`.
 
 Then:
 
@@ -915,13 +915,13 @@ V_S ≥ V_O ≥ V_Z
 
 That is, the best policy with access only to `Z` cannot exceed the best policy with access to `O`, and the best policy with access only to `O` cannot exceed the best policy with access to `S`.
 
-If there exist two utility-relevant states `s1` and `s2` such that:
+If there exist two utility-relevant states `s1` and `s2` that produce the same operational representation:
 
 ```text
-ψ(φ(s1)) = ψ(φ(s2))
+Z(s1) = Z(s2)
 ```
 
-or they are operationally indistinguishable under the system, and:
+and:
 
 ```text
 argmax_a U(a | s1) ≠ argmax_a U(a | s2)
@@ -1222,7 +1222,7 @@ A new tool, verifier, router, or rubric is not part of the system merely because
 
 This document implies several integration requirements across the governed-LLM document set.
 
-### 19.1 Structural Theory
+### 19.1 Structural Theory (`structural-theory-value-preservation-llm-systems.md`)
 
 Add a section after the six primitive mismatches:
 
@@ -1240,7 +1240,7 @@ repair_layer ∈ agent | training | hybrid
 
 and include the compact crosswalk matrix.
 
-### 19.2 Six Primitive Mismatches Taxonomy
+### 19.2 Six Primitive Mismatches Taxonomy (`six-primitive-mismatches-pipeline-derived-taxonomy-llm-systems.md`)
 
 Add a section:
 
@@ -1254,17 +1254,17 @@ Clarify:
 The relative completeness of the six primitive mismatches is a completeness claim over value-preservation diagnostic stations, not over all intervenable components of a closed-loop LLM system.
 ```
 
-### 19.3 Formal Mechanism Layer
+### 19.3 Formal Mechanism Layer (`formal-mechanism-layer-for-governed-llm-systems.md`)
 
-Update the file header to state:
+The file should state:
 
 ```text
 This document defines the intervention-localization layer orthogonal to the six primitive value-preservation mismatches.
 ```
 
-Add learning/system/hybrid classification, minimal intervention probes, and the representation-induced value ceiling proposition.
+Include learning/system/hybrid classification, minimal intervention probes, and the representation-induced value ceiling proposition.
 
-### 19.4 Governed Object Model
+### 19.4 Governed Object Model (`governed-llm-object-model-interface-specification.md`)
 
 Canonicalize:
 
@@ -1275,7 +1275,7 @@ repair_layer = agent | training | hybrid
 mechanism_profile = first-class object
 ```
 
-### 19.5 Audit Engineering
+### 19.5 Audit Engineering (`audit-engineering-failure-localization-control-space-writeback.md`)
 
 Upgrade the loop:
 
@@ -1287,7 +1287,7 @@ Audit Finding
   → Control Delta
 ```
 
-### 19.6 SGAR
+### 19.6 SGAR (`state-governed-agent-regime-for-governed-llm-systems.md`)
 
 Add:
 
@@ -1297,16 +1297,16 @@ SGAR as Governed Mechanism-Layer Transition
 
 and explicitly connect `S + A → O → V → S'` to `A_sys`, observation channels, verifiers, world models, and committed state.
 
-### 19.7 Mechanism-Driven Training
+### 19.7 Mechanism-Driven Training (`mechanism-driven-training-for-governed-llm-systems.md`)
 
-Create a dedicated document:
+The dedicated document is:
 
 ```text
 Mechanism-Driven Training for Governed LLM Systems
 From Audit Findings to Training Curricula
 ```
 
-This document should define how recurrent learning-component failures move from defect ledger to training data, boundary curricula, reward correction, router training, and world-model grounding.
+It should define how recurrent learning-component failures move from defect ledger to training data, boundary curricula, reward correction, router training, and world-model grounding.
 
 ---
 

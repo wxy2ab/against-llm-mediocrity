@@ -83,32 +83,42 @@ The Formal Mechanism Layer decomposes a governed LLM system into an environment 
 ```text
 E = (S, A, T, R*, Ω, O, γ)
 
-M_θ = (B_θ, T̂_θ, R̂_θ, π_θ, r_θ, D, A_sys)
+M_θ = (R̂_θ, Ω_sys, B_θ, T̂_θ, A_sys, π_θ, r_θ, D)
 ```
 
-Mechanism-driven training concerns the **learned component subset**:
+`Ω_sys` belongs to `M_θ` rather than `E`: `Ω` and `O` describe what the environment can in principle reveal, while `Ω_sys` denotes which observation channels are actually exposed to the deployed system.
+
+Mechanism-driven training does not target "all learned things" indiscriminately. It primarily concerns five mechanism axes with learned-side components:
 
 ```text
-B_θ      belief / representation
-T̂_θ     dynamics / world model
-π_θ      capability support / policy prior
-r_θ      capability routing
-R̂_θ     learned reward / learned proxy
-R_proxy  trainable proxy objective
+belief_representation   -> B_θ
+dynamics_world_model    -> T̂_θ
+capability_support      -> π_θ
+capability_routing      -> r_θ
+specification_reward    -> R̂_θ and, where relevant, R_proxy
 ```
 
-It does not directly repair system components:
+The pure system-side axes are:
 
 ```text
-Ω, O       observation availability
-A_sys      action / interface
-D          search / execution
-R_eval     runtime evaluator / rubric / verifier
+observation_availability  -> Ω_sys and observation access policy
+action_interface          -> A_sys
+search_execution          -> D
 ```
 
 Those system components are repaired through agent-layer governance: observation repair, tool access, interface change, execution search, verifier design, GKO updates, SGAR transition rules, and audit loops.
 
-Some axes are hybrid:
+The five hybrid axes are exactly:
+
+```text
+specification_reward
+belief_representation
+dynamics_world_model
+capability_support
+capability_routing
+```
+
+These axes have both training-side and runtime-side components:
 
 | Mechanism axis | Training-side component | Runtime-side component |
 |---|---|---|

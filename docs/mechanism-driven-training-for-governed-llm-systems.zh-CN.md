@@ -84,32 +84,42 @@ repair_layer ∈ agent | training | hybrid
 ```text
 E = (S, A, T, R*, Ω, O, γ)
 
-M_θ = (B_θ, T̂_θ, R̂_θ, π_θ, r_θ, D, A_sys)
+M_θ = (R̂_θ, Ω_sys, B_θ, T̂_θ, A_sys, π_θ, r_θ, D)
 ```
 
-机制驱动训练关注的是 **学习组件子集**：
+`\Omega_{sys}` 属于 `M_θ`，而不是 `E`：`Ω` 与 `O` 描述环境原则上能提供哪些观测，`\Omega_{sys}` 则描述已部署系统实际暴露了哪些观测通道。
+
+机制驱动训练并不是笼统地针对“一切学习到的东西”。它主要关注五条带有学习侧分量的机制轴：
 
 ```text
-B_θ      信念 / 表征
-T̂_θ     动态 / 世界模型
-π_θ      能力支持 / 策略先验
-r_θ      能力路由
-R̂_θ     学习到的奖励 / 学习到的代理
-R_proxy  可训练的代理目标
+belief_representation   -> B_θ
+dynamics_world_model    -> T̂_θ
+capability_support      -> π_θ
+capability_routing      -> r_θ
+specification_reward    -> R̂_θ，以及相关情况下的 R_proxy
 ```
 
-它并不直接修复系统组件：
+纯系统侧的机制轴是：
 
 ```text
-Ω, O       观测可得性
-A_sys      动作 / 接口
-D          搜索 / 执行
-R_eval     运行时评估器 / rubric / verifier
+observation_availability  -> Ω_sys 与观测接入策略
+action_interface          -> A_sys
+search_execution          -> D
 ```
 
 这些系统组件应通过 Agent 层治理来修复：观测修复、工具接入、接口修改、执行搜索、verifier 设计、GKO 更新、SGAR 转移规则与审计回路。
 
-某些机制轴是混合型的：
+五条混合机制轴恰好是：
+
+```text
+specification_reward
+belief_representation
+dynamics_world_model
+capability_support
+capability_routing
+```
+
+这些轴同时具有训练侧与运行时侧分量：
 
 | 机制轴 | 训练侧组件 | 运行时侧组件 |
 |---|---|---|

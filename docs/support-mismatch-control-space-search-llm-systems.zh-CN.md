@@ -16,6 +16,30 @@
 
 本文形式化定义支持失配，区分其子类型，解释为什么朴素采样和 self-consistency 在共享支持盲点下常常失败，并提出支持修复的治理架构：支持诊断、控制轴构造、候选扩展、覆盖核算、反剪枝、验证器耦合和支持增量。本文还引入 Support Map、Search Warrant、Candidate Generation Contract、Coverage Ledger、Support Regression Guard 等支持专属对象。放在更大的统一理论中，支持治理是候选空间层面对通道治理、能力路由治理、审计工程和硬状态运行时治理的对应物。
 
+### 与 Diagnostic–Mechanism Bridge 的关系
+
+本文使用支持失配作为一种价值保存诊断。当失败进入修复阶段时，Diagnostic–Mechanism Bridge 会把这一诊断映射到八轴机制目标与修复层：
+
+```text
+mismatch_type ∈ six primitive mismatches
+repair_target ∈ eight mechanism axes
+repair_layer ∈ agent | training | hybrid
+```
+
+### 机制层映射
+
+支持失配主要映射到 `capability_support` 与 `search_execution`，某些情况下还会次级映射到 `capability_routing`。
+
+```text
+missing candidate structure under the active policy
+  → repair_target = capability_support
+
+candidate exists but search, pruning, or budget fails to preserve it
+  → repair_target = search_execution
+```
+
+从机制角度看，支持失配关心的是 `π_θ` 与 `D` 下的可达性不足，而不是观测缺失或目标错误。Agent 层修复依赖控制空间搜索、反剪枝规则和支持治理对象；反复出现的学习组件失败则可以提升到机制驱动训练。
+
 ---
 
 ## 1. 引言

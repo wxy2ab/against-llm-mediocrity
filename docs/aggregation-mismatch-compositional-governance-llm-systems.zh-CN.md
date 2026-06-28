@@ -16,6 +16,28 @@
 
 建设性响应是 **组合治理**（Compositional Governance）。系统不再依赖无治理的局部 continuation，而是外化中间结构：依赖图、接口契约、全局不变量、绑定记录、组合计划、集成账本和端到端验证器。局部生成在它对齐的地方被保存，但全局价值由受治理组合对象和组合审计保护。问题由“模型能否生成好局部部分？”转为“系统能否在组装局部生成部分时保存全局不变量？”
 
+### 与 Diagnostic–Mechanism Bridge 的关系
+
+本文使用聚合失配作为一种价值保存诊断。当失败进入修复阶段时，Diagnostic–Mechanism Bridge 会把这一诊断映射到八轴机制目标与修复层：
+
+```text
+mismatch_type ∈ six primitive mismatches
+repair_target ∈ eight mechanism axes
+repair_layer ∈ agent | training | hybrid
+```
+
+### 机制层映射
+
+聚合失配并没有单一专属的机制轴。它通常对应一个复合机制画像，横跨 `belief_representation`、`action_interface` 与 `search_execution`，有时还伴随支持相关放大因素。
+
+```text
+parts are represented but not bound into a globally valid object
+  → likely composite repair_target
+  → often includes belief_representation + action_interface + search_execution
+```
+
+从机制角度看，聚合失配指向的是整体对象保存失败，而不是某一个独立站点缺失。这也是为什么组合治理经常需要同时修补多个机制目标，而不能假定存在一条专属“聚合轴”。
+
 ---
 
 ## 1. 在统一理论中的位置

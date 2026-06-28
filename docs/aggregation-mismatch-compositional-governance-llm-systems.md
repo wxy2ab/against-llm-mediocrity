@@ -16,6 +16,28 @@ Aggregation mismatch is not identical to support mismatch, specification mismatc
 
 The constructive response is **Compositional Governance**. Instead of relying on ungoverned local continuation, the system externalizes intermediate structure: dependency graphs, interface contracts, global invariants, binding records, composition plans, integration ledgers, and end-to-end validators. Local generation is preserved where it is aligned, but global value is protected by governed composition objects and compositional audits. This turns the question from “Can the model generate good local parts?” into “Can the system preserve global invariants while assembling locally generated parts?”
 
+### Relationship to the Diagnostic–Mechanism Bridge
+
+This document uses aggregation mismatch as a value-preservation diagnosis. When a failure requires repair, the Diagnostic–Mechanism Bridge maps that diagnosis to an eight-axis mechanism target and a repair layer:
+
+```text
+mismatch_type ∈ six primitive mismatches
+repair_target ∈ eight mechanism axes
+repair_layer ∈ agent | training | hybrid
+```
+
+### Mechanism-Layer Mapping
+
+Aggregation mismatch does not have a single exclusive mechanism axis. It is usually a composite mechanism profile spanning `belief_representation`, `action_interface`, and `search_execution`, and sometimes support-related amplification.
+
+```text
+parts are represented but not bound into a globally valid object
+  → likely composite repair_target
+  → often includes belief_representation + action_interface + search_execution
+```
+
+In mechanism terms, aggregation mismatch is about failure of whole-object preservation rather than a single missing station. That is why compositional governance often repairs multiple mechanism targets at once instead of assuming one dedicated aggregation axis.
+
 ---
 
 ## 1. Position in the Unified Theory
