@@ -8,8 +8,8 @@ kicker: 把这套框架正式写清楚
 summary: 这里收集与LLM 平庸、LLM卓越、知识治理、硬状态 Agent 治理、治理式协作和 AI 认知纪律相关的当前工作稿与后续实证方向。
 order: 7
 heroPoints:
-  - 主文：Knowledge Governance for Large Language Model Systems。
-  - 工作稿：价值保存结构理论、六类原始失配总图、受治理 LLM 对象模型、审计工程、状态治理型 Agent 体制、通道治理、状态治理、能力路由、控制空间搜索、组合治理、目标治理、Observation-Representation Mismatch 与 Human-Assist Operational Mismatches。
+  - 当前总稿：价值保存结构理论与六类原始失配总图。
+  - 工作稿：形式化机制层、受治理 LLM 对象模型、审计工程、状态治理型 Agent 体制、通道治理、状态治理、能力路由、控制空间搜索、组合治理、目标治理与 Human-Assist Operational Mismatches。
   - 延伸与实现：治理式协作、硬状态 Agent 治理、AI 认知纪律、人类学习与由研究议程直接推导的工具方向。
 ---
 
@@ -20,7 +20,7 @@ heroPoints:
 建议阅读顺序：
 
 1. 先读站点的"为什么重要"和"案例"页，按案例索引建立从控制空间治理到分层治理的直觉。
-2. 再读"机制"和主文，理解三种对齐区间、六类原始失配，以及知识治理如何把中间控制知识外化、验证和复用。
+2. 再读"机制"、价值保存结构理论和六类原始失配总图，理解价值如何穿过管线，以及受治理控制对象如何保存任务价值。
 3. 然后读协作补充稿，理解能自主推进任务的 AI agent 什么时候应该问人，以及如何构造最小充分人类问题。
 4. 再读"状态治理型 Agent 体制（SGAR）"，理解长程 agent 为什么需要硬状态，而不是只依赖上下文维持连续性。
 5. 再读"审计工程"，理解系统如何把生成后的失败信号路由回控制空间，并用回归治理防止退化。
@@ -32,13 +32,6 @@ heroPoints:
 ## 当前工作稿
 
 :::cards
-### Knowledge Governance for Large Language Model Systems
-Tag: 主文
-
-主文提出三种区间：LLM 平庸、局部对齐、LLM卓越；用聚合、支持、状态、规格、拟合边界、观测-表征六类原始失配解释为什么普通输出空间搜索会进入平台期；并提出知识治理、解耦控制空间和受治理知识对象（GKO）。
-
-[阅读主文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/knowledge-governance-llm-systems-local-alignment.zh-CN.md)
-
 ### LLM 系统中价值保存的结构理论
 Tag: 结构理论工作稿
 
@@ -116,26 +109,12 @@ Tag: 目标治理技术报告
 
 [阅读目标治理技术报告](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/specification-mismatch-objective-governance-llm-systems.zh-CN.md)
 
-### 观测-表征失配
-Tag: 第六类原始失配专题
-
-这份专题工作稿展开第六类失配：决定性世界变量可能在进入模型可访问表征之前就被观测、编码、tokenization、上下文、工具或控制表征通道丢失。它区分通道不足、状态不确定和能力路由错误，并给出补测量、原始证据、工具、日志、传感器、环境查询和更丰富控制表征等干预方式。
-
-[阅读观测-表征失配专题](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/observation-representation-mismatch.zh-CN.md)
-
-### 拟合边界失配
-Tag: 第五类原始失配专题
-
-这份专题工作稿专门展开第五类失配：模型过度绑定局部证据链、代理指标、话术、角色期待或用户反馈，导致答案在当前场景里看似合理，却无法通过相邻场景、指标、审计协议或机制切换。它进一步拆分证据链过拟合、代理指标过拟合、场景默认值过拟合、解法路径过拟合、话术/角色过拟合、对齐偏好过拟合、用户反馈过拟合等子模式。
-
-[阅读拟合边界失配专题](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/fitting-boundary-mismatch.zh-CN.md)
-
 ### LLM 失败的形式化机制层
 Tag: 干预定位工作稿
 
 这份工作稿把 LLM 系统写成部分可观测环境中的近似决策系统，并用八类可干预组件定位失败：规格 / 奖励、观测可得性、信念 / 表征、动态 / 世界模型、行动 / 接口、策略先验 / 能力支持、拟合边界 / 能力路由，以及搜索 / 执行。它不替代六类原始失配，而是把"为什么失败"进一步转化为"该改哪个组件"。
 
-[阅读形式化机制层](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/formal-mechanism-layer.zh-CN.md)
+[阅读形式化机制层](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/formal-mechanism-layer.zh-CN.md) / [English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/formal-mechanism-layer.md)
 
 ### Human-Assist Operational Mismatches
 Tag: 协作补充稿
@@ -143,20 +122,6 @@ Tag: 协作补充稿
 补充稿不增加新的原始失配，而是把执行阻塞收紧为五个操作域，定义硬治理与预期损失升级门槛，并展开最小充分人类问题（MSHQ）、受治理升级对象（GEO）、回答验证和自治恢复。
 
 [阅读技术补充稿](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/human-assist-operational-mismatches.zh-CN.md)
-
-### Audit Engineering
-Tag: 审计—回写—治理工程
-
-这份工作稿把生成—验证不对称提升为独立工程范式：候选产物负责暴露问题，独立审计器负责定位失配，修复路由器把发现写回 Prompt、Context、Control Space、工具、评价器或人工治理边界，回归审计则防止旧缺陷复发。它关注的不是"打多少分"，而是失败信号如何变成显式、可执行、可撤销的控制增量。
-
-[阅读审计工程工作稿](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/audit-engineering.zh-CN.md)
-
-### 状态治理型 Agent 体制（SGAR）
-Tag: 硬状态 Agent 治理
-
-这份工作稿把 SGAR 命名为一种 agent 体制：agent 的状态被外部化为可验证、可恢复、可审计并具有治理权威的硬状态，而不是只存在于 LLM 上下文叙事中。它说明长程 agent 为什么必须把计划、行动、观测、验证、升级和审计发现组织成受治理状态转移。
-
-[阅读 SGAR 工作稿](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime.zh-CN.md)
 
 ### 治理式人机协作
 Tag: 公开实践框架
@@ -178,6 +143,45 @@ Tag: AI 经济学与定价工作稿
 这份工作稿建立了 LLM 产品定价的最高价格包络：长期支付意愿同时受可靠性、残余稀缺性、价值捕获份额与总成本约束，并进一步对软件、法律、医疗、金融、客服、内容、教育与科研等行业给出量级估算。
 
 [阅读定价工作稿](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/maximum-price-of-llms.zh-CN.md)
+:::
+
+## 旧版本
+
+:::cards
+### Knowledge Governance for Large Language Model Systems
+Tag: 旧版主文
+
+这份早期主文提出三种区间、第一版六失配框架、知识治理、解耦控制空间和 GKO。当前总稿已经由上方的价值保存结构理论、六类原始失配总图、对象模型和受治理系统技术报告承接。
+
+[阅读旧版主文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/knowledge-governance-llm-systems-local-alignment.zh-CN.md)
+
+### 观测-表征失配
+Tag: 旧版原始失配专题
+
+这份早期专题把观测-表征失配作为独立原始失配展开。当前版本是上方当前工作稿中的通道治理技术报告。
+
+[阅读旧版观测-表征失配专题](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/observation-representation-mismatch.zh-CN.md)
+
+### 拟合边界失配
+Tag: 旧版原始失配专题
+
+这份早期专题把拟合边界失配作为独立原始失配展开。当前版本是上方当前工作稿中的能力路由技术报告。
+
+[阅读旧版拟合边界失配专题](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/fitting-boundary-mismatch.zh-CN.md)
+
+### Audit Engineering
+Tag: 旧版审计工程稿
+
+这份早期稿从生成—验证不对称展开审计—回写—治理工程。当前版本是上方当前工作稿中的面向受治理 LLM 系统的审计工程技术报告。
+
+[阅读旧版审计工程稿](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/audit-engineering.zh-CN.md)
+
+### 状态治理型 Agent 体制（SGAR）
+Tag: 旧版硬状态 Agent 治理稿
+
+这份早期 SGAR 稿命名了硬状态 Agent 治理。当前版本是上方当前工作稿中的面向受治理 LLM 系统的 SGAR 工作稿。
+
+[阅读旧版 SGAR 稿](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime.zh-CN.md)
 :::
 
 ## 延伸与实现方向

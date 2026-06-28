@@ -3,7 +3,7 @@
 ## 从失配现象到可干预组件
 
 **状态：** 工作稿  
-**主文：** [大语言模型系统的知识治理](knowledge-governance-llm-systems-local-alignment.zh-CN.md)
+**当前总稿：** [LLM 系统中价值保存的结构理论](structural-theory-value-preservation-llm-systems.zh-CN.md)
 
 ## 摘要
 
@@ -449,7 +449,7 @@ T_X\setminus M_X \quad \text{（欠触发）}.
 
 #### 边界
 
-能力支持失配是正确能力基本不在有效支持内；路由失配要求能力已经存在或近似存在，只是没有在正确区域触发。完整展开见 [拟合边界失配](fitting-boundary-mismatch.zh-CN.md)。
+能力支持失配是正确能力基本不在有效支持内；路由失配要求能力已经存在或近似存在，只是没有在正确区域触发。完整展开见 [LLM 系统中的拟合边界失配与能力路由](fitting-boundary-mismatch-capability-routing-llm-systems.zh-CN.md)。
 
 ### 3.8 搜索 / 执行失配
 

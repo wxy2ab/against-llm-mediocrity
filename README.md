@@ -18,9 +18,9 @@ The goal is not to reject autoregression, but to transform tasks that would othe
 
 ### Knowledge Governance
 
-- Main working manuscript: [English](docs/knowledge-governance-llm-systems-local-alignment.md) · [中文](docs/knowledge-governance-llm-systems-local-alignment.zh-CN.md)
 - Structural theory of value preservation: [English](docs/structural-theory-value-preservation-llm-systems.md) · [中文](docs/structural-theory-value-preservation-llm-systems.zh-CN.md)
 - Six primitive mismatches pipeline-derived taxonomy: [English](docs/six-primitive-mismatches-pipeline-derived-taxonomy-llm-systems.md) · [中文](docs/six-primitive-mismatches-pipeline-derived-taxonomy-llm-systems.zh-CN.md)
+- Formal mechanism layer for LLM failure: [English](docs/formal-mechanism-layer.md) · [中文](docs/formal-mechanism-layer.zh-CN.md)
 - Governed LLM object model and interface specification: [English](docs/governed-llm-object-model-interface-specification.md) · [中文](docs/governed-llm-object-model-interface-specification.zh-CN.md)
 - Audit Engineering for governed LLM systems: [English](docs/audit-engineering-failure-localization-control-space-writeback.md) · [中文](docs/audit-engineering-failure-localization-control-space-writeback.zh-CN.md)
 - State-Governed Agent Regime for governed LLM systems: [English](docs/state-governed-agent-regime-for-governed-llm-systems.md) · [中文](docs/state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)
@@ -30,8 +30,12 @@ The goal is not to reject autoregression, but to transform tasks that would othe
 - Support mismatch and control-space search: [English](docs/support-mismatch-control-space-search-llm-systems.md) · [中文](docs/support-mismatch-control-space-search-llm-systems.zh-CN.md)
 - Aggregation mismatch and compositional governance: [English](docs/aggregation-mismatch-compositional-governance-llm-systems.md) · [中文](docs/aggregation-mismatch-compositional-governance-llm-systems.zh-CN.md)
 - Specification mismatch and objective governance: [English](docs/specification-mismatch-objective-governance-llm-systems.md) · [中文](docs/specification-mismatch-objective-governance-llm-systems.zh-CN.md)
-- Fitting-boundary mismatch: [English](docs/fitting-boundary-mismatch.md) · [中文](docs/fitting-boundary-mismatch.zh-CN.md)
-- Observation-representation mismatch: [English](docs/observation-representation-mismatch.md) · [中文](docs/observation-representation-mismatch.zh-CN.md)
+
+### Legacy Versions
+
+- Knowledge Governance for Large Language Model Systems: [English](docs/knowledge-governance-llm-systems-local-alignment.md) · [中文](docs/knowledge-governance-llm-systems-local-alignment.zh-CN.md)
+- Observation-representation mismatch supplement: [English](docs/observation-representation-mismatch.md) · [中文](docs/observation-representation-mismatch.zh-CN.md)
+- Fitting-boundary mismatch supplement: [English](docs/fitting-boundary-mismatch.md) · [中文](docs/fitting-boundary-mismatch.zh-CN.md)
 - Audit–write-back–governance engineering: [English](docs/audit-engineering.md) · [中文](docs/audit-engineering.zh-CN.md)
 - State-Governed Agent Regime: [English](docs/state-governed-agent-regime.md) · [中文](docs/state-governed-agent-regime.zh-CN.md)
 

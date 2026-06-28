@@ -8,8 +8,8 @@ kicker: Formalizing the framework
 summary: This section collects the current manuscripts and future empirical directions related to LLM mediocrity, autoregressive extraordinary, Knowledge Governance, hard-state agent governance, governed collaboration, and cognitive discipline for AI.
 order: 7
 heroPoints:
-  - "Main manuscript: Knowledge Governance for Large Language Model Systems."
-  - "Working drafts: Structural Theory of Value Preservation, Six Primitive Mismatches, Governed LLM Object Model, Audit Engineering, State-Governed Agent Regime, Channel Governance, State Governance, Capability Routing, Control-Space Search, Compositional Governance, Objective Governance, Fitting-Boundary Mismatch, Observation-Representation Mismatch, and Human-Assist Operational Mismatches."
+  - "Current synthesis: Structural Theory of Value Preservation and Six Primitive Mismatches."
+  - "Working drafts: Formal Mechanism Layer, Governed LLM Object Model, Audit Engineering, State-Governed Agent Regime, Channel Governance, State Governance, Capability Routing, Control-Space Search, Compositional Governance, Objective Governance, and Human-Assist Operational Mismatches."
   - "Extensions and implementation: governed collaboration, hard-state agent governance, cognitive discipline for AI, human learning, and tooling directions derived from the research agenda."
 ---
 
@@ -20,7 +20,7 @@ The main site is the public explanation layer: intuition first, mechanism second
 Suggested reading order:
 
 1. Start with "Why It Matters" and "Cases," using the case index to build intuition from control-space governance to layered governance.
-2. Read "Mechanism" and the main manuscript to understand the three regimes, six primitive mismatches, and how Knowledge Governance externalizes, validates, and reuses intermediate control knowledge.
+2. Read "Mechanism," the structural theory draft, and the six-mismatch taxonomy to understand the value-preservation pipeline and how governed control objects preserve task value.
 3. Read the collaboration supplement to understand when an agent should ask a human and how to construct minimal sufficient human queries.
 4. Read "State-Governed Agent Regime" to understand why long-horizon agents need hard state rather than context-maintained continuity.
 5. Read "Audit Engineering" to understand how systems route post-generation failure signals back into control space and prevent regression.
@@ -32,13 +32,6 @@ If you only read the site, the goal is to get an operational judgment chain. If 
 ## Current Working Manuscripts
 
 :::cards
-### Knowledge Governance for Large Language Model Systems
-Tag: main manuscript
-
-The main manuscript introduces the three regimes: LLM mediocrity, local alignment, and autoregressive extraordinary. It explains ordinary output-space search plateaus through six primitive mismatches: aggregation, support, state, specification, fitting-boundary, and observation-representation. It then develops Knowledge Governance, Decoupled Control Spaces, and GKOs.
-
-[Read the main manuscript](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/knowledge-governance-llm-systems-local-alignment.md)
-
 ### A Structural Theory of Value Preservation in LLM Systems
 Tag: structural theory working draft
 
@@ -52,6 +45,13 @@ Tag: pipeline-derived taxonomy working draft
 This working draft consolidates the six primitive mismatches into one pipeline-derived taxonomy. It derives observation-representation, state, fitting-boundary, support, aggregation, and specification mismatch as distinct value-preservation failure stations, then maps each to diagnostic questions, repair targets, audit findings, control deltas, GKOs, regression guards, and SGAR commitments.
 
 [Read the six-mismatch taxonomy](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/six-primitive-mismatches-pipeline-derived-taxonomy-llm-systems.md)
+
+### A Formal Mechanism Layer for LLM Failure
+Tag: intervention-localization working draft
+
+This working draft treats LLM systems as approximate decision systems in partially observable environments, then maps failures to eight intervenable components: specification / reward, observation availability, belief / representation, dynamics / world model, action / interface, policy prior / capability support, fitting boundary / capability routing, and search / execution. It complements the six primitive mismatches by translating "why did value separate from reachable generation?" into "which component should be changed next?"
+
+[Read the formal mechanism layer](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/formal-mechanism-layer.md)
 
 ### Governed LLM Object Model and Interface Specification
 Tag: implementation specification
@@ -116,40 +116,12 @@ This technical report develops specification mismatch as an objective-preservati
 
 [Read the objective governance report](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/specification-mismatch-objective-governance-llm-systems.md)
 
-### Fitting-Boundary Mismatch
-Tag: fifth primitive mismatch supplement
-
-This working draft develops the fifth primitive mismatch: a learned capability's implicit trigger boundary may fail to match its true domain of application. It distinguishes over-triggering from under-triggering, then expands subpatterns such as evidence-chain overfitting, proxy-metric overfitting, scene-default overfitting, solution-path overfitting, role-language overfitting, alignment-preference overfitting, and user-feedback overfitting.
-
-[Read the Fitting-Boundary supplement](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/fitting-boundary-mismatch.md)
-
-### Observation-Representation Mismatch
-Tag: sixth primitive mismatch supplement
-
-This working draft develops the sixth primitive mismatch: decisive world variables may be lost before they enter the model-accessible representation. It distinguishes channel insufficiency from state uncertainty and capability routing, then gives signatures and interventions such as measurement, raw evidence, tools, logs, sensors, environmental queries, and richer control representations.
-
-[Read the Observation-Representation supplement](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/observation-representation-mismatch.md)
-
 ### Human-Assist Operational Mismatches
 Tag: collaboration supplement
 
 The supplement does not add new primitive mismatches. It consolidates execution blockers into five operational domains, defines hard and expected-loss escalation gates, and develops MSHQs, GEOs, answer validation, and autonomy recovery.
 
 [Read the technical supplement](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/human-assist-operational-mismatches.md)
-
-### Audit Engineering
-Tag: audit–write-back–governance engineering
-
-This manuscript develops generation–verification asymmetry into an independent engineering paradigm. Candidate artifacts expose failures; an independent auditor localizes mismatch; a repair router writes findings back into the prompt, context, control space, tools, evaluator, or human-governed boundary; and regression audit prevents old defects from returning. Its concern is not the score itself, but how failure signals become explicit, actionable, and revocable control deltas.
-
-[Read the Audit Engineering manuscript](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/audit-engineering.md)
-
-### State-Governed Agent Regime
-Tag: hard-state agent governance
-
-This working draft names SGAR as the regime in which agent state is externalized, verifiable, recoverable, and authoritative outside the LLM context. It argues that long-horizon agents need hard state so that planning, action, observation, verification, escalation, and audit findings become governed state transitions rather than loose narrative continuity.
-
-[Read the SGAR working draft](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime.md)
 
 ### Governed Human-AI Collaboration
 Tag: public practice framework
@@ -171,6 +143,45 @@ Tag: economics and pricing manuscript
 This manuscript develops a pricing envelope for LLM products. It argues that long-run willingness to pay is bounded by reliability, residual scarcity, value capture share, and the full cost stack. It then estimates ceiling price bands across software, law, healthcare, finance, support, content, education, and research.
 
 [Read the economics manuscript](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/maximum-price-of-llms.md)
+:::
+
+## Legacy Versions
+
+:::cards
+### Knowledge Governance for Large Language Model Systems
+Tag: legacy main manuscript
+
+This earlier manuscript introduced the three regimes, the first six-mismatch framing, Knowledge Governance, Decoupled Control Spaces, and GKOs. The current synthesis is now represented by the structural theory, six-mismatch taxonomy, object model, and governed-systems technical reports above.
+
+[Read the legacy main manuscript](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/knowledge-governance-llm-systems-local-alignment.md)
+
+### Observation-Representation Mismatch
+Tag: legacy primitive-mismatch supplement
+
+This earlier supplement develops observation-representation mismatch as a standalone primitive mismatch. The current version is the channel governance report in the current working manuscripts section.
+
+[Read the legacy observation-representation supplement](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/observation-representation-mismatch.md)
+
+### Fitting-Boundary Mismatch
+Tag: legacy primitive-mismatch supplement
+
+This earlier supplement develops fitting-boundary mismatch as a standalone primitive mismatch. The current version is the capability routing report in the current working manuscripts section.
+
+[Read the legacy fitting-boundary supplement](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/fitting-boundary-mismatch.md)
+
+### Audit Engineering
+Tag: legacy audit manuscript
+
+This earlier manuscript develops audit-write-back governance from generation-verification asymmetry. The current version is the governed-systems Audit Engineering technical report above.
+
+[Read the legacy Audit Engineering manuscript](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/audit-engineering.md)
+
+### State-Governed Agent Regime
+Tag: legacy hard-state agent governance draft
+
+This earlier SGAR draft names hard-state agent governance. The current version is the governed-systems SGAR working draft above.
+
+[Read the legacy SGAR draft](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime.md)
 :::
 
 ## Extensions and Implementation
