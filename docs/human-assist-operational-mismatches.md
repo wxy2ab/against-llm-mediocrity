@@ -5,8 +5,8 @@
 **Status:** Working draft  
 **Version:** 1.1  
 **Companion practice framework:** [Governed Human-AI Collaboration](governed-human-ai-collaboration.md)  
-**Main manuscript:** [Knowledge Governance for Large Language Model Systems](knowledge-governance-llm-systems-local-alignment.md)  
-**Agent-state supplement:** [State-Governed Agent Regime](state-governed-agent-regime.md)
+**Current synthesis:** [A Structural Theory of Value Preservation in LLM Systems](structural-theory-value-preservation-llm-systems.md)  
+**Agent-state supplement:** [State-Governed Agent Regime for Governed LLM Systems](state-governed-agent-regime-for-governed-llm-systems.md)
 
 ## Abstract
 

@@ -5,8 +5,8 @@
 **状态：** 实践框架工作稿  
 **版本：** 1.1  
 **技术补充稿：** [人类协助型操作失配](human-assist-operational-mismatches.zh-CN.md)  
-**主文：** [大型语言模型系统的知识治理](knowledge-governance-llm-systems-local-alignment.zh-CN.md)  
-**Agent 状态补充稿：** [状态治理型 Agent 体制](state-governed-agent-regime.zh-CN.md)
+**当前总稿：** [LLM 系统中价值保存的结构理论](structural-theory-value-preservation-llm-systems.zh-CN.md)  
+**Agent 状态补充稿：** [面向受治理 LLM 系统的状态治理型 Agent 体制](state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)
 
 ## 1. 核心命题
 

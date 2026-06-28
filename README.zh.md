@@ -104,7 +104,6 @@ against-llm-mediocrity/
 
 ### 工作稿（[docs](./docs)）
 
-- [Knowledge Governance for Large Language Model Systems](./docs/knowledge-governance-llm-systems-local-alignment.zh-CN.md)：主文。
 - [LLM 系统中价值保存的结构理论](./docs/structural-theory-value-preservation-llm-systems.zh-CN.md)：新的结构理论工作稿。
 - [LLM 系统中的六类原始失配](./docs/six-primitive-mismatches-pipeline-derived-taxonomy-llm-systems.zh-CN.md)：从价值保存管线推导六类原始失配的总览工作稿。
 - [受治理 LLM 对象模型与接口规范](./docs/governed-llm-object-model-interface-specification.zh-CN.md)：价值保存结构理论的配套实现规范。
@@ -116,15 +115,19 @@ against-llm-mediocrity/
 - [LLM 系统中的支持失配与控制空间搜索](./docs/support-mismatch-control-space-search-llm-systems.zh-CN.md)：可达性、候选支持与搜索治理的配套技术报告。
 - [LLM 系统中的聚合失配与组合治理](./docs/aggregation-mismatch-compositional-governance-llm-systems.zh-CN.md)：局部价值、全局失败与组合关系治理的配套技术报告。
 - [LLM 系统中的规格失配与目标治理](./docs/specification-mismatch-objective-governance-llm-systems.zh-CN.md)：代理目标、隐性效用与反例驱动规格修复的配套技术报告。
-- [拟合边界失配](./docs/fitting-boundary-mismatch.zh-CN.md)：第五类原始失配的专题。
-- [观测-表征失配](./docs/observation-representation-mismatch.zh-CN.md)：第六类原始失配的专题。
-- [LLM 失败的形式化机制层](./docs/formal-mechanism-layer.zh-CN.md)：八类可干预机制。
+- LLM 失败的形式化机制层：[English](./docs/formal-mechanism-layer.md) · [中文](./docs/formal-mechanism-layer.zh-CN.md)：八类可干预机制。
 - [Human-Assist Operational Mismatches](./docs/human-assist-operational-mismatches.zh-CN.md)：协作层失配与升级协议。
-- [Audit Engineering](./docs/audit-engineering.zh-CN.md)：从生成-验证不对称到 Agent 治理。
-- [状态治理型 Agent 体制（SGAR）](./docs/state-governed-agent-regime.zh-CN.md)：长程 Agent 的硬状态治理。
 - [治理式人机协作](./docs/governed-human-ai-collaboration.zh-CN.md)：从聊天式使用到变量治理。
 - [AI 的认知纪律](./docs/cognitive-discipline-for-ai.zh-CN.md)：AI 使用侧的认知框架。
 - [模型最高价格](./docs/maximum-price-of-llms.zh-CN.md)：LLM 定价与商品化的数学。
+
+### 旧版本
+
+- Knowledge Governance for Large Language Model Systems：[English](./docs/knowledge-governance-llm-systems-local-alignment.md) · [中文](./docs/knowledge-governance-llm-systems-local-alignment.zh-CN.md)
+- 观测-表征失配专题：[English](./docs/observation-representation-mismatch.md) · [中文](./docs/observation-representation-mismatch.zh-CN.md)
+- 拟合边界失配专题：[English](./docs/fitting-boundary-mismatch.md) · [中文](./docs/fitting-boundary-mismatch.zh-CN.md)
+- Audit Engineering：[English](./docs/audit-engineering.md) · [中文](./docs/audit-engineering.zh-CN.md)
+- 状态治理型 Agent 体制（SGAR）：[English](./docs/state-governed-agent-regime.md) · [中文](./docs/state-governed-agent-regime.zh-CN.md)
 
 ---
 
