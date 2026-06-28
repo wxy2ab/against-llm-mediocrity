@@ -9,7 +9,7 @@ summary: This section collects the current manuscripts and future empirical dire
 order: 7
 heroPoints:
   - "Current synthesis: Structural Theory of Value Preservation and Six Primitive Mismatches."
-  - "Working drafts: Formal Mechanism Layer, Governed LLM Object Model, Audit Engineering, State-Governed Agent Regime, Channel Governance, State Governance, Capability Routing, Control-Space Search, Compositional Governance, Objective Governance, and Human-Assist Operational Mismatches."
+  - "Working drafts: Formal Mechanism Layer for Governed LLM Systems, Diagnostic-Mechanism Bridge, Governed LLM Object Model, Audit Engineering, State-Governed Agent Regime, Channel Governance, State Governance, Capability Routing, Control-Space Search, Compositional Governance, Objective Governance, and Human-Assist Operational Mismatches."
   - "Extensions and implementation: governed collaboration, hard-state agent governance, cognitive discipline for AI, human learning, and tooling directions derived from the research agenda."
 ---
 
@@ -46,12 +46,19 @@ This working draft consolidates the six primitive mismatches into one pipeline-d
 
 [Read the six-mismatch taxonomy](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/six-primitive-mismatches-pipeline-derived-taxonomy-llm-systems.md)
 
-### A Formal Mechanism Layer for LLM Failure
+### Formal Mechanism Layer for Governed LLM Systems
 Tag: intervention-localization working draft
 
-This working draft treats LLM systems as approximate decision systems in partially observable environments, then maps failures to eight intervenable components: specification / reward, observation availability, belief / representation, dynamics / world model, action / interface, policy prior / capability support, fitting boundary / capability routing, and search / execution. It complements the six primitive mismatches by translating "why did value separate from reachable generation?" into "which component should be changed next?"
+This working draft defines the formal mechanism layer for governed LLM systems. It decomposes repair localization into eight intervenable axes, treats diagnosis as mechanism profiles rather than forced single labels, and shows how mechanism-level localization integrates with Audit Engineering, Control Deltas, Regression Guards, Defect Ledgers, and SGAR hard-state transitions.
 
-[Read the formal mechanism layer](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/formal-mechanism-layer.md)
+[Read the governed-systems formal mechanism layer](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/formal-mechanism-layer-for-governed-llm-systems.md)
+
+### Diagnostic-Mechanism Bridge for Governed LLM Systems
+Tag: diagnostic bridge working draft
+
+This working draft connects the six primitive mismatches to the eight mechanism axes. It defines the bridge from value-failure diagnosis to repair localization through mechanism profiles, repair-layer selection, audit write-back, governed objects, SGAR commitment, and mechanism-driven training promotion.
+
+[Read the diagnostic-mechanism bridge](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/diagnostic-mechanism-bridge-for-governed-llm-systems.md)
 
 ### Governed LLM Object Model and Interface Specification
 Tag: implementation specification
@@ -148,6 +155,13 @@ This manuscript develops a pricing envelope for LLM products. It argues that lon
 ## Legacy Versions
 
 :::cards
+### A Formal Mechanism Layer for LLM Failure
+Tag: legacy intervention-localization draft
+
+This earlier mechanism-layer draft introduced the eight intervenable components as a companion to the earlier manuscript stack. The current governed-systems version is the formal mechanism layer draft in the current working manuscripts section above.
+
+[Read the legacy formal mechanism layer](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/formal-mechanism-layer.md)
+
 ### Knowledge Governance for Large Language Model Systems
 Tag: legacy main manuscript
 

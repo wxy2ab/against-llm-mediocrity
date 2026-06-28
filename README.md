@@ -22,7 +22,8 @@ Note: the material on this site comes primarily from engineering practice and en
 
 - Structural theory of value preservation: [English](docs/structural-theory-value-preservation-llm-systems.md) · [中文](docs/structural-theory-value-preservation-llm-systems.zh-CN.md)
 - Six primitive mismatches pipeline-derived taxonomy: [English](docs/six-primitive-mismatches-pipeline-derived-taxonomy-llm-systems.md) · [中文](docs/six-primitive-mismatches-pipeline-derived-taxonomy-llm-systems.zh-CN.md)
-- Formal mechanism layer for LLM failure: [English](docs/formal-mechanism-layer.md) · [中文](docs/formal-mechanism-layer.zh-CN.md)
+- Formal Mechanism Layer for Governed LLM Systems: [English](docs/formal-mechanism-layer-for-governed-llm-systems.md) · [中文](docs/formal-mechanism-layer-for-governed-llm-systems.zh-CN.md)
+- Diagnostic-Mechanism Bridge for Governed LLM Systems: [English](docs/diagnostic-mechanism-bridge-for-governed-llm-systems.md) · [中文](docs/diagnostic-mechanism-bridge-for-governed-llm-systems.zh-CN.md)
 - Governed LLM object model and interface specification: [English](docs/governed-llm-object-model-interface-specification.md) · [中文](docs/governed-llm-object-model-interface-specification.zh-CN.md)
 - Audit Engineering for governed LLM systems: [English](docs/audit-engineering-failure-localization-control-space-writeback.md) · [中文](docs/audit-engineering-failure-localization-control-space-writeback.zh-CN.md)
 - State-Governed Agent Regime for governed LLM systems: [English](docs/state-governed-agent-regime-for-governed-llm-systems.md) · [中文](docs/state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)
@@ -35,6 +36,7 @@ Note: the material on this site comes primarily from engineering practice and en
 
 ### Legacy Versions
 
+- A Formal Mechanism Layer for LLM Failure: [English](docs/formal-mechanism-layer.md) · [中文](docs/formal-mechanism-layer.zh-CN.md)
 - Knowledge Governance for Large Language Model Systems: [English](docs/knowledge-governance-llm-systems-local-alignment.md) · [中文](docs/knowledge-governance-llm-systems-local-alignment.zh-CN.md)
 - Observation-representation mismatch supplement: [English](docs/observation-representation-mismatch.md) · [中文](docs/observation-representation-mismatch.zh-CN.md)
 - Fitting-boundary mismatch supplement: [English](docs/fitting-boundary-mismatch.md) · [中文](docs/fitting-boundary-mismatch.zh-CN.md)

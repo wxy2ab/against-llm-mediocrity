@@ -94,7 +94,7 @@ against-llm-mediocrity/
 | 治理 | [/zh/engineering](https://wxy2ab.github.io/against-llm-mediocrity/zh/engineering) | 想把理论用于工程的人 |
 | 协作 | [/zh/collaboration](https://wxy2ab.github.io/against-llm-mediocrity/zh/collaboration) | 想用 AI agent 推进任务的人 |
 | 学习 | [/zh/learning](https://wxy2ab.github.io/against-llm-mediocrity/zh/learning) | 想重新理解"人该学什么"的人 |
-| 论文 | [/zh/papers](https://wxy2ab.github.io/against-llm-mediocrity/zh/papers) | 想看工作稿与研究议程的人 |
+| 工作稿 | [/zh/papers](https://wxy2ab.github.io/against-llm-mediocrity/zh/papers) | 想看工作稿与研究议程的人 |
 | 项目 | [/zh/projects](https://wxy2ab.github.io/against-llm-mediocrity/zh/projects) | 想把它落到工具的人 |
 
 ### 案例详情
@@ -117,7 +117,8 @@ against-llm-mediocrity/
 - [LLM 系统中的支持失配与控制空间搜索](./docs/support-mismatch-control-space-search-llm-systems.zh-CN.md)：可达性、候选支持与搜索治理的配套技术报告。
 - [LLM 系统中的聚合失配与组合治理](./docs/aggregation-mismatch-compositional-governance-llm-systems.zh-CN.md)：局部价值、全局失败与组合关系治理的配套技术报告。
 - [LLM 系统中的规格失配与目标治理](./docs/specification-mismatch-objective-governance-llm-systems.zh-CN.md)：代理目标、隐性效用与反例驱动规格修复的配套技术报告。
-- LLM 失败的形式化机制层：[English](./docs/formal-mechanism-layer.md) · [中文](./docs/formal-mechanism-layer.zh-CN.md)：八类可干预机制。
+- 面向受治理 LLM 系统的形式化机制层：[English](./docs/formal-mechanism-layer-for-governed-llm-systems.md) · [中文](./docs/formal-mechanism-layer-for-governed-llm-systems.zh-CN.md)：把结构性诊断接到八条可干预机制轴。
+- 面向受治理 LLM 系统的诊断-机制桥接：[English](./docs/diagnostic-mechanism-bridge-for-governed-llm-systems.md) · [中文](./docs/diagnostic-mechanism-bridge-for-governed-llm-systems.zh-CN.md)：把六类原始失配翻译成修复定位与修复层选择。
 - [Human-Assist Operational Mismatches](./docs/human-assist-operational-mismatches.zh-CN.md)：协作层失配与升级协议。
 - [治理式人机协作](./docs/governed-human-ai-collaboration.zh-CN.md)：从聊天式使用到变量治理。
 - [AI 的认知纪律](./docs/cognitive-discipline-for-ai.zh-CN.md)：AI 使用侧的认知框架。
@@ -125,6 +126,7 @@ against-llm-mediocrity/
 
 ### 旧版本
 
+- LLM 失败的形式化机制层：[English](./docs/formal-mechanism-layer.md) · [中文](./docs/formal-mechanism-layer.zh-CN.md)
 - Knowledge Governance for Large Language Model Systems：[English](./docs/knowledge-governance-llm-systems-local-alignment.md) · [中文](./docs/knowledge-governance-llm-systems-local-alignment.zh-CN.md)
 - 观测-表征失配专题：[English](./docs/observation-representation-mismatch.md) · [中文](./docs/observation-representation-mismatch.zh-CN.md)
 - 拟合边界失配专题：[English](./docs/fitting-boundary-mismatch.md) · [中文](./docs/fitting-boundary-mismatch.zh-CN.md)
