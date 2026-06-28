@@ -483,7 +483,7 @@ mechanical verifier / execution result
 
 ## 9. 审计发现
 
-**审计发现** 定位产物、轨迹、状态转移或受治理对象中的缺陷。它是从失败观测到系统修复的桥梁。
+**审计发现** 定位产物、轨迹、状态转移或受治理对象中的缺陷。它是从失败观测到系统修复的桥梁。修正后的桥接顺序不是“失配类型 → 八类机制 → 直接修”，而是“失配类型 → 任务特定控制对象 → 机制归因 → 修复层选择”。
 
 ### 9.1 Finding Schema
 
@@ -500,7 +500,10 @@ mechanical verifier / execution result
   "severity": "low | medium | high | critical",
   "confidence": "low | medium | high | confirmed",
   "failure_mode": "short failure-mode label",
-  "repair_target": "specification_reward | observation_availability | belief_representation | dynamics_world_model | action_interface | capability_support | capability_routing | search_execution | unknown",
+  "control_object_ref": "object.id",
+  "control_object_type": "sql_dag | claim_evidence_map | character_state_machine | narrative_skeleton | rubric | router_rule | state_table | other",
+  "mechanism_axis": "specification_reward | observation_availability | belief_representation | dynamics_world_model | action_interface | capability_support | capability_routing | search_execution | unknown | not_operationalized",
+  "operationalization_status": "direct | derived | partial | not_operationalized",
   "repair_layer": "agent | training | hybrid | unknown",
   "target_object_refs": ["object.id"],
   "root_cause_hypothesis": "why the failure occurred",
@@ -531,7 +534,7 @@ mechanical verifier / execution result
 
 ### 9.3 审计发现示例
 
-规范示例是 text-to-SQL 中的空结果查询：SQL 能执行但返回零行，因为谓词使用了数据库中不存在的表面字符串。该发现被归为 `observation_representation`，修复目标是 `belief_representation`，修复层是 `agent`，并派生出值落地 GKO 与回归护栏。
+规范示例是 text-to-SQL 中的空结果查询：SQL 能执行但返回零行，因为谓词使用了数据库中不存在的表面字符串。该发现被归为 `observation_representation`，直接修复对象是 `value_binding_table`，机制归因是 `belief_representation`，修复层是 `agent`，并派生出值落地 GKO 与回归护栏。
 
 ---
 
@@ -576,7 +579,10 @@ change_observation_channel
   "status": "draft | proposed | approved | applied | rejected | rolled_back | superseded | archived",
   "delta_type": "create_object | update_object | weaken_object | strengthen_object | revoke_object | supersede_object | add_evidence | add_counterevidence | change_priority | change_scope | change_router | change_verifier | change_transition_contract | add_regression_guard | change_rendering_policy | change_search_policy | change_representation | change_observation_channel",
   "source_finding_refs": ["finding.id"],
-  "repair_target": "specification_reward | observation_availability | belief_representation | dynamics_world_model | action_interface | capability_support | capability_routing | search_execution | unknown",
+  "target_object_ref": "object.id",
+  "target_object_type": "sql_dag | claim_evidence_map | character_state_machine | narrative_skeleton | rubric | router_rule | state_table | other",
+  "mechanism_axis": "specification_reward | observation_availability | belief_representation | dynamics_world_model | action_interface | capability_support | capability_routing | search_execution | unknown | not_operationalized",
+  "operationalization_status": "direct | derived | partial | not_operationalized",
   "repair_layer": "agent | training | hybrid | unknown",
   "target_object_refs": ["object.id"],
   "proposed_change": "human-readable description of the change",
@@ -1354,7 +1360,8 @@ natural language question + database schema → SQL
 ```text
 finding: value predicate uses ungrounded surface form
 mismatch_type: observation_representation
-repair_target: belief_representation
+control_object_ref: value_binding_table.status_column
+mechanism_axis: belief_representation
 repair_layer: agent
 ```
 
@@ -1564,7 +1571,7 @@ Which conflicts are unresolved?
 Which deltas were applied without rollback plans?
 ```
 
-最小的审计之审计发现，本身也是一个 Audit Finding：它的 `repair_target` 可以是 `unknown` 或某个具体机制目标，而 `target_object_refs` 则可指向需要改变的 `gko`、`verifier`、`guard` 或 `transition_contract`。
+最小的审计之审计发现，本身也是一个 Audit Finding：它的 `mechanism_axis` 可以是 `unknown` 或某个具体机制归因，而 `target_object_refs` 则可指向需要改变的 `gko`、`verifier`、`guard` 或 `transition_contract`。
 
 ---
 
@@ -1574,7 +1581,7 @@ Which deltas were applied without rollback plans?
 
 ```text
 [ ] Active GKOs include scope, support_scope, strength, and revocation_trigger.
-[ ] Audit Findings include mismatch_type and repair_target.
+[ ] Audit Findings include mismatch_type and control_object_ref；若已可操作化，还应包含 mechanism_axis。
 [ ] Control Deltas reference findings or explicit rationales.
 [ ] Regression Guards include representative_defect and failure_predicate.
 [ ] Evidence Objects identify authority_level and limitations.
@@ -1650,7 +1657,20 @@ implementation
 unknown
 ```
 
-规范 `repair_target` 词汇是：
+规范任务对象词汇是：
+
+```text
+sql_dag
+claim_evidence_map
+character_state_machine
+narrative_skeleton
+rubric
+router_rule
+state_table
+other
+```
+
+规范 `mechanism_axis` 词汇是：
 
 ```text
 specification_reward
@@ -1662,6 +1682,16 @@ capability_support
 capability_routing
 search_execution
 unknown
+not_operationalized
+```
+
+规范 `operationalization_status` 词汇是：
+
+```text
+direct
+derived
+partial
+not_operationalized
 ```
 
 规范 `repair_layer` 词汇是：
@@ -1733,7 +1763,7 @@ Regression Guard
 
 ## 附录 C：最小审计发现示例
 
-该示例定位一个未引用事实声明：答案对近期法规提出事实主张，却没有引用或不确定性标记。失配类型是 `specification`，修复目标是 `specification`，控制增量是添加引用护栏。
+该示例定位一个未引用事实声明：答案对近期法规提出事实主张，却没有引用或不确定性标记。失配类型是 `specification`，直接修复对象是 `rubric`，机制归因是 `specification_reward`，控制增量是添加引用护栏。
 
 ---
 

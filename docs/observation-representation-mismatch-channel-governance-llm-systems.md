@@ -453,9 +453,11 @@ Repair requires provenance, authority labels, and commitment status.
 
 The most important theoretical consequence of observation-representation mismatch is that it creates ceilings no downstream policy can reliably exceed.
 
-### Proposition: Representation-Induced Value Ceiling
+### Claim (informal): Representation-Induced Value Ceiling
 
 Observation-representation mismatch induces a ceiling on downstream performance.
+
+This is a structural argument rather than a fully formal proof. Its role is to mark a representation-level limit on recoverable task value.
 
 Let `S` be the world state, `O` the observation, and `Z = ψ(O)` the system's operational representation. Let `V(S)`, `V(O)`, and `V(Z)` denote the best achievable expected task utility by policies that can condition on `S`, `O`, and `Z`.
 

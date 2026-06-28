@@ -9,9 +9,9 @@
 
 ## Abstract
 
-This document defines the **Formal Mechanism Layer** for governed LLM systems. It is a companion to the structural theory of value preservation, the six primitive mismatches, the Governed LLM Object Model, Audit Engineering, and the State-Governed Agent Regime. Its purpose is to connect structural diagnosis to concrete repair.
+This document defines the **Formal Mechanism Layer** for governed LLM systems. It is a companion to the structural theory of value preservation, the six primitive mismatches, the Governed LLM Object Model, Audit Engineering, and the State-Governed Agent Regime. Its purpose is to connect structural diagnosis to component-level attribution and repair localization after a task has already been turned into governable control objects.
 
-The six primitive mismatches explain where task value becomes structurally distorted: observation-representation, state, fitting-boundary, support, aggregation, and specification. They are **task-value structural diagnostic axes**. By contrast, the Formal Mechanism Layer asks a different question: once a failure has been observed, which component of the actual LLM system should be changed?
+The six primitive mismatches explain where task value becomes structurally distorted: observation-representation, state, fitting-boundary, support, aggregation, and specification. They are **task-value structural diagnostic axes** and, in practice, the first engineering entry points. By contrast, the Formal Mechanism Layer asks a different question: once a failure has been observed and operationalized into task-specific control objects, which component of the actual LLM system best explains that failure and where should persistent repair be localized?
 
 We model an LLM system as an approximate decision system operating in a partially observable environment. The system does not directly possess the true state, true transition function, true reward, complete action space, or complete observation channel. It acts through approximate components: specification and reward proxies, observation interfaces, belief and representation state, a world model, action interfaces, policy and capability support, capability routing, and search or execution algorithms.
 
@@ -30,11 +30,11 @@ The mechanism layer therefore decomposes repair localization into eight interven
 
 These are not eight new primitive mismatches. They are not a replacement for the six-mismatch taxonomy. They are **system-intervention axes**. One primitive mismatch may be produced by several mechanism failures, and one mechanism failure may appear as several primitive mismatches. The proper unit of diagnosis is therefore a **Mechanism Profile**, not a forced single label.
 
-The core principle is:
+The corrected positioning is:
 
-> The primitive-mismatch layer explains structure; the mechanism layer chooses the scalpel.
+> The Formal Mechanism Layer is a derived component-analysis layer, not a primary engineering entry point.
 
-This document formalizes the eight axes, defines Mechanism Profiles as governance objects, provides minimal intervention probes for causal localization, maps primitive mismatches to mechanism sources, and shows how mechanism-level diagnosis integrates with Audit Engineering, Control Deltas, Regression Guards, Defect Ledgers, and SGAR hard-state transitions.
+This document formalizes the eight axes, defines Mechanism Profiles as governance objects, provides minimal intervention probes for causal localization, maps primitive mismatches to mechanism sources, and shows how mechanism-level diagnosis integrates with task-specific control objects, Audit Engineering, Control Deltas, Regression Guards, Defect Ledgers, and SGAR hard-state transitions.
 
 ---
 
@@ -45,13 +45,14 @@ The current governed-LLM theory stack has several layers:
 ```text
 Layer 0: World-to-output value-preservation pipeline
 Layer 1: Six Primitive Mismatches
-Layer 2: Formal Mechanism Layer
-Layer 3: Diagnostic–Mechanism Bridge
-Layer 4: Knowledge Governance
-Layer 5: Audit Engineering
-Layer 6: Governed Object Model
-Layer 7: State-Governed Agent Regime
-Layer 8: Mechanism-Driven Training
+Layer 2: Task-Specific Control Objects
+Layer 3: Formal Mechanism Layer
+Layer 4: Diagnostic–Mechanism Bridge
+Layer 5: Knowledge Governance
+Layer 6: Audit Engineering
+Layer 7: Governed Object Model
+Layer 8: State-Governed Agent Regime
+Layer 9: Mechanism-Driven Training
 ```
 
 Each layer answers a different question.
@@ -60,13 +61,14 @@ Each layer answers a different question.
 |---|---|
 | Value-preservation pipeline | Through which stations must task value survive? |
 | Six Primitive Mismatches | Where is task value structurally distorted? |
-| Formal Mechanism Layer | Which intervenable system component should be changed? |
-| Diagnostic–Mechanism Bridge | How does value diagnosis become repair localization and repair-layer selection? |
+| Task-Specific Control Objects | What governed task object must be constructed or revised to expose the failure? |
+| Formal Mechanism Layer | Which component-level mechanism explains or amplifies failure in that task object? |
+| Diagnostic–Mechanism Bridge | How does value diagnosis become object repair, mechanism attribution, and repair-layer selection? |
 | Knowledge Governance | Which control knowledge should be objectified, scoped, revised, and revoked? |
 | Audit Engineering | How should failures be localized and written back into the control space? |
 | Governed Object Model | How should findings, deltas, GKOs, guards, and state records be represented? |
 | SGAR | Which actions, repairs, memories, and state updates are actually committed? |
-| Mechanism-Driven Training | Which recurrent learning-component failures should be promoted into training? |
+| Mechanism-Driven Training | Which recurrent operationalized learning-component failures should be promoted into training? |
 
 The mechanism layer sits between structural theory and repair. It prevents a common failure in LLM-system design: moving directly from a surface symptom to a favorite repair without identifying the component-level bottleneck.
 
@@ -83,7 +85,7 @@ candidate generated but discarded     → search / execution
 wrong success criterion               → specification / reward
 ```
 
-The primitive mismatch tells us what kind of value-preservation failure occurred. The mechanism profile tells us where to intervene.
+The primitive mismatch tells us what kind of value-preservation failure occurred. The task-specific control object tells us what is directly manipulated. The mechanism profile tells us which component-level mechanism explains why that task object failed and where persistent repair may belong.
 
 ---
 
@@ -199,6 +201,69 @@ unknown / not yet distinguished
 ```
 
 The goal is not to name the failure beautifully. The goal is to identify the lowest-cost, highest-information, highest-leverage repair.
+
+### 1.5 Scope Correction: Derived Component Analysis, Not Primary Engineering Entry
+
+The Formal Mechanism Layer should not be treated as the first engineering move. Engineering usually enters through a primitive mismatch that forces construction of a task-specific governed object:
+
+```text
+observation-representation
+  → evidence map, schema view, reader simulator, value-binding table
+
+state
+  → state machine, world ledger, role-state table, task-state table
+
+fitting-boundary
+  → router rule, mode boundary, pacing or density controller
+
+support
+  → candidate generator, technique library, retrieval operator
+
+aggregation
+  → DAG, outline graph, dependency tracker, narrative skeleton
+
+specification
+  → rubric, style guard, success condition, reader-response criterion
+```
+
+These task objects are what audits and control deltas directly modify. The Formal Mechanism Layer comes after that direct object construction. It explains whether the recurring pressure behind those object failures belongs to specification/reward, representation, routing, search, or another component axis.
+
+### 1.6 Operationalization Gate
+
+A mechanism axis should become a direct repair target only when five conditions hold:
+
+```text
+1. Observable symptom
+   The mechanism failure is visible in task behavior.
+
+2. Task-specific control object
+   A concrete governed object carries the repair.
+
+3. Intervention operator
+   We know how to modify the object or component.
+
+4. Success / failure signal
+   We can tell whether the intervention worked.
+
+5. Regression guard
+   Recurrence can be detected reliably.
+```
+
+If these conditions do not hold, a mechanism label should be recorded as:
+
+```text
+hypothesis
+diagnostic lens
+training-side attribution
+```
+
+rather than as a direct runtime control delta.
+
+### 1.7 Open-Ended Task Boundary
+
+The Formal Mechanism Layer is most actionable when the task admits stable system components such as observations, state variables, verifiers, execution traces, candidate spaces, or learned routing boundaries.
+
+It is less directly actionable in open-ended creative tasks unless the task has first been transformed into governed control objects. In story generation, for example, it is usually premature to begin with `dynamics_world_model` or `specification_reward` as direct repair targets. The first useful engineering objects are more often a character-state machine, narrative skeleton, foreshadowing ledger, style guard, pacing controller, or reader simulator. Only after those objects exist and fail recurrently does mechanism attribution become sharp enough to support stable repair or training promotion.
 
 ---
 
@@ -1146,7 +1211,7 @@ An Audit Finding can say:
   "finding": "The SQL query joins orders to customers through the wrong bridge table.",
   "primitive_mismatch": ["aggregation", "support"],
   "mechanism_profile": "mechanism_profile.sql_join_path_001",
-  "repair_target": "belief_representation + search_execution",
+  "mechanism_axis": "belief_representation + search_execution",
   "control_delta": "externalize schema graph and enumerate join paths before SQL rendering"
 }
 ```
@@ -1896,16 +1961,19 @@ For a concrete failure, use the following protocol:
 5. Assign causal roles.
    primary cause, secondary cause, necessary condition, amplifier, downstream symptom, not distinguished.
 
-6. Produce Control Delta.
-   Modify the component that mechanism diagnosis identifies.
+6. Construct or revise the task-specific control object.
+   Turn the lesion into something auditable and directly modifiable.
 
-7. Add Regression Guard.
+7. Produce Control Delta.
+   Modify the governed object first; record mechanism attribution alongside it.
+
+8. Add Regression Guard.
    Ensure representative recurrence of the defect fails.
 
-8. Commit through SGAR.
+9. Commit through SGAR.
    Only verified repair becomes hard state.
 
-9. Record in Defect Ledger.
+10. Record in Defect Ledger.
    Store failure family, mechanism profile, deltas, guards, and revocation rules.
 ```
 
@@ -1915,13 +1983,13 @@ For a concrete failure, use the following protocol:
 
 The Formal Mechanism Layer completes an important bridge in the governed-LLM theory stack.
 
-The six primitive mismatches explain how task value is structurally lost. But structural diagnosis alone does not determine which component should be changed. The mechanism layer localizes failures to eight intervenable system axes: specification / reward, observation availability, belief / representation, dynamics / world model, action / interface, capability support / policy prior, fitting boundary / capability routing, and search / execution.
+The six primitive mismatches explain how task value is structurally lost. They are not merely explanatory labels; they are task-anchored engineering entry points. They tell us what kind of governed task object must be constructed before repair becomes durable. Structural diagnosis alone does not determine which component should be changed, but it does expose where engineering should begin.
 
-A mechanism profile is not a decorative label. It is a repair-localization object. It records which components are primary causes, which are amplifiers, which are downstream symptoms, what minimal intervention evidence supports the diagnosis, what control deltas should be applied, what regression guards should be added, and what state transition should be committed.
+A mechanism profile is not a decorative label. It is a derived repair-localization object. It records which components are primary causes, which are amplifiers, which are downstream symptoms, what minimal intervention evidence supports the diagnosis, and which recurrent operationalized failures justify promotion beyond local runtime governance.
 
 This layer also clarifies why common repairs fail. Larger models do not fix missing observations, wrong objectives, unavailable actions, or uncommitted state. Larger search does not help when the system searches the wrong space. More tools do not help when tool results are not represented, routed, verified, or committed. Better prompts do not repair absent action interfaces or false world models.
 
-The mechanism layer turns diagnosis into a question of system surgery:
+The mechanism layer turns diagnosis into a question of system anatomy:
 
 ```text
 What exactly must be changed so that the same failure family does not recur?
@@ -1929,7 +1997,7 @@ What exactly must be changed so that the same failure family does not recur?
 
 In the shortest form:
 
-> The primitive-mismatch layer explains structure; the mechanism layer chooses the scalpel.
+> Six mismatches find the lesion. Task objects expose the tissue. Mechanism axes explain the anatomy. Audit deltas perform the cut.
 
 ---
 
@@ -2034,7 +2102,7 @@ Search / Execution
   "primitive_mismatch": ["..."],
   "mechanism_profile": "mechanism_profile.id",
   "severity": "low | medium | high | critical",
-  "repair_target": "...",
+  "mechanism_axis": "...",
   "control_delta": "control_delta.id",
   "regression_guard": "regression_guard.id",
   "confidence": "low | medium | high"

@@ -167,13 +167,14 @@ The canonical lifecycle is:
 1. Artifact is produced.
 2. Artifact is audited.
 3. Audit produces one or more findings.
-4. Findings are localized to mismatch types and repair targets.
-5. Each repair target produces a control delta.
-6. Control delta updates governed objects.
-7. A regression guard is created or updated.
-8. The defect ledger records the failure family and repair.
-9. A verifier determines whether state should be committed.
-10. Future routing, search, rendering, and audit use the updated governed state.
+4. Findings are localized to mismatch types and task-specific control objects.
+5. Mechanism attribution and repair-layer selection are added where operationalized.
+6. Each accepted finding produces a control delta against a governed object.
+7. Control delta updates governed objects.
+8. A regression guard is created or updated.
+9. The defect ledger records the failure family and repair.
+10. A verifier determines whether state should be committed.
+11. Future routing, search, rendering, and audit use the updated governed state.
 ```
 
 In object form:
@@ -555,7 +556,10 @@ An **Audit Finding** localizes a defect in an artifact, trace, state transition,
   "severity": "low | medium | high | critical",
   "confidence": "low | medium | high | confirmed",
   "failure_mode": "short failure-mode label",
-  "repair_target": "specification_reward | observation_availability | belief_representation | dynamics_world_model | action_interface | capability_support | capability_routing | search_execution | unknown",
+  "control_object_ref": "object.id",
+  "control_object_type": "sql_dag | claim_evidence_map | character_state_machine | narrative_skeleton | rubric | router_rule | state_table | other",
+  "mechanism_axis": "specification_reward | observation_availability | belief_representation | dynamics_world_model | action_interface | capability_support | capability_routing | search_execution | unknown | not_operationalized",
+  "operationalization_status": "direct | derived | partial | not_operationalized",
   "repair_layer": "agent | training | hybrid | unknown",
   "target_object_refs": ["object.id"],
   "root_cause_hypothesis": "why the failure occurred",
@@ -599,9 +603,12 @@ An **Audit Finding** localizes a defect in an artifact, trace, state transition,
   "severity": "high",
   "confidence": "confirmed",
   "failure_mode": "value_linking_surface_form_not_grounded",
-  "repair_target": "belief_representation",
+  "control_object_ref": "value_binding_table.status_column",
+  "control_object_type": "value_binding_table",
+  "mechanism_axis": "belief_representation",
+  "operationalization_status": "direct",
   "repair_layer": "agent",
-  "target_object_refs": [],
+  "target_object_refs": ["value_binding_table.status_column"],
   "root_cause_hypothesis": "The system used the natural-language value phrase directly rather than querying or normalizing database values before predicate construction.",
   "minimal_reproduction": "Use the same question and schema but omit sample values for the status column; the model generates an unsupported literal predicate.",
   "control_delta_refs": ["delta.text2sql.require_value_grounding_before_predicate_rendering.v1"],
@@ -657,7 +664,10 @@ change_observation_channel
   "status": "draft | proposed | approved | applied | rejected | rolled_back | superseded | archived",
   "delta_type": "create_object | update_object | weaken_object | strengthen_object | revoke_object | supersede_object | add_evidence | add_counterevidence | change_priority | change_scope | change_router | change_verifier | change_transition_contract | add_regression_guard | change_rendering_policy | change_search_policy | change_representation | change_observation_channel",
   "source_finding_refs": ["finding.id"],
-  "repair_target": "specification_reward | observation_availability | belief_representation | dynamics_world_model | action_interface | capability_support | capability_routing | search_execution | unknown",
+  "target_object_ref": "object.id",
+  "target_object_type": "sql_dag | claim_evidence_map | character_state_machine | narrative_skeleton | rubric | router_rule | state_table | other",
+  "mechanism_axis": "specification_reward | observation_availability | belief_representation | dynamics_world_model | action_interface | capability_support | capability_routing | search_execution | unknown | not_operationalized",
+  "operationalization_status": "direct | derived | partial | not_operationalized",
   "repair_layer": "agent | training | hybrid | unknown",
   "target_object_refs": ["object.id"],
   "proposed_change": "human-readable description of the change",
@@ -686,9 +696,12 @@ change_observation_channel
   "status": "approved",
   "delta_type": "create_object",
   "source_finding_refs": ["finding.text2sql.empty_result_due_to_overconstrained_predicate.014"],
-  "repair_target": "belief_representation",
+  "target_object_ref": "value_binding_table.status_column",
+  "target_object_type": "value_binding_table",
+  "mechanism_axis": "belief_representation",
+  "operationalization_status": "direct",
   "repair_layer": "agent",
-  "target_object_refs": [],
+  "target_object_refs": ["value_binding_table.status_column"],
   "proposed_change": "Create a GKO requiring observed or normalized database values before rendering literal predicates.",
   "patch": {
     "create": {
@@ -1610,7 +1623,8 @@ It audits the candidate and creates a finding:
 ```text
 finding: value predicate uses ungrounded surface form
 mismatch_type: observation_representation
-repair_target: belief_representation
+control_object_ref: value_binding_table.status_column
+mechanism_axis: belief_representation
 repair_layer: agent
 ```
 
@@ -1818,7 +1832,7 @@ Which conflicts are unresolved?
 Which deltas were applied without rollback plans?
 ```
 
-A minimal audit-of-audit finding is itself an Audit Finding with `repair_target = unknown` or a specific mechanism target, while `target_object_refs` can point to a `gko`, `verifier`, `guard`, or `transition_contract` that should change.
+A minimal audit-of-audit finding is itself an Audit Finding with `mechanism_axis = unknown` or a specific mechanism attribution, while `target_object_refs` can point to a `gko`, `verifier`, `guard`, or `transition_contract` that should change.
 
 ---
 
@@ -1828,7 +1842,7 @@ A system conforms to the Core Profile if it satisfies:
 
 ```text
 [ ] Active GKOs include scope, support_scope, strength, and revocation_trigger.
-[ ] Audit Findings include mismatch_type and repair_target.
+[ ] Audit Findings include mismatch_type and control_object_ref, plus mechanism attribution when operationalized.
 [ ] Control Deltas reference findings or explicit rationales.
 [ ] Regression Guards include representative_defect and failure_predicate.
 [ ] Evidence Objects identify authority_level and limitations.
@@ -1904,7 +1918,20 @@ implementation
 unknown
 ```
 
-The canonical repair-target vocabulary is:
+The canonical control-object vocabulary is:
+
+```text
+sql_dag
+claim_evidence_map
+character_state_machine
+narrative_skeleton
+rubric
+router_rule
+state_table
+other
+```
+
+The canonical mechanism-axis vocabulary is:
 
 ```text
 specification_reward
@@ -1916,6 +1943,16 @@ capability_support
 capability_routing
 search_execution
 unknown
+not_operationalized
+```
+
+The canonical operationalization_status vocabulary is:
+
+```text
+direct
+derived
+partial
+not_operationalized
 ```
 
 The canonical repair_layer vocabulary is:
@@ -2022,7 +2059,10 @@ This minimal set already converts prompt iteration into governed repair.
   "severity": "medium",
   "confidence": "high",
   "failure_mode": "uncited_noncommon_factual_claim",
-  "repair_target": "specification",
+  "control_object_ref": "gko.example.must_cite_source_for_noncommon_factual_claims.v1",
+  "control_object_type": "rubric",
+  "mechanism_axis": "specification_reward",
+  "operationalization_status": "direct",
   "root_cause_hypothesis": "The citation requirement was not represented in the active answer rubric.",
   "control_delta_refs": ["delta.example.add_citation_guard.v1"],
   "regression_guard_refs": ["guard.example.noncommon_claim_requires_citation.v1"],

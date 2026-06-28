@@ -25,7 +25,8 @@
 
 ```text
 mismatch_type ∈ 六类原始价值保存失配
-repair_target ∈ 八条干预机制轴
+control_object ∈ 任务特定治理对象
+mechanism_axis ∈ 八条干预机制轴 | unknown | not_operationalized
 repair_layer ∈ agent | training | hybrid
 ```
 
@@ -49,8 +50,7 @@ repair_layer ∈ agent | training | hybrid
   定位应当修改哪个系统组件。
 
 机制驱动训练：
-  处理其中那部分修复目标属于学习组件、
-  且其复发性足以证明应将修复摊销进模型训练的机制失败。
+  处理其中那部分已经通过任务对象完成可操作化、并且其学习组件归因足以证明应将修复摊销进模型训练的机制失败。
 ```
 
 六类原始失配回答的是：
@@ -64,13 +64,13 @@ repair_layer ∈ agent | training | hybrid
 
 ```text
 是哪个组件造成了或放大了失败？
-应该修改哪个修复目标？
+在任务对象已经明确之后，哪条机制轴被牵涉？
 ```
 
 机制驱动训练回答的是：
 
 ```text
-当修复目标是学习组件时，
+当机制轴属于学习组件，而且失败族已经被对象化时，
 这个失败应继续保留为运行时补丁，
 还是应当被提升进训练？
 ```
@@ -153,6 +153,7 @@ capability_routing
 ```text
 表面失败
   → 原始失配诊断
+  → 任务特定控制对象
   → 机制画像
   → 学习组件 / 系统组件拆分
   → 如果是学习组件且会复发：
@@ -162,7 +163,7 @@ capability_routing
 
 规则是：
 
-> 不要训练症状。要训练那个让症状反复出现的机制。
+> 不要训练症状。要训练那个已经被操作化、并让症状反复出现的机制失败族。
 
 例如：
 
@@ -214,7 +215,7 @@ capability_routing
 机制画像中具有：
 
 ```text
-repair_target = belief_representation
+mechanism_axis = belief_representation
 repair_layer = training | hybrid
 ```
 
@@ -303,7 +304,7 @@ T̂_θ(s_{t+1} | s_t, a_t) ≈ T(s_{t+1} | s_t, a_t)
 机制画像中具有：
 
 ```text
-repair_target = dynamics_world_model
+mechanism_axis = dynamics_world_model
 repair_layer = training | hybrid
 ```
 
@@ -387,7 +388,7 @@ join 模式、程序模式或工作流？
 机制画像中具有：
 
 ```text
-repair_target = capability_support
+mechanism_axis = capability_support
 repair_layer = training | hybrid
 ```
 
@@ -474,7 +475,7 @@ M_X = 模型激活能力 X 的域
 机制画像中具有：
 
 ```text
-repair_target = capability_routing
+mechanism_axis = capability_routing
 repair_layer = training | hybrid
 ```
 
@@ -555,7 +556,7 @@ rank_R̂(Y1, Y2) ≠ rank_U(Y1, Y2)
 机制画像中具有：
 
 ```text
-repair_target = specification_reward
+mechanism_axis = specification_reward
 repair_layer = training | hybrid
 ```
 
@@ -650,8 +651,9 @@ evaluator 分歧数据
 ```text
 Agent 层审计发现
   → 原始失配诊断
+  → 任务特定控制对象
   → 机制画像
-  → repair_target ∈ 八条机制轴
+  → mechanism_axis ∈ 八条机制轴
   → repair_layer ∈ agent | training | hybrid
   → 如果是系统组件：
        通过 Agent 层治理修复
@@ -670,17 +672,18 @@ Agent 层审计发现
 
 ```text
 1. repair_layer 是 training 或 hybrid。
-2. repair_target 是学习组件：
+2. mechanism_axis 是学习组件：
      belief_representation
      dynamics_world_model
      capability_support
      capability_routing
      specification_reward
-3. recurrence_count 超过阈值。
-4. 复发跨越了任务、schema、用户或环境。
-5. Agent 层补丁是重复性的或代价高的。
-6. 可以构造机制特定的保留集评测。
-7. 边界回归风险可接受。
+3. 失败家族已经通过任务特定控制对象完成可操作化。
+4. recurrence_count 超过阈值。
+5. 复发跨越了任务、schema、用户或环境。
+6. Agent 层补丁是重复性的或代价高的。
+7. 可以构造机制特定的保留集评测。
+8. 边界回归风险可接受。
 ```
 
 ### 6.3 拒绝条件
@@ -711,9 +714,12 @@ Agent 层审计发现
 ```json
 {
   "mismatch_type": "observation_representation | state | fitting_boundary | support | aggregation | specification | compound | unknown",
-  "repair_target": "specification_reward | observation_availability | belief_representation | dynamics_world_model | action_interface | capability_support | capability_routing | search_execution | unknown",
+  "control_object_ref": "object.id",
+  "control_object_type": "sql_dag | claim_evidence_map | state_table | router_rule | rubric | other",
+  "mechanism_axis": "specification_reward | observation_availability | belief_representation | dynamics_world_model | action_interface | capability_support | capability_routing | search_execution | unknown | not_operationalized",
+  "operationalization_status": "direct | derived | partial | not_operationalized",
   "repair_layer": "agent | training | hybrid | unknown",
-  "repair_target_role": "primary | amplifier | downstream | unknown",
+  "mechanism_role": "primary | amplifier | downstream | unknown",
   "mechanism_profile_ref": "mechanism_profile.id"
 }
 ```
@@ -769,7 +775,7 @@ Mechanism Profile 应区分系统机制与学习机制：
 {
   "id": "defect_family.schema_audit_undertrigger",
   "recurrence_count": 37,
-  "repair_target": "capability_routing",
+  "mechanism_axis": "capability_routing",
   "repair_layer": "hybrid",
   "promoted_to_training": true,
   "training_corpus_refs": ["corpus.schema_audit_boundary_v1"],
@@ -1128,7 +1134,8 @@ R̂_θ / R_proxy 奖励侧
 只有当以下每一项的答案都是 yes，某个缺陷家族才可以提升到训练层：
 
 ```text
-[ ] 修复目标是否是学习组件？
+[ ] 机制轴是否是学习组件？
+[ ] 是否存在一个让失败家族可复现、可审计的治理任务对象？
 [ ] 缺陷是否会复发？
 [ ] 复发是否跨越任务、schema、用户或环境？
 [ ] 运行时补丁是否正在变成跑步机？

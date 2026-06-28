@@ -27,6 +27,7 @@ Note: the material on this site comes primarily from engineering practice and en
 - Mechanism-Driven Training for Governed LLM Systems: [English](docs/mechanism-driven-training-for-governed-llm-systems.md) · [中文](docs/mechanism-driven-training-for-governed-llm-systems.zh-CN.md)
 - Governed LLM object model and interface specification: [English](docs/governed-llm-object-model-interface-specification.md) · [中文](docs/governed-llm-object-model-interface-specification.zh-CN.md)
 - Audit Engineering for governed LLM systems: [English](docs/audit-engineering-failure-localization-control-space-writeback.md) · [中文](docs/audit-engineering-failure-localization-control-space-writeback.zh-CN.md)
+- Oracle classification, audit agent, and SGAR engine routing: [English](docs/oracle-classification-audit-agent-sgar-engine-routing.md) · [中文](docs/oracle-classification-audit-agent-sgar-engine-routing.zh-CN.md)
 - State-Governed Agent Regime for governed LLM systems: [English](docs/state-governed-agent-regime-for-governed-llm-systems.md) · [中文](docs/state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)
 - Observation-representation mismatch and channel governance: [English](docs/observation-representation-mismatch-channel-governance-llm-systems.md) · [中文](docs/observation-representation-mismatch-channel-governance-llm-systems.zh-CN.md)
 - State mismatch and state governance: [English](docs/state-mismatch-state-governance-llm-systems.md) · [中文](docs/state-mismatch-state-governance-llm-systems.zh-CN.md)
