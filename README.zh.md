@@ -119,6 +119,7 @@ against-llm-mediocrity/
 - [LLM 系统中的规格失配与目标治理](./docs/specification-mismatch-objective-governance-llm-systems.zh-CN.md)：代理目标、隐性效用与反例驱动规格修复的配套技术报告。
 - 面向受治理 LLM 系统的形式化机制层：[English](./docs/formal-mechanism-layer-for-governed-llm-systems.md) · [中文](./docs/formal-mechanism-layer-for-governed-llm-systems.zh-CN.md)：把结构性诊断接到八条可干预机制轴。
 - 面向受治理 LLM 系统的诊断-机制桥接：[English](./docs/diagnostic-mechanism-bridge-for-governed-llm-systems.md) · [中文](./docs/diagnostic-mechanism-bridge-for-governed-llm-systems.zh-CN.md)：把六类原始失配翻译成修复定位与修复层选择。
+- 面向受治理 LLM 系统的机制驱动训练：[English](./docs/mechanism-driven-training-for-governed-llm-systems.md) · [中文](./docs/mechanism-driven-training-for-governed-llm-systems.zh-CN.md)：把反复出现的学习组件失败提升为可摊销的训练信号。
 - [Human-Assist Operational Mismatches](./docs/human-assist-operational-mismatches.zh-CN.md)：协作层失配与升级协议。
 - [治理式人机协作](./docs/governed-human-ai-collaboration.zh-CN.md)：从聊天式使用到变量治理。
 - [AI 的认知纪律](./docs/cognitive-discipline-for-ai.zh-CN.md)：AI 使用侧的认知框架。

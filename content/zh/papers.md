@@ -9,7 +9,7 @@ summary: 这里收集与LLM 平庸、LLM卓越、知识治理、硬状态 Agent 
 order: 7
 heroPoints:
   - 当前总稿：价值保存结构理论与六类原始失配总图。
-  - 工作稿：面向受治理 LLM 系统的形式化机制层、诊断-机制桥接、受治理 LLM 对象模型、审计工程、状态治理型 Agent 体制、通道治理、状态治理、能力路由、控制空间搜索、组合治理、目标治理与 Human-Assist Operational Mismatches。
+  - 工作稿：面向受治理 LLM 系统的形式化机制层、诊断-机制桥接、机制驱动训练、受治理 LLM 对象模型、审计工程、状态治理型 Agent 体制、通道治理、状态治理、能力路由、控制空间搜索、组合治理、目标治理与 Human-Assist Operational Mismatches。
   - 延伸与实现：治理式协作、硬状态 Agent 治理、AI 认知纪律、人类学习与由研究议程直接推导的工具方向。
 ---
 
@@ -122,6 +122,13 @@ Tag: 诊断桥接工作稿
 这份工作稿把六类原始失配与八条机制轴接到同一诊断与修复链路里。它定义从价值失败诊断走向修复定位的桥：机制画像、修复层选择、审计写回、受治理对象、SGAR 提交，以及由机制驱动的训练提升。
 
 [阅读诊断-机制桥接](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/diagnostic-mechanism-bridge-for-governed-llm-systems.zh-CN.md) / [English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/diagnostic-mechanism-bridge-for-governed-llm-systems.md)
+
+### 面向受治理 LLM 系统的机制驱动训练
+Tag: 训练侧治理工作稿
+
+这份工作稿定义了运行时治理在训练侧的对应层。它说明哪些反复出现的失败不应长期停留在运行时补丁，而应被提升为机制特定的训练干预，例如表征训练、边界数据、grounding 数据、奖励纠偏和能力支持训练。
+
+[阅读机制驱动训练工作稿](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/mechanism-driven-training-for-governed-llm-systems.zh-CN.md) / [English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/mechanism-driven-training-for-governed-llm-systems.md)
 
 ### Human-Assist Operational Mismatches
 Tag: 协作补充稿
