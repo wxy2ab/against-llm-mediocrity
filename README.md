@@ -25,6 +25,7 @@ The goal is not to reject autoregression, but to transform tasks that would othe
 - Audit Engineering for governed LLM systems: [English](docs/audit-engineering-failure-localization-control-space-writeback.md) · [中文](docs/audit-engineering-failure-localization-control-space-writeback.zh-CN.md)
 - State-Governed Agent Regime for governed LLM systems: [English](docs/state-governed-agent-regime-for-governed-llm-systems.md) · [中文](docs/state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)
 - Observation-representation mismatch and channel governance: [English](docs/observation-representation-mismatch-channel-governance-llm-systems.md) · [中文](docs/observation-representation-mismatch-channel-governance-llm-systems.zh-CN.md)
+- State mismatch and state governance: [English](docs/state-mismatch-state-governance-llm-systems.md) · [中文](docs/state-mismatch-state-governance-llm-systems.zh-CN.md)
 - Fitting-boundary mismatch and capability routing: [English](docs/fitting-boundary-mismatch-capability-routing-llm-systems.md) · [中文](docs/fitting-boundary-mismatch-capability-routing-llm-systems.zh-CN.md)
 - Support mismatch and control-space search: [English](docs/support-mismatch-control-space-search-llm-systems.md) · [中文](docs/support-mismatch-control-space-search-llm-systems.zh-CN.md)
 - Aggregation mismatch and compositional governance: [English](docs/aggregation-mismatch-compositional-governance-llm-systems.md) · [中文](docs/aggregation-mismatch-compositional-governance-llm-systems.zh-CN.md)
