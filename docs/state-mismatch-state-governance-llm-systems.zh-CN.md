@@ -24,6 +24,16 @@ S_world → O → Z → state belief / state hypothesis → capability routing �
 
 本文提出状态失配的形式模型、状态失败模式分类、诊断特征、状态治理对象、审计发现、控制增量、回归护栏，以及它与知识治理、审计工程和状态治理型 Agent 体制的集成规则。它也解释状态失配如何与其他原始失配复合，以及为什么状态不确定性经常必须被显式表示，而不是过早塌缩成一个单一答案。
 
+### 与 Diagnostic–Mechanism Bridge 的关系
+
+本文使用六类原始失配作为价值保存诊断。当失败进入修复阶段时，应通过 Diagnostic–Mechanism Bridge 把诊断映射到八轴机制目标与修复层：
+
+```text
+mismatch_type ∈ six primitive mismatches
+repair_target ∈ eight mechanism axes
+repair_layer ∈ agent | training | hybrid
+```
+
 ---
 
 ## 0. 在统一理论中的位置
@@ -992,6 +1002,33 @@ audit finding invalidates assumption
 11. Store state findings, control deltas, and regression guards.
 ```
 
+### 机制层映射
+
+状态失配是一个原始的价值保存诊断，但它的机制画像可能涉及多个修复目标：
+
+| 机制目标 | 在状态失配中的角色 |
+|---|---|
+| `observation_availability` | 因为缺少所需证据，系统无法区分状态 |
+| `belief_representation` | 证据存在，但没有被维护为状态 |
+| `dynamics_world_model` | 系统错误预测了行动如何改变状态 |
+| `search_execution` | 系统没有对状态假设进行分支、测试或判别 |
+
+状态失配不应被自动修成“再多推理一点”。真正的修法取决于机制定位：
+
+```text
+missing evidence:
+  repair observation_availability.
+
+unstructured or forgotten evidence:
+  repair belief_representation.
+
+wrong prediction of state transitions:
+  repair dynamics_world_model.
+
+failure to branch or test hypotheses:
+  repair search_execution.
+```
+
 ### 9.1 状态敏感性测试
 
 最重要的测试是：
@@ -1197,6 +1234,8 @@ Verifier guard:
 ## 12. 与 SGAR 集成
 
 状态失配和 SGAR 关系紧密，但并不相同。
+
+状态失配问的是哪个潜在任务状态为真。SGAR 问的是哪个状态转移已经被正式提交。前者是对不确定性或误识别的诊断；后者是一种运行时权威体制。
 
 ### 12.1 信念状态与已提交状态
 

@@ -23,6 +23,16 @@ The report provides formal definitions, diagnostic criteria, repair operators, a
 Before governing knowledge, verify that the variables to be governed have entered the representation.
 ```
 
+### Relationship to the Diagnostic–Mechanism Bridge
+
+This document uses the six primitive mismatches as value-preservation diagnostics. When a failure requires repair, the Diagnostic–Mechanism Bridge should be used to map the diagnosis to an eight-axis mechanism target and a repair layer:
+
+```text
+mismatch_type ∈ six primitive mismatches
+repair_target ∈ eight mechanism axes
+repair_layer ∈ agent | training | hybrid
+```
+
 ---
 
 ## 1. Introduction
@@ -443,6 +453,26 @@ Repair requires provenance, authority labels, and commitment status.
 
 The most important theoretical consequence of observation-representation mismatch is that it creates ceilings no downstream policy can reliably exceed.
 
+### Proposition: Representation-Induced Value Ceiling
+
+Observation-representation mismatch induces a ceiling on downstream performance.
+
+Let `S` be the world state, `O` the observation, and `Z = ψ(O)` the system's operational representation. Let `V(S)`, `V(O)`, and `V(Z)` denote the best achievable expected task utility by policies that can condition on `S`, `O`, and `Z`.
+
+Because `Z` is a post-processing of `O`, and `O` is a partial observation of `S`:
+
+```text
+V(S) ≥ V(O) ≥ V(Z)
+```
+
+If two task-relevant world states are collapsed into the same `Z` with positive probability and require different optimal actions, then:
+
+```text
+V(S) > V(Z)
+```
+
+This is the representation-induced ceiling. Once the decisive distinction is collapsed before `Z`, no downstream policy restricted to `Z` can reliably recover it without additional observation, channel repair, or representation repair.
+
 Suppose two world states `s1` and `s2` are mapped to the same representation:
 
 ```text
@@ -802,6 +832,10 @@ memory updated from unverified assumption
 ```
 
 A state transition contract must include observation authority and representation sufficiency.
+
+### Mechanism-Layer Mapping
+
+In the Formal Mechanism Layer, observation-representation mismatch usually maps to `observation_availability` and `belief_representation`. If the missing variable is unavailable to the system, the repair target is `observation_availability`. If the variable is available but not converted into an operational structure, the repair target is `belief_representation`.
 
 ---
 
@@ -1287,4 +1321,3 @@ Required repair:
 ```
 
 A variable with any `no` or critical `unknown` should not be treated as safely entered.
-

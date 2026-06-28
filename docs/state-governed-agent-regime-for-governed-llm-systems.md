@@ -22,6 +22,16 @@ SGAR is not a new prompting pattern and not a seventh primitive mismatch. It is 
 
 The central thesis is simple: long-horizon LLM systems require state authority outside the model. Without hard-state authority, agents are vulnerable to false completion, state drift, state oscillation, memory contamination, performative action, unrecoverable intermediate failure, and context-level progress illusion. With explicit state records, transition contracts, verifier stratification, rollback rules, replayability, and defect ledgers, an LLM system can convert local model competence into durable, auditable, recoverable progress.
 
+### Relationship to the Diagnostic–Mechanism Bridge
+
+This document uses the six primitive mismatches as value-preservation diagnostics. When a failure requires repair, the Diagnostic–Mechanism Bridge should be used to map the diagnosis to an eight-axis mechanism target and a repair layer:
+
+```text
+mismatch_type ∈ six primitive mismatches
+repair_target ∈ eight mechanism axes
+repair_layer ∈ agent | training | hybrid
+```
+
 ---
 
 ## 1. Position in the Unified Theory
@@ -620,6 +630,41 @@ def state_governed_step(S):
 ```
 
 The crucial detail is that context is rendered from state, not the other way around. The model does not own the state. It receives a projection of state and proposes transitions.
+
+### SGAR as Governed Mechanism-Layer Transition
+
+The Formal Mechanism Layer models an LLM system as an approximate decision system with observation, belief, world model, action interface, policy support, routing, and search/execution components.
+
+SGAR operationalizes one governed step in that mechanism-layer system:
+
+```text
+S + A → O → V → S'
+```
+
+This can be read as:
+
+| SGAR term | Mechanism-layer interpretation |
+|---|---|
+| `S` | committed state record, including task state, governance state, tool state, and belief state |
+| `A` | action selected from the effective action interface `A_sys` |
+| `O` | observation produced by the observation channel after action |
+| `V` | verifier, evaluator, transition guard, or commitment criterion |
+| `S'` | next committed hard state |
+
+The eight mechanism axes describe common ways this transition can fail:
+
+| Mechanism axis | SGAR failure form |
+|---|---|
+| `specification_reward` | the verifier commits progress under the wrong criterion |
+| `observation_availability` | the needed post-action observation is unavailable |
+| `belief_representation` | the observation is not converted into correct state |
+| `dynamics_world_model` | the system predicts the action consequence incorrectly |
+| `action_interface` | the required action is not actually callable |
+| `capability_support` | the system cannot produce the needed action candidate |
+| `capability_routing` | the wrong capability or mode is activated |
+| `search_execution` | the system fails to complete, preserve, or verify the transition |
+
+World-model and action-interface failures are especially important for SGAR. A model may narrate a successful action while the environment does not change, or it may propose a repair that is not available in the actual action interface. SGAR prevents such narrative progress from becoming committed progress.
 
 ---
 
@@ -1601,7 +1646,7 @@ State machines define allowed transitions between states. SGAR extends this idea
 
 ### 31.5 POMDPs and Belief State
 
-POMDPs distinguish world state from belief state under partial observability. SGAR similarly distinguishes observed, inferred, verified, and committed state, but emphasizes runtime authority and transition commitment rather than only decision-theoretic policy.
+POMDPs are not merely an analogy for SGAR. The Formal Mechanism Layer provides the approximate decision-system model in which SGAR commits verified transitions. SGAR is the hard-state governance layer over that mechanism-level transition process.
 
 ### 31.6 Truth Maintenance
 
@@ -1874,4 +1919,3 @@ Before allowing an LLM agent to mark a state-changing step complete, ask:
 ```
 
 If these questions cannot be answered, the system may have a useful narrative of progress, but it does not yet have governed progress.
-
