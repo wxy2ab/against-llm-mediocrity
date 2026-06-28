@@ -24,6 +24,16 @@ This distinguishes state mismatch from observation-representation mismatch. Obse
 
 The document introduces a formal model of state mismatch, a taxonomy of state failure modes, diagnostic signatures, state-governance objects, audit findings, control deltas, regression guards, and integration rules with Knowledge Governance, Audit Engineering, and State-Governed Agent Regime. It also explains how state mismatch compounds with the other primitive mismatches and why state uncertainty must often be represented explicitly rather than collapsed prematurely into a single answer.
 
+### Relationship to the Diagnostic–Mechanism Bridge
+
+This document uses the six primitive mismatches as value-preservation diagnostics. When a failure requires repair, the Diagnostic–Mechanism Bridge should be used to map the diagnosis to an eight-axis mechanism target and a repair layer:
+
+```text
+mismatch_type ∈ six primitive mismatches
+repair_target ∈ eight mechanism axes
+repair_layer ∈ agent | training | hybrid
+```
+
 ---
 
 ## 0. Position in the Unified Theory
@@ -992,6 +1002,33 @@ A practical diagnostic workflow for state mismatch:
 11. Store state findings, control deltas, and regression guards.
 ```
 
+### Mechanism-Layer Mapping
+
+State mismatch is a primitive value-preservation diagnosis. Its mechanism profile may involve several repair targets:
+
+| Mechanism target | State-mismatch role |
+|---|---|
+| `observation_availability` | state cannot be distinguished because the needed evidence is missing |
+| `belief_representation` | evidence exists but is not maintained as state |
+| `dynamics_world_model` | the system mispredicts how actions change state |
+| `search_execution` | the system fails to branch, test, or discriminate state hypotheses |
+
+State mismatch should not be automatically repaired by asking for more reasoning. The repair depends on mechanism localization:
+
+```text
+missing evidence:
+  repair observation_availability.
+
+unstructured or forgotten evidence:
+  repair belief_representation.
+
+wrong prediction of state transitions:
+  repair dynamics_world_model.
+
+failure to branch or test hypotheses:
+  repair search_execution.
+```
+
 ### 9.1 The State-Sensitivity Test
 
 The most important test is:
@@ -1197,6 +1234,8 @@ State objects can be GKOs when they function as reusable task-control knowledge.
 ## 12. Integration with SGAR
 
 State mismatch and SGAR are closely related but not identical.
+
+State mismatch asks which latent task state is true. SGAR asks which state transition has been officially committed. The former is a diagnosis of uncertainty or misidentification; the latter is a runtime authority regime.
 
 ### 12.1 Belief State vs Committed State
 
