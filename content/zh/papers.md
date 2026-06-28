@@ -3,7 +3,7 @@ key: papers
 lang: zh
 path: /zh/papers
 title: 文章与工作稿
-navTitle: 文章
+navTitle: 工作稿
 kicker: 把这套框架正式写清楚
 summary: 这里收集与LLM 平庸、LLM卓越、知识治理、硬状态 Agent 治理、治理式协作和 AI 认知纪律相关的当前工作稿与后续实证方向。
 order: 7

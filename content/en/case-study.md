@@ -6,7 +6,7 @@ title: Case Studies
 navTitle: Cases
 kicker: From individual examples to an extensible case library
 summary: "The case page is not one system's detail page. It is the entry point for case studies, organized by governance problem: control-space design first, then layered governance, continuity audit, plateau detection, financial producer governance, and hard-experience regeneration."
-order: 2
+order: 3
 heroPoints:
   - The case library connects the theory to real systems instead of leaving the framework abstract.
   - Each case answers the same questions: why the task is high-mismatch, which intermediate objects are made explicit, and how evaluation and revision close the loop.

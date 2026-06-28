@@ -3,7 +3,7 @@ key: papers
 lang: en
 path: /papers
 title: Papers and Working Manuscripts
-navTitle: Papers
+navTitle: Working drafts
 kicker: Formalizing the framework
 summary: This section collects the current manuscripts and future empirical directions related to LLM mediocrity, autoregressive extraordinary, Knowledge Governance, hard-state agent governance, governed collaboration, and cognitive discipline for AI.
 order: 7
