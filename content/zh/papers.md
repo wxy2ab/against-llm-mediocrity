@@ -9,7 +9,7 @@ summary: 这里收集与LLM 平庸、LLM卓越、知识治理、硬状态 Agent 
 order: 7
 heroPoints:
   - 主文：Knowledge Governance for Large Language Model Systems。
-  - 工作稿：价值保存结构理论、六类原始失配总图、受治理 LLM 对象模型、审计工程、状态治理型 Agent 体制、通道治理、能力路由、控制空间搜索、组合治理、目标治理、Observation-Representation Mismatch 与 Human-Assist Operational Mismatches。
+  - 工作稿：价值保存结构理论、六类原始失配总图、受治理 LLM 对象模型、审计工程、状态治理型 Agent 体制、通道治理、状态治理、能力路由、控制空间搜索、组合治理、目标治理、Observation-Representation Mismatch 与 Human-Assist Operational Mismatches。
   - 延伸与实现：治理式协作、硬状态 Agent 治理、AI 认知纪律、人类学习与由研究议程直接推导的工具方向。
 ---
 
@@ -80,6 +80,13 @@ Tag: 通道治理技术报告
 这份技术报告把观测-表征失配展开为第一类原始失配，并把通道治理定义为知识治理之前的前治理修复：确保变量进入、保留、绑定、可区分，并能用于路由、搜索、审计、渲染、验证和状态更新。
 
 [阅读通道治理技术报告](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/observation-representation-mismatch-channel-governance-llm-systems.zh-CN.md)
+
+### LLM 系统中的状态失配与状态治理
+Tag: 状态治理技术报告
+
+这份技术报告把状态失配展开为第二类原始失配：当多个潜在任务状态仍然可行、且行动价值会随状态改变时，系统却像状态已经已知一样行动。它定义状态假设、证据绑定、判别器、信念记录、状态条件化策略、转移护栏、状态回归护栏和与 SGAR 的集成规则。
+
+[阅读状态治理技术报告](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-mismatch-state-governance-llm-systems.zh-CN.md)
 
 ### LLM 系统中的拟合边界失配与能力路由
 Tag: 能力路由技术报告

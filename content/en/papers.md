@@ -9,7 +9,7 @@ summary: This section collects the current manuscripts and future empirical dire
 order: 7
 heroPoints:
   - "Main manuscript: Knowledge Governance for Large Language Model Systems."
-  - "Working drafts: Structural Theory of Value Preservation, Six Primitive Mismatches, Governed LLM Object Model, Audit Engineering, State-Governed Agent Regime, Channel Governance, Capability Routing, Control-Space Search, Compositional Governance, Objective Governance, Fitting-Boundary Mismatch, Observation-Representation Mismatch, and Human-Assist Operational Mismatches."
+  - "Working drafts: Structural Theory of Value Preservation, Six Primitive Mismatches, Governed LLM Object Model, Audit Engineering, State-Governed Agent Regime, Channel Governance, State Governance, Capability Routing, Control-Space Search, Compositional Governance, Objective Governance, Fitting-Boundary Mismatch, Observation-Representation Mismatch, and Human-Assist Operational Mismatches."
   - "Extensions and implementation: governed collaboration, hard-state agent governance, cognitive discipline for AI, human learning, and tooling directions derived from the research agenda."
 ---
 
@@ -80,6 +80,13 @@ Tag: channel governance technical report
 This technical report develops observation-representation mismatch as the first primitive mismatch and defines channel governance as pre-governance repair for variable entry, representation ceilings, binding, provenance, freshness, authority, and operational control.
 
 [Read the channel governance report](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/observation-representation-mismatch-channel-governance-llm-systems.md)
+
+### State Mismatch and State Governance in LLM Systems
+Tag: state governance technical report
+
+This technical report develops state mismatch as the second primitive mismatch: the system acts as if the relevant latent task state is known when multiple states remain plausible and action value changes across them. It defines state hypotheses, evidence binding, discriminators, belief records, state-conditioned policies, transition guards, state regression guards, and SGAR integration rules.
+
+[Read the state governance report](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-mismatch-state-governance-llm-systems.md)
 
 ### Fitting-Boundary Mismatch and Capability Routing in LLM Systems
 Tag: capability routing technical report
