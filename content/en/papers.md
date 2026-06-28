@@ -9,7 +9,7 @@ summary: This section collects the current manuscripts and future empirical dire
 order: 7
 heroPoints:
   - "Main manuscript: Knowledge Governance for Large Language Model Systems."
-  - "Working drafts: Structural Theory of Value Preservation, Governed LLM Object Model, Audit Engineering, State-Governed Agent Regime, Channel Governance, Capability Routing, Control-Space Search, Compositional Governance, Fitting-Boundary Mismatch, Observation-Representation Mismatch, and Human-Assist Operational Mismatches."
+  - "Working drafts: Structural Theory of Value Preservation, Governed LLM Object Model, Audit Engineering, State-Governed Agent Regime, Channel Governance, Capability Routing, Control-Space Search, Compositional Governance, Objective Governance, Fitting-Boundary Mismatch, Observation-Representation Mismatch, and Human-Assist Operational Mismatches."
   - "Extensions and implementation: governed collaboration, hard-state agent governance, cognitive discipline for AI, human learning, and tooling directions derived from the research agenda."
 ---
 
@@ -94,6 +94,13 @@ Tag: compositional governance technical report
 This technical report develops aggregation mismatch as a local-to-global composition failure: locally plausible parts may fail to preserve global utility under the composition operator. It defines compositional governance through dependency graphs, interface contracts, invariant registries, binding records, claim-support maps, integration ledgers, and composition audits.
 
 [Read the compositional governance report](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-compositional-governance-llm-systems.md)
+
+### Specification Mismatch and Objective Governance in LLM Systems
+Tag: objective governance technical report
+
+This technical report develops specification mismatch as an objective-preservation failure: the accessible proxy objective may diverge from true task utility even when observation, state, routing, support, and aggregation are adequate. It defines Objective Governance through scoped objective objects, proxy-risk audits, priority rules, verifier contracts, specification audits, control deltas, and regression guards.
+
+[Read the objective governance report](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/specification-mismatch-objective-governance-llm-systems.md)
 
 ### Fitting-Boundary Mismatch
 Tag: fifth primitive mismatch supplement

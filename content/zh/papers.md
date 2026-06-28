@@ -9,7 +9,7 @@ summary: 这里收集与LLM 平庸、LLM卓越、知识治理、硬状态 Agent 
 order: 7
 heroPoints:
   - 主文：Knowledge Governance for Large Language Model Systems。
-  - 工作稿：价值保存结构理论、受治理 LLM 对象模型、审计工程、状态治理型 Agent 体制、通道治理、能力路由、控制空间搜索、组合治理、Observation-Representation Mismatch 与 Human-Assist Operational Mismatches。
+  - 工作稿：价值保存结构理论、受治理 LLM 对象模型、审计工程、状态治理型 Agent 体制、通道治理、能力路由、控制空间搜索、组合治理、目标治理、Observation-Representation Mismatch 与 Human-Assist Operational Mismatches。
   - 延伸与实现：治理式协作、硬状态 Agent 治理、AI 认知纪律、人类学习与由研究议程直接推导的工具方向。
 ---
 
@@ -94,6 +94,13 @@ Tag: 组合治理技术报告
 这份技术报告把聚合失配展开为局部到全局的组合失败：局部合理、局部有用或局部改进的 parts，可能无法在组合算子下保存全局任务效用。它定义 dependency graph、interface contract、invariant registry、binding record、claim-support map、integration ledger 和 composition audit 等组合治理对象。
 
 [阅读组合治理技术报告](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-compositional-governance-llm-systems.zh-CN.md)
+
+### LLM 系统中的规格失配与目标治理
+Tag: 目标治理技术报告
+
+这份技术报告把规格失配展开为目标保存失败：即使观测、状态、路由、支持和聚合都足够，可访问代理目标仍可能偏离真实任务效用。它定义 scoped objective objects、代理风险审计、优先级规则、验证器契约、规格审计、控制增量和回归护栏。
+
+[阅读目标治理技术报告](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/specification-mismatch-objective-governance-llm-systems.zh-CN.md)
 
 ### 观测-表征失配
 Tag: 第六类原始失配专题
