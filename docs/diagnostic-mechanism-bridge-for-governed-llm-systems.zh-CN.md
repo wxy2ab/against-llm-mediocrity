@@ -42,7 +42,7 @@ S_world → O → Z → routing → support → aggregation → evaluation
 
 机制层决策模型：
 E = (S, A, T, R*, Ω, O, γ)
-M_θ = (B_θ, T̂_θ, R̂_θ, π_θ, r_θ, D, A_sys)
+M_θ = (R̂_θ, Ω_sys, B_θ, T̂_θ, A_sys, π_θ, r_θ, D)
 ```
 
 第一套形式系统支撑六类原始失配。它描述系统从世界状态走到输出的过程中，任务价值在哪里流失。它首先是一个 **价值泄漏的诊断本体**。
@@ -119,7 +119,7 @@ M_θ = (B_θ, T̂_θ, R̂_θ, π_θ, r_θ, D, A_sys)
 3. Belief / representation
 4. Dynamics / world model
 5. Action / interface
-6. Policy prior / capability support
+6. Capability support / policy prior
 7. Fitting boundary / capability routing
 8. Search / execution
 ```
@@ -909,7 +909,7 @@ S':
 
 ### 14.1 命题：表征诱导的价值上限
 
-令 `S` 为世界状态，`O` 为观测，`Z = ψ(O)` 为操作表征。令基于 `S`、`O` 与 `Z` 的策略集合分别记为 `Π_S`、`Π_O` 与 `Π_Z`。令 `V_X` 表示在信息受限于 `X` 时可达到的最优期望效用。
+令 `S` 为世界状态，`O` 为观测，`Z = ψ(O)` 为操作表征。令 `Π_X` 表示只能访问 `X` 的策略类，并令 `V_X = \max_{\pi \in \Pi_X}\mathbb{E}[\text{utility} \mid \pi]`。
 
 则有：
 
@@ -919,13 +919,13 @@ V_S ≥ V_O ≥ V_Z
 
 也就是说，只能访问 `Z` 的最优策略，不可能优于只能访问 `O` 的最优策略；而只能访问 `O` 的最优策略，也不可能优于能直接访问 `S` 的最优策略。
 
-如果存在两个与效用相关的状态 `s1` 和 `s2`，满足：
+如果存在两个与效用相关的状态 `s1` 和 `s2`，它们产生相同的操作表征：
 
 ```text
-ψ(φ(s1)) = ψ(φ(s2))
+Z(s1) = Z(s2)
 ```
 
-也即在系统看来它们在操作上不可区分，并且：
+并且：
 
 ```text
 argmax_a U(a | s1) ≠ argmax_a U(a | s2)
@@ -1226,7 +1226,7 @@ Eight: Which component should be repaired?
 
 本文意味着整个受治理 LLM 文档集合需要若干项集成更新。
 
-### 19.1 结构理论
+### 19.1 结构理论 (`structural-theory-value-preservation-llm-systems.md`)
 
 在六类原始失配之后增加一节：
 
@@ -1244,7 +1244,7 @@ repair_layer ∈ agent | training | hybrid
 
 并包含一个紧凑的交叉映射矩阵。
 
-### 19.2 六类原始失配分类法
+### 19.2 六类原始失配分类法 (`six-primitive-mismatches-pipeline-derived-taxonomy-llm-systems.md`)
 
 增加一节：
 
@@ -1259,17 +1259,17 @@ Primitive Mismatch vs Mechanism Axis
 而不是针对闭环 LLM 系统中所有可干预组件的完备性主张。
 ```
 
-### 19.3 形式化机制层
+### 19.3 形式化机制层 (`formal-mechanism-layer-for-governed-llm-systems.md`)
 
-更新文件抬头，声明：
+该文件应声明：
 
 ```text
 This document defines the intervention-localization layer orthogonal to the six primitive value-preservation mismatches.
 ```
 
-并加入学习 / 系统 / 混合分类、最小干预探针，以及表征诱导的价值上限命题。
+并纳入学习 / 系统 / 混合分类、最小干预探针，以及表征诱导的价值上限命题。
 
-### 19.4 受治理对象模型
+### 19.4 受治理对象模型 (`governed-llm-object-model-interface-specification.md`)
 
 规范化：
 
@@ -1280,7 +1280,7 @@ repair_layer = agent | training | hybrid
 mechanism_profile = first-class object
 ```
 
-### 19.5 审计工程
+### 19.5 审计工程 (`audit-engineering-failure-localization-control-space-writeback.md`)
 
 把循环升级为：
 
@@ -1292,7 +1292,7 @@ Audit Finding
   → Control Delta
 ```
 
-### 19.6 SGAR
+### 19.6 SGAR (`state-governed-agent-regime-for-governed-llm-systems.md`)
 
 增加：
 
@@ -1302,16 +1302,16 @@ SGAR as Governed Mechanism-Layer Transition
 
 并把 `S + A → O → V → S'` 明确连接到 `A_sys`、观测通道、验证器、世界模型和已提交状态。
 
-### 19.7 机制驱动训练
+### 19.7 机制驱动训练 (`mechanism-driven-training-for-governed-llm-systems.md`)
 
-创建一份单独文档：
+对应的单独文档是：
 
 ```text
 Mechanism-Driven Training for Governed LLM Systems
 From Audit Findings to Training Curricula
 ```
 
-该文档应定义：反复出现的学习组件失败如何从 defect ledger 流向训练数据、边界课程、奖励纠偏、路由训练和世界模型 grounding。
+它应定义反复出现的学习组件失败如何从 defect ledger 流向训练数据、边界课程、奖励纠偏、路由训练和世界模型 grounding。
 
 ---
 

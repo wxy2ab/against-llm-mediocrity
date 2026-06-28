@@ -18,6 +18,28 @@ The constructive response is **Objective Governance**: the disciplined induction
 
 The paper concludes by placing Objective Governance inside the unified governed LLM architecture. Observation governance ensures that task-relevant variables enter the representation. State governance distinguishes latent regimes. Router governance activates the right capability. Support governance makes high-value candidates reachable. Compositional governance preserves global structure. Objective Governance determines what counts as success and prevents the entire system from optimizing the wrong target.
 
+### Relationship to the Diagnostic–Mechanism Bridge
+
+This document uses specification mismatch as a value-preservation diagnosis. When a failure requires repair, the Diagnostic–Mechanism Bridge maps that diagnosis to an eight-axis mechanism target and a repair layer:
+
+```text
+mismatch_type ∈ six primitive mismatches
+repair_target ∈ eight mechanism axes
+repair_layer ∈ agent | training | hybrid
+```
+
+### Mechanism-Layer Mapping
+
+Specification mismatch maps primarily to `specification_reward`, whose learned and runtime components include `R̂_θ`, proxy objectives, rubrics, evaluators, verifiers, and acceptance criteria.
+
+```text
+wrong criterion of success
+  → repair_target = specification_reward
+  → repair_layer = agent | training | hybrid
+```
+
+Objective Governance operates at the governance-object layer, while `specification_reward` names the mechanism axis. The two are orthogonal coordinates: one says which objective objects should be governed, the other says which mechanism target should be repaired.
+
 ---
 
 ## 1. Position in the Unified Theory
@@ -1813,6 +1835,8 @@ SGAR:
 ```
 
 The layers interact. Objective Governance often supplies the criteria used by the other layers. But it also depends on them. A good objective cannot be applied if the decisive variables are absent, the state is wrong, the capability is not triggered, the candidate is unreachable, or the artifact composition is broken.
+
+Governance layers and the eight mechanism axes are orthogonal coordinates. Objective Governance names the governed layer in which objective objects are induced and revised. `specification_reward` names the mechanism axis that localizes which component should be repaired.
 
 ---
 

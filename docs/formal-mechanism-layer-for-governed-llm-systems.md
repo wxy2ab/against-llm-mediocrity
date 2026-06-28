@@ -23,7 +23,7 @@ The mechanism layer therefore decomposes repair localization into eight interven
 3. Belief / representation
 4. Dynamics / world model
 5. Action / interface
-6. Policy prior / capability support
+6. Capability support / policy prior
 7. Fitting boundary / capability routing
 8. Search / execution
 ```
@@ -46,10 +46,12 @@ The current governed-LLM theory stack has several layers:
 Layer 0: World-to-output value-preservation pipeline
 Layer 1: Six Primitive Mismatches
 Layer 2: Formal Mechanism Layer
-Layer 3: Knowledge Governance
-Layer 4: Audit Engineering
-Layer 5: Governed Object Model
-Layer 6: State-Governed Agent Regime
+Layer 3: Diagnostic–Mechanism Bridge
+Layer 4: Knowledge Governance
+Layer 5: Audit Engineering
+Layer 6: Governed Object Model
+Layer 7: State-Governed Agent Regime
+Layer 8: Mechanism-Driven Training
 ```
 
 Each layer answers a different question.
@@ -59,10 +61,12 @@ Each layer answers a different question.
 | Value-preservation pipeline | Through which stations must task value survive? |
 | Six Primitive Mismatches | Where is task value structurally distorted? |
 | Formal Mechanism Layer | Which intervenable system component should be changed? |
+| Diagnostic–Mechanism Bridge | How does value diagnosis become repair localization and repair-layer selection? |
 | Knowledge Governance | Which control knowledge should be objectified, scoped, revised, and revoked? |
 | Audit Engineering | How should failures be localized and written back into the control space? |
 | Governed Object Model | How should findings, deltas, GKOs, guards, and state records be represented? |
 | SGAR | Which actions, repairs, memories, and state updates are actually committed? |
+| Mechanism-Driven Training | Which recurrent learning-component failures should be promoted into training? |
 
 The mechanism layer sits between structural theory and repair. It prevents a common failure in LLM-system design: moving directly from a surface symptom to a favorite repair without identifying the component-level bottleneck.
 
@@ -266,6 +270,8 @@ where:
 | `r_\theta` | Capability router: mode, role, tool, skill, audit pattern, and behavior activation. |
 | `D` | Decoding, planning, search, ranking, verification, and execution procedure. |
 
+`\Omega_{sys}` belongs to `\mathcal{M}_\theta`, not to the true environment tuple `\mathcal{E}`. `\Omega` and `\mathcal{O}(o \mid s)` describe what observations exist in principle in the task environment. `\Omega_{sys}` describes which observation channels are actually exposed to the deployed governed system.
+
 The system is also shaped by external specifications:
 
 ```text
@@ -274,6 +280,26 @@ R_eval: deployment evaluator or benchmark metric
 R_user: expressed user preference
 R*: true task utility
 ```
+
+Not all mechanism axes are of the same type. Five axes include learned components that may justify training promotion:
+
+| Mechanism axis | Learned-side components | Runtime-side components |
+|---|---|---|
+| `specification_reward` | `\hat{R}_\theta`, learned reward proxy | rubric, evaluator, verifier, acceptance criterion |
+| `belief_representation` | `B_\theta` | state tables, schemas, memory objects, GKOs |
+| `dynamics_world_model` | `\hat{\mathcal{T}}_\theta` | execution feedback, simulator, verifier |
+| `capability_support` | `\pi_\theta` | examples, RAG, specialist operators, tools |
+| `capability_routing` | `r_\theta` | explicit router, mode switch, role binding |
+
+Three axes are primarily system-side:
+
+| Mechanism axis | Dominant system-side components |
+|---|---|
+| `observation_availability` | `\Omega_{sys}` and observation access policy |
+| `action_interface` | `\mathcal{A}_{sys}` |
+| `search_execution` | `D` |
+
+This distinction also explains why a representation-induced value ceiling belongs to the mechanism layer. Once utility-relevant distinctions are lost before `B_\theta`, downstream routing, support, aggregation, or search cannot reliably recover them without additional observation or representation repair.
 
 A mechanism mismatch occurs when a component of `\mathcal{M}_\theta` differs from what the task requires in a way that changes reachable value.
 
@@ -659,11 +685,11 @@ Action / interface contributes to **observation-representation mismatch** when t
 
 ---
 
-### 3.6 Policy Prior / Capability Support
+### 3.6 Capability Support / Policy Prior
 
 #### Definition
 
-Policy prior / capability support mismatch occurs when the correct knowledge, operator, reasoning pattern, artifact structure, or action candidate has insufficient probability or reachability under the system's effective policy and budget.
+Capability support / policy prior mismatch occurs when the correct knowledge, operator, reasoning pattern, artifact structure, or action candidate has insufficient probability or reachability under the system's effective policy and budget.
 
 Let `y^*` be a high-value candidate and `B` the inference budget. The mismatch exists when:
 
@@ -906,7 +932,7 @@ Search / execution contributes to **support mismatch** when reachable candidates
 | Belief / representation | `B_\theta` | Did observed information become correct operational state? | State extraction, entity binding, external memory, structured representation. |
 | Dynamics / world model | `\hat{\mathcal T}_\theta` | Did the system mispredict action consequences? | Execution feedback, tests, sandbox, simulator, backtest. |
 | Action / interface | `\mathcal A_sys` | Is the required action callable? | Tools, APIs, permissions, schemas, rollback gates. |
-| Policy prior / capability support | `\pi_\theta`, effective support | Is the correct structure reachable under budget? | Examples, RAG, expert models, programmatic operators, training. |
+| Capability support / policy prior | `\pi_\theta`, effective support | Is the correct structure reachable under budget? | Examples, RAG, expert models, programmatic operators, training. |
 | Fitting boundary / routing | `r_\theta`, `M_X`, `T_X` | Is the capability triggered in the right region? | Routers, mode switches, trigger boundaries, role separation. |
 | Search / execution | `D` | Is a reachable candidate found, selected, preserved, and completed? | Sampling, tree search, backtracking, verifier, checkpoints. |
 
@@ -989,7 +1015,7 @@ A practical dependency order is:
 3. Belief / representation
 4. Dynamics / world model
 5. Action / interface
-6. Policy prior / capability support
+6. Capability support / policy prior
 7. Fitting boundary / capability routing
 8. Search / execution
 ```
@@ -1889,7 +1915,7 @@ For a concrete failure, use the following protocol:
 
 The Formal Mechanism Layer completes an important bridge in the governed-LLM theory stack.
 
-The six primitive mismatches explain how task value is structurally lost. But structural diagnosis alone does not determine which component should be changed. The mechanism layer localizes failures to eight intervenable system axes: specification / reward, observation availability, belief / representation, dynamics / world model, action / interface, policy prior / capability support, fitting boundary / capability routing, and search / execution.
+The six primitive mismatches explain how task value is structurally lost. But structural diagnosis alone does not determine which component should be changed. The mechanism layer localizes failures to eight intervenable system axes: specification / reward, observation availability, belief / representation, dynamics / world model, action / interface, capability support / policy prior, fitting boundary / capability routing, and search / execution.
 
 A mechanism profile is not a decorative label. It is a repair-localization object. It records which components are primary causes, which are amplifiers, which are downstream symptoms, what minimal intervention evidence supports the diagnosis, what control deltas should be applied, what regression guards should be added, and what state transition should be committed.
 

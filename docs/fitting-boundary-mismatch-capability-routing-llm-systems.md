@@ -45,6 +45,28 @@ Z → trigger evidence → implicit router → activated capability set
 
 The paper then develops a practical theory of capability routing: capability profiles, trigger evidence, suppressors, role attractors, boundary perturbations, router deltas, routing GKOs, and boundary regression guards. It shows how fitting-boundary mismatch interacts with Knowledge Governance, Audit Engineering, and State-Governed Agent Regime. The goal is to turn capability activation from an implicit side effect of prompt surface form into an auditable, revisable, state-aware control layer.
 
+### Relationship to the Diagnostic–Mechanism Bridge
+
+This document uses fitting-boundary mismatch as a value-preservation diagnosis. When a failure requires repair, the Diagnostic–Mechanism Bridge maps that diagnosis to an eight-axis mechanism target and a repair layer:
+
+```text
+mismatch_type ∈ six primitive mismatches
+repair_target ∈ eight mechanism axes
+repair_layer ∈ agent | training | hybrid
+```
+
+### Mechanism-Layer Mapping
+
+Fitting-boundary mismatch maps primarily to `capability_routing`, whose formal mechanism-side component is `r_θ`.
+
+```text
+wrong trigger boundary
+  → repair_target = capability_routing
+  → repair_layer = agent | training | hybrid
+```
+
+At the agent layer, the repair is typically a routing GKO, router trace, trigger rule, suppressor rule, or explicit mode-binding change. If the same boundary error recurs across tasks and cannot be stabilized by runtime governance alone, it should be promoted to mechanism-driven training.
+
 ---
 
 ## 1. Introduction

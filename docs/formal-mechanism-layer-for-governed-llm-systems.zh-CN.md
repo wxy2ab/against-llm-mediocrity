@@ -46,10 +46,12 @@
 Layer 0: 世界到输出的价值保存管线
 Layer 1: 六类原始失配
 Layer 2: 形式化机制层
-Layer 3: 知识治理
-Layer 4: 审计工程
-Layer 5: 受治理对象模型
-Layer 6: 状态治理代理机制（SGAR）
+Layer 3: 诊断-机制桥接
+Layer 4: 知识治理
+Layer 5: 审计工程
+Layer 6: 受治理对象模型
+Layer 7: 状态治理代理机制（SGAR）
+Layer 8: 机制驱动训练
 ```
 
 每一层回答一个不同的问题。
@@ -59,10 +61,12 @@ Layer 6: 状态治理代理机制（SGAR）
 | 价值保存管线 | 任务价值必须经过哪些站点才能存活？ |
 | 六类原始失配 | 任务价值在何处发生结构性扭曲？ |
 | 形式化机制层 | 应当修改哪个可干预的系统组件？ |
+| 诊断-机制桥接 | 价值诊断如何转化为修复定位与修复层选择？ |
 | 知识治理 | 哪些控制知识应被对象化、定域、修订与撤销？ |
 | 审计工程 | 应如何定位失败并把结果写回控制空间？ |
 | 受治理对象模型 | 发现、增量、GKO、护栏与状态记录应如何表示？ |
 | SGAR | 哪些动作、修复、记忆与状态更新会被真正提交？ |
+| 机制驱动训练 | 哪些反复出现的学习组件失败应被提升到训练中？ |
 
 机制层位于结构理论与修复之间。它防止 LLM 系统设计中一种常见失败：从表面症状直接跳到自己偏爱的修法，而没有先识别组件级瓶颈。
 
@@ -266,6 +270,8 @@ D
 | `r_\theta` | 能力路由器：模式、角色、工具、技能、审计模式与行为激活。 |
 | `D` | 解码、规划、搜索、排序、验证与执行过程。 |
 
+`\Omega_{sys}` 属于 `\mathcal{M}_\theta`，而不属于真实环境元组 `\mathcal{E}`。`\Omega` 与 `\mathcal{O}(o \mid s)` 描述的是任务环境原则上能提供哪些观测；`\Omega_{sys}` 描述的是已部署受治理系统实际上暴露了哪些观测通道。
+
 系统还会受到外部规格的塑形：
 
 ```text
@@ -274,6 +280,26 @@ R_eval: 部署评估器或 benchmark 指标
 R_user: 用户显式表达的偏好
 R*: 真实任务效用
 ```
+
+并非所有机制轴都属于同一种类型。五条机制轴包含学习侧组件，因此可能需要提升到训练层：
+
+| 机制轴 | 学习侧组件 | 运行时侧组件 |
+|---|---|---|
+| `specification_reward` | `\hat{R}_\theta` | rubric、evaluator、verifier、验收标准 |
+| `belief_representation` | `B_\theta` | 状态表、schema、memory object、GKO |
+| `dynamics_world_model` | `\hat{\mathcal{T}}_\theta` | 执行反馈、simulator、verifier |
+| `capability_support` | `\pi_\theta` | 示例、RAG、专门算子、工具 |
+| `capability_routing` | `r_\theta` | 显式 router、模式切换、角色绑定 |
+
+另外三条机制轴主要是系统侧：
+
+| 机制轴 | 主导系统组件 |
+|---|---|
+| `observation_availability` | `\Omega_{sys}` 与观测接入策略 |
+| `action_interface` | `\mathcal{A}_{sys}` |
+| `search_execution` | `D` |
+
+这也解释了为什么“表征诱导的价值上限”属于机制层：一旦与效用相关的区分在 `B_\theta` 之前被折叠，后续的路由、支持、聚合或搜索都无法在没有新增观测或表征修复的情况下可靠恢复它。
 
 当 `\mathcal{M}_\theta` 的某个组件与任务所要求的状态存在偏差，并且这种偏差改变了可达价值时，就发生机制失配。
 
@@ -906,7 +932,7 @@ SearchExecutionDelta:
 | Belief / representation | `B_\theta` | 已观测信息是否形成正确可操作状态？ | 状态抽取、实体绑定、外部记忆、结构化表征。 |
 | Dynamics / world model | `\hat{\mathcal T}_\theta` | 系统是否误判了动作后果？ | 执行反馈、测试、沙盒、模拟器、回测。 |
 | Action / interface | `\mathcal A_sys` | 所需动作是否可调用？ | 工具、API、权限、schema、回滚门槛。 |
-| Policy prior / capability support | `\pi_\theta`, effective support | 正确结构在预算内是否可达？ | 范例、RAG、专家模型、程序算子、训练。 |
+| Capability support / policy prior | `\pi_\theta`, effective support | 正确结构在预算内是否可达？ | 范例、RAG、专家模型、程序算子、训练。 |
 | Fitting boundary / routing | `r_\theta`, `M_X`, `T_X` | 能力是否在正确区域被触发？ | 路由器、模式切换、触发边界、角色分离。 |
 | Search / execution | `D` | 可达候选是否被找到、选中、保住并完成？ | 采样、树搜索、回溯、验证器、检查点。 |
 

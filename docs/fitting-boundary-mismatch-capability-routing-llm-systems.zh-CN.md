@@ -45,6 +45,28 @@ Z → trigger evidence → implicit router → activated capability set
 
 随后本文发展一套能力路由的实践理论：能力画像、触发证据、抑制器、角色吸引子、边界扰动、路由增量、路由 GKO 和边界回归护栏。它说明拟合边界失配如何与知识治理、审计工程和状态治理型 Agent 体制相互作用。目标是把能力激活从 prompt 表面形式的隐式副作用，转化为可审计、可修订、状态感知的控制层。
 
+### 与 Diagnostic–Mechanism Bridge 的关系
+
+本文使用拟合边界失配作为一种价值保存诊断。当失败进入修复阶段时，Diagnostic–Mechanism Bridge 会把这一诊断映射到八轴机制目标与修复层：
+
+```text
+mismatch_type ∈ six primitive mismatches
+repair_target ∈ eight mechanism axes
+repair_layer ∈ agent | training | hybrid
+```
+
+### 机制层映射
+
+拟合边界失配主要映射到 `capability_routing`，其形式机制侧组件是 `r_θ`。
+
+```text
+wrong trigger boundary
+  → repair_target = capability_routing
+  → repair_layer = agent | training | hybrid
+```
+
+在 Agent 层，修复通常表现为路由 GKO、router trace、触发规则、抑制规则或显式模式绑定修改。如果同一边界错误跨任务反复出现，并且仅靠运行时治理无法稳定，就应被提升到机制驱动训练。
+
 ---
 
 ## 1. 引言
