@@ -20,6 +20,7 @@ The goal is not to reject autoregression, but to transform tasks that would othe
 
 - Main working manuscript: [English](docs/knowledge-governance-llm-systems-local-alignment.md) · [中文](docs/knowledge-governance-llm-systems-local-alignment.zh-CN.md)
 - Structural theory of value preservation: [English](docs/structural-theory-value-preservation-llm-systems.md) · [中文](docs/structural-theory-value-preservation-llm-systems.zh-CN.md)
+- Six primitive mismatches pipeline-derived taxonomy: [English](docs/six-primitive-mismatches-pipeline-derived-taxonomy-llm-systems.md) · [中文](docs/six-primitive-mismatches-pipeline-derived-taxonomy-llm-systems.zh-CN.md)
 - Governed LLM object model and interface specification: [English](docs/governed-llm-object-model-interface-specification.md) · [中文](docs/governed-llm-object-model-interface-specification.zh-CN.md)
 - Audit Engineering for governed LLM systems: [English](docs/audit-engineering-failure-localization-control-space-writeback.md) · [中文](docs/audit-engineering-failure-localization-control-space-writeback.zh-CN.md)
 - State-Governed Agent Regime for governed LLM systems: [English](docs/state-governed-agent-regime-for-governed-llm-systems.md) · [中文](docs/state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)

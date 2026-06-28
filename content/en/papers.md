@@ -9,7 +9,7 @@ summary: This section collects the current manuscripts and future empirical dire
 order: 7
 heroPoints:
   - "Main manuscript: Knowledge Governance for Large Language Model Systems."
-  - "Working drafts: Structural Theory of Value Preservation, Governed LLM Object Model, Audit Engineering, State-Governed Agent Regime, Channel Governance, Capability Routing, Control-Space Search, Compositional Governance, Objective Governance, Fitting-Boundary Mismatch, Observation-Representation Mismatch, and Human-Assist Operational Mismatches."
+  - "Working drafts: Structural Theory of Value Preservation, Six Primitive Mismatches, Governed LLM Object Model, Audit Engineering, State-Governed Agent Regime, Channel Governance, Capability Routing, Control-Space Search, Compositional Governance, Objective Governance, Fitting-Boundary Mismatch, Observation-Representation Mismatch, and Human-Assist Operational Mismatches."
   - "Extensions and implementation: governed collaboration, hard-state agent governance, cognitive discipline for AI, human learning, and tooling directions derived from the research agenda."
 ---
 
@@ -45,6 +45,13 @@ Tag: structural theory working draft
 This working draft reframes the framework around value preservation across a world-to-output pipeline. It derives the six primitive mismatches from pipeline stations, explains repair-operator coupling and super-additive compound failure, and unifies Knowledge Governance, Audit Engineering, and State-Governed Agent Regime as mechanisms for preserving task value.
 
 [Read the structural theory draft](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/structural-theory-value-preservation-llm-systems.md)
+
+### Six Primitive Mismatches in LLM Systems
+Tag: pipeline-derived taxonomy working draft
+
+This working draft consolidates the six primitive mismatches into one pipeline-derived taxonomy. It derives observation-representation, state, fitting-boundary, support, aggregation, and specification mismatch as distinct value-preservation failure stations, then maps each to diagnostic questions, repair targets, audit findings, control deltas, GKOs, regression guards, and SGAR commitments.
+
+[Read the six-mismatch taxonomy](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/six-primitive-mismatches-pipeline-derived-taxonomy-llm-systems.md)
 
 ### Governed LLM Object Model and Interface Specification
 Tag: implementation specification

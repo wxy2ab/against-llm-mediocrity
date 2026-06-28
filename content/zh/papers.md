@@ -9,7 +9,7 @@ summary: 这里收集与LLM 平庸、LLM卓越、知识治理、硬状态 Agent 
 order: 7
 heroPoints:
   - 主文：Knowledge Governance for Large Language Model Systems。
-  - 工作稿：价值保存结构理论、受治理 LLM 对象模型、审计工程、状态治理型 Agent 体制、通道治理、能力路由、控制空间搜索、组合治理、目标治理、Observation-Representation Mismatch 与 Human-Assist Operational Mismatches。
+  - 工作稿：价值保存结构理论、六类原始失配总图、受治理 LLM 对象模型、审计工程、状态治理型 Agent 体制、通道治理、能力路由、控制空间搜索、组合治理、目标治理、Observation-Representation Mismatch 与 Human-Assist Operational Mismatches。
   - 延伸与实现：治理式协作、硬状态 Agent 治理、AI 认知纪律、人类学习与由研究议程直接推导的工具方向。
 ---
 
@@ -45,6 +45,13 @@ Tag: 结构理论工作稿
 这份工作稿把框架重写为世界到输出管线中的价值保存问题：任务价值必须穿过观测、表征、状态识别、能力路由、候选支持、聚合与评估。它从管线站点推出六类原始失配，解释修复算子耦合和超加性复合失败，并把知识治理、审计工程和状态治理型 Agent 体制统一为价值保存机制。
 
 [阅读价值保存结构理论工作稿](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/structural-theory-value-preservation-llm-systems.zh-CN.md)
+
+### LLM 系统中的六类原始失配
+Tag: 管线推导分类法工作稿
+
+这份工作稿把观测-表征、状态、拟合边界、支持、聚合和规格六类原始失配收束为一张从价值保存管线推导出的总图，并把每类失配映射到诊断问题、修复目标、审计发现、控制增量、GKO、回归护栏和 SGAR 提交。
+
+[阅读六类原始失配总图](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/six-primitive-mismatches-pipeline-derived-taxonomy-llm-systems.zh-CN.md)
 
 ### 受治理 LLM 对象模型与接口规范
 Tag: 实现规范工作稿
