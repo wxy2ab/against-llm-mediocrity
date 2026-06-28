@@ -14,7 +14,7 @@ The main *Knowledge Governance* manuscript explains task-value divergence throug
 
 An operational mismatch occurs when an agent cannot reliably continue because a task-critical control variable is unavailable, uncertain, or outside its legitimate authority, and targeted human input can resolve the blocker. Operational mismatches do not expand the primitive mismatch taxonomy. They answer a different question: not why generation diverges from value, but where autonomous execution is blocked and what minimal human contribution restores progress.
 
-The central objects are the **Minimal Sufficient Human Query (MSHQ)** and the **Governed Escalation Object (GEO)**. An MSHQ asks only for the missing human-governed variable. A GEO records when escalation is required, who should answer, what safe default applies, what work may continue, and how the rule expires or is revoked. In a long-horizon agent, the answer should then be committed into hard state rather than left as context-only memory.
+The central objects are the **Minimal Sufficient Human Query (MSHQ)** and the **Governed Escalation Object (GEsO)**. Here `GEsO` is intentionally distinct from the object-model's **Governed Execution Object (GEO)**. An MSHQ asks only for the missing human-governed variable. A GEsO records when escalation is required, who should answer, what safe default applies, what work may continue, and how the rule expires or is revoked. In a long-horizon agent, the answer should then be committed into hard state rather than left as context-only memory.
 
 ## 1. Scope and Core Claim
 
@@ -38,7 +38,7 @@ Only then should it ask:
 |---|---|---|
 | Primitive mismatch | Why can generation diverge from task value? | aggregation, support, state, specification, fitting-boundary, observation-representation |
 | Operational blocker | What control variable prevents reliable continuation? | missing state, value choice, authority, evidence, resource |
-| Escalation protocol | What should the agent ask, and what happens next? | MSHQ, GEO, safe default, answer validation, autonomy recovery |
+| Escalation protocol | What should the agent ask, and what happens next? | MSHQ, GEsO, safe default, answer validation, autonomy recovery |
 
 Operational blockers often express primitive mismatches:
 
@@ -187,11 +187,11 @@ Better:
 
 ## 6. Governed Escalation Object
 
-A GEO stores a reusable escalation rule.
+A GEsO stores a reusable escalation rule.
 
 ```json
 {
-  "id": "geo-uuid",
+  "id": "geso-uuid",
   "domain": "information | value | authority | boundary | coordination",
   "subtype": "authorization",
   "condition": "predicate that triggers escalation",
@@ -224,16 +224,16 @@ A GEO stores a reusable escalation rule.
 3. Apply hard governance gates.
 4. If no hard gate applies, compare expected unsupported-autonomy loss
    with interruption and delay cost.
-5. Construct an MSHQ and instantiate or update a GEO.
+5. Construct an MSHQ and instantiate or update a GEsO.
 6. Continue safe reversible work while waiting.
 7. Validate the human answer:
    sufficient? authorized? internally consistent? current?
 8. If ambiguous, ask one narrower follow-up or route to the correct role.
 9. Resume autonomous work under the resolved variable.
 10. Verify the resulting action or artifact.
-11. Commit the resolved variable as a hard-state transition when it changes the recognized task state, authorization, boundary, or obligation.
-12. Store durable answers as GKOs; retain recurring escalation rules as GEOs.
-13. Revoke stale GKOs and GEOs when state, policy, authority, or tools change.
+11. Commit the resolved variable as a hard-state transition when it changes the recognized task state, authorization, boundary, or obligation. In the object model, this typically lands in a `state_record` under a `transition_contract`, and control changes may also emit a `control_delta`.
+12. Store durable answers as GKOs; retain recurring escalation rules as GEsOs.
+13. Revoke stale GKOs and GEsOs when state, policy, authority, or tools change.
 ```
 
 If no answer arrives:
@@ -243,23 +243,23 @@ If no answer arrives:
 - continue reversible preparatory work;
 - record the unresolved blocker rather than silently guessing.
 
-## 8. GKO and GEO Integration
+## 8. GKO and GEsO Integration
 
 | Object | Governs | Primary question |
 |---|---|---|
 | GKO | knowledge, constraints, conditions, diagnostics | What should the agent know or obey? |
-| GEO | escalation, missing variables, authority, handoff | When should the agent ask, whom, and what next? |
+| GEsO | escalation, missing variables, authority, handoff | When should the agent ask, whom, and what next? |
 | SGAR state | recognized position, transition, recovery, audit | What changed in the agent's operative state? |
 
-A human answer to a GEO may become a GKO:
+A human answer to a GEsO may become a GKO:
 
 > For this client, never promise refunds directly; escalate to the account owner.
 
-A GKO may trigger a GEO:
+A GKO may trigger a GEsO:
 
 > Any external commitment requires explicit approval before sending.
 
-A GEO answer may also trigger a hard-state transition:
+A GEsO answer may also trigger a hard-state transition:
 
 > The account owner approved the revised commitment wording; the agent may now send exactly that version, and the approval expires after this message.
 
@@ -275,7 +275,7 @@ A human-assist system should be evaluated on both task outcomes and collaboratio
 - **wrong-autonomy incidents:** the agent acts when it should escalate;
 - **unnecessary escalation incidents:** the agent asks when tools or context suffice;
 - **answer-resolution rate:** the response actually resolves the blocker;
-- **GEO reuse and revocation quality:** recurring rules help without becoming stale;
+- **GEsO reuse and revocation quality:** recurring rules help without becoming stale;
 - **hard-state uptake:** resolved variables become recoverable state rather than disappearing into chat.
 
 ## 10. Limitations and Research Agenda
@@ -289,7 +289,7 @@ Important open questions include:
 - resolving conflicts among multiple principals;
 - preventing over-escalation and learned helplessness;
 - protecting sensitive information collected during escalation;
-- measuring whether MSHQ/GEO protocols improve task value under matched budgets.
+- measuring whether MSHQ/GEsO protocols improve task value under matched budgets.
 
 ## Conclusion
 

@@ -555,7 +555,9 @@ An **Audit Finding** localizes a defect in an artifact, trace, state transition,
   "severity": "low | medium | high | critical",
   "confidence": "low | medium | high | confirmed",
   "failure_mode": "short failure-mode label",
-  "repair_target": "channel | representation | state | router | support | aggregation | specification | verifier | gko | geo | state_record | transition_contract | prompt | tool | unknown",
+  "repair_target": "specification_reward | observation_availability | belief_representation | dynamics_world_model | action_interface | capability_support | capability_routing | search_execution | unknown",
+  "repair_layer": "agent | training | hybrid | unknown",
+  "target_object_refs": ["object.id"],
   "root_cause_hypothesis": "why the failure occurred",
   "minimal_reproduction": "minimal condition or example that reproduces the defect",
   "control_delta_refs": ["delta.id"],
@@ -597,7 +599,9 @@ An **Audit Finding** localizes a defect in an artifact, trace, state transition,
   "severity": "high",
   "confidence": "confirmed",
   "failure_mode": "value_linking_surface_form_not_grounded",
-  "repair_target": "representation",
+  "repair_target": "belief_representation",
+  "repair_layer": "agent",
+  "target_object_refs": [],
   "root_cause_hypothesis": "The system used the natural-language value phrase directly rather than querying or normalizing database values before predicate construction.",
   "minimal_reproduction": "Use the same question and schema but omit sample values for the status column; the model generates an unsupported literal predicate.",
   "control_delta_refs": ["delta.text2sql.require_value_grounding_before_predicate_rendering.v1"],
@@ -653,6 +657,8 @@ change_observation_channel
   "status": "draft | proposed | approved | applied | rejected | rolled_back | superseded | archived",
   "delta_type": "create_object | update_object | weaken_object | strengthen_object | revoke_object | supersede_object | add_evidence | add_counterevidence | change_priority | change_scope | change_router | change_verifier | change_transition_contract | add_regression_guard | change_rendering_policy | change_search_policy | change_representation | change_observation_channel",
   "source_finding_refs": ["finding.id"],
+  "repair_target": "specification_reward | observation_availability | belief_representation | dynamics_world_model | action_interface | capability_support | capability_routing | search_execution | unknown",
+  "repair_layer": "agent | training | hybrid | unknown",
   "target_object_refs": ["object.id"],
   "proposed_change": "human-readable description of the change",
   "patch": "machine-readable patch or structured update",
@@ -680,6 +686,8 @@ change_observation_channel
   "status": "approved",
   "delta_type": "create_object",
   "source_finding_refs": ["finding.text2sql.empty_result_due_to_overconstrained_predicate.014"],
+  "repair_target": "belief_representation",
+  "repair_layer": "agent",
   "target_object_refs": [],
   "proposed_change": "Create a GKO requiring observed or normalized database values before rendering literal predicates.",
   "patch": {
@@ -1602,7 +1610,8 @@ It audits the candidate and creates a finding:
 ```text
 finding: value predicate uses ungrounded surface form
 mismatch_type: observation_representation
-repair_target: representation
+repair_target: belief_representation
+repair_layer: agent
 ```
 
 It derives a control delta:
@@ -1809,7 +1818,7 @@ Which conflicts are unresolved?
 Which deltas were applied without rollback plans?
 ```
 
-A minimal audit-of-audit finding is itself an Audit Finding with `repair_target = governance_layer` or a more specific target such as `gko`, `verifier`, `guard`, or `transition_contract`.
+A minimal audit-of-audit finding is itself an Audit Finding with `repair_target = unknown` or a specific mechanism target, while `target_object_refs` can point to a `gko`, `verifier`, `guard`, or `transition_contract` that should change.
 
 ---
 
@@ -1881,7 +1890,7 @@ revoked
 archived
 ```
 
-The canonical primitive mismatch vocabulary is:
+The canonical mismatch_type vocabulary is:
 
 ```text
 observation_representation
@@ -1898,21 +1907,23 @@ unknown
 The canonical repair-target vocabulary is:
 
 ```text
-channel
-representation
-state
-router
-support
-aggregation
-specification
-verifier
-gko
-geo
-state_record
-transition_contract
-prompt
-tool
-governance_layer
+specification_reward
+observation_availability
+belief_representation
+dynamics_world_model
+action_interface
+capability_support
+capability_routing
+search_execution
+unknown
+```
+
+The canonical repair_layer vocabulary is:
+
+```text
+agent
+training
+hybrid
 unknown
 ```
 

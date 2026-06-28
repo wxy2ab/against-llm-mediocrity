@@ -597,7 +597,8 @@ A minimal Audit Finding schema is:
   "evidence": "specific evidence for the defect",
   "mismatch_type": "observation_representation | state | fitting_boundary | support | aggregation | specification | compound",
   "severity": "low | medium | high | critical",
-  "repair_target": "channel | representation | router | support | aggregation | specification | state | GKO | verifier",
+  "repair_target": "specification_reward | observation_availability | belief_representation | dynamics_world_model | action_interface | capability_support | capability_routing | search_execution | unknown",
+  "repair_layer": "agent | training | hybrid | unknown",
   "control_delta": "proposed change to the governed control space",
   "regression_guard": "test, check, or condition that should fail if the defect recurs",
   "confidence": "confidence in the diagnosis"

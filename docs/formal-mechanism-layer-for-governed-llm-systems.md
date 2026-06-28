@@ -1070,7 +1070,7 @@ A Mechanism Profile should be part of the governed object system.
     "belief_representation": "none | low | medium | high | critical | unknown | not_distinguished",
     "dynamics_world_model": "none | low | medium | high | critical | unknown | not_distinguished",
     "action_interface": "none | low | medium | high | critical | unknown | not_distinguished",
-    "policy_capability_support": "none | low | medium | high | critical | unknown | not_distinguished",
+    "capability_support": "none | low | medium | high | critical | unknown | not_distinguished",
     "capability_routing": "none | low | medium | high | critical | unknown | not_distinguished",
     "search_execution": "none | low | medium | high | critical | unknown | not_distinguished"
   },
@@ -1977,7 +1977,7 @@ Search / Execution
     "belief_representation": "...",
     "dynamics_world_model": "...",
     "action_interface": "...",
-    "policy_capability_support": "...",
+    "capability_support": "...",
     "capability_routing": "...",
     "search_execution": "..."
   },
@@ -2054,4 +2054,3 @@ Search / Execution
 | CapabilityRoutingDelta | Repair to trigger boundaries, modes, roles, or routers. |
 | SearchExecutionDelta | Repair to sampling, branch search, verification, ranking, checkpoints, or execution. |
 | SGAR commitment | Hard-state transition that makes a repair, action, or state update authoritative. |
-
