@@ -2,6 +2,7 @@
 
 **代理目标、隐性效用与反例驱动的规格修复**  
 **工作稿 v0.1**
+**Xinyun Wang, Shuliang Liang**
 
 ---
 

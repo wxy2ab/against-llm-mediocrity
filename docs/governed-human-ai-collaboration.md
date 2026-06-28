@@ -17,7 +17,7 @@ AI should advance everything that can be generated, searched, structured, simula
 ```text
 AI: process → search → structure → simulate → verify
 Human: set values → allocate budget → authorize → judge taste → own responsibility
-System: preserve durable judgments as GKOs/GEOs -> commit governed state transitions -> restore AI autonomy
+System: preserve durable judgments as GKOs/GEsOs -> commit governed state transitions -> restore AI autonomy
 ```
 
 The collaboration unit is not the whole task. It is the **control variable**. For long-horizon agents, the resolved control variable should also become a hard-state update: a fact, permission, boundary, obligation, revocation, or verification record that the agent can recover from later.
@@ -111,7 +111,7 @@ Ask a human only when a remaining variable cannot be reliably observed, inferred
 |---|---|---|
 | Primitive mismatch | Why might ordinary generation diverge from value? | reparameterize task or construct control space |
 | Operational blocker | Which missing control variable prevents progress? | attempt autonomous recovery, then route if needed |
-| Escalation protocol | What is the smallest human contribution? | issue MSHQ, apply GEO, restore autonomy |
+| Escalation protocol | What is the smallest human contribution? | issue MSHQ, apply GEsO, restore autonomy |
 
 The five operational domains are:
 
@@ -132,11 +132,11 @@ See the [technical supplement](human-assist-operational-mismatches.md) for defin
 5. **Query the environment.** Inspect files, sources, tools, logs, tests, current state, available evidence, and any missing measurement or channel variable before escalating to a human.
 6. **Construct proving grounds.** Generate scenarios, counterfactuals, red-team cases, stakeholder views, and edge cases.
 7. **Identify the remaining operational blocker.** Determine whether it is genuinely human-governed.
-8. **Issue an MSHQ or instantiate a GEO.** Ask only for the variable needed to restore autonomy, with options and a safe default.
+8. **Issue an MSHQ or instantiate a GEsO (Governed Escalation Object).** Ask only for the variable needed to restore autonomy, with options and a safe default.
 9. **Continue reversible work while waiting.** Prepare drafts, tests, matrices, and safer alternatives.
 10. **Validate the response and resume autonomy.** Verify the answer, execute within its boundary, and check the result.
-11. **Commit the resolved variable.** Write the answer, evidence, or verification result into the agent's hard state as a recognized transition.
-12. **Preserve reusable judgment.** Store durable conditions as GKOs and recurring escalation rules as GEOs.
+11. **Commit the resolved variable.** Write the answer, evidence, or verification result into the agent's hard state as a recognized transition. In the object model, this usually becomes a `state_record` governed by a `transition_contract`, while control changes may also emit a `control_delta`.
+12. **Preserve reusable judgment.** Store durable conditions as GKOs and recurring escalation rules as GEsOs.
 13. **Revoke stale governance.** Update objects when policy, authority, state, tools, or preferences change.
 
 Multi-turn collaboration is useful when each round produces a persistent object that changes the next task. "Try again" without new control objects is often repeated sampling.
@@ -174,8 +174,8 @@ Multi-turn collaboration is useful when each round produces a persistent object 
 | Failure-mode list | exposes how a plausible answer could fail |
 | Validation checklist | separates generation from evidence |
 | GKO | stores what the agent should know or obey |
-| GEO | stores when the agent should ask, whom, and what next |
-| MSHQ | expresses a GEO in a specific interaction |
+| GEsO | stores when the agent should ask, whom, and what next |
+| MSHQ | expresses a GEsO in a specific interaction |
 | Hard-state transition | records what changed after action, evidence, verification, or human input |
 
 ### 7.1 Minimal Sufficient Human Query Template
@@ -229,7 +229,7 @@ Safe default without human input:
 - **AI first:** create a feature × user value × cost × reversibility × risk matrix.
 - **Environment:** analyze usage, support tickets, experiments, and competitor behavior.
 - **Human variable:** strategic priority, budget ceiling, release window, and brand boundary.
-- **GEO:** when options mainly differ by cost, speed, and risk, ask the project owner to choose the dominant weight.
+- **GEsO:** when options mainly differ by cost, speed, and risk, ask the project owner to choose the dominant weight.
 
 ### 8.3 Code and Data Validation
 
@@ -256,7 +256,7 @@ As AI becomes the default information-processing core, human capability should m
 - **evidence judgment:** distinguish generated explanation from validated knowledge;
 - **authorization:** define autonomous and approval-required actions;
 - **environment design:** create feedback, experiments, and review mechanisms;
-- **governance memory:** preserve recurring judgments as GKOs and GEOs;
+- **governance memory:** preserve recurring judgments as GKOs and GEsOs;
 - **hard-state updates:** ensure human answers and validation results change the agent's recognized state, not only its conversational context.
 
 ## 10. Quality Metrics and Risk Boundaries
@@ -270,7 +270,7 @@ Useful collaboration metrics include:
 - wrong-autonomy incidents;
 - unnecessary escalations;
 - answer-resolution rate;
-- reuse and revocation quality of GKOs/GEOs;
+- reuse and revocation quality of GKOs/GEsOs;
 - state recovery and replayability after interruption.
 
 Hard boundaries should default to escalation for external commitments, disclosure, deletion, payment, signing, publication, or other irreversible actions. High-error-cost domains require stronger verification. State uncertainty should produce conditional policies, not fabricated certainty.

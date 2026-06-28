@@ -500,7 +500,9 @@ mechanical verifier / execution result
   "severity": "low | medium | high | critical",
   "confidence": "low | medium | high | confirmed",
   "failure_mode": "short failure-mode label",
-  "repair_target": "channel | representation | state | router | support | aggregation | specification | verifier | gko | geo | state_record | transition_contract | prompt | tool | unknown",
+  "repair_target": "specification_reward | observation_availability | belief_representation | dynamics_world_model | action_interface | capability_support | capability_routing | search_execution | unknown",
+  "repair_layer": "agent | training | hybrid | unknown",
+  "target_object_refs": ["object.id"],
   "root_cause_hypothesis": "why the failure occurred",
   "minimal_reproduction": "minimal condition or example that reproduces the defect",
   "control_delta_refs": ["delta.id"],
@@ -529,7 +531,7 @@ mechanical verifier / execution result
 
 ### 9.3 审计发现示例
 
-规范示例是 text-to-SQL 中的空结果查询：SQL 能执行但返回零行，因为谓词使用了数据库中不存在的表面字符串。该发现被归为 `observation_representation`，修复目标是 `representation`，并派生出值落地 GKO 与回归护栏。
+规范示例是 text-to-SQL 中的空结果查询：SQL 能执行但返回零行，因为谓词使用了数据库中不存在的表面字符串。该发现被归为 `observation_representation`，修复目标是 `belief_representation`，修复层是 `agent`，并派生出值落地 GKO 与回归护栏。
 
 ---
 
@@ -574,6 +576,8 @@ change_observation_channel
   "status": "draft | proposed | approved | applied | rejected | rolled_back | superseded | archived",
   "delta_type": "create_object | update_object | weaken_object | strengthen_object | revoke_object | supersede_object | add_evidence | add_counterevidence | change_priority | change_scope | change_router | change_verifier | change_transition_contract | add_regression_guard | change_rendering_policy | change_search_policy | change_representation | change_observation_channel",
   "source_finding_refs": ["finding.id"],
+  "repair_target": "specification_reward | observation_availability | belief_representation | dynamics_world_model | action_interface | capability_support | capability_routing | search_execution | unknown",
+  "repair_layer": "agent | training | hybrid | unknown",
   "target_object_refs": ["object.id"],
   "proposed_change": "human-readable description of the change",
   "patch": "machine-readable patch or structured update",
@@ -1350,7 +1354,8 @@ natural language question + database schema → SQL
 ```text
 finding: value predicate uses ungrounded surface form
 mismatch_type: observation_representation
-repair_target: representation
+repair_target: belief_representation
+repair_layer: agent
 ```
 
 它派生控制增量：
@@ -1559,7 +1564,7 @@ Which conflicts are unresolved?
 Which deltas were applied without rollback plans?
 ```
 
-最小审计之审计发现，本身也是一个 Audit Finding，其 `repair_target = governance_layer`，或更具体地指向 `gko`、`verifier`、`guard` 或 `transition_contract`。
+最小的审计之审计发现，本身也是一个 Audit Finding：它的 `repair_target` 可以是 `unknown` 或某个具体机制目标，而 `target_object_refs` 则可指向需要改变的 `gko`、`verifier`、`guard` 或 `transition_contract`。
 
 ---
 
@@ -1631,7 +1636,7 @@ revoked
 archived
 ```
 
-规范原始失配词汇是：
+规范 `mismatch_type` 词汇是：
 
 ```text
 observation_representation
@@ -1645,24 +1650,26 @@ implementation
 unknown
 ```
 
-规范修复目标词汇是：
+规范 `repair_target` 词汇是：
 
 ```text
-channel
-representation
-state
-router
-support
-aggregation
-specification
-verifier
-gko
-geo
-state_record
-transition_contract
-prompt
-tool
-governance_layer
+specification_reward
+observation_availability
+belief_representation
+dynamics_world_model
+action_interface
+capability_support
+capability_routing
+search_execution
+unknown
+```
+
+规范 `repair_layer` 词汇是：
+
+```text
+agent
+training
+hybrid
 unknown
 ```
 

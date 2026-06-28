@@ -2,6 +2,7 @@
 
 **Proxy Objectives, Tacit Utility, and Counterexample-Driven Specification Repair**  
 **Working Draft v0.1**
+**Xinyun Wang, Shuliang Liang**
 
 ---
 

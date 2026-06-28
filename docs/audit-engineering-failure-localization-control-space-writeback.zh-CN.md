@@ -85,7 +85,8 @@ The code may fail.
 The output joined table A to table C directly, but the schema requires A → B → C.
 Evidence: foreign-key graph shows no A.c_id; execution error references missing column C.id.
 Mismatch: aggregation + observation-representation.
-Repair target: join-path control object.
+Repair target: capability_routing.
+Repair object: join-path control object.
 Control delta: add join_path_constraint for this schema family.
 Regression guard: re-run representative query requiring A → B → C and fail if direct A → C join appears.
 ```
@@ -243,7 +244,10 @@ S_world
     "observation_representation | state | fitting_boundary | support | aggregation | specification | compound"
   ],
   "severity": "low | medium | high | critical",
-  "repair_target": "channel | representation | state | router | support | aggregation | specification | verifier | GKO | GEO | transition_contract",
+  "repair_target": "specification_reward | observation_availability | belief_representation | dynamics_world_model | action_interface | capability_support | capability_routing | search_execution | unknown",
+  "repair_layer": "agent | training | hybrid | unknown",
+  "repair_target_role": "primary | amplifier | downstream | unknown",
+  "repair_object": "gko | geo | verifier | transition_contract | state_record | regression_guard | unknown",
   "control_delta": "proposed change to governed control space",
   "regression_guard": "test or condition that should fail if the defect recurs",
   "authority": "proposed | accepted | rejected | superseded",
@@ -1011,7 +1015,10 @@ The SQL may have an incorrect join and should be checked.
   ],
   "mismatch_type": ["aggregation", "observation_representation"],
   "severity": "high",
-  "repair_target": "GKO",
+  "repair_target": "capability_routing",
+  "repair_layer": "agent",
+  "repair_target_role": "primary",
+  "repair_object": "gko",
   "control_delta": "Create join-path constraint requiring schema-graph path coverage for all question-bound entities.",
   "regression_guard": "For questions binding departments, employees, and training_records, fail if generated SQL lacks employees in the join path.",
   "authority": "accepted",
@@ -1066,7 +1073,10 @@ Failure condition: any bound entity is absent or connected through an invalid ed
   ],
   "mismatch_type": ["aggregation", "specification"],
   "severity": "critical",
-  "repair_target": "regression_guard",
+  "repair_target": "search_execution",
+  "repair_layer": "agent",
+  "repair_target_role": "downstream",
+  "repair_object": "regression_guard",
   "control_delta": "Add order-randomized test guard and state-isolation invariant.",
   "regression_guard": "Run affected test suite under randomized order and fail on global cache mutation outside allowed lifecycle.",
   "authority": "accepted",
@@ -1245,7 +1255,10 @@ defect-ledger entry
   "evidence": ["specific evidence"],
   "mismatch_type": ["observation_representation | state | fitting_boundary | support | aggregation | specification | compound"],
   "severity": "low | medium | high | critical",
-  "repair_target": "channel | representation | state | router | support | aggregation | specification | verifier | GKO | GEO | transition_contract",
+  "repair_target": "specification_reward | observation_availability | belief_representation | dynamics_world_model | action_interface | capability_support | capability_routing | search_execution | unknown",
+  "repair_layer": "agent | training | hybrid | unknown",
+  "repair_target_role": "primary | amplifier | downstream | unknown",
+  "repair_object": "gko | geo | verifier | transition_contract | state_record | regression_guard | unknown",
   "control_delta": "proposed change",
   "regression_guard": "future recurrence check",
   "authority": "proposed | accepted | rejected | superseded",

@@ -1070,7 +1070,7 @@ SearchExecutionDelta:
     "belief_representation": "none | low | medium | high | critical | unknown | not_distinguished",
     "dynamics_world_model": "none | low | medium | high | critical | unknown | not_distinguished",
     "action_interface": "none | low | medium | high | critical | unknown | not_distinguished",
-    "policy_capability_support": "none | low | medium | high | critical | unknown | not_distinguished",
+    "capability_support": "none | low | medium | high | critical | unknown | not_distinguished",
     "capability_routing": "none | low | medium | high | critical | unknown | not_distinguished",
     "search_execution": "none | low | medium | high | critical | unknown | not_distinguished"
   },
@@ -1977,7 +1977,7 @@ Search / Execution
     "belief_representation": "...",
     "dynamics_world_model": "...",
     "action_interface": "...",
-    "policy_capability_support": "...",
+    "capability_support": "...",
     "capability_routing": "...",
     "search_execution": "..."
   },
