@@ -24,6 +24,7 @@ Note: the material on this site comes primarily from engineering practice and en
 - Six primitive mismatches pipeline-derived taxonomy: [English](docs/six-primitive-mismatches-pipeline-derived-taxonomy-llm-systems.md) · [中文](docs/six-primitive-mismatches-pipeline-derived-taxonomy-llm-systems.zh-CN.md)
 - Formal Mechanism Layer for Governed LLM Systems: [English](docs/formal-mechanism-layer-for-governed-llm-systems.md) · [中文](docs/formal-mechanism-layer-for-governed-llm-systems.zh-CN.md)
 - Diagnostic-Mechanism Bridge for Governed LLM Systems: [English](docs/diagnostic-mechanism-bridge-for-governed-llm-systems.md) · [中文](docs/diagnostic-mechanism-bridge-for-governed-llm-systems.zh-CN.md)
+- Mechanism-Driven Training for Governed LLM Systems: [English](docs/mechanism-driven-training-for-governed-llm-systems.md) · [中文](docs/mechanism-driven-training-for-governed-llm-systems.zh-CN.md)
 - Governed LLM object model and interface specification: [English](docs/governed-llm-object-model-interface-specification.md) · [中文](docs/governed-llm-object-model-interface-specification.zh-CN.md)
 - Audit Engineering for governed LLM systems: [English](docs/audit-engineering-failure-localization-control-space-writeback.md) · [中文](docs/audit-engineering-failure-localization-control-space-writeback.zh-CN.md)
 - State-Governed Agent Regime for governed LLM systems: [English](docs/state-governed-agent-regime-for-governed-llm-systems.md) · [中文](docs/state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)

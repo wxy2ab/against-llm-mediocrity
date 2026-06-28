@@ -9,7 +9,7 @@ summary: This section collects the current manuscripts and future empirical dire
 order: 7
 heroPoints:
   - "Current synthesis: Structural Theory of Value Preservation and Six Primitive Mismatches."
-  - "Working drafts: Formal Mechanism Layer for Governed LLM Systems, Diagnostic-Mechanism Bridge, Governed LLM Object Model, Audit Engineering, State-Governed Agent Regime, Channel Governance, State Governance, Capability Routing, Control-Space Search, Compositional Governance, Objective Governance, and Human-Assist Operational Mismatches."
+  - "Working drafts: Formal Mechanism Layer for Governed LLM Systems, Diagnostic-Mechanism Bridge, Mechanism-Driven Training, Governed LLM Object Model, Audit Engineering, State-Governed Agent Regime, Channel Governance, State Governance, Capability Routing, Control-Space Search, Compositional Governance, Objective Governance, and Human-Assist Operational Mismatches."
   - "Extensions and implementation: governed collaboration, hard-state agent governance, cognitive discipline for AI, human learning, and tooling directions derived from the research agenda."
 ---
 
@@ -59,6 +59,13 @@ Tag: diagnostic bridge working draft
 This working draft connects the six primitive mismatches to the eight mechanism axes. It defines the bridge from value-failure diagnosis to repair localization through mechanism profiles, repair-layer selection, audit write-back, governed objects, SGAR commitment, and mechanism-driven training promotion.
 
 [Read the diagnostic-mechanism bridge](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/diagnostic-mechanism-bridge-for-governed-llm-systems.md)
+
+### Mechanism-Driven Training for Governed LLM Systems
+Tag: training-side governance working draft
+
+This working draft defines the training-side counterpart to runtime governance. It explains when recurrent failures should stop being handled as runtime patches and instead be promoted into mechanism-specific training interventions such as representation training, boundary data, grounding data, reward correction, and capability-support training.
+
+[Read the mechanism-driven training draft](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/mechanism-driven-training-for-governed-llm-systems.md)
 
 ### Governed LLM Object Model and Interface Specification
 Tag: implementation specification
