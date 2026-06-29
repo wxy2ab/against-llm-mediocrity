@@ -2,7 +2,6 @@
 
 **Capability Domains, Trigger Boundaries, and Router Governance**  
 **Working Draft v0.1**  
-**Xinyun Wang, Shuliang Liang**
 
 ---
 

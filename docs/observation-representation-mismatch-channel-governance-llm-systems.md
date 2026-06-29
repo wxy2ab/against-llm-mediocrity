@@ -3,7 +3,6 @@
 **Variable Entry, Representation Ceilings, and Pre-Governance Repair**  
 **Companion Technical Report to _A Structural Theory of Value Preservation in LLM Systems_**  
 **Working Draft v0.1**  
-**Xinyun Wang, Shuliang Liang**
 
 ---
 

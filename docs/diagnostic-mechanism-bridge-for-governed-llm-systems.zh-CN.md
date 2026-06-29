@@ -3,7 +3,6 @@
 ## 用八条干预机制轴统一六类原始价值保存失配
 
 **工作稿 v0.1**  
-**Xinyun Wang, Shuliang Liang**
 
 ---
 

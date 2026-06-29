@@ -2,7 +2,6 @@
 
 **Latent Regimes, Identifiability, and State-Conditioned Control**  
 **Working Draft v0.1**  
-**Xinyun Wang, Shuliang Liang**
 
 ---
 

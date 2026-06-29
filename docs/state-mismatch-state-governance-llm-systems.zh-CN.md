@@ -2,7 +2,6 @@
 
 **潜在区间、可识别性与状态条件化控制**  
 **工作稿 v0.1**  
-**Xinyun Wang, Shuliang Liang**
 
 ---
 

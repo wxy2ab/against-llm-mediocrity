@@ -1,7 +1,6 @@
 # A Structural Theory of Value Preservation in LLM Systems
 
 **Working Draft v0.1**  
-**Xinyun Wang, Shuliang Liang**
 
 ---
 

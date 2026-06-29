@@ -2,7 +2,6 @@
 
 **Oracle Classification, Boundary Fidelity, and Engine Routing**  
 **Working Draft v0.1**  
-**Xinyun Wang, Shuliang Liang**
 
 ---
 

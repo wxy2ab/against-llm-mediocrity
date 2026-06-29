@@ -3,7 +3,6 @@
 ## 可干预组件、诊断画像与修复定位
 
 **工作稿 v0.1**  
-**Xinyun Wang, Shuliang Liang**
 
 ---
 

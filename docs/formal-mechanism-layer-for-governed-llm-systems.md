@@ -3,7 +3,6 @@
 ## Intervenable Components, Diagnostic Profiles, and Repair Localization
 
 **Working Draft v0.1**  
-**Xinyun Wang, Shuliang Liang**
 
 ---
 

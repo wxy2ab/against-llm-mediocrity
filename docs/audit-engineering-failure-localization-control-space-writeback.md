@@ -3,7 +3,6 @@
 **Failure Localization, Control-Space Write-Back, and Regression Governance**  
 **Working Draft v0.1**  
 **Companion Technical Report to _A Structural Theory of Value Preservation in LLM Systems_**  
-**Xinyun Wang, Shuliang Liang**
 
 ---
 
