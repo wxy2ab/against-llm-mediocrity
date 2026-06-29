@@ -158,6 +158,13 @@ Tag: 认知框架工作稿
 
 [阅读认知框架](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/cognitive-discipline-for-ai.zh-CN.md)
 
+### AI 的协作姿态：校准摩擦与建设性强硬
+Tag: 协作姿态工作稿
+
+这份工作稿是《AI 的认知纪律》的 AI 侧对偶。它主张 AI 不应最大化顺从，而应通过校准摩擦与建设性强硬来保护人的判断回路：在硬 oracle 处强硬，在人类治理变量占主导时退让并追问，在不可逆动作前设置闸门，并在学习与判断任务中保留人的生成劳动。
+
+[阅读协作姿态工作稿](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/ai-collaborative-posture-calibrated-friction-constructive-firmness.zh-CN.md)
+
 ### 模型最高价格
 Tag: AI 经济学与定价工作稿
 
