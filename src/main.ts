@@ -17,6 +17,135 @@ if (!app) {
 }
 
 const appRoot = app;
+const githubDocsBase = "https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs";
+
+type ImageLang = "en" | "zh";
+
+type InfographicArticle = {
+  imageKey: string;
+  enTitle: string;
+  zhTitle: string;
+  enDoc: string;
+  zhDoc: string;
+};
+
+const rawInfographicImages = import.meta.glob("../docs/images/*", {
+  query: "?url",
+  import: "default",
+  eager: true,
+}) as Record<string, string>;
+
+const infographicImages = Object.fromEntries(
+  Object.entries(rawInfographicImages).map(([path, url]) => [path.split("/").pop() ?? path, url]),
+) as Record<string, string>;
+
+const infographicArticles: InfographicArticle[] = [
+  {
+    imageKey: "value_keep",
+    enTitle: "A Structural Theory of Value Preservation in LLM Systems",
+    zhTitle: "LLM 系统中价值保存的结构理论",
+    enDoc: "structural-theory-value-preservation-llm-systems.md",
+    zhDoc: "structural-theory-value-preservation-llm-systems.zh-CN.md",
+  },
+  {
+    imageKey: "six_mismatch",
+    enTitle: "Six Primitive Mismatches in LLM Systems",
+    zhTitle: "LLM 系统中的六类原始失配",
+    enDoc: "six-primitive-mismatches-pipeline-derived-taxonomy-llm-systems.md",
+    zhDoc: "six-primitive-mismatches-pipeline-derived-taxonomy-llm-systems.zh-CN.md",
+  },
+  {
+    imageKey: "formal_layer",
+    enTitle: "Formal Mechanism Layer for Governed LLM Systems",
+    zhTitle: "面向受治理 LLM 系统的形式化机制层",
+    enDoc: "formal-mechanism-layer-for-governed-llm-systems.md",
+    zhDoc: "formal-mechanism-layer-for-governed-llm-systems.zh-CN.md",
+  },
+  {
+    imageKey: "bridge",
+    enTitle: "Diagnostic–Mechanism Bridge for Governed LLM Systems",
+    zhTitle: "面向受治理 LLM 系统的诊断-机制桥接",
+    enDoc: "diagnostic-mechanism-bridge-for-governed-llm-systems.md",
+    zhDoc: "diagnostic-mechanism-bridge-for-governed-llm-systems.zh-CN.md",
+  },
+  {
+    imageKey: "train",
+    enTitle: "Mechanism-Driven Training for Governed LLM Systems",
+    zhTitle: "面向受治理 LLM 系统的机制驱动训练",
+    enDoc: "mechanism-driven-training-for-governed-llm-systems.md",
+    zhDoc: "mechanism-driven-training-for-governed-llm-systems.zh-CN.md",
+  },
+  {
+    imageKey: "interface",
+    enTitle: "Governed LLM Object Model and Interface Specification",
+    zhTitle: "受治理 LLM 对象模型与接口规范",
+    enDoc: "governed-llm-object-model-interface-specification.md",
+    zhDoc: "governed-llm-object-model-interface-specification.zh-CN.md",
+  },
+  {
+    imageKey: "audit",
+    enTitle: "Audit Engineering for Governed LLM Systems",
+    zhTitle: "面向受治理 LLM 系统的审计工程",
+    enDoc: "audit-engineering-failure-localization-control-space-writeback.md",
+    zhDoc: "audit-engineering-failure-localization-control-space-writeback.zh-CN.md",
+  },
+  {
+    imageKey: "oracle",
+    enTitle: "Oracle, Audit Agent, and SGAR: A Unified Framework from Hard Feedback to Engine Routing",
+    zhTitle: "Oracle、Audit Agent 与 SGAR：从硬反馈到引擎路由的统一框架",
+    enDoc: "oracle-classification-audit-agent-sgar-engine-routing.md",
+    zhDoc: "oracle-classification-audit-agent-sgar-engine-routing.zh-CN.md",
+  },
+  {
+    imageKey: "sgar",
+    enTitle: "State-Governed Agent Regime for Governed LLM Systems",
+    zhTitle: "面向受治理 LLM 系统的状态治理型 Agent 体制",
+    enDoc: "state-governed-agent-regime-for-governed-llm-systems.md",
+    zhDoc: "state-governed-agent-regime-for-governed-llm-systems.zh-CN.md",
+  },
+  {
+    imageKey: "observe_represent",
+    enTitle: "Observation-Representation Mismatch and Channel Governance in LLM Systems",
+    zhTitle: "LLM 系统中的观测-表征失配与通道治理",
+    enDoc: "observation-representation-mismatch-channel-governance-llm-systems.md",
+    zhDoc: "observation-representation-mismatch-channel-governance-llm-systems.zh-CN.md",
+  },
+  {
+    imageKey: "state_mismatch",
+    enTitle: "State Mismatch and State Governance in LLM Systems",
+    zhTitle: "LLM 系统中的状态失配与状态治理",
+    enDoc: "state-mismatch-state-governance-llm-systems.md",
+    zhDoc: "state-mismatch-state-governance-llm-systems.zh-CN.md",
+  },
+  {
+    imageKey: "fit_mismatch",
+    enTitle: "Fitting-Boundary Mismatch and Capability Routing in LLM Systems",
+    zhTitle: "LLM 系统中的拟合边界失配与能力路由",
+    enDoc: "fitting-boundary-mismatch-capability-routing-llm-systems.md",
+    zhDoc: "fitting-boundary-mismatch-capability-routing-llm-systems.zh-CN.md",
+  },
+  {
+    imageKey: "support_mismatch",
+    enTitle: "Support Mismatch and Control-Space Search in LLM Systems",
+    zhTitle: "LLM 系统中的支持失配与控制空间搜索",
+    enDoc: "support-mismatch-control-space-search-llm-systems.md",
+    zhDoc: "support-mismatch-control-space-search-llm-systems.zh-CN.md",
+  },
+  {
+    imageKey: "aggregation",
+    enTitle: "Aggregation Mismatch and Compositional Governance in LLM Systems",
+    zhTitle: "LLM 系统中的聚合失配与组合治理",
+    enDoc: "aggregation-mismatch-compositional-governance-llm-systems.md",
+    zhDoc: "aggregation-mismatch-compositional-governance-llm-systems.zh-CN.md",
+  },
+  {
+    imageKey: "specification_mismatch",
+    enTitle: "Specification Mismatch and Objective Governance in LLM Systems",
+    zhTitle: "LLM 系统中的规格失配与目标治理",
+    enDoc: "specification-mismatch-objective-governance-llm-systems.md",
+    zhDoc: "specification-mismatch-objective-governance-llm-systems.zh-CN.md",
+  },
+];
 
 function routeTo(path: string) {
   window.history.pushState({}, "", withBase(path));
@@ -52,8 +181,22 @@ function link(path: string, text: string, className = "") {
   return `<a class="${className}" href="${href}"${attrs}>${text}</a>`;
 }
 
+function articleUrl(article: InfographicArticle, lang: ImageLang) {
+  return `${githubDocsBase}/${lang === "zh" ? article.zhDoc : article.enDoc}`;
+}
+
+function infographicImageUrl(article: InfographicArticle, lang: ImageLang) {
+  return infographicImages[`${article.imageKey}.${lang}.png`] ?? "";
+}
+
+function renderArticleLink(article: InfographicArticle, lang: ImageLang, label: string, className = "") {
+  return `<a class="${className}" href="${articleUrl(article, lang)}" target="_blank" rel="noreferrer">${label}</a>`;
+}
+
 function renderNav(lang: Lang, current: Page) {
   const site = content[lang];
+  const overviewPath = pagePath(lang, "overview");
+  const overviewActive = current.key === "overview" ? " active" : "";
   return `
     <header class="site-header">
       <a class="brand" href="${withBase(pagePath(lang, "home"))}" data-route="${pagePath(lang, "home")}">
@@ -71,6 +214,7 @@ function renderNav(lang: Lang, current: Page) {
       </nav>
       <div class="header-actions">
         ${link(`/interactive.html?lang=${lang}`, lang === "zh" ? "交互实验" : "Interactive Lab", "ghost-button")}
+        <a class="ghost-button${overviewActive}" href="${withBase(overviewPath)}" data-route="${overviewPath}">${lang === "zh" ? "一览" : "Overview"}</a>
         ${link(alternatePath(lang, current.key), site.switchLabel, "ghost-button")}
         ${link(site.repoUrl, site.repoLabel, "solid-button")}
       </div>
@@ -413,10 +557,90 @@ function renderMarkdownSections(html: string) {
   return sections.join("");
 }
 
+function renderOverviewGallery(lang: Lang) {
+  const labels = {
+    en: {
+      sectionEyebrow: "Current working manuscripts",
+      sectionTitle: "Article infographics",
+      sectionCopy: "Each card pairs the English and Chinese infographic generated for the corresponding working draft.",
+      englishImage: "English infographic",
+      chineseImage: "中文图版",
+      readEnglish: "Read English",
+      readChinese: "阅读中文",
+      missingImage: "Image unavailable",
+    },
+    zh: {
+      sectionEyebrow: "当前工作稿",
+      sectionTitle: "文章图版索引",
+      sectionCopy: "每张卡片对应一篇当前工作稿，并同时展示英文与中文 infographic 图版。",
+      englishImage: "English infographic",
+      chineseImage: "中文图版",
+      readEnglish: "Read English",
+      readChinese: "阅读中文",
+      missingImage: "图片暂缺",
+    },
+  }[lang];
+
+  const cards = infographicArticles
+    .map((article, index) => {
+      const title = lang === "zh" ? article.zhTitle : article.enTitle;
+      const titleLang: ImageLang = lang === "zh" ? "zh" : "en";
+      const panels = (["en", "zh"] as const)
+        .map((imageLang) => {
+          const src = infographicImageUrl(article, imageLang);
+          const imageLabel = imageLang === "zh" ? labels.chineseImage : labels.englishImage;
+          const altTitle = imageLang === "zh" ? article.zhTitle : article.enTitle;
+
+          return `
+            <a class="overview-image-panel" href="${articleUrl(article, imageLang)}" target="_blank" rel="noreferrer" aria-label="${imageLabel}: ${altTitle}">
+              <span>${imageLabel}</span>
+              ${
+                src
+                  ? `<img src="${src}" alt="${imageLabel}: ${altTitle}" loading="lazy" />`
+                  : `<div class="overview-image-missing">${labels.missingImage}</div>`
+              }
+            </a>
+          `;
+        })
+        .join("");
+
+      return `
+        <article class="overview-card">
+          <div class="overview-card-heading">
+            <p>${String(index + 1).padStart(2, "0")}</p>
+            <h2>${renderArticleLink(article, titleLang, title)}</h2>
+          </div>
+          <div class="overview-image-pair">
+            ${panels}
+          </div>
+          <div class="overview-card-actions">
+            ${renderArticleLink(article, "en", labels.readEnglish, "ghost-button")}
+            ${renderArticleLink(article, "zh", labels.readChinese, "solid-button")}
+          </div>
+        </article>
+      `;
+    })
+    .join("");
+
+  return `
+    <section class="overview-section">
+      <div class="overview-section-heading">
+        <p class="section-eyebrow">${labels.sectionEyebrow}</p>
+        <h2>${labels.sectionTitle}</h2>
+        <p>${labels.sectionCopy}</p>
+      </div>
+      <div class="overview-grid">
+        ${cards}
+      </div>
+    </section>
+  `;
+}
+
 function render() {
   const route = normalizePath(withoutBase(window.location.pathname));
   const site = content[route.lang];
   const page = site.pages[route.key];
+  const pageBody = page.key === "overview" ? renderOverviewGallery(route.lang) : renderMarkdownSections(page.html);
   document.documentElement.lang = route.lang;
   document.title = `${page.title} | Against LLM Mediocrity`;
   appRoot.innerHTML = `
@@ -424,7 +648,7 @@ function render() {
     <main>
       ${renderHero(page)}
       <div class="page-shell">
-        ${renderMarkdownSections(page.html)}
+        ${pageBody}
       </div>
     </main>
     <footer class="footer">
