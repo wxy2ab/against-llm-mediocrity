@@ -4,14 +4,14 @@ lang: en
 path: /
 title: Against LLM Mediocrity
 navTitle: Home
-kicker: Start with the most common frustration
-summary: "We increasingly depend on LLMs to help us finish tasks. Some tasks go well; others remain unsatisfying no matter how much we optimize the prompt. The desired result feels trapped behind an invisible barrier: the model keeps generating, but it never quite releases the answer. This is LLM mediocrity."
+kicker: Start with the structural ceiling
+summary: "Models keep improving, but not every important problem will be solved by more training. This project asks which failures belong to the structural ceilings of LLMs and how engineering can route around, constrain, compensate for, or redesign them."
 order: 0
 heroVisual: alignment
 heroPoints:
-  - "Phenomenon: some tasks go smoothly, while others remain wrong after many prompt revisions."
-  - "Cause: on some tasks, the maximum-probability path and the task-value path are not the same path."
-  - "Method: recognizing and resisting this mediocrity may be the most common task AI users face."
+  - "Phenomenon: model capability keeps improving, yet some tasks stay stuck in the same failure class no matter how much you iterate or prompt."
+  - "Diagnosis: some of those failures are not temporary capability gaps but structural splits between probability paths and value paths."
+  - "Method: identify the ceiling first, then move the repair into control objects, validation, tools, hard state, and human governance."
 alignmentLabels:
   probability: statistical probability
   value: task value
@@ -23,21 +23,23 @@ alignmentLabels:
   partial: some regions align, others diverge
 ---
 
-## Start With the Most Common Frustration
+## Start With the Reverse Question
 
-We increasingly depend on LLMs to help us finish tasks: writing code, doing research, analyzing material, drafting plans, organizing knowledge, and supporting decisions. Some tasks go well, sometimes well enough that it feels obvious they should belong to AI from now on. But other tasks remain unsatisfying. So you optimize the prompt: add context, specify the format, tighten constraints, ask it to reflect, and request more versions.
+Models keep improving, and their capabilities keep expanding. So a natural intuition appears: the problems that remain hard today may disappear after the next round of training, the next model generation, or the next scaling curve.
 
-Sometimes that works. Eventually, though, you meet tasks where the prompt has been improved many times and the result is still not right. The answer becomes more complete, smoother, and better structured, but the thing you actually wanted still does not appear. It feels trapped behind an invisible barrier: you can sense that the target is nearby, but the model cannot release it.
+But the more useful question is the reverse one: can training and iteration solve every important problem? If not, then some tasks are not merely "not solved yet." They are constrained by ceilings that follow from the algorithmic and architectural character of LLMs.
+
+Daily use keeps exposing this pattern. The same model can feel extremely capable on some tasks and still miss the final decisive step on others. You add context, specify format, tighten constraints, ask for reflection, and request more versions. The answer becomes more complete, smoother, and better structured, but the thing you actually need still does not appear.
 
 This is not simply that the model is not smart enough, and it is not only that the prompt is still wrong. The same model can perform well elsewhere: compressing context, rewriting text, generating structure, expanding candidate options, explaining code, calling tools, and assisting validation. The real problem is that local capability does not always become the task value you need.
 
-That is what this project calls **LLM mediocrity**: on some tasks, the language-probability system and the real problem domain are structurally mismatched. The model may move along the direction that is statistically natural, easy to continue, well supported, or broadly acceptable, while the actual value depends on global structure, hidden state, a sharper specification, or a rare low-support move.
+That is what this project calls **LLM mediocrity**: on some tasks, the language-probability system and the real problem domain are structurally mismatched. The model may move along the direction that is statistically natural, easy to continue, well supported, or broadly acceptable, while the actual value depends on global structure, hidden state, a sharper specification, or a rare low-support move. In other words, some failures do not merely wait for more scale. They are already touching a structural ceiling.
 
-The response is not to keep optimizing prompts indefinitely. The first question is diagnostic: which parts of the task are already aligned with the model's generative strengths, which parts are only locally aligned, and which parts must be governed through control spaces, validation, tools, or human decisions?
+The response is not to keep optimizing prompts indefinitely. The first question is diagnostic: which parts of the task are already aligned with the model's generative strengths, which parts are only locally aligned, and which parts must be repaired through control spaces, validation, tools, human decisions, or hard-state governance?
 
 Recognizing and resisting this mediocrity may be the most common task AI users face. The practical aim is to preserve the model's real strengths while preventing local fluency from masquerading as global value.
 
-The site follows that order. It starts with this common frustration, then explains why probability and value diverge, then turns the divergent parts into control spaces, validation objects, and minimal human questions. In other words, these pages are not separate essays. They are a path from scene to diagnosis to delivery.
+The site follows that order. It starts by asking why some problems cannot be solved just by waiting for stronger models, then explains why probability and value diverge, then turns the divergent parts into control spaces, validation objects, and minimal human questions. These pages are not separate essays. They are a path from structural judgment to diagnosis to delivery.
 
 > **Note on scope**
 > This framework starts as a summary of engineering practice and engineering intuition. What matters most here is whether it helps people reorganize tasks and improve practical engineering outcomes, not whether it forms a mathematically complete final theory; the theory sections are better understood as adjustable thinking scaffolds that will keep changing with practice.

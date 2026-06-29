@@ -1,21 +1,33 @@
 # Against LLM Mediocrity
 
-Against LLM Mediocrity studies how to resist LLM mediocrity and turn local model capability into stable task value.
+A field guide to the structural ceilings of LLMs and the engineering moves that work around them.
 
-## Core Idea
+Models keep improving, and their capabilities keep expanding. But there is a more important reverse question: can continued training and iteration solve every important problem?
 
-LLMs are often able to produce fluent answers long before they produce truly high-value answers. The core idea of this project is that many hard failures are not just prompt failures. They arise because the task's real value function is not well aligned with the model's local continuation tendencies.
+For the problems that LLMs still fail on today, should we just wait for the next round of training, the next model generation, or the next scaling curve? Or should we admit a more basic fact: some limits are structural ceilings imposed by the algorithmic and architectural character of LLMs themselves?
 
-This project focuses on three moves:
+This site takes the second view: **some failures really are structural ceilings, and they will not disappear merely because training continues.** The useful work is to identify those ceilings and show how engineering can route around them, constrain them, compensate for them, or redesign the system boundary around them.
 
-- preserve the parts of a task that are already locally aligned with autoregressive generation;
-- externalize the poorly aligned parts into explicit control objects, constraints, rubrics, state representations, or verification loops;
-- add hard environmental boundaries, hard feedback, and minimal human intervention points when the model cannot continue reliably on its own.
+What you gain from reading this site:
 
-The goal is not to reject autoregression, but to transform tasks that would otherwise plateau in fluent mediocrity into tasks where autoregressive generation becomes genuinely useful or even extraordinary.
+- recognize structural failure modes early instead of wasting time waiting for scale to fix them;
+- learn engineering patterns that solve those problems outside the model when needed;
+- see why the next serious agent paradigm has to move toward governance, state, and explicit control objects.
+
+`against-llm-mediocrity` turns that claim into an engineering language. It uses **LLM mediocrity**, **local alignment**, **LLM excellence**, **six primitive mismatches**, **knowledge governance**, **Governed Knowledge Objects (GKO) / Governed Evolution Objects (GEO)**, **audit engineering**, **State-Governed Agent Regime (SGAR)**, and **governed human-machine collaboration** to describe where structural ceilings appear and whether the fix belongs inside the model, outside the model, or at the human-system boundary.
 
 > **Note on scope**
 > The material on this site comes primarily from engineering practice and engineering intuition. It tries to distill those experiences into theory-like frameworks that can guide engineering practice again, so the main criterion is practical engineering payoff rather than mathematical completeness. The theoretical parts are working scaffolds and may change at any time; they should not be treated as complete theoretical research.
+
+## Core Idea
+
+LLMs are already good at coding, drafting, summarizing, explaining, and rephrasing. But once a task depends on long-horizon coordination, hidden state, rare structure, real-world constraints, explicit value judgment, or responsibility, "try one more time" and "prompt it better" often make outputs smoother without making them fundamentally right.
+
+This project focuses on three questions:
+
+- which failures are structural ceilings rather than temporary capability gaps;
+- how to turn local alignment into engineering fixes that are verifiable, governable, and reusable;
+- how agent and human collaboration should be redesigned once those ceilings are taken seriously.
 
 ## Docs
 

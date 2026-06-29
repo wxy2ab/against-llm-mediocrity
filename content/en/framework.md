@@ -4,8 +4,8 @@ lang: en
 path: /framework
 title: Mechanism
 navTitle: Mechanism
-kicker: A theoretical framework for studying resistance to autoregression
-summary: The framework treats LLM generation as a relationship between probability and task value. The key question is not whether the model can write, but whether what it easily generates is also what the task truly rewards.
+kicker: Explaining why structural ceilings appear
+summary: The framework treats LLM generation as a relationship between probability and task value. Its question is not merely whether the model can write, but why some failures recur so persistently that they remain as structural ceilings even while training keeps improving.
 order: 2
 heroPoints:
   - "LLM mediocrity: fluent, plausible outputs remain concentrated away from high-value regions."
@@ -15,6 +15,8 @@ heroPoints:
 
 ## The Core Question: Does Probability Track Value?
 
+The earlier pages make the judgment first: some problems are not going to disappear just because models get stronger. The job of the mechanism page is to explain why those ceilings appear and why they often look like this: the answer gets smoother and more persuasive, but the decisive variable still never enters the system.
+
 An LLM still generates through probability: the next token, reasoning step, structural move, or tool call is selected under the current context. Training, RLHF, preference optimization, and inference-time reasoning reshape this distribution, but they do not give the model direct access to the real utility function of the current task.
 
 The mechanism question is therefore:
@@ -23,7 +25,7 @@ The mechanism question is therefore:
 Is the model's easiest direction of continuation also the direction in which task value rises?
 ```
 
-When yes, autoregressive generation can be extremely effective. When no, fluency can make the wrong direction more convincing.
+When yes, autoregressive generation can be extremely effective. When no, fluency can make the wrong direction more convincing. That is why "the model got better" and "the task still fails at the critical point" can both be true: training expands the locally aligned region, but it does not guarantee the removal of every structural mismatch.
 
 ## Three Alignment Regimes
 

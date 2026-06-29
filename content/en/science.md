@@ -4,14 +4,22 @@ lang: en
 path: /science
 title: Why It Matters
 navTitle: Why It Matters
-kicker: A plain-language entry point
-summary: "LLM mediocrity does not mean LLMs are useless. It explains a common illusion: the more fluent an answer becomes, the easier it is to mistake it for one that has captured the structure the task actually needs."
+kicker: Why this is not just a wait-for-the-next-model problem
+summary: "LLM mediocrity does not mean LLMs are useless. It means some failures will not disappear just because training continues. Once you see that, you know when to keep optimizing and when to redesign the task itself."
 order: 1
 heroPoints:
   - A model can improve surface quality while staying inside the same wrong abstraction.
-  - Repeated refinement can make a mediocre answer more complete and persuasive.
-  - Once you see the pattern, you know when to prompt, when to restructure, and when to use tools or ask a human.
+  - Repeated refinement can make a mediocre answer more complete and persuasive without crossing the real bottleneck.
+  - Once you see the structural limit, you know when to keep prompting and when to restructure, use tools, or ask a human.
 ---
+
+## Why This Matters
+
+If a problem will eventually be solved by bigger models, longer training, or better data, then waiting or doing more local prompt optimization may be a reasonable strategy.
+
+But if a failure has already reached a structural ceiling, waiting becomes an expensive misdiagnosis. You think you are giving the model more chances to improve, but you are really polishing the wrong task shape, sampling inside the same basin, and spending time on a door that will not open by itself.
+
+That is why this page comes early. Its first job is to help you decide what kind of problem you are facing: is this still a matter of using the model better, or has it become a case where the task must be restructured with external control objects and governance?
 
 ## What It Looks Like in Daily Use
 
@@ -21,7 +29,7 @@ That feeling is often not about prose. It is about task value. The missing piece
 
 This is why fluent failure is hard to notice. The answer may be useful in several local ways: it compresses context, chooses a reasonable tone, fills in missing transitions, and produces a coherent structure. The failure appears only when those local improvements do not reach the variable that determines the task's real value.
 
-This page does only the first step: it breaks the vague feeling of "still wrong" into diagnosable forms. The next page, "Cases," is the case-library entry point: from Story Insight V4/V6 on control-space and layered governance, to Stock Rec V3 on financial production authority, to FW-Insight V3 on hard-experience extraction. The following "Mechanism" page then compresses the cases into more stable theoretical axes: whether probability and value point in the same direction, and which intervention follows from each primitive mismatch.
+This page does the first step only: it breaks that vague sense of "still wrong" into diagnosable forms. The next page, "Cases," is the case-library entry point: from Story Insight V4/V6 on control-space and layered governance, to Stock Rec V3 on financial production authority, to FW-Insight V3 on hard-experience extraction. The following "Mechanism" page then compresses the cases into more stable theoretical axes: whether probability and value point in the same direction, and which intervention follows from each primitive mismatch.
 
 ## Why More Iteration Can Still Fail
 

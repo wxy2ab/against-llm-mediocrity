@@ -4,16 +4,18 @@ lang: en
 path: /case-study
 title: Case Studies
 navTitle: Cases
-kicker: From individual examples to an extensible case library
-summary: "The case page is not one system's detail page. It is the entry point for case studies, organized by governance problem: control-space design first, then layered governance, continuity audit, plateau detection, financial producer governance, and hard-experience regeneration."
+kicker: See how structural ceilings surface in real systems
+summary: "This page is not here to show that a system is impressive. It shows what teams do when a problem can no longer be fixed by polishing outputs: rewrite the bottleneck into control objects, validation loops, hard state, and governance moves."
 order: 3
 heroPoints:
-  - The case library connects the theory to real systems instead of leaving the framework abstract.
-  - Each case answers the same questions: why the task is high-mismatch, which intermediate objects are made explicit, and how evaluation and revision close the loop.
-  - V4 is the control-space case, V6 is the layered-governance case, Stock Rec V3 is the financial production-authority case, and FW-Insight V3 is the hard-experience case for factor-framework regeneration.
+  - The case library answers an engineering question: which failures cannot be solved by "try again" and require task redesign.
+  - Each case answers the same questions: where the structural bottleneck sits, which intermediate objects become explicit, and how evaluation and revision close the loop.
+  - V4 is the control-space case, V6 is the layered-governance case, Stock Rec V3 is the financial production-authority case, and FW-Insight V3 is the hard-experience regeneration case.
 ---
 
 ## How To Read the Cases
+
+If the home page asks which problems have already reached structural ceilings, and "Why It Matters" explains why those failures should not be misread as prompt problems, then this page answers the next question: **what does a real system do once it admits the ceiling and rewrites the problem into something governable?**
 
 The purpose of a case study is not to show that a particular system is impressive. It is to test this site's framework inside a real task. A useful case must explain why the raw task cannot be solved by fluent output alone, which intermediate objects the system creates, how evaluators detect failure, how revision routing decides which layer to change, and what limits remain.
 
