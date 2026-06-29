@@ -562,21 +562,17 @@ function renderOverviewGallery(lang: Lang) {
     en: {
       sectionEyebrow: "Current working manuscripts",
       sectionTitle: "Article infographics",
-      sectionCopy: "Each card pairs the English and Chinese infographic generated for the corresponding working draft.",
+      sectionCopy: "Each card shows the English infographic generated for the corresponding working draft.",
       englishImage: "English infographic",
-      chineseImage: "中文图版",
-      readEnglish: "Read English",
-      readChinese: "阅读中文",
+      readArticle: "Read article",
       missingImage: "Image unavailable",
     },
     zh: {
       sectionEyebrow: "当前工作稿",
       sectionTitle: "文章图版索引",
-      sectionCopy: "每张卡片对应一篇当前工作稿，并同时展示英文与中文 infographic 图版。",
-      englishImage: "English infographic",
+      sectionCopy: "每张卡片对应一篇当前工作稿，并展示对应的中文 infographic 图版。",
       chineseImage: "中文图版",
-      readEnglish: "Read English",
-      readChinese: "阅读中文",
+      readArticle: "阅读文章",
       missingImage: "图片暂缺",
     },
   }[lang];
@@ -585,24 +581,8 @@ function renderOverviewGallery(lang: Lang) {
     .map((article, index) => {
       const title = lang === "zh" ? article.zhTitle : article.enTitle;
       const titleLang: ImageLang = lang === "zh" ? "zh" : "en";
-      const panels = (["en", "zh"] as const)
-        .map((imageLang) => {
-          const src = infographicImageUrl(article, imageLang);
-          const imageLabel = imageLang === "zh" ? labels.chineseImage : labels.englishImage;
-          const altTitle = imageLang === "zh" ? article.zhTitle : article.enTitle;
-
-          return `
-            <a class="overview-image-panel" href="${articleUrl(article, imageLang)}" target="_blank" rel="noreferrer" aria-label="${imageLabel}: ${altTitle}">
-              <span>${imageLabel}</span>
-              ${
-                src
-                  ? `<img src="${src}" alt="${imageLabel}: ${altTitle}" loading="lazy" />`
-                  : `<div class="overview-image-missing">${labels.missingImage}</div>`
-              }
-            </a>
-          `;
-        })
-        .join("");
+      const src = infographicImageUrl(article, titleLang);
+      const imageLabel = titleLang === "zh" ? labels.chineseImage : labels.englishImage;
 
       return `
         <article class="overview-card">
@@ -610,12 +590,16 @@ function renderOverviewGallery(lang: Lang) {
             <p>${String(index + 1).padStart(2, "0")}</p>
             <h2>${renderArticleLink(article, titleLang, title)}</h2>
           </div>
-          <div class="overview-image-pair">
-            ${panels}
-          </div>
+          <a class="overview-image-panel" href="${articleUrl(article, titleLang)}" target="_blank" rel="noreferrer" aria-label="${imageLabel}: ${title}">
+            <span>${imageLabel}</span>
+            ${
+              src
+                ? `<img src="${src}" alt="${imageLabel}: ${title}" loading="lazy" />`
+                : `<div class="overview-image-missing">${labels.missingImage}</div>`
+            }
+          </a>
           <div class="overview-card-actions">
-            ${renderArticleLink(article, "en", labels.readEnglish, "ghost-button")}
-            ${renderArticleLink(article, "zh", labels.readChinese, "solid-button")}
+            ${renderArticleLink(article, titleLang, labels.readArticle, "solid-button")}
           </div>
         </article>
       `;
