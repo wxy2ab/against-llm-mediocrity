@@ -141,4 +141,4 @@ The dangerous misunderstanding is: if AI can process knowledge, humans only need
 
 Human learning should not move away from knowledge. It should upgrade knowledge from a low-level execution tool into a control layer for judging AI, constraining AI, validating AI, and creating higher-value tasks.
 
-The practical test is simple: after using AI, do you only have a better output, or do you also have better control knowledge for the next task?
+**The practical test is simple: after using AI, do you only have a better output, or do you also have better control knowledge for the next task?**

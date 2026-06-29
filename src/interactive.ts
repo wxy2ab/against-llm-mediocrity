@@ -131,12 +131,12 @@ function renderApp() {
       <section class="intro"><div><p class="eyebrow">${t.introEyebrow}</p><h1>${t.introTitle}</h1><p class="intro-copy">${t.introCopy}</p><div class="intro-actions"><a class="primary" href="#trajectory">${t.start} <span>↓</span></a><span class="legend"><i class="prob"></i>${t.probability} <i class="value"></i>${t.value}</span></div></div>
         <div class="hero-orbit" aria-hidden="true"><div class="orbit orbit-a"></div><div class="orbit orbit-b"></div><div class="orbit orbit-c"></div><div class="orbit-core"><b>P</b><span>next token</span></div><span class="orbit-label label-a">${t.orbit[0]}</span><span class="orbit-label label-b">${t.orbit[1]}</span><span class="orbit-label label-c">${t.orbit[2]}</span></div>
       </section>
-      <section class="trajectory section-shell" id="trajectory"><div class="section-heading"><div><p class="eyebrow">01 / PATH</p><h2>${t.pathTitle}</h2></div><p>${t.pathCopy}</p></div>
+      <section class="trajectory section-shell" id="trajectory"><div class="section-heading"><div><p class="eyebrow"><b>01</b> / PATH</p><h2>${t.pathTitle}</h2></div><p>${t.pathCopy}</p></div>
         <div class="regime-tabs" role="tablist">${(Object.keys(regimes[lang]) as Regime[]).map(key => `<button data-regime="${key}"><span>${regimes[lang][key][0]}</span><small>${regimes[lang][key][1]}</small></button>`).join("")}</div>
         <div class="trajectory-stage"><div class="stage-top"><div><span class="stage-kicker">${t.current}</span><h3 id="regime-name"></h3><p id="regime-copy"></p></div><button class="generate-button" id="generate">${t.next} <kbd>→</kbd></button></div><svg id="path-svg" viewBox="0 0 1000 360" role="img"></svg>
           <div class="meters"><div><span>${t.cumulativeProbability}</span><b id="prob-score">0</b><div class="meter"><i id="prob-meter"></i></div></div><div><span>${t.cumulativeValue}</span><b id="value-score">0</b><div class="meter value"><i id="value-meter"></i></div></div><p id="regime-insight"></p></div></div>
       </section>
-      <section class="mismatch section-shell" id="mismatch"><div class="section-heading"><div><p class="eyebrow">02 / FOUR PRIMITIVE MISMATCHES</p><h2>${t.mismatchTitle}</h2></div><p>${t.mismatchCopy}</p></div>
+      <section class="mismatch section-shell" id="mismatch"><div class="section-heading"><div><p class="eyebrow"><b>02</b> / FOUR PRIMITIVE MISMATCHES</p><h2>${t.mismatchTitle}</h2></div><p>${t.mismatchCopy}</p></div>
         <div class="mismatch-layout"><aside class="mismatch-tabs">${(Object.keys(mismatches[lang]) as Mismatch[]).map(key => `<button data-mismatch="${key}"><span>${mismatches[lang][key][0]}</span><b>${mismatches[lang][key][1]}</b><i>↗</i></button>`).join("")}</aside>
           <article class="mismatch-lab"><div class="mismatch-title"><span id="mismatch-index"></span><div><h3 id="mismatch-name"></h3><p id="mismatch-question"></p></div></div>
             <div class="training-console"><div class="console-head"><span><i></i> ALIGNMENT TRAINING</span><b>epoch <output id="epoch">0</output></b></div><div class="candidate-grid">
@@ -145,7 +145,7 @@ function renderApp() {
             <div class="diagnosis"><div><span>${t.trap}</span><p id="mismatch-trap"></p></div><div class="irreducible"><span>${t.irreducible}</span><p id="mismatch-irreducible"></p></div></div><div class="intervention"><span>${t.intervention}</span><b id="mismatch-intervention"></b></div>
           </article></div>
       </section>
-      <section class="transform section-shell" id="transform"><div class="section-heading"><div><p class="eyebrow">03 / TRANSFORMATION</p><h2>${t.transformTitle}</h2></div><p>${t.transformCopy}</p></div>
+      <section class="transform section-shell" id="transform"><div class="section-heading"><div><p class="eyebrow"><b>03</b> / TRANSFORMATION</p><h2>${t.transformTitle}</h2></div><p>${t.transformCopy}</p></div>
         <div class="transform-flow"><div class="flow-node bad"><span>${f[0]}</span><b>${f[1]}</b><small>${f[2]}</small></div><div class="flow-arrow"><i></i><span>${f[3]}</span></div><div class="flow-stack">${[[4,5],[6,7],[8,9],[10,11]].map(([a,b]) => `<div><span>${f[a]}</span><b>${f[b]}</b></div>`).join("")}</div><div class="flow-arrow"><i></i><span>${f[12]}</span></div><div class="flow-node good"><span>${f[13]}</span><b>${f[14]}</b><small>${f[15]}</small></div></div>
       </section>
     </main><footer><b>Against LLM Mediocrity</b><span>${t.footer}</span><a href="./">${t.home} ↗</a></footer>`;
@@ -173,6 +173,7 @@ function renderPath() {
 
 function renderRegime() {
   document.querySelectorAll<HTMLButtonElement>("[data-regime]").forEach(b => b.classList.toggle("active", b.dataset.regime === regime));
+  q(".meters").className = `meters ${regime}`;
   const r = regimes[lang][regime]; q("#regime-name").textContent = r[0]; q("#regime-copy").textContent = r[2]; q("#regime-insight").textContent = r[3]; renderPath();
 }
 

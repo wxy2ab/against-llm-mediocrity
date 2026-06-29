@@ -209,4 +209,4 @@ The system can over-bind to a polished scene, a symbolic image, or an early revi
 
 Story Insight V4 is not a simple multi-round polishing system. Its value is that it rewrites open-ended story generation into a governed intermediate-object loop: build a logic space, render text, evaluate, attack, diagnose, and revise.
 
-That is why this project emphasizes control spaces. The hard part is not making the model produce more text. The hard part is making it face the right task shape. For high-mismatch tasks, the final answer should be rendered from a governed state rather than discovered by fluent continuation.
+That is why this project emphasizes control spaces. The hard part is not making the model produce more text. The hard part is making it face the right task shape. **For high-mismatch tasks, the final answer should be rendered from a governed state rather than discovered by fluent continuation.**

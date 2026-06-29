@@ -27,7 +27,7 @@ Suggested reading order:
 6. Read "Cognitive Discipline for AI" to understand how individual users can govern emotional projection, uncontrolled abstraction, self-confirmation, and real-world feedback.
 7. Use the site pages on collaboration, learning, and projects to see how the manuscripts translate into practice and implementation directions.
 
-If you only read the site, the goal is to get an operational judgment chain. If you enter the manuscripts, the goal is to inspect the definitions, boundaries, and testability of that chain. This page connects the public explanation layer to the formal working drafts.
+**If you only read the site, the goal is to get an operational judgment chain. If you enter the manuscripts, the goal is to inspect the definitions, boundaries, and testability of that chain.** This page connects the public explanation layer to the formal working drafts.
 
 ## Current Working Manuscripts
 

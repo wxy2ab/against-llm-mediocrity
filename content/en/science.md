@@ -35,7 +35,7 @@ This page does the first step only: it breaks that vague sense of "still wrong" 
 
 Iteration works when the local direction of improvement and the real direction of value are aligned. If the task is summarizing text, changing tone, or organizing a list, local improvement often really is improvement.
 
-In high-mismatch tasks, the bottleneck is not local polish. It is the structure of the task:
+**In high-mismatch tasks, the bottleneck is not local polish. It is the structure of the task:**
 
 :::cards
 ### Wrong Abstraction
@@ -176,7 +176,9 @@ So understanding LLM mediocrity is not a niche prompt-writing trick. It is becom
 - which tasks naturally fall into it
 - what methods can be used to resist it
 
+:::takeaway
 Because resisting LLM mediocrity is becoming a base capability for high-value work: not a narrow specialist technique, but a common foundation across research, finance, creativity, product work, and governance.
+:::
 
 ## What the Framework Offers
 
