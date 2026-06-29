@@ -424,6 +424,9 @@ button.primary:hover {
   padding: 16px;
   background: var(--surface-1);
 }
+.scene-fallback[hidden] {
+  display: none;
+}
 .fallback-svg {
   width: 100%;
   height: 100%;
