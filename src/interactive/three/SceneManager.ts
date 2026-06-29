@@ -6,34 +6,44 @@ interface Registered {
   id: string;
   scene: LabScene;
   stage: HTMLElement;
-  canvas: HTMLCanvasElement;
-  renderer: WebGLRenderer;
-  w: number;
-  h: number;
+  canvas: HTMLCanvasElement; // visible 2D canvas in the frame
+  ctx: CanvasRenderingContext2D;
 }
 
 const CLEAR = 0x0a1411; // solid dark backdrop matching the page surface
 
 /**
- * Each scene renders into its own in-flow <canvas> filling its frame — directly
- * visible, no fixed-canvas-behind-content compositing. One rAF loop drives them
- * all; visibility is checked per-frame via getBoundingClientRect (cheap, and
- * robust where IntersectionObserver is throttled). The loop pauses when the tab
- * is hidden. ~5 contexts (mismatch reuses its slot) is well within limits.
+ * One shared WebGLRenderer renders each scene into an OFFSCREEN canvas; the
+ * result is blitted into each frame's own visible 2D <canvas> via drawImage.
+ * A single WebGL context avoids the multi-context compositing failures that left
+ * GPU-rendered content out of the displayed page; 2D canvases always composite
+ * and screenshot reliably. One rAF loop; visibility checked per-frame via
+ * getBoundingClientRect; loop pauses when the tab is hidden.
  */
 export class SceneManager {
   private scenes = new Map<string, Registered>();
+  private renderer: WebGLRenderer;
+  private gl: HTMLCanvasElement;
   private running = false;
   private last = 0;
   private elapsed = 0;
   private rafId = 0;
   private dpr: number;
-  private antialias: boolean;
+  private glW = 0;
+  private glH = 0;
 
   constructor() {
     const coarse = isCoarsePointer();
     this.dpr = Math.min(window.devicePixelRatio || 1, coarse ? 1.5 : 2);
-    this.antialias = !coarse;
+    this.gl = document.createElement("canvas");
+    this.renderer = new WebGLRenderer({
+      canvas: this.gl,
+      antialias: !coarse,
+      powerPreference: "high-performance",
+      preserveDrawingBuffer: true, // required so drawImage reads the rendered frame
+    });
+    this.renderer.setClearColor(CLEAR, 1);
+    this.renderer.setPixelRatio(this.dpr);
     document.addEventListener("visibilitychange", this.onVisibility);
   }
 
@@ -41,23 +51,14 @@ export class SceneManager {
     const canvas = document.createElement("canvas");
     canvas.className = "scene-canvas";
     stage.appendChild(canvas);
-    const renderer = new WebGLRenderer({
-      canvas,
-      antialias: this.antialias,
-      powerPreference: "high-performance",
-    });
-    renderer.setClearColor(CLEAR, 1);
-    renderer.setPixelRatio(this.dpr);
-    const entry: Registered = { id, scene, stage, canvas, renderer, w: 0, h: 0 };
-    this.sync(entry);
-    this.scenes.set(id, entry);
+    const ctx = canvas.getContext("2d")!;
+    this.scenes.set(id, { id, scene, stage, canvas, ctx });
   }
 
   unregister(id: string): void {
     const r = this.scenes.get(id);
     if (!r) return;
     r.scene.dispose();
-    r.renderer.dispose();
     r.canvas.remove();
     this.scenes.delete(id);
   }
@@ -82,32 +83,37 @@ export class SceneManager {
     cancelAnimationFrame(this.rafId);
   }
 
-  private sync(r: Registered): boolean {
-    const w = r.canvas.clientWidth;
-    const h = r.canvas.clientHeight;
-    if (w < 2 || h < 2) return false;
-    if (w !== r.w || h !== r.h) {
-      r.w = w;
-      r.h = h;
-      r.renderer.setSize(w, h, false);
-      r.scene.resize(w, h);
-    }
-    return true;
-  }
-
   private loop = (now: number): void => {
     if (!this.running) return;
     const dt = Math.min((now - this.last) / 1000, 1 / 30);
     this.last = now;
     this.elapsed += dt;
     const vh = window.innerHeight;
+    const ratio = this.dpr;
     for (const r of this.scenes.values()) {
       const rect = r.canvas.getBoundingClientRect();
-      // only render scenes whose canvas is on screen
       if (rect.bottom < 0 || rect.top > vh || rect.width < 2 || rect.height < 2) continue;
-      if (!this.sync(r)) continue;
+      const w = Math.round(rect.width);
+      const h = Math.round(rect.height);
+
+      // size the shared renderer to this scene
+      if (w !== this.glW || h !== this.glH) {
+        this.renderer.setSize(w, h, false);
+        this.glW = w;
+        this.glH = h;
+      }
+      r.scene.resize(w, h);
       r.scene.update(dt, this.elapsed);
-      r.renderer.render(r.scene.scene, r.scene.camera);
+      this.renderer.render(r.scene.scene, r.scene.camera);
+
+      // blit the rendered frame into the visible 2D canvas
+      const bw = Math.round(w * ratio);
+      const bh = Math.round(h * ratio);
+      if (r.canvas.width !== bw || r.canvas.height !== bh) {
+        r.canvas.width = bw;
+        r.canvas.height = bh;
+      }
+      r.ctx.drawImage(this.gl, 0, 0, bw, bh);
     }
     this.rafId = requestAnimationFrame(this.loop);
   };
@@ -121,5 +127,6 @@ export class SceneManager {
     this.stop();
     document.removeEventListener("visibilitychange", this.onVisibility);
     for (const id of [...this.scenes.keys()]) this.unregister(id);
+    this.renderer.dispose();
   }
 }
