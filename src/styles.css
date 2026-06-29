@@ -672,6 +672,35 @@ h1 {
   line-height: 1.75;
 }
 
+.content-section blockquote {
+  max-width: 860px;
+  margin: 26px 0 0;
+  padding: 20px 24px 20px 22px;
+  background:
+    linear-gradient(135deg, rgba(255, 253, 249, 0.98), rgba(244, 238, 228, 0.96)),
+    radial-gradient(circle at top right, rgba(242, 204, 93, 0.16), transparent 34%);
+  border: 1px solid rgba(34, 40, 49, 0.14);
+  border-left: 8px solid #b55243;
+  border-radius: 10px;
+  box-shadow: 14px 14px 0 rgba(34, 40, 49, 0.07);
+}
+
+.content-section blockquote p {
+  margin: 0;
+  color: #303947;
+  font-size: 17px;
+  line-height: 1.72;
+}
+
+.content-section blockquote p + p {
+  margin-top: 10px;
+}
+
+.content-section blockquote strong {
+  color: #8f3f33;
+  font-weight: 900;
+}
+
 .bullet-list,
 .content-section > ul {
   display: grid;
@@ -935,6 +964,7 @@ h1 {
   .summary,
   .hero-points li,
   .content-section > p,
+  .content-section blockquote p,
   .bullet-list li,
   .info-card p {
     word-break: break-word;
