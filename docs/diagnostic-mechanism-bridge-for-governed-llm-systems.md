@@ -3,7 +3,6 @@
 ## Unifying Six Primitive Value-Preservation Mismatches with Eight Intervention Mechanism Axes
 
 **Working Draft v0.1**  
-**Xinyun Wang, Shuliang Liang**
 
 ---
 

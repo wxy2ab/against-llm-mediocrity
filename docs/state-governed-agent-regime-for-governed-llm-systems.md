@@ -2,7 +2,6 @@
 
 **Hard-State Authority, Transition Contracts, and Runtime Governance**  
 **Working Draft v0.1**  
-**Xinyun Wang, Shuliang Liang**
 
 ---
 

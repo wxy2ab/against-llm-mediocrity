@@ -2,7 +2,6 @@
 
 **Working Draft v0.1**  
 **Companion Specification to _A Structural Theory of Value Preservation in LLM Systems_**  
-**Xinyun Wang, Shuliang Liang**
 
 ---
 
