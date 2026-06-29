@@ -158,6 +158,13 @@ This draft turns AI use from a list of warnings into a discipline of cognition: 
 
 [Read the cognitive framework](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/cognitive-discipline-for-ai.md)
 
+### AI Collaborative Posture: Calibrated Friction and Constructive Firmness
+Tag: collaboration posture working draft
+
+This working draft develops the AI-side dual of cognitive discipline. Instead of maximizing compliance, AI should protect the human judgment loop through calibrated friction and constructive firmness: be firm where hard oracles exist, defer where human-governed variables dominate, install gates before irreversible actions, and preserve human generative labor in learning and judgment tasks.
+
+[Read the collaboration posture draft](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/ai-collaborative-posture-calibrated-friction-constructive-firmness.md)
+
 ### The Maximum Price of Models
 Tag: economics and pricing manuscript
 
