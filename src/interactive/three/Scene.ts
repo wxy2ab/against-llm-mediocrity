@@ -65,12 +65,12 @@ export abstract class BaseScene implements LabScene {
     this.camera = new PerspectiveCamera(45, 1, 0.1, 200);
     this.labels = new LabelLayer(overlay);
 
-    const ambient = new AmbientLight(COLORS.ink, 0.55);
-    const key = new DirectionalLight(COLORS.ink, 1.1);
+    const ambient = new AmbientLight(COLORS.ink, 0.85);
+    const key = new DirectionalLight(COLORS.ink, 1.5);
     key.position.set(6, 12, 8);
-    const mintFill = new PointLight(COLORS.mint, 0.5, 60);
+    const mintFill = new PointLight(COLORS.mint, 0.8, 80);
     mintFill.position.set(-8, 6, 6);
-    const orangeFill = new PointLight(COLORS.orange, 0.4, 60);
+    const orangeFill = new PointLight(COLORS.orange, 0.6, 80);
     orangeFill.position.set(8, 3, -6);
     this.scene.add(ambient, key, mintFill, orangeFill);
   }
