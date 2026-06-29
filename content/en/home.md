@@ -39,7 +39,8 @@ Recognizing and resisting this mediocrity may be the most common task AI users f
 
 The site follows that order. It starts with this common frustration, then explains why probability and value diverge, then turns the divergent parts into control spaces, validation objects, and minimal human questions. In other words, these pages are not separate essays. They are a path from scene to diagnosis to delivery.
 
-This framework starts as a summary of engineering practice and engineering intuition. What matters most here is whether it helps people reorganize tasks and improve practical engineering outcomes, not whether it forms a mathematically complete final theory; the theory sections are better understood as adjustable thinking scaffolds that will keep changing with practice.
+> **Note on scope**
+> This framework starts as a summary of engineering practice and engineering intuition. What matters most here is whether it helps people reorganize tasks and improve practical engineering outcomes, not whether it forms a mathematically complete final theory; the theory sections are better understood as adjustable thinking scaffolds that will keep changing with practice.
 
 ## The One-Page Map
 

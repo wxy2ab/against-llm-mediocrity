@@ -14,7 +14,8 @@ This project focuses on three moves:
 
 The goal is not to reject autoregression, but to transform tasks that would otherwise plateau in fluent mediocrity into tasks where autoregressive generation becomes genuinely useful or even extraordinary.
 
-Note: the material on this site comes primarily from engineering practice and engineering intuition. It tries to distill those experiences into theory-like frameworks that can guide engineering practice again, so the main criterion is practical engineering payoff rather than mathematical completeness. The theoretical parts are working scaffolds and may change at any time; they should not be treated as complete theoretical research.
+> **Note on scope**
+> The material on this site comes primarily from engineering practice and engineering intuition. It tries to distill those experiences into theory-like frameworks that can guide engineering practice again, so the main criterion is practical engineering payoff rather than mathematical completeness. The theoretical parts are working scaffolds and may change at any time; they should not be treated as complete theoretical research.
 
 ## Docs
 
