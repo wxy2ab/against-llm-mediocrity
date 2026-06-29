@@ -32,8 +32,8 @@ export class PipelineScene extends BaseScene {
   private t = 0;
   private governed = false;
 
-  protected orbitRadius = 18;
-  protected orbitHeight = 5;
+  protected orbitRadius = 15;
+  protected orbitHeight = 4.5;
   protected orbitSpeed = 0.22;
   protected orbitSway = 0.22;
   protected baseAngle = Math.PI * 0.5;
@@ -62,11 +62,11 @@ export class PipelineScene extends BaseScene {
     // nodes
     for (let i = 0; i < N; i++) {
       const node = new Mesh(
-        new SphereGeometry(0.34, 24, 24),
+        new SphereGeometry(0.46, 24, 24),
         new MeshStandardMaterial({
-          color: COLORS.surface,
+          color: COLORS.mint,
           emissive: COLORS.mint,
-          emissiveIntensity: 0.45,
+          emissiveIntensity: 0.8,
         }),
       );
       node.position.set(X0 + i * STEP, 0, 0);

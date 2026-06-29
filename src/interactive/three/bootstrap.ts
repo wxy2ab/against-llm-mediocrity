@@ -8,8 +8,8 @@ import { GovernanceScene } from "./scenes/GovernanceScene";
 import { createMismatchScene } from "./scenes/mismatch";
 
 export function start(shell: ShellHandle): void {
-  const { ctx, store, frames, glCanvas } = shell;
-  const mgr = new SceneManager(glCanvas);
+  const { ctx, store, frames } = shell;
+  const mgr = new SceneManager();
 
   mgr.register("pipeline", new PipelineScene(frames.pipeline.overlay, ctx), frames.pipeline.stage);
   mgr.register(

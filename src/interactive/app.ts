@@ -25,7 +25,6 @@ export interface ShellHandle {
   store: Store;
   root: HTMLElement;
   frames: Record<SectionId, SectionFrame>;
-  glCanvas: HTMLCanvasElement;
   renderFallbacks(): void;
 }
 
@@ -324,7 +323,7 @@ export function mountShell(): ShellHandle {
   paintAll();
   sync();
 
-  return { ctx, store, root, frames, glCanvas: must<HTMLCanvasElement>("#lab-gl"), renderFallbacks };
+  return { ctx, store, root, frames, renderFallbacks };
 }
 
 // ============================================================================
@@ -333,7 +332,6 @@ export function mountShell(): ShellHandle {
 
 function skeleton(): string {
   return `
-  <canvas id="lab-gl" aria-hidden="true"></canvas>
   <header class="lab-header">
     <a class="lab-brand" href="./"><span class="brand-dot"></span><span data-i18n="brand"></span></a>
     <nav data-nav></nav>
