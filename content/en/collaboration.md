@@ -27,7 +27,7 @@ Human: Govern → Set values → Authorize → Judge taste → Own responsibilit
 System: turn reusable judgments into GKOs / GEOs and hard-state transitions
 ```
 
-In one sentence: AI should move the task to the point where only human-governed variables remain; humans should resolve variables that cannot be reliably obtained from environment, feedback, tools, or simulation; the system should commit the resolved variable into hard state rather than leave it as chat history.
+**In one sentence: AI should move the task to the point where only human-governed variables remain; humans should resolve variables that cannot be reliably obtained from environment, feedback, tools, or simulation; the system should commit the resolved variable into hard state rather than leave it as chat history.**
 
 This page picks up the last step of the governance page. Control spaces and validation loops solve many structural problems, but value, authorization, responsibility, taste, and real-world state can still block autonomy. The collaboration question is not how to involve humans more. It is how to make human input small, precise, and sufficient for AI to resume autonomous progress.
 

@@ -181,7 +181,7 @@ A local-to-global transformation has four moves:
 3. Govern the boundary: turn the boundary into state matrices, rubrics, constraints, counterexamples, failure modes, or GKOs.
 4. Render after stabilization: let the model produce the final fluent artifact from governed intermediate objects, then check that the control objects survived rendering.
 
-That is the path from LLM mediocrity toward autoregressive extraordinary, and it is what Knowledge Governance formalizes.
+**That is the path from LLM mediocrity toward autoregressive extraordinary, and it is what Knowledge Governance formalizes.**
 
 The transition from mechanism to governance is therefore direct. The mechanism page explains why direct generation gets stuck; the governance page explains how to rewrite stuck tasks into searchable, verifiable, reusable engineering objects. Without that layer, the six mismatches are only diagnostic labels. With it, they become interventions.
 

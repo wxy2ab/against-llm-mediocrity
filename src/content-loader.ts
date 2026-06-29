@@ -133,6 +133,53 @@ function parseMarkdownFile(raw: string): { frontmatter: PageFrontmatter; body: s
   return { frontmatter, body: match[2] };
 }
 
+// Keys the three home "regime" cards to a color block by their unique Tag copy.
+// NOTE: coupled to the exact tag strings in content/{en,zh}/home.md — keep in sync.
+function regimeClass(tag: string): string {
+  if (/probability-value mismatch|概率与价值错位/i.test(tag)) return " regime-mediocre";
+  if (/common real-world regime|最常见的现实区间/i.test(tag)) return " regime-local";
+  if (/probability and value align|概率与价值同向/i.test(tag)) return " regime-extraordinary";
+  return "";
+}
+
+function renderTakeaway(block: string): string {
+  const body = marked.parse(block.trim(), { async: false }) as string;
+  return `<aside class="takeaway">
+${body}
+</aside>`;
+}
+
+// Turns ```text fences that contain `->` arrows into styled flow-diagram callouts.
+// A single fence may hold several pipelines separated by blank lines; each becomes
+// its own row. Non-arrow text fences are left as plain <pre> blocks.
+function styleFlowDiagrams(html: string): string {
+  return html.replace(
+    /<pre><code class="language-text">([\s\S]*?)<\/code><\/pre>/g,
+    (whole, inner: string) => {
+      if (!inner.includes("-&gt;")) return whole;
+      const groups = inner
+        .split(/\n[ \t]*\n/)
+        .map((group) =>
+          group
+            .replace(/\r?\n/g, " ")
+            .split(/\s*-&gt;\s*/)
+            .map((step) => step.trim())
+            .filter(Boolean),
+        )
+        .filter((steps) => steps.length >= 2);
+      if (!groups.length) return whole;
+      return groups
+        .map(
+          (steps) =>
+            `<div class="flow-diagram" role="group">${steps
+              .map((step) => `<span class="flow-step">${step}</span>`)
+              .join('<span class="flow-arrow" aria-hidden="true">&rarr;</span>')}</div>`,
+        )
+        .join("");
+    },
+  );
+}
+
 function renderCards(block: string): string {
   const chunks = block
     .trim()
@@ -149,7 +196,7 @@ function renderCards(block: string): string {
     const body = tagMatch ? lines.slice(1).join("\n").trim() : lines.join("\n").trim();
     const bodyHtml = marked.parse(body, { async: false }) as string;
 
-    return `<article class="info-card">
+    return `<article class="info-card${regimeClass(tag)}">
 ${tag ? `<span>${tag}</span>` : ""}
 <h3>${title}</h3>
 ${bodyHtml}
@@ -175,11 +222,18 @@ function prefixInternalLinks(html: string): string {
 }
 
 function renderMarkdown(markdown: string): string {
-  const withCards = markdown.replace(
+  // Takeaway fence first (disjoint from cards), then cards, then parse, then
+  // post-process the parsed HTML (flow diagrams + internal-link base prefixing).
+  const withTakeaways = markdown.replace(
+    /^(:{3,})takeaway[ \t]*\r?\n([\s\S]*?)^\1[ \t]*\r?$/gm,
+    (_match, _fence: string, block: string) => renderTakeaway(block),
+  );
+  const withCards = withTakeaways.replace(
     /^(:{3,})cards[ \t]*\r?\n([\s\S]*?)^\1[ \t]*\r?$/gm,
     (_match, _fence: string, block: string) => renderCards(block),
   );
-  return prefixInternalLinks(marked.parse(withCards, { async: false }) as string);
+  const html = marked.parse(withCards, { async: false }) as string;
+  return prefixInternalLinks(styleFlowDiagrams(html));
 }
 
 function loadPages(): Record<Lang, Site> {

@@ -67,7 +67,9 @@ output-space sampling
 -> experience write-back
 ```
 
+:::takeaway
 This works better than asking for "one more version" because each step changes the problem itself instead of merely changing the phrasing.
+:::
 
 ## The Control Space Should Also Be Searched
 
