@@ -17,14 +17,16 @@ const MINT = "#50d3b8";
 const ORANGE = "#ff745c";
 const MAX_DOTS = 60;
 
-// value landscape: low rolling plateau + tall narrow peak Y* on the right
+// value landscape: rolling plateau + tall narrow peak Y* on the right
 const valueH = (t: number): number =>
   0.06 +
-  0.2 * Math.exp(-((t - 0.3) ** 2) / 0.02) +
-  0.66 * Math.exp(-((t - 0.78) ** 2) / 0.0042);
+  0.18 * Math.exp(-((t - 0.28) ** 2) / 0.016) +
+  0.1 * Math.exp(-((t - 0.52) ** 2) / 0.012) +
+  0.84 * Math.exp(-((t - 0.8) ** 2) / 0.004);
 
-// probability mass: a fat bump over the easy central-left region, ~0 at Y*
-const probH = (t: number): number => 0.44 * Math.exp(-((t - 0.34) ** 2) / 0.02);
+// probability mass: a couple of "easy" hills over the central-left, ~0 at Y*
+const probH = (t: number): number =>
+  0.42 * Math.exp(-((t - 0.34) ** 2) / 0.02) + 0.18 * Math.exp(-((t - 0.12) ** 2) / 0.011);
 
 export function startHero(canvas: HTMLCanvasElement, reduced: boolean): () => void {
   const ctx = canvas.getContext("2d");
@@ -40,7 +42,7 @@ export function startHero(canvas: HTMLCanvasElement, reduced: boolean): () => vo
 
   const PAD = 0.07;
   const px = (t: number) => (PAD + t * (1 - 2 * PAD)) * w;
-  const py = (hh: number) => h * 0.92 - hh * h * 0.82;
+  const py = (hh: number) => h * 0.94 - hh * h * 0.95;
 
   function resize(): void {
     const r = canvas.getBoundingClientRect();

@@ -77,8 +77,15 @@ export class SamplingTheaterScene extends BaseScene {
 
   private probH = (x: number, z: number): number => {
     const t = this.train;
-    const spread = 3.2 - 1.5 * t;
-    let h = 2.5 * gauss(x, z, PLATEAU.x, PLATEAU.z, spread) * (1 + 0.4 * t);
+    const spread = 3.0 - 1.4 * t;
+    // several "easy" hills of probability mass (multi-modal) — all in the
+    // low-value region, none reaching the true-value peak Y*
+    let h =
+      2.4 * gauss(x, z, PLATEAU.x, PLATEAU.z, spread) * (1 + 0.4 * t) +
+      1.5 * gauss(x, z, -4.6, -1.8, 2.2) +
+      1.2 * gauss(x, z, -1.0, 2.6, 2.0) +
+      1.0 * gauss(x, z, -3.4, 2.2, 1.6) +
+      0.9 * gauss(x, z, 0.2, -2.8, 1.8);
     if (this.cause === "specification") {
       h += (0.5 + 3.6 * t) * gaussAniso(x, z, PROXY.x, PROXY.z, 1.1, 1.1);
     }

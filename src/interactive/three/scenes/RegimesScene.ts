@@ -71,21 +71,22 @@ export class RegimesScene extends BaseScene {
     this.value.setHeight(this.valueH);
     this.scene.add(this.value.mesh);
 
+    // probability as an orange WIREFRAME draped over the value terrain, so both
+    // surfaces are always visible (a translucent sheet hides one or the other)
     this.prob = new HeightSurface(
       13,
-      44,
+      30,
       new MeshStandardMaterial({
         color: COLORS.orange,
         emissive: COLORS.orange,
-        emissiveIntensity: 0.35,
+        emissiveIntensity: 0.7,
         transparent: true,
-        opacity: 0.45,
-        side: DoubleSide,
-        depthWrite: false,
+        opacity: 0.85,
+        wireframe: true,
       }),
     );
     this.prob.setHeight(this.probH);
-    this.prob.mesh.position.y = 0.05;
+    this.prob.mesh.position.y = 0.08;
     this.scene.add(this.prob.mesh);
 
     this.ring = new Mesh(

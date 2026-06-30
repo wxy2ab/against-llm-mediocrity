@@ -24,20 +24,22 @@ const STEP = (X1 - X0) / (N - 1);
  * mint and the payload arrives nearly whole.
  */
 export class PipelineScene extends BaseScene {
-  private payload!: Mesh;
-  private ghost!: Mesh;
+  private payload!: Mesh; // actual value (shrinks)
+  private ghost!: Mesh; // ideal value (stays full)
   private gates: Mesh[] = [];
   private leaks: Mesh[] = [];
   private nodeLabels: LabelHandle[] = [];
+  private lIdeal!: LabelHandle;
+  private lActual!: LabelHandle;
   private t = 0;
   private governed = false;
 
-  protected orbitRadius = 15;
-  protected orbitHeight = 4.5;
+  protected orbitRadius = 15.5;
+  protected orbitHeight = 5.5;
   protected orbitSpeed = 0.22;
-  protected orbitSway = 0.22;
+  protected orbitSway = 0.2;
   protected baseAngle = Math.PI * 0.5;
-  protected target = new Vector3(0, 0, 0);
+  protected target = new Vector3(0, 0.7, 0);
 
   constructor(overlay: HTMLElement, ctx: ConstructorParameters<typeof BaseScene>[1]) {
     super(overlay, ctx);
@@ -105,33 +107,26 @@ export class PipelineScene extends BaseScene {
       this.leaks.push(leak);
     }
 
-    // payload (mint) + ideal ghost on a parallel rail
-    this.payload = new Mesh(
-      new SphereGeometry(0.4, 28, 28),
-      new MeshStandardMaterial({
-        color: COLORS.mint,
-        emissive: COLORS.mint,
-        emissiveIntensity: 1.1,
-      }),
-    );
-    this.scene.add(this.payload);
-
+    // two value spheres travel together above the pipeline:
+    // ghost = ideal value (full, bright), payload = actual value (shrinks/dims)
     this.ghost = new Mesh(
-      new SphereGeometry(0.34, 24, 24),
-      new MeshStandardMaterial({
-        color: COLORS.mint,
-        emissive: COLORS.mint,
-        emissiveIntensity: 0.9,
-        transparent: true,
-        opacity: 0.4,
-      }),
+      new SphereGeometry(0.42, 28, 28),
+      new MeshStandardMaterial({ color: COLORS.mint, emissive: COLORS.mint, emissiveIntensity: 1.2 }),
     );
     this.scene.add(this.ghost);
 
+    this.payload = new Mesh(
+      new SphereGeometry(0.42, 28, 28),
+      new MeshStandardMaterial({ color: COLORS.mint, emissive: COLORS.mint, emissiveIntensity: 1.2 }),
+    );
+    this.scene.add(this.payload);
+
     // node labels
     for (let i = 0; i < N; i++) {
-      this.nodeLabels.push(this.labels.add(new Vector3(X0 + i * STEP, 1.15, 0)));
+      this.nodeLabels.push(this.labels.add(new Vector3(X0 + i * STEP, -1.1, 0)));
     }
+    this.lIdeal = this.labels.add(new Vector3(0, 0, 0), "is-value");
+    this.lActual = this.labels.add(new Vector3(0, 0, 0), "is-prob");
   }
 
   protected relabel(): void {
@@ -140,6 +135,9 @@ export class PipelineScene extends BaseScene {
       const n = nodes[i];
       if (n) lab.setText(n.name, n.sym);
     });
+    const zh = this.lang === "zh";
+    this.lIdeal.setText(zh ? "理想价值" : "Ideal value", "U*");
+    this.lActual.setText(zh ? "实际价值" : "Actual value", "U");
   }
 
   setParams(p: SceneParams): void {
@@ -159,8 +157,11 @@ export class PipelineScene extends BaseScene {
     this.t = (this.t + dt * 0.11) % 1.08; // small pause past the end
     const tt = Math.min(this.t, 1);
     const x = X0 + tt * (X1 - X0);
-    this.payload.position.set(x, 0, 0);
-    this.ghost.position.set(x, 0, -1.4);
+    const yBall = 1.7;
+    this.ghost.position.set(x, yBall, 0.95); // ideal
+    this.payload.position.set(x, yBall, -0.95); // actual
+    this.lIdeal.anchor.set(x, yBall + 0.75, 0.95);
+    this.lActual.anchor.set(x, yBall + 0.75, -0.95);
 
     // how many mismatch gates the payload has passed
     let passed = 0;
@@ -171,22 +172,26 @@ export class PipelineScene extends BaseScene {
       const leak = this.leaks[i];
       const m = leak.material as MeshStandardMaterial;
       const near = Math.abs(x - gx);
-      if (!this.governed && near < 0.5) {
-        const k = 1 - near / 0.5;
+      if (!this.governed && near < 0.6) {
+        const k = 1 - near / 0.6;
         m.opacity = k * 0.9;
-        leak.scale.setScalar(0.2 + k * 0.5);
-        leak.position.set(gx, -k * 1.4, 0);
+        leak.scale.setScalar(0.2 + k * 0.6);
+        // fragments shed from the actual-value ball and fall away
+        leak.position.set(gx, yBall - k * 2.2, -0.95);
       } else {
         m.opacity *= 0.9;
         leak.scale.multiplyScalar(0.96);
       }
     }
 
-    const loss = this.governed ? 0.08 : 0.62;
+    // actual value shrinks + dims as it passes gates; ideal stays full
+    const loss = this.governed ? 0.06 : 0.82;
     const frac = passed / this.gates.length;
+    const scale = Math.max(0.16, 1 - loss * frac);
     const pm = this.payload.material as MeshStandardMaterial;
-    pm.emissiveIntensity = 1.1 * (1 - loss * frac);
-    this.payload.scale.setScalar(1 - loss * frac * 0.5);
+    pm.emissiveIntensity = 1.2 * Math.max(0.25, scale);
+    this.payload.scale.setScalar(scale);
+    this.ghost.scale.setScalar(1);
 
     // gentle spin on gates
     for (const g of this.gates) g.rotation.z += dt * 0.4;

@@ -57,14 +57,16 @@ export class GovernanceScene extends BaseScene {
       new MeshStandardMaterial({
         color: COLORS.mint,
         emissive: COLORS.mint,
-        emissiveIntensity: 0.16,
+        emissiveIntensity: 0.2,
         transparent: true,
-        opacity: 0.7,
+        opacity: 0.42,
         side: DoubleSide,
         flatShading: true,
+        depthWrite: false,
       }),
     );
     surf.setHeight(this.valueH);
+    surf.mesh.renderOrder = 0;
     this.scene.add(surf.mesh);
 
     // control-space lattice (orderly, searchable) floating above
