@@ -13,6 +13,7 @@ import {
   type SectionId,
 } from "./types";
 import { fallbackSVG } from "./fallback/static";
+import { startHero } from "./hero";
 
 export interface SectionFrame {
   stage: HTMLElement;
@@ -323,6 +324,10 @@ export function mountShell(): ShellHandle {
   paintAll();
   sync();
 
+  // hero animation (pure Canvas 2D — always displays, independent of WebGL)
+  const heroCanvas = opt<HTMLCanvasElement>("[data-hero-canvas]");
+  if (heroCanvas) startHero(heroCanvas, ctx.prefersReducedMotion);
+
   return { ctx, store, root, frames, renderFallbacks };
 }
 
@@ -344,10 +349,7 @@ function skeleton(): string {
   <main>
     <section class="intro">
       <div class="intro-text" data-intro></div>
-      <div class="hero-orbit" aria-hidden="true">
-        <div class="orbit orbit-a"></div><div class="orbit orbit-b"></div><div class="orbit orbit-c"></div>
-        <div class="orbit-core"><b>U</b><span>value</span></div>
-      </div>
+      <div class="hero-visual" aria-hidden="true"><canvas class="hero-canvas" data-hero-canvas></canvas></div>
     </section>
     ${SECTIONS.map(sectionSkeleton).join("")}
   </main>
