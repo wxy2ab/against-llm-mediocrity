@@ -42,7 +42,9 @@ export function startHero(canvas: HTMLCanvasElement, reduced: boolean): () => vo
 
   const PAD = 0.07;
   const px = (t: number) => (PAD + t * (1 - 2 * PAD)) * w;
-  const py = (hh: number) => h * 0.94 - hh * h * 0.95;
+  // landscape anchored to the bottom; vertical scale tied to width so a taller
+  // canvas just adds "sky" above (where the samples rain from) without stretching
+  const py = (hh: number) => h * 0.93 - hh * Math.min(h * 0.78, w * 0.46);
 
   function resize(): void {
     const r = canvas.getBoundingClientRect();
@@ -136,7 +138,7 @@ export function startHero(canvas: HTMLCanvasElement, reduced: boolean): () => vo
     while (spawnAcc > 0.18 && dots.length < MAX_DOTS) {
       spawnAcc -= 0.18;
       const t = 0.2 + Math.random() * 0.3;
-      dots.push({ t, x: px(t), y: py(1.05), vy: 0, landY: py(valueH(t)) - 2, landed: false, age: 0 });
+      dots.push({ t, x: px(t), y: -8 - Math.random() * 30, vy: 0, landY: py(valueH(t)) - 2, landed: false, age: 0 });
     }
     for (let i = dots.length - 1; i >= 0; i--) {
       const d = dots[i];

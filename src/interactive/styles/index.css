@@ -176,10 +176,13 @@ a {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: clamp(24px, 4vw, 56px);
-  align-items: center;
+  align-items: stretch;
   padding: clamp(40px, 7vw, 104px) clamp(20px, 6vw, 96px) clamp(40px, 6vw, 80px);
   max-width: 1320px;
   margin: 0 auto;
+}
+.intro-text {
+  align-self: center;
 }
 .eyebrow {
   margin: 0 0 14px;
@@ -256,9 +259,10 @@ button.primary:hover {
 
 .hero-visual {
   position: relative;
-  aspect-ratio: 3 / 2;
   width: 100%;
   max-width: 640px;
+  height: 100%;
+  min-height: clamp(360px, 48vh, 580px);
   margin: 0 auto;
   justify-self: stretch;
   border: 1px solid var(--line);
