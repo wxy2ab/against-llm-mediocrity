@@ -40,11 +40,11 @@ export class ObservationScene extends BaseScene {
   private lWorld!: LabelHandle;
   private lZ!: LabelHandle;
 
-  protected orbitRadius = 13;
-  protected orbitHeight = 5;
-  protected orbitSpeed = 0.2;
-  protected orbitSway = 0.45;
-  protected target = new Vector3(-0.5, 1.5, 0);
+  protected orbitRadius = 17;
+  protected orbitHeight = 6;
+  protected orbitSpeed = 0.18;
+  protected orbitSway = 0.3;
+  protected target = new Vector3(-0.3, 2, 0);
 
   constructor(overlay: HTMLElement, ctx: AppContext) {
     super(overlay, ctx);
@@ -52,19 +52,20 @@ export class ObservationScene extends BaseScene {
   }
 
   protected build(): void {
-    // representation plane Z (right)
+    // representation plane Z (right) — a y-z panel the world projects onto
     this.plane = new Mesh(
-      new PlaneGeometry(0.15, 6, 1, 1),
+      new PlaneGeometry(5.4, 5.4, 1, 1),
       new MeshStandardMaterial({
-        color: COLORS.ink,
+        color: COLORS.surface,
         emissive: COLORS.mint,
-        emissiveIntensity: 0.15,
+        emissiveIntensity: 0.12,
         transparent: true,
-        opacity: 0.5,
+        opacity: 0.2,
         side: DoubleSide,
       }),
     );
-    this.plane.position.set(4, 1.8, 0);
+    this.plane.position.set(4, 2, 0);
+    this.plane.rotation.y = Math.PI / 2;
     this.scene.add(this.plane);
 
     const beamPos: number[] = [];
@@ -124,7 +125,5 @@ export class ObservationScene extends BaseScene {
       pos.setXYZ(i * 2 + 1, 4, p.y, z);
     }
     pos.needsUpdate = true;
-    // plane tilts to signal the preserved axis
-    this.plane.rotation.y = this.keep * Math.PI * 0.5;
   }
 }
