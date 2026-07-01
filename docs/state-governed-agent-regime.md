@@ -4,7 +4,7 @@
 
 **Status:** Working draft  
 **Abbreviation:** SGAR  
-**Chinese term:** 状态治理型 Agent 体制  
+**Chinese term:** 状态治理智能体范式  
 **Related drafts:** [Knowledge Governance](knowledge-governance-llm-systems-local-alignment.md), [Audit Engineering](audit-engineering.md), [Human-Assist Operational Mismatches](human-assist-operational-mismatches.md), [Governed Human-AI Collaboration](governed-human-ai-collaboration.md)
 
 ## Abstract

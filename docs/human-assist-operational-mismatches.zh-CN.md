@@ -6,7 +6,7 @@
 **版本：** 1.1  
 **配套实践框架：** [治理式人机协作](governed-human-ai-collaboration.zh-CN.md)  
 **当前总稿：** [LLM 系统中价值保存的结构理论](structural-theory-value-preservation-llm-systems.zh-CN.md)  
-**Agent 状态补充稿：** [面向受治理 LLM 系统的状态治理型 Agent 体制](state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)
+**Agent 状态补充稿：** [面向受治理 LLM 系统的状态治理智能体范式](state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)
 
 ## 目录
 
@@ -262,7 +262,7 @@ GEsO 保存可复用的升级规则。
 
 ## 8. GKO 与 GEsO 的结合
 
-三类治理对象各司其职，而且其中一个的回答可以喂给另一个。第三行所引的 agent 状态层来自状态治理型 Agent 体制（SGAR）。
+三类治理对象各司其职，而且其中一个的回答可以喂给另一个。第三行所引的 agent 状态层来自状态治理智能体范式（SGAR）。
 
 | 对象 | 治理内容 | 核心问题 |
 |---|---|---|

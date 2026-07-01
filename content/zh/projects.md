@@ -9,7 +9,7 @@ summary: 已发布的第一个项目是 sgar：一个把长程代码编辑、自
 order: 8
 heroPoints:
   - sgar：用于长程代码编辑、自动化修复和可治理运维的状态治理型 coding agent。
-  - 将审计工程和状态治理 agent 模式落到 CLI、runtime、trace 与验证记录。
+  - 将审计工程和状态治理智能体范式落到 CLI、runtime、trace 与验证记录。
   - 后续工具会继续覆盖 GKO lifecycle、升级协议和任务控制工作台。
   - 用于检测输出空间搜索何时进入平台期的基准测试。
 ---
@@ -24,7 +24,7 @@ Tag: State-Governed Agent Regime
 
 [sgar](https://github.com/wxy2ab/sgar) 是一个 embedded coding agent，用来把自动化修复、自动化运维与长程代码编辑能力嵌入到系统中。它同时提供 standalone CLI、可嵌入的 agent runtime，以及面向 OpenClaw 的长程代码编辑技能。
 
-项目的核心不是“一次调用 LLM 写点代码”，而是把代码编辑、状态治理、阶段推进、审计验证和运行痕迹组合成可长期运行的 agent 模型。它的设计基于 [审计工程](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/audit-engineering.zh-CN.md) 与 [状态治理 agent 模式（State-Governed Agent Regime / SGAR）](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime.zh-CN.md)。具体来说，就是外部化硬状态、action/delta、trace、验证记录和 `.sgar/` 工作区。这些机制合在一起，能降低长程运行中的漂移、跳步和虚假完成。
+项目的核心不是“一次调用 LLM 写点代码”，而是把代码编辑、状态治理、阶段推进、审计验证和运行痕迹组合成可长期运行的 agent 模型。它的设计基于 [审计工程](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/audit-engineering.zh-CN.md) 与 [状态治理智能体范式（State-Governed Agent Regime / SGAR）](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime.zh-CN.md)。具体来说，就是外部化硬状态、action/delta、trace、验证记录和 `.sgar/` 工作区。这些机制合在一起，能降低长程运行中的漂移、跳步和虚假完成。
 
 当前入口包括 `pip install sgar`、`sgar --help`、`sgar init`、`sgar status`、`sgar doctor`、`sgar trace`，以及 `validate`、`verify`、`mission` 等治理型命令。仓库文档还提供 [架构](https://github.com/wxy2ab/sgar/blob/main/docs/architecture.md)、[使用](https://github.com/wxy2ab/sgar/blob/main/docs/usage.md)、[API](https://github.com/wxy2ab/sgar/blob/main/docs/api.md) 与 [集成](https://github.com/wxy2ab/sgar/blob/main/docs/integration.md) 说明。
 ::::

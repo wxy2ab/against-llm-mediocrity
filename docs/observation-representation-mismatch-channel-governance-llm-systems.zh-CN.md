@@ -142,7 +142,7 @@ S_world
 任何作用在 Z 上的下游策略，都无法可靠超过 S_world → O → Z 中丢失区分所诱导的价值上限。
 ```
 
-这就是为什么观测-表征失配必须位于知识治理、审计工程和状态治理型 Agent 体制（State-Governed Agent Regime / SGAR）之前。
+这就是为什么观测-表征失配必须位于知识治理、审计工程和状态治理智能体范式（State-Governed Agent Regime / SGAR）之前。
 
 知识治理治理控制知识。但控制知识必须关于已经进入控制表征的变量。
 
@@ -1213,7 +1213,7 @@ failure is expensive or hard to detect locally
 Govern the channel before governing the knowledge.
 ```
 
-忽视这条规则的系统，可能在任务的贫化投影上建立复杂治理。遵守它的系统，才能让后续知识治理、审计工程和状态治理型 Agent 体制作用在真正决定价值的变量上。
+忽视这条规则的系统，可能在任务的贫化投影上建立复杂治理。遵守它的系统，才能让后续知识治理、审计工程和状态治理智能体范式作用在真正决定价值的变量上。
 
 ---
 

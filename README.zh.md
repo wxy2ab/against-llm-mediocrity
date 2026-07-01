@@ -26,7 +26,7 @@
 - **受治理知识对象（GKO）**：一份经过验证的控制知识，让下游生成从它出发，而不是从模型默认概率出发。
 - **受治理升级对象（GEO）**：一条存下来的规则，规定什么时候该问人、问什么、问谁。
 - **审计工程**：把审计当成独立的一层，用来定位失败并把修复回写进控制对象，而不是当成事后的打分器。
-- **状态治理型 Agent 体制（SGAR）**：一种 agent 设计，把长程执行搬到外部硬状态层，让计划、行动、验证、升级都成为受治理的状态转移。
+- **状态治理智能体范式（SGAR）**：一种 agent 设计，把长程执行搬到外部硬状态层，让计划、行动、验证、升级都成为受治理的状态转移。
 - **治理式人机协作**：围绕控制变量组织协作（AI 推进可搜索的部分，人治理价值、偏好与责任），而不是围绕任务分工。
 
 > **该怎么读这些材料**
@@ -79,7 +79,7 @@ LLM 已经很擅长写代码、写邮件、做总结、解释概念、起草方�
 
 不再围绕"任务分工"组织协作，而围绕"控制变量"组织协作。AI 推进可处理、可搜索、可验证的部分；人治理价值、偏好、授权、品味和责任；系统把可复用判断沉淀为 GKO/GEO。
 
-### 状态治理型 Agent 体制（SGAR）
+### 状态治理智能体范式（SGAR）
 
 把长程 agent 的运行基础从上下文叙事转移到外部硬状态：LLM 负责理解、提案、探索和执行；硬状态层负责定位、约束、验证、提交、恢复和审计。这样，计划、行动、验证、升级和审计发现都进入受治理状态转移，而不是只停留在聊天记录里。
 
@@ -139,7 +139,7 @@ against-llm-mediocrity/
 - [受治理 LLM 对象模型与接口规范](./docs/governed-llm-object-model-interface-specification.zh-CN.md)：价值保存结构理论的配套实现规范。
 - [面向受治理 LLM 系统的审计工程](./docs/audit-engineering-failure-localization-control-space-writeback.zh-CN.md)：失败定位、控制空间写回与回归治理的配套技术报告。
 - [Oracle、Audit Agent 与 SGAR：从硬反馈到引擎路由的统一框架](./docs/oracle-classification-audit-agent-sgar-engine-routing.zh-CN.md)：把 oracle 分类、audit、SGAR 与 No-Go 统一到同一引擎路由判断链中的工作稿。
-- [面向受治理 LLM 系统的状态治理型 Agent 体制](./docs/state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)：硬状态权威、转移契约与运行时治理的新工作稿。
+- [面向受治理 LLM 系统的状态治理智能体范式](./docs/state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)：硬状态权威、转移契约与运行时治理的新工作稿。
 - [LLM 系统中的观测-表征失配与通道治理](./docs/observation-representation-mismatch-channel-governance-llm-systems.zh-CN.md)：变量进入、表征上限与前治理修复的配套技术报告。
 - [LLM 系统中的状态失配与状态治理](./docs/state-mismatch-state-governance-llm-systems.zh-CN.md)：潜在状态、状态判别与状态条件化控制的配套技术报告。
 - [LLM 系统中的拟合边界失配与能力路由](./docs/fitting-boundary-mismatch-capability-routing-llm-systems.zh-CN.md)：能力领域、触发边界与路由治理的配套技术报告。
@@ -163,7 +163,7 @@ against-llm-mediocrity/
 - 观测-表征失配专题：[English](./docs/observation-representation-mismatch.md) · [中文](./docs/observation-representation-mismatch.zh-CN.md)：观测-表征失配的独立专题。
 - 拟合边界失配专题：[English](./docs/fitting-boundary-mismatch.md) · [中文](./docs/fitting-boundary-mismatch.zh-CN.md)：拟合边界失配的独立专题。
 - Audit Engineering：[English](./docs/audit-engineering.md) · [中文](./docs/audit-engineering.zh-CN.md)：早期的审计与写回工程笔记。
-- 状态治理型 Agent 体制（SGAR）：[English](./docs/state-governed-agent-regime.md) · [中文](./docs/state-governed-agent-regime.zh-CN.md)：早期的 SGAR 草稿。
+- 状态治理智能体范式（SGAR）：[English](./docs/state-governed-agent-regime.md) · [中文](./docs/state-governed-agent-regime.zh-CN.md)：早期的 SGAR 草稿。
 
 ---
 

@@ -118,7 +118,7 @@ AI 时代更重要的问题变成：
 
 ### 硬状态更新
 
-让人类回答和验证结果改变 agent 的被承认状态，而不是只留在对话上下文中。这是状态治理型智能体体制（State-Governed Agent Regime，SGAR）工作稿最强调的人类入口动作。
+让人类回答和验证结果改变 agent 的被承认状态，而不是只留在对话上下文中。这是状态治理智能体范式（State-Governed Agent Regime，SGAR）工作稿最强调的人类入口动作。
 :::
 
 这九条与协作工作稿中的"人类角色：从信息处理者到治理者"一一对应。任何一条缺失，都会让协作退化成"人给 AI 草稿做校对"的旧模式。
@@ -196,6 +196,6 @@ AI 时代的学习不应停留在"看资料"和"完成作业"，而应该进入�
 - 问题构造 / 价值设计 → [治理式人机协作](docs/governed-human-ai-collaboration.zh-CN.md) 第 3 节"先问环境，再问人"与第 5 节"治理式协作流程"。
 - 品味表达 / 证据判断 → 同上第 3.2 节"反馈可学习型工作"。
 - 授权 / 预算治理 → 同上第 3.4 节"人类治理变量"与第 6 节"AI 应向前推进什么，不应静默决定什么"。
-- 治理记忆 / 硬状态更新 → [状态治理型 Agent 体制（SGAR）](docs/state-governed-agent-regime-for-governed-llm-systems.zh-CN.md) 第 12 节"设计原则"与 [人类协助型操作失配](docs/human-assist-operational-mismatches.zh-CN.md) 的五个操作域。
+- 治理记忆 / 硬状态更新 → [状态治理智能体范式（SGAR）](docs/state-governed-agent-regime-for-governed-llm-systems.zh-CN.md) 第 12 节"设计原则"与 [人类协助型操作失配](docs/human-assist-operational-mismatches.zh-CN.md) 的五个操作域。
 
 把训练与协作协议连起来，学习才不会停在"会问几个好问题"，而是变成一条可以沉淀、可以削弱、可以恢复的治理能力。

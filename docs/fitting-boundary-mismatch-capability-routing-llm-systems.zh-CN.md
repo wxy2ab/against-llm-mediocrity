@@ -42,7 +42,7 @@ S_world → O → Z → capability routing → candidate support → aggregation
 Z → trigger evidence → implicit router → activated capability set
 ```
 
-随后本文发展一套能力路由的实践理论：能力画像、触发证据、抑制器、角色吸引子、边界扰动、路由增量、路由 GKO（Governed Knowledge Object，受治理知识对象）和边界回归护栏。它说明拟合边界失配如何与知识治理、审计工程和状态治理型 Agent 体制（State-Governed Agent Regime，SGAR）相互作用。目标是把能力激活从 prompt 表面形式的隐式副作用，转化为可审计、可修订、状态感知的控制层。
+随后本文发展一套能力路由的实践理论：能力画像、触发证据、抑制器、角色吸引子、边界扰动、路由增量、路由 GKO（Governed Knowledge Object，受治理知识对象）和边界回归护栏。它说明拟合边界失配如何与知识治理、审计工程和状态治理智能体范式（State-Governed Agent Regime，SGAR）相互作用。目标是把能力激活从 prompt 表面形式的隐式副作用，转化为可审计、可修订、状态感知的控制层。
 
 ### 与 Diagnostic–Mechanism Bridge 的关系
 
@@ -86,7 +86,7 @@ wrong trigger boundary
 - [12. 路由 GKO](#12-路由-gko)
 - [13. 拟合边界失配的审计工程](#13-拟合边界失配的审计工程)
 - [14. 边界回归护栏](#14-边界回归护栏)
-- [15. 与状态治理型 Agent 体制的相互作用](#15-与状态治理型-agent-体制的相互作用)
+- [15. 与状态治理智能体范式的相互作用](#15-与状态治理智能体范式的相互作用)
 - [16. 与知识治理的相互作用](#16-与知识治理的相互作用)
 - [17. 与支持失配的相互作用](#17-与支持失配的相互作用)
 - [18. 与规格失配的相互作用](#18-与规格失配的相互作用)
@@ -870,7 +870,7 @@ If state enumeration is skipped, the guard should fail on observations compatibl
 
 ---
 
-## 15. 与状态治理型 Agent 体制的相互作用
+## 15. 与状态治理智能体范式的相互作用
 
 能力路由不只是单轮决策。在长程系统中，路由决策会成为运行时状态的一部分。
 
