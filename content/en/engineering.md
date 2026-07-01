@@ -15,7 +15,7 @@ heroPoints:
 
 ## What Governance Is Actually Doing
 
-Governance is not about making the model behave more strictly, and it is not about writing longer prompts. What it really does is rewrite a hard final-output problem into a workflow that is easier to search, verify, and roll back. The rest of this page lays out that workflow step by step, then narrows to the engineering judgment of when it is worth the cost.
+Governance is not about making the model behave more strictly, and it is not about writing longer prompts. What it really does is rewrite a hard final-output problem into a workflow that is easier to search, verify, and roll back.
 
 Many failed tasks originally look like this:
 
@@ -35,25 +35,25 @@ This page follows directly from the mechanism page. When local fluency no longer
 
 For full engineering examples, return to "Cases." V4 applies this workflow through a narrative logic space, evaluator, and defect attacker. V6 then shows the next layer: once a control space exists, the system must route problems across MetaSpace, LogicSpace, text, continuity, and evaluation contracts.
 
-This verification and write-back mechanism can be developed into an independent discipline: **[Audit Engineering](/glossary#audit-engineering)**. It treats audit not as post-generation scoring but as a structured process that turns findings into defect evidence, repair routes, control deltas, and regression tests—allowing underspecified user value to become explicit through iteration.
+This verification and write-back mechanism can be developed into an independent discipline: **[Audit Engineering](/glossary#audit-engineering)**. It treats audit not as post-generation scoring but as a structured process that turns findings into defect evidence, repair routes, control deltas, and regression tests - allowing underspecified user value to become explicit through iteration.
 
-[Read “Audit Engineering: From Generation–Verification Asymmetry to General Agent Governance”](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/audit-engineering.md)
+[Read "Audit Engineering: From Generation–Verification Asymmetry to General Agent Governance"](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/audit-engineering.md)
 
 For long-horizon agents, these control objects also need a hard-state layer. The **[State-Governed Agent Regime (SGAR)](/glossary#sgar)** treats plans, tool calls, observations, verification results, human answers, audit findings, and rollback decisions as state transitions rather than loose chat history. The point is not to make the LLM less capable; it is to stop asking the same context that acted to also be the sole authority on whether the task advanced.
 
-[Read “State-Governed Agent Regime”](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime.md)
+[Read "State-Governed Agent Regime"](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime.md)
 
 ## A More Useful Governance Workflow
 
 The workflow can be described in seven steps:
 
-1. **Output-space sampling**: explore broadly in the original autoregressive space and collect rare but high-quality samples.
-2. **Experience extraction**: pull transferable control variables, generation operators, and failure boundaries out of those samples.
-3. **Control-space construction**: rewrite the original task into a lower-dimensional, composable, and verifiable intermediate representation.
-4. **Control-space search**: stop sampling only final answers; search the control space with beam search, tree search, evolutionary search, or local repair.
-5. **Output-space projection**: render the control plan back into final text, code, strategy, or artifact.
-6. **Layered validation**: apply hard constraints, soft scoring, reverse attacks, and external tools.
-7. **Experience write-back**: write both successes and failures into the experience base for the next round.
+1. **Output-space sampling**: Explore broadly in the original autoregressive space and collect rare but high-quality samples.
+2. **Experience extraction**: Pull transferable control variables, generation operators, and failure boundaries out of those samples.
+3. **Control-space construction**: Rewrite the original task into a lower-dimensional, composable, and verifiable intermediate representation.
+4. **Control-space search**: Stop sampling only final answers; search the control space with beam search, tree search, evolutionary search, or local repair.
+5. **Output-space projection**: Render the control plan back into final text, code, strategy, or artifact.
+6. **Layered validation**: Apply hard constraints, soft scoring, reverse attacks, and external tools.
+7. **Experience write-back**: Write both successes and failures into the experience base for the next round.
 
 The loop looks like this:
 
@@ -73,7 +73,7 @@ This works better than asking for "one more version" because each step changes t
 
 ## The Control Space Should Also Be Searched
 
-It is tempting to think of a control space as something you design once and then keep fixed. In practice, the safer view is that **the control space itself should be searched.**
+It is tempting to think of a control space as something you design once and then keep fixed. In practice, the safer view is that **the control space itself should be searched**.
 
 There are at least two layers here:
 
@@ -114,9 +114,9 @@ The system can already produce some good candidates, but it cannot reliably iden
 
 These three cases must be separated because the intervention changes completely:
 
-- If the problem is support, adding more search does not help.
-- If the problem is search, control space is often extremely effective.
-- If the problem is validation, more sampling can become dangerous because you get more candidates that merely fool the evaluator.
+- If the problem is **support**, adding more search does not help.
+- If the problem is **search**, control space is often extremely effective.
+- If the problem is **validation**, more sampling can become dangerous because you get more candidates that merely fool the evaluator.
 
 ## What Goes Into a Control Space
 
@@ -138,9 +138,9 @@ Typical control objects include:
 
 A good control space usually has three properties:
 
-- **lower-dimensional**: easier to search than final prose
-- **composable**: local structures can be recombined rather than regenerated from scratch
-- **verifiable**: constraints, evidence, and failure boundaries can be checked directly instead of inferred from surface plausibility
+- **Lower-dimensional**: easier to search than final prose
+- **Composable**: local structures can be recombined rather than regenerated from scratch
+- **Verifiable**: constraints, evidence, and failure boundaries can be checked directly instead of inferred from surface plausibility
 
 ## Separate the Generator From the Evaluator
 
@@ -211,15 +211,15 @@ Novelty here is not about being strange for its own sake. It is about expanding 
 
 So sample selection should keep at least three kinds of candidates:
 
-1. **highest total-score samples**
-2. **samples that are exceptionally strong on one local dimension**
-3. **samples most different from the current strong set**
+1. **Highest total-score samples**
+2. **Samples that are exceptionally strong on one local dimension**
+3. **Samples most different from the current strong set**
 
 The third group is especially important because it often supplies the material needed to escape the current local optimum.
 
 ## Derive Control Space Backward From Failure
 
-A control space does not have to be derived only from good samples. It can also be derived backward from failure modes, a useful move we call **reverse control-space construction**.
+A control space does not have to be derived only from good samples. It can also be derived backward from failure modes — a useful move we call **reverse control-space construction**.
 
 Common story failure modes include:
 
@@ -268,11 +268,11 @@ That is far more useful than an instruction such as "make the story deeper," bec
 
 Governance should not be maximized on every task. The tasks that really justify it usually show a few signals:
 
-- repeated sampling rarely produces stable good results
-- strong outputs appear occasionally, but cannot be reproduced
-- good candidates exist, but the system cannot reliably choose them
-- the cost of error is high enough that surface plausibility is not acceptable
-- similar tasks will recur often enough that an experience base is worth building
+- Repeated sampling rarely produces stable good results
+- Strong outputs appear occasionally, but cannot be reproduced
+- Good candidates exist, but the system cannot reliably choose them
+- The cost of error is high enough that surface plausibility is not acceptable
+- Similar tasks will recur often enough that an experience base is worth building
 
 By contrast, if the task is mostly compression, rewriting, format conversion, or routine candidate generation, direct generation is often already enough and heavy governance is unnecessary.
 

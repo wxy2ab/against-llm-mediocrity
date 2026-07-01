@@ -7,9 +7,15 @@
 
 ## Abstract
 
-This document proposes a **formal mechanism layer** for diagnosing failures in LLM systems. It does not replace the six primitive mismatches in the main manuscript, and it does not merely give errors a more "mathematical" name. It answers a more engineering-facing question: when a failure occurs, should the system change the specification, add observations, repair belief state, connect real environment feedback, expand the action interface, add capability support, calibrate capability routing, or expand search?
+This document proposes a **formal mechanism layer** for diagnosing failures in LLM systems. It does not replace the six primitive mismatches in the main manuscript, and it does not merely give errors a more "mathematical" name. It answers a more engineering-facing question:
 
-We model an LLM system as an approximate decision system in a partially observable environment, and decompose its intervenable components into eight classes: **specification / reward, observation availability, belief / representation, dynamics / world model, action / interface, policy prior / capability support, fitting boundary / capability routing, and search / execution**. These eight classes are not mutually exclusive error labels. They are diagnostic axes that can be distinguished by intervention experiments. A single failure may be caused by several mechanisms, and upstream mismatches may induce downstream symptoms along the execution chain.
+> When a failure occurs, should the system change the specification, add observations, repair belief state, connect real environment feedback, expand the action interface, add capability support, calibrate capability routing, or expand search?
+
+We model an LLM system as an approximate decision system in a partially observable environment, and decompose its intervenable components into eight classes:
+
+**specification / reward, observation availability, belief / representation, dynamics / world model, action / interface, policy prior / capability support, fitting boundary / capability routing, and search / execution**.
+
+These eight classes are not mutually exclusive error labels. They are diagnostic axes that can be distinguished by intervention experiments. A single failure may be caused by several mechanisms, and upstream mismatches may induce downstream symptoms along the execution chain.
 
 The core principle of the mechanism layer is:
 
@@ -36,7 +42,9 @@ These causes can look similar at the surface, but their repairs differ. The mech
 
 ### 1.2 It Is Not a New Main Taxonomy
 
-The main manuscript's six primitive mismatches, aggregation, support, specification, state, fitting-boundary, and observation-representation mismatch, describe **structural misalignment between task value and system-reachable generation**. The mechanism layer instead follows the system execution chain: how objectives enter the system, how information is observed and represented, how consequences are predicted, how actions are executed, how capabilities are supported and routed, and how candidates are searched.
+The main manuscript's six primitive mismatches — aggregation, support, specification, state, fitting-boundary, and observation-representation mismatch — describe **structural misalignment between task value and system-reachable generation**.
+
+The mechanism layer instead follows the system execution chain: how objectives enter the system, how information is observed and represented, how consequences are predicted, how actions are executed, how capabilities are supported and routed, and how candidates are searched.
 
 Therefore the two layers do not correspond one-to-one:
 
@@ -47,7 +55,9 @@ Therefore the two layers do not correspond one-to-one:
 
 ### 1.3 It Is Not a Mutually Exclusive Label Set
 
-The mechanism layer should be represented as a **mismatch profile**, not as a forced single-label classification. Real systems often exhibit compound mismatches. For example, a wrong evaluation standard may push a router into conservative audit mode; conservative routing may narrow candidate search; the final symptom may look like "the model did not find the strategy." At the surface this looks like search failure, but the root cause includes specification, routing, and search.
+The mechanism layer should be represented as a **mismatch profile**, not as a forced single-label classification.
+
+Real systems often exhibit compound mismatches. For example, a wrong evaluation standard may push a router into conservative audit mode; conservative routing may narrow candidate search; the final symptom may look like "the model did not find the strategy." At the surface this looks like search failure, but the root cause includes specification, routing, and search.
 
 The goal of diagnosis is not to find a unique label. It is to identify:
 

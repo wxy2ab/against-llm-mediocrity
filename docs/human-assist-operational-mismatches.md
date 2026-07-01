@@ -29,7 +29,9 @@ The main *Knowledge Governance* manuscript explains task-value divergence throug
 
 An operational mismatch occurs when an agent cannot reliably continue because a task-critical control variable is unavailable, uncertain, or outside its legitimate authority, and targeted human input can resolve the blocker. Operational mismatches do not expand the primitive mismatch taxonomy. They answer a different question: not why generation diverges from value, but where autonomous execution is blocked and what minimal human contribution restores progress.
 
-The central objects are the **Minimal Sufficient Human Query (MSHQ)** and the **Governed Escalation Object (GEsO)**. Here `GEsO` is intentionally distinct from the object-model's **Governed Execution Object (GEO)**. An MSHQ asks only for the missing human-governed variable. A GEsO records when escalation is required, who should answer, what safe default applies, what work may continue, and how the rule expires or is revoked. In a long-horizon agent, the answer should then be committed into hard state rather than left as context-only memory.
+The central objects are the **Minimal Sufficient Human Query (MSHQ)** and the **Governed Escalation Object (GEsO)**. Here `GEsO` is intentionally distinct from the object-model's **Governed Execution Object (GEO)**. An MSHQ asks only for the missing human-governed variable. A GEsO records when escalation is required, who should answer, what safe default applies, what work may continue, and how the rule expires or is revoked.
+
+In a long-horizon agent, the answer should then be committed into hard state rather than left as context-only memory.
 
 ## 1. Scope and Core Claim
 
@@ -64,8 +66,8 @@ Operational blockers often express primitive mismatches:
 - hidden state may become a missing-observation blocker;
 - specification mismatch may become a preference or acceptance-criterion blocker;
 - aggregation mismatch may require confirmation of global constraints;
-- support mismatch may require access to an expert, source, tool, or unusual option.
-- fitting-boundary mismatch may require a human or external validator to test whether a local claim survives adjacent cases.
+- support mismatch may require access to an expert, source, tool, or unusual option;
+- fitting-boundary mismatch may require a human or external validator to test whether a local claim survives adjacent cases;
 - observation-representation mismatch may require measurement, raw evidence, a richer modality, tool feedback, logs, sensors, or a structured control representation before human escalation is useful.
 
 ## 3. Definition and Escalation Gate

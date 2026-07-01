@@ -15,7 +15,7 @@ heroPoints:
 
 ## Why This Matters
 
-This page exists to answer one practical question before you spend more effort on a failing task: is this a problem that more of the same will eventually fix, or one that no amount of waiting will fix?
+This page exists to answer one practical question before you spend more effort on a failing task: *is this a problem that more of the same will eventually fix, or one that no amount of waiting will fix?*
 
 If a problem will eventually be solved by bigger models, longer training, or better data, then waiting or doing more local prompt optimization may be a reasonable strategy.
 
@@ -27,7 +27,7 @@ That is why this page comes early. Its first job is to help you decide what kind
 
 You ask an LLM to handle a hard task. It gives a plausible answer. You point out problems, and it adds detail, improves tone, creates structure, and expands the argument. After several rounds the text is better, but something still feels off.
 
-That feeling is often not about prose. It is about task value. The missing piece may be a hidden assumption, real-world state, domain boundary, rare option, global dependency, authorization condition, or a better model of the problem itself. The model is not necessarily lazy or random; it may simply be making local improvements on the wrong surface.
+That feeling is often not about prose. It is about *task value*. The missing piece may be a hidden assumption, real-world state, domain boundary, rare option, global dependency, authorization condition, or a better model of the problem itself. The model is not necessarily lazy or random; it may simply be making local improvements on the wrong surface.
 
 This is why fluent failure is hard to notice. The answer may be useful in several local ways: it compresses context, chooses a reasonable tone, fills in missing transitions, and produces a coherent structure. The failure appears only when those local improvements do not reach the variable that determines the task's real value.
 
@@ -68,34 +68,34 @@ The model locks onto one plausible explanation, metric, style, or early solution
 These everyday patterns correspond to the [six primitive mismatches](/glossary#six-primitive-mismatches) in the mechanism layer:
 
 ::::cards
-### Wrong Abstraction -> Aggregation / Specification
+### Wrong Abstraction → Aggregation / Specification
 
 The model improves pieces of the answer while missing the global structure or the real objective. A more polished strategy memo may still optimize for rhetorical completeness instead of decision clarity.
 
-### Missing State -> State
+### Missing State → State
 
 The model answers as if the world were stable and known. But a refund policy, deployment plan, or market recommendation can reverse depending on current state.
 
-### Missing Channel Variable -> Observation-Representation
+### Missing Channel Variable → Observation-Representation
 
 The model reasons over a visible proxy because the task-sufficient variable never entered its representation. The system needs measurement, raw data, logs, tests, tool feedback, or richer modality before reasoning can close.
 
-### Missing Tail Option -> Support
+### Missing Tail Option → Support
 
 The best answer may not be the most statistically natural answer. The system needs retrieval, perturbation, counterexamples, or explicit tail search to bring the rare structure into view.
 
-### Missing Real Standard -> Specification
+### Missing Real Standard → Specification
 
 The model satisfies the stated proxy while failing the actual success condition. "Looks professional" is not the same as validated, authorized, reversible, or correct.
 
-### Local Binding -> Fitting Boundary
+### Local Binding → Fitting Boundary
 
 The model treats local support as if it were an invariant. Perturbing the scene, metric, audit path, or feedback source reveals whether the claim actually generalizes.
 ::::
 
 ## A Simple Diagnostic
 
-If "make it deeper," "make it more insightful," or "make it more concrete" keeps producing better versions of the same kind of answer, the problem may not be generation quality. It may be task shape.
+If "make it deeper," "make it more insightful," or "make it more concrete" keeps producing better versions of the same kind of answer, the problem may not be generation quality. It may be *task shape*.
 
 The better question is not:
 
@@ -113,12 +113,12 @@ The task may need state observation, missing-channel measurement, tool validatio
 
 A useful check is to ask what kind of object would change the next generation:
 
-- A state matrix changes hidden assumptions into explicit cases.
-- A measurement or raw-signal request moves missing channel variables into representation.
-- A rubric changes vague quality into testable criteria.
-- A failure-mode list exposes how a plausible answer could fail.
-- A query plan moves missing facts out of imagination and into retrieval.
-- A [minimal sufficient human question](/glossary#mshq) isolates a value, authority, or responsibility variable.
+- A **state matrix** changes hidden assumptions into explicit cases.
+- A **measurement** or raw-signal request moves missing channel variables into representation.
+- A **rubric** changes vague quality into testable criteria.
+- A **failure-mode list** exposes how a plausible answer could fail.
+- A **query plan** moves missing facts out of imagination and into retrieval.
+- A **[minimal sufficient human question](/glossary#mshq)** isolates a value, authority, or responsibility variable.
 
 ## What This Understanding Prevents
 
@@ -134,11 +134,11 @@ If the answer depends on real-world state or a variable absent from the current 
 ### Do Not Vote Your Way Into the Default Answer
 
 When the best answer is rare, majority agreement is not reliable. You need tail search, perturbation, counterexamples, retrieval, or structural validation.
-:::
 
 ### Do Not Ask Humans to Replace the Whole Task
 
 If the missing variable is human-governed, the right move is not "please redo this." The right move is a small question: confirm a fact, choose a priority, authorize a boundary, validate an assumption, or define a stopping criterion.
+:::
 
 ## Why This Becomes a Common Foundation for High-Value Work
 

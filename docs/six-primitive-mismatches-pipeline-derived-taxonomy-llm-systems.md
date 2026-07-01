@@ -8,7 +8,7 @@
 
 ## Abstract
 
-This document consolidates the six primitive mismatches in governed LLM systems into a single pipeline-derived taxonomy. Its purpose is not to add another list of failure modes. The purpose is to show why these six mismatches are structurally basic under a value-preservation view of LLM systems.
+This document consolidates the six primitive mismatches in governed LLM systems into a single pipeline-derived taxonomy. Its purpose is not to add another list of failure modes. Rather, it shows why these six mismatches are structurally basic under a value-preservation view of LLM systems.
 
 The central abstraction is a world-to-output pipeline:
 
@@ -22,7 +22,14 @@ S_world
   -> evaluation
 ```
 
-A high-value LLM system must preserve task-relevant value structure across this pipeline. Failures arise when decisive variables do not enter the representation, when latent states are not identifiable, when capabilities are routed to the wrong domains, when high-value structures are unreachable under the system policy, when locally plausible components fail to compose, or when the accessible objective diverges from true task utility.
+A high-value LLM system must preserve task-relevant value structure across this pipeline. Failures arise when:
+
+- decisive variables do not enter the representation,
+- latent states are not identifiable,
+- capabilities are routed to the wrong domains,
+- high-value structures are unreachable under the system policy,
+- locally plausible components fail to compose, or
+- the accessible objective diverges from true task utility.
 
 These correspond to six primitive mismatches:
 
@@ -35,11 +42,17 @@ These correspond to six primitive mismatches:
 6. Specification mismatch
 ```
 
-The document advances two structural claims. First, the taxonomy is relatively complete under the pipeline abstraction: any task-value failure in an LLM system modeled as this pipeline must occur at one or more of these stations or through their interactions. Second, the six mismatches are operationally independent: each can be perturbed while holding the others fixed, and each requires a distinct class of repair.
+The document advances two structural claims. First, the taxonomy is relatively complete under the pipeline abstraction: any task-value failure in an LLM system modeled as this pipeline must occur at one or more of these stations or through their interactions.
 
-The document also explains how primitive mismatches combine into compound failures. The strongest compound failures are not merely additive. They are often super-additive because repair operators are coupled across pipeline stations. A failure at one station can disable the information, distinction, candidate, capability, composition rule, or objective criterion needed to repair another.
+Second, the six mismatches are operationally independent: each can be perturbed while holding the others fixed, and each requires a distinct class of repair.
 
-Finally, the document provides a diagnostic and governance interface. Each mismatch is mapped to its core question, formal signature, typical symptoms, audit findings, control deltas, governed knowledge objects, regression guards, and state-governed commitments. The result is a unified bridge between the structural theory, the object model, Audit Engineering, Knowledge Governance, and State-Governed Agent Regime.
+The document also explains how primitive mismatches combine into compound failures. The strongest compound failures are not merely additive. They are often super-additive because repair operators are coupled across pipeline stations.
+
+A failure at one station can disable the information, distinction, candidate, capability, composition rule, or objective criterion needed to repair another.
+
+Finally, the document provides a diagnostic and governance interface. Each mismatch is mapped to its core question, formal signature, typical symptoms, audit findings, control deltas, governed knowledge objects, regression guards, and state-governed commitments.
+
+The result is a unified bridge between the structural theory, the object model, Audit Engineering, Knowledge Governance, and State-Governed Agent Regime.
 
 ---
 

@@ -14,7 +14,9 @@ heroPoints:
   - The best version appeared at iteration 2, not the last iteration, so governance must preserve the best state instead of assuming more revision is always better.
 ---
 
-Story Insight V6 is a single annotated run of a layered story-generation system, used here to make one argument concrete: once generation is already governed through a control space, governance is not finished. The system still has to decide which layer owns a problem, when to keep revising, and when to stop. This page walks through one high-threshold run and maps what it shows back to the six primitive mismatches.
+Story Insight V6 is a single annotated run of a layered story-generation system, used here to make one argument concrete: once generation is already governed through a control space, governance is not finished.
+
+The system still has to decide which layer owns a problem, when to keep revising, and when to stop. This page walks through one high-threshold run and maps what it shows back to the six primitive mismatches.
 
 ## Why a Second Case Is Needed
 
@@ -22,7 +24,7 @@ Story Insight V6 is a single annotated run of a layered story-generation system,
 
 Story Insight V6 addresses the next layer. Even after a system has a control space, governance is not automatically complete. The control space may itself need evaluation and revision; text-level failures should not be misdiagnosed as world-setting failures; continuity problems should not be hidden behind a strong average score; and when a high threshold cannot be reached, the system must decide whether to continue, roll back to the best version, or recognize a plateau.
 
-V6 is therefore not best understood as another story generator. It is a layered governance case: the same story task is split across distinct layers — MetaSpace, LogicSpace, section plans, text, ledger, continuity, attack, revision, and pairwise comparison — and each layer carries a different responsibility.
+V6 is therefore not best understood as another story generator. It is a **layered governance case**: the same story task is split across distinct layers — MetaSpace, LogicSpace, section plans, text, ledger, continuity, attack, revision, and pairwise comparison — and each layer carries a different responsibility.
 
 ## Why This Run Is Useful
 

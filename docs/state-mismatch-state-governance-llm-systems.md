@@ -255,7 +255,7 @@ State mismatch = unresolved state uncertainty × state-sensitive policy × prema
 
 ## 3. Why State Mismatch Is Primitive
 
-State mismatch is primitive because it has a distinct structural location and distinct repair target.
+State mismatch is primitive because it has a distinct structural location and a distinct repair target.
 
 It occurs after the system has an operational representation `Z`, but before it can correctly route capabilities, search candidates, compose outputs, or evaluate success. The system must determine not just what information is available, but what situation that information indicates.
 
@@ -273,9 +273,7 @@ State mismatch is not reducible to any other primitive mismatch.
 
 ### 3.1 Not Observation-Representation Mismatch
 
-Observation-representation mismatch concerns whether the decisive variables enter `Z`.
-
-State mismatch concerns whether the available variables identify the active state.
+Observation-representation mismatch concerns whether the decisive variables enter `Z`. State mismatch concerns whether the available variables identify the active state.
 
 A simple contrast:
 
@@ -291,9 +289,7 @@ In the first case, repair requires channel or representation repair. In the seco
 
 ### 3.2 Not Specification Mismatch
 
-Specification mismatch concerns whether the objective proxy matches true utility.
-
-State mismatch concerns which condition or regime determines the objective.
+Specification mismatch concerns whether the objective proxy matches true utility. State mismatch concerns which condition or regime determines the objective.
 
 A system may have a correct rubric for each state but fail to identify which rubric applies. Conversely, it may identify the state correctly but use a bad proxy objective.
 
@@ -309,9 +305,7 @@ Specification mismatch:
 
 ### 3.3 Not Fitting-Boundary Mismatch
 
-Fitting-boundary mismatch concerns whether a learned capability is activated inside or outside its true domain.
-
-State mismatch concerns which state should govern capability selection.
+Fitting-boundary mismatch concerns whether a learned capability is activated inside or outside its true domain. State mismatch concerns which state should govern capability selection.
 
 They often compound. A wrong state hypothesis may trigger the wrong capability. But the repair targets differ:
 
@@ -325,17 +319,13 @@ Router repair:
 
 ### 3.4 Not Support Mismatch
 
-Support mismatch concerns whether the high-value candidate is reachable.
-
-State mismatch concerns whether the system knows which candidate family should be preferred.
+Support mismatch concerns whether the high-value candidate is reachable. State mismatch concerns whether the system knows which candidate family should be preferred.
 
 A correct candidate may be reachable but rejected because the system assumes the wrong state. Or the system may correctly identify the state but fail to generate a low-support structure needed under that state.
 
 ### 3.5 Not Aggregation Mismatch
 
-Aggregation mismatch concerns whether local parts compose into global value.
-
-State mismatch concerns whether the system is composing under the correct latent-state hypothesis.
+Aggregation mismatch concerns whether local parts compose into global value. State mismatch concerns whether the system is composing under the correct latent-state hypothesis.
 
 A plan may be internally consistent under state `h1` but wrong for state `h2`. Its failure is not local-to-global composition alone; it is state-conditioned misapplication.
 
@@ -1109,7 +1099,7 @@ This connects state governance to SGAR.
 
 ## 10. Audit Engineering for State Mismatch
 
-An audit finding for state mismatch should identify not only that the output is wrong, but which state assumption caused the wrong action.
+An audit finding for state mismatch should identify not only that the output is wrong, but also which state assumption caused the wrong action.
 
 ### 10.1 State Mismatch Audit Finding
 

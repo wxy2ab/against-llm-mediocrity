@@ -39,9 +39,13 @@ This paper assumes the reader is already familiar with the governed-LLM theory s
 
 ## Abstract
 
-The theory of governed LLM systems contains two complementary diagnostic layers. The first layer is the **six primitive mismatch taxonomy**: observation-representation, state, fitting-boundary, support, aggregation, and specification mismatch. This layer explains where task value is structurally lost along a value-preservation pipeline. It answers the question: **why did the system fail in task-value terms?**
+The theory of governed LLM systems contains two complementary diagnostic layers.
 
-The second layer is the **formal mechanism layer**: specification/reward, observation availability, belief/representation, dynamics/world model, action/interface, capability support, capability routing, and search/execution. This layer identifies which intervenable component of an approximate LLM decision system best explains or amplifies failure once the task has already been turned into governable control objects. It answers the question: **which component-level mechanism does the failure point to?**
+The first layer is the **six primitive mismatch taxonomy**: observation-representation, state, fitting-boundary, support, aggregation, and specification mismatch. This layer explains where task value is structurally lost along a value-preservation pipeline. It answers the question: **why did the system fail in task-value terms?**
+
+The second layer is the **formal mechanism layer**: specification/reward, observation availability, belief/representation, dynamics/world model, action/interface, capability support, capability routing, and search/execution. This layer identifies which intervenable component of an approximate LLM decision system best explains or amplifies failure once the task has already been turned into governable control objects.
+
+It answers the question: **which component-level mechanism does the failure point to?**
 
 These two layers are not competing taxonomies. They are orthogonal coordinate systems. The six primitive mismatches are **value-preservation diagnostic axes** and practical engineering entry points; the eight mechanism axes are **derived component-attribution axes**. A failure should therefore be represented by at least four fields:
 
@@ -52,7 +56,11 @@ mechanism_axis ∈ eight mechanism axes | unknown | not_operationalized
 repair_layer  ∈ agent | training | hybrid
 ```
 
-This document defines the bridge between the two layers. It introduces a six-by-eight crosswalk matrix, a mechanism-profile object, an operationalization gate, a repair-layer selection rule, and an audit-to-training feedback loop. It also clarifies how the mechanism layer relates to Audit Engineering, the Governed Object Model, and the State-Governed Agent Regime (SGAR). The result is a unified diagnostic and repair architecture: primitive mismatches explain value failure; task-specific control objects expose what is directly repaired; mechanism profiles localize component attribution; audit findings produce control deltas; governed objects store repair knowledge; SGAR commits verified changes into hard state; recurrent operationalized learning-component failures can be promoted into training curricula.
+This document defines the bridge between the two layers. It introduces a six-by-eight crosswalk matrix, a mechanism-profile object, an operationalization gate, a repair-layer selection rule, and an audit-to-training feedback loop.
+
+It also clarifies how the mechanism layer relates to Audit Engineering, the Governed Object Model, and the State-Governed Agent Regime (SGAR).
+
+The result is a unified diagnostic and repair architecture: primitive mismatches explain value failure; task-specific control objects expose what is directly repaired; mechanism profiles localize component attribution; audit findings produce control deltas; governed objects store repair knowledge; SGAR commits verified changes into hard state; recurrent operationalized learning-component failures can be promoted into training curricula.
 
 The corrected central sentence is:
 

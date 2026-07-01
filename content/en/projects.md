@@ -33,7 +33,7 @@ Current entry points include `pip install sgar`, `sgar --help`, `sgar init`, `sg
 
 The directions below are follow-on implementations derived from the current manuscripts. They are not additional theoretical claims; they are ways to test whether governed knowledge, hard-state transitions, escalation protocols, and mismatch diagnostics can become useful software objects.
 
-Each one picks up the same empirical question the manuscripts raise: **if Knowledge Governance is more than an explanatory framework, it must become software objects that can be stored, inspected, weakened, and revoked.** `sgar` has already made hard state, staged progression, verification, and traces into runnable objects. Future projects continue the pattern, turning control spaces, layered routing, continuity audit, pairwise judgment, and plateau detection into observable governance processes. None of them aims to build a monolithic agent first; each isolates the smallest testable component.
+Each one picks up the same empirical question the manuscripts raise: **if Knowledge Governance is more than an explanatory framework, it must become software objects that can be stored, inspected, weakened, and revoked.** `sgar` has already made hard state, staged progression, verification, and traces into runnable objects. Future projects continue the pattern, turning control spaces, layered routing, continuity audit, pairwise judgment, and plateau detection into observable governance processes. None aims to build a monolithic agent first; each isolates the smallest testable component.
 
 ::::cards
 ### GKO Registry

@@ -27,11 +27,11 @@ alignmentLabels:
 
 Models keep improving, and their capabilities keep expanding. A natural intuition follows: the problems that remain hard today may simply disappear after the next round of training, the next model generation, or the next scaling curve.
 
-But the more useful question is the reverse one. Can training and iteration solve every important problem? If not, then some tasks are not merely "not solved yet." They are constrained by ceilings that follow from the algorithmic and architectural character of large language models (LLMs).
+But the more useful question is the reverse one. **Can training and iteration solve *every* important problem?** If not, then some tasks are not merely "not solved yet." They are constrained by ceilings that follow from the algorithmic and architectural character of large language models (LLMs).
 
-Daily use keeps exposing this pattern. The same model can feel extremely capable on some tasks and still miss the final decisive step on others. You add context, specify the format, tighten constraints, ask for reflection, and request more versions. The answer becomes more complete, smoother, and better structured, yet the one thing you actually need still does not appear.
+Daily use keeps exposing this pattern. The same model can feel extremely capable on some tasks and still miss the final decisive step on others. You add context, specify the format, tighten constraints, ask for reflection, and request more versions. The answer becomes more complete, smoother, and better structured — yet the one thing you actually need still does not appear.
 
-This is not simply that the model is not smart enough, and it is not only that the prompt is still wrong. The same model can perform well elsewhere: compressing context, rewriting text, generating structure, expanding candidate options, explaining code, calling tools, and assisting validation. The real problem is that local capability does not always become the task value you need.
+This is not simply that the model is not smart enough, and it is not only that the prompt is still wrong. The same model can perform well elsewhere: compressing context, rewriting text, generating structure, expanding candidate options, explaining code, calling tools, and assisting validation. The real problem is that **local capability does not always become the task value you need.**
 
 That is what this project calls **[LLM mediocrity](/glossary#llm-mediocrity)**: on some tasks, the language-probability system and the real problem domain are structurally mismatched. The model may move along the direction that is statistically natural, easy to continue, well supported, or broadly acceptable, while the actual value depends on global structure, hidden state, a sharper specification, or a rare low-support move. **In other words, some failures do not merely wait for more scale. They are already touching a structural ceiling.**
 
@@ -39,10 +39,11 @@ The response is not to keep optimizing prompts indefinitely. The first question 
 
 Recognizing and resisting this mediocrity may be the most common task AI users face. The practical aim is to preserve the model's real strengths while preventing local fluency from masquerading as global value.
 
-The site follows that order. It starts by asking why some problems cannot be solved just by waiting for stronger models, then explains why probability and value diverge, and finally turns the divergent parts into control spaces, validation objects, and [Minimal Sufficient Human Queries](/glossary#mshq). These pages are not separate essays; they are a single path from structural judgment to diagnosis to delivery.
+The site follows that order. It starts by asking why some problems cannot be solved just by waiting for stronger models, then explains why probability and value diverge, and finally turns the divergent parts into control spaces, validation objects, and [minimal human questions](/glossary#mshq). These pages are not separate essays; they trace a single path from structural judgment to diagnosis to delivery.
 
 > **Note on scope**
-> This framework starts as a summary of engineering practice and engineering intuition. What matters most here is whether it helps people reorganize tasks and improve practical engineering outcomes, not whether it forms a mathematically complete final theory; the theory sections are better understood as adjustable thinking scaffolds that will keep changing with practice.
+>
+> This framework starts as a summary of engineering practice and engineering intuition. What matters most here is whether it helps people reorganize tasks and improve practical engineering outcomes, not whether it forms a mathematically complete final theory. The theory sections are better understood as adjustable thinking scaffolds that will keep changing with practice.
 
 ## The One-Page Map
 
@@ -65,7 +66,7 @@ Tag: probability and value align
 When local continuation reliably points toward task value, autoregression is not the problem; it is the advantage. Context compression, semantic expansion, structured transformation, and register transfer often live here.
 :::
 
-The common case is the middle one. A product memo, code review, customer reply, or research synthesis may contain parts that are easy for the model to handle alongside parts that depend on hidden state, global coordination, rare evidence, or a value choice. The question is not whether to use AI, but where the alignment boundary lies.
+The common case is the middle one. A product memo, code review, customer reply, or research synthesis may contain parts that are easy for the model to handle alongside parts that depend on hidden state, global coordination, rare evidence, or a value choice. The real question is not whether to use AI, but where the alignment boundary lies.
 
 ## From a Fluent Draft to a Valuable Answer
 
@@ -89,7 +90,7 @@ identify the probability-value regime
 -> render the final answer from the governed state
 ```
 
-Each arrow changes the task the model is actually solving. The chain is not a mandatory workflow for every request; it is a way to avoid repeatedly polishing the final answer when the real bottleneck lives upstream.
+Each arrow changes the task the model is actually solving. The chain is not a mandatory workflow for every request — it is a way to avoid repeatedly polishing the final answer when the real bottleneck lives upstream.
 
 The six primitive mismatches help diagnose the second step in that chain:
 
@@ -127,7 +128,7 @@ It may be useful if you have run into patterns like these:
 
 - The model can produce fluent answers, but the key judgment remains unreliable.
 - Writing, research, code, investing, product, or collaboration tasks repeatedly produce outputs that look right but are not good enough.
-- You want to understand why a task diverges from the model's generation tendency instead of collecting more prompt tricks.
+- You want to understand *why* a task diverges from the model's generation tendency instead of collecting more prompt tricks.
 - You are building agents, workflows, evaluators, knowledge bases, or automation systems and need to put LLMs inside verifiable, reversible, governable processes.
 - You care about human-AI collaboration: what should be delegated to the model, and which variables must remain human-governed.
 
@@ -189,6 +190,10 @@ Those artifacts may include rubrics, state matrices, hard-state ledgers, depende
 - The theory layer develops the [six primitive mismatches](/glossary#six-primitive-mismatches), [Knowledge Governance](/glossary#knowledge-governance), [GKO](/glossary#gko) / [GEO](/glossary#geo), the [State-Governed Agent Regime (SGAR)](/glossary#sgar), and governance loops.
 - The engineering layer turns control objects, hard-state ledgers, validation loops, and minimal human intervention points into usable tools and templates.
 - The collaboration layer reframes the human role: not as a processor of every task, but as the governor of value, authority, taste, budget, evidence, and responsibility.
+- **The public layer** will explain LLM mediocrity, local alignment, and autoregressive extraordinary without requiring the reader to begin with the paper.
+- **The theory layer** develops the [six primitive mismatches](/glossary#six-primitive-mismatches), [Knowledge Governance](/glossary#knowledge-governance), [GKO](/glossary#gko) / [GEO](/glossary#geo), the [State-Governed Agent Regime (SGAR)](/glossary#sgar), and governance loops.
+- **The engineering layer** turns control objects, hard-state ledgers, validation loops, and minimal human intervention points into usable tools and templates.
+- **The collaboration layer** reframes the human role: not as a processor of every task, but as the governor of value, authority, taste, budget, evidence, and responsibility.
 
 ## Contributions Welcome
 
@@ -196,10 +201,10 @@ This project welcomes cases, criticism, and improvements.
 
 The most useful contributions include:
 
-- Real task cases: where LLMs look strong on the surface but final value remains unstable.
-- Engineering patterns: how you split a task into control objects, validation objects, rubrics, or human decision points.
-- Failure samples: prompts, agents, or workflows that looked reasonable but proved uncontrollable.
-- Conceptual corrections: counterexamples, extensions, or clearer wording for LLM mediocrity, local alignment, mismatch, control space, and related concepts.
-- Tool implementations: small components that turn these governance moves into code, templates, evaluators, or workflows.
+- **Real task cases**: where LLMs look strong on the surface but final value remains unstable.
+- **Engineering patterns**: how you split a task into control objects, validation objects, rubrics, or human decision points.
+- **Failure samples**: prompts, agents, or workflows that looked reasonable but proved uncontrollable.
+- **Conceptual corrections**: counterexamples, extensions, or clearer wording for LLM mediocrity, local alignment, mismatch, control space, and related concepts.
+- **Tool implementations**: small components that turn these governance moves into code, templates, evaluators, or workflows.
 
 A contribution does not need to be complete at first. A concrete failure case, a reproducible process, a sharper term, or an evidence-backed objection is more valuable than generic agreement.

@@ -7,7 +7,7 @@
 
 ## Abstract
 
-**Fitting-boundary mismatch** occurs when, during training, fine-tuning, alignment, or inference, a model learns an implicit trigger boundary for some capability, strategy, audit structure, or behavior pattern X, and the boundary at which the model actually triggers X does not match the true domain in which X applies.
+**Fitting-boundary mismatch** occurs when, during training, fine-tuning, alignment, or inference, a model learns an implicit trigger boundary for some capability, strategy, audit structure, or behavior pattern X. The boundary at which the model actually triggers X does not match the true domain in which X applies.
 
 It has two directions:
 
@@ -22,12 +22,11 @@ More briefly:
 
 > The capability exists; the routing is wrong.
 
-"Capability-boundary mismatch," "adaptation-boundary mismatch," and "joint over/under-fitting mismatch" can all serve as secondary names. The formal name is **fitting-boundary mismatch** because the phenomenon is not ordinary training-set overfitting. It is a misalignment between the high-dimensional trigger domain of a capability and the true domain in which that capability applies.
+"Capability-boundary mismatch," "adaptation-boundary mismatch," and "joint over/under-fitting mismatch" can all serve as secondary names.
 
-This mismatch fills a direction not fully covered by the first four primitive mismatches:
+The formal name is **fitting-boundary mismatch** because the phenomenon is not ordinary training-set overfitting. It is a misalignment between the high-dimensional trigger domain of a capability and the true domain in which that capability applies.
 
-- Aggregation mismatch is **over-averaging**: many different situations are compressed into one high-probability answer.
-- Fitting-boundary mismatch is **boundary displacement**: the wrong capability is over-triggered, or the right capability is not triggered.
+This mismatch fills a direction not fully covered by the first four primitive mismatches. Aggregation mismatch is **over-averaging**: many different situations are compressed into one high-probability answer. Fitting-boundary mismatch is **boundary displacement**: the wrong capability is over-triggered, or the right capability is not triggered.
 
 ## 1. Core Definition
 
