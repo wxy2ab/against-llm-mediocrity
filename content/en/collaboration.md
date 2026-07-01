@@ -26,7 +26,7 @@ Good collaboration is neither front-loading a long questionnaire nor letting the
 ```text
 AI: Process → Search → Structure → Simulate → Verify
 Human: Govern → Set values → Authorize → Judge taste → Own responsibility
-System: turn reusable judgments into GKOs / GEOs and hard-state transitions
+System: turn reusable judgments into [GKOs](/glossary#gko) / [GEOs](/glossary#geo) and hard-state transitions
 ```
 
 **In one sentence: AI should move the task to the point where only human-governed variables remain; humans should resolve variables that cannot be reliably obtained from environment, feedback, tools, or simulation; the system should commit the resolved variable into hard state rather than leave it as chat history.**
@@ -48,8 +48,8 @@ Which missing control variable prevents reliable continuation? The blocker may b
 
 ### Escalation Protocol
 
-What is the smallest human contribution that restores autonomy? This is where Minimal Sufficient Human Queries (MSHQs) and Governed Escalation Objects (GEOs) belong.
-:::
+What is the smallest human contribution that restores autonomy? This is where [Minimal Sufficient Human Queries (MSHQs)](/glossary#mshq) and [Governed Escalation Objects (GEOs)](/glossary#geo) belong.
+::::
 
 ## First Ask Where the Variable Comes From
 
@@ -111,7 +111,7 @@ Some cases require escalation even when the agent is confident. These are hard g
 
 For non-mandatory cases, escalation should depend on expected loss. If the expected cost of acting without support exceeds the cost of interruption and delay, the agent should ask. Reversibility also matters: a reversible draft can continue, but an irreversible commitment should pause.
 
-## Minimal Sufficient Human Query
+## [Minimal Sufficient Human Query](/glossary#mshq)
 
 A good agent should not ask:
 
@@ -161,9 +161,9 @@ If you do not specify, I will ______ because it is the safest or most reversible
 "The main unresolved risk is temporal leakage. Please confirm that all features are available before prediction time, or provide an example or test result."
 :::
 
-## Governed Escalation Objects: Governing When to Ask
+## [Governed Escalation Objects](/glossary#geo): Governing When to Ask
 
-A Governed Knowledge Object (GKO) governs what the AI should know or obey. A GEO governs the asking itself: when the AI should ask a human, what it should ask, whom it should ask, and what to do safely if no answer arrives.
+A [Governed Knowledge Object (GKO)](/glossary#gko) governs what the AI should know or obey. A [GEO](/glossary#geo) governs the asking itself: when the AI should ask a human, what it should ask, whom it should ask, and what to do safely if no answer arrives.
 
 A GEO should specify:
 
@@ -177,7 +177,7 @@ A GEO should specify:
 
 When a human answer turns out to be durable, it can graduate into a GKO — for example, "Any external commitment for this client requires explicit approval before sending." The reverse also holds: a GKO may trigger a GEO when its condition reappears in a future task.
 
-For long-horizon agents, the answer should also update the agent's hard state: which fact was confirmed, which boundary now applies, which authorization was granted or denied, and which transition is now allowed. This is the collaboration-side link to the State-Governed Agent Regime (SGAR).
+For long-horizon agents, the answer should also update the agent's hard state: which fact was confirmed, which boundary now applies, which authorization was granted or denied, and which transition is now allowed. This is the collaboration-side link to the [State-Governed Agent Regime (SGAR)](/glossary#sgar).
 
 ## Collaboration Workflow
 
@@ -223,7 +223,7 @@ Good human-AI collaboration is not measured by minimizing all human involvement.
 - Is the question minimal, specific, and answerable?
 - After the human answers, can the AI resume autonomous work?
 - Does the AI avoid unauthorized external actions?
-- Are reusable judgments stored as GKOs or GEOs instead of disappearing into the chat?
+- Are reusable judgments stored as [GKOs](/glossary#gko) or [GEOs](/glossary#geo) instead of disappearing into the chat?
 - Can the agent recover the recognized state after interruption?
 
 That is the move from chat-style use to governed collaboration: AI handles processing, search, and expression; humans govern the variables that probability alone cannot replace.

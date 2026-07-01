@@ -39,24 +39,24 @@ heroPoints:
 
 机制层用失配做诊断，治理层用对象做动作。下面四个对象把诊断、动作和人类治理缝合成一条可执行链路，它们对应 [受治理 LLM 对象模型与接口规范](docs/governed-llm-object-model-interface-specification.zh-CN.md) 与 [价值保存结构理论](docs/structural-theory-value-preservation-llm-systems.zh-CN.md)：
 
-- **GKO（Governed Knowledge Object）**：保存任务特定控制知识（已验证主张、条件、优先级、生命周期、撤销规则）。
-- **GEO（Governed Escalation Object）**：保存"何时升级、升级给谁、问什么、等待期间能做什么"。
-- **MSHQ（Minimal Sufficient Human Query）**：GEO 在一次交互中的实例化，只问恢复自治所需最小变量。
-- **SGAR（State-Governed Agent Regime）**：把 plan / action / observation / verification / 人类回答 / 审计发现提交到外部硬状态层，让长程 agent 在被承认的状态里推进。
+- **[GKO（Governed Knowledge Object）](/zh/glossary#gko)**：保存任务特定控制知识（已验证主张、条件、优先级、生命周期、撤销规则）。
+- **[GEO（Governed Escalation Object）](/zh/glossary#geo)**：保存"何时升级、升级给谁、问什么、等待期间能做什么"。
+- **[MSHQ（Minimal Sufficient Human Query）](/zh/glossary#mshq)**：GEO 在一次交互中的实例化，只问恢复自治所需最小变量。
+- **[SGAR（State-Governed Agent Regime）](/zh/glossary#sgar)**：把 plan / action / observation / verification / 人类回答 / 审计发现提交到外部硬状态层，让长程 agent 在被承认的状态里推进。
 
 四者一起把治理从"流程感"转成"对象与协议"。
 
 ### 进一步：审计工程、SGAR、协作工作稿
 
-这套验证与回写机制可以进一步独立为 **审计工程（Audit Engineering）**：它不把审计当作生成后的打分，而是把审计发现结构化为缺陷证据、修复路由、控制增量和回归测试，从而让尚未充分说明的用户价值在迭代中逐步外化。
+这套验证与回写机制可以进一步独立为 **[审计工程（Audit Engineering）](/zh/glossary#audit-engineering)**：它不把审计当作生成后的打分，而是把审计发现结构化为缺陷证据、修复路由、控制增量和回归测试，从而让尚未充分说明的用户价值在迭代中逐步外化。
 
 [阅读《Audit Engineering：从生成—验证不对称到通用 Agent 治理》](docs/audit-engineering-failure-localization-control-space-writeback.zh-CN.md)
 
-对于长程 agent，这些控制对象还需要一个硬状态层。**状态治理智能体范式（SGAR）** 把计划、工具调用、观测、验证结果、人类回答、审计发现和回滚决定都组织成状态转移，而不是松散的聊天历史。这样做不是为了削弱 LLM，而是避免让执行动作的那个上下文，又独自裁决任务是否已经推进。
+对于长程 agent，这些控制对象还需要一个硬状态层。**[状态治理智能体范式（SGAR）](/zh/glossary#sgar)** 把计划、工具调用、观测、验证结果、人类回答、审计发现和回滚决定都组织成状态转移，而不是松散的聊天历史。这样做不是为了削弱 LLM，而是避免让执行动作的那个上下文，又独自裁决任务是否已经推进。
 
 [阅读《状态治理智能体范式（SGAR）》](docs/state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)
 
-升级协议与人类边界由 **治理式人机协作** 与 **人类协助型操作失配（五个操作域）** 共同支撑：先问环境，再问人；用 MSHQ 提问；用 GEO 保存重复规则；让长程 agent 在硬状态中恢复自治。
+升级协议与人类边界由 **[治理式人机协作](/zh/glossary#governed-human-ai-collaboration)** 与 **人类协助型操作失配（五个操作域）** 共同支撑：先问环境，再问人；用 [MSHQ](/zh/glossary#mshq) 提问；用 [GEO](/zh/glossary#geo) 保存重复规则；让长程 agent 在硬状态中恢复自治。
 
 [阅读《治理式人机协作》](docs/governed-human-ai-collaboration.zh-CN.md) · [阅读《人类协助型操作失配》](docs/human-assist-operational-mismatches.zh-CN.md)
 
