@@ -15,21 +15,58 @@ heroPoints:
 
 This page is the index to the project's formal writing. It lists the current working manuscripts, the legacy versions they replace, the site extensions that put the theory into practice, and the empirical questions still open. Use it to find the right document and to see how the public site connects to the formal drafts.
 
-## How to Enter the Deep End
+## Document Map
 
-The main site is the public explanation layer: intuition first, mechanism second, practice third. The papers and working manuscripts are the deeper layer, where definitions, diagnostic categories, governance objects, and research questions are developed more fully.
+The main site is the public explanation layer: intuition first, mechanism second, practice third. The papers and working manuscripts are the formal layer, where concepts, diagnostic categories, governance objects, runtime regimes, and research questions are written in a form that can be cited, compared, and extended.
 
-A suggested reading order, from intuition to formal detail:
+So this section is not just a reading order. It is a five-layer document map: which role each manuscript plays in the framework, and how the documents connect to one another.
 
-1. Start with "Why It Matters" and "Cases," using the case index to build intuition from control-space governance to layered governance.
-2. Read "Mechanism," the structural theory draft, and the six-mismatch taxonomy to understand the value-preservation pipeline and how governed control objects preserve task value.
-3. Read the collaboration supplement to understand when an agent should ask a human and how to construct minimal sufficient human queries (MSHQs).
-4. Read "State-Governed Agent Regime (SGAR)" to understand why long-horizon agents need hard state rather than context-maintained continuity.
-5. Read "Audit Engineering" to understand how systems route post-generation failure signals back into control space and prevent regression.
-6. Read "Cognitive Discipline for AI" to understand how individual users can govern emotional projection, uncontrolled abstraction, self-confirmation, and real-world feedback.
-7. Use the site pages on collaboration, learning, and projects to see how the manuscripts translate into practice and implementation directions.
+```text
+Core theory layer
+-> diagnostic-mechanism layer
+-> governance-object layer
+-> runtime layer
+-> human collaboration layer
+```
 
-**If you only read the site, the goal is to get an operational judgment chain. If you enter the manuscripts, the goal is to inspect the definitions, boundaries, and testability of that chain.** This page connects the public explanation layer to the formal working drafts.
+:::cards
+### Core Theory Layer
+Tag: explain why failure appears
+
+**Role**: explain why LLM mediocrity, local alignment, and value-preservation failure appear in the first place.
+
+**Corresponding documents**: [A Structural Theory of Value Preservation](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/structural-theory-value-preservation-llm-systems.md), [Six Primitive Mismatches](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/six-primitive-mismatches-pipeline-derived-taxonomy-llm-systems.md)
+
+### Diagnostic-Mechanism Layer
+Tag: localize what failed
+
+**Role**: localize failure to pipeline stations, mechanism axes, and repair layers, so the question becomes not just "what failed?" but "where did it fail, and which repair layer should own it?"
+
+**Corresponding documents**: [Formal Mechanism Layer](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/formal-mechanism-layer-for-governed-llm-systems.md), [Diagnostic-Mechanism Bridge](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/diagnostic-mechanism-bridge-for-governed-llm-systems.md), [Mechanism-Driven Training](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/mechanism-driven-training-for-governed-llm-systems.md)
+
+### Governance-Object Layer
+Tag: write control as objects
+
+**Role**: define GKO, GEO / GEsO, Audit Finding, Control Delta, Regression Guard, State Record, and related objects so governance becomes a set of explicit, writeable, checkable entities rather than only principles.
+
+**Corresponding documents**: [Object Model and Interface Specification](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/governed-llm-object-model-interface-specification.md), [Audit Engineering](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/audit-engineering-failure-localization-control-space-writeback.md)
+
+### Runtime Layer
+Tag: commit progress into hard state
+
+**Role**: explain how agent progress enters hard state, and which actions count as real progress only after gating, audit, and verified state transition.
+
+**Corresponding documents**: [SGAR](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime-for-governed-llm-systems.md), [Oracle / Audit / SGAR routing](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/oracle-classification-audit-agent-sgar-engine-routing.md)
+
+### Human Collaboration Layer
+Tag: ask humans only where humans must govern
+
+**Role**: define which variables must remain human-governed and how to minimize interruption while still letting AI resume autonomous progress after the answer arrives.
+
+**Corresponding documents**: [Human-Assist Operational Mismatches](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/human-assist-operational-mismatches.md), [Governed Human-AI Collaboration](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/governed-human-ai-collaboration.md), [Cognitive Discipline for AI](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/cognitive-discipline-for-ai.md), [AI Collaborative Posture](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/ai-collaborative-posture-calibrated-friction-constructive-firmness.md)
+:::
+
+**If you only read the site, the goal is to get an operational judgment chain. If you enter the manuscripts, the goal is to inspect how these five layers define the problem, localize failure, carry governance, commit state, and organize collaboration.** This page connects the public explanation layer and the formal manuscripts inside one map.
 
 ## Current Working Manuscripts
 

@@ -1509,6 +1509,25 @@ h1 {
   text-decoration-thickness: 2px;
 }
 
+.page-shell--glossary .content-section a {
+  color: var(--blue);
+  font-weight: 700;
+  text-decoration-line: underline;
+  text-decoration-color: color-mix(in srgb, var(--blue) 72%, white 28%);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  transition:
+    color var(--dur) var(--ease),
+    text-decoration-color var(--dur) var(--ease),
+    text-decoration-thickness var(--dur) var(--ease);
+}
+
+.page-shell--glossary .content-section a:hover {
+  color: var(--violet);
+  text-decoration-color: color-mix(in srgb, var(--violet) 78%, white 22%);
+  text-decoration-thickness: 3px;
+}
+
 .overview-section {
   display: grid;
   gap: 24px;
