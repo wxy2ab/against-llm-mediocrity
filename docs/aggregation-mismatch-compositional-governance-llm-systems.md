@@ -8,13 +8,27 @@
 
 ## Abstract
 
-Many LLM failures do not arise because every local part of an output is bad. They arise because locally plausible, locally useful, or locally improved parts fail to compose into a globally valuable artifact. A SQL query may have a reasonable `SELECT`, a plausible `JOIN`, and a defensible `WHERE` clause while returning the wrong answer. A code patch may fix a local symptom while violating a hidden invariant. A research synthesis may contain accurate summaries while failing to support its central claim. A long-horizon agent may complete several subtasks while failing to advance the actual project state.
+Many LLM failures do not arise because every local part of an output is bad. They arise because locally plausible, locally useful, or locally improved parts fail to compose into a globally valuable artifact.
 
-This paper develops **aggregation mismatch** as one of the primitive mismatch types in the structural theory of value preservation for LLM systems. Aggregation mismatch occurs when local value signals do not preserve global task utility under the composition operation that builds the final artifact. It is the core structural form behind what may be narrowly called **autoregressive mediocrity**: the tendency of locally likely continuations, local refinements, and local critiques to produce fluent but globally suboptimal artifacts when the task depends on nonlocal dependencies, delayed commitments, interface consistency, global invariants, or end-to-end semantics.
+Consider a few examples. A SQL query may have a reasonable `SELECT`, a plausible `JOIN`, and a defensible `WHERE` clause—yet return the wrong answer. A code patch may fix a local symptom while violating a hidden invariant. A research synthesis may contain accurate summaries while failing to support its central claim. A long-horizon agent may complete several subtasks while failing to advance the actual project state.
 
-Aggregation mismatch is not identical to support mismatch, specification mismatch, state mismatch, observation-representation mismatch, or fitting-boundary mismatch. It can occur even when the relevant information is present, the state is known, the correct capability is activated, high-value components are reachable, and the objective is clear. The failure lies in the **composition operator**: the procedure that assembles parts, clauses, modules, arguments, decisions, tool outputs, or agent actions into a global object.
+This paper develops **aggregation mismatch** as one of the primitive mismatch types in the structural theory of value preservation for LLM systems. Aggregation mismatch occurs when local value signals do not preserve global task utility under the composition operation that builds the final artifact.
 
-The constructive response is **Compositional Governance**. Instead of relying on ungoverned local continuation, the system externalizes intermediate structure: dependency graphs, interface contracts, global invariants, binding records, composition plans, integration ledgers, and end-to-end validators. Local generation is preserved where it is aligned, but global value is protected by governed composition objects and compositional audits. This turns the question from “Can the model generate good local parts?” into “Can the system preserve global invariants while assembling locally generated parts?”
+It is the core structural form behind what may be narrowly called **autoregressive mediocrity**: the tendency of locally likely continuations, local refinements, and local critiques to produce fluent but globally suboptimal artifacts. This tendency appears whenever the task depends on nonlocal dependencies, delayed commitments, interface consistency, global invariants, or end-to-end semantics.
+
+Aggregation mismatch is not identical to support mismatch, specification mismatch, state mismatch, observation-representation mismatch, or fitting-boundary mismatch. It can occur even when:
+
+- the relevant information is present,
+- the state is known,
+- the correct capability is activated,
+- high-value components are reachable, and
+- the objective is clear.
+
+The failure lies in the **composition operator**: the procedure that assembles parts, clauses, modules, arguments, decisions, tool outputs, or agent actions into a global object.
+
+The constructive response is **Compositional Governance**. Instead of relying on ungoverned local continuation, the system externalizes intermediate structure: dependency graphs, interface contracts, global invariants, binding records, composition plans, integration ledgers, and end-to-end validators. Local generation is preserved where it is aligned, but global value is protected by governed composition objects and compositional audits.
+
+This reframes the central question. Rather than asking, "Can the model generate good local parts?", the system asks, "Can it preserve global invariants while assembling locally generated parts?"
 
 ### Relationship to the Diagnostic–Mechanism Bridge
 
@@ -315,7 +329,7 @@ The repair is not rubric clarification. The repair is compositional validation.
 
 ### 3.6 Minimal Pair Criterion
 
-Aggregation mismatch is independently testable by holding other stations fixed while varying only the composition relation.
+The preceding sections showed that aggregation mismatch is distinct from the other five primitive mismatches. A stronger test is available: aggregation mismatch is independently testable by holding other stations fixed while varying only the composition relation.
 
 ```text
 Same observation.

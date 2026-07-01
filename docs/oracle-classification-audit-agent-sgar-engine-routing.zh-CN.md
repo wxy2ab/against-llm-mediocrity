@@ -47,9 +47,9 @@ Audit agent 和 SGAR 不是彼此替代的机制，而是同一个底层资源�
 
 ## 1. 背景问题
 
-最初的问题来自 text2sql：builder agent 已经看 schema、column sample、column stat、column description，也尝试过类似 audit agent 的分析，但仍然很容易失败。反过来，让一个 audit agent 在失败之后审计已有 SQL，效果却明显变好。
+最初的问题来自 text2sql：builder agent 已经看过 schema、column sample、column stat、column description，也尝试过类似 audit agent 的分析，但仍然很容易失败。反过来，让一个 audit agent 在失败之后审计已有 SQL，效果却明显变好。
 
-这个现象令人困惑，因为从静态信息看，builder 与 auditor 拿到的信息几乎一样。关键问题是：
+这个现象令人困惑。因为从静态信息看，builder 与 auditor 拿到的信息几乎一样。关键问题是：
 
 > **audit agent 到底多了什么？这个机制能否泛化到 text2sql 之外？**
 

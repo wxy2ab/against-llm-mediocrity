@@ -10,7 +10,7 @@
 
 ## Overview
 
-This working paper proposes a practical model for dividing labor between AI and humans. Rather than splitting tasks into "AI work" and "human work," it governs the individual variables inside a task that require human judgment, and lets AI advance everything else. The sections below define the core proposition, explain when governance is and is not needed, set out a workflow for routing and escalation, and give templates and worked examples.
+This working paper proposes a practical model for dividing labor between AI and humans. Rather than splitting tasks into "AI work" and "human work," it governs the individual variables inside a task that require human judgment, letting AI advance everything else.
 
 Several governance objects recur throughout. They are spelled out on first use and then referred to by acronym:
 
@@ -48,15 +48,7 @@ The collaboration unit is not the whole task. It is the **control variable**. Fo
 
 ## 2. When Governance Is and Is Not Needed
 
-Governed collaboration is useful for high-mismatch, high-risk, preference-heavy, cross-role, or reusable work. It should not burden tasks that are already in an autoregressive-extraordinary regime.
-
-| Positive-alignment task | AI should do | Human boundary |
-|---|---|---|
-| Context compression | summarize, classify, extract decision variables | confirm whether stakes were omitted |
-| Semantic decompression | expand notes or outlines into prose | ensure upstream structure is correct |
-| Register transfer | adapt tone and audience | intervene when legal, relational, or reputational boundaries are tacit |
-| Structured transformation | create tables, checklists, JSON, SOPs | confirm the format reflects the real workflow |
-| Candidate generation | propose titles, risks, edge cases, queries | select, rank, and validate |
+Governed collaboration is useful for high-mismatch, high-risk, preference-heavy, cross-role, or reusable work. It should not burden tasks that already sit in an autoregressive-extraordinary regime.
 
 The design rule is:
 
@@ -70,7 +62,7 @@ The first question is not "Can AI do this?" It is:
 
 ### 3.1 Environment-Observable Work
 
-Facts should be retrieved, inspected, tested, or measured before they are escalated.
+Facts should be retrieved, inspected, tested, or measured before being escalated to a human.
 
 | Task | AI-first action | Avoid premature human burden |
 |---|---|---|
@@ -82,13 +74,9 @@ Facts should be retrieved, inspected, tested, or measured before they are escala
 
 ### 3.2 Feedback-Learnable Work
 
-Some preferences cannot be fully stated in advance. AI should construct contrasts so that preference becomes visible through selection.
+Some preferences cannot be fully stated in advance. AI should construct contrasts so that preferences become visible through selection.
 
-Instead of:
-
-> What style do you want?
-
-Use:
+Instead of asking "What style do you want?", use:
 
 > Here are three meaning-preserving variants: restrained expert, sharp argument, and public explanation. Which is closest, and which is unacceptable?
 
@@ -103,7 +91,7 @@ Useful intermediate objects include:
 
 ### 3.3 Constructed Proving Grounds
 
-When real feedback is unavailable or costly, AI should construct environments where proposals can fail:
+When real feedback is unavailable or costly, AI should construct environments in which proposals can fail:
 
 - competitor responses and price wars;
 - novice, impatient, or adversarial user journeys;
@@ -131,7 +119,7 @@ Ask a human only when a remaining variable cannot be reliably observed, inferred
 
 ## 4. Three-Layer Diagnostic Stack
 
-Before deciding what to ask a human, diagnose the task through three layers, from why ordinary generation might fail to what the smallest human contribution would be.
+Before deciding what to ask a human, diagnose the task through three layers — from why ordinary generation might fail to what the smallest human contribution would be.
 
 | Layer | Question | Collaboration consequence |
 |---|---|---|
@@ -165,7 +153,7 @@ See the [technical supplement](human-assist-operational-mismatches.md) for defin
 12. **Preserve reusable judgment.** Store durable conditions as GKOs and recurring escalation rules as GEsOs.
 13. **Revoke stale governance.** Update objects when policy, authority, state, tools, or preferences change.
 
-Multi-turn collaboration is useful when each round produces a persistent object that changes the next task. "Try again" without new control objects is often repeated sampling.
+Multi-turn collaboration is useful when each round produces a persistent object that changes the next task. A "try again" without new control objects is often just repeated sampling.
 
 ## 6. What AI Should Advance and What It Should Not Decide
 

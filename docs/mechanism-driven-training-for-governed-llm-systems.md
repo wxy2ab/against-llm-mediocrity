@@ -15,11 +15,11 @@
 
 ## Abstract
 
-The current governed-LLM theory stack primarily describes **runtime governance**: Knowledge Governance, Audit Engineering, object-level control deltas, regression guards, and the State-Governed Agent Regime (SGAR) all operate around a frozen model. They repair failures by changing the task representation, control objects, audit loops, routing rules, execution procedures, and committed state, without changing the model weights.
+The current governed-LLM theory stack primarily describes **runtime governance**. Knowledge Governance, Audit Engineering, object-level control deltas, regression guards, and the State-Governed Agent Regime (SGAR) all operate around a frozen model. They repair failures by changing the task representation, control objects, audit loops, routing rules, execution procedures, and committed state—without changing the model weights.
 
-This leaves a training-side gap. When a recurring failure is caused by a **learned component** of the approximate LLM system—belief/representation `B_θ`, world model `T̂_θ`, capability support `π_θ`, capability routing `r_θ`, or learned reward/proxy `R̂_θ / R_proxy`—runtime governance can often patch the failure, but repeated patches become a treadmill. The system keeps paying inference-time cost for a defect that should be amortized into the model.
+This leaves a training-side gap. When a recurring failure is caused by a **learned component** of the approximate LLM system—belief/representation `B_θ`, world model `T̂_θ`, capability support `π_θ`, capability routing `r_θ`, or learned reward/proxy `R̂_θ / R_proxy`—runtime governance can often patch the failure. Yet repeated patches become a treadmill. The system keeps paying inference-time cost for a defect that should be amortized into the model.
 
-This document defines **Mechanism-Driven Training**: the training-side counterpart of runtime governance. Its central claim is that the same eight-axis mechanism diagnosis used for repair localization should also drive training intervention, but only after recurring failures have been operationalized through task-specific control objects and mechanism-aware evaluation. The difference is not the diagnosis alone; the difference is the **repair layer** and the operationalization threshold.
+This document defines **Mechanism-Driven Training**: the training-side counterpart of runtime governance. Its central claim is straightforward. The same eight-axis mechanism diagnosis used for repair localization should also drive training intervention—but only after recurring failures have been operationalized through task-specific control objects and mechanism-aware evaluation. The key difference is not the diagnosis itself. It is the **repair layer** and the operationalization threshold.
 
 The canonical record is:
 
@@ -30,7 +30,7 @@ mechanism_axis ∈ eight intervention mechanism axes | unknown | not_operational
 repair_layer ∈ agent | training | hybrid
 ```
 
-Runtime governance repairs local, reversible, task-specific failures. Mechanism-driven training promotes recurrent, cross-task, operationalized learning-component failures from the Defect Ledger into training curricula, boundary data, grounding data, reward corrections, or capability-support data.
+To see the contrast clearly: runtime governance repairs local, reversible, task-specific failures. Mechanism-driven training, on the other hand, promotes recurrent, cross-task, operationalized learning-component failures from the Defect Ledger into training curricula, boundary data, grounding data, reward corrections, or capability-support data.
 
 In one sentence:
 
@@ -62,7 +62,7 @@ In one sentence:
 
 ## 1. Position in the Unified Theory Stack
 
-Mechanism-Driven Training does not add a new primitive mismatch and does not replace the six-mismatch taxonomy. It occupies the training-side branch of the Diagnostic–Mechanism Bridge.
+Mechanism-Driven Training does not add a new primitive mismatch. It also does not replace the six-mismatch taxonomy. Instead, it occupies the training-side branch of the Diagnostic–Mechanism Bridge.
 
 ```text
 Six Primitive Mismatches:
@@ -75,6 +75,8 @@ Mechanism-Driven Training:
   handles the subset of mechanism failures whose learned component is operationalized enough
   that recurrence justifies amortizing the repair into model training.
 ```
+
+Each layer answers a different question.
 
 The six primitive mismatches answer:
 
@@ -109,7 +111,7 @@ E = (S, A, T, R*, Ω, O, γ)
 M_θ = (R̂_θ, Ω_sys, B_θ, T̂_θ, A_sys, π_θ, r_θ, D)
 ```
 
-`Ω_sys` belongs to `M_θ` rather than `E`: `Ω` and `O` describe what the environment can in principle reveal, while `Ω_sys` denotes which observation channels are actually exposed to the deployed system.
+With this decomposition in mind, we can separate the components that are fixed at deployment from those that can be learned. `Ω_sys` belongs to `M_θ` rather than `E`: `Ω` and `O` describe what the environment can in principle reveal, while `Ω_sys` denotes which observation channels are actually exposed to the deployed system.
 
 Mechanism-driven training does not target "all learned things" indiscriminately. It primarily concerns five mechanism axes with learned-side components:
 
@@ -151,6 +153,8 @@ These axes have both training-side and runtime-side components:
 | `capability_support` | probability mass for structures/operators | RAG, examples, specialist operators, tools |
 | `capability_routing` | learned trigger boundary | explicit router, mode switch, role binding |
 
+Because each hybrid axis spans both training and runtime, choosing the right repair layer depends on the nature of the failure.
+
 The layer-selection rule is:
 
 ```text
@@ -170,7 +174,7 @@ Mixed case:
 
 A surface error is rarely a sufficient training target. The same wrong output may arise from missing observation, bad representation, wrong state, weak support, wrong routing, poor search, or objective mismatch.
 
-Mechanism-driven training therefore follows this discipline:
+Because the symptom can hide the true cause, mechanism-driven training insists on tracing every failure through a specific diagnostic chain. Mechanism-driven training therefore follows this discipline:
 
 ```text
 surface failure
@@ -642,7 +646,7 @@ The same mechanism failure may have two repair routes:
 | Training-layer repair | slower, global, persistent, amortized | SFT, preference data, curriculum, grounding traces, reward correction, router training |
 | Hybrid | runtime patch now, training promotion if recurrence persists | defect ledger, mechanism profile, temporary GKO, later training item |
 
-Mechanism-driven training should not be the default first response. The default should be:
+Given these three routes, the default should be local repair. Mechanism-driven training should not be the first response. The default should be:
 
 ```text
 repair locally when local repair is sufficient
@@ -667,7 +671,7 @@ safe under boundary regression
 
 ## 6. Promotion Ratchet: From Audit Finding to Training Signal
 
-Mechanism-driven training extends Audit Engineering from runtime write-back into training-side write-back.
+Mechanism-driven training extends Audit Engineering from runtime write-back into training-side write-back. This closed loop ensures that findings do not sit in a ledger without action.
 
 ### 6.1 Closed Loop
 
@@ -858,7 +862,7 @@ Representation training:
   improves structured extraction but over-structures open tasks.
 ```
 
-Therefore every mechanism-driven training intervention requires boundary governance.
+Because side effects are inevitable, every mechanism-driven training intervention requires explicit boundary governance.
 
 ### 8.1 Required Release Gates
 
@@ -890,7 +894,7 @@ A training intervention without a mechanism eval and boundary regression is not 
 
 ## 9. When Not to Train
 
-Mechanism-driven training should be selective.
+Mechanism-driven training should be selective. Before committing to a training run, pause and verify that the defect truly belongs in the model rather than in the runtime layer.
 
 Do not train when:
 
@@ -937,9 +941,7 @@ control deltas
 stateful repair
 ```
 
-These are agent-layer governance mechanisms.
-
-When failures recur across schemas or query families, the same findings can be promoted to training.
+These are agent-layer governance mechanisms. When these runtime patches are not enough, the same findings can be promoted to training.
 
 | Learned component | Text-to-SQL training intervention | Mechanism eval |
 |---|---|---|
@@ -963,7 +965,7 @@ mechanism eval for training promotion
 
 ## 11. Metrics for Mechanism-Driven Training
 
-The success criterion is not generic benchmark improvement alone. The target is reduction of recurrent learned-component defects without unacceptable boundary damage.
+The success criterion is not generic benchmark improvement alone. The target is reduction of recurrent learned-component defects without unacceptable boundary damage. To judge whether a training intervention succeeded, use metrics that target the mechanism, not just the benchmark.
 
 | Metric | Meaning |
 |---|---|
@@ -1017,7 +1019,7 @@ The core claim of mechanism-driven training can be represented as a governed the
 
 ## 13. Failure Modes of Mechanism-Driven Training
 
-Mechanism-driven training can itself fail.
+Mechanism-driven training can itself fail. Even when the diagnosis is correct, the training process can go wrong in several characteristic ways.
 
 ### 13.1 Symptom Training
 

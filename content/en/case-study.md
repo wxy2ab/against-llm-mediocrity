@@ -19,7 +19,7 @@ If the home page asks which problems have already reached structural ceilings, a
 
 The purpose of a case study is not to show that a particular system is impressive. It is to test this site's framework inside a real task. A useful case must explain why the raw task cannot be solved by fluent output alone, which intermediate objects the system creates, how evaluators detect failure, how revision routing decides which layer to change, and what limits remain.
 
-The case page is therefore an index, not a pile of top-level navigation entries. The top navigation keeps a single "Cases" entry, and each concrete case lives on its own detail page. That structure will still hold up as future cases expand into writing, research, code, investment, collaboration, or learning tasks.
+The case page is therefore an index, not a pile of top-level navigation entries. The top navigation keeps a single "Cases" entry, and each concrete case lives on its own detail page. That structure will hold up as future cases expand into writing, research, code, investment, collaboration, or learning tasks.
 
 ## Current Cases
 

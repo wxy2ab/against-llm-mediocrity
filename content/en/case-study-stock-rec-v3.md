@@ -46,7 +46,7 @@ A locally valid factor, rule, or narrative does not imply a valid portfolio. Bas
 ### Support Mismatch
 
 Valuable strategy changes are often not default financial prose. They may be low-coverage shadow factors, rule combinations that behave better across regimes, or sidecar enhancements that should not be activated yet.
-::::
+:::
 
 That is why `stock_rec_v3` is a useful case. It does not present the LLM as a stock-picking model. It puts the LLM inside a production system that distrusts it by design.
 
@@ -70,7 +70,7 @@ Evolves excitation rules: how theme, flow, momentum, risk, and narrative atoms c
 ### Holding-Processing Producer
 
 Turns recommendations into position actions: position ledger, holding analysis, PnL, validation feedback, holding governance, and carryover. It answers what to do now instead of trusting a new market story.
-::::
+:::
 
 Together, these producers form the body of the strategy. Each night, the system does not ask the LLM to rewrite its opinion. Instead, it lets the producers emit new inspectable objects, then lets governance decide which of those objects deserve production authority.
 
@@ -143,7 +143,7 @@ Base score and excitation enter champion-challenger evaluation. Candidates must 
 ### Production Consumption
 
 Phase B loads active specs only. Recommendations then enter the holding loop: position ledger, holding analysis, PnL, validation feedback, holding governance, and execution report.
-::::
+:::
 
 The value of this chain is that it turns "what the model thinks is plausible today" into "which governed objects are allowed to affect the strategy today." That is the difference between a financial production system and an ordinary text task.
 
@@ -183,7 +183,7 @@ Dry runs do not move the active pointer. Observation-only enhancements only reco
 ### It Knows How To Roll Back
 
 When a candidate fails or persistence fails, the system keeps the existing champion or rolls shadow state back. The production path is not permanently polluted by a plausible LLM proposal.
-::::
+:::
 
 This is where the financial case adds the most to the site's argument. In a creative system, failure may mean a weaker story. In a financial system, failure becomes real position state, transaction cost, and risk exposure. Governance authority must be stronger than generation authority.
 
@@ -211,7 +211,7 @@ Natural-language explanation is not a strategy specification. The system grounds
 ### Fitting-Boundary Mismatch
 
 A locally plausible alpha story, filter, benchmark result, or audit path can bind too tightly and crowd out neighboring mechanisms. Shadow states, promotion gates, train/validation splits, and PnL vetoes force local claims to survive adjacent market, metric, and deployment checks before they gain authority.
-::::
+:::
 
 ## Relation to the Story Insight Cases
 

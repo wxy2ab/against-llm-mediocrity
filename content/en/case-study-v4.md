@@ -14,7 +14,9 @@ heroPoints:
   - In one run, all 10 scoring dimensions passed with an average of 8.88, yet the final status remained not qualified. Passing scores were not enough.
 ---
 
-Story Insight V4 is a story generation and optimization system. Instead of treating creative writing as "sample more prose," it first builds a logic space — a structured skeleton of the story — and then uses evaluation, defect attack, and targeted revision to govern story structure before any final text is rendered. This case study walks through why that approach matters, how the system is built, and what a single real run revealed.
+Story Insight V4 is a story generation and optimization system. Instead of treating creative writing as "sample more prose," it first builds a logic space — a structured skeleton of the story — and then uses evaluation, defect attack, and targeted revision to govern story structure before any final text is rendered.
+
+This case study walks through why that approach matters, how the system is built, and what a single real run revealed.
 
 ## Why This Case
 
@@ -22,7 +24,7 @@ Story Insight V4 is a useful case for this project because its task is not factu
 
 That is a classic form of LLM mediocrity. A model can improve local expression while failing to preserve global narrative value: why characters act, why events happen, whether the theme is carried by action, whether symbols return, and whether the climax pays off earlier commitments.
 
-Story Insight V4 does not ask the model to simply “write better.” It first turns the story into searchable, verifiable, revisable control objects. It is an engineering example of governing the control space before rendering the final text.
+Story Insight V4 does not ask the model to simply "write better." It first turns the story into searchable, verifiable, revisable control objects. It is an engineering example of governing the control space before rendering the final text.
 
 ## Why Story Generation Is High-Mismatch
 
@@ -52,11 +54,11 @@ The difficulty is that local writing ability is genuinely useful, but good local
 
 If you directly ask a model to write a xianxia short story, it can usually produce readable prose: failure at the opening, obsession in the protagonist, sacrifice in the middle, insight near the ending. But those elements may only be a familiar narrative template.
 
-Mediocrity does not always look bad. It often looks almost right. Each element seems plausible, but the elements lack necessity:
+Mediocrity does not always look bad. It often looks *almost right*. Each element seems plausible, but the elements lack necessity:
 
 - Qingling sacrifices, but the psychological path to that choice may be underbuilt.
 - Lingxu changes, but the trigger for that change may not be visible enough.
-- The “sword sheath” is a strong image, but without later return it remains a pretty concept.
+- The "sword sheath" is a strong image, but without later return it remains a pretty concept.
 - Demonic cultivators can create climax pressure, but if they only function as external pressure, they do not carry equal thematic depth.
 
 Polishing the prose can make the story look more mature without repairing the gaps between character, event, and theme.
@@ -95,7 +97,7 @@ Information release, suspense count, and cognitive load. It answers what readers
 Conflict lines, stakes escalation, turning points, value transformation, and ending design. It answers why the story must happen and how the cost rises.
 ::::
 
-This is what a control space does. It rewrites “write a good story” into smaller intermediate objects that are easier to generate, inspect, and revise.
+This is what a control space does. It rewrites "write a good story" into smaller intermediate objects that are easier to generate, inspect, and revise.
 
 ## How the Governance Loop Works
 
@@ -142,7 +144,7 @@ Checks foreshadowing, metaphor, turns, and negative space. It maps mainly to con
 Checks whether character, event, and conflict form an organic whole. It maps mainly to character space, event graph, and conflict architecture.
 ::::
 
-This mapping matters. If a dimension fails, the system does not merely say “the story is not good enough.” It knows which control object should be revised. The evaluator is therefore a router inside the governance loop.
+This mapping matters. If a dimension fails, the system does not merely say "the story is not good enough." It knows which control object should be revised. The evaluator is therefore a router inside the governance loop.
 
 ## A Real Run
 
@@ -170,11 +172,11 @@ This run is especially useful for explaining the core claim of this project. A s
 
 ## What Remained After Scores Passed
 
-The reported issues were not “bad writing.” They were specific structural gaps:
+The reported issues were not "bad writing." They were specific structural gaps:
 
 - Qingling uses an opening move from Qingyun sword technique, but the character ability setup does not sufficiently explain how she learned it.
 - The source of her knowledge about the soul-condensing herb is not explicit enough, weakening the causal support for her risky path.
-- The “sword sheath” image appears as a central symbol, but later return and deepening can be stronger.
+- The "sword sheath" image appears as a central symbol, but later return and deepening can be stronger.
 - Lingxu's attitude change toward Qingling needs more psychological grounding.
 - The demonic cultivators work as external pressure, but their symbolic relation to the core theme is comparatively thin.
 - If the ending states the character's insight too directly, it weakens the aftertaste of the open ending.
@@ -196,11 +198,11 @@ Character state, ability, relationships, memory, and motivation must persist acr
 
 ### Support Mismatch
 
-High-value structures are often not the default template. The “sword sheath” should not remain only an image; it must become a complex conflict around containment, waiting, acceptance, dependence, and agency.
+High-value structures are often not the default template. The "sword sheath" should not remain only an image; it must become a complex conflict around containment, waiting, acceptance, dependence, and agency.
 
 ### Specification Mismatch
 
-A generic “good story” score is not the same as the qualification profile for a specific genre, length, and structure. Xianxia, linear structure, and short length should change which dimensions must be excellent.
+A generic "good story" score is not the same as the qualification profile for a specific genre, length, and structure. Xianxia, linear structure, and short length should change which dimensions must be excellent.
 
 ### Fitting-Boundary Mismatch
 

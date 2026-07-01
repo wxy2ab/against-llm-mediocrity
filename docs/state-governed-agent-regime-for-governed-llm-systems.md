@@ -54,9 +54,13 @@ A short reader's note on terminology used throughout: a **GKO** is a Governed Kn
 
 ## Abstract
 
-Large language model (LLM) agents are often described as systems that plan, remember, act, observe, revise, and complete tasks over time. In practice, many such systems rely on the language-model context window as the apparent carrier of progress. The context says that a file was changed, a test was run, a bug was fixed, a user preference was remembered, a task was completed, or a plan step was executed. But a language context can describe progress without authorizing it. It can summarize state without being state. It can claim completion without committing a verified transition.
+Large language model (LLM) agents are often described as systems that plan, remember, act, observe, revise, and complete tasks over time. In practice, many such systems rely on the language-model context window as the apparent carrier of progress. The context says that a file was changed, a test was run, a bug was fixed, a user preference was remembered, a task was completed, or a plan step was executed.
 
-This paper introduces **State-Governed Agent Regime** (SGAR), a runtime regime for governed LLM systems in which progress is defined not by what the model says has happened, but by committed transitions in external, inspectable, replayable hard state. SGAR treats the context window as a narrative workspace and proposal surface, not as the source of state authority. An agent action changes the authoritative system state only when it passes an explicit transition contract:
+But a language context can describe progress without authorizing it. It can summarize state without being state. It can claim completion without committing a verified transition.
+
+This paper introduces **State-Governed Agent Regime** (SGAR), a runtime regime for governed LLM systems. In SGAR, progress is defined not by what the model says has happened, but by committed transitions in external, inspectable, replayable hard state.
+
+SGAR treats the context window as a narrative workspace and proposal surface, not as the source of state authority. An agent action changes the authoritative system state only when it passes an explicit transition contract:
 
 ```text
 S + A → O → V → S'
@@ -64,9 +68,13 @@ S + A → O → V → S'
 
 where `S` is the current committed state, `A` is a proposed action, `O` is the observed outcome, `V` is the verifier or commitment rule, and `S'` is the next committed state.
 
-SGAR is not a new prompting pattern and not a seventh primitive mismatch. It is the runtime layer of the unified theory of value preservation in LLM systems. The six primitive mismatches diagnose where value is lost in the world-to-output pipeline. Knowledge Governance externalizes control knowledge as governed objects. Audit Engineering turns failures into control deltas and regression guards. SGAR decides which observations, repairs, object updates, tool effects, memory writes, and task completions are actually admitted into hard state.
+SGAR is not a new prompting pattern and not a seventh primitive mismatch. It is the runtime layer of the unified theory of value preservation in LLM systems.
 
-The central thesis is simple: long-horizon LLM systems require state authority outside the model. Without hard-state authority, agents are vulnerable to false completion, state drift, state oscillation, memory contamination, performative action, unrecoverable intermediate failure, and context-level progress illusion. With explicit state records, transition contracts, verifier stratification, rollback rules, replayability, and defect ledgers, an LLM system can convert local model competence into durable, auditable, recoverable progress.
+The six primitive mismatches diagnose where value is lost in the world-to-output pipeline. Knowledge Governance externalizes control knowledge as governed objects. Audit Engineering turns failures into control deltas and regression guards. SGAR decides which observations, repairs, object updates, tool effects, memory writes, and task completions are actually admitted into hard state.
+
+The central thesis is simple: long-horizon LLM systems require state authority outside the model. Without hard-state authority, agents are vulnerable to false completion, state drift, state oscillation, memory contamination, performative action, unrecoverable intermediate failure, and context-level progress illusion.
+
+With explicit state records, transition contracts, verifier stratification, rollback rules, replayability, and defect ledgers, an LLM system can convert local model competence into durable, auditable, recoverable progress.
 
 ### Relationship to the Diagnostic–Mechanism Bridge
 

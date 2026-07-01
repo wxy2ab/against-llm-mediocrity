@@ -8,11 +8,17 @@
 
 ## Abstract
 
-LLM systems are increasingly built around iterative generation, critique, retrieval, tool use, execution feedback, and revision. These loops often improve surface quality, but they do not automatically create durable system learning. A model may critique an answer, produce a better candidate, and still leave the underlying failure mode untouched. The next similar task may fail again because the defect was never localized, written back into the control space, guarded against, or committed into state.
+LLM systems are increasingly built around iterative generation, critique, retrieval, tool use, execution feedback, and revision. These loops often improve surface quality, but they do not automatically create durable system learning.
 
-This report introduces **Audit Engineering** as the discipline of converting failures into durable control improvements for governed LLM systems. An audit is not a score, a preference judgment, or a generic critique. A useful audit identifies a localized defect, grounds it in evidence, maps it to a mismatch type, identifies the task-specific control object that should change, records mechanism attribution when operationalized, produces a control delta, and creates a regression guard that will fail if the defect family recurs.
+A model may critique an answer, produce a better candidate, and still leave the underlying failure mode untouched. The next similar task may fail again because the defect was never localized, written back into the control space, guarded against, or committed into state.
 
-Audit Engineering is built on two asymmetries. First, excellent generation is often harder than defect identification. Second, complete upfront specification is often harder than counterexample-driven specification repair. High-value systems should exploit these asymmetries by turning candidate failures into improvements in task representation, capability routing, support search, aggregation constraints, specification, verification, and hard state.
+This report introduces **Audit Engineering** as the discipline of converting failures into durable control improvements for governed LLM systems.
+
+An audit is not a score, a preference judgment, or a generic critique. A useful audit identifies a localized defect, grounds it in evidence, maps it to a mismatch type, and identifies the task-specific control object that should change. It also records mechanism attribution when operationalized, produces a control delta, and creates a regression guard that will fail if the defect family recurs.
+
+Audit Engineering is built on two asymmetries. First, excellent generation is often harder than defect identification. Second, complete upfront specification is often harder than counterexample-driven specification repair.
+
+High-value systems should exploit these asymmetries by turning candidate failures into improvements in task representation, capability routing, support search, aggregation constraints, specification, verification, and hard state.
 
 The report defines the core audit lifecycle:
 
@@ -127,7 +133,9 @@ Regression guard: re-run representative query requiring A → B → C and fail i
 
 This is a different kind of object. It localizes the defect, names its mechanism, changes the control space, and prevents silent recurrence.
 
-Audit Engineering therefore treats a failure as a resource. The failure reveals something about the task, the system, the specification, the representation, the verifier, or the state transition contract. The goal is to capture that information in a form the system can use later.
+Audit Engineering therefore treats a failure as a resource. The failure reveals something about the task, the system, the specification, the representation, the verifier, or the state transition contract.
+
+The goal is to capture that information in a form the system can use later.
 
 ---
 

@@ -7,7 +7,9 @@
 
 ## Overview
 
-This paper argues that the right question for a self-improving system is not *whether* to build an audit agent, but *what kind of oracle* a given task exposes — and therefore which repair engine to route to. It introduces three engines (Audit, SGAR, and No-Go), a taxonomy of fidelity sources, an A/B/C stratification of tasks by oracle quality, and the architectural implications for the ccx system. Throughout, two terms recur: an **audit agent**, which uses recognition to localize the cause of a failure, and **SGAR (State-Governed Agent Regime)**, which uses recognition only as a pass/fail gate over generated candidates.
+This paper argues that the right question for a self-improving system is not *whether* to build an audit agent, but *what kind of oracle* a given task exposes — and therefore which repair engine to route to.
+
+It introduces three engines (Audit, SGAR, and No-Go), a taxonomy of fidelity sources, an A/B/C stratification of tasks by oracle quality, and the architectural implications for the ccx system. Throughout, two terms recur: an **audit agent**, which uses recognition to localize the cause of a failure, and **SGAR (State-Governed Agent Regime)**, which uses recognition only as a pass/fail gate over generated candidates.
 
 ## Contents
 
@@ -49,7 +51,7 @@ Therefore, ccx should not merely build an "audit agent" in the future. It should
 
 The original question came from text2sql: the builder agent already sees the schema, column samples, column stats, and column descriptions, and has also tried audit-agent-like analysis, yet it still fails easily. By contrast, asking an audit agent to inspect an existing SQL query after failure produces clearly better results.
 
-This is puzzling, because from the standpoint of static information, the builder and the auditor receive almost the same inputs. The key question is:
+This is puzzling. From the standpoint of static information, the builder and the auditor receive almost the same inputs. The key question is:
 
 > **What exactly does the audit agent have in addition? Can this mechanism generalize beyond text2sql?**
 

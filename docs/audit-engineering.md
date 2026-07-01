@@ -8,13 +8,20 @@ Its starting claim is simple: in many open-ended tasks with severe mismatch and 
 
 > Let generation expose the problem, let audit convert the problem into an actionable control delta, commit any necessary state transition, and let the agent continue from that delta.
 
-This gives Audit Engineering a position alongside Prompt Engineering, Context Engineering, and Hardness Engineering. Prompt Engineering controls how the task is asked. Context Engineering controls what information is visible. Hardness Engineering controls how demanding the task, environment, and acceptance boundary are. Audit Engineering controls how the system discovers the real objective after generation, localizes failure, writes it back into the control space, and prevents the next iteration from regressing.
+This gives Audit Engineering a position alongside Prompt Engineering, Context Engineering, and Hardness Engineering:
+
+- Prompt Engineering controls *how the task is asked*;
+- Context Engineering controls *what information is visible*;
+- Hardness Engineering controls *how demanding the task, environment, and acceptance boundary are*;
+- Audit Engineering controls *how the system discovers the real objective after generation, localizes failure, writes it back into the control space, and prevents the next iteration from regressing*.
 
 ---
 
 ## 1. Why Audit Engineering Is Necessary
 
-Traditional Prompt Engineering often assumes that the user can specify the objective, constraints, style, success criteria, and boundary conditions before the work begins. That assumption breaks down in many high-value tasks. A user may know that an artifact is wrong without yet being able to state what the right artifact should be. They may recognize failure immediately after seeing a candidate but be unable to define the complete objective before the first generation.
+Traditional Prompt Engineering often assumes that the user can specify the objective, constraints, style, success criteria, and boundary conditions before the work begins. That assumption breaks down in many high-value tasks.
+
+A user may know that an artifact is wrong without yet being able to state what the right artifact should be. They may recognize failure immediately after seeing a candidate but be unable to define the complete objective before the first generation.
 
 This is not merely a failure of articulation. The task itself may have the following properties:
 
@@ -159,7 +166,9 @@ The contract itself remains auditable because the real standard is rarely comple
 
 ### 6.4 Audit the candidate independently
 
-The auditor finds, localizes, and routes defects; it does not rewrite the artifact. Generator and auditor should be isolated by interface, not merely by guideline, whenever the task admits such separation. Even if they use the same underlying model, they should use separate contexts, with external tools or dedicated verifiers added for verifiable tasks. The producer should not be able to author its own acceptance test or its own mutation set through a fallback path; if those artifacts are required for promotion, they must enter as independent operator or verifier inputs.
+The auditor finds, localizes, and routes defects; it does not rewrite the artifact. Generator and auditor should be isolated by interface, not merely by guideline, whenever the task admits such separation. Even if they use the same underlying model, they should use separate contexts, with external tools or dedicated verifiers added for verifiable tasks.
+
+The producer should not be able to author its own acceptance test or its own mutation set through a fallback path. If those artifacts are required for promotion, they must enter as independent operator or verifier inputs.
 
 A minimal audit covers:
 

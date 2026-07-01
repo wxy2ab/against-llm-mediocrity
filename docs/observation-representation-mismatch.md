@@ -10,7 +10,7 @@
 
 **Observation-representation mismatch** occurs when task-relevant world variables are lost, compressed, aliased, or made operationally inaccessible by the observation, encoding, tokenization, embedding, context-compression, or control-representation channel through which the world reaches an LLM system.
 
-It is not merely that the current latent state is unknown. It is that the available representation is not a task-sufficient representation of the world state. The system may reason well over the variables it has, yet still be capped by the variables that never entered its controllable representation.
+It is not merely that the current latent state is unknown. More precisely, the available representation is not a task-sufficient representation of the world state. The system may reason well over the variables it has, yet still be capped by the variables that never entered its controllable representation.
 
 The practical alias is **observation-channel mismatch**. The formal name is **observation-representation mismatch**, because the bottleneck can occur at sensing, reporting, modality conversion, encoding, tokenization, embedding, summarization, retrieval, memory, or task-control representation.
 
@@ -91,11 +91,11 @@ This gap cannot be eliminated by longer reasoning over the same representation. 
 
 If task value depends on a variable \(v^\star(S)\) that never enters \(Z\), even an optimal policy can only be Bayes-optimal with respect to \(Z\), not optimal with respect to \(S\). The system may appear to reason carefully while optimizing only the projection it can see.
 
-Typical signs include decisions based on summaries that omit decisive evidence, recommendations based on stale snapshots, and answers that treat user reports as complete state rather than partial observations.
+Typical signs include decisions based on summaries that omit decisive evidence, recommendations drawn from stale snapshots, and answers that treat user reports as complete state rather than partial observations.
 
 ### 2.2 Affordance Ceiling
 
-Images can show appearance without preserving weight, temperature, texture, friction, elasticity, fragility, grip, resistance, attachment, or action cost. These are not merely semantic attributes. They are action-relevant affordances.
+Images can show appearance without preserving weight, temperature, texture, friction, elasticity, fragility, grip, resistance, attachment, or action cost. These are not merely semantic attributes — they are action-relevant affordances.
 
 For example:
 
@@ -111,27 +111,27 @@ Without an affordance channel, an action problem is reduced to a visual or lingu
 
 ### 2.3 Spatiotemporal Continuity Ceiling
 
-A single image, truncated video, summarized log, or text transcript may lose velocity, acceleration, contact order, action intent, trajectories, event sequence, latency, or irreversible state change.
+A single image, truncated video, summarized log, or text transcript may lose velocity, acceleration, contact order, action intent, trajectories, event sequence, latency, or irreversible state changes.
 
-Many tasks depend on state transitions rather than static object identity: medicine, sports judgment, driving, robotics, financial microstructure, incident response, and customer escalation timing. If the channel undersamples transitions, the system cannot construct the correct dynamic control variables.
+Many tasks depend on state transitions rather than static object identity — medicine, sports judgment, driving, robotics, financial microstructure, incident response, and customer-escalation timing. If the channel undersamples transitions, the system cannot construct the correct dynamic control variables.
 
 ### 2.4 Social-Pragmatic Ceiling
 
 Text transcripts often lose tone, pause, facial expression, shared attention, power relation, humiliation, sarcasm, exhaustion, intimacy, tension, and scene pressure.
 
-The sentence "Sure, you're impressive" can be praise, anger, sarcasm, surrender, flirtation, teasing, or social self-protection. If the system receives only text tokens, multiple interaction states collapse into one observation. State mismatch can describe the latent dialogue-state uncertainty; observation-representation mismatch names the lower-level cause: the social variables did not enter the representation.
+The sentence "Sure, you're impressive" can be praise, anger, sarcasm, surrender, flirtation, teasing, or social self-protection. If the system receives only text tokens, multiple interaction states collapse into one observation. State mismatch can describe the latent dialogue-state uncertainty, while observation-representation mismatch names the lower-level cause: the social variables never entered the representation.
 
 ### 2.5 Verification Ceiling
 
-An LLM can generate a plausible answer, but without tests, sensors, runtime logs, user feedback, external data, or expert acceptance, it cannot bind a candidate output to its real consequences.
+An LLM can generate a plausible answer, but without tests, sensors, runtime logs, user feedback, external data, or expert acceptance, it cannot bind a candidate output to its actual consequences.
 
-This is not identical to hallucination. Hallucination is false output content. Observation-representation mismatch is the absence of verification signal from the system representation. More thinking over the same unverified representation may only produce more elaborate error.
+This is not identical to hallucination. Hallucination is false output content. Observation-representation mismatch is the absence of verification signal from the system representation. More thinking over the same unverified representation may only produce more elaborate errors.
 
 ### 2.6 Task-Construction Ceiling
 
-Many real tasks are not already clean abstract problems. The system must first extract the task model from a natural scene. Observation-representation mismatch explains one lower-level failure source: the decisive variables in the scene never become extractable, verifiable, or controllable variables.
+Many real tasks are not already clean abstract problems. The system must first extract the task model from a natural scene. Observation-representation mismatch explains one lower-level failure source: the decisive variables in the scene never become extractable, verifiable, or controllable.
 
-In a car-wash problem, the key variable is not how far a person moves but which object's state must change. In a doorway-and-pole problem, the key variables may include three-dimensional clearance, cross-section, orientation, path, and surrounding maneuvering space. A clean abstract formulation may be solvable while the natural observation form remains unsolved because the right control variables never entered \(Z\).
+In a car-wash problem, the key variable is not how far a person moves but which object's state must change. In a doorway-and-pole problem, the key variables may include three-dimensional clearance, cross-section, orientation, path, and surrounding maneuvering space. A clean abstract formulation may be solvable even when the natural observation form remains unsolved, because the right control variables never entered \(Z\).
 
 ## 3. Distinction from State Mismatch
 
@@ -144,7 +144,7 @@ In a car-wash problem, the key variable is not how far a person moves but which 
 | Standard repair | State enumeration, scenario matrix, if-then policy, revocation trigger | New measurement, richer modality, tool call, sensor, raw data, environmental query, structured representation |
 | Success criterion | Conditional policy covers the relevant states | Performance jumps after the observation or representation channel changes |
 
-State mismatch should first make state explicit: enumerate plausible latent states, identify variables that change action ranking, create scenario matrices, write conditional policies, and add revocation triggers.
+State mismatch should first make state explicit: enumerate plausible latent states, identify variables that change action ranking, construct scenario matrices, write conditional policies, and add revocation triggers.
 
 Observation-representation mismatch asks a different first question:
 
@@ -160,7 +160,7 @@ Fitting-boundary mismatch concerns capability routing:
 M_X \ne T_X.
 \]
 
-The model has learned or approximately learned capability \(X\), but activates it outside its true domain or fails to activate it inside its true domain.
+The model has learned or approximately learned capability \(X\), but activates it outside its true domain or fails to activate it within its true domain.
 
 Observation-representation mismatch concerns the upstream channel:
 
@@ -199,7 +199,7 @@ Under observation-representation mismatch, state enumeration may only expose the
 \text{measure } v^\star.
 \]
 
-For example: if the cup is hot, do not grab it; if it is not hot, grabbing may be safe. But if the current image cannot reveal temperature, the next step is not to answer with confidence. It is to measure temperature or mark the variable unavailable.
+For example: if the cup is hot, do not grab it; if it is not hot, grabbing may be safe. But if the current image cannot reveal temperature, the correct next step is not to answer with confidence. It is to measure temperature or mark the variable unavailable.
 
 ### 5.3 Errors Concentrate in Channel Blind Spots
 
@@ -228,7 +228,7 @@ For example, an image may lead to a wrong pole-through-door judgment, while a st
 
 ### 5.5 Output-Space Search Has Low Yield; Measurement Has High Yield
 
-Repeated requests to "try again," "think harder," or "make it better" produce limited improvement when the channel is insufficient. Measurement, raw signals, tools, tests, logs, environmental APIs, or structured multimodal variables can produce a much larger gain.
+Repeated requests to "try again," "think harder," or "make it better" produce limited improvement when the channel is insufficient. Measurement, raw signals, tools, tests, logs, environmental APIs, or structured multimodal variables can yield a much larger gain.
 
 The required reparameterization is not only a better state matrix. It is making the world observable, measurable, encodable, and controllable.
 

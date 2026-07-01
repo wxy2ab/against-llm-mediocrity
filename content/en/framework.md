@@ -15,9 +15,9 @@ heroPoints:
 
 ## The Core Question: Does Probability Track Value?
 
-The earlier pages make the judgment first: some problems will not disappear just because models get stronger. This page explains why those ceilings appear. The recurring symptom is easy to recognize: the answer keeps getting smoother and more persuasive, yet the decisive variable still never enters the system.
+Earlier sections made the judgment first: some problems will not disappear simply because models get stronger. This page explains why those ceilings appear. The recurring symptom is easy to spot: the answer keeps getting smoother and more persuasive, yet the decisive variable never enters the system.
 
-To see why, start from how the model works. An LLM still generates through probability: at each step it selects the next token, reasoning step, structural move, or tool call under the current context. Training, reinforcement learning from human feedback (RLHF), preference optimization, and inference-time reasoning all reshape this distribution. None of them, however, give the model direct access to the real utility function of the current task.
+To see why, return to how the model actually works. An LLM generates through probability: at each step it selects the next token, reasoning step, structural move, or tool call based on the current context. Training, reinforcement learning from human feedback (RLHF), preference optimization, and inference-time reasoning all reshape this probability distribution. **None of them, however, give the model direct access to the real utility function of the current task.**
 
 The mechanism question is therefore:
 
@@ -25,7 +25,7 @@ The mechanism question is therefore:
 Is the model's easiest direction of continuation also the direction in which task value rises?
 ```
 
-When the answer is yes, autoregressive generation can be extremely effective. When it is no, fluency can make the wrong direction more convincing. That is why "the model got better" and "the task still fails at the critical point" can both be true at once: training expands the locally aligned region, but it does not guarantee that every structural mismatch is removed.
+When the answer is yes, autoregressive generation can be extremely effective. When it is no, fluency makes the wrong direction more convincing. That is why "the model got better" and "the task still fails at the critical point" can both be true: training expands the locally aligned region, but it cannot remove every structural mismatch.
 
 ## Three Alignment Regimes
 
@@ -50,7 +50,7 @@ High-value outputs are no longer tail events; they are easy to reach. Context co
 
 ## Policy-Value Compression
 
-Modern aligned models should not be described as merely following raw word frequency. Pretraining gives the model language and world patterns. Supervised fine-tuning (SFT), RLHF, direct preference optimization (DPO), process supervision, and related methods then compress certain proxy values into the policy, making helpful, preferred, apparently correct, or safe trajectories more probable.
+Modern aligned models are not simply following raw word frequencies. Pretraining equips them with language and world patterns. Then supervised fine-tuning (SFT), RLHF, direct preference optimization (DPO), process supervision, and related methods compress certain proxy values into the policy—making helpful, preferred, apparently correct, or safe trajectories more probable.
 
 This is **policy-value compression**: value is not directly read by the model; it is compressed into probability and expressed at inference time through more likely tokens, steps, and output trajectories.
 
@@ -59,21 +59,21 @@ This explains two facts:
 - Models keep getting more useful because more valuable behaviors are moved into high-probability regions.
 - Mismatch remains because proxy value is not the same as the real value of the current task, especially in open-ended, dynamic, high-stakes, or underspecified situations.
 
-Inference-time reasoning has a similar effect. Chain-of-thought, search, reflection, and tool use create intermediate states that can turn the original task into more locally aligned subtasks. But if the intermediate representation is wrong, longer reasoning can simply become a longer rationalization of the wrong abstraction.
+Inference-time reasoning works similarly. Chain-of-thought, search, reflection, and tool use create intermediate states that can decompose the original task into more locally aligned subtasks. But if the intermediate representation is wrong, longer reasoning becomes a longer rationalization of the same wrong abstraction.
 
 The consequence is not pessimism. It is calibration. Training and inference-time thinking expand the region where probability and value are locally aligned, but they do not remove the need to ask whether the current representation actually contains the task's decisive variables.
 
 ## Why Multi-Agent Collaboration Does Not Automatically Escape LLM Mediocrity
 
-Many people have the intuition that if a single model is prone to mediocrity, then multiple agents can solve the problem by discussing, critiquing, dividing roles, and voting. That is only true when multi-agent collaboration actually introduces a new control space, external state, validation mechanism, or genuinely differentiated strategy. Otherwise, it often amounts to repeating the same generative process many times.
+Many people assume that if a single model is prone to mediocrity, multiple agents can escape it by discussing, critiquing, dividing roles, and voting. That works only when multi-agent collaboration actually introduces a new control space, external state, validation mechanism, or genuinely differentiated strategy. Otherwise, it often amounts to repeating the same generative process many times.
 
-If several agents share roughly the same model, corpus priors, reward shaping, and task representation, then their collaboration is mechanically closer to **repeated sampling**. Even if they are labeled proposer, critic, judge, and executor, they are still searching on roughly the same probability landscape. This can improve average quality, reduce obvious errors, and make the output more complete or robust, but it does not automatically change the fact that high-value solutions may still lie outside the high-probability region.
+If several agents share roughly the same model, corpus priors, reward shaping, and task representation, their collaboration is mechanically closer to **repeated sampling**. Even when labeled proposer, critic, judge, and executor, they are still searching on the same probability landscape. This can improve average quality, reduce obvious errors, and make the output more complete, but it does not change the fact that high-value solutions may still lie outside the high-probability region.
 
-The same applies to multi-persona collaboration. Giving one model identities such as conservative, radical, user advocate, or architect can lengthen the sampling path and create more local perturbations and corrections. But if those personas are not tied to different information sources, different state access, different control objects, or different validation criteria, then the apparent dialogue is often just one autoregressive trajectory stretched into several entangled ones. A longer path does not mean escape from autoregressive gravity.
+The same limitation applies to multi-persona collaboration. Giving one model identities such as conservative, radical, user advocate, or architect can lengthen the sampling path and create more local perturbations. But if those personas are not tied to different information sources, state access, control objects, or validation criteria, the apparent dialogue is often just one autoregressive trajectory stretched into several entangled ones. A longer path does not mean escape from autoregressive gravity.
 
-The key point is this: **lengthening the sampling path is not the same as changing the search space; increasing the number of roles is not the same as changing the value function.** If the real bottleneck comes from aggregation mismatch, state mismatch, support mismatch, specification mismatch, or fitting-boundary mismatch, then more agents often expose the mismatch more thoroughly rather than repair it. They may make a mediocre answer more persuasive, or make a cluster of middling answers more consistent, while still failing to reach the decisive structure.
+The key point is this: **lengthening the sampling path is not the same as changing the search space; increasing the number of roles is not the same as changing the value function.** If the real bottleneck is an aggregation, state, support, specification, or fitting-boundary mismatch, then more agents often expose the mismatch more thoroughly rather than repair it. They may make a mediocre answer more persuasive, or a cluster of middling answers more consistent, while still failing to reach the decisive structure.
 
-So multi-agent collaboration is not a sufficient condition for escaping LLM mediocrity. It starts to become a real governance mechanism only when it genuinely rewrites the task into a different control problem: by introducing explicit external state, validation loops, Governed Knowledge Objects (GKOs), differentiated tool permissions, structured control spaces, or minimal human intervention points.
+Therefore, multi-agent collaboration is not a sufficient condition for escaping LLM mediocrity. It becomes a real governance mechanism only when it genuinely rewrites the task into a different control problem—by introducing explicit external state, validation loops, Governed Knowledge Objects (GKOs), differentiated tool permissions, structured control spaces, or minimal human intervention points.
 
 ## The Six Primitive Mismatches
 
@@ -131,7 +131,7 @@ Test local explanations against neighboring contexts: perturb metrics, audit pro
 ### Observation-Representation-Dominant
 
 Repair the channel before reasoning harder: add measurements, inspect raw evidence, run tests, query the environment, or encode physical, social, temporal, and verification variables explicitly.
-::::
+:::
 
 ## Why Derivative Patterns Should Not Multiply the Taxonomy
 
@@ -168,7 +168,7 @@ Meaning-preserving shifts in tone, audience, or format often benefit from the mo
 ### Structured Transformation
 
 Converting material into tables, checklists, JSON, SOPs, queries, or edge-case lists is often easier to verify than open-ended final-answer generation.
-::::
+:::
 
 ## From Theory to Method
 
@@ -202,7 +202,7 @@ This is fundamentally a way to fight support mismatch: pull low-probability but 
 ### Write the Control Space First, Then Generate the Output
 Tag: rewrite a mediocre task into extraordinary subtasks
 
-Tasks such as stories, long-form writing, course design, or complex proposals often become mediocre when the model is asked to generate the final artifact directly. But if the elements of excellence are written down first, such as required components, pacing, constraints, tonal boundaries, emotional arcs, character relations, foreshadowing payoffs, or acceptance criteria, then the model often becomes strong on those subtasks.
+Tasks such as stories, long-form writing, course design, or complex proposals often become mediocre when the model is asked to generate the final artifact directly. But if the elements of excellence are written down first—such as required components, pacing, constraints, tonal boundaries, emotional arcs, character relations, foreshadowing payoffs, or acceptance criteria—then the model often becomes strong on those subtasks.
 
 In practice, this means constructing a control space first: character arcs, conflict gradients, thematic constraints, scene beats, reveal order, forbidden cliches, and evaluation rubrics. Then the model generates the story or artifact under that control space, and a relatively more reliable evaluation task checks whether the result drifts, becomes generic, violates setup, or collapses into cliche.
 

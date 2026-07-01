@@ -188,7 +188,7 @@ Collaboration Layer
   Governed Execution Objects and human-AI coordination records
 ```
 
-These layers are not separate products. They are roles in a single lifecycle. A failure diagnosed at the diagnostic layer should be able to produce an audit finding. An audit finding should produce a control delta. A control delta may update a GKO, a GEO, a verifier, a guard, or a state record. A verified update may become a committed state transition.
+These layers are not separate products. They are distinct roles within a single lifecycle. A failure diagnosed at the diagnostic layer should be able to produce an audit finding. An audit finding should produce a control delta. A control delta may update a GKO, a GEO, a verifier, a guard, or a state record. A verified update may become a committed state transition.
 
 ---
 
@@ -222,7 +222,7 @@ Artifact
   → StateTransition
 ```
 
-The lifecycle does not require all objects for every task. Low-risk tasks may use only a subset. High-value or long-horizon tasks should preserve the chain from finding to state commitment.
+The lifecycle does not require all objects for every task. Low-risk tasks may use only a subset. High-value or long-horizon tasks should preserve the full chain from finding to state commitment.
 
 ---
 
@@ -286,7 +286,7 @@ state.project.current_schema_graph.commit_000042
 | revoked | Withdrawn due to contradiction, failed scope, or invalid evidence. |
 | archived | Historical object no longer part of active governance. |
 
-No object should silently disappear. Revocation and supersession should be explicit.
+No object should silently disappear. Revocation and supersession must be explicit events.
 
 ---
 
@@ -294,7 +294,7 @@ No object should silently disappear. Revocation and supersession should be expli
 
 A **Governed Knowledge Object** is a scoped, evidence-bearing, revocable unit of task-specific control knowledge.
 
-GKOs are the core knowledge-layer objects. They are not merely facts. They can govern routing, search, validation, rendering, state interpretation, or audit.
+GKOs are the core knowledge-layer objects. They are not merely facts; they can govern routing, search, validation, rendering, state interpretation, or audit.
 
 ### 6.1 GKO Types
 
@@ -574,6 +574,8 @@ This ordering is not universal. It must be configurable by domain. The invariant
 
 An **Audit Finding** localizes a defect in an artifact, trace, state transition, or governed object. It is the bridge from failure observation to system repair.
 
+The corrected bridging sequence is not "mismatch type → eight mechanisms → direct fix," but rather "mismatch type → task-specific control object → mechanism attribution → repair-layer selection."
+
 ### 9.1 Finding Schema
 
 ```json
@@ -660,7 +662,7 @@ An **Audit Finding** localizes a defect in an artifact, trace, state transition,
 
 A **Control Delta** specifies a localized change to the governed control space. It is the write-back object produced by an audit finding.
 
-A finding says what failed. A control delta says what must change.
+A finding says what failed; a control delta says what must change.
 
 ### 10.1 Delta Types
 
@@ -1272,7 +1274,7 @@ No object should both supersede and depend on the same object unless explicitly 
 
 ### 17.3 Conflict Resolution
 
-When objects conflict, default resolution should consider:
+When objects conflict, default resolution should consider the following factors:
 
 ```text
 scope specificity
@@ -1631,7 +1633,7 @@ This section gives a compact end-to-end example of the object model in a text-to
 
 ### 21.1 Direct Generation Failure
 
-A direct system receives:
+A direct system receives a natural language question and a database schema, then produces SQL:
 
 ```text
 natural language question + database schema → SQL
@@ -1811,7 +1813,7 @@ human review for critical conflicts
 
 Governance should be selective.
 
-A system should apply heavier governance when:
+A system should apply heavier governance when the following inequality holds:
 
 ```text
 P(failure without governance)
@@ -1871,7 +1873,7 @@ A minimal audit-of-audit finding is itself an Audit Finding with `mechanism_axis
 
 ## 25. Conformance Checklist
 
-A system conforms to the Core Profile if it satisfies:
+A system conforms to the Core Profile if it satisfies the following:
 
 ```text
 [ ] Active GKOs include scope, support_scope, strength, and revocation_trigger.
@@ -1881,7 +1883,7 @@ A system conforms to the Core Profile if it satisfies:
 [ ] Evidence Objects identify authority_level and limitations.
 ```
 
-A system conforms to the Standard Profile if it additionally satisfies:
+A system conforms to the Standard Profile if it additionally satisfies the following:
 
 ```text
 [ ] Defect Ledger entries track recurrence and mitigation.
@@ -1890,7 +1892,7 @@ A system conforms to the Standard Profile if it additionally satisfies:
 [ ] Resolved defects have guards or accepted-risk notes.
 ```
 
-A system conforms to the Full SGAR Profile if it additionally satisfies:
+A system conforms to the Full SGAR Profile if it additionally satisfies the following:
 
 ```text
 [ ] Critical state changes use Transition Contracts.

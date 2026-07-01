@@ -6,21 +6,54 @@
 
 ## Abstract
 
-Large language model (LLM) systems are increasingly improved at inference time through repeated sampling, critique, planning, reranking, retrieval, tool use, and iterative revision. These methods can substantially outperform one-shot generation. Yet on a class of difficult tasks they often remain concentrated in outputs that are fluent, locally coherent, and incrementally improvable while still falling short of high task value. We use **LLM mediocrity** as the umbrella term for this failure mode.
+Large language model (LLM) systems are increasingly improved at inference time through repeated sampling, critique, planning, reranking, retrieval, tool use, and iterative revision. These methods can substantially outperform one-shot generation. Yet on a class of difficult tasks they often remain concentrated in outputs that are fluent, locally coherent, and incrementally improvable—while still falling short of high task value. We use **LLM mediocrity** as the umbrella term for this failure mode.
 
-A terminological clarification is central to this version. **Autoregressive mediocrity** is too narrow to name the entire phenomenon. It accurately describes only one submechanism: **aggregation mismatch**, where locally plausible token-level continuations fail to compose into globally high-value structures. The other primitive mismatches are not primarily autoregressive. **State mismatch** is a latent-state identifiability problem under a given observation channel. **Specification mismatch** is a problem of ambiguous, incomplete, or inconsistent task criteria in training data, prompts, and evaluators. **Support mismatch** is a probability-support/value mismatch in which high-value structures may occupy low-support regions of the policy and cannot be directly identified as valuable by probability alone. **Fitting-boundary mismatch** is a capability-routing problem: the learned activation boundary of a capability does not match its true domain of application, producing both over-triggering and under-triggering. **Observation-representation mismatch** is an interface-level problem: task-relevant world variables are lost, compressed, aliased, or made operationally inaccessible before they enter the model-accessible representation. For this reason, the broader failure regime is better named LLM mediocrity, while autoregressive mediocrity becomes a special case.
+### Terminological Clarification
 
-This paper argues that LLM mediocrity is not a universal property of LLMs. It is a task-, representation-, state-observation-, specification-, and budget-dependent regime. Between mediocrity and extraordinary lies the regime that most often appears in real human-facing tasks: **autoregressive local alignment**, or probability-value local alignment. In this regime, the model's local continuation tendencies are genuinely aligned with parts of the task value function, but that alignment is partial, conditional, and insufficient to guarantee global success. The system can produce locally correct, fluent, useful, or even insightful components while still drifting at the level of task construal, long-range coordination, hidden state, support, or true objective.
+**Autoregressive mediocrity** is too narrow to name the entire phenomenon. It accurately describes only one submechanism: **aggregation mismatch**, where locally plausible token-level continuations fail to compose into globally high-value structures. The other primitive mismatches are not primarily autoregressive.
+
+- **State mismatch** is a latent-state identifiability problem under a given observation channel.
+- **Specification mismatch** is a problem of ambiguous, incomplete, or inconsistent task criteria in training data, prompts, and evaluators.
+- **Support mismatch** is a probability-support/value mismatch: high-value structures may occupy low-support regions of the policy and cannot be directly identified as valuable by probability alone.
+- **Fitting-boundary mismatch** is a capability-routing problem. The learned activation boundary of a capability does not match its true domain of application, producing both over-triggering and under-triggering.
+- **Observation-representation mismatch** is an interface-level problem. Task-relevant world variables are lost, compressed, aliased, or made operationally inaccessible before they enter the model-accessible representation.
+
+For this reason, the broader failure regime is better named LLM mediocrity, while autoregressive mediocrity becomes a special case.
+
+### Three Regimes
+
+This paper argues that LLM mediocrity is not a universal property of LLMs. It is a task-, representation-, state-observation-, specification-, and budget-dependent regime.
+
+Between mediocrity and extraordinary lies the regime that most often appears in real human-facing tasks: **autoregressive local alignment**, or probability-value local alignment. In this regime, the model's local continuation tendencies are genuinely aligned with parts of the task value function, but that alignment is partial, conditional, and insufficient to guarantee global success. The system can produce locally correct, fluent, useful, or even insightful components while still drifting at the level of task construal, long-range coordination, hidden state, support, or true objective.
 
 At the positive pole, which we call **autoregressive extraordinary**, the model's local continuation tendencies, learned semantic representations, genre priors, and surface fluency are positively aligned with task value at both local and global levels. In such cases, autoregressive generation is not a bottleneck but an advantage: local improvement compounds into global quality, high-value outputs are easy to reach, relevant state is explicit or stable, and the fluent output space itself may already be an adequate control space. Context compression and high-dimensional semantic mapping are central examples, but the same positive-alignment regime also appears in semantic decompression, register transfer, surface polishing, structured transformation, taxonomy generation, hypothesis generation, edge-case enumeration, query formulation, and boilerplate synthesis.
 
+### Policy-Value Compression
+
 A crucial clarification is that modern aligned LLMs are not merely following raw lexical frequency. Supervised fine-tuning, reinforcement learning from human feedback, preference optimization, process supervision, and inference-time thinking reshape the policy distribution so that many proxy values become high-probability trajectories. We call this **policy-value compression**: task value is not emitted directly, but compressed into the model's policy and expressed at inference time as probabilities over tokens, reasoning traces, and output trajectories. This explains why better training and more thinking expand the region of local alignment. It also explains why mismatch remains: proxy value compressed into policy probability is not identical to true task value in open-ended settings.
 
-We argue that susceptibility to LLM mediocrity is often predictable from six primitive mismatches between the LLM system and the task value landscape: **aggregation mismatch**, where global value is not recoverable from local improvements and which is the narrow home of autoregressive mediocrity; **support mismatch**, where high-value structures lie in low-probability or low-support regions and probability cannot by itself distinguish rare insight from rare noise; **state mismatch**, where utility depends on a dynamic latent state that is not identifiable under the current observation channel; **specification mismatch**, where the accessible prompt, training-data norm, evaluator, or proxy objective diverges from the true task criterion; **fitting-boundary mismatch**, where the implicit trigger boundary learned for a capability, strategy, audit structure, or behavior does not match its true application boundary; and **observation-representation mismatch**, where the observation, encoding, tokenization, context, tool, or control-representation channel does not preserve task-sufficient world variables. These six mismatches are intended as primitive diagnostic axes rather than an exhaustive list of surface phenomena.
+### Six Primitive Mismatches
 
-A key clarification is that many recurrent failures are not additional primitive mismatch classes. **Order-sensitive trajectories**, **emergent specification**, **structure-signal gaps**, **noisy-context construal failures**, **corpus-prior dominance**, and **budgeted control-capacity collapse** are better understood as derivative or compound patterns produced by the interaction of the six primitive mismatches with representation choice, inference budget, and control policy.
+We argue that susceptibility to LLM mediocrity is often predictable from six primitive mismatches between the LLM system and the task value landscape:
 
-The central intervention principle of the paper is therefore broader than any single architecture: preserve and exploit the parts of a task that are already locally aligned, while transforming the poorly aligned parts into lower-mismatch, positively aligned subtasks. We call this principle **Mediocrity-to-Extraordinary Transformation**. A system can avoid mediocre output-space search if it can convert a difficult final-output problem into subtasks such as compression, construal extraction, rubric generation, state enumeration, edge-case generation, query formulation, structural outlining, constraint induction, and semantic decompression. These subtasks are often autoregressive-extraordinary or at least more locally aligned than the original task.
+1. **Aggregation mismatch** — global value is not recoverable from local improvements. This is the narrow home of autoregressive mediocrity.
+2. **Support mismatch** — high-value structures lie in low-probability or low-support regions, and probability cannot by itself distinguish rare insight from rare noise.
+3. **State mismatch** — utility depends on a dynamic latent state that is not identifiable under the current observation channel.
+4. **Specification mismatch** — the accessible prompt, training-data norm, evaluator, or proxy objective diverges from the true task criterion.
+5. **Fitting-boundary mismatch** — the implicit trigger boundary learned for a capability, strategy, audit structure, or behavior does not match its true application boundary.
+6. **Observation-representation mismatch** — the observation, encoding, tokenization, context, tool, or control-representation channel does not preserve task-sufficient world variables.
+
+These six mismatches are intended as primitive diagnostic axes rather than an exhaustive list of surface phenomena.
+
+A key clarification is that many recurrent failures are not additional primitive mismatch classes. **Order-sensitive trajectories**, **emergent specification**, **structure-signal gaps**, **noisy-context construal failures**, **corpus-prior dominance**, and **budgeted control-capacity collapse** are better understood as derivative or compound patterns. They are produced by the interaction of the six primitive mismatches with representation choice, inference budget, and control policy.
+
+### The Intervention Principle: Mediocrity-to-Extraordinary Transformation
+
+The central intervention principle of the paper is therefore broader than any single architecture: preserve and exploit the parts of a task that are already locally aligned, while transforming the poorly aligned parts into lower-mismatch, positively aligned subtasks. We call this principle **Mediocrity-to-Extraordinary Transformation**.
+
+A system can avoid mediocre output-space search if it can convert a difficult final-output problem into subtasks such as compression, construal extraction, rubric generation, state enumeration, edge-case generation, query formulation, structural outlining, constraint induction, and semantic decompression. These subtasks are often autoregressive-extraordinary or at least more locally aligned than the original task.
+
+### Knowledge Governance
 
 To operationalize this principle, we propose **Knowledge Governance**, an inference-time framework that separates final rendering from the acquisition, validation, and control of task-specific knowledge. The framework constructs a **Decoupled Control Space**, extracts candidate invariants, validates them under task-relevant evidence, and stores them as **Governed Knowledge Objects (GKOs)** with explicit conditions, strength, priority, lifespan, and revocation rules. These objects then guide subsequent generation as soft preferences, hard constraints, routing rules, construal rules, or diagnostic tests.
 
@@ -34,11 +67,15 @@ The framework does not assume a universal control-space representation. What is 
 
 Large language models increasingly rely on inference-time compute to solve difficult tasks. Prompting with intermediate reasoning, sampling multiple chains, performing tree-based search, iteratively rewriting outputs, and interacting with tools or environments have all shown that performance is not determined solely by model weights at deployment time [1--5, 11]. These advances matter because they demonstrate that generation can be improved by search, critique, and feedback rather than by one-shot decoding alone.
 
-Yet a persistent limitation remains. In many high-value applications - especially those involving long-range coordination, tacit quality criteria, dynamic environments, noisy real-world context, rare structures, hidden state, or ambiguous specifications - systems continue to plateau in outputs that are plausible but mediocre. These outputs are not random failures. They are often fluent, defensible, and even better than the first draft. What they lack is the rare structural relation, hidden boundary condition, correct problem construal, state-sensitive adaptation, low-support insight, or true success criterion that actually determines value.
+Yet a persistent limitation remains. In many high-value applications—especially those involving long-range coordination, tacit quality criteria, dynamic environments, noisy real-world context, rare structures, hidden state, or ambiguous specifications—systems continue to plateau. Their outputs are plausible but mediocre.
+
+These outputs are not random failures. They are often fluent, defensible, and even better than the first draft. What they lack is the decisive element that actually determines value: the rare structural relation, the hidden boundary condition, the correct problem construal, the state-sensitive adaptation, the low-support insight, or the true success criterion.
 
 We call this broader failure mode **LLM mediocrity**. The term is not meant as a universal criticism of large language models. Rather, it names a task- and budget-dependent phenomenon: under a fixed inference budget and a given family of search operators, the system remains concentrated in regions of output space that are easy to generate and refine but systematically suboptimal with respect to task value. In such regimes, more output-space search can raise average quality while still failing to reach the near-optimal region.
 
-The earlier phrase **autoregressive mediocrity** is useful but too narrow. It should be reserved for the part of LLM mediocrity that is genuinely caused by autoregressive aggregation: local token-level continuation, local plausibility, and local refinement do not necessarily compose into global value. This mechanism is real, but it does not explain every important failure. State mismatch, specification mismatch, and support mismatch do not reduce to next-token generation alone. They arise from the gap between the LLM's observation channel, learned policy distribution, and accessible task specification on one side, and the true state, true value criterion, and high-value support structure of the problem domain on the other.
+The earlier phrase **autoregressive mediocrity** is useful but too narrow. It should be reserved for the part of LLM mediocrity that is genuinely caused by autoregressive aggregation: local token-level continuation, local plausibility, and local refinement do not necessarily compose into global value. This mechanism is real, but it does not explain every important failure.
+
+State mismatch, specification mismatch, and support mismatch do not reduce to next-token generation alone. They arise from a gap. On one side stand the LLM's observation channel, learned policy distribution, and accessible task specification. On the other side stand the true state, the true value criterion, and the high-value support structure of the problem domain.
 
 LLM mediocrity should also be distinguished from classical **mode collapse**. Mode collapse, as typically discussed in generative modeling, concerns a loss of diversity. By contrast, LLM mediocrity can persist even when candidate diversity is nontrivial. The problem is not necessarily that the system produces only one kind of answer; it is that diverse-looking answers may still occupy the same low-value basin of the task landscape or share the same hidden failure of state, specification, support, or aggregation.
 
@@ -48,7 +85,9 @@ We call this middle regime **autoregressive local alignment**. It occurs when st
 
 Local alignment is therefore the ordinary human-facing regime. Users typically bring messy, partially specified, state-dependent tasks that include both routine components and tacit high-value constraints. The system's challenge is not to suppress autoregressive generation; it is to identify where autoregression is already aligned, where it is only locally aligned, and where governance or reparameterization is needed to prevent local fluency from substituting for global value.
 
-This point requires a clarification about probability. After instruction tuning, reinforcement learning from human feedback, direct preference optimization, process supervision, and related methods, a deployed LLM is no longer well described as merely following raw pretraining frequency. It still generates through an autoregressive probability distribution, but that distribution has been reshaped by proxy objectives for helpfulness, correctness, harmlessness, instruction-following, and task success [8, 13, 14]. In other words, alignment training does not abolish statistical generation. It compresses proxy task value into policy probability.
+This point requires a clarification about probability. After instruction tuning, reinforcement learning from human feedback, direct preference optimization, process supervision, and related methods, a deployed LLM is no longer well described as merely following raw pretraining frequency. It still generates through an autoregressive probability distribution, but that distribution has been reshaped by proxy objectives for helpfulness, correctness, harmlessness, instruction-following, and task success [8, 13, 14].
+
+In other words, alignment training does not abolish statistical generation. It compresses proxy task value into policy probability.
 
 This compression is one reason modern LLM systems keep improving. As feedback improves, more high-value behaviors become high-probability under the aligned policy. As thinking and test-time reasoning create intermediate states, more difficult tasks are decomposed into local operations that the model can handle well. But this process expands local alignment rather than eliminating all mismatch. When true value depends on nonlocal aggregation, rare structures, latent state, or underspecified objectives, the aligned policy may still diverge from the real task utility.
 
@@ -75,7 +114,15 @@ The core claim of this paper is therefore three-regime rather than two-sided. Fi
 
 Second, autoregressive local alignment describes the regime in which most deployed tasks actually live: local model strengths are real, but they are not sufficient to guarantee global task value. Third, autoregressive extraordinary provides the central design principle for intervention. A system can mitigate mediocrity by transforming high-mismatch or only locally aligned final-output tasks into lower-mismatch, positively aligned intermediate tasks. Knowledge Governance is a disciplined implementation of this transformation: it creates explicit control artifacts, validates them, stores them as governed knowledge, and uses them to guide fluent rendering.
 
-This distinction matters because many intuitive failure categories are tempting but not primitive. For example, order-sensitive trajectories are important, but the mere fact that a task has a correct sequence is not itself a mismatch. It becomes a mismatch only when the generation or search procedure cannot reliably recover, preserve, or validate the required trajectory. Similarly, some goals are not fully known before candidate outputs are inspected; this is a dynamic source of specification mismatch, not a new primitive class. Real-world reasoning tasks often require extracting relevant variables from noisy scenes; this is a compound construal failure involving specification, state, support, and sometimes aggregation mismatch. Training data source imbalance can strongly shape default narratives; when that prior makes one locally plausible explanation dominate adjacent alternatives, it often appears as fitting-boundary mismatch, sometimes interacting with support, specification, state, and aggregation effects.
+This distinction matters because many intuitive failure categories are tempting but not primitive.
+
+**Order-sensitive trajectories** are important, but the mere fact that a task has a correct sequence is not itself a mismatch. It becomes a mismatch only when the generation or search procedure cannot reliably recover, preserve, or validate the required trajectory.
+
+**Emergent goals**—where some goals are not fully known before candidate outputs are inspected—are a dynamic source of specification mismatch, not a new primitive class.
+
+**Noisy-context reasoning** often requires extracting relevant variables from messy scenes. This is a compound construal failure involving specification, state, support, and sometimes aggregation mismatch.
+
+**Training-data source imbalance** can strongly shape default narratives. When that prior makes one locally plausible explanation dominate adjacent alternatives, it often appears as fitting-boundary mismatch, sometimes interacting with support, specification, state, and aggregation effects.
 
 This paper makes eight contributions.
 
@@ -144,7 +191,11 @@ We now formalize LLM mediocrity as a predictable consequence of mismatches betwe
 
 ### 3.1 Problem Setup
 
-Let the accessible input to the model be an observation sequence $o_{1:t} \triangleq x \in \mathcal{X}$, and let $s_t \in \mathcal{S}$ denote an optional latent, environmental, or interaction state. The notation is intentionally state-observation separated: the model conditions on observations, prompts, traces, retrieved text, logs, or other visible artifacts, but the utility of an output may depend on a latent state that is not equivalent to those observations. Let $y \in \mathcal{Y}$ denote an output. Let the active model policy define a conditional distribution
+Let the accessible input to the model be an observation sequence $o_{1:t} \triangleq x \in \mathcal{X}$, and let $s_t \in \mathcal{S}$ denote an optional latent, environmental, or interaction state.
+
+The notation is intentionally state-observation separated. The model conditions on observations, prompts, traces, retrieved text, logs, or other visible artifacts. But the utility of an output may depend on a latent state that is not equivalent to those observations.
+
+Let $y \in \mathcal{Y}$ denote an output. Let the active model policy define a conditional distribution
 
 \[
 p_\theta(y \mid o_{1:t}),
@@ -581,7 +632,12 @@ Local alignment is not a weak version of mediocrity. It is a distinct operating 
 
 ### 4.1 Definition
 
-Let $x$ denote the input, $s$ the relevant latent or environmental state, and $y$ the final output. A task instance exhibits **autoregressive local alignment** under an inference procedure $\Pi_B$ when some reachable local operations are positively aligned with task value, while the final-output process is not globally guaranteed to reach the near-optimal set $\mathcal{H}_\tau(x,s)$.
+Let $x$ denote the input, $s$ the relevant latent or environmental state, and $y$ the final output.
+
+A task instance exhibits **autoregressive local alignment** under an inference procedure $\Pi_B$ when two conditions hold:
+
+1. Some reachable local operations are positively aligned with task value.
+2. The final-output process is not globally guaranteed to reach the near-optimal set $\mathcal{H}_\tau(x,s)$.
 
 Informally:
 

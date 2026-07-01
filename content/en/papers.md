@@ -253,4 +253,4 @@ The framework is built to be tested, not just argued. These are the open empiric
 
 ## Project Status
 
-These drafts are research frameworks and an open-source agenda, not a closed theory. Their goal is to provide a language that can be debated, implemented, and tested: when LLMs become mediocre, when they become extraordinary, and how people and systems can turn local capability into stable task value.
+These drafts are research frameworks and an open-source agenda, not a closed theory. Their goal is to provide a language for debating, implementing, and testing: when LLMs become mediocre, when they become extraordinary, and how people and systems can turn local capability into stable task value.

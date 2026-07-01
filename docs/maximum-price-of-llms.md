@@ -62,11 +62,14 @@ Chapter 2 gives micro-pricing for a single transaction. Chapter 3 adds competiti
 
 ## 1. Why Model Capability Does Not Equal Maximum Price
 
-A common inference is: the stronger the model, the higher the price. That only holds in the **short run, with low diffusion, low competition, or proprietary settings**. In the long run, users do not pay for model capability itself. They pay for **verifiable incremental utility relative to the next-best substitute**.
+A common inference is: the stronger the model, the higher the price. That only holds in the **short run, with low diffusion, low competition, or proprietary settings**.
+
+In the long run, users do not pay for model capability itself. They pay for **verifiable incremental utility relative to the next-best substitute**.
 
 Pricing is squeezed by two opposing forces:
 
-1. **Commoditization pressure**: once a model can fluently perform a task, supply expands quickly. The customer baseline shifts from expensive human labor to cheaper competing tools, and price gets pushed toward competitive equilibrium.
+1. **Commoditization pressure**: once a model can fluently perform a task, supply expands quickly. The task moves from scarce capability to infrastructure, and the market price per unit of output drops. More critically, the "next-best substitute" itself changes: as competing tools spread, the customer's baseline shifts from expensive human labor to cheaper competing tools, pushing price toward competitive equilibrium.
+
 2. **Reachability pressure**: tasks that still carry high scarcity rent often depend on hidden state, nonlocal structure, rare judgment, IP, organizational process, taste, and governance. General models often cannot reliably reach the near-optimal solution or capture the full value.
 
 This matches the three-regime split:

@@ -188,7 +188,7 @@ Collaboration Layer
   Governed Execution Objects and human-AI coordination records
 ```
 
-这些层不是分离产品，而是同一生命周期中的角色。诊断层识别的失败应能产生审计发现；审计发现应产生控制增量；控制增量可能更新 GKO、GEO、验证器、护栏或状态记录；经验证的更新可以成为已提交的状态转移。
+这些层不是分离的产品，而是同一生命周期中的不同角色。诊断层识别的失败应能产生审计发现；审计发现应产生控制增量；控制增量可能更新 GKO、GEO、验证器、护栏或状态记录；经验证的更新可以成为已提交的状态转移。
 
 ---
 
@@ -221,7 +221,7 @@ Artifact
   → StateTransition
 ```
 
-每个任务不必使用所有对象。低风险任务可以只使用子集。高价值或长程任务应保存从发现到状态提交的链条。
+每个任务不必使用所有对象。低风险任务可以只使用子集。高价值或长程任务应保存从发现到状态提交的完整链条。
 
 ---
 
@@ -285,15 +285,15 @@ state.project.current_schema_graph.commit_000042
 | revoked | 因矛盾、作用域失败或无效证据而撤回。 |
 | archived | 历史对象，不再参与活跃治理。 |
 
-对象不应静默消失。撤销和取代应是显式事件。
+对象不应静默消失。撤销和取代必须是显式事件。
 
 ---
 
 ## 6. 受治理知识对象
 
-**受治理知识对象** 是带作用域、有证据、可撤销的任务特定控制知识单元。
+**受治理知识对象**（Governed Knowledge Object，GKO）是带作用域、有证据、可撤销的任务特定控制知识单元。
 
-GKO 是知识层核心对象。它们不只是事实。它们可以治理路由、搜索、验证、渲染、状态解释或审计。
+GKO 是知识层核心对象。它们不只是事实；还可以治理路由、搜索、验证、渲染、状态解释或审计。
 
 ### 6.1 GKO 类型
 
@@ -355,7 +355,7 @@ rendering_rule
 
 ### 6.3 GKO 示例：Text-to-SQL Join Path 约束
 
-该示例要求多表 SQL 的 join path 必须由外键、已验证 schema 关系或记录为证据的值分布匹配支持。完整英文规范示例保留在英文版；中文实现应保持相同字段结构与对象 ID 风格。
+该示例说明一条用于多表 SQL 的 join path 约束：join path 必须由外键、已验证 schema 关系或记录为证据的值分布匹配来支持。完整 JSON 示例保留在英文版规范中；中文实现应保持相同的字段结构与对象 ID 风格。
 
 ### 6.4 GKO 不变量
 
@@ -390,9 +390,9 @@ audit trail
 
 ## 7. 受治理执行对象
 
-**受治理执行对象** 表示必须被跟踪和治理的任务、计划、行动、协作单元或工作流项。
+**受治理执行对象**（Governed Execution Object，GEO）表示必须被跟踪和治理的任务、计划、行动、协作单元或工作流项。
 
-GKO 治理知识，GEO 治理执行。
+GKO 治理知识；GEO 治理执行。
 
 ### 7.1 GEO 类型
 
@@ -567,15 +567,15 @@ mechanical verifier / execution result
 
 ### 9.3 审计发现示例
 
-规范示例是 text-to-SQL 中的空结果查询：SQL 能执行但返回零行，因为谓词使用了数据库中不存在的表面字符串。该发现被归为 `observation_representation`，直接修复对象是 `value_binding_table`，机制归因是 `belief_representation`，修复层是 `agent`，并派生出值落地 GKO 与回归护栏。
+规范示例是 text-to-SQL 中的空结果查询：SQL 能执行但返回零行，因为谓词使用了数据库中不存在的表面字符串。该发现被归为 `observation_representation`，直接修复对象是 `value_binding_table`，机制归因是 `belief_representation`，修复层是 `agent`，并派生出值落地 GKO 与回归护栏。完整 JSON 示例见英文版规范。
 
 ---
 
 ## 10. 控制增量
 
-**控制增量** 指定对受治理控制空间的局部改变。它是审计发现产生的写回对象。
+**控制增量**（Control Delta）指定对受治理控制空间的局部改变。它是审计发现产生的写回对象。
 
-发现说明哪里失败。控制增量说明必须改变什么。
+发现说明哪里失败；控制增量说明必须改变什么。
 
 ### 10.1 Delta 类型
 
@@ -636,7 +636,7 @@ change_observation_channel
 
 ### 10.3 控制增量示例
 
-规范示例创建一个 GKO，要求在渲染 SQL 字面量谓词前，必须把字符串或分类值落地到已观测数据库值、归一化映射或显式不确定性说明上。
+规范示例创建一个 GKO，要求在渲染 SQL 字面量谓词前，必须把字符串或分类值落地到已观测数据库值、归一化映射或显式不确定性说明上。完整 JSON 示例见英文版规范。
 
 ### 10.4 Delta 不变量
 
@@ -719,7 +719,7 @@ human_review_check
 
 ### 11.4 护栏示例
 
-规范示例检查 text-to-SQL 中的未落地字面量谓词：当分类字符串不在样本值、归一化映射或显式 schema 证据中，且没有不确定性分支时，护栏应失败。
+规范示例检查 text-to-SQL 中的未落地字面量谓词：当分类字符串不在样本值、归一化映射或显式 schema 证据中，且没有不确定性分支时，护栏应失败。完整 JSON 示例见英文版规范。
 
 ---
 
@@ -757,7 +757,7 @@ human_review_check
 
 ### 12.2 缺陷账本示例
 
-规范示例记录 `ungrounded_literal_predicate` 缺陷家族：系统将自然语言表面值直接插入 SQL 谓词，而没有根据数据库值或归一化映射落地。当前缓解方法是要求谓词渲染前进行值落地，并运行分类谓词护栏。
+规范示例记录 `ungrounded_literal_predicate` 缺陷家族：系统将自然语言表面值直接插入 SQL 谓词，而没有根据数据库值或归一化映射落地。当前缓解方法是要求谓词渲染前进行值落地，并运行分类谓词护栏。完整 JSON 示例见英文版规范。
 
 ---
 
@@ -812,7 +812,7 @@ external_api_checker
 
 ### 13.3 验证器示例
 
-规范示例 `verifier.sql.execution_engine` 验证 SQL 对特定数据库实例的语法可执行性和观测结果集。它的限制是：执行成功并不证明该 SQL 在自然语言问题语义上正确。
+规范示例 `verifier.sql.execution_engine` 验证 SQL 对特定数据库实例的语法可执行性和观测结果集。它的限制是：执行成功并不证明该 SQL 在自然语言问题语义上正确。完整 JSON 示例见英文版规范。
 
 ---
 
@@ -868,7 +868,7 @@ defect_state
 
 ### 14.3 状态记录示例
 
-规范示例提交一个 text-to-SQL schema graph 状态，其中包含表、外键、来源 snapshot、前序状态、转移契约、证据和验证器引用。若 snapshot 失效或外键元数据不完整，该状态应被争议或回滚。
+规范示例提交一个 text-to-SQL schema graph 状态，其中包含表、外键、来源 snapshot、前序状态、转移契约、证据和验证器引用。若 snapshot 失效或外键元数据不完整，该状态应被争议或回滚。完整 JSON 示例见英文版规范。
 
 ---
 
@@ -921,7 +921,7 @@ S' = next committed state
 
 ### 15.2 转移契约示例
 
-规范示例 `contract.text2sql.sql_repair_commit.v1` 要求 SQL 执行通过、语义审计通过、相关回归护栏通过且不违反 hard GKO 后，才能把候选状态提交为 `repaired_and_verified`。
+规范示例 `contract.text2sql.sql_repair_commit.v1` 要求 SQL 执行通过、语义审计通过、相关回归护栏通过且不违反 hard GKO 后，才能把候选状态提交为 `repaired_and_verified`。完整 JSON 示例见英文版规范。
 
 ### 15.3 转移不变量
 
@@ -970,7 +970,7 @@ rollback policy
 
 ### 16.2 路由规则示例
 
-规范示例在自然语言短语可能映射到多列、列名语义重叠，或 SQL 候选使用未绑定列时，激活 `schema_audit`。它记录过触发风险、欠触发风险、触发证据、边界测试和 fallback capability。
+规范示例在自然语言短语可能映射到多列、列名语义重叠，或 SQL 候选使用未绑定列时，激活 `schema_audit`。它记录过触发风险、欠触发风险、触发证据、边界测试和 fallback capability。完整 JSON 示例见英文版规范。
 
 ---
 
@@ -1039,7 +1039,7 @@ hard object with valid mechanical evidence
 
 ## 18. 核心接口
 
-本节定义面向实现的操作，不规定传输协议。这些操作可以实现为函数、数据库操作、agent 工具、API endpoint 或编排步骤。
+本节定义面向实现的操作，不规定传输协议。这些操作可以实现为函数、数据库操作、agent 工具、API 端点或编排步骤。
 
 ### 18.1 `propose_object`
 

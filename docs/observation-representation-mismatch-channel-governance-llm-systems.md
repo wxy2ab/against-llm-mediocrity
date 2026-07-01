@@ -38,13 +38,21 @@
 
 Large language model systems do not act directly on the world. They act on observations, retrieved fragments, compressed context, database schemas, tool outputs, screenshots, logs, summaries, embeddings, serialized state, and prompt representations. Many high-value failures therefore occur before reasoning begins. The decisive variable is not misreasoned about; it never enters the operational representation. Or it enters in a form that is aliased, flattened, decontextualized, truncated, stale, unbound, or unusable for control.
 
-This report develops **observation-representation mismatch** as the first primitive mismatch in a structural theory of value preservation for LLM systems. If `S_world` is the task world, `φ` the observation function, `ψ` the representation function, and `Z = ψ(φ(S_world))` the model-accessible control representation, observation-representation mismatch occurs when task-relevant distinctions in `S_world` are collapsed or made operationally inaccessible in `Z`. The resulting failure is a **representation-induced ceiling**: no amount of downstream reasoning, critique, reranking, or self-reflection over the same `Z` can reliably recover the value that was lost upstream.
+This report develops **observation-representation mismatch** as the first primitive mismatch in a structural theory of value preservation for LLM systems.
 
-The report clarifies the boundary between observation-representation mismatch and state mismatch. State mismatch asks: given the available representation, which latent state are we in? Observation-representation mismatch asks: did the variables needed to make that state or value distinction enter the representation at all? The first is a problem of inference under a representation. The second is a problem of transduction into that representation.
+Formally, let `S_world` be the task world, `φ` the observation function, `ψ` the representation function, and `Z = ψ(φ(S_world))` the model-accessible control representation. Observation-representation mismatch occurs when task-relevant distinctions in `S_world` are collapsed or made operationally inaccessible in `Z`. The resulting failure is a **representation-induced ceiling**: no amount of downstream reasoning, critique, reranking, or self-reflection over the same `Z` can reliably recover the value that was lost upstream.
 
-We then introduce **channel governance**: a pre-governance discipline for ensuring that value-critical variables enter, survive, bind correctly, remain discriminative, and become operational in the control space. Channel governance precedes Knowledge Governance. Before a system can govern knowledge about a task, it must govern the channels through which the task becomes visible.
+The report clarifies the boundary between observation-representation mismatch and state mismatch.
 
-The report provides formal definitions, diagnostic criteria, repair operators, audit patterns, Governed Knowledge Object (GKO) templates, regression guards, and examples across text-to-SQL, code systems, tool-using agents, research workflows, and long-horizon state-governed agents. The central rule is simple:
+State mismatch asks: given the available representation, which latent state are we in? Observation-representation mismatch asks: did the variables needed to make that state or value distinction enter the representation at all?
+
+The first is a problem of inference under a representation. The second is a problem of transduction into that representation.
+
+We then introduce **channel governance**: a pre-governance discipline for ensuring that value-critical variables enter, survive, bind correctly, remain discriminative, and become operational in the control space.
+
+Channel governance precedes Knowledge Governance. Before a system can govern knowledge about a task, it must govern the channels through which the task becomes visible.
+
+The report provides formal definitions, diagnostic criteria, repair operators, audit patterns, Governed Knowledge Object (GKO) templates, regression guards, and examples across multiple domains. These domains include text-to-SQL, code systems, tool-using agents, research workflows, and long-horizon state-governed agents. The central rule is simple:
 
 ```text
 Before governing knowledge, verify that the variables to be governed have entered the representation.

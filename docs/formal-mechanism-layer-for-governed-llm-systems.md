@@ -40,7 +40,16 @@ This document defines the **Formal Mechanism Layer** for governed LLM systems. I
 
 The six primitive mismatches explain where task value becomes structurally distorted: observation-representation, state, fitting-boundary, support, aggregation, and specification. They are **task-value structural diagnostic axes** and, in practice, the first engineering entry points. By contrast, the Formal Mechanism Layer asks a different question: once a failure has been observed and operationalized into task-specific control objects, which component of the actual LLM system best explains that failure and where should persistent repair be localized?
 
-We model an LLM system as an approximate decision system operating in a partially observable environment. The system does not directly possess the true state, true transition function, true reward, complete action space, or complete observation channel. It acts through approximate components: specification and reward proxies, observation interfaces, belief and representation state, a world model, action interfaces, policy and capability support, capability routing, and search or execution algorithms.
+We model an LLM system as an approximate decision system operating in a partially observable environment. The system does not directly possess the true state, the true transition function, the true reward, the complete action space, or the complete observation channel. Instead, it acts through approximate components:
+
+- specification and reward proxies;
+- observation interfaces;
+- belief and representation state;
+- a world model;
+- action interfaces;
+- policy and capability support;
+- capability routing;
+- search or execution algorithms.
 
 The mechanism layer therefore decomposes repair localization into eight intervenable axes:
 
@@ -288,9 +297,18 @@ rather than as a direct runtime control delta.
 
 ### 1.7 Open-Ended Task Boundary
 
-The Formal Mechanism Layer is most actionable when the task admits stable system components such as observations, state variables, verifiers, execution traces, candidate spaces, or learned routing boundaries.
+The Formal Mechanism Layer is most actionable when the task admits stable system components. Examples include observations, state variables, verifiers, execution traces, candidate spaces, or learned routing boundaries.
 
-It is less directly actionable in open-ended creative tasks unless the task has first been transformed into governed control objects. In story generation, for example, it is usually premature to begin with `dynamics_world_model` or `specification_reward` as direct repair targets. The first useful engineering objects are more often a character-state machine, narrative skeleton, foreshadowing ledger, style guard, pacing controller, or reader simulator. Only after those objects exist and fail recurrently does mechanism attribution become sharp enough to support stable repair or training promotion.
+It is less directly actionable in open-ended creative tasks unless the task has first been transformed into governed control objects. In story generation, for example, it is usually premature to begin with `dynamics_world_model` or `specification_reward` as direct repair targets. The first useful engineering objects are more often:
+
+- a character-state machine;
+- a narrative skeleton;
+- a foreshadowing ledger;
+- a style guard;
+- a pacing controller;
+- a reader simulator.
+
+Only after those objects exist and fail recurrently does mechanism attribution become sharp enough to support stable repair or training promotion.
 
 ---
 
@@ -391,9 +409,9 @@ Three axes are primarily system-side:
 | `action_interface` | `\mathcal{A}_{sys}` |
 | `search_execution` | `D` |
 
-This distinction also explains why a representation-induced value ceiling belongs to the mechanism layer. Once utility-relevant distinctions are lost before `B_\theta`, downstream routing, support, aggregation, or search cannot reliably recover them without additional observation or representation repair.
+This distinction also explains why a representation-induced value ceiling belongs to the mechanism layer. Once utility-relevant distinctions are lost before `B_\theta`, downstream routing, support, aggregation, or search cannot reliably recover them. Recovery requires additional observation or representation repair.
 
-A mechanism mismatch occurs when a component of `\mathcal{M}_\theta` differs from what the task requires in a way that changes reachable value.
+A mechanism mismatch occurs when a component of `\mathcal{M}_\theta` differs from what the task requires, and that difference changes reachable value.
 
 ### 2.3 Mechanism mismatch profile
 
@@ -440,7 +458,7 @@ Mechanism diagnosis should be evidence-bearing. A mechanism label without a mini
 
 #### Definition
 
-Specification / reward mismatch occurs when the true utility, expressed task objective, evaluator, reward proxy, acceptance criteria, or internal model judgment diverge in a way that changes candidate ranking.
+Specification / reward mismatch occurs when the true utility, expressed task objective, evaluator, reward proxy, acceptance criteria, or internal model judgment diverge. The divergence must be large enough to change candidate ranking.
 
 Let `R^*` be the true task utility and `R_eval` be the evaluator used by the system. The mismatch exists when:
 
@@ -698,7 +716,7 @@ DynamicsWorldModelDelta:
 
 #### Boundary conditions
 
-If a real feedback channel exists but predictions disagree with it, this is world-model mismatch. If no feedback channel or action interface exists, this is action / interface mismatch. The two often co-occur, but their repair order differs: first make the environment callable or observable, then calibrate the world model.
+If a real feedback channel exists but predictions disagree with it, this is world-model mismatch. If no feedback channel or action interface exists, this is action / interface mismatch. The two often co-occur, but their repair order differs. First make the environment callable or observable; then calibrate the world model.
 
 #### Primitive mismatch relations
 
@@ -769,7 +787,7 @@ ActionInterfaceDelta:
 
 #### Boundary conditions
 
-More tools are not automatically better. Tools expand the effective action space only when the system can observe them, select them, call them correctly, interpret their returns, verify their effects, and commit resulting state transitions. Otherwise, tools add routing and search burdens.
+More tools are not automatically better. Tools expand the effective action space only when the system can observe them, select them, call them correctly, interpret their returns, verify their effects, and commit the resulting state transitions. Otherwise, tools merely add routing and search burdens.
 
 #### Primitive mismatch relations
 
@@ -941,7 +959,7 @@ Fitting boundary / capability routing is the main mechanism source for **fitting
 
 #### Definition
 
-Search / execution mismatch occurs when the correct candidate is in effective support and the relevant information, objective, action space, capability, and routing are close enough to correct, but the current search, ranking, verification, or execution procedure fails to find, select, preserve, or complete it.
+Search / execution mismatch occurs when the correct candidate is already in effective support, and when the relevant information, objective, action space, capability, and routing are all close enough to correct. The failure happens because the current search, ranking, verification, or execution procedure cannot find, select, preserve, or complete that candidate.
 
 Let `D` be the decoding, search, planning, ranking, verification, and execution procedure. The mismatch exists when:
 
@@ -1343,7 +1361,7 @@ Without this commitment, the system may merely narrate that it “will use execu
 
 ### 8.1 Mechanisms are causally coupled
 
-The eight mechanisms are not independent modules. They influence each other:
+The eight mechanisms are not independent modules. They influence each other in a causal chain:
 
 ```text
 specification → observation selection
@@ -1870,7 +1888,7 @@ hypothesis, not distinguished
 
 ### 15.2 One intervention may affect several mechanisms
 
-Interventions are not pure.
+Interventions are not mechanically pure. A single change often affects multiple axes.
 
 ```text
 RAG may add observation and capability support.

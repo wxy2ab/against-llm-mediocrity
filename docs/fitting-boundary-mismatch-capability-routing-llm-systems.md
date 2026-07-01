@@ -7,7 +7,9 @@
 
 ## Abstract
 
-Large language models often possess capabilities that are not reliably expressed in the situations where those capabilities are needed. Conversely, they may activate learned behaviors, expert registers, solution templates, refusal policies, safety rituals, or benchmark patterns in situations where those behaviors are not warranted. This paper develops **fitting-boundary mismatch** as a primitive failure mode in governed LLM systems: the mismatch between the true applicability domain of a capability and the domain in which the model or system actually activates that capability.
+Large language models often possess capabilities that are not reliably expressed in the situations where those capabilities are needed. Conversely, they may activate learned behaviors, expert registers, solution templates, refusal policies, safety rituals, or benchmark patterns in situations where those behaviors are not warranted.
+
+This paper develops **fitting-boundary mismatch** as a primitive failure mode in governed LLM systems. At its core, it is the mismatch between the true applicability domain of a capability and the domain in which the model or system actually activates that capability.
 
 The core claim is simple:
 
@@ -15,7 +17,9 @@ The core claim is simple:
 Capability present does not imply capability routed.
 ```
 
-An LLM system may contain the knowledge, pattern, skill, tool, or reasoning routine required for a task, while still failing because the implicit router does not activate it. Conversely, a system may activate a capability because surface evidence resembles its training-time or prompt-induced trigger conditions, even when the task does not actually satisfy the capability's applicability conditions. These failures are not reducible to missing knowledge, insufficient probability support, specification ambiguity, state uncertainty, or aggregation failure. They occur at the **capability-routing station** of the world-to-output pipeline.
+An LLM system may contain the knowledge, pattern, skill, tool, or reasoning routine required for a task, while still failing because the implicit router does not activate it. Conversely, a system may activate a capability because surface evidence resembles its training-time or prompt-induced trigger conditions, even when the task does not actually satisfy the capability's applicability conditions.
+
+These failures are not reducible to missing knowledge, insufficient probability support, specification ambiguity, state uncertainty, or aggregation failure. They occur at the **capability-routing station** of the world-to-output pipeline.
 
 We formalize the problem by distinguishing the true applicability domain of a capability, `T_X`, from the model/system activation domain, `M_X`. Fitting-boundary mismatch occurs when:
 
@@ -42,7 +46,9 @@ fitting-boundary mismatch occupies the routing station:
 Z → trigger evidence → implicit router → activated capability set
 ```
 
-The paper then develops a practical theory of capability routing: capability profiles, trigger evidence, suppressors, role attractors, boundary perturbations, router deltas, routing GKOs (Governed Knowledge Objects), and boundary regression guards. It shows how fitting-boundary mismatch interacts with Knowledge Governance, Audit Engineering, and the State-Governed Agent Regime (SGAR). The goal is to turn capability activation from an implicit side effect of prompt surface form into an auditable, revisable, state-aware control layer.
+The paper then develops a practical theory of capability routing. This includes capability profiles, trigger evidence, suppressors, role attractors, boundary perturbations, router deltas, routing GKOs (Governed Knowledge Objects), and boundary regression guards. It shows how fitting-boundary mismatch interacts with Knowledge Governance, Audit Engineering, and the State-Governed Agent Regime (SGAR).
+
+The goal is to turn capability activation from an implicit side effect of prompt surface form into an auditable, revisable, state-aware control layer.
 
 ### Relationship to the Diagnostic–Mechanism Bridge
 
@@ -109,7 +115,9 @@ The paper moves from definition to diagnosis to repair. Sections 1–4 establish
 
 ## 1. Introduction
 
-A common description of LLM failure is that the model “does not know” something or “cannot reason” in a particular way. This description is often too coarse. In many tasks, the model can demonstrate the relevant capability when asked directly, when placed in a different prompt frame, when given a minimal example, when shown a counterexample, or when routed through a specialized procedure. Yet in the original task context, the capability remains inactive. The model does something else: it follows a generic template, adopts an irrelevant expert persona, over-applies a safety pattern, writes plausible boilerplate, performs shallow analogy, or produces a fluent answer that bypasses the real operation.
+A common description of LLM failure is that the model “does not know” something or “cannot reason” in a particular way. This description is often too coarse.
+
+In many tasks, the model can demonstrate the relevant capability when asked directly, when placed in a different prompt frame, when given a minimal example, when shown a counterexample, or when routed through a specialized procedure. Yet in the original task context, the capability remains inactive. The model does something else: it follows a generic template, adopts an irrelevant expert persona, over-applies a safety pattern, writes plausible boilerplate, performs shallow analogy, or produces a fluent answer that bypasses the real operation.
 
 This is not primarily a knowledge failure. It is a routing failure.
 
@@ -117,7 +125,9 @@ The same phenomenon appears in the opposite direction. A model may activate a ca
 
 The learned behavior is real. The problem is that its boundary is wrong.
 
-This paper calls this failure mode **fitting-boundary mismatch**. A capability has a true applicability domain: the set of situations where using it would improve task value. The model or system has an activation domain: the set of situations where the capability is actually triggered. When these sets diverge, the system can fail even if the capability exists, the relevant information is present, the correct answer has sufficient support, and the objective is reasonably specified.
+This paper calls this failure mode **fitting-boundary mismatch**. A capability has a true applicability domain: the set of situations where using it would improve task value. The model or system has an activation domain: the set of situations where the capability is actually triggered.
+
+When these sets diverge, the system can fail even if the capability exists, the relevant information is present, the correct answer has sufficient support, and the objective is reasonably specified.
 
 In the broader structural theory of governed LLM systems, fitting-boundary mismatch is one of six primitive mismatches:
 
@@ -147,6 +157,8 @@ Given the available representation, which learned capability does the system act
 ```
 
 This question is central because modern LLM systems are not single homogeneous policies. They are mixtures of behaviors, roles, tools, memories, prompt routines, latent skills, refusal heuristics, search procedures, validators, and style regimes. A high-value system must not only contain useful capabilities; it must route them to the right cases.
+
+To understand where this routing failure occurs, we now place it within the broader value-preservation pipeline.
 
 ---
 
@@ -188,9 +200,18 @@ Z -- ρ --> C
 
 It is the failure of capability routing.
 
-This position matters. If the decisive variable never enters `Z`, the failure is observation-representation mismatch. If `Z` is insufficient to infer the relevant latent state, the failure is state mismatch. If the capability is not activated despite being appropriate, or activated despite being inappropriate, the failure is fitting-boundary mismatch. If the capability is active but the correct structure has low probability under the policy, the failure is support mismatch. If local capability outputs fail to compose, the failure is aggregation mismatch. If the evaluator rewards the wrong thing, the failure is specification mismatch.
+This position matters. Each station in the pipeline has its own failure mode:
+
+- If the decisive variable never enters `Z`, the failure is observation-representation mismatch.
+- If `Z` is insufficient to infer the relevant latent state, the failure is state mismatch.
+- If the capability is not activated despite being appropriate, or activated despite being inappropriate, the failure is fitting-boundary mismatch.
+- If the capability is active but the correct structure has low probability under the policy, the failure is support mismatch.
+- If local capability outputs fail to compose, the failure is aggregation mismatch.
+- If the evaluator rewards the wrong thing, the failure is specification mismatch.
 
 Fitting-boundary mismatch is therefore not an optional add-on to the taxonomy. It corresponds to a structurally distinct station in the pipeline.
+
+With this position established, we now define the mismatch formally.
 
 ---
 
@@ -232,6 +253,8 @@ M_X = T_X
 
 In practice, this is rarely possible. The goal is not perfect routing. The goal is to make routing boundaries explicit enough to audit, revise, suppress, escalate, and govern.
 
+To clarify what routing governs, we must distinguish capability from behavior.
+
 ---
 
 ## 4. Capability Is Not Behavior
@@ -260,6 +283,8 @@ For example, an LLM may demonstrate schema-linking ability when directly asked t
 Similarly, a model may be able to write precise code patches, but when asked to “fix the bug,” it may over-trigger explanation mode, produce a generic diagnosis, or modify unrelated code because the router bound the task to the wrong repair pattern.
 
 Fitting-boundary mismatch focuses on the second and third levels: whether a capability is activated, and whether it is activated within its true scope.
+
+With these levels in mind, we can now examine the internal structure of the routing process itself.
 
 ---
 
@@ -305,6 +330,8 @@ human feedback priors
 ```
 
 Because the router is implicit, capability activation is often misdiagnosed as capability absence. The system appears unable to do the task, but the deeper issue is that it was never placed into the mode in which its useful capability becomes active.
+
+To understand why the wrong mode is selected, we need to look at what evidence triggers capability activation—and what inhibits it.
 
 ---
 
@@ -358,6 +385,8 @@ Socratic-clarification attractor
 ```
 
 Attractors matter because fitting-boundary mismatch is often path-dependent. Once a capability attractor becomes active, subsequent tokens may justify, elaborate, and stabilize that behavior. This creates a self-reinforcing boundary error.
+
+These mechanisms produce several recurring failure forms.
 
 ---
 
@@ -465,6 +494,8 @@ In multi-turn settings, capability boundaries can drift. A capability that was a
 
 This connects fitting-boundary mismatch to SGAR: routing state should not be inferred merely from conversational momentum.
 
+The failure forms above are easier to understand once fitting-boundary mismatch is contrasted with the other primitive mismatches.
+
 ---
 
 ## 8. Distinguishing Fitting-Boundary Mismatch from Other Mismatches
@@ -551,6 +582,8 @@ Did the system activate the capability appropriate to the task conditions?
 
 A vague or wrong specification can induce routing failures, but routing can fail even when the specification is clear.
 
+Why does this matter in practice? Because fitting-boundary mismatch is a primary driver of the phenomenon we call LLM mediocrity.
+
 ---
 
 ## 9. Why Fitting-Boundary Mismatch Matters for LLM Mediocrity
@@ -579,6 +612,8 @@ It writes expert-sounding financial caution instead of deriving an executable si
 These outputs can score well under shallow review because the active capability is real. The system is not simply bad. It is doing the wrong good thing.
 
 This is why fitting-boundary mismatch is central to the local alignment regime. Many model capabilities are locally aligned: summarization, stylistic control, caution, generic expertise, analogy, explanation, decomposition, code fluency, SQL fluency, mathematical notation, safety sensitivity. But local alignment becomes harmful when routed across the wrong boundary.
+
+If this diagnosis fits a given failure, the next step is to audit it directly.
 
 ---
 
@@ -690,6 +725,8 @@ Which failure modes were not checked?
 
 This is essential because under-triggering is often invisible in the final artifact.
 
+Once a fitting-boundary mismatch is diagnosed, the repair is not a better prompt. It is explicit governance of the router itself.
+
 ---
 
 ## 11. Router Governance
@@ -708,6 +745,9 @@ suppressor evidence
 priority / arbitration rules
 scope limits
 revocation triggers
+```
+
+With these tools in place, we can summarize the core argument.
 regression guards
 state dependencies
 ```
@@ -827,6 +867,8 @@ A minimal schema:
 
 Routing GKOs are especially important because they govern behavior before final generation. They decide what the model is allowed to do next.
 
+With routing rules in place, audits can now target the router rather than only the final output.
+
 ---
 
 ## 13. Audit Engineering for Fitting-Boundary Mismatch
@@ -857,6 +899,8 @@ A fitting-boundary audit finding can use this schema:
 ```
 
 The key is that the repair target is the router, not the final artifact alone.
+
+A routing repair is incomplete without tests that verify it stays in place.
 
 ---
 
@@ -930,6 +974,8 @@ S': Router GKO committed with scope and revocation trigger.
 
 This prevents router drift and router folklore. Routing rules become stateful commitments rather than conversational suggestions.
 
+Stateful routing rules are themselves a form of governed knowledge.
+
 ---
 
 ## 16. Interaction with Knowledge Governance
@@ -964,6 +1010,8 @@ role_binding_rule
 ```
 
 Knowledge Governance turns routing into an explicit control surface.
+
+Routing is not the only factor that determines whether a capability succeeds. Support matters too, and the two interact.
 
 ---
 
@@ -1000,6 +1048,8 @@ Often the right sequence is:
 ```
 
 Otherwise, the system may expand candidates in the wrong mode.
+
+Routing is also shaped by what the system believes the task requires.
 
 ---
 
@@ -1052,6 +1102,8 @@ The correct order is often:
 4. Search or render under the activated capability.
 ```
 
+Even with correct routing and representation, the system must still coordinate multiple capabilities into a coherent whole.
+
 ---
 
 ## 20. Interaction with Aggregation Mismatch
@@ -1073,6 +1125,8 @@ regression guard before committing fix
 ```
 
 Such constraints are both routing rules and aggregation rules. They govern not only which capability activates, but when it activates in the composition sequence.
+
+These interactions suggest several practical design patterns for building governed routers.
 
 ---
 
@@ -1160,6 +1214,8 @@ regression testing
 state commitment
 reuse across tasks
 ```
+
+The following examples show how these concepts apply in concrete domains.
 
 ---
 
@@ -1346,6 +1402,8 @@ Suppress literature-summary mode unless the task explicitly asks for positioning
 
 This keeps writing from replacing theory construction.
 
+These examples suggest a broader principle: routing itself can be treated as a search problem.
+
 ---
 
 ## 27. Capability Routing as Control-Space Search
@@ -1382,6 +1440,8 @@ capability-route space
 ```
 
 For high-value tasks, route search may dominate output search. If the system is in the wrong capability mode, sampling more outputs merely explores the wrong basin.
+
+We now state the key formal claims that underpin this framework.
 
 ---
 
@@ -1435,6 +1495,8 @@ Otherwise, repairing under-triggering by always activating the capability may in
 ### 28.5 State-Router Commitment Claim
 
 In long-horizon systems, routing changes should be committed as hard state only after boundary verification. Otherwise, router drift can become persistent system behavior.
+
+Governing the router brings benefits, but it also carries costs and risks.
 
 ---
 
@@ -1490,6 +1552,9 @@ local generation already aligns with value
 routing overhead exceeds expected gain
 ```
 
+Every routing rule and theoretical claim should also carry conditions for its own revision.
+```
+
 ---
 
 ## 30. Revocation Triggers for Fitting-Boundary Claims
@@ -1521,6 +1586,9 @@ new verifier invalidates the activation condition
 state distribution changes
 cost exceeds value gain
 more precise routing rule supersedes the old rule
+```
+
+The following checklist summarizes the practical steps for diagnosing and repairing fitting-boundary mismatch.
 ```
 
 ---
@@ -1556,6 +1624,9 @@ router deltas
 boundary regression guards
 routing state records
 revocation triggers
+```
+
+With these tools in place, we can summarize the core argument.
 ```
 
 ---
