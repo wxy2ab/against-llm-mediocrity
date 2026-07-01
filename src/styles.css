@@ -792,6 +792,294 @@ h1 {
   border-left: var(--border-block) solid var(--regime-local);
 }
 
+/* ------------------------------------------------------------------
+   Extended diagram vocabulary — shared by the hero alignment charts
+   and every topic-page visual. Color law (keep strict):
+   red = statistical probability · blue = task value ·
+   teal = aligned / validated / good · gold = local / partial ·
+   violet = the human · ink = neutral structure.
+   ------------------------------------------------------------------ */
+.visual-text,
+.visual-text-strong,
+.visual-caption,
+.chart-cue,
+.chart-label,
+.visual-tab-num {
+  font-family: var(--font-sans);
+  text-anchor: middle;
+  fill: var(--ink-700);
+}
+
+.visual-text {
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.visual-text-strong {
+  font-size: 20px;
+  font-weight: 900;
+  fill: var(--ink-800);
+}
+
+.visual-caption {
+  font-size: 13px;
+  font-weight: 800;
+  fill: var(--ink-500);
+  letter-spacing: 0.02em;
+}
+
+.chart-cue {
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.chart-label {
+  font-size: 12px;
+  font-weight: 800;
+  fill: var(--ink-500);
+}
+
+.visual-mono {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 500;
+  fill: var(--ink-600);
+  text-anchor: start;
+}
+
+.warm-ink {
+  fill: var(--regime-mediocre);
+}
+
+.cool-ink {
+  fill: var(--blue);
+}
+
+.teal-ink {
+  fill: var(--regime-extraordinary-ink);
+}
+
+.gold-ink {
+  fill: var(--regime-local-ink);
+}
+
+.violet-ink {
+  fill: var(--violet);
+}
+
+.mute-ink {
+  fill: var(--ink-500);
+}
+
+.visual-node.teal,
+.visual-dot.teal {
+  fill: var(--regime-extraordinary);
+}
+
+.visual-node.violet,
+.visual-dot.violet {
+  fill: var(--violet);
+}
+
+.visual-arrow-head {
+  fill: rgba(34, 40, 49, 0.5);
+  stroke: none;
+}
+
+.visual-arrow-head.teal {
+  fill: var(--regime-extraordinary);
+}
+
+.visual-arrow-head.violet {
+  fill: var(--violet);
+}
+
+.visual-arrow-head.warm {
+  fill: var(--regime-mediocre);
+}
+
+.visual-flow {
+  fill: none;
+  stroke: rgba(34, 40, 49, 0.5);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.visual-loop {
+  fill: none;
+  stroke: var(--regime-extraordinary);
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 7 7;
+}
+
+.visual-loop.violet {
+  stroke: var(--violet);
+}
+
+.visual-check {
+  fill: none;
+  stroke: var(--regime-extraordinary);
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.visual-check.on-fill {
+  stroke: var(--surface);
+}
+
+.visual-pill {
+  fill: var(--surface);
+  stroke: rgba(34, 40, 49, 0.14);
+  stroke-width: 1.5;
+}
+
+.visual-pill.teal {
+  fill: var(--regime-extraordinary-soft);
+  stroke: rgba(111, 179, 168, 0.5);
+}
+
+/* alignment mini-chart annotations */
+.peak-drop {
+  fill: none;
+  stroke: rgba(34, 40, 49, 0.4);
+  stroke-width: 1.5;
+  stroke-dasharray: 3 3;
+  stroke-linecap: round;
+}
+
+.peak-drop.warm {
+  stroke: rgba(212, 93, 76, 0.7);
+}
+
+.peak-drop.cool {
+  stroke: rgba(73, 106, 159, 0.7);
+}
+
+.peak-dot {
+  stroke: var(--ink-800);
+  stroke-width: 1.5;
+}
+
+.peak-dot.warm {
+  fill: var(--regime-mediocre);
+}
+
+.peak-dot.cool {
+  fill: var(--blue);
+}
+
+.peak-dot.teal {
+  fill: var(--regime-extraordinary);
+}
+
+.gap-measure {
+  fill: none;
+  stroke: var(--ink-500);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.alignment-axis-note {
+  margin: 12px 2px 0;
+  color: var(--ink-500);
+  font-size: 12.5px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.alignment-card-text {
+  min-width: 0;
+}
+
+/* science — target + quality gauge */
+.target-ring {
+  fill: none;
+  stroke: rgba(73, 106, 159, 0.32);
+  stroke-width: 2.5;
+}
+
+.target-ring.faint {
+  stroke: rgba(73, 106, 159, 0.16);
+}
+
+.visual-gap {
+  fill: none;
+  stroke: var(--regime-mediocre);
+  stroke-width: 2.5;
+  stroke-dasharray: 5 5;
+  stroke-linecap: round;
+}
+
+.gauge-track {
+  fill: rgba(34, 40, 49, 0.06);
+  stroke: rgba(34, 40, 49, 0.14);
+  stroke-width: 2;
+}
+
+.gauge-fill {
+  fill: var(--regime-mediocre);
+}
+
+/* collaboration — gate + human */
+.visual-gate {
+  fill: var(--surface-tint);
+  stroke: var(--ink-800);
+  stroke-width: 3;
+}
+
+.visual-human {
+  fill: var(--violet);
+  stroke: var(--ink-800);
+  stroke-width: 2.5;
+}
+
+.visual-human-body {
+  fill: none;
+  stroke: var(--violet);
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* case-study — numbered tabs + validation threshold + magnifier */
+.visual-tab {
+  fill: var(--ink-800);
+}
+
+.visual-tab-num {
+  fill: var(--surface);
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.visual-threshold {
+  fill: none;
+  stroke: rgba(34, 40, 49, 0.3);
+  stroke-width: 2;
+  stroke-dasharray: 5 4;
+}
+
+.visual-lens {
+  fill: none;
+  stroke: var(--ink-700);
+  stroke-width: 3.5;
+}
+
+/* projects — terminal window */
+.visual-window {
+  fill: var(--surface-tint);
+  stroke: rgba(34, 40, 49, 0.18);
+  stroke-width: 2;
+}
+
+.visual-titlebar {
+  fill: rgba(34, 40, 49, 0.06);
+}
+
 .page-shell {
   counter-reset: section;
   display: grid;
