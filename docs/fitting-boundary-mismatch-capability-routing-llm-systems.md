@@ -42,7 +42,7 @@ fitting-boundary mismatch occupies the routing station:
 Z → trigger evidence → implicit router → activated capability set
 ```
 
-The paper then develops a practical theory of capability routing: capability profiles, trigger evidence, suppressors, role attractors, boundary perturbations, router deltas, routing GKOs, and boundary regression guards. It shows how fitting-boundary mismatch interacts with Knowledge Governance, Audit Engineering, and State-Governed Agent Regime. The goal is to turn capability activation from an implicit side effect of prompt surface form into an auditable, revisable, state-aware control layer.
+The paper then develops a practical theory of capability routing: capability profiles, trigger evidence, suppressors, role attractors, boundary perturbations, router deltas, routing GKOs (Governed Knowledge Objects), and boundary regression guards. It shows how fitting-boundary mismatch interacts with Knowledge Governance, Audit Engineering, and the State-Governed Agent Regime (SGAR). The goal is to turn capability activation from an implicit side effect of prompt surface form into an auditable, revisable, state-aware control layer.
 
 ### Relationship to the Diagnostic–Mechanism Bridge
 
@@ -65,6 +65,45 @@ wrong trigger boundary
 ```
 
 At the agent layer, the repair is typically a routing GKO, router trace, trigger rule, suppressor rule, or explicit mode-binding change. If the same boundary error recurs across tasks and cannot be stabilized by runtime governance alone, it should be promoted to mechanism-driven training.
+
+---
+
+## Contents
+
+The paper moves from definition to diagnosis to repair. Sections 1–4 establish what fitting-boundary mismatch is and why it is distinct. Sections 5–10 describe the routing pipeline and how to diagnose boundary failures. Sections 11–21 cover router governance and its design patterns. Sections 22–26 work through concrete examples, and sections 27–32 close with formal claims, costs, and a practical checklist.
+
+- [1. Introduction](#1-introduction)
+- [2. Position in the Structural Theory of Value Preservation](#2-position-in-the-structural-theory-of-value-preservation)
+- [3. Core Definition](#3-core-definition)
+- [4. Capability Is Not Behavior](#4-capability-is-not-behavior)
+- [5. A Capability-Routing Pipeline](#5-a-capability-routing-pipeline)
+- [6. Trigger Evidence, Suppressors, and Attractors](#6-trigger-evidence-suppressors-and-attractors)
+- [7. Failure Morphology](#7-failure-morphology)
+- [8. Distinguishing Fitting-Boundary Mismatch from Other Mismatches](#8-distinguishing-fitting-boundary-mismatch-from-other-mismatches)
+- [9. Why Fitting-Boundary Mismatch Matters for LLM Mediocrity](#9-why-fitting-boundary-mismatch-matters-for-llm-mediocrity)
+- [10. Diagnostic Methods](#10-diagnostic-methods)
+- [11. Router Governance](#11-router-governance)
+- [12. Routing GKOs](#12-routing-gkos)
+- [13. Audit Engineering for Fitting-Boundary Mismatch](#13-audit-engineering-for-fitting-boundary-mismatch)
+- [14. Boundary Regression Guards](#14-boundary-regression-guards)
+- [15. Interaction with State-Governed Agent Regime](#15-interaction-with-state-governed-agent-regime)
+- [16. Interaction with Knowledge Governance](#16-interaction-with-knowledge-governance)
+- [17. Interaction with Support Mismatch](#17-interaction-with-support-mismatch)
+- [18. Interaction with Specification Mismatch](#18-interaction-with-specification-mismatch)
+- [19. Interaction with Observation-Representation Mismatch](#19-interaction-with-observation-representation-mismatch)
+- [20. Interaction with Aggregation Mismatch](#20-interaction-with-aggregation-mismatch)
+- [21. Design Patterns for Capability Routing](#21-design-patterns-for-capability-routing)
+- [22. Example: Text-to-SQL](#22-example-text-to-sql)
+- [23. Example: Code Repair](#23-example-code-repair)
+- [24. Example: Quantitative Research and Strategy Design](#24-example-quantitative-research-and-strategy-design)
+- [25. Example: Safety and Refusal](#25-example-safety-and-refusal)
+- [26. Example: Research and Theory Writing](#26-example-research-and-theory-writing)
+- [27. Capability Routing as Control-Space Search](#27-capability-routing-as-control-space-search)
+- [28. Formal Claims](#28-formal-claims)
+- [29. Cost and Risk of Router Governance](#29-cost-and-risk-of-router-governance)
+- [30. Revocation Triggers for Fitting-Boundary Claims](#30-revocation-triggers-for-fitting-boundary-claims)
+- [31. Practical Checklist](#31-practical-checklist)
+- [32. Conclusion](#32-conclusion)
 
 ---
 

@@ -5,6 +5,29 @@
 
 ---
 
+## 概览
+
+本文主张：对一个自我改进的系统来说，关键问题不是“要不要做 audit agent”，而是“某个任务暴露了什么样的 oracle”，进而决定应该路由到哪种修复引擎。文章给出三种引擎（Audit、SGAR、No-Go），一套 fidelity source（保真度来源）分类，一套按 oracle 质量把任务分成 A/B/C 三层的方法，以及这套框架对 ccx 系统的架构含义。全文反复出现两个角色：一是 audit agent，它用识别去定位失败的原因；二是 状态治理智能体范式（State-Governed Agent Regime / SGAR），它只把识别当作对候选的“过/不过”关卡。
+
+## 目录
+
+- [0. 一句话结论](#0-一句话结论)
+- [1. 背景问题](#1-背景问题)
+- [2. 核心机制：audit 是 failure-conditioned oracle exploitation](#2-核心机制audit-是-failure-conditioned-oracle-exploitation)
+- [3. 关键判据：oracle 的成本、带宽、保真度](#3-关键判据oracle-的成本带宽保真度)
+- [4. 重要纠正：文本不是 taste，文本逻辑审计是甜点区](#4-重要纠正文本不是-taste文本逻辑审计是甜点区)
+- [5. Fidelity source taxonomy：任务可审计性来自哪里](#5-fidelity-source-taxonomy任务可审计性来自哪里)
+- [6. 任务分层：A / B / C](#6-任务分层a--b--c)
+- [7. Audit 与 SGAR：同一不对称的两种引擎](#7-audit-与-sgar同一不对称的两种引擎)
+- [8. 三引擎地图：Audit / SGAR / No-Go](#8-三引擎地图audit--sgar--no-go)
+- [9. 对 ccx 的架构含义](#9-对-ccx-的架构含义)
+- [10. 不同任务的落地策略](#10-不同任务的落地策略)
+- [11. 实验与度量](#11-实验与度量)
+- [12. 最终原则](#12-最终原则)
+- [13. 最终压缩版](#13-最终压缩版)
+
+---
+
 ## 0. 一句话结论
 
 真正重要的不是“要不要做 audit agent”，而是：

@@ -8,6 +8,30 @@
 **Current synthesis:** [A Structural Theory of Value Preservation in LLM Systems](structural-theory-value-preservation-llm-systems.md)  
 **Agent-state supplement:** [State-Governed Agent Regime for Governed LLM Systems](state-governed-agent-regime-for-governed-llm-systems.md)
 
+## Overview
+
+This working paper proposes a practical model for dividing labor between AI and humans. Rather than splitting tasks into "AI work" and "human work," it governs the individual variables inside a task that require human judgment, and lets AI advance everything else. The sections below define the core proposition, explain when governance is and is not needed, set out a workflow for routing and escalation, and give templates and worked examples.
+
+Several governance objects recur throughout. They are spelled out on first use and then referred to by acronym:
+
+- **GKO** — Governed Knowledge Object: a durable fact, rule, or boundary the agent should know or obey.
+- **GEsO** — Governed Escalation Object: a rule for when the agent should ask a human, whom to ask, and what to do next.
+- **MSHQ** — Minimal Sufficient Human Query: the smallest question that injects exactly the missing variable and restores autonomy.
+
+## Contents
+
+- [1. Core Proposition](#1-core-proposition)
+- [2. When Governance Is and Is Not Needed](#2-when-governance-is-and-is-not-needed)
+- [3. Ask the Environment Before Asking the Human](#3-ask-the-environment-before-asking-the-human)
+- [4. Three-Layer Diagnostic Stack](#4-three-layer-diagnostic-stack)
+- [5. The Governed Collaboration Workflow](#5-the-governed-collaboration-workflow)
+- [6. What AI Should Advance and What It Should Not Decide](#6-what-ai-should-advance-and-what-it-should-not-decide)
+- [7. Collaboration Objects](#7-collaboration-objects)
+- [8. Scenario Examples](#8-scenario-examples)
+- [9. Human Role: From Processor to Governor](#9-human-role-from-processor-to-governor)
+- [10. Quality Metrics and Risk Boundaries](#10-quality-metrics-and-risk-boundaries)
+- [Conclusion](#conclusion)
+
 ## 1. Core Proposition
 
 The best division of labor between AI and humans is not a static split between "AI work" and "human work." It is governance of task-critical variables.
@@ -107,6 +131,8 @@ Ask a human only when a remaining variable cannot be reliably observed, inferred
 
 ## 4. Three-Layer Diagnostic Stack
 
+Before deciding what to ask a human, diagnose the task through three layers, from why ordinary generation might fail to what the smallest human contribution would be.
+
 | Layer | Question | Collaboration consequence |
 |---|---|---|
 | Primitive mismatch | Why might ordinary generation diverge from value? | reparameterize task or construct control space |
@@ -132,7 +158,7 @@ See the [technical supplement](human-assist-operational-mismatches.md) for defin
 5. **Query the environment.** Inspect files, sources, tools, logs, tests, current state, available evidence, and any missing measurement or channel variable before escalating to a human.
 6. **Construct proving grounds.** Generate scenarios, counterfactuals, red-team cases, stakeholder views, and edge cases.
 7. **Identify the remaining operational blocker.** Determine whether it is genuinely human-governed.
-8. **Issue an MSHQ or instantiate a GEsO (Governed Escalation Object).** Ask only for the variable needed to restore autonomy, with options and a safe default.
+8. **Issue an MSHQ or instantiate a GEsO.** Ask only for the variable needed to restore autonomy, with options and a safe default.
 9. **Continue reversible work while waiting.** Prepare drafts, tests, matrices, and safer alternatives.
 10. **Validate the response and resume autonomy.** Verify the answer, execute within its boundary, and check the result.
 11. **Commit the resolved variable.** Write the answer, evidence, or verification result into the agent's hard state as a recognized transition. In the object model, this usually becomes a `state_record` governed by a `transition_contract`, while control changes may also emit a `control_delta`.
@@ -164,6 +190,8 @@ Multi-turn collaboration is useful when each round produces a persistent object 
 - whether stale preferences apply to a new context.
 
 ## 7. Collaboration Objects
+
+The workflow runs on a small set of reusable objects. Each one turns an open-ended judgment into something bounded, inspectable, or persistent.
 
 | Object | Purpose |
 |---|---|

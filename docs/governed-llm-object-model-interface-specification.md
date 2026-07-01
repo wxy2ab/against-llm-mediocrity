@@ -26,6 +26,40 @@ The goal is not to prescribe a single software architecture. The goal is to defi
 
 ---
 
+## Contents
+
+This specification is long. Use the section map below to jump to a topic. Sections 1–4 give the conceptual frame (purpose, principles, layers, and lifecycle); sections 5–16 define each governed object in turn; sections 17–20 cover how the objects relate, the implementation profiles, and the mapping back to the six primitive mismatches; sections 21–27 give a worked example, failure modes, governance economics, and conformance; the appendices supply a minimal starter object set.
+
+- [1. Purpose and Scope](#1-purpose-and-scope)
+- [2. Design Principles](#2-design-principles)
+- [3. Architectural Layers](#3-architectural-layers)
+- [4. Canonical Object Lifecycle](#4-canonical-object-lifecycle)
+- [5. Common Object Envelope](#5-common-object-envelope)
+- [6. Governed Knowledge Object](#6-governed-knowledge-object)
+- [7. Governed Execution Object](#7-governed-execution-object)
+- [8. Evidence Object](#8-evidence-object)
+- [9. Audit Finding](#9-audit-finding)
+- [10. Control Delta](#10-control-delta)
+- [11. Regression Guard](#11-regression-guard)
+- [12. Defect Ledger](#12-defect-ledger)
+- [13. Verifier Object](#13-verifier-object)
+- [14. State Record](#14-state-record)
+- [15. Transition Contract](#15-transition-contract)
+- [16. Capability Routing Rule](#16-capability-routing-rule)
+- [17. Object Relationships and Graph Semantics](#17-object-relationships-and-graph-semantics)
+- [18. Core Interfaces](#18-core-interfaces)
+- [19. Minimal Implementation Profiles](#19-minimal-implementation-profiles)
+- [20. Mapping Objects to Primitive Mismatches](#20-mapping-objects-to-primitive-mismatches)
+- [21. Text-to-SQL Instantiation](#21-text-to-sql-instantiation)
+- [22. Governance Failure Modes](#22-governance-failure-modes)
+- [23. Cost-Benefit Rule for Governance](#23-cost-benefit-rule-for-governance)
+- [24. Audit-of-Audit Requirements](#24-audit-of-audit-requirements)
+- [25. Conformance Checklist](#25-conformance-checklist)
+- [26. Compact JSON Type Index](#26-compact-json-type-index)
+- [27. Conclusion](#27-conclusion)
+
+---
+
 ## 1. Purpose and Scope
 
 This specification defines a common object language for LLM systems that require more than one-shot generation. It applies to systems where outputs, decisions, or actions must be governed by explicit control knowledge, audit trails, verification conditions, and state commitments.

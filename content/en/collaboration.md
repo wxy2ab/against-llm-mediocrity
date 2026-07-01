@@ -15,6 +15,8 @@ heroPoints:
 
 ## Collaboration Is Variable Governance
 
+Most advice on human-AI collaboration starts by splitting tasks. This page argues for a finer unit. Instead of asking which whole tasks belong to AI and which belong to humans, govern the individual **control variables** inside a task — the specific facts, weights, and authorizations that decide where the work goes.
+
 The usual question is: which work should AI do, and which work should humans do? That is too coarse. The better unit is the **control variable**.
 
 AI should advance the parts that can be processed, searched, structured, simulated, retrieved, and validated. Humans should govern value functions, preference weights, authorization boundaries, taste, budget, identity, and responsibility.
@@ -33,7 +35,7 @@ This page picks up the last step of the governance page. Control spaces and vali
 
 ## Three-Layer Diagnostic Stack
 
-Governed collaboration sits on top of the mechanism layer. It does not add new primitive mismatches; it asks where autonomous execution is blocked.
+Governed collaboration sits on top of the mechanism layer. It does not add new primitive mismatches; it asks where autonomous execution is blocked. Reading the three cards top to bottom takes you from why a failure happens, to what is missing right now, to the smallest way a human can unblock it.
 
 ::::cards
 ### Primitive Mismatch
@@ -51,7 +53,7 @@ What is the smallest human contribution that restores autonomy? This is where Mi
 
 ## First Ask Where the Variable Comes From
 
-Not every uncertainty should be escalated to a human. The agent should first ask whether the missing variable can be obtained from the environment, learned through feedback, or stress-tested through a constructed scenario.
+Here, an agent is an AI system that can autonomously call tools, run steps, and move a task forward within set boundaries. Not every uncertainty should be escalated to a human. The agent should first ask whether the missing variable can be obtained from the environment, learned through feedback, or stress-tested through a constructed scenario.
 
 :::cards
 ### Environment-Observable
@@ -75,7 +77,7 @@ Tag: only then ask the human
 When the variable cannot be observed, inferred, validated, or legitimately authorized by AI, the agent should ask the human for a fact, weight, boundary, authorization, validation signal, resource, risk owner, or stopping criterion.
 :::
 
-Before asking, the agent should attempt bounded autonomous recovery: inspect context, query tools and files, run tests, retrieve current sources, simulate scenarios, generate options, and reparameterize the task. Escalation is justified only when the remaining variable is both task-critical and genuinely human-governed.
+Before asking, the agent should attempt bounded autonomous recovery: inspect context, query tools and files, run tests, retrieve current sources, simulate scenarios, generate options, and reparameterize the task. Only after that work runs out is escalation justified, and only when the remaining variable is both task-critical and genuinely human-governed.
 
 ## Five Operational Domains
 
@@ -105,9 +107,9 @@ The current decomposition, workflow, handoff, or task model may omit a decisive 
 
 ## Escalation Gates
 
-Some cases require escalation even if the agent is confident. These are hard governance gates: external commitments, sensitive disclosure, deletion, payment, signing, publication, deployment, policy overrides, or legal, financial, safety, employment, privacy, or reputational responsibility.
+Some cases require escalation even when the agent is confident. These are hard governance gates: external commitments, sensitive disclosure, deletion, payment, signing, publication, deployment, and policy overrides — plus anything that carries legal, financial, safety, employment, privacy, or reputational responsibility. The agent must stop and ask, regardless of how sure it is.
 
-For non-mandatory cases, escalation should depend on expected loss: if the expected cost of unsupported autonomy exceeds the cost of interruption and delay, the agent should ask. Reversibility matters. A reversible draft can continue; an irreversible commitment should pause.
+For non-mandatory cases, escalation should depend on expected loss. If the expected cost of acting without support exceeds the cost of interruption and delay, the agent should ask. Reversibility also matters: a reversible draft can continue, but an irreversible commitment should pause.
 
 ## Minimal Sufficient Human Query
 
@@ -161,7 +163,7 @@ If you do not specify, I will ______ because it is the safest or most reversible
 
 ## Governed Escalation Objects: Governing When to Ask
 
-Governed Knowledge Objects (GKOs) govern what the AI should know or obey. GEOs govern when the AI should ask a human, what it should ask, whom it should ask, and what to do safely if no answer arrives.
+A Governed Knowledge Object (GKO) governs what the AI should know or obey. A GEO governs the asking itself: when the AI should ask a human, what it should ask, whom it should ask, and what to do safely if no answer arrives.
 
 A GEO should specify:
 
@@ -173,11 +175,13 @@ A GEO should specify:
 - Autonomous work while waiting: what drafts, tests, or analysis can continue?
 - Revocation trigger: when does this escalation rule stop applying?
 
-If a human answer becomes durable, it may become a GKO. For example: "Any external commitment for this client requires explicit approval before sending." Conversely, a GKO may trigger a GEO when a condition appears in a future task.
+When a human answer turns out to be durable, it can graduate into a GKO — for example, "Any external commitment for this client requires explicit approval before sending." The reverse also holds: a GKO may trigger a GEO when its condition reappears in a future task.
 
-For long-horizon agents, the answer should also update the agent's hard state: which fact was confirmed, which boundary now applies, which authorization was granted or denied, and which transition is now allowed. This is the collaboration-side link to State-Governed Agent Regime (SGAR).
+For long-horizon agents, the answer should also update the agent's hard state: which fact was confirmed, which boundary now applies, which authorization was granted or denied, and which transition is now allowed. This is the collaboration-side link to the State-Governed Agent Regime (SGAR).
 
 ## Collaboration Workflow
+
+Putting the pieces together, a single governed collaboration loop runs in roughly these steps:
 
 1. Route low-mismatch work directly.
 2. Diagnose the primitive mismatch and current operational blocker.

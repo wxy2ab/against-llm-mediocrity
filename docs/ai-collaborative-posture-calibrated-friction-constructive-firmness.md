@@ -22,6 +22,31 @@ This paper is the AI-side dual of `cognitive-discipline-for-ai.md`. Human-side d
 
 ---
 
+## Contents
+
+- [0. Relation to the Human-Side Document](#0-relation-to-the-human-side-document)
+- [1. The Core Problem: Default AI Posture Is Suboptimal for Collaboration](#1-the-core-problem-default-ai-posture-is-suboptimal-for-collaboration)
+- [2. Collaboration Goal: Not Satisfaction, but Appropriate Reliance and Preserved Agency](#2-collaboration-goal-not-satisfaction-but-appropriate-reliance-and-preserved-agency)
+- [3. Core Concept: Calibrated Friction](#3-core-concept-calibrated-friction)
+- [4. When to Add Friction: Calibration Variables](#4-when-to-add-friction-calibration-variables)
+- [5. The Right Decomposition of "Making Moderate Mistakes"](#5-the-right-decomposition-of-making-moderate-mistakes)
+- [6. The Right Boundary of "Firmness"](#6-the-right-boundary-of-firmness)
+- [7. Six Collaboration Roles for AI](#7-six-collaboration-roles-for-ai)
+- [8. Collaboration Protocol for Hard Engineering Problems](#8-collaboration-protocol-for-hard-engineering-problems)
+- [9. Collaboration Protocol for Emotion, Relationships, and Identity Narratives](#9-collaboration-protocol-for-emotion-relationships-and-identity-narratives)
+- [10. Organizational Collaboration Protocol: AI Should Not Make the Team Disappear](#10-organizational-collaboration-protocol-ai-should-not-make-the-team-disappear)
+- [11. Failure Modes of Friction](#11-failure-modes-of-friction)
+- [12. Measurement and Training](#12-measurement-and-training)
+- [13. Operational Specification: How AI Decides Its Current Posture](#13-operational-specification-how-ai-decides-its-current-posture)
+- [14. Reconnecting to the Existing Framework](#14-reconnecting-to-the-existing-framework)
+- [15. Open Research Questions](#15-open-research-questions)
+- [16. Compressed Principles](#16-compressed-principles)
+- [17. Directions for the Next Draft](#17-directions-for-the-next-draft)
+- [18. Temporary System Prompt: Helping an Untrained LLM Approximate the Desired Collaborative Posture](#18-temporary-system-prompt-helping-an-untrained-llm-approximate-the-desired-collaborative-posture)
+- [References](#references)
+
+---
+
 ## 0. Relation to the Human-Side Document
 
 The core claim of `cognitive-discipline-for-ai.md` is that mastering AI is not about getting more answers from AI. It is about governing AI's effects on human cognition, emotion, language, judgment, and action. That document emphasizes that AI easily amplifies what users already believe, that fluency is not truth, that AI tends to continue along the user's premise, and that AI's value must be tested in reality outside the conversation. This paper flips those human-side principles into AI-side obligations.
@@ -223,7 +248,7 @@ Low-stakes, reversible, local tasks can remain smoother: rewriting a sentence, g
 
 Some variables are unknown to AI but can be recovered through search, files, code, or data. Others may be guessable, but AI should not guess them. The latter are human-governed variables: value ordering, risk preference, authorization boundaries, real relationships, organizational politics, long-term goals, ethical cost.
 
-At these points, AI's correct action is not "fill in a plausible assumption." It is to ask the minimum necessary question. This connects directly to MSHQ: **ask only for the missing variables that genuinely belong to human governance; do not ask just to simulate rigor.**
+At these points, AI's correct action is not "fill in a plausible assumption." It is to ask the minimum necessary question. This connects directly to the MSHQ (Minimal Sufficient Human Query): **ask only for the missing variables that genuinely belong to human governance; do not ask just to simulate rigor.**
 
 ### 4.4 User Participation State and Drift Signals
 
@@ -423,7 +448,7 @@ Before a high-risk engineering action, AI should at least require confirmation o
 - how success will be verified after execution;
 - how loss will be stopped if execution fails.
 
-This can connect to your SGAR gate: do not commit before verification; do not execute without rollback; do not externalize without confirmation.
+This can connect to your SGAR (State-Governed Agent Regime) gate: do not commit before verification; do not execute without rollback; do not externalize without confirmation.
 
 ### 8.4 Constructive Firmness as a Workflow in Engineering
 
@@ -695,7 +720,7 @@ This paper can serve as the AI-side dual of `cognitive-discipline-for-ai.md` and
 - **Fluency = an uncertainty concealer.** On the human side, remember that fluency is not truth; on the AI side, make uncertainty visible.
 - **firmness ∝ oracle fidelity.** Firmness is not personality; it is an oracle-driven evidential stance.
 - **MSHQ = ask only for variables that genuinely belong to human governance.** Do not ask in order to look rigorous; ask only to get critical human variables into the representation.
-- **GEO = escalation triggered by risk and irreversibility.** The stronger the external consequence, the more AI should switch from executor to gatekeeper.
+- **GEO (Governed Escalation Object) = escalation triggered by risk and irreversibility.** The stronger the external consequence, the more AI should switch from executor to gatekeeper.
 - **SGAR gate = do not commit before verification.** In engineering, release, migration, writing, or sending actions, use verification and rollback to anchor state.
 - **The human is the anchor of AI.** Zero friction makes the human stop acting as anchor; calibrated friction brings the human back into the decision point.
 - **The organization is the second anchor.** AI should not only preserve the individual-model loop. It should also preserve team review, authorization, and responsibility chains.

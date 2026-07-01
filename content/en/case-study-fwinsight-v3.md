@@ -14,6 +14,10 @@ heroPoints:
   - Folding, direction checks, and the maturity filter compress repeated soft knowledge into a small set of regeneration-ready hard experiences.
 ---
 
+## Overview
+
+FW-Insight V3 (`fwinsight_v3`) is a factor-framework regeneration case. A factor framework here is a generated piece of quantitative-trading logic; "regeneration" means producing the next, improved version of it. The system has already produced many such versions and recorded how each one backtested. The question this case answers is which lessons from that history actually deserve to shape the next version — and how to tell a genuinely useful lesson apart from one that merely sounds good. Throughout, "V2" and "V3" refer to successive generations of the framework's experience layer, and a "claim" is a candidate lesson carried forward from V2.
+
 ## Why This Case Is Worth Studying
 
 This case is worth studying because it covers a governance move that the earlier cases do not: **extracting hard experiences from a large population of historical generated samples so future generation can move differently**.
@@ -52,9 +56,11 @@ The case is therefore not about whether an LLM can write a factor framework. It 
 
 The core move in `fwinsight_v3` is to treat the existing population of generated factor-framework samples as an empirical laboratory.
 
-It reads existing framework versions, performance metrics, and V2 claims. It does not trust the natural-language explanation of any claim. Instead, it realizes each claim as a detectable predicate `φ_c`, maps that predicate across the full sample pool, splits high-realization and low-realization groups, and compares their Sharpe, quantiles, and distribution shape.
+It reads existing framework versions, performance metrics, and V2 claims. It does not trust the natural-language explanation of any claim. Instead, it converts each claim into a detectable predicate `φ_c` (a "realization" test: a yes/no check for whether a given sample actually exhibits the property the claim describes). It then maps that predicate across the full sample pool, splits the samples into high-realization and low-realization groups, and compares their Sharpe ratios, quantiles, and distribution shape.
 
 In other words, a claim survives not because it sounds right, but because it actually cuts the sample distribution.
+
+The pipeline below shows how a candidate experience moves from raw samples to a vetted hard experience. (The distribution tests are standard statistical comparisons: MWU and KS check whether two groups differ, Levene checks for a difference in spread, and q90 compares the 90th-percentile tail.)
 
 <div class="process-flow" aria-label="FW-Insight V3 hard-experience pipeline">
   <section class="process-phase">
@@ -83,7 +89,7 @@ In other words, a claim survives not because it sounds right, but because it act
 
 `fwinsight_v3` is strict about what counts as experience. A claim can receive a high V2 score and still be downgraded to `SOFT` or `UNCLEAR` if it does not significantly separate the sample distribution. Conversely, a low-scored V2 claim can be promoted if it reliably changes the distribution.
 
-That produces four important operations:
+That strictness produces four key operations:
 
 ::::cards
 ### Cutting

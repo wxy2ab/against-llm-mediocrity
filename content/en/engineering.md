@@ -15,7 +15,7 @@ heroPoints:
 
 ## What Governance Is Actually Doing
 
-Governance is not about making the model behave more strictly, and it is not about writing longer prompts. What it really does is rewrite a hard final-output problem into a workflow that is easier to search, verify, and roll back.
+Governance is not about making the model behave more strictly, and it is not about writing longer prompts. What it really does is rewrite a hard final-output problem into a workflow that is easier to search, verify, and roll back. The rest of this page lays out that workflow step by step, then narrows to the engineering judgment of when it is worth the cost.
 
 Many failed tasks originally look like this:
 
@@ -31,7 +31,7 @@ input -> build a control space -> search in control space -> project back into o
 
 In one line: **do not let the model struggle blindly inside final-answer space when the real move is to create a better intermediate layer.**
 
-This page follows directly from the mechanism page. When local fluency no longer predicts global value, the question is not "how many more versions should we sample?" but "what must be made explicit before generation?" Governance translates the six mismatches into engineering moves: construct control spaces, add measurement or raw evidence, separate evaluators, preserve experience, govern agent state, and pass remaining variables to collaboration protocols when needed.
+This page follows directly from the mechanism page. When local fluency no longer predicts global value, the question is not "how many more versions should we sample?" but "what must be made explicit before generation?" Governance translates the six mismatches into engineering moves: construct control spaces, add measurement or raw evidence, separate evaluators, preserve experience, govern agent state, and pass any remaining variables to collaboration protocols when needed.
 
 For full engineering examples, return to "Cases." V4 applies this workflow through a narrative logic space, evaluator, and defect attacker. V6 then shows the next layer: once a control space exists, the system must route problems across MetaSpace, LogicSpace, text, continuity, and evaluation contracts.
 
@@ -39,7 +39,7 @@ This verification and write-back mechanism can be developed into an independent 
 
 [Read “Audit Engineering: From Generation–Verification Asymmetry to General Agent Governance”](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/audit-engineering.md)
 
-For long-horizon agents, these control objects also need a hard-state layer. **State-Governed Agent Regime (SGAR)** treats plans, tool calls, observations, verification results, human answers, audit findings, and rollback decisions as state transitions rather than loose chat history. The point is not to make the LLM less capable; it is to stop asking the same context that acted to be the sole authority on whether the task advanced.
+For long-horizon agents, these control objects also need a hard-state layer. The **State-Governed Agent Regime (SGAR)** treats plans, tool calls, observations, verification results, human answers, audit findings, and rollback decisions as state transitions rather than loose chat history. The point is not to make the LLM less capable; it is to stop asking the same context that acted to also be the sole authority on whether the task advanced.
 
 [Read “State-Governed Agent Regime”](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime.md)
 
@@ -73,7 +73,7 @@ This works better than asking for "one more version" because each step changes t
 
 ## The Control Space Should Also Be Searched
 
-It is tempting to think of control space as something you design once and then keep fixed. In practice, the safer view is: **the control space itself should be searched.**
+It is tempting to think of a control space as something you design once and then keep fixed. In practice, the safer view is that **the control space itself should be searched.**
 
 There are at least two layers here:
 
@@ -93,7 +93,7 @@ So governance is not "design a control space and stop." It is "search the output
 
 ## First Ask What Is Actually Missing
 
-When a task goes wrong, "the model is not strong enough" is usually too vague. A more useful diagnosis is whether the bottleneck is **support**, **search**, or **validation**.
+When a task goes wrong, "the model is not strong enough" is usually too vague to act on. A more useful diagnosis asks whether the bottleneck is **support**, **search**, or **validation**.
 
 ::::cards
 ### Support Deficit
@@ -144,7 +144,7 @@ A good control space usually has three properties:
 
 ## Separate the Generator From the Evaluator
 
-Do not let the same model in the same context generate, evaluate, and revise. That setup easily creates path dependence: the model tends to defend its earlier choices rather than seriously challenge them.
+Do not let the same model in the same context generate, evaluate, and revise. That setup easily creates path dependence, because the model tends to defend its earlier choices rather than seriously challenge them.
 
 A more stable arrangement separates roles:
 
@@ -170,7 +170,7 @@ Even when the underlying model is the same, separate contexts can simulate role 
 
 ## Do Not Store Only Positive Experience
 
-Extracting positive experience from strong samples is valuable, but it is not enough. If you store only success patterns, the system may still repeat the same family of mistakes in slightly different surface forms.
+Extracting positive experience from strong samples is valuable, but it is not enough on its own. If you store only success patterns, the system can still repeat the same family of mistakes in slightly different surface forms.
 
 A better experience base has two parts:
 
@@ -219,7 +219,7 @@ The third group is especially important because it often supplies the material n
 
 ## Derive Control Space Backward From Failure
 
-Control space does not have to be derived only from good samples. It can also be derived backward from failure modes. That is a useful form of **reverse control-space construction**.
+A control space does not have to be derived only from good samples. It can also be derived backward from failure modes, a useful move we call **reverse control-space construction**.
 
 Common story failure modes include:
 
@@ -229,7 +229,7 @@ Common story failure modes include:
 - weak ending
 - vague theme
 
-Those labels are not useful if they stay at the adjective level. The productive question is what control variable is missing underneath each failure.
+Those labels are not useful while they stay at the adjective level. The productive question is which control variable is missing underneath each failure.
 
 ::::cards
 ### Flat
@@ -276,4 +276,4 @@ Governance should not be maximized on every task. The tasks that really justify 
 
 By contrast, if the task is mostly compression, rewriting, format conversion, or routine candidate generation, direct generation is often already enough and heavy governance is unnecessary.
 
-The point of governance is never to make the process feel more elaborate. It is to make search more effective, validation more reliable, and experience more cumulative. A good governed system does not make the model generate less. It makes the model generate in the right task shape.
+The point of governance is never to make the process feel more elaborate. It is to make search more effective, validation more reliable, and experience more cumulative. A good governed system does not make the model generate less; it makes the model generate in the right task shape.

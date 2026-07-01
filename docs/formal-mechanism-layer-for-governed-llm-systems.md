@@ -6,9 +6,37 @@
 
 ---
 
+## Contents
+
+- [Abstract](#abstract)
+- [0. Position in the Unified Theory](#0-position-in-the-unified-theory)
+- [1. Why a Mechanism Layer Is Needed](#1-why-a-mechanism-layer-is-needed)
+- [2. Formal Decision-System Model](#2-formal-decision-system-model)
+- [3. The Eight Intervenable Mechanism Axes](#3-the-eight-intervenable-mechanism-axes)
+- [4. Eight-Axis Summary Table](#4-eight-axis-summary-table)
+- [5. Crosswalk with the Six Primitive Mismatches](#5-crosswalk-with-the-six-primitive-mismatches)
+- [6. Minimal Intervention Probes](#6-minimal-intervention-probes)
+- [7. Mechanism Profiles as Governance Objects](#7-mechanism-profiles-as-governance-objects)
+- [8. Compound Mechanism Chains](#8-compound-mechanism-chains)
+- [9. Relation to Audit Engineering](#9-relation-to-audit-engineering)
+- [10. Relation to Knowledge Governance](#10-relation-to-knowledge-governance)
+- [11. Relation to SGAR](#11-relation-to-sgar)
+- [12. Case Illustration I: Text-to-SQL](#12-case-illustration-i-text-to-sql)
+- [13. Case Illustration II: Financial Event Strategy](#13-case-illustration-ii-financial-event-strategy)
+- [14. Case Illustration III: Tool-Using Code Agent](#14-case-illustration-iii-tool-using-code-agent)
+- [15. Use Principles and Limits](#15-use-principles-and-limits)
+- [16. Self-Audit of the Mechanism Layer](#16-self-audit-of-the-mechanism-layer)
+- [17. Compressed Operating Protocol](#17-compressed-operating-protocol)
+- [18. Conclusion](#18-conclusion)
+- [Appendix A: Mechanism Checklist](#appendix-a-mechanism-checklist)
+- [Appendix B: Compact Schema Bundle](#appendix-b-compact-schema-bundle)
+- [Appendix C: Glossary](#appendix-c-glossary)
+
+---
+
 ## Abstract
 
-This document defines the **Formal Mechanism Layer** for governed LLM systems. It is a companion to the structural theory of value preservation, the six primitive mismatches, the Governed LLM Object Model, Audit Engineering, and the State-Governed Agent Regime. Its purpose is to connect structural diagnosis to component-level attribution and repair localization after a task has already been turned into governable control objects.
+This document defines the **Formal Mechanism Layer** for governed LLM systems. It is a companion to the structural theory of value preservation, the six primitive mismatches, the Governed LLM Object Model, Audit Engineering, and the State-Governed Agent Regime (SGAR). Its purpose is to connect structural diagnosis to component-level attribution and repair localization after a task has already been turned into governable control objects.
 
 The six primitive mismatches explain where task value becomes structurally distorted: observation-representation, state, fitting-boundary, support, aggregation, and specification. They are **task-value structural diagnostic axes** and, in practice, the first engineering entry points. By contrast, the Formal Mechanism Layer asks a different question: once a failure has been observed and operationalized into task-specific control objects, which component of the actual LLM system best explains that failure and where should persistent repair be localized?
 
@@ -65,7 +93,7 @@ Each layer answers a different question.
 | Diagnostic–Mechanism Bridge | How does value diagnosis become object repair, mechanism attribution, and repair-layer selection? |
 | Knowledge Governance | Which control knowledge should be objectified, scoped, revised, and revoked? |
 | Audit Engineering | How should failures be localized and written back into the control space? |
-| Governed Object Model | How should findings, deltas, GKOs, guards, and state records be represented? |
+| Governed Object Model | How should findings, deltas, Governed Knowledge Objects (GKOs), guards, and state records be represented? |
 | SGAR | Which actions, repairs, memories, and state updates are actually committed? |
 | Mechanism-Driven Training | Which recurrent operationalized learning-component failures should be promoted into training? |
 
@@ -1538,7 +1566,7 @@ Mechanism profiles determine which kind of governed knowledge is needed.
 | Capability routing | routing rule; mode state; trigger boundary GKO |
 | Search / execution | search policy; branch record; verifier contract; checkpoint rule |
 
-Mechanism profiles therefore help determine what should become a GKO, GEO, guard, or hard-state record.
+Mechanism profiles therefore help determine what should become a GKO, a Governed Escalation Object (GEO), a guard, or a hard-state record.
 
 ---
 
@@ -2146,4 +2174,7 @@ Search / Execution
 | CapabilitySupportDelta | Repair to candidate support through examples, retrieval, expert modules, or operators. |
 | CapabilityRoutingDelta | Repair to trigger boundaries, modes, roles, or routers. |
 | SearchExecutionDelta | Repair to sampling, branch search, verification, ranking, checkpoints, or execution. |
+| GKO (Governed Knowledge Object) | Externalized control knowledge represented as a scoped, evidenced, revocable governance object. |
+| GEO (Governed Escalation Object) | Governance object that records when and how a failure should be escalated for human or higher-authority handling. |
+| SGAR (State-Governed Agent Regime) | Regime that distinguishes narrative context from hard-state authority and commits only verified state transitions. |
 | SGAR commitment | Hard-state transition that makes a repair, action, or state update authoritative. |

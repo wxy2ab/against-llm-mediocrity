@@ -14,11 +14,13 @@ heroPoints:
   - Production impact requires the nightly cycle, shadow observation, champion-challenger promotion, and active activation.
 ---
 
+`stock_rec_v3` is a daily stock-strategy system built on one rule: never ask an LLM to pick stocks, and never trust its financial judgment by default. The model may only feed candidates, hints, explanations, and observations into a production process that distrusts it by design. This case study walks through why that design is necessary, how its four producers and nightly lifecycle enforce it, and how the whole system maps back to the site's six-mismatch framework.
+
 ## Why This Case Is Worth Studying
 
-This case is worth studying. The current case library already has [Story Insight V4](/case-study-v4) and [Story Insight V6](/case-study-v6), which explain control-space design, layered governance, continuity audit, and plateau detection in narrative generation. But both cases still live in a creative-writing domain.
+The current case library already has [Story Insight V4](/case-study-v4) and [Story Insight V6](/case-study-v6), which explain control-space design, layered governance, continuity audit, and plateau detection in narrative generation. But both cases still live in a creative-writing domain.
 
-`stock_rec_v3` adds a different high-mismatch system: a daily financial strategy. Financial systems make LLM state mismatch hard to ignore. Market regime changes, data coverage changes, factor validity changes, position cost and PnL change, and yesterday's governance action can affect today's holding decision. Asking an LLM to directly answer "what should we buy or sell?" is dangerous because the model can easily produce a plausible market narrative without producing a verifiable, traceable, rollback-capable strategy state.
+`stock_rec_v3` adds a different high-mismatch system: a daily financial strategy. Financial systems make LLM state mismatch hard to ignore. The market regime changes, data coverage changes, factor validity changes, position cost and profit-and-loss (PnL) change, and yesterday's governance action can affect today's holding decision. Asking an LLM to directly answer "what should we buy or sell?" is dangerous, because the model can easily produce a plausible market narrative without producing a verifiable, traceable, rollback-capable strategy state.
 
 The core sentence for this case should be:
 
@@ -35,7 +37,7 @@ The same signal means different things in bull, bear, and range markets. Current
 
 ### Specification Mismatch
 
-"Sounds reasonable" is not the objective function. The real targets include IC, spread, top-N behavior, out-of-sample validation, transaction cost, drawdown, industry concentration, and holding-action consequences.
+"Sounds reasonable" is not the objective function. The real targets include the information coefficient (IC), spread, top-N behavior, out-of-sample validation, transaction cost, drawdown, industry concentration, and holding-action consequences.
 
 ### Aggregation Mismatch
 
@@ -70,7 +72,7 @@ Evolves excitation rules: how theme, flow, momentum, risk, and narrative atoms c
 Turns recommendations into position actions: position ledger, holding analysis, PnL, validation feedback, holding governance, and carryover. It answers what to do now instead of trusting a new market story.
 ::::
 
-Together, these producers form the body of the strategy. Each night, the system does not ask the LLM to rewrite its opinion. It lets producers emit new inspectable objects, then lets governance decide which objects deserve production authority.
+Together, these producers form the body of the strategy. Each night, the system does not ask the LLM to rewrite its opinion. Instead, it lets the producers emit new inspectable objects, then lets governance decide which of those objects deserve production authority.
 
 ## Lifecycle: From Candidate to Active
 

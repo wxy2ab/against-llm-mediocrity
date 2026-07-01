@@ -14,6 +14,8 @@ heroPoints:
   - 用于检测输出空间搜索何时进入平台期的基准测试。
 ---
 
+本页记录这项工作的软件一侧：把论文中关于知识治理的想法，做成可运行、可检查、可撤销的对象。目前已发布一个项目，其余都还是计划中的实现方向。下文出现的 GKO，指受治理知识对象（Governed Knowledge Object / GKO）——一个存储下来的判断单元，可以被检索、弱化或撤销。
+
 ## 已发布项目
 
 ::::cards
@@ -22,16 +24,16 @@ Tag: State-Governed Agent Regime
 
 [sgar](https://github.com/wxy2ab/sgar) 是一个 embedded coding agent，用来把自动化修复、自动化运维与长程代码编辑能力嵌入到系统中。它同时提供 standalone CLI、可嵌入的 agent runtime，以及面向 OpenClaw 的长程代码编辑技能。
 
-项目的核心不是“一次调用 LLM 写点代码”，而是把代码编辑、状态治理、阶段推进、审计验证和运行痕迹组合成可长期运行的 agent 模型。它基于 [审计工程](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/audit-engineering.zh-CN.md) 与 [状态治理 agent 模式](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime.zh-CN.md)：用外部化硬状态、action/delta、trace、验证记录和 `.sgar/` 工作区来降低长程运行中的漂移、跳步和虚假完成。
+项目的核心不是“一次调用 LLM 写点代码”，而是把代码编辑、状态治理、阶段推进、审计验证和运行痕迹组合成可长期运行的 agent 模型。它的设计基于 [审计工程](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/audit-engineering.zh-CN.md) 与 [状态治理 agent 模式（State-Governed Agent Regime / SGAR）](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime.zh-CN.md)。具体来说，就是外部化硬状态、action/delta、trace、验证记录和 `.sgar/` 工作区。这些机制合在一起，能降低长程运行中的漂移、跳步和虚假完成。
 
 当前入口包括 `pip install sgar`、`sgar --help`、`sgar init`、`sgar status`、`sgar doctor`、`sgar trace`，以及 `validate`、`verify`、`mission` 等治理型命令。仓库文档还提供 [架构](https://github.com/wxy2ab/sgar/blob/main/docs/architecture.md)、[使用](https://github.com/wxy2ab/sgar/blob/main/docs/usage.md)、[API](https://github.com/wxy2ab/sgar/blob/main/docs/api.md) 与 [集成](https://github.com/wxy2ab/sgar/blob/main/docs/integration.md) 说明。
 ::::
 
 ## 计划中的项目类型
 
-这些是从当前工作稿推导出的后续实现方向，不是额外理论主张。它们用于测试受治理知识、硬状态转移、升级协议和失配诊断能否变成有用的软件对象。
+下面这些是从当前工作稿推导出的后续实现方向，不是额外的理论主张。它们的作用，是测试受治理知识、硬状态转移、升级协议和失配诊断能否变成有用的软件对象。
 
-项目页承接论文页的实证问题：**如果知识治理不只是一个解释框架，它就必须能落到可保存、可检查、可撤销的软件对象上。**`sgar` 已经先把硬状态、阶段推进、验证和 trace 做成可运行对象；后续项目会继续把控制空间、分层路由、连续性审计、pairwise 判断和平台期判断做成可观察的治理过程。这里的项目不追求一次性做出"大而全 agent"，而是拆出最小可验证组件。
+每一个方向都承接论文提出的同一个实证问题：**如果知识治理不只是一个解释框架，它就必须能落到可保存、可检查、可撤销的软件对象上。**`sgar` 已经先把硬状态、阶段推进、验证和 trace 做成可运行对象。后续项目会延续这个思路，把控制空间、分层路由、连续性审计、pairwise 判断和平台期判断也做成可观察的治理过程。它们都不追求一次性做出"大而全 agent"，而是各自拆出最小可验证组件。
 
 ::::cards
 ### GKO 登记库

@@ -35,6 +35,39 @@ The central claim is that governed LLM systems do not improve merely by being cr
 
 ---
 
+## Contents
+
+- [1. Purpose and Scope](#1-purpose-and-scope)
+- [2. Core Thesis](#2-core-thesis)
+- [3. What Audit Is Not](#3-what-audit-is-not)
+- [4. Foundational Asymmetries](#4-foundational-asymmetries)
+- [5. Audit in the Value-Preservation Pipeline](#5-audit-in-the-value-preservation-pipeline)
+- [6. Audit Finding](#6-audit-finding)
+- [7. Control Delta](#7-control-delta)
+- [8. The Audit Lifecycle](#8-the-audit-lifecycle)
+- [9. Mismatch-Specific Audit Patterns](#9-mismatch-specific-audit-patterns)
+- [10. Failure Localization](#10-failure-localization)
+- [11. Regression Governance](#11-regression-governance)
+- [12. Defect Ledger](#12-defect-ledger)
+- [13. Verifier Authority and Verifier Integrity](#13-verifier-authority-and-verifier-integrity)
+- [14. Audit Patterns](#14-audit-patterns)
+- [15. Anti-Patterns](#15-anti-patterns)
+- [16. Integration with Knowledge Governance](#16-integration-with-knowledge-governance)
+- [17. Integration with SGAR](#17-integration-with-sgar)
+- [18. Risk-Tiered Audit Intensity](#18-risk-tiered-audit-intensity)
+- [19. Reference Example: Text-to-SQL](#19-reference-example-text-to-sql)
+- [20. Reference Example: Code Repair](#20-reference-example-code-repair)
+- [21. Audit Closure Criteria](#21-audit-closure-criteria)
+- [22. Audit-of-Audit](#22-audit-of-audit)
+- [23. Relationship to Formal Traditions](#23-relationship-to-formal-traditions)
+- [24. Minimal Viable Audit Engineering](#24-minimal-viable-audit-engineering)
+- [25. Conclusion](#25-conclusion)
+- Appendices: [A. Compact Schemas](#appendix-a-compact-schemas) · [B. Audit Checklist](#appendix-b-audit-checklist) · [C. Severity Guide](#appendix-c-severity-guide) · [D. Closure Statuses](#appendix-d-closure-statuses)
+
+This document uses several governed objects by acronym throughout. The most important are the **GKO (Governed Knowledge Object)**, the durable unit of governed control knowledge written back by an audit; the **GEO (Governed Escalation Object)**, which carries a finding to human or higher-authority review; and the **SGAR (State-Governed Agent Regime)**, the state model under which an audit conclusion becomes authoritative only after a committed transition.
+
+---
+
 ## 1. Purpose and Scope
 
 This document is the audit-focused companion to a structural theory of value preservation in LLM systems and to the governed object model specification. The structural theory explains where task value can be lost in a world-to-output pipeline. The object model defines how governed knowledge, execution, findings, deltas, guards, and state records can be represented. This report focuses on the loop that connects failure to repair.

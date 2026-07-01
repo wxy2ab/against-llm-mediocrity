@@ -6,6 +6,37 @@
 
 ---
 
+## Contents
+
+- [Abstract](#abstract)
+- [1. Purpose and Scope](#1-purpose-and-scope)
+- [2. Two Orthogonal Cuts Through the Same System](#2-two-orthogonal-cuts-through-the-same-system)
+- [3. Layer Position in the Unified Theory Stack](#3-layer-position-in-the-unified-theory-stack)
+- [4. The Six Primitive Mismatches](#4-the-six-primitive-mismatches)
+- [5. The Eight Mechanism Axes](#5-the-eight-mechanism-axes)
+- [6. Learning Components, System Components, and Hybrid Components](#6-learning-components-system-components-and-hybrid-components)
+- [7. The Six-by-Eight Crosswalk Matrix](#7-the-six-by-eight-crosswalk-matrix)
+- [8. Diagnostic Workflow](#8-diagnostic-workflow)
+- [9. Minimal Intervention Probes](#9-minimal-intervention-probes)
+- [10. Mechanism Profiles as Governance Objects](#10-mechanism-profiles-as-governance-objects)
+- [11. Audit Engineering Integration](#11-audit-engineering-integration)
+- [12. Object Model Integration](#12-object-model-integration)
+- [13. SGAR as Governed Mechanism-Layer Transition](#13-sgar-as-governed-mechanism-layer-transition)
+- [14. Representation-Induced Value Ceiling](#14-representation-induced-value-ceiling)
+- [15. Agent-Layer Governance and Training-Layer Repair](#15-agent-layer-governance-and-training-layer-repair)
+- [16. Case Sketch: Text-to-SQL](#16-case-sketch-text-to-sql)
+- [17. Compound Causal Chains](#17-compound-causal-chains)
+- [18. Anti-Patterns](#18-anti-patterns)
+- [19. Integration Requirements for the Theory Stack](#19-integration-requirements-for-the-theory-stack)
+- [20. Compressed Statement](#20-compressed-statement)
+- [Appendix A: Canonical Enums](#appendix-a-canonical-enums)
+- [Appendix B: Minimal Intervention Probe Templates](#appendix-b-minimal-intervention-probe-templates)
+- [Appendix C: Minimal Object Bundle](#appendix-c-minimal-object-bundle)
+
+This paper assumes the reader is already familiar with the governed-LLM theory stack; throughout, "agent layer" means inference-time governance and "training layer" means changes amortized into model weights.
+
+---
+
 ## Abstract
 
 The theory of governed LLM systems contains two complementary diagnostic layers. The first layer is the **six primitive mismatch taxonomy**: observation-representation, state, fitting-boundary, support, aggregation, and specification mismatch. This layer explains where task value is structurally lost along a value-preservation pipeline. It answers the question: **why did the system fail in task-value terms?**
@@ -1040,7 +1071,7 @@ This proposition is not a claim that richer representations are always worth the
 
 The bridge creates a training-side doctrine for governed LLM systems.
 
-Current governance mechanisms are primarily inference-time:
+Current governance mechanisms are primarily inference-time. Here `GKO` denotes the Governed Knowledge Object:
 
 ```text
 GKO

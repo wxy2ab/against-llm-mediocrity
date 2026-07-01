@@ -5,6 +5,39 @@
 
 ---
 
+## Contents
+
+- [Abstract](#abstract)
+- [0. Position in the Unified Theory](#0-position-in-the-unified-theory)
+- [1. The Problem: Acting as If the State Were Known](#1-the-problem-acting-as-if-the-state-were-known)
+- [2. Formal Definition](#2-formal-definition)
+- [3. Why State Mismatch Is Primitive](#3-why-state-mismatch-is-primitive)
+- [4. The State Station in the Value-Preservation Pipeline](#4-the-state-station-in-the-value-preservation-pipeline)
+- [5. Taxonomy of State Mismatch](#5-taxonomy-of-state-mismatch)
+- [6. Diagnostic Signatures](#6-diagnostic-signatures)
+- [7. State Governance](#7-state-governance)
+- [8. Core State-Governance Objects](#8-core-state-governance-objects)
+- [9. Diagnostic Workflow](#9-diagnostic-workflow)
+- [10. Audit Engineering for State Mismatch](#10-audit-engineering-for-state-mismatch)
+- [11. Knowledge Governance for State](#11-knowledge-governance-for-state)
+- [12. Integration with SGAR](#12-integration-with-sgar)
+- [13. State Mismatch in Text-to-SQL](#13-state-mismatch-in-text-to-sql)
+- [14. State Mismatch in Code and Debugging](#14-state-mismatch-in-code-and-debugging)
+- [15. State Mismatch in Research, Strategy, and Advisory Work](#15-state-mismatch-in-research-strategy-and-advisory-work)
+- [16. Compound Interactions with Other Mismatches](#16-compound-interactions-with-other-mismatches)
+- [17. State-Governed Rendering](#17-state-governed-rendering)
+- [18. Relationship to Formal Traditions](#18-relationship-to-formal-traditions)
+- [19. When State Governance Is Not Needed](#19-when-state-governance-is-not-needed)
+- [20. Self-Audit of the State Mismatch Claim](#20-self-audit-of-the-state-mismatch-claim)
+- [21. Checklist for State Mismatch](#21-checklist-for-state-mismatch)
+- [22. Conclusion](#22-conclusion)
+- [Appendix A: Minimal Pair Examples](#appendix-a-minimal-pair-examples)
+- [Appendix B: State Governance Object Catalogue](#appendix-b-state-governance-object-catalogue)
+- [Appendix C: State Control Delta Types](#appendix-c-state-control-delta-types)
+- [Appendix D: Compact Definition](#appendix-d-compact-definition)
+
+---
+
 ## Abstract
 
 High-value LLM systems often fail not because the model lacks fluent language, relevant knowledge, or a plausible local strategy, but because the system acts as if it knows which situation it is in when the decisive latent state remains unresolved. The same prompt, schema, user instruction, code trace, research question, market description, or tool output may be compatible with multiple task states, and the optimal action may reverse across those states. In such cases, more confident generation can worsen performance: the model collapses uncertainty into one convenient interpretation and then optimizes a state-inappropriate policy.
@@ -39,7 +72,7 @@ repair_layer ∈ agent | training | hybrid
 
 This document is part of the governed LLM systems series.
 
-The main structural theory defines LLM system failure as value loss across a world-to-output pipeline. The object-model specification defines governed objects such as GKOs, audit findings, control deltas, regression guards, and state records. Audit Engineering explains how failures are localized and written back into the control space. SGAR explains how verified progress becomes committed hard state. The individual mismatch documents expand each pipeline station.
+The main structural theory defines LLM system failure as value loss across a world-to-output pipeline. The object-model specification defines governed objects such as Governed Knowledge Objects (GKOs), audit findings, control deltas, regression guards, and state records. Audit Engineering explains how failures are localized and written back into the control space. The State-Governed Agent Regime (SGAR) explains how verified progress becomes committed hard state. The individual mismatch documents expand each pipeline station.
 
 This document expands the **state station**.
 

@@ -14,10 +14,23 @@ What you gain from reading this site:
 - learn engineering patterns that solve those problems outside the model when needed;
 - see why the next serious agent paradigm has to move toward governance, state, and explicit control objects.
 
-`against-llm-mediocrity` turns that claim into an engineering language. It uses **LLM mediocrity**, **local alignment**, **LLM excellence**, **six primitive mismatches**, **knowledge governance**, **Governed Knowledge Objects (GKO) / Governed Evolution Objects (GEO)**, **audit engineering**, **State-Governed Agent Regime (SGAR)**, and **governed human-machine collaboration** to describe where structural ceilings appear and whether the fix belongs inside the model, outside the model, or at the human-system boundary.
+`against-llm-mediocrity` turns that claim into a shared engineering language: a small set of terms for naming where a structural ceiling appears and deciding whether the fix belongs inside the model, outside the model, or at the human-system boundary.
 
-> **Note on scope**
-> The material on this site comes primarily from engineering practice and engineering intuition. It tries to distill those experiences into theory-like frameworks that can guide engineering practice again, so the main criterion is practical engineering payoff rather than mathematical completeness. The theoretical parts are working scaffolds and may change at any time; they should not be treated as complete theoretical research.
+Here is the vocabulary the site builds on, with a one-line definition for each:
+
+- **LLM mediocrity** — the regime where the model's easiest output and the task's high-value output point in different directions, so more sampling or polishing makes answers smoother but not better.
+- **local alignment** — the common case where the model's local moves (compressing, rewriting, comparing) align with *part* of the task value, but the alignment is conditional and does not carry the whole task.
+- **LLM excellence** — the regime where fluency and learned representations pull with the task value along the whole chain, so autoregression becomes an advantage.
+- **six primitive mismatches** — a taxonomy of the structural reasons a value-preserving pipeline breaks down (aggregation, support, state, specification, fitting-boundary, observation-representation).
+- **knowledge governance** — separating verified, task-specific control knowledge from generation and storing it as reusable objects.
+- **Governed Knowledge Object (GKO)** — a verified unit of control knowledge that downstream generation can start from instead of from the model's default probabilities.
+- **Governed Escalation Object (GEO)** — a stored rule for when to ask a human, what to ask, and whom to ask.
+- **audit engineering** — treating auditing as an independent layer that localizes failures and writes fixes back into control objects, rather than as a post-hoc scorer.
+- **State-Governed Agent Regime (SGAR)** — an agent design that moves long-horizon execution onto an external hard-state layer so plans, actions, verification, and escalation become governed state transitions.
+- **governed human-machine collaboration** — organizing collaboration around control variables (AI advances the searchable parts; humans govern value, preference, and responsibility) instead of around task splits.
+
+> **How to read this material**
+> The content grows out of engineering practice and engineering intuition, distilled into theory-like frameworks meant to feed back into practice. The measure of success here is practical engineering payoff, not mathematical completeness. Read the theoretical parts as working scaffolds that can change at any time, rather than as finished theoretical research.
 
 ## Core Idea
 
@@ -31,45 +44,53 @@ This project focuses on three questions:
 
 ## Docs
 
+The docs are working drafts, grouped by theme. Each entry ships in English and 中文; the gloss after each link says why you might read it.
+
 ### Knowledge Governance
 
-- Structural theory of value preservation: [English](docs/structural-theory-value-preservation-llm-systems.md) · [中文](docs/structural-theory-value-preservation-llm-systems.zh-CN.md)
-- Six primitive mismatches pipeline-derived taxonomy: [English](docs/six-primitive-mismatches-pipeline-derived-taxonomy-llm-systems.md) · [中文](docs/six-primitive-mismatches-pipeline-derived-taxonomy-llm-systems.zh-CN.md)
-- Formal Mechanism Layer for Governed LLM Systems: [English](docs/formal-mechanism-layer-for-governed-llm-systems.md) · [中文](docs/formal-mechanism-layer-for-governed-llm-systems.zh-CN.md)
-- Diagnostic-Mechanism Bridge for Governed LLM Systems: [English](docs/diagnostic-mechanism-bridge-for-governed-llm-systems.md) · [中文](docs/diagnostic-mechanism-bridge-for-governed-llm-systems.zh-CN.md)
-- Mechanism-Driven Training for Governed LLM Systems: [English](docs/mechanism-driven-training-for-governed-llm-systems.md) · [中文](docs/mechanism-driven-training-for-governed-llm-systems.zh-CN.md)
-- Governed LLM object model and interface specification: [English](docs/governed-llm-object-model-interface-specification.md) · [中文](docs/governed-llm-object-model-interface-specification.zh-CN.md)
-- Audit Engineering for governed LLM systems: [English](docs/audit-engineering-failure-localization-control-space-writeback.md) · [中文](docs/audit-engineering-failure-localization-control-space-writeback.zh-CN.md)
-- Oracle classification, audit agent, and SGAR engine routing: [English](docs/oracle-classification-audit-agent-sgar-engine-routing.md) · [中文](docs/oracle-classification-audit-agent-sgar-engine-routing.zh-CN.md)
-- State-Governed Agent Regime for governed LLM systems: [English](docs/state-governed-agent-regime-for-governed-llm-systems.md) · [中文](docs/state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)
-- Observation-representation mismatch and channel governance: [English](docs/observation-representation-mismatch-channel-governance-llm-systems.md) · [中文](docs/observation-representation-mismatch-channel-governance-llm-systems.zh-CN.md)
-- State mismatch and state governance: [English](docs/state-mismatch-state-governance-llm-systems.md) · [中文](docs/state-mismatch-state-governance-llm-systems.zh-CN.md)
-- Fitting-boundary mismatch and capability routing: [English](docs/fitting-boundary-mismatch-capability-routing-llm-systems.md) · [中文](docs/fitting-boundary-mismatch-capability-routing-llm-systems.zh-CN.md)
-- Support mismatch and control-space search: [English](docs/support-mismatch-control-space-search-llm-systems.md) · [中文](docs/support-mismatch-control-space-search-llm-systems.zh-CN.md)
-- Aggregation mismatch and compositional governance: [English](docs/aggregation-mismatch-compositional-governance-llm-systems.md) · [中文](docs/aggregation-mismatch-compositional-governance-llm-systems.zh-CN.md)
-- Specification mismatch and objective governance: [English](docs/specification-mismatch-objective-governance-llm-systems.md) · [中文](docs/specification-mismatch-objective-governance-llm-systems.zh-CN.md)
+The core framework: how structural failures arise and how governance turns them into verifiable, reusable fixes.
+
+- Structural theory of value preservation: [English](docs/structural-theory-value-preservation-llm-systems.md) · [中文](docs/structural-theory-value-preservation-llm-systems.zh-CN.md) — start here for the overall theory of when value survives a pipeline and when it does not.
+- Six primitive mismatches pipeline-derived taxonomy: [English](docs/six-primitive-mismatches-pipeline-derived-taxonomy-llm-systems.md) · [中文](docs/six-primitive-mismatches-pipeline-derived-taxonomy-llm-systems.zh-CN.md) — the diagnostic taxonomy that names the six structural reasons a task breaks down.
+- Formal Mechanism Layer for Governed LLM Systems: [English](docs/formal-mechanism-layer-for-governed-llm-systems.md) · [中文](docs/formal-mechanism-layer-for-governed-llm-systems.zh-CN.md) — connects the mismatches to eight intervenable mechanism axes.
+- Diagnostic-Mechanism Bridge for Governed LLM Systems: [English](docs/diagnostic-mechanism-bridge-for-governed-llm-systems.md) · [中文](docs/diagnostic-mechanism-bridge-for-governed-llm-systems.zh-CN.md) — translates a diagnosed mismatch into where the repair belongs and which layer to fix.
+- Mechanism-Driven Training for Governed LLM Systems: [English](docs/mechanism-driven-training-for-governed-llm-systems.md) · [中文](docs/mechanism-driven-training-for-governed-llm-systems.zh-CN.md) — when to promote a recurring component failure into an amortizable training signal.
+- Governed LLM object model and interface specification: [English](docs/governed-llm-object-model-interface-specification.md) · [中文](docs/governed-llm-object-model-interface-specification.zh-CN.md) — the implementation spec: the objects and interfaces the theory relies on.
+- Audit Engineering for governed LLM systems: [English](docs/audit-engineering-failure-localization-control-space-writeback.md) · [中文](docs/audit-engineering-failure-localization-control-space-writeback.zh-CN.md) — how to localize failures and write fixes back into the control space.
+- Oracle classification, audit agent, and SGAR engine routing: [English](docs/oracle-classification-audit-agent-sgar-engine-routing.md) · [中文](docs/oracle-classification-audit-agent-sgar-engine-routing.zh-CN.md) — unifies oracle classification, auditing, and SGAR into one engine-routing decision chain.
+- State-Governed Agent Regime for governed LLM systems: [English](docs/state-governed-agent-regime-for-governed-llm-systems.md) · [中文](docs/state-governed-agent-regime-for-governed-llm-systems.zh-CN.md) — the case for hard-state authority, transition contracts, and runtime governance.
+- Observation-representation mismatch and channel governance: [English](docs/observation-representation-mismatch-channel-governance-llm-systems.md) · [中文](docs/observation-representation-mismatch-channel-governance-llm-systems.zh-CN.md) — how decisive variables enter the model, and how to govern the channel that carries them.
+- State mismatch and state governance: [English](docs/state-mismatch-state-governance-llm-systems.md) · [中文](docs/state-mismatch-state-governance-llm-systems.zh-CN.md) — handling latent state, state discrimination, and state-conditioned control.
+- Fitting-boundary mismatch and capability routing: [English](docs/fitting-boundary-mismatch-capability-routing-llm-systems.md) · [中文](docs/fitting-boundary-mismatch-capability-routing-llm-systems.zh-CN.md) — aligning a capability's trigger boundary with where it actually works, via routing.
+- Support mismatch and control-space search: [English](docs/support-mismatch-control-space-search-llm-systems.md) · [中文](docs/support-mismatch-control-space-search-llm-systems.zh-CN.md) — reaching high-value structures that sit in low-probability regions.
+- Aggregation mismatch and compositional governance: [English](docs/aggregation-mismatch-compositional-governance-llm-systems.md) · [中文](docs/aggregation-mismatch-compositional-governance-llm-systems.zh-CN.md) — why good local pieces fail to compose, and how to govern the composition.
+- Specification mismatch and objective governance: [English](docs/specification-mismatch-objective-governance-llm-systems.md) · [中文](docs/specification-mismatch-objective-governance-llm-systems.zh-CN.md) — closing the gap between the proxy objective and the real one, driven by counterexamples.
 
 ### Legacy Versions
 
-- A Formal Mechanism Layer for LLM Failure: [English](docs/formal-mechanism-layer.md) · [中文](docs/formal-mechanism-layer.zh-CN.md)
-- Knowledge Governance for Large Language Model Systems: [English](docs/knowledge-governance-llm-systems-local-alignment.md) · [中文](docs/knowledge-governance-llm-systems-local-alignment.zh-CN.md)
-- Observation-representation mismatch supplement: [English](docs/observation-representation-mismatch.md) · [中文](docs/observation-representation-mismatch.zh-CN.md)
-- Fitting-boundary mismatch supplement: [English](docs/fitting-boundary-mismatch.md) · [中文](docs/fitting-boundary-mismatch.zh-CN.md)
-- Audit–write-back–governance engineering: [English](docs/audit-engineering.md) · [中文](docs/audit-engineering.zh-CN.md)
-- State-Governed Agent Regime: [English](docs/state-governed-agent-regime.md) · [中文](docs/state-governed-agent-regime.zh-CN.md)
+Earlier drafts kept for reference; superseded by the entries above but still cited.
+
+- A Formal Mechanism Layer for LLM Failure: [English](docs/formal-mechanism-layer.md) · [中文](docs/formal-mechanism-layer.zh-CN.md) — the original mechanism-layer write-up.
+- Knowledge Governance for Large Language Model Systems: [English](docs/knowledge-governance-llm-systems-local-alignment.md) · [中文](docs/knowledge-governance-llm-systems-local-alignment.zh-CN.md) — the first full statement of knowledge governance and local alignment.
+- Observation-representation mismatch supplement: [English](docs/observation-representation-mismatch.md) · [中文](docs/observation-representation-mismatch.zh-CN.md) — the standalone supplement on observation-representation mismatch.
+- Fitting-boundary mismatch supplement: [English](docs/fitting-boundary-mismatch.md) · [中文](docs/fitting-boundary-mismatch.zh-CN.md) — the standalone supplement on fitting-boundary mismatch.
+- Audit–write-back–governance engineering: [English](docs/audit-engineering.md) · [中文](docs/audit-engineering.zh-CN.md) — the earlier audit-and-write-back engineering note.
+- State-Governed Agent Regime: [English](docs/state-governed-agent-regime.md) · [中文](docs/state-governed-agent-regime.zh-CN.md) — the earlier SGAR draft.
 
 ### Governed Human-AI Collaboration
 
-- Human-assist operational mismatches, MSHQs, and GEOs: [English](docs/human-assist-operational-mismatches.md) · [中文](docs/human-assist-operational-mismatches.zh-CN.md)
-- Practical governed-collaboration framework: [English](docs/governed-human-ai-collaboration.md) · [中文](docs/governed-human-ai-collaboration.zh-CN.md)
-- Cognitive discipline for AI: [English](docs/cognitive-discipline-for-ai.md) · [中文](docs/cognitive-discipline-for-ai.zh-CN.md)
-- AI collaborative posture: calibrated friction and constructive firmness: [English](docs/ai-collaborative-posture-calibrated-friction-constructive-firmness.md) · [中文](docs/ai-collaborative-posture-calibrated-friction-constructive-firmness.zh-CN.md)
+How AI and humans should divide work once structural ceilings are taken seriously.
+
+- Human-assist operational mismatches, MSHQs, and GEOs: [English](docs/human-assist-operational-mismatches.md) · [中文](docs/human-assist-operational-mismatches.zh-CN.md) — the technical supplement on when an agent should escalate and how it restores autonomy afterward, using Minimal Sufficient Human Queries (MSHQ) and Governed Escalation Objects (GEO).
+- Practical governed-collaboration framework: [English](docs/governed-human-ai-collaboration.md) · [中文](docs/governed-human-ai-collaboration.zh-CN.md) — the practice framework: AI first queries the environment and builds options and proving grounds, then asks humans only for genuinely human-governed variables.
+- Cognitive discipline for AI: [English](docs/cognitive-discipline-for-ai.md) · [中文](docs/cognitive-discipline-for-ai.zh-CN.md) — the cognitive framework for the human side of using AI.
+- AI collaborative posture: calibrated friction and constructive firmness: [English](docs/ai-collaborative-posture-calibrated-friction-constructive-firmness.md) · [中文](docs/ai-collaborative-posture-calibrated-friction-constructive-firmness.zh-CN.md) — how an assistant should push back with calibrated friction instead of agreeing by default.
 
 ### AI Economics and Pricing
 
-- The maximum price of models: [English](docs/maximum-price-of-llms.md) · [中文](docs/maximum-price-of-llms.zh-CN.md)
+- The maximum price of models: [English](docs/maximum-price-of-llms.md) · [中文](docs/maximum-price-of-llms.zh-CN.md) — the math behind LLM pricing and commoditization.
 
-The technical supplement defines when an agent should escalate and how to restore autonomy. The practice framework explains how AI should first query the environment, construct options and proving grounds, and ask humans only for genuinely human-governed variables. The SGAR draft explains why long-horizon agents need an external hard-state layer so that plans, actions, verification, escalation, and audit findings become governed state transitions rather than loose context narrative.
+Taken together, these drafts make one case in detail: the SGAR draft explains why long-horizon agents need an external hard-state layer so that plans, actions, verification, escalation, and audit findings become governed state transitions rather than loose context narrative.
 
 ## Site
 

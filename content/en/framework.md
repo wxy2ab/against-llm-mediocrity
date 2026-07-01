@@ -15,9 +15,9 @@ heroPoints:
 
 ## The Core Question: Does Probability Track Value?
 
-The earlier pages make the judgment first: some problems are not going to disappear just because models get stronger. The job of the mechanism page is to explain why those ceilings appear and why they often look like this: the answer gets smoother and more persuasive, but the decisive variable still never enters the system.
+The earlier pages make the judgment first: some problems will not disappear just because models get stronger. This page explains why those ceilings appear. The recurring symptom is easy to recognize: the answer keeps getting smoother and more persuasive, yet the decisive variable still never enters the system.
 
-An LLM still generates through probability: the next token, reasoning step, structural move, or tool call is selected under the current context. Training, RLHF, preference optimization, and inference-time reasoning reshape this distribution, but they do not give the model direct access to the real utility function of the current task.
+To see why, start from how the model works. An LLM still generates through probability: at each step it selects the next token, reasoning step, structural move, or tool call under the current context. Training, reinforcement learning from human feedback (RLHF), preference optimization, and inference-time reasoning all reshape this distribution. None of them, however, give the model direct access to the real utility function of the current task.
 
 The mechanism question is therefore:
 
@@ -25,7 +25,7 @@ The mechanism question is therefore:
 Is the model's easiest direction of continuation also the direction in which task value rises?
 ```
 
-When yes, autoregressive generation can be extremely effective. When no, fluency can make the wrong direction more convincing. That is why "the model got better" and "the task still fails at the critical point" can both be true: training expands the locally aligned region, but it does not guarantee the removal of every structural mismatch.
+When the answer is yes, autoregressive generation can be extremely effective. When it is no, fluency can make the wrong direction more convincing. That is why "the model got better" and "the task still fails at the critical point" can both be true at once: training expands the locally aligned region, but it does not guarantee that every structural mismatch is removed.
 
 ## Three Alignment Regimes
 
@@ -50,7 +50,7 @@ High-value outputs are no longer tail events; they are easy to reach. Context co
 
 ## Policy-Value Compression
 
-Modern aligned models should not be described as merely following raw word frequency. Pretraining gives the model language and world patterns. SFT, RLHF, DPO, process supervision, and related methods compress certain proxy values into the policy, making helpful, preferred, apparently correct, or safe trajectories more probable.
+Modern aligned models should not be described as merely following raw word frequency. Pretraining gives the model language and world patterns. Supervised fine-tuning (SFT), RLHF, direct preference optimization (DPO), process supervision, and related methods then compress certain proxy values into the policy, making helpful, preferred, apparently correct, or safe trajectories more probable.
 
 This is **policy-value compression**: value is not directly read by the model; it is compressed into probability and expressed at inference time through more likely tokens, steps, and output trajectories.
 
@@ -69,15 +69,15 @@ Many people have the intuition that if a single model is prone to mediocrity, th
 
 If several agents share roughly the same model, corpus priors, reward shaping, and task representation, then their collaboration is mechanically closer to **repeated sampling**. Even if they are labeled proposer, critic, judge, and executor, they are still searching on roughly the same probability landscape. This can improve average quality, reduce obvious errors, and make the output more complete or robust, but it does not automatically change the fact that high-value solutions may still lie outside the high-probability region.
 
-The same applies to multi-persona collaboration. Giving one model identities such as conservative, radical, user advocate, or architect can lengthen the sampling path and create more local perturbations and corrections. But if those personas are not tied to different information sources, different state access, different control objects, or different validation criteria, then the apparent dialogue is often just one autoregressive trajectory stretched into several entangled autoregressive trajectories. A longer path does not mean escape from autoregressive gravity.
+The same applies to multi-persona collaboration. Giving one model identities such as conservative, radical, user advocate, or architect can lengthen the sampling path and create more local perturbations and corrections. But if those personas are not tied to different information sources, different state access, different control objects, or different validation criteria, then the apparent dialogue is often just one autoregressive trajectory stretched into several entangled ones. A longer path does not mean escape from autoregressive gravity.
 
 The key point is this: **lengthening the sampling path is not the same as changing the search space; increasing the number of roles is not the same as changing the value function.** If the real bottleneck comes from aggregation mismatch, state mismatch, support mismatch, specification mismatch, or fitting-boundary mismatch, then more agents often expose the mismatch more thoroughly rather than repair it. They may make a mediocre answer more persuasive, or make a cluster of middling answers more consistent, while still failing to reach the decisive structure.
 
-So multi-agent collaboration is not a sufficient condition for escaping LLM mediocrity. It starts to become a real governance mechanism only when it genuinely rewrites the task into a different control problem by introducing explicit external state, validation loops, governed knowledge objects, differentiated tool permissions, structured control spaces, or minimal human intervention points.
+So multi-agent collaboration is not a sufficient condition for escaping LLM mediocrity. It starts to become a real governance mechanism only when it genuinely rewrites the task into a different control problem: by introducing explicit external state, validation loops, Governed Knowledge Objects (GKOs), differentiated tool permissions, structured control spaces, or minimal human intervention points.
 
 ## The Six Primitive Mismatches
 
-The six mismatches are not an attempt to name every surface failure. They are diagnostic axes for predicting when ordinary final-output search is likely to plateau.
+The six mismatches are not an attempt to name every surface failure. They are diagnostic axes for predicting when ordinary final-output search is likely to plateau. Each one describes a different reason the easy direction of continuation stops tracking value.
 
 :::cards
 ### Aggregation
@@ -96,7 +96,7 @@ The ranking of answers depends on hidden, changing, or underspecified state. Use
 
 The accessible proxy objective diverges from the true objective. An answer may satisfy the prompt, rubric, style, or test while missing the user's real success criterion.
 
-### Fitting Boundary
+### Fitting-Boundary
 
 The system binds too tightly to a local evidence chain, metric, scene default, role template, or feedback signal. The answer is locally reasonable but does not survive neighboring contexts.
 
@@ -105,7 +105,7 @@ The system binds too tightly to a local evidence chain, metric, scene default, r
 The decisive world variable never reaches the model in a task-sufficient form. The system may need measurement, raw logs, tool feedback, richer modality, sensor data, or a structured control representation before reasoning can close.
 :::
 
-A task rarely contains only one mismatch. A useful diagnosis asks for the **mismatch profile**: which mismatch dominates, which ones are secondary, and which intervention follows from that profile.
+A task rarely contains only one mismatch. A useful diagnosis asks for the **mismatch profile**: which mismatch dominates, which ones are secondary, and which intervention follows from that profile. The cards below pair each dominant mismatch with the move that tends to address it.
 
 ::::cards
 ### Aggregation-Dominant

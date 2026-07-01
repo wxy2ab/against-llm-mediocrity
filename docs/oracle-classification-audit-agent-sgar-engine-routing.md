@@ -5,6 +5,29 @@
 
 ---
 
+## Overview
+
+This paper argues that the right question for a self-improving system is not *whether* to build an audit agent, but *what kind of oracle* a given task exposes — and therefore which repair engine to route to. It introduces three engines (Audit, SGAR, and No-Go), a taxonomy of fidelity sources, an A/B/C stratification of tasks by oracle quality, and the architectural implications for the ccx system. Throughout, two terms recur: an **audit agent**, which uses recognition to localize the cause of a failure, and **SGAR (State-Governed Agent Regime)**, which uses recognition only as a pass/fail gate over generated candidates.
+
+## Contents
+
+- [0. One-Sentence Conclusion](#0-one-sentence-conclusion)
+- [1. Background Problem](#1-background-problem)
+- [2. Core Mechanism: Audit Is Failure-Conditioned Oracle Exploitation](#2-core-mechanism-audit-is-failure-conditioned-oracle-exploitation)
+- [3. The Key Criterion: Oracle Cost, Bandwidth, and Fidelity](#3-the-key-criterion-oracle-cost-bandwidth-and-fidelity)
+- [4. Important Correction: Text Is Not Taste, and Textual Logic Audit Is a Sweet Spot](#4-important-correction-text-is-not-taste-and-textual-logic-audit-is-a-sweet-spot)
+- [5. Fidelity Source Taxonomy: Where Task Auditability Comes From](#5-fidelity-source-taxonomy-where-task-auditability-comes-from)
+- [6. Task Stratification: A / B / C](#6-task-stratification-a--b--c)
+- [7. Audit and SGAR: Two Engines for the Same Asymmetry](#7-audit-and-sgar-two-engines-for-the-same-asymmetry)
+- [8. The Three-Engine Map: Audit / SGAR / No-Go](#8-the-three-engine-map-audit--sgar--no-go)
+- [9. Architectural Implications for ccx](#9-architectural-implications-for-ccx)
+- [10. Deployment Strategies for Different Tasks](#10-deployment-strategies-for-different-tasks)
+- [11. Experiments and Metrics](#11-experiments-and-metrics)
+- [12. Final Principles](#12-final-principles)
+- [13. Final Compressed Version](#13-final-compressed-version)
+
+---
+
 ## 0. One-Sentence Conclusion
 
 What truly matters is not "whether to build an audit agent," but rather:
@@ -302,7 +325,7 @@ SGAR  = dumb recognition (pass/fail) + smart generation/state management
 
 This is the most important point.
 
-SGAR appears to need only a boundary and therefore seem less demanding. But it does not escape the fidelity problem. It moves fidelity from a hard place to a tractable one:
+SGAR appears to need only a boundary and therefore seems less demanding. But it does not escape the fidelity problem; it merely moves fidelity from a hard place to a tractable one:
 
 | Mechanism | What must be proven | Difficulty |
 |---|---|---|

@@ -13,6 +13,8 @@ heroPoints:
   - The scarce capability is judging, giving feedback, validating, and meaningfully directing AI work.
 ---
 
+When AI can already perform most standard tasks, what should a person still learn? This page argues that the answer is not "less knowledge" but a different use of knowledge: less for executing routine work by hand, more for judging, directing, and validating the work AI does. The sections below trace that shift — why knowledge still matters, how the learning target moves up, the capacities worth building, and the daily practices that build them.
+
 ## Knowledge Still Matters
 
 AI will make many standard skills cheaper: writing code, drafting reports, translating, summarizing, creating tables, organizing material, composing emails, and generating plans. That does not mean humans should stop learning knowledge. It means shallow execution loses value while deep structure gains value.
@@ -27,9 +29,9 @@ Without domain knowledge, a person cannot tell whether AI output is:
 
 In one sentence: **AI makes shallow knowledge cheaper and deep knowledge more necessary.**
 
-This page extends the governed collaboration argument on the human side: as AI becomes the default information-processing core, humans should move from doing every routine operation toward governing the variables that AI cannot legitimately or reliably settle.
+This page extends the governed-collaboration argument to the human side. As AI becomes the default information-processing core, humans should move from doing every routine operation toward governing the variables that AI cannot legitimately or reliably settle.
 
-So the learning page is not a detour into education. It answers the question left by the collaboration page: if human value lies in governing variables, what should people practice so they can provide better variables, feedback, validation, and revocation judgments?
+So this is not a detour into education. It answers the question the collaboration page leaves open: if human value lies in governing variables, what should people practice so they can supply better variables, feedback, validation, and revocation judgments?
 
 ## The Learning Target Moves Up
 
@@ -51,7 +53,7 @@ Can I decide what is worth doing and own the consequences?
 
 The goal is not to become "unreplaceable" in every task. The goal is to turn AI's information-processing capacity into compounding judgment, feedback, and creation.
 
-In the language of this project, learning moves from output production to control quality. A strong learner becomes better at constructing the task, locating mismatch, creating intermediate objects, validating evidence, and deciding when a human-governed variable must be supplied.
+In the language of this project, learning moves from output production to control quality. A strong learner gets better at constructing the task, locating where it is mismatched, creating intermediate objects, validating evidence, and deciding when a human-governed variable must be supplied.
 
 ## Five Core Capacities
 
@@ -137,8 +139,8 @@ Keep conditional judgment rules with scope and revocation triggers, such as "whe
 
 ## Anti-Knowledge Is the Risk
 
-The dangerous misunderstanding is: if AI can process knowledge, humans only need prompting and soft skills. Without a knowledge base, prompts become empty, feedback becomes generic, insight becomes hallucination, and narrative becomes packaging.
+The dangerous misunderstanding is that if AI can process knowledge, humans only need prompting and soft skills. Without a knowledge base, prompts become empty, feedback becomes generic, insight becomes hallucination, and narrative becomes packaging.
 
-Human learning should not move away from knowledge. It should upgrade knowledge from a low-level execution tool into a control layer for judging AI, constraining AI, validating AI, and creating higher-value tasks.
+Human learning should not move away from knowledge. It should upgrade knowledge from a low-level execution tool into a control layer — one used to judge AI, constrain AI, validate AI, and create higher-value tasks.
 
 **The practical test is simple: after using AI, do you only have a better output, or do you also have better control knowledge for the next task?**

@@ -20,7 +20,31 @@ Under this abstraction, the taxonomy has a relative completeness claim: any fail
 
 The paper then introduces a mechanism for compound failure. Mismatches do not merely accumulate additively or multiplicatively. They often become **super-additive** because repair operators are coupled across pipeline stations. A repair operation for one mismatch may be ineffective when another station has already destroyed the information, state distinction, routing condition, support mass, aggregation invariant, or objective criterion on which the repair depends.
 
-This structural view unifies three system-level interventions. **Knowledge Governance** externalizes and revises task-specific control knowledge as governed objects. **Audit Engineering** converts failure signals into localized control deltas and regression guards. **State-Governed Agent Regime** provides hard-state authority for long-horizon systems, ensuring that plans, observations, verifications, corrections, and revocations become committed state transitions rather than loose context narrative. Together, these mechanisms implement a broader principle: preserve locally aligned model capabilities, but transform high-mismatch task components into lower-mismatch control objects that can be audited, revised, revoked, and reused.
+This structural view unifies three system-level interventions. **Knowledge Governance** externalizes and revises task-specific control knowledge as governed objects. **Audit Engineering** converts failure signals into localized control deltas and regression guards. **State-Governed Agent Regime (SGAR)** provides hard-state authority for long-horizon systems, ensuring that plans, observations, verifications, corrections, and revocations become committed state transitions rather than loose context narrative. Together, these mechanisms implement a broader principle: preserve locally aligned model capabilities, but transform high-mismatch task components into lower-mismatch control objects that can be audited, revised, revoked, and reused.
+
+---
+
+## Contents
+
+This is a long working paper. Sections 1–2 set up the value-preservation problem; Sections 3–6 develop the six-mismatch taxonomy and its compound-failure mechanism; Sections 7–11 describe the governance response and its object model; Sections 12–16 cover a worked instantiation, related traditions, scope limits, and a self-audit.
+
+- [1. Introduction](#1-introduction)
+- [2. The Value-Preservation Problem](#2-the-value-preservation-problem)
+- [3. Six Primitive Mismatches as Pipeline-Station Failures](#3-six-primitive-mismatches-as-pipeline-station-failures)
+- [4. Relative Completeness and Independence](#4-relative-completeness-and-independence)
+- [5. Regimes of Probability-Value Coupling](#5-regimes-of-probability-value-coupling)
+- [6. Repair-Operator Coupling and Super-Additive Failure](#6-repair-operator-coupling-and-super-additive-failure)
+- [7. Mediocrity-to-Extraordinary Transformation](#7-mediocrity-to-extraordinary-transformation)
+- [8. Knowledge Governance](#8-knowledge-governance)
+- [9. Audit Engineering](#9-audit-engineering)
+- [10. State-Governed Agent Regime](#10-state-governed-agent-regime)
+- [11. A Unified Object Model](#11-a-unified-object-model)
+- [12. Text-to-SQL as a Flagship Instantiation](#12-text-to-sql-as-a-flagship-instantiation)
+- [13. Relation to Existing Formal Traditions](#13-relation-to-existing-formal-traditions)
+- [14. When Governance Is Not Needed](#14-when-governance-is-not-needed)
+- [15. Self-Audit of the Theory](#15-self-audit-of-the-theory)
+- [16. Conclusion](#16-conclusion)
+- [Appendix A: Compact Terminology](#appendix-a-compact-terminology)
 
 ---
 
@@ -524,7 +548,7 @@ Knowledge Governance is an inference-time framework for constructing, validating
 
 It begins from a distinction between final rendering and control knowledge. Many LLM failures occur because the system asks the model to produce the final artifact directly, when the more valuable operation would be to construct the control objects from which the final artifact should be rendered.
 
-A **Governed Knowledge Object** is a task-specific control object with explicit scope, evidence, strength, and revocation conditions.
+A **Governed Knowledge Object (GKO)** is a task-specific control object with explicit scope, evidence, strength, and revocation conditions.
 
 A minimal GKO schema is:
 
@@ -677,7 +701,7 @@ The central objects are:
 | Object | Function |
 |---|---|
 | GKO | Stores governed control knowledge. |
-| GEO | Stores governed execution or collaboration objects. |
+| GEO (Governed Escalation Object) | Stores governed execution or collaboration objects. |
 | Audit Finding | Localizes a failure and its evidence. |
 | Control Delta | Specifies how the control space should change. |
 | Regression Guard | Prevents recurrence of a failure family. |

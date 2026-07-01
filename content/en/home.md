@@ -25,11 +25,11 @@ alignmentLabels:
 
 ## Start With the Reverse Question
 
-Models keep improving, and their capabilities keep expanding. So a natural intuition appears: the problems that remain hard today may disappear after the next round of training, the next model generation, or the next scaling curve.
+Models keep improving, and their capabilities keep expanding. A natural intuition follows: the problems that remain hard today may simply disappear after the next round of training, the next model generation, or the next scaling curve.
 
-But the more useful question is the reverse one: can training and iteration solve every important problem? If not, then some tasks are not merely "not solved yet." They are constrained by ceilings that follow from the algorithmic and architectural character of LLMs.
+But the more useful question is the reverse one. Can training and iteration solve every important problem? If not, then some tasks are not merely "not solved yet." They are constrained by ceilings that follow from the algorithmic and architectural character of large language models (LLMs).
 
-Daily use keeps exposing this pattern. The same model can feel extremely capable on some tasks and still miss the final decisive step on others. You add context, specify format, tighten constraints, ask for reflection, and request more versions. The answer becomes more complete, smoother, and better structured, but the thing you actually need still does not appear.
+Daily use keeps exposing this pattern. The same model can feel extremely capable on some tasks and still miss the final decisive step on others. You add context, specify the format, tighten constraints, ask for reflection, and request more versions. The answer becomes more complete, smoother, and better structured, yet the one thing you actually need still does not appear.
 
 This is not simply that the model is not smart enough, and it is not only that the prompt is still wrong. The same model can perform well elsewhere: compressing context, rewriting text, generating structure, expanding candidate options, explaining code, calling tools, and assisting validation. The real problem is that local capability does not always become the task value you need.
 
@@ -39,7 +39,7 @@ The response is not to keep optimizing prompts indefinitely. The first question 
 
 Recognizing and resisting this mediocrity may be the most common task AI users face. The practical aim is to preserve the model's real strengths while preventing local fluency from masquerading as global value.
 
-The site follows that order. It starts by asking why some problems cannot be solved just by waiting for stronger models, then explains why probability and value diverge, then turns the divergent parts into control spaces, validation objects, and minimal human questions. These pages are not separate essays. They are a path from structural judgment to diagnosis to delivery.
+The site follows that order. It starts by asking why some problems cannot be solved just by waiting for stronger models, then explains why probability and value diverge, and finally turns the divergent parts into control spaces, validation objects, and minimal human questions. These pages are not separate essays; they are a single path from structural judgment to diagnosis to delivery.
 
 > **Note on scope**
 > This framework starts as a summary of engineering practice and engineering intuition. What matters most here is whether it helps people reorganize tasks and improve practical engineering outcomes, not whether it forms a mathematically complete final theory; the theory sections are better understood as adjustable thinking scaffolds that will keep changing with practice.
@@ -65,7 +65,7 @@ Tag: probability and value align
 When local continuation reliably points toward task value, autoregression is not the problem; it is the advantage. Context compression, semantic expansion, structured transformation, and register transfer often live here.
 :::
 
-The common case is the middle one. A product memo, code review, customer reply, or research synthesis may contain parts that are easy for the model to handle and parts that depend on hidden state, global coordination, rare evidence, or a value choice. The question is not whether to use AI, but where the alignment boundary lies.
+The common case is the middle one. A product memo, code review, customer reply, or research synthesis may contain parts that are easy for the model to handle alongside parts that depend on hidden state, global coordination, rare evidence, or a value choice. The question is not whether to use AI, but where the alignment boundary lies.
 
 ## From a Fluent Draft to a Valuable Answer
 
@@ -89,9 +89,9 @@ identify the probability-value regime
 -> render the final answer from the governed state
 ```
 
-Each arrow changes the task the model is solving. The chain is not a mandatory workflow for every request. It is a way to avoid repeatedly polishing the final answer when the real bottleneck lives upstream.
+Each arrow changes the task the model is actually solving. The chain is not a mandatory workflow for every request; it is a way to avoid repeatedly polishing the final answer when the real bottleneck lives upstream.
 
-The six primitive mismatches help diagnose the second step:
+The six primitive mismatches help diagnose the second step in that chain:
 
 ::::cards
 ### Aggregation
@@ -181,12 +181,12 @@ In practice, this means a hard task should often move through artifacts before i
 input -> task model -> control objects -> validation / escalation -> final answer
 ```
 
-Those artifacts may include rubrics, state matrices, hard-state ledgers, dependency graphs, option sets, failure-mode lists, validation checklists, GKOs, Governed Escalation Objects (GEOs), or Minimal Sufficient Human Queries (MSHQs). They are not bureaucracy for its own sake. They are ways to convert a high-mismatch final-output problem into smaller operations where the model's local strengths become useful again.
+Those artifacts may include rubrics, state matrices, hard-state ledgers, dependency graphs, option sets, failure-mode lists, validation checklists, GKOs, Governed Escalation Objects (GEOs), or Minimal Sufficient Human Queries (MSHQs). They are not bureaucracy for its own sake; they convert a high-mismatch final-output problem into smaller operations where the model's local strengths become useful again.
 
 ## Where This Is Going
 
 - The public layer will explain LLM mediocrity, local alignment, and autoregressive extraordinary without requiring the reader to begin with the paper.
-- The theory layer develops the six primitive mismatches, Knowledge Governance, GKO/GEO, SGAR, and governance loops.
+- The theory layer develops the six primitive mismatches, Knowledge Governance, GKO/GEO, the State-Governed Agent Regime (SGAR), and governance loops.
 - The engineering layer turns control objects, hard-state ledgers, validation loops, and minimal human intervention points into usable tools and templates.
 - The collaboration layer reframes the human role: not as a processor of every task, but as the governor of value, authority, taste, budget, evidence, and responsibility.
 

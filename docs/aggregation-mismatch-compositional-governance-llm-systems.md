@@ -40,6 +40,38 @@ In mechanism terms, aggregation mismatch is about failure of whole-object preser
 
 ---
 
+## Contents
+
+This is a long working paper. The reader's map:
+
+- [1. Position in the Unified Theory](#1-position-in-the-unified-theory)
+- [2. Core Definition](#2-core-definition)
+- [3. Why Aggregation Is a Primitive Mismatch](#3-why-aggregation-is-a-primitive-mismatch)
+- [4. Aggregation and Autoregressive Mediocrity](#4-aggregation-and-autoregressive-mediocrity)
+- [5. The Structure of Local-to-Global Failure](#5-the-structure-of-local-to-global-failure)
+- [6. Local Value Is Not a Homomorphism](#6-local-value-is-not-a-homomorphism)
+- [7. Compositional Governance](#7-compositional-governance)
+- [8. The Compositional Governance Loop](#8-the-compositional-governance-loop)
+- [9. Core Governance Objects](#9-core-governance-objects)
+- [10. Audit Engineering for Aggregation Mismatch](#10-audit-engineering-for-aggregation-mismatch)
+- [11. Transformation Patterns](#11-transformation-patterns)
+- [12. Interaction With Other Mismatches](#12-interaction-with-other-mismatches)
+- [13. Text-to-SQL as Aggregation Mismatch](#13-text-to-sql-as-aggregation-mismatch)
+- [14. Code Generation and Patch Integration](#14-code-generation-and-patch-integration)
+- [15. Research Synthesis and Argument Composition](#15-research-synthesis-and-argument-composition)
+- [16. Multi-Agent and Tool-Using Workflows](#16-multi-agent-and-tool-using-workflows)
+- [17. When Local Improvement Is Enough](#17-when-local-improvement-is-enough)
+- [18. Failure Modes of Compositional Governance](#18-failure-modes-of-compositional-governance)
+- [19. Practical Checklist](#19-practical-checklist)
+- [20. Relation to Existing Formal Traditions](#20-relation-to-existing-formal-traditions)
+- [21. Formal Claims and Revocation Conditions](#21-formal-claims-and-revocation-conditions)
+- [22. Conclusion](#22-conclusion)
+- [Appendix A: Compact Glossary](#appendix-a-compact-glossary)
+- [Appendix B: Minimal Compositional Governance Template](#appendix-b-minimal-compositional-governance-template)
+- [Appendix C: One-Page Operational Summary](#appendix-c-one-page-operational-summary)
+
+---
+
 ## 1. Position in the Unified Theory
 
 The structural theory of value preservation analyzes LLM system failure through a world-to-output pipeline:
@@ -672,7 +704,7 @@ state transition plan
 coverage matrix
 ```
 
-These objects become GKOs or GEOs when they have scope, evidence, strength, and revocation conditions.
+These objects become Governed Knowledge Objects (GKOs) or Governed Escalation Objects (GEOs) when they have scope, evidence, strength, and revocation conditions.
 
 ### 8.3 Local Part Generation
 
@@ -1462,7 +1494,7 @@ integration audit
 
 ### 16.3 SGAR Connection
 
-In long-horizon workflows, aggregation validity must be tied to hard state.
+In a State-Governed Agent Regime (SGAR), aggregation validity must be tied to hard state across long-horizon workflows.
 
 A set of local completions should not automatically commit project progress.
 

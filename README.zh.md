@@ -14,10 +14,23 @@
 - 找到应对结构性缺陷的工程思路，在模型之外补上关键能力；
 - 理解在这些结构性限制之后，下一代 agent 范式为什么必须走向治理、状态与控制对象。
 
-`against-llm-mediocrity` 试图把这套判断落成一门工程语言。我们用 **LLM 平庸**、**局部对齐**、**LLM卓越**、**六类原始失配**、**知识治理**、**受治理知识对象（GKO）/ 受治理升级对象（GEO）**、**审计工程**、**状态治理型 Agent 体制（SGAR）** 和 **治理式人机协作**，来描述结构性天花板出现在哪里，以及修复应该放在模型内、模型外，还是人机边界上。
+`against-llm-mediocrity` 试图把这套判断落成一门共同的工程语言：用一小组术语来命名结构性天花板出现在哪里，并判断修复应该放在模型内、模型外，还是人机边界上。
 
-> **说明**
-> 本站内容主要来自工程实践和工程直觉的总结。我们尝试把这些经验梳理成能够重新指导工程实践的理论框架，所以整体更看重工程实践收益，而不是数学上的完备性。这里的理论部分更像一种可调整的思维脚手架，可能随时更新，不应被当作完备的理论研究。
+下面先给出这套词汇表，每个术语配一句话定义（更完整的解释见后文"核心概念"）：
+
+- **LLM 平庸**：模型最容易生成的方向和任务真正高价值的方向不一致，于是继续采样或润色只会让答案更顺，却不会更对。
+- **局部对齐**：模型的局部操作（压缩、改写、比较）只与*部分*任务价值对齐，这种一致是有条件的，撑不起整条任务。这也是现实中最常见的区间。
+- **LLM卓越**：流畅性和习得表征在整条任务链上与任务价值同向发力，此时自回归反而成为优势。
+- **六类原始失配**：一套诊断分类，命名价值保存管线失效的六种结构性原因（聚合、支持、状态、规格、拟合边界、观测-表征）。
+- **知识治理**：把经过验证的、任务特定的控制知识从生成中分离出来，存成可复用的对象。
+- **受治理知识对象（GKO）**：一份经过验证的控制知识，让下游生成从它出发，而不是从模型默认概率出发。
+- **受治理升级对象（GEO）**：一条存下来的规则，规定什么时候该问人、问什么、问谁。
+- **审计工程**：把审计当成独立的一层，用来定位失败并把修复回写进控制对象，而不是当成事后的打分器。
+- **状态治理型 Agent 体制（SGAR）**：一种 agent 设计，把长程执行搬到外部硬状态层，让计划、行动、验证、升级都成为受治理的状态转移。
+- **治理式人机协作**：围绕控制变量组织协作（AI 推进可搜索的部分，人治理价值、偏好与责任），而不是围绕任务分工。
+
+> **该怎么读这些材料**
+> 这些内容源自工程实践和工程直觉，再被提炼成能反过来指导实践的理论框架。因此衡量标准是工程上的实际收益，而不是数学上的完备性。请把其中的理论部分当作可能随时调整的思维脚手架，而不是已经定稿的理论研究。
 
 站点地址：<https://wxy2ab.github.io/against-llm-mediocrity/>
 
@@ -119,6 +132,8 @@ against-llm-mediocrity/
 
 ### 工作稿（[docs](./docs)）
 
+这些都是工作稿，每篇提供中英双语。链接后的一句话说明它讲什么、值不值得读。
+
 - [LLM 系统中价值保存的结构理论](./docs/structural-theory-value-preservation-llm-systems.zh-CN.md)：新的结构理论工作稿。
 - [LLM 系统中的六类原始失配](./docs/six-primitive-mismatches-pipeline-derived-taxonomy-llm-systems.zh-CN.md)：从价值保存管线推导六类原始失配的总览工作稿。
 - [受治理 LLM 对象模型与接口规范](./docs/governed-llm-object-model-interface-specification.zh-CN.md)：价值保存结构理论的配套实现规范。
@@ -141,12 +156,14 @@ against-llm-mediocrity/
 
 ### 旧版本
 
-- LLM 失败的形式化机制层：[English](./docs/formal-mechanism-layer.md) · [中文](./docs/formal-mechanism-layer.zh-CN.md)
-- Knowledge Governance for Large Language Model Systems：[English](./docs/knowledge-governance-llm-systems-local-alignment.md) · [中文](./docs/knowledge-governance-llm-systems-local-alignment.zh-CN.md)
-- 观测-表征失配专题：[English](./docs/observation-representation-mismatch.md) · [中文](./docs/observation-representation-mismatch.zh-CN.md)
-- 拟合边界失配专题：[English](./docs/fitting-boundary-mismatch.md) · [中文](./docs/fitting-boundary-mismatch.zh-CN.md)
-- Audit Engineering：[English](./docs/audit-engineering.md) · [中文](./docs/audit-engineering.zh-CN.md)
-- 状态治理型 Agent 体制（SGAR）：[English](./docs/state-governed-agent-regime.md) · [中文](./docs/state-governed-agent-regime.zh-CN.md)
+保留下来供参考的早期草稿，已被上面的新版取代，但仍被引用。
+
+- LLM 失败的形式化机制层：[English](./docs/formal-mechanism-layer.md) · [中文](./docs/formal-mechanism-layer.zh-CN.md)：机制层最初的写法。
+- Knowledge Governance for Large Language Model Systems：[English](./docs/knowledge-governance-llm-systems-local-alignment.md) · [中文](./docs/knowledge-governance-llm-systems-local-alignment.zh-CN.md)：知识治理与局部对齐的首次完整表述。
+- 观测-表征失配专题：[English](./docs/observation-representation-mismatch.md) · [中文](./docs/observation-representation-mismatch.zh-CN.md)：观测-表征失配的独立专题。
+- 拟合边界失配专题：[English](./docs/fitting-boundary-mismatch.md) · [中文](./docs/fitting-boundary-mismatch.zh-CN.md)：拟合边界失配的独立专题。
+- Audit Engineering：[English](./docs/audit-engineering.md) · [中文](./docs/audit-engineering.zh-CN.md)：早期的审计与写回工程笔记。
+- 状态治理型 Agent 体制（SGAR）：[English](./docs/state-governed-agent-regime.md) · [中文](./docs/state-governed-agent-regime.zh-CN.md)：早期的 SGAR 草稿。
 
 ---
 

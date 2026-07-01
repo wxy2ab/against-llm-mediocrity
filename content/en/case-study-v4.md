@@ -14,6 +14,8 @@ heroPoints:
   - In one run, all 10 scoring dimensions passed with an average of 8.88, yet the final status remained not qualified. Passing scores were not enough.
 ---
 
+Story Insight V4 is a story generation and optimization system. Instead of treating creative writing as "sample more prose," it first builds a logic space — a structured skeleton of the story — and then uses evaluation, defect attack, and targeted revision to govern story structure before any final text is rendered. This case study walks through why that approach matters, how the system is built, and what a single real run revealed.
+
 ## Why This Case
 
 Story Insight V4 is a useful case for this project because its task is not factual answering or surface rewriting. It generates and iterates short fiction. Story generation is easy to misread: the prose can be fluent, the atmosphere can work, and the sentences can be polished while the story still fails at a deeper level.
@@ -24,7 +26,7 @@ Story Insight V4 does not ask the model to simply “write better.” It first t
 
 ## Why Story Generation Is High-Mismatch
 
-A story's value is not determined by whether each paragraph reads smoothly. The decisive variables live across layers:
+A task is high-mismatch when its real value is decided by structure that local quality cannot guarantee — so polishing the surface does not close the gap. A story's value is not determined by whether each paragraph reads smoothly. The decisive variables live across layers:
 
 :::cards
 ### Character Motivation
@@ -61,7 +63,7 @@ Polishing the prose can make the story look more mature without repairing the ga
 
 ## How the Control Space Is Designed
 
-Story Insight V4 decomposes the story into a `LogicSpace`: a structured skeleton from which the final text is rendered.
+Story Insight V4 decomposes the story into a `LogicSpace` (logic space): a structured skeleton from which the final text is rendered. The text is not produced directly from a blank prompt; it is rendered out of this control space.
 
 ::::cards
 ### character_space
@@ -164,7 +166,7 @@ The system ran 9 iterations and reached an average score of 8.88. All 10 dimensi
 Despite passing all scoring dimensions, the final status remained not qualified. This is not merely a failure. It is the important lesson: passing scores do not mean governance is complete.
 :::
 
-This run is especially useful for explaining the core claim of this project. A system can produce a high-scoring story and still be blocked by a higher-level acceptance process. The problem is not sentence fluency. The deeper checks can expose structural flaws hidden behind locally strong scores.
+This run is especially useful for explaining the core claim of this project. A system can produce a high-scoring story and still be blocked by a higher-level acceptance process. The problem is not sentence fluency; it is that deeper checks — defect attack, continuity audit, and the qualification profile — can expose structural flaws hidden behind locally strong scores.
 
 ## What Remained After Scores Passed
 
@@ -181,7 +183,7 @@ These are not reliably solved by asking for another polished draft. They point t
 
 ## Mapping Back to the Framework
 
-Story Insight V4 maps directly onto this site's framework.
+Story Insight V4 maps directly onto this site's framework, where each failure mode is named as a *mismatch* between local quality and global value. The flaws above line up with these mismatch types:
 
 ::::cards
 ### Aggregation Mismatch
