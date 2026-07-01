@@ -33,13 +33,13 @@ Daily use keeps exposing this pattern. The same model can feel extremely capable
 
 This is not simply that the model is not smart enough, and it is not only that the prompt is still wrong. The same model can perform well elsewhere: compressing context, rewriting text, generating structure, expanding candidate options, explaining code, calling tools, and assisting validation. The real problem is that local capability does not always become the task value you need.
 
-That is what this project calls **LLM mediocrity**: on some tasks, the language-probability system and the real problem domain are structurally mismatched. The model may move along the direction that is statistically natural, easy to continue, well supported, or broadly acceptable, while the actual value depends on global structure, hidden state, a sharper specification, or a rare low-support move. **In other words, some failures do not merely wait for more scale. They are already touching a structural ceiling.**
+That is what this project calls **[LLM mediocrity](/glossary#llm-mediocrity)**: on some tasks, the language-probability system and the real problem domain are structurally mismatched. The model may move along the direction that is statistically natural, easy to continue, well supported, or broadly acceptable, while the actual value depends on global structure, hidden state, a sharper specification, or a rare low-support move. **In other words, some failures do not merely wait for more scale. They are already touching a structural ceiling.**
 
-The response is not to keep optimizing prompts indefinitely. The first question is diagnostic: which parts of the task are already aligned with the model's generative strengths, which parts are only locally aligned, and which parts must be repaired through control spaces, validation, tools, human decisions, or hard-state governance?
+The response is not to keep optimizing prompts indefinitely. The first question is diagnostic: which parts of the task are already aligned with the model's generative strengths, which parts are only [locally aligned](/glossary#local-alignment), and which parts must be repaired through control spaces, validation, tools, human decisions, or hard-state governance?
 
 Recognizing and resisting this mediocrity may be the most common task AI users face. The practical aim is to preserve the model's real strengths while preventing local fluency from masquerading as global value.
 
-The site follows that order. It starts by asking why some problems cannot be solved just by waiting for stronger models, then explains why probability and value diverge, and finally turns the divergent parts into control spaces, validation objects, and minimal human questions. These pages are not separate essays; they are a single path from structural judgment to diagnosis to delivery.
+The site follows that order. It starts by asking why some problems cannot be solved just by waiting for stronger models, then explains why probability and value diverge, and finally turns the divergent parts into control spaces, validation objects, and [Minimal Sufficient Human Queries](/glossary#mshq). These pages are not separate essays; they are a single path from structural judgment to diagnosis to delivery.
 
 > **Note on scope**
 > This framework starts as a summary of engineering practice and engineering intuition. What matters most here is whether it helps people reorganize tasks and improve practical engineering outcomes, not whether it forms a mathematically complete final theory; the theory sections are better understood as adjustable thinking scaffolds that will keep changing with practice.
@@ -181,12 +181,12 @@ In practice, this means a hard task should often move through artifacts before i
 input -> task model -> control objects -> validation / escalation -> final answer
 ```
 
-Those artifacts may include rubrics, state matrices, hard-state ledgers, dependency graphs, option sets, failure-mode lists, validation checklists, GKOs, Governed Escalation Objects (GEOs), or Minimal Sufficient Human Queries (MSHQs). They are not bureaucracy for its own sake; they convert a high-mismatch final-output problem into smaller operations where the model's local strengths become useful again.
+Those artifacts may include rubrics, state matrices, hard-state ledgers, dependency graphs, option sets, failure-mode lists, validation checklists, [GKOs](/glossary#gko), [Governed Escalation Objects (GEOs)](/glossary#geo), or [Minimal Sufficient Human Queries (MSHQs)](/glossary#mshq). They are not bureaucracy for its own sake; they convert a high-mismatch final-output problem into smaller operations where the model's local strengths become useful again.
 
 ## Where This Is Going
 
 - The public layer will explain LLM mediocrity, local alignment, and autoregressive extraordinary without requiring the reader to begin with the paper.
-- The theory layer develops the six primitive mismatches, Knowledge Governance, GKO/GEO, the State-Governed Agent Regime (SGAR), and governance loops.
+- The theory layer develops the [six primitive mismatches](/glossary#six-primitive-mismatches), [Knowledge Governance](/glossary#knowledge-governance), [GKO](/glossary#gko) / [GEO](/glossary#geo), the [State-Governed Agent Regime (SGAR)](/glossary#sgar), and governance loops.
 - The engineering layer turns control objects, hard-state ledgers, validation loops, and minimal human intervention points into usable tools and templates.
 - The collaboration layer reframes the human role: not as a processor of every task, but as the governor of value, authority, taste, budget, evidence, and responsibility.
 

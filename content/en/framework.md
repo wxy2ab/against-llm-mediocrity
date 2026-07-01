@@ -30,19 +30,19 @@ When the answer is yes, autoregressive generation can be extremely effective. Wh
 ## Three Alignment Regimes
 
 :::cards
-### LLM Mediocrity
+### [LLM mediocrity](/glossary#llm-mediocrity)
 Tag: probability peak misses value peak
 
 Under the available budget, reachable candidates remain concentrated in outputs that are fluent, plausible, and locally improvable but far from high-value solutions. More sampling or polishing may improve average quality without exposing the decisive structure.
 
 Autoregressive mediocrity is the aggregation-mismatch subcase: local token probabilities keep producing reasonable continuations while the global value structure is diluted.
 
-### Local Alignment
+### [Local alignment](/glossary#local-alignment)
 Tag: the common practical state
 
 The model's local continuation tendencies align with part of the task value. It can compress, rewrite, enumerate, compare, outline, and produce useful fragments. But global success may still depend on hidden state, long-range dependency, true objective, or validation.
 
-### Autoregressive Extraordinary
+### [LLM excellence](/glossary#llm-excellence)
 Tag: probability and value rise together
 
 High-value outputs are no longer tail events; they are easy to reach. Context compression, semantic decompression, register transfer, surface polish, structured transformation, query formulation, and edge-case generation often live in this regime.
@@ -73,11 +73,11 @@ The same applies to multi-persona collaboration. Giving one model identities suc
 
 The key point is this: **lengthening the sampling path is not the same as changing the search space; increasing the number of roles is not the same as changing the value function.** If the real bottleneck comes from aggregation mismatch, state mismatch, support mismatch, specification mismatch, or fitting-boundary mismatch, then more agents often expose the mismatch more thoroughly rather than repair it. They may make a mediocre answer more persuasive, or make a cluster of middling answers more consistent, while still failing to reach the decisive structure.
 
-So multi-agent collaboration is not a sufficient condition for escaping LLM mediocrity. It starts to become a real governance mechanism only when it genuinely rewrites the task into a different control problem: by introducing explicit external state, validation loops, Governed Knowledge Objects (GKOs), differentiated tool permissions, structured control spaces, or minimal human intervention points.
+So multi-agent collaboration is not a sufficient condition for escaping LLM mediocrity. It starts to become a real governance mechanism only when it genuinely rewrites the task into a different control problem: by introducing explicit external state, validation loops, [Governed Knowledge Objects (GKOs)](/glossary#gko), differentiated tool permissions, structured control spaces, or minimal human intervention points.
 
 ## The Six Primitive Mismatches
 
-The six mismatches are not an attempt to name every surface failure. They are diagnostic axes for predicting when ordinary final-output search is likely to plateau. Each one describes a different reason the easy direction of continuation stops tracking value.
+The [six primitive mismatches](/glossary#six-primitive-mismatches) are not an attempt to name every surface failure. They are diagnostic axes for predicting when ordinary final-output search is likely to plateau. Each one describes a different reason the easy direction of continuation stops tracking value.
 
 :::cards
 ### Aggregation

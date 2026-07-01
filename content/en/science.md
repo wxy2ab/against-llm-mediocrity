@@ -65,7 +65,7 @@ The prompt objective is only a proxy. The answer may be clear, complete, and pro
 The model locks onto one plausible explanation, metric, style, or early solution path. The answer feels coherent in the current scene, but nearby cases expose that it was bound too tightly.
 :::
 
-These everyday patterns correspond to the six primitive mismatches in the mechanism layer:
+These everyday patterns correspond to the [six primitive mismatches](/glossary#six-primitive-mismatches) in the mechanism layer:
 
 ::::cards
 ### Wrong Abstraction -> Aggregation / Specification
@@ -118,7 +118,7 @@ A useful check is to ask what kind of object would change the next generation:
 - A rubric changes vague quality into testable criteria.
 - A failure-mode list exposes how a plausible answer could fail.
 - A query plan moves missing facts out of imagination and into retrieval.
-- A minimal sufficient human question isolates a value, authority, or responsibility variable.
+- A [minimal sufficient human question](/glossary#mshq) isolates a value, authority, or responsibility variable.
 
 ## What This Understanding Prevents
 

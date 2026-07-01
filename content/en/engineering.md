@@ -35,11 +35,11 @@ This page follows directly from the mechanism page. When local fluency no longer
 
 For full engineering examples, return to "Cases." V4 applies this workflow through a narrative logic space, evaluator, and defect attacker. V6 then shows the next layer: once a control space exists, the system must route problems across MetaSpace, LogicSpace, text, continuity, and evaluation contracts.
 
-This verification and write-back mechanism can be developed into an independent discipline: **Audit Engineering**. It treats audit not as post-generation scoring but as a structured process that turns findings into defect evidence, repair routes, control deltas, and regression tests—allowing underspecified user value to become explicit through iteration.
+This verification and write-back mechanism can be developed into an independent discipline: **[Audit Engineering](/glossary#audit-engineering)**. It treats audit not as post-generation scoring but as a structured process that turns findings into defect evidence, repair routes, control deltas, and regression tests—allowing underspecified user value to become explicit through iteration.
 
 [Read “Audit Engineering: From Generation–Verification Asymmetry to General Agent Governance”](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/audit-engineering.md)
 
-For long-horizon agents, these control objects also need a hard-state layer. The **State-Governed Agent Regime (SGAR)** treats plans, tool calls, observations, verification results, human answers, audit findings, and rollback decisions as state transitions rather than loose chat history. The point is not to make the LLM less capable; it is to stop asking the same context that acted to also be the sole authority on whether the task advanced.
+For long-horizon agents, these control objects also need a hard-state layer. The **[State-Governed Agent Regime (SGAR)](/glossary#sgar)** treats plans, tool calls, observations, verification results, human answers, audit findings, and rollback decisions as state transitions rather than loose chat history. The point is not to make the LLM less capable; it is to stop asking the same context that acted to also be the sole authority on whether the task advanced.
 
 [Read “State-Governed Agent Regime”](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime.md)
 
@@ -125,7 +125,7 @@ A control space does not need to resemble the final answer. It is better underst
 Typical control objects include:
 
 - state matrices
-- hard-state ledgers
+- [hard-state ledgers](/glossary#sgar)
 - rubrics
 - candidate frames
 - failure-mode lists
