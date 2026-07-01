@@ -948,7 +948,7 @@ Because finding F exposed defect family D, delta Δ repaired it, and guard G pro
 
 ## 17. 与 SGAR 的集成
 
-审计工程也与状态治理型 Agent 体制集成。
+审计工程也与状态治理智能体范式集成。
 
 审计结果不应自动改变硬状态。它必须通过转移契约。
 

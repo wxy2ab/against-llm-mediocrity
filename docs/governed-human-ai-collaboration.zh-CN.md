@@ -6,7 +6,7 @@
 **版本：** 1.1  
 **技术补充稿：** [人类协助型操作失配](human-assist-operational-mismatches.zh-CN.md)  
 **当前总稿：** [LLM 系统中价值保存的结构理论](structural-theory-value-preservation-llm-systems.zh-CN.md)  
-**Agent 状态补充稿：** [面向受治理 LLM 系统的状态治理型 Agent 体制](state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)
+**Agent 状态补充稿：** [面向受治理 LLM 系统的状态治理智能体范式](state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)
 
 ## 概述
 

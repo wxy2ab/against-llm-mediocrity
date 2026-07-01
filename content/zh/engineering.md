@@ -52,9 +52,9 @@ heroPoints:
 
 [阅读《Audit Engineering：从生成—验证不对称到通用 Agent 治理》](docs/audit-engineering-failure-localization-control-space-writeback.zh-CN.md)
 
-对于长程 agent，这些控制对象还需要一个硬状态层。**状态治理型 Agent 体制（SGAR）** 把计划、工具调用、观测、验证结果、人类回答、审计发现和回滚决定都组织成状态转移，而不是松散的聊天历史。这样做不是为了削弱 LLM，而是避免让执行动作的那个上下文，又独自裁决任务是否已经推进。
+对于长程 agent，这些控制对象还需要一个硬状态层。**状态治理智能体范式（SGAR）** 把计划、工具调用、观测、验证结果、人类回答、审计发现和回滚决定都组织成状态转移，而不是松散的聊天历史。这样做不是为了削弱 LLM，而是避免让执行动作的那个上下文，又独自裁决任务是否已经推进。
 
-[阅读《状态治理型 Agent 体制（SGAR）》](docs/state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)
+[阅读《状态治理智能体范式（SGAR）》](docs/state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)
 
 升级协议与人类边界由 **治理式人机协作** 与 **人类协助型操作失配（五个操作域）** 共同支撑：先问环境，再问人；用 MSHQ 提问；用 GEO 保存重复规则；让长程 agent 在硬状态中恢复自治。
 

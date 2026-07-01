@@ -9,7 +9,7 @@ summary: 这里收集与LLM 平庸、LLM卓越、知识治理、硬状态 Agent 
 order: 7
 heroPoints:
   - 当前总稿：价值保存结构理论与六类原始失配总图。
-  - 工作稿：面向受治理 LLM 系统的形式化机制层、诊断-机制桥接、机制驱动训练、受治理 LLM 对象模型、审计工程、Oracle 分类与引擎路由、状态治理型 Agent 体制、通道治理、状态治理、能力路由、控制空间搜索、组合治理、目标治理与 Human-Assist Operational Mismatches。
+  - 工作稿：面向受治理 LLM 系统的形式化机制层、诊断-机制桥接、机制驱动训练、受治理 LLM 对象模型、审计工程、Oracle 分类与引擎路由、状态治理智能体范式、通道治理、状态治理、能力路由、控制空间搜索、组合治理、目标治理与 Human-Assist Operational Mismatches。
   - 延伸与实现：治理式协作、硬状态 Agent 治理、AI 认知纪律、人类学习与由研究议程直接推导的工具方向。
 ---
 
@@ -24,7 +24,7 @@ heroPoints:
 1. 先读站点的"为什么重要"和"案例"页，按案例索引建立从控制空间治理到分层治理的直觉。
 2. 再读"机制"、价值保存结构理论和六类原始失配总图，理解价值如何穿过管线，以及受治理控制对象如何保存任务价值。
 3. 然后读协作补充稿，理解能自主推进任务的 AI agent 什么时候应该问人，以及如何构造最小充分人类问题（MSHQ）。
-4. 再读"状态治理型 Agent 体制（SGAR）"，理解长程 agent 为什么需要硬状态，而不是只依赖上下文维持连续性。
+4. 再读"状态治理智能体范式（SGAR）"，理解长程 agent 为什么需要硬状态，而不是只依赖上下文维持连续性。
 5. 再读"审计工程"，理解系统如何把生成后的失败信号路由回控制空间，并用回归治理防止退化。
 6. 然后读"AI 的认知纪律"，理解个人使用 AI 时如何管理情绪投射、抽象失控、自我确认和现实反馈。
 7. 最后读站点中的协作、学习和项目页，理解这些手稿如何转化为实践和实现方向。
@@ -37,7 +37,7 @@ heroPoints:
 ### LLM 系统中价值保存的结构理论
 Tag: 结构理论工作稿
 
-这份工作稿把框架重写为世界到输出管线中的价值保存问题：任务价值必须穿过观测、表征、状态识别、能力路由、候选支持、聚合与评估。它从管线站点推出六类原始失配，并解释修复算子耦合和超加性复合失败。最后它把知识治理、审计工程和状态治理型 Agent 体制统一为价值保存机制。
+这份工作稿把框架重写为世界到输出管线中的价值保存问题：任务价值必须穿过观测、表征、状态识别、能力路由、候选支持、聚合与评估。它从管线站点推出六类原始失配，并解释修复算子耦合和超加性复合失败。最后它把知识治理、审计工程和状态治理智能体范式统一为价值保存机制。
 
 [阅读价值保存结构理论工作稿](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/structural-theory-value-preservation-llm-systems.zh-CN.md)
 
@@ -69,7 +69,7 @@ Tag: oracle 路由工作稿
 
 [阅读 oracle 分类与引擎路由工作稿](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/oracle-classification-audit-agent-sgar-engine-routing.zh-CN.md) / [English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/oracle-classification-audit-agent-sgar-engine-routing.md)
 
-### 面向受治理 LLM 系统的状态治理型 Agent 体制
+### 面向受治理 LLM 系统的状态治理智能体范式
 Tag: 运行时治理工作稿
 
 这份工作稿把 SGAR 定义为运行时层：进展只有通过已验证硬状态转移才被准入。它覆盖上下文降权、状态表面、转移契约、验证器分层、运行时循环、记忆写入、完成治理、多 agent 权限、回滚、撤销和从状态渲染上下文。
@@ -215,7 +215,7 @@ Tag: 旧版审计工程稿
 
 [阅读旧版审计工程稿](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/audit-engineering.zh-CN.md)
 
-### 状态治理型 Agent 体制（SGAR）
+### 状态治理智能体范式（SGAR）
 Tag: 旧版硬状态 Agent 治理稿
 
 这份早期 SGAR 稿命名了硬状态 Agent 治理。当前版本是上方当前工作稿中的面向受治理 LLM 系统的 SGAR 工作稿。
