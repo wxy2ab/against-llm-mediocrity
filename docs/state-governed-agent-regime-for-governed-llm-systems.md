@@ -5,6 +5,53 @@
 
 ---
 
+## Contents
+
+This is a long working paper. The early sections (Abstract through Section 5) motivate the core idea and state the central rule; Sections 6–9 define the state model and transition machinery; Sections 10–13 connect SGAR to the runtime loop, Knowledge Governance, and Audit Engineering; Sections 14–21 cover the failure modes SGAR prevents and the operational disciplines it relies on; Sections 22–24 work through concrete domains; and Sections 25–35 cover the remaining cross-cutting concerns, theory, and conclusion. Two appendices give a compact glossary and a checklist.
+
+A short reader's note on terminology used throughout: a **GKO** is a Governed Knowledge Object (a piece of control knowledge stored as a governed object), and a **GEO** is a Governed Escalation Object (a governed record of an escalation). Both are defined again at first substantive use below.
+
+- [Abstract](#abstract)
+- [1. Position in the Unified Theory](#1-position-in-the-unified-theory)
+- [2. The Runtime Problem: Context Is Not State](#2-the-runtime-problem-context-is-not-state)
+- [3. State-Governed Agent Regime](#3-state-governed-agent-regime)
+- [4. State Authority and State Surfaces](#4-state-authority-and-state-surfaces)
+- [5. The Context Demotion Rule](#5-the-context-demotion-rule)
+- [6. State Model](#6-state-model)
+- [7. Transition Contracts](#7-transition-contracts)
+- [8. Verifier Stratification](#8-verifier-stratification)
+- [9. State Transition Types](#9-state-transition-types)
+- [10. Runtime Loop](#10-runtime-loop)
+- [11. SGAR and the Six Primitive Mismatches](#11-sgar-and-the-six-primitive-mismatches)
+- [12. SGAR and Knowledge Governance](#12-sgar-and-knowledge-governance)
+- [13. SGAR and Audit Engineering](#13-sgar-and-audit-engineering)
+- [14. Failure Modes Prevented by SGAR](#14-failure-modes-prevented-by-sgar)
+- [15. Authority Separation](#15-authority-separation)
+- [16. Idempotence, Replay, and Rollback](#16-idempotence-replay-and-rollback)
+- [17. State Invariants](#17-state-invariants)
+- [18. Completion as a Governed Transition](#18-completion-as-a-governed-transition)
+- [19. Memory Writes as Governed Transitions](#19-memory-writes-as-governed-transitions)
+- [20. Human Approval and Collaboration State](#20-human-approval-and-collaboration-state)
+- [21. SGAR for Multi-Agent Systems](#21-sgar-for-multi-agent-systems)
+- [22. SGAR for Text-to-SQL](#22-sgar-for-text-to-sql)
+- [23. SGAR for Code Agents](#23-sgar-for-code-agents)
+- [24. SGAR for Research Agents](#24-sgar-for-research-agents)
+- [25. SGAR and Tool Use](#25-sgar-and-tool-use)
+- [26. State Compression and Context Rendering](#26-state-compression-and-context-rendering)
+- [27. Non-Monotonic State and Revocation](#27-non-monotonic-state-and-revocation)
+- [28. SGAR Decision Rules](#28-sgar-decision-rules)
+- [29. Minimal SGAR Implementation](#29-minimal-sgar-implementation)
+- [30. Theoretical Propositions](#30-theoretical-propositions)
+- [31. Relationship to Formal Traditions](#31-relationship-to-formal-traditions)
+- [32. Risks and Failure Modes of SGAR Itself](#32-risks-and-failure-modes-of-sgar-itself)
+- [33. Design Principles](#33-design-principles)
+- [34. Standard Schemas](#34-standard-schemas)
+- [35. Conclusion](#35-conclusion)
+- [Appendix A: Compact Glossary](#appendix-a-compact-glossary)
+- [Appendix B: Minimal Checklist](#appendix-b-minimal-checklist)
+
+---
+
 ## Abstract
 
 Large language model (LLM) agents are often described as systems that plan, remember, act, observe, revise, and complete tasks over time. In practice, many such systems rely on the language-model context window as the apparent carrier of progress. The context says that a file was changed, a test was run, a bug was fixed, a user preference was remembered, a task was completed, or a plan step was executed. But a language context can describe progress without authorizing it. It can summarize state without being state. It can claim completion without committing a verified transition.
@@ -344,7 +391,7 @@ revoked assumptions
 
 ### 6.5 Governance State
 
-Governance state records governed objects:
+Governance state records governed objects. Two acronyms appear here and recur throughout the paper: a GKO is a Governed Knowledge Object (control knowledge stored as a governed object), and a GEO is a Governed Escalation Object (a governed record of an escalation). The governed objects tracked in this surface are:
 
 ```text
 GKOs

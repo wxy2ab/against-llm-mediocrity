@@ -5,6 +5,27 @@
 **Status:** Working cognitive framework  
 **Version:** 0.1
 
+## Overview
+
+This is a working framework for using AI well — not a guide to extracting more or better answers, but a discipline for governing how AI shapes your thinking, feeling, language, judgment, and action. The central worry throughout is that AI is most persuasive precisely where it is least reliable: it produces fluent, supportive, confident output that can amplify what you already want to believe. Each section below names one way that failure shows up and gives concrete practices for keeping your own judgment intact while using AI.
+
+The twelve sections move from the core proposition to the specific traps (personhood effects, fluency mistaken for truth, premise-following, hallucinated arguments, the illusion of abstraction), then to the tests that keep AI honest (reality feedback, what learning must now do, hidden default frames, the limits of simulated expertise), and finally to privacy and a definition of real AI capability.
+
+## Contents
+
+- [1. Core Proposition](#1-core-proposition)
+- [2. AI Is Not a Person, but It Can Produce Personhood Effects](#2-ai-is-not-a-person-but-it-can-produce-personhood-effects)
+- [3. Fluency Is Not Truth](#3-fluency-is-not-truth)
+- [4. AI Tends to Follow Your Premise](#4-ai-tends-to-follow-your-premise)
+- [5. Beware Argument Hallucination and Self-Confirmation Loops](#5-beware-argument-hallucination-and-self-confirmation-loops)
+- [6. Beware the Illusion of Understanding Produced by Abstraction](#6-beware-the-illusion-of-understanding-produced-by-abstraction)
+- [7. AI's Benefits Must Be Tested in Reality](#7-ais-benefits-must-be-tested-in-reality)
+- [8. AI Does Not Eliminate Learning. It Changes What Learning Must Do.](#8-ai-does-not-eliminate-learning-it-changes-what-learning-must-do)
+- [9. AI Is Not a Neutral Mirror. It Carries Default Frames.](#9-ai-is-not-a-neutral-mirror-it-carries-default-frames)
+- [10. AI Can Simulate Professional Expression, but It Cannot Replace Real Experience](#10-ai-can-simulate-professional-expression-but-it-cannot-replace-real-experience)
+- [11. Privacy, Boundaries, and Irreversible Input](#11-privacy-boundaries-and-irreversible-input)
+- [12. Real AI Capability](#12-real-ai-capability)
+
 ## 1. Core Proposition
 
 Mastering AI is not learning how to get more answers from AI. It is learning how to govern AI's influence on your cognition, emotion, language, judgment, and action.
@@ -98,7 +119,7 @@ A common mechanism is:
 5. AI continues strengthening that direction.
 6. An unverified idea becomes a seemingly rigorous theory.
 
-This is the hallucination explosion of conclusions.
+This is what makes conclusions hallucinate and then expand: each turn reinforces the previous one, so an unchecked premise can grow into a polished system without ever being tested.
 
 Different hallucinations carry different risks:
 

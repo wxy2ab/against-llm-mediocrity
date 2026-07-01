@@ -5,6 +5,24 @@ Revised edition | 2026-06-12
 
 ---
 
+## Contents
+
+This is a long working paper. The Core Conclusion and Argument Map below give the one-page version; Chapters 1–4 build the pricing model from a single task up to the four-ceiling envelope; Chapter 5 applies it across eight sectors; Chapters 6–7 unpack the most misread parts of cost; Chapters 8–9 give implications and the conclusion.
+
+- [Core Conclusion](#core-conclusion)
+- [Argument Map](#argument-map)
+- [1. Why Model Capability Does Not Equal Maximum Price](#1-why-model-capability-does-not-equal-maximum-price)
+- [2. Single-Task Pricing Model](#2-single-task-pricing-model)
+- [3. Market Dynamics: Commoditization and the Hump Curve](#3-market-dynamics-commoditization-and-the-hump-curve)
+- [4. The Maximum-Price Envelope](#4-the-maximum-price-envelope)
+- [5. Industry Estimates](#5-industry-estimates)
+- [6. Tokens Are Search Budget, Not Value](#6-tokens-are-search-budget-not-value)
+- [7. State Oscillation in Self-Improving Agents](#7-state-oscillation-in-self-improving-agents)
+- [8. Implications](#8-implications)
+- [9. Conclusion](#9-conclusion)
+
+---
+
 ## Core Conclusion
 
 Users do not pay for a model's aura of capability, parameter count, reasoning length, or token burn. They pay for **verifiable incremental value**. For any task, an LLM's long-run maximum price is jointly constrained by four ceilings:
@@ -295,7 +313,7 @@ This is the limit case: value is enormous, but only verifiable validation pipeli
 
 ## 6. Tokens Are Search Budget, Not Value
 
-Tokens belong on the cost side:
+Public APIs bill per token, so token burn is easy to measure and easy to treat as a proxy for value. It is not. Tokens are a search budget, and search budget belongs on the cost side. Writing task value as a function of token count `T`, and its marginal return on investment (MROI) as the derivative, makes this explicit:
 
 ```text
 Value(T) = r_i(T) * V_i - [1-r_i(T)] * F_i
@@ -311,7 +329,7 @@ Useful token-yield metrics are therefore things like:
 
 - `Delta r / 1M tokens`
 - validated candidates per 1M tokens
-- new rubrics, edge cases, state variables, or GKOs found per 1M tokens
+- new rubrics, edge cases, state variables, or Governed Knowledge Objects (GKOs) found per 1M tokens
 - human review time or rework reduced per 1M tokens
 
 The common feature is that the numerator is a **verifiable state change**, not more text.

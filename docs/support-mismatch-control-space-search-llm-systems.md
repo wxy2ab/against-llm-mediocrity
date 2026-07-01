@@ -5,6 +5,45 @@
 
 ---
 
+## How to Read This Paper
+
+This is a technical working paper. It argues that many high-value LLM (Large Language Model) systems fail because the structures needed for high task value are simply not *reachable* under the deployed search procedure — they are never sampled, never preserved, never matured, or never recognized. The paper names this failure **support mismatch**, contrasts it with the other primitive mismatch types, and develops a governance approach built around **control-space search**.
+
+If you want the core idea quickly, read the Abstract and Section 1 (Introduction). For the formal definitions, read Sections 2–4. For the practical machinery — the governance loop, the governance objects, and the worked domains — read Sections 8–13. The appendices collect a terminology table, a diagnosis checklist, and ready-to-use templates.
+
+**Abbreviations.** These acronyms appear throughout (including inside code and pseudo-code blocks). They are defined once here for reference:
+
+- **LLM** — Large Language Model.
+- **GKO** — Governed Knowledge Object: a scoped, revocable knowledge artifact written back into the governed system.
+- **GEO** — Governed Escalation Object: a governed record that routes a case for escalation.
+- **SGAR** — State-Governed Agent Regime: the hard-state runtime governance layer for long-horizon agents.
+- **RLHF / DPO** — Reinforcement Learning from Human Feedback / Direct Preference Optimization (learned-component training methods).
+
+**Contents.**
+
+- [1. Introduction](#1-introduction)
+- [2. Support in the Value-Preservation Pipeline](#2-support-in-the-value-preservation-pipeline)
+- [3. What Support Mismatch Is Not](#3-what-support-mismatch-is-not)
+- [4. Subtypes of Support Mismatch](#4-subtypes-of-support-mismatch)
+- [5. Why More Sampling Often Fails](#5-why-more-sampling-often-fails)
+- [6. Control-Space Search](#6-control-space-search)
+- [7. Support Lifting](#7-support-lifting)
+- [8. Support Governance Loop](#8-support-governance-loop)
+- [9. Support-Specific Governance Objects](#9-support-specific-governance-objects)
+- [10. Support Audit](#10-support-audit)
+- [11. Support Mismatch in Text-to-SQL](#11-support-mismatch-in-text-to-sql)
+- [12. Support Mismatch in Code Synthesis](#12-support-mismatch-in-code-synthesis)
+- [13. Support Mismatch in Research and Analysis](#13-support-mismatch-in-research-and-analysis)
+- [14. Search Budget as a Governed Resource](#14-search-budget-as-a-governed-resource)
+- [15. Anti-Patterns](#15-anti-patterns)
+- [16. Integration with Knowledge Governance, Audit Engineering, and SGAR](#16-integration-with-knowledge-governance-audit-engineering-and-sgar)
+- [17. Minimal Implementation Pattern](#17-minimal-implementation-pattern)
+- [18. When Support Governance Is Not Needed](#18-when-support-governance-is-not-needed)
+- [19. Self-Audit of Support Mismatch](#19-self-audit-of-support-mismatch)
+- [20. Conclusion](#20-conclusion)
+
+---
+
 ## Abstract
 
 High-value LLM systems often fail not because the correct answer is logically impossible, nor because the model lacks all relevant local capabilities, but because the structures required for high task value receive too little effective support under the deployed inference procedure. They are not sampled, not preserved, not expanded, not recognized, or not carried forward under the available search budget. This paper develops **support mismatch** as one of the six primitive mismatch types in the structural theory of value preservation in LLM systems.

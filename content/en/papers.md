@@ -13,16 +13,18 @@ heroPoints:
   - "Extensions and implementation: governed collaboration, hard-state agent governance, cognitive discipline for AI, human learning, and tooling directions derived from the research agenda."
 ---
 
+This page is the index to the project's formal writing. It lists the current working manuscripts, the legacy versions they replace, the site extensions that put the theory into practice, and the empirical questions still open. Use it to find the right document and to see how the public site connects to the formal drafts.
+
 ## How to Enter the Deep End
 
 The main site is the public explanation layer: intuition first, mechanism second, practice third. The papers and working manuscripts are the deeper layer, where definitions, diagnostic categories, governance objects, and research questions are developed more fully.
 
-Suggested reading order:
+A suggested reading order, from intuition to formal detail:
 
 1. Start with "Why It Matters" and "Cases," using the case index to build intuition from control-space governance to layered governance.
 2. Read "Mechanism," the structural theory draft, and the six-mismatch taxonomy to understand the value-preservation pipeline and how governed control objects preserve task value.
-3. Read the collaboration supplement to understand when an agent should ask a human and how to construct minimal sufficient human queries.
-4. Read "State-Governed Agent Regime" to understand why long-horizon agents need hard state rather than context-maintained continuity.
+3. Read the collaboration supplement to understand when an agent should ask a human and how to construct minimal sufficient human queries (MSHQs).
+4. Read "State-Governed Agent Regime (SGAR)" to understand why long-horizon agents need hard state rather than context-maintained continuity.
 5. Read "Audit Engineering" to understand how systems route post-generation failure signals back into control space and prevent regression.
 6. Read "Cognitive Discipline for AI" to understand how individual users can govern emotional projection, uncontrolled abstraction, self-confirmation, and real-world feedback.
 7. Use the site pages on collaboration, learning, and projects to see how the manuscripts translate into practice and implementation directions.
@@ -35,14 +37,14 @@ Suggested reading order:
 ### A Structural Theory of Value Preservation in LLM Systems
 Tag: structural theory working draft
 
-This working draft reframes the framework around value preservation across a world-to-output pipeline. It derives the six primitive mismatches from pipeline stations, explains repair-operator coupling and super-additive compound failure, and unifies Knowledge Governance, Audit Engineering, and State-Governed Agent Regime as mechanisms for preserving task value.
+This working draft reframes the framework around value preservation across a world-to-output pipeline. It derives the six primitive mismatches from pipeline stations and explains repair-operator coupling and super-additive compound failure. It then unifies Knowledge Governance, Audit Engineering, and the State-Governed Agent Regime as mechanisms for preserving task value.
 
 [Read the structural theory draft](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/structural-theory-value-preservation-llm-systems.md)
 
 ### Six Primitive Mismatches in LLM Systems
 Tag: pipeline-derived taxonomy working draft
 
-This working draft consolidates the six primitive mismatches into one pipeline-derived taxonomy. It derives observation-representation, state, fitting-boundary, support, aggregation, and specification mismatch as distinct value-preservation failure stations, then maps each to diagnostic questions, repair targets, audit findings, control deltas, GKOs, regression guards, and SGAR commitments.
+This working draft consolidates the six primitive mismatches into one pipeline-derived taxonomy. It derives observation-representation, state, fitting-boundary, support, aggregation, and specification mismatch as distinct value-preservation failure stations. It then maps each one to diagnostic questions, repair targets, audit findings, control deltas, Governed Knowledge Objects (GKOs), regression guards, and SGAR commitments.
 
 [Read the six-mismatch taxonomy](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/six-primitive-mismatches-pipeline-derived-taxonomy-llm-systems.md)
 
@@ -70,7 +72,7 @@ This working draft defines the training-side counterpart to runtime governance. 
 ### Governed LLM Object Model and Interface Specification
 Tag: implementation specification
 
-This companion specification defines the object contracts and interface semantics for governed LLM systems. It unifies GKOs, GEOs, Audit Findings, Control Deltas, Regression Guards, Defect Ledgers, State Records, Transition Contracts, Verifier Objects, and Evidence Objects into a lifecycle for audit write-back, regression prevention, and hard-state commitment.
+This companion specification defines the object contracts and interface semantics for governed LLM systems. It unifies GKOs, Governed Escalation Objects (GEOs), Audit Findings, Control Deltas, Regression Guards, Defect Ledgers, State Records, Transition Contracts, Verifier Objects, and Evidence Objects into a lifecycle for audit write-back, regression prevention, and hard-state commitment.
 
 [Read the object model specification](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/governed-llm-object-model-interface-specification.md)
 
@@ -119,7 +121,7 @@ This technical report develops fitting-boundary mismatch as a capability-routing
 ### Support Mismatch and Control-Space Search in LLM Systems
 Tag: control-space search technical report
 
-This technical report develops support mismatch as a candidate-reachability failure: high-value structures may be expressible and valuable but still receive too little effective support under the deployed policy, search operator, pruning rule, recognition mechanism, and budget. It defines control-space search, support lifting, support maps, search warrants, coverage ledgers, support deltas, and support regression guards.
+This technical report develops support mismatch as a candidate-reachability failure: a high-value structure may be expressible and valuable yet still receive too little effective support under the deployed policy, search operator, pruning rule, recognition mechanism, and budget. It defines control-space search, support lifting, support maps, search warrants, coverage ledgers, support deltas, and support regression guards.
 
 [Read the control-space search report](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/support-mismatch-control-space-search-llm-systems.md)
 
@@ -175,6 +177,8 @@ This manuscript develops a pricing envelope for LLM products. It argues that lon
 
 ## Legacy Versions
 
+These are earlier drafts kept for reference. Each one is now superseded by a document in the current working manuscripts above, and each card points to its replacement.
+
 :::cards
 ### A Formal Mechanism Layer for LLM Failure
 Tag: legacy intervention-localization draft
@@ -221,6 +225,8 @@ This earlier SGAR draft names hard-state agent governance. The current version i
 
 ## Extensions and Implementation
 
+These site pages carry the framework into practice. They do not add new theory; they apply the manuscripts to human capability and to open-source implementation.
+
 ::::cards
 ### Human Learning in the AI Era
 Tag: site extension
@@ -234,6 +240,8 @@ The project page only organizes implementation and evaluation directions already
 ::::
 
 ## Future Empirical Agenda
+
+The framework is built to be tested, not just argued. These are the open empirical questions it raises:
 
 - Compare Knowledge Governance against strong output-space search baselines under matched compute budgets.
 - Measure when generated rubrics, edge cases, state matrices, and GKOs correlate with expert judgment.

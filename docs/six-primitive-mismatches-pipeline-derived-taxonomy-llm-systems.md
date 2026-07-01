@@ -49,11 +49,11 @@ This document occupies a specific position in the governed LLM theory stack.
 
 The main theory document states the broad thesis: high-value LLM systems are not merely generation systems; they are value-preservation systems. Task value must survive observation, representation, routing, support, aggregation, evaluation, audit, and state transition.
 
-The object specification defines the object layer: GKO, GEO, Audit Finding, Control Delta, Regression Guard, Defect Ledger, State Record, Transition Contract, and Revocation Rule.
+The object specification defines the object layer: Governed Knowledge Object (GKO), Governed Escalation Object (GEO), Audit Finding, Control Delta, Regression Guard, Defect Ledger, State Record, Transition Contract, and Revocation Rule.
 
 The Audit Engineering document defines how failures are localized and written back into the control space.
 
-The SGAR document defines hard-state authority and runtime commitment.
+The State-Governed Agent Regime (SGAR) document defines hard-state authority and runtime commitment.
 
 The individual mismatch documents expand each primitive mismatch in detail.
 

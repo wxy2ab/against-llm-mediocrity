@@ -8,6 +8,21 @@
 **Current synthesis:** [A Structural Theory of Value Preservation in LLM Systems](structural-theory-value-preservation-llm-systems.md)  
 **Agent-state supplement:** [State-Governed Agent Regime for Governed LLM Systems](state-governed-agent-regime-for-governed-llm-systems.md)
 
+## Contents
+
+- [Abstract](#abstract)
+- [1. Scope and Core Claim](#1-scope-and-core-claim)
+- [2. Relation to the Main Framework](#2-relation-to-the-main-framework)
+- [3. Definition and Escalation Gate](#3-definition-and-escalation-gate)
+- [4. Five Operational Domains](#4-five-operational-domains)
+- [5. Minimal Sufficient Human Query](#5-minimal-sufficient-human-query)
+- [6. Governed Escalation Object](#6-governed-escalation-object)
+- [7. Human-Assist Governance Loop](#7-human-assist-governance-loop)
+- [8. GKO and GEsO Integration](#8-gko-and-geso-integration)
+- [9. Evaluation](#9-evaluation)
+- [10. Limitations and Research Agenda](#10-limitations-and-research-agenda)
+- [Conclusion](#conclusion)
+
 ## Abstract
 
 The main *Knowledge Governance* manuscript explains task-value divergence through six primitive mismatches: aggregation, support, state, specification, fitting-boundary, and observation-representation mismatch. This supplement introduces a collaboration-layer diagnosis for agentic systems: **Human-Assist Operational Mismatches**.
@@ -17,6 +32,8 @@ An operational mismatch occurs when an agent cannot reliably continue because a 
 The central objects are the **Minimal Sufficient Human Query (MSHQ)** and the **Governed Escalation Object (GEsO)**. Here `GEsO` is intentionally distinct from the object-model's **Governed Execution Object (GEO)**. An MSHQ asks only for the missing human-governed variable. A GEsO records when escalation is required, who should answer, what safe default applies, what work may continue, and how the rule expires or is revoked. In a long-horizon agent, the answer should then be committed into hard state rather than left as context-only memory.
 
 ## 1. Scope and Core Claim
+
+This section states what human assistance is for and the recovery steps an agent should exhaust before asking for it.
 
 The purpose of human assistance is not to return the task to the human. It is to supply the smallest missing control variable that allows the agent to resume autonomous work.
 
@@ -33,6 +50,8 @@ Only then should it ask:
 > What is the smallest human-answerable question whose answer restores reliable autonomy?
 
 ## 2. Relation to the Main Framework
+
+Operational blockers sit at a different layer from the primitive mismatches. The table below separates the three layers by the question each one answers.
 
 | Layer | Question | Examples |
 |---|---|---|
@@ -85,7 +104,7 @@ Reversibility, evidence quality, and available autonomous recovery should influe
 
 ## 4. Five Operational Domains
 
-The earlier broad list of operational mismatches is consolidated into five action-oriented domains. More specific labels remain useful as subtypes, not as peer-level primitive categories.
+The earlier broad list of operational mismatches is consolidated into five action-oriented domains. More specific labels remain useful as subtypes, not as peer-level primitive categories. Each domain below names the kind of control variable that is missing, lists its common subtypes, and gives an example MSHQ.
 
 ### 4.1 Information and Evidence
 
@@ -232,7 +251,7 @@ A GEsO stores a reusable escalation rule.
 9. Resume autonomous work under the resolved variable.
 10. Verify the resulting action or artifact.
 11. Commit the resolved variable as a hard-state transition when it changes the recognized task state, authorization, boundary, or obligation. In the object model, this typically lands in a `state_record` under a `transition_contract`, and control changes may also emit a `control_delta`.
-12. Store durable answers as GKOs; retain recurring escalation rules as GEsOs.
+12. Store durable answers as Governed Knowledge Objects (GKOs); retain recurring escalation rules as GEsOs.
 13. Revoke stale GKOs and GEsOs when state, policy, authority, or tools change.
 ```
 
@@ -244,6 +263,8 @@ If no answer arrives:
 - record the unresolved blocker rather than silently guessing.
 
 ## 8. GKO and GEsO Integration
+
+The three governance objects play complementary roles, and an answer to one can feed another. The State-Governed Agent Regime (SGAR) supplies the agent-state layer referenced in the third row.
 
 | Object | Governs | Primary question |
 |---|---|---|

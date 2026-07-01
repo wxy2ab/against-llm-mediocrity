@@ -19,7 +19,7 @@ If the home page asks which problems have already reached structural ceilings, a
 
 The purpose of a case study is not to show that a particular system is impressive. It is to test this site's framework inside a real task. A useful case must explain why the raw task cannot be solved by fluent output alone, which intermediate objects the system creates, how evaluators detect failure, how revision routing decides which layer to change, and what limits remain.
 
-The case page is therefore an index, not a pile of top-level navigation entries. The top navigation keeps one "Cases" entry. Each concrete case lives as a detail page. That structure will still work when future cases cover writing, research, code, investment, collaboration, or learning tasks.
+The case page is therefore an index, not a pile of top-level navigation entries. The top navigation keeps a single "Cases" entry, and each concrete case lives on its own detail page. That structure will still hold up as future cases expand into writing, research, code, investment, collaboration, or learning tasks.
 
 ## Current Cases
 
@@ -41,7 +41,7 @@ V6 shows the next governance problem after control-space design: under a high th
 ### Stock Rec V3: Financial Producer Governance
 Tag: Finance / state mismatch
 
-Stock Rec V3 shows high state mismatch in a financial strategy system. Factor, base-score, excitation, and holding-processing producers evolve continuously; the LLM may only emit candidates, hints, or explanations, and new content must pass through shadow, promotion, and active lifecycle stages before it can affect the strategy.
+Stock Rec V3 shows a high state mismatch in a financial strategy system. Factor, base-score, excitation, and holding-processing producers evolve continuously. The LLM may only emit candidates, hints, or explanations, and any new content must pass through shadow, promotion, and active lifecycle stages before it can affect the strategy.
 
 [Read the Stock Rec V3 case](/case-study-stock-rec-v3)
 
@@ -72,7 +72,7 @@ Stock Rec V3 solves the production-authority problem. In a financial strategy sy
 
 ### What FW-Insight V3 Solves
 
-FW-Insight V3 solves the hard-experience problem. Once many factor-framework samples already exist, the scarce asset is not more samples; it is a small set of experiences that penetrate the old distribution, correct directionality, and guide the next regeneration cycle.
+FW-Insight V3 solves the hard-experience problem. Once many factor-framework samples already exist, the scarce asset is no longer more samples. It is a small set of experiences that penetrate the old distribution, correct its directionality, and guide the next regeneration cycle.
 
 ### Why They Are Not Top-Level Peers
 

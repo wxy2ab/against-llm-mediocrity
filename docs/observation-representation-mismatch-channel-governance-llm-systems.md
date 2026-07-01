@@ -6,6 +6,34 @@
 
 ---
 
+## Contents
+
+- [Abstract](#abstract)
+- [1. Introduction](#1-introduction)
+- [2. Position in the Unified Theory](#2-position-in-the-unified-theory)
+- [3. Formal Setup](#3-formal-setup)
+- [4. Observation-Representation Mismatch vs State Mismatch](#4-observation-representation-mismatch-vs-state-mismatch)
+- [5. A Taxonomy of Observation-Representation Failures](#5-a-taxonomy-of-observation-representation-failures)
+- [6. Representation-Induced Ceilings](#6-representation-induced-ceilings)
+- [7. Variable Entry Criteria](#7-variable-entry-criteria)
+- [8. Channel Governance](#8-channel-governance)
+- [9. Audit Engineering for Observation-Representation Mismatch](#9-audit-engineering-for-observation-representation-mismatch)
+- [10. Interaction with Other Mismatches](#10-interaction-with-other-mismatches)
+- [11. Text-to-SQL as a Canonical Case](#11-text-to-sql-as-a-canonical-case)
+- [12. Code, Agents, and Research Workflows](#12-code-agents-and-research-workflows)
+- [13. Design Patterns for Channel Governance](#13-design-patterns-for-channel-governance)
+- [14. Relation to Existing Formal Traditions](#14-relation-to-existing-formal-traditions)
+- [15. When Channel Governance Is Not Needed](#15-when-channel-governance-is-not-needed)
+- [16. Self-Audit of the Concept](#16-self-audit-of-the-concept)
+- [17. Minimal Diagnostic Checklist](#17-minimal-diagnostic-checklist)
+- [18. Conclusion](#18-conclusion)
+- [Appendix A: Compact Glossary](#appendix-a-compact-glossary)
+- [Appendix B: Representation Contract Template](#appendix-b-representation-contract-template)
+- [Appendix C: Observation-Representation Audit Finding Template](#appendix-c-observation-representation-audit-finding-template)
+- [Appendix D: Variable Entry Test](#appendix-d-variable-entry-test)
+
+---
+
 ## Abstract
 
 Large language model systems do not act directly on the world. They act on observations, retrieved fragments, compressed context, database schemas, tool outputs, screenshots, logs, summaries, embeddings, serialized state, and prompt representations. Many high-value failures therefore occur before reasoning begins. The decisive variable is not misreasoned about; it never enters the operational representation. Or it enters in a form that is aliased, flattened, decontextualized, truncated, stale, unbound, or unusable for control.
@@ -16,7 +44,7 @@ The report clarifies the boundary between observation-representation mismatch an
 
 We then introduce **channel governance**: a pre-governance discipline for ensuring that value-critical variables enter, survive, bind correctly, remain discriminative, and become operational in the control space. Channel governance precedes Knowledge Governance. Before a system can govern knowledge about a task, it must govern the channels through which the task becomes visible.
 
-The report provides formal definitions, diagnostic criteria, repair operators, audit patterns, GKO templates, regression guards, and examples across text-to-SQL, code systems, tool-using agents, research workflows, and long-horizon state-governed agents. The central rule is simple:
+The report provides formal definitions, diagnostic criteria, repair operators, audit patterns, Governed Knowledge Object (GKO) templates, regression guards, and examples across text-to-SQL, code systems, tool-using agents, research workflows, and long-horizon state-governed agents. The central rule is simple:
 
 ```text
 Before governing knowledge, verify that the variables to be governed have entered the representation.
@@ -114,7 +142,7 @@ The key consequence is a ceiling:
 No downstream policy over Z can reliably exceed the value ceiling induced by the distinctions lost in S_world → O → Z.
 ```
 
-This is the foundational reason to place observation-representation mismatch before Knowledge Governance, Audit Engineering, and State-Governed Agent Regime.
+This is the foundational reason to place observation-representation mismatch before Knowledge Governance, Audit Engineering, and the State-Governed Agent Regime (SGAR).
 
 Knowledge Governance governs control knowledge. But control knowledge must be about variables that have entered the control representation.
 

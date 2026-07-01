@@ -15,6 +15,8 @@ heroPoints:
 
 ## Why This Matters
 
+This page exists to answer one practical question before you spend more effort on a failing task: is this a problem that more of the same will eventually fix, or one that no amount of waiting will fix?
+
 If a problem will eventually be solved by bigger models, longer training, or better data, then waiting or doing more local prompt optimization may be a reasonable strategy.
 
 But if a failure has already reached a structural ceiling, waiting becomes an expensive misdiagnosis. You think you are giving the model more chances to improve, but you are really polishing the wrong task shape, sampling inside the same basin, and spending time on a door that will not open by itself.
@@ -25,11 +27,11 @@ That is why this page comes early. Its first job is to help you decide what kind
 
 You ask an LLM to handle a hard task. It gives a plausible answer. You point out problems, and it adds detail, improves tone, creates structure, and expands the argument. After several rounds the text is better, but something still feels off.
 
-That feeling is often not about prose. It is about task value. The missing piece may be a hidden assumption, real-world state, domain boundary, rare option, global dependency, authorization condition, or better problem model. The model is not necessarily lazy or random. It may simply be making local improvements on the wrong surface.
+That feeling is often not about prose. It is about task value. The missing piece may be a hidden assumption, real-world state, domain boundary, rare option, global dependency, authorization condition, or a better model of the problem itself. The model is not necessarily lazy or random; it may simply be making local improvements on the wrong surface.
 
 This is why fluent failure is hard to notice. The answer may be useful in several local ways: it compresses context, chooses a reasonable tone, fills in missing transitions, and produces a coherent structure. The failure appears only when those local improvements do not reach the variable that determines the task's real value.
 
-This page does the first step only: it breaks that vague sense of "still wrong" into diagnosable forms. The next page, "Cases," is the case-library entry point: from Story Insight V4/V6 on control-space and layered governance, to Stock Rec V3 on financial production authority, to FW-Insight V3 on hard-experience extraction. The following "Mechanism" page then compresses the cases into more stable theoretical axes: whether probability and value point in the same direction, and which intervention follows from each primitive mismatch.
+This page does the first step only: it breaks that vague sense of "still wrong" into diagnosable forms. The next page, "Cases," is the entry point to the case library, spanning Story Insight V4/V6 on control space and layered governance, Stock Rec V3 on financial production authority, and FW-Insight V3 on hard-experience extraction. The "Mechanism" page after that compresses those cases into more stable theoretical axes: whether probability and value point in the same direction, and which intervention follows from each primitive mismatch.
 
 ## Why More Iteration Can Still Fail
 
@@ -116,7 +118,7 @@ A useful check is to ask what kind of object would change the next generation:
 - A rubric changes vague quality into testable criteria.
 - A failure-mode list exposes how a plausible answer could fail.
 - A query plan moves missing facts out of imagination and into retrieval.
-- A minimal human question isolates a value, authority, or responsibility variable.
+- A minimal sufficient human question isolates a value, authority, or responsibility variable.
 
 ## What This Understanding Prevents
 
@@ -182,6 +184,6 @@ Because resisting LLM mediocrity is becoming a base capability for high-value wo
 
 ## What the Framework Offers
 
-This is not a universal prompt. It is a way to diagnose the task regime first, then decide whether to generate directly, create intermediate objects, verify with tools, or ask a human for the missing variable.
+This is not a universal prompt. It is a way to diagnose the task regime first, and only then decide whether to generate directly, create intermediate objects, verify with tools, or ask a human for the missing variable.
 
 The optimistic part is that the goal is not to make the model less generative. The goal is to put generation in the right task shape: use it directly where probability and value align, and govern the boundary where local fluency stops being a reliable proxy for task success.

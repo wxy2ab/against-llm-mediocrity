@@ -14,13 +14,15 @@ heroPoints:
   - The best version appeared at iteration 2, not the last iteration, so governance must preserve the best state instead of assuming more revision is always better.
 ---
 
+Story Insight V6 is a single annotated run of a layered story-generation system, used here to make one argument concrete: once generation is already governed through a control space, governance is not finished. The system still has to decide which layer owns a problem, when to keep revising, and when to stop. This page walks through one high-threshold run and maps what it shows back to the six primitive mismatches.
+
 ## Why a Second Case Is Needed
 
 [Story Insight V4](/case-study-v4) established the first core point: story generation should not rely on fluent text sampling alone. It needs a control space for characters, events, emotion, theme, rhythm, and reader understanding.
 
 Story Insight V6 addresses the next layer. Even after a system has a control space, governance is not automatically complete. The control space may itself need evaluation and revision; text-level failures should not be misdiagnosed as world-setting failures; continuity problems should not be hidden behind a strong average score; and when a high threshold cannot be reached, the system must decide whether to continue, roll back to the best version, or recognize a plateau.
 
-V6 is therefore not best understood as another story generator. It is a layered governance case: the same story task is split across MetaSpace, LogicSpace, section plans, text, ledger, continuity, attack, revision, and pairwise comparison.
+V6 is therefore not best understood as another story generator. It is a layered governance case: the same story task is split across distinct layers — MetaSpace, LogicSpace, section plans, text, ledger, continuity, attack, revision, and pairwise comparison — and each layer carries a different responsibility.
 
 ## Why This Run Is Useful
 
@@ -44,7 +46,7 @@ The run status was `success`, but the termination reason was `score_plateau`. Th
 The best iteration was iteration 2, with an average score of 9.00. Later stages did not produce a better version, so the final output preserved the best state instead of blindly selecting the last draft.
 :::
 
-The result is useful because it turns "iterate more" into an object of governance. The real question is not whether to keep revising, but which layer to revise, why that layer is implicated, how the revision is judged, and whether the system can roll back when later versions degrade.
+The result is useful because it turns "iterate more" into an object of governance. The real question is no longer whether to keep revising. It is which layer to revise, why that layer is implicated, how the revision is judged, and whether the system can roll back when later versions degrade.
 
 ## The Layered Governance Chain
 
@@ -89,7 +91,7 @@ The V6 run can be simplified into four phases:
   </section>
 </div>
 
-The key shift is that V6 does not only ask "what is wrong with the story text?" It asks "which layer owns this problem?" The same symptom can come from different layers:
+The key shift is that V6 does not only ask "what is wrong with the story text?" It also asks "which layer owns this problem?" The same symptom can come from different layers:
 
 ::::cards
 ### MetaSpace
@@ -139,7 +141,7 @@ This run did not trigger `route_was_upgraded`. That matters: the case should not
 
 `score_plateau` does not mean the system failed. It means the system did not pretend that continued iteration was progress.
 
-Ordinary multi-round generation often creates a misleading impression: if the model keeps revising, the result must be improving. In high-mismatch tasks, later revision can do three different things:
+Ordinary multi-round generation often creates a misleading impression: if the model keeps revising, the result must be improving. In high-mismatch tasks, later revision can instead do three different things:
 
 - Fix one local issue while breaking another cross-scene state.
 - Improve prose while weakening structural density.
@@ -149,7 +151,7 @@ This V6 run shows that tension. Iteration 2 was the best version. Iteration 3 ke
 
 ## What Pairwise Critic Adds
 
-The most important additional path in this run was `pairwise_critic`. It is not just another total score. It compares variants and writes routeable insights about why one version carries value better than another.
+The most important additional path in this run was `pairwise_critic`. It does not just produce another total score. It compares variants and writes routeable insights about why one version carries value better than another.
 
 Its findings were mostly text-layer findings, but they were not merely style comments:
 
@@ -175,7 +177,7 @@ The token, broken sword, scar, and bloodstain were not decorations. They became 
 The stronger version connected morning labor, an old acquaintance arriving, demonic traces, and the night-time token into an action chain. The weaker version let daily-life details dilute the central conflict.
 ::::
 
-This shows that layered governance does not push every issue back into structure. It can recognize that once structure mostly works, the bottleneck may be how text realizes structural value.
+This shows that layered governance does not push every issue back into structure. It can recognize that once structure mostly works, the bottleneck may shift to how the text realizes structural value.
 
 ## What Continuity Audit Found
 
@@ -189,11 +191,11 @@ Representative findings included:
 - In some variants, Xiaoji's right-foot gait was described inconsistently.
 - Su Chen used spiritual power during sealing, but the earlier setup of residual spiritual power was not strong enough.
 
-These are not copyediting issues. Continuity checks whether story state persists across scenes, whether abilities have sources, whether objects and clues carry later responsibility, and whether readers can trust the rules of the world.
+These are not copyediting issues. Continuity checks whether story state persists across scenes, whether abilities have sources, whether objects and clues carry later responsibility, and whether readers can trust the rules of the world to stay fixed.
 
 ## Mapping Back to the Six Mismatches
 
-Story Insight V6 maps directly onto this site's primitive mismatch framework.
+Story Insight V6 maps directly onto this site's primitive mismatch framework. Five of the six mismatches show up clearly in this run:
 
 ::::cards
 ### Aggregation Mismatch
@@ -234,4 +236,4 @@ Story Insight V6 is valuable not because every run keeps improving, but because 
 
 This high-threshold run did not reach 9.2 and did not trigger automatic escalation to MetaSpace. That does not weaken the case. It clarifies it: a mature governance system should show not only successful acceptance, but also plateau detection, version regression, layer attribution, and best-state preservation.
 
-That is part of resisting LLM mediocrity. Mediocrity does not only come from weak prose. It also comes from systems that cannot tell when local revision has stopped advancing real value. V6 makes that judgment explicit.
+That is part of resisting LLM mediocrity. Mediocrity does not only come from weak prose. It also comes from systems that cannot tell when local revision has stopped advancing real value. V6 makes that judgment explicit, and it is the reason a plateau here counts as a result rather than a failure.

@@ -41,6 +41,43 @@ Objective Governance operates at the governance-object layer, while `specificati
 
 ---
 
+## Contents
+
+This is a long working paper. The first half (Sections 1–8) establishes specification mismatch as a primitive failure mode and distinguishes it from the other five mismatches. The second half (Sections 9–29) develops the constructive response, Objective Governance, and works it through concrete domains. Appendices collect reusable templates and checklists.
+
+- [1. Position in the Unified Theory](#1-position-in-the-unified-theory)
+- [2. Core Definition](#2-core-definition)
+- [3. Specification Is Not the Same as Instruction](#3-specification-is-not-the-same-as-instruction)
+- [4. Why Specification Mismatch Is Primitive](#4-why-specification-mismatch-is-primitive)
+- [5. Boundary with the Other Five Mismatches](#5-boundary-with-the-other-five-mismatches)
+- [6. Types of Specification Mismatch](#6-types-of-specification-mismatch)
+- [7. Formal Model](#7-formal-model)
+- [8. Specification Mismatch as a Repair-Operator Gate](#8-specification-mismatch-as-a-repair-operator-gate)
+- [9. Objective Governance](#9-objective-governance)
+- [10. Specification Audit](#10-specification-audit)
+- [11. Audit Findings for Specification Mismatch](#11-audit-findings-for-specification-mismatch)
+- [12. Control Deltas for Objective Repair](#12-control-deltas-for-objective-repair)
+- [13. Regression Guards for Specification Mismatch](#13-regression-guards-for-specification-mismatch)
+- [14. Objective Objects and GKO Integration](#14-objective-objects-and-gko-integration)
+- [15. Objective Governance and SGAR](#15-objective-governance-and-sgar)
+- [16. Objective Governance in Text-to-SQL](#16-objective-governance-in-text-to-sql)
+- [17. Objective Governance in Code Repair](#17-objective-governance-in-code-repair)
+- [18. Objective Governance in Writing and Analysis](#18-objective-governance-in-writing-and-analysis)
+- [19. Objective Governance in Agentic Workflows](#19-objective-governance-in-agentic-workflows)
+- [20. Objective Governance Protocol](#20-objective-governance-protocol)
+- [21. Objective Governance and Human-AI Collaboration](#21-objective-governance-and-human-ai-collaboration)
+- [22. Failure Modes of Objective Governance](#22-failure-modes-of-objective-governance)
+- [23. Design Patterns](#23-design-patterns)
+- [24. Minimal Implementation Architecture](#24-minimal-implementation-architecture)
+- [25. When Objective Governance Is Necessary](#25-when-objective-governance-is-necessary)
+- [26. Relation to Goodhart and Mechanism Design](#26-relation-to-goodhart-and-mechanism-design)
+- [27. Relation to the Other Governance Layers](#27-relation-to-the-other-governance-layers)
+- [28. Self-Audit of Specification Mismatch](#28-self-audit-of-specification-mismatch)
+- [29. Conclusion](#29-conclusion)
+- Appendices: [A. Compact Terminology](#appendix-a-compact-terminology) · [B. Minimal Objective Object Template](#appendix-b-minimal-objective-object-template) · [C. Specification Audit Checklist](#appendix-c-specification-audit-checklist) · [D. Example Objective Ledger Entry](#appendix-d-example-objective-ledger-entry)
+
+---
+
 ## 1. Position in the Unified Theory
 
 The structural theory of value preservation analyzes LLM system failure as loss or distortion of task value across a world-to-output pipeline:
@@ -1142,7 +1179,7 @@ A unit-test pass may allow "tested under current suite" but not "bug fully fixed
 
 ## 14. Objective Objects and GKO Integration
 
-Objective Governance should integrate with the Governed Knowledge Object model.
+Objective Governance should integrate with the Governed Knowledge Object (GKO) model.
 
 An objective can be represented as a GKO:
 
@@ -1179,7 +1216,7 @@ Objective GKOs differ from ordinary facts. They govern value judgments, not just
 
 ## 15. Objective Governance and SGAR
 
-Objectives should be connected to hard state.
+The State-Governed Agent Regime (SGAR) connects objectives to hard state, so that a change of objective is a recorded, validated event rather than a drifting context update.
 
 In long-horizon systems, objective changes must not be loose context updates. They should be committed transitions.
 

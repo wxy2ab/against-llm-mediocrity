@@ -15,7 +15,7 @@
 
 ## Abstract
 
-The current governed-LLM theory stack primarily describes **runtime governance**: Knowledge Governance, Audit Engineering, object-level control deltas, regression guards, and State-Governed Agent Regime all operate around a frozen model. They repair failures by changing the task representation, control objects, audit loops, routing rules, execution procedures, and committed state, without changing the model weights.
+The current governed-LLM theory stack primarily describes **runtime governance**: Knowledge Governance, Audit Engineering, object-level control deltas, regression guards, and the State-Governed Agent Regime (SGAR) all operate around a frozen model. They repair failures by changing the task representation, control objects, audit loops, routing rules, execution procedures, and committed state, without changing the model weights.
 
 This leaves a training-side gap. When a recurring failure is caused by a **learned component** of the approximate LLM system—belief/representation `B_θ`, world model `T̂_θ`, capability support `π_θ`, capability routing `r_θ`, or learned reward/proxy `R̂_θ / R_proxy`—runtime governance can often patch the failure, but repeated patches become a treadmill. The system keeps paying inference-time cost for a defect that should be amortized into the model.
 
@@ -35,6 +35,28 @@ Runtime governance repairs local, reversible, task-specific failures. Mechanism-
 In one sentence:
 
 > Runtime governance turns a failure into a revocable control object; mechanism-driven training turns recurrent learning-component failures into amortized training signal.
+
+---
+
+## Contents
+
+- [1. Position in the Unified Theory Stack](#1-position-in-the-unified-theory-stack)
+- [2. Scope: Learned Components vs System Components](#2-scope-learned-components-vs-system-components)
+- [3. Core Principle: Train the Mechanism, Not the Symptom](#3-core-principle-train-the-mechanism-not-the-symptom)
+- [4. Learned Component → Training Intervention Map](#4-learned-component--training-intervention-map)
+- [5. Agent-Layer Governance vs Training-Layer Repair](#5-agent-layer-governance-vs-training-layer-repair)
+- [6. Promotion Ratchet: From Audit Finding to Training Signal](#6-promotion-ratchet-from-audit-finding-to-training-signal)
+- [7. Object Model Integration](#7-object-model-integration)
+- [8. Training Side Effects and Boundary Governance](#8-training-side-effects-and-boundary-governance)
+- [9. When Not to Train](#9-when-not-to-train)
+- [10. Text-to-SQL / BIRD as a Mechanism-Driven Training Case](#10-text-to-sql--bird-as-a-mechanism-driven-training-case)
+- [11. Metrics for Mechanism-Driven Training](#11-metrics-for-mechanism-driven-training)
+- [12. Self-Audit GKO](#12-self-audit-gko)
+- [13. Failure Modes of Mechanism-Driven Training](#13-failure-modes-of-mechanism-driven-training)
+- [14. Compressed Doctrine](#14-compressed-doctrine)
+- [Appendix A: Learning-Component Training Cards](#appendix-a-learning-component-training-cards)
+- [Appendix B: Training Promotion Checklist](#appendix-b-training-promotion-checklist)
+- [Appendix C: Training Delta Template](#appendix-c-training-delta-template)
 
 ---
 
@@ -107,7 +129,7 @@ action_interface          -> A_sys
 search_execution          -> D
 ```
 
-Those system components are repaired through agent-layer governance: observation repair, tool access, interface change, execution search, verifier design, GKO updates, SGAR transition rules, and audit loops.
+Those system components are repaired through agent-layer governance: observation repair, tool access, interface change, execution search, verifier design, Governed Knowledge Object (GKO) updates, SGAR transition rules, and audit loops.
 
 The five hybrid axes are exactly:
 

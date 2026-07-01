@@ -39,7 +39,7 @@ S_world
 
 本文也说明原始失配如何组合成复合失败。最强的复合失败并非简单相加，而往往是超加性的，因为修复算子在管线站点之间相互耦合。一个站点的失败可能禁用修复另一个站点所需的信息、区分、候选、能力、组合规则或目标标准。
 
-最后，本文提供诊断与治理接口。每类失配都被映射到核心问题、形式特征、典型症状、审计发现、控制增量、受治理知识对象、回归护栏和状态治理型提交。结果是在结构理论、对象模型、审计工程、知识治理和状态治理型 Agent 体制之间建立一座统一桥梁。
+最后，本文提供诊断与治理接口。每类失配都被映射到核心问题、形式特征、典型症状、审计发现、控制增量、受治理知识对象、回归护栏和状态治理型提交。结果是在结构理论、对象模型、审计工程、知识治理和状态治理智能体范式之间建立一座统一桥梁。
 
 ---
 
@@ -49,11 +49,11 @@ S_world
 
 主理论文档提出总论点：高价值 LLM 系统不只是生成系统，而是价值保存系统。任务价值必须穿过观测、表征、路由、支持、聚合、评价、审计和状态转移而不被破坏。
 
-对象规范定义对象层：GKO、GEO、Audit Finding、Control Delta、Regression Guard、Defect Ledger、State Record、Transition Contract 和 Revocation Rule。
+对象规范定义对象层：受治理知识对象（Governed Knowledge Object / GKO）、受治理升级对象（Governed Escalation Object / GEO）、Audit Finding、Control Delta、Regression Guard、Defect Ledger、State Record、Transition Contract 和 Revocation Rule。
 
 审计工程文档定义失败如何被定位并写回控制空间。
 
-SGAR 文档定义硬状态权威和运行时提交。
+状态治理智能体范式（State-Governed Agent Regime / SGAR）文档定义硬状态权威和运行时提交。
 
 各个 mismatch 文档详细展开每类原始失配。
 
