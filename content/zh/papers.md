@@ -15,16 +15,6 @@ heroPoints:
 
 这一页是整个项目正式写作的索引。它列出当前的工作稿、被它们替代的旧版本、把理论落到实践的站点延伸，以及仍然敞开的实证问题。你可以用它快速找到该读的文档，也可以看清公开站点如何与正式工作稿对接。
 
-> **术语权威说明**
->
-> - `GKO` = Governed Knowledge Object / 受治理知识对象。
-> - `GExO` = Governed Execution Object / 受治理执行对象。
-> - `GEsO` = Governed Escalation Object / 受治理升级对象。
-> - `MSHQ` = Minimal Sufficient Human Query / 最小充分人类问题。
-> - `SGAR` = State-Governed Agent Regime / 状态治理智能体范式。
->
-> 为避免 `GEO` 同时指 Execution 与 Escalation，本站后续统一使用：`GExO` 表示 Execution Object，`GEsO` 表示 Escalation Object。
-
 ## 文档地图
 
 站点正文是公开解释层：先讲直觉，再讲机制，再讲实践。文章与工作稿则是形式化层：把概念定义、诊断分类、治理对象、运行时体制和研究议程写成可以引用、比较和继续扩展的文稿。

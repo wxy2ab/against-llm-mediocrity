@@ -15,16 +15,6 @@ heroPoints:
 
 This page is the index to the project's formal writing. It lists the current working manuscripts, the legacy versions they replace, the site extensions that put the theory into practice, and the empirical questions still open. Use it to find the right document and to see how the public site connects to the formal drafts.
 
-> **Terminology authority note**
->
-> - `GKO` = Governed Knowledge Object.
-> - `GExO` = Governed Execution Object.
-> - `GEsO` = Governed Escalation Object.
-> - `MSHQ` = Minimal Sufficient Human Query.
-> - `SGAR` = State-Governed Agent Regime.
->
-> To avoid `GEO` carrying both execution and escalation meanings, the site now standardizes on `GExO` for execution objects and `GEsO` for escalation objects.
-
 ## Document Map
 
 The main site is the public explanation layer: intuition first, mechanism second, practice third. The papers and working manuscripts are the formal layer, where concepts, diagnostic categories, governance objects, runtime regimes, and research questions are written in a form that can be cited, compared, and extended.
