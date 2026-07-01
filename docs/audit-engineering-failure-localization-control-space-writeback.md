@@ -29,7 +29,7 @@ Candidate Artifact
   → Task-Specific Control Object
   → Mechanism Attribution
   → Control Delta
-  → GKO / GEO / Verifier / State Update
+  → GKO / GExO / GEsO / Verifier / State Update
   → Regression Guard
   → Defect Ledger
   → Future Routing / Search / Rendering / Revocation
@@ -70,7 +70,7 @@ The central claim is that governed LLM systems do not improve merely by being cr
 - [25. Conclusion](#25-conclusion)
 - Appendices: [A. Compact Schemas](#appendix-a-compact-schemas) · [B. Audit Checklist](#appendix-b-audit-checklist) · [C. Severity Guide](#appendix-c-severity-guide) · [D. Closure Statuses](#appendix-d-closure-statuses)
 
-This document uses several governed objects by acronym throughout. The most important are the **GKO (Governed Knowledge Object)**, the durable unit of governed control knowledge written back by an audit; the **GEO (Governed Escalation Object)**, which carries a finding to human or higher-authority review; and the **SGAR (State-Governed Agent Regime)**, the state model under which an audit conclusion becomes authoritative only after a committed transition.
+This document uses several governed objects by acronym throughout. The most important are the **GKO (Governed Knowledge Object)**, the durable unit of governed control knowledge written back by an audit; the **GEsO (Governed Escalation Object)**, which carries a finding to human or higher-authority review; and the **SGAR (State-Governed Agent Regime)**, the state model under which an audit conclusion becomes authoritative only after a committed transition.
 
 ---
 
@@ -338,7 +338,7 @@ A minimal schema is:
   "id": "delta.unique_identifier",
   "source_finding_id": "finding that produced the delta",
   "operation": "create | update | weaken | strengthen | revoke | split | merge | reorder | escalate",
-  "target_type": "GKO | GEO | verifier | representation | router | state_record | transition_contract | regression_guard",
+  "target_type": "GKO | GExO | GEsO | verifier | representation | router | state_record | transition_contract | regression_guard",
   "target_id": "object being modified, if any",
   "mechanism_axis": "specification_reward | observation_availability | belief_representation | dynamics_world_model | action_interface | capability_support | capability_routing | search_execution | unknown | not_operationalized",
   "operationalization_status": "direct | derived | partial | not_operationalized",
@@ -1661,7 +1661,7 @@ In governed LLM systems, failure is not only an error. It is one of the primary 
   "id": "delta.unique_identifier",
   "source_finding_id": "finding id",
   "operation": "create | update | weaken | strengthen | revoke | split | merge | reorder | escalate",
-  "target_type": "GKO | GEO | verifier | representation | router | state_record | transition_contract | regression_guard",
+  "target_type": "GKO | GExO | GEsO | verifier | representation | router | state_record | transition_contract | regression_guard",
   "target_id": "optional target object",
   "proposed_change": "precise change",
   "condition": "when delta applies",

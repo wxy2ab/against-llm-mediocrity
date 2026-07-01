@@ -15,21 +15,23 @@ heroPoints:
 
 这一页是整个项目正式写作的索引。它列出当前的工作稿、被它们替代的旧版本、把理论落到实践的站点延伸，以及仍然敞开的实证问题。你可以用它快速找到该读的文档，也可以看清公开站点如何与正式工作稿对接。
 
+> **术语权威说明**
+>
+> - `GKO` = Governed Knowledge Object / 受治理知识对象。
+> - `GExO` = Governed Execution Object / 受治理执行对象。
+> - `GEsO` = Governed Escalation Object / 受治理升级对象。
+> - `MSHQ` = Minimal Sufficient Human Query / 最小充分人类问题。
+> - `SGAR` = State-Governed Agent Regime / 状态治理智能体范式。
+>
+> 为避免 `GEO` 同时指 Execution 与 Escalation，本站后续统一使用：`GExO` 表示 Execution Object，`GEsO` 表示 Escalation Object。
+
 ## 文档地图
 
 站点正文是公开解释层：先讲直觉，再讲机制，再讲实践。文章与工作稿则是形式化层：把概念定义、诊断分类、治理对象、运行时体制和研究议程写成可以引用、比较和继续扩展的文稿。
 
 这页不是单纯的“阅读顺序”，而是一张五层文档关系图：看每个文稿在整个框架里承担什么角色，以及它和别的文稿怎样衔接。
 
-```text
-核心理论层
--> 诊断机制层
--> 治理对象层
--> 运行时层
--> 人机协作层
-```
-
-:::cards
+:::document-map
 ### 核心理论层
 Tag: 说明为什么会失败
 
@@ -47,7 +49,7 @@ Tag: 把失败定位清楚
 ### 治理对象层
 Tag: 把控制写成对象
 
-**作用**：定义 GKO、GEO / GEsO、Audit Finding、Control Delta、Regression Guard、State Record 等对象，让治理从抽象原则变成可提交、可写回、可回归检查的实体。
+**作用**：定义 GKO、GExO、GEsO、Audit Finding、Control Delta、Regression Guard、State Record 等对象，让治理从抽象原则变成可提交、可写回、可回归检查的实体。
 
 **对应内容**：[对象模型与接口规范](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/governed-llm-object-model-interface-specification.zh-CN.md)、[审计工程](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/audit-engineering-failure-localization-control-space-writeback.zh-CN.md)
 
@@ -70,7 +72,7 @@ Tag: 只在人该管的地方问人
 
 ## 当前工作稿
 
-:::cards
+:::paper-docs
 ### LLM 系统中价值保存的结构理论
 Tag: 结构理论工作稿
 
@@ -88,7 +90,7 @@ Tag: 管线推导分类法工作稿
 ### 受治理 LLM 对象模型与接口规范
 Tag: 实现规范工作稿
 
-这份配套规范定义受治理 LLM 系统的对象契约与接口语义。它把 GKO、受治理升级对象（GEO）、审计发现、控制增量、回归护栏、缺陷账本、状态记录、转移契约、验证器对象和证据对象统一到一个生命周期中，用于审计写回、回归防护和硬状态提交。
+这份配套规范定义受治理 LLM 系统的对象契约与接口语义。它把 GKO、受治理执行对象（GExO）、审计发现、控制增量、回归护栏、缺陷账本、状态记录、转移契约、验证器对象和证据对象统一到一个生命周期中，用于审计写回、回归防护和硬状态提交。
 
 [阅读对象模型与接口规范](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/governed-llm-object-model-interface-specification.zh-CN.md)
 
@@ -179,7 +181,7 @@ Tag: 训练侧治理工作稿
 ### Human-Assist Operational Mismatches
 Tag: 协作补充稿
 
-补充稿不增加新的原始失配，而是把执行阻塞收紧为五个操作域，定义硬治理与预期损失升级门槛，并展开 MSHQ、GEO、回答验证和自治恢复。
+补充稿不增加新的原始失配，而是把执行阻塞收紧为五个操作域，定义硬治理与预期损失升级门槛，并展开 MSHQ、GEsO、回答验证和自治恢复。
 
 [阅读技术补充稿](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/human-assist-operational-mismatches.zh-CN.md)
 
@@ -216,7 +218,7 @@ Tag: AI 经济学与定价工作稿
 
 下面是保留下来供参考的早期稿。每一份都已经被上方当前工作稿中的某个文档承接，每张卡片也都指向它的替代版本。
 
-:::cards
+:::paper-docs
 ### LLM 失败的形式化机制层
 Tag: 旧版干预定位稿
 
@@ -273,7 +275,7 @@ Tag: 站点延伸
 ### 开源项目
 Tag: 实现路线图
 
-项目页只整理当前工作稿已经提出的实现与评估方向：GKO 生命周期、GEO 升级协议、硬状态 agent ledger 和六类原始失配诊断。它不是当前工作稿之外的新理论主张。
+项目页只整理当前工作稿已经提出的实现与评估方向：GKO 生命周期、GEsO 升级协议、硬状态 agent ledger 和六类原始失配诊断。它不是当前工作稿之外的新理论主张。
 ::::
 
 ## 后续实证方向
@@ -284,8 +286,8 @@ Tag: 实现路线图
 - 衡量自动生成的评分规约、边界情况、状态矩阵和 GKO，什么时候与专家判断相关。
 - 研究上下文压缩、语义解压、查询构造和结构化转换这些正向对齐任务的画像。
 - 测量嘈杂自然场景与干净抽象形式之间的建模缺口。
-- 比较普通人机问答与 MSHQ/GEO 协作协议在中断次数、回答质量和自治恢复率上的差异。
-- 评估 GKO/GEO 存储是否能提高复用，同时避免过期治理、过度升级或习得性无助。
+- 比较普通人机问答与 MSHQ/GEsO 协作协议在中断次数、回答质量和自治恢复率上的差异。
+- 评估 GKO/GEsO 存储是否能提高复用，同时避免过期治理、过度升级或习得性无助。
 - 评估 SGAR 式硬状态是否能减少长程 agent 的虚假完成、状态漂移、中断后不可恢复和不可审计行动循环。
 
 ## 项目定位

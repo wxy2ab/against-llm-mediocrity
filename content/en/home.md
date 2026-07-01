@@ -182,16 +182,16 @@ In practice, this means a hard task should often move through artifacts before i
 input -> task model -> control objects -> validation / escalation -> final answer
 ```
 
-Those artifacts may include rubrics, state matrices, hard-state ledgers, dependency graphs, option sets, failure-mode lists, validation checklists, [GKOs](/glossary#gko), [Governed Escalation Objects (GEOs)](/glossary#geo), or [Minimal Sufficient Human Queries (MSHQs)](/glossary#mshq). They are not bureaucracy for its own sake; they convert a high-mismatch final-output problem into smaller operations where the model's local strengths become useful again.
+Those artifacts may include rubrics, state matrices, hard-state ledgers, dependency graphs, option sets, failure-mode lists, validation checklists, [GKOs](/glossary#gko), [Governed Escalation Objects (GEsOs)](/glossary#geso), or [Minimal Sufficient Human Queries (MSHQs)](/glossary#mshq). They are not bureaucracy for its own sake; they convert a high-mismatch final-output problem into smaller operations where the model's local strengths become useful again.
 
 ## Where This Is Going
 
 - The public layer will explain LLM mediocrity, local alignment, and autoregressive extraordinary without requiring the reader to begin with the paper.
-- The theory layer develops the [six primitive mismatches](/glossary#six-primitive-mismatches), [Knowledge Governance](/glossary#knowledge-governance), [GKO](/glossary#gko) / [GEO](/glossary#geo), the [State-Governed Agent Regime (SGAR)](/glossary#sgar), and governance loops.
+- The theory layer develops the [six primitive mismatches](/glossary#six-primitive-mismatches), [Knowledge Governance](/glossary#knowledge-governance), [GKO](/glossary#gko) / [GExO](/glossary#gexo) / [GEsO](/glossary#geso), the [State-Governed Agent Regime (SGAR)](/glossary#sgar), and governance loops.
 - The engineering layer turns control objects, hard-state ledgers, validation loops, and minimal human intervention points into usable tools and templates.
 - The collaboration layer reframes the human role: not as a processor of every task, but as the governor of value, authority, taste, budget, evidence, and responsibility.
 - **The public layer** will explain LLM mediocrity, local alignment, and autoregressive extraordinary without requiring the reader to begin with the paper.
-- **The theory layer** develops the [six primitive mismatches](/glossary#six-primitive-mismatches), [Knowledge Governance](/glossary#knowledge-governance), [GKO](/glossary#gko) / [GEO](/glossary#geo), the [State-Governed Agent Regime (SGAR)](/glossary#sgar), and governance loops.
+- **The theory layer** develops the [six primitive mismatches](/glossary#six-primitive-mismatches), [Knowledge Governance](/glossary#knowledge-governance), [GKO](/glossary#gko) / [GExO](/glossary#gexo) / [GEsO](/glossary#geso), the [State-Governed Agent Regime (SGAR)](/glossary#sgar), and governance loops.
 - **The engineering layer** turns control objects, hard-state ledgers, validation loops, and minimal human intervention points into usable tools and templates.
 - **The collaboration layer** reframes the human role: not as a processor of every task, but as the governor of value, authority, taste, budget, evidence, and responsibility.
 

@@ -705,7 +705,8 @@ The central objects are:
 | Object | Function |
 |---|---|
 | GKO | Stores governed control knowledge. |
-| GEO (Governed Escalation Object) | Stores governed execution or collaboration objects. |
+| GExO (Governed Execution Object) | Stores governed execution objects such as tasks, plans, actions, or workflow items. |
+| GEsO (Governed Escalation Object) | Stores governed collaboration and escalation objects. |
 | Audit Finding | Localizes a failure and its evidence. |
 | Control Delta | Specifies how the control space should change. |
 | Regression Guard | Prevents recurrence of a failure family. |
@@ -720,7 +721,7 @@ The object flow is:
 Candidate Artifact
   → Audit Finding
   → Control Delta
-  → GKO / GEO / Verifier / State Update
+  → GKO / GExO / GEsO / Verifier / State Update
   → Regression Guard
   → Defect Ledger
   → Hard State Commitment

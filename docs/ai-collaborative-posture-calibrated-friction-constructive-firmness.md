@@ -722,7 +722,7 @@ This paper can serve as the AI-side dual of `cognitive-discipline-for-ai.md` and
 - **Fluency = an uncertainty concealer.** On the human side, remember that fluency is not truth; on the AI side, make uncertainty visible.
 - **firmness ∝ oracle fidelity.** Firmness is not personality; it is an oracle-driven evidential stance.
 - **MSHQ = ask only for variables that genuinely belong to human governance.** Do not ask in order to look rigorous; ask only to get critical human variables into the representation.
-- **GEO (Governed Escalation Object) = escalation triggered by risk and irreversibility.** The stronger the external consequence, the more AI should switch from executor to gatekeeper.
+- **GEsO (Governed Escalation Object) = escalation triggered by risk and irreversibility.** The stronger the external consequence, the more AI should switch from executor to gatekeeper.
 - **SGAR gate = do not commit before verification.** In engineering, release, migration, writing, or sending actions, use verification and rollback to anchor state.
 - **The human is the anchor of AI.** Zero friction makes the human stop acting as anchor; calibrated friction brings the human back into the decision point.
 - **The organization is the second anchor.** AI should not only preserve the individual-model loop. It should also preserve team review, authorization, and responsibility chains.

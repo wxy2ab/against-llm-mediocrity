@@ -153,11 +153,11 @@ Tag: 概率与价值同向
 机制层告诉我们"为什么会卡住"，但要落地到工程，还需要一组能把诊断翻译成动作的对象。本项目使用四个核心对象，它们一起把失配诊断、控制动作与人类治理缝合成一条可执行链路：
 
 - **[受治理知识对象（Governed Knowledge Object, GKO）](/zh/glossary#gko)**：保存任务特定的控制知识，包括已验证的主张、条件、优先级、强度、生命周期、冲突和撤销规则。GKO 是[知识治理](/zh/glossary#knowledge-governance)的最小存储单位，对应 [受治理 LLM 对象模型与接口规范](docs/governed-llm-object-model-interface-specification.zh-CN.md) 里的对象模型。
-- **[受治理升级对象（Governed Escalation Object, GEO）](/zh/glossary#geo)**：定义 agent 什么时候该问人、问谁、问什么、等待期间能做什么。它把"升级给人类"从一句口号变成可复用的协议对象。
-- **[最小充分人类问题（Minimal Sufficient Human Query, MSHQ）](/zh/glossary#mshq)**：在一次具体交互里把 GEO 实例化，只问恢复自治所需的最小变量。
+- **[受治理升级对象（Governed Escalation Object, GEsO）](/zh/glossary#geso)**：定义 agent 什么时候该问人、问谁、问什么、等待期间能做什么。它把"升级给人类"从一句口号变成可复用的协议对象。
+- **[最小充分人类问题（Minimal Sufficient Human Query, MSHQ）](/zh/glossary#mshq)**：在一次具体交互里把 GEsO 实例化，只问恢复自治所需的最小变量。
 - **[状态治理智能体范式（State-Governed Agent Regime, SGAR）](/zh/glossary#sgar)**：把 plan / action / observation / verification / 人类回答 / 审计发现组织成受治理状态转移，让长程 agent 在被承认的硬状态里推进，而不是在自我叙事里漂浮。详见 [SGAR 工作稿](docs/state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)。
 
-四者关系可以这样理解：GKO 存"应该知道什么"，GEO 存"什么时候该问"，MSHQ 是 GEO 的一次实例化，SGAR 则把这些对象连同观测、验证、人类回答一起提交到外部硬状态层。
+四者关系可以这样理解：GKO 存"应该知道什么"，GEsO 存"什么时候该问"，MSHQ 是 GEsO 的一次实例化，SGAR 则把这些对象连同观测、验证、人类回答一起提交到外部硬状态层。
 
 ## 哪些地方自回归是优势
 

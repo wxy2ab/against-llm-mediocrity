@@ -593,7 +593,7 @@ function renderTopicVisual(page: Page) {
         case "engineering":
           return {
             label: "治理层",
-            tags: ["中间对象", "验证循环", "GKO / GEO"],
+            tags: ["中间对象", "验证循环", "GKO / GExO / GEsO"],
           };
         case "collaboration":
           return {
@@ -637,7 +637,7 @@ function renderTopicVisual(page: Page) {
       case "engineering":
         return {
           label: "Governance Layer",
-          tags: ["Intermediate objects", "Validation loop", "GKO / GEO"],
+          tags: ["Intermediate objects", "Validation loop", "GKO / GExO / GEsO"],
         };
       case "collaboration":
         return {

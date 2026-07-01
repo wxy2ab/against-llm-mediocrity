@@ -15,7 +15,7 @@ If you want the core idea quickly, read the Abstract and Section 1 (Introduction
 
 - **LLM** — Large Language Model.
 - **GKO** — Governed Knowledge Object: a scoped, revocable knowledge artifact written back into the governed system.
-- **GEO** — Governed Escalation Object: a governed record that routes a case for escalation.
+- **GEsO** — Governed Escalation Object: a governed record that routes a case for escalation.
 - **SGAR** — State-Governed Agent Regime: the hard-state runtime governance layer for long-horizon agents.
 - **RLHF / DPO** — Reinforcement Learning from Human Feedback / Direct Preference Optimization (learned-component training methods).
 
@@ -595,7 +595,7 @@ A basic support governance loop is:
 5. Track coverage and diversity structurally, not stylistically.
 6. Protect promising low-probability candidates from premature pruning.
 7. Use verifiers or audits to recognize value.
-8. Convert successful structures into GKOs, GEOs, or state records.
+8. Convert successful structures into GKOs, GExOs, GEsOs, or state records.
 9. Add support regression guards.
 10. Update future routing and search policies.
 ```

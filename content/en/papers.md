@@ -15,21 +15,23 @@ heroPoints:
 
 This page is the index to the project's formal writing. It lists the current working manuscripts, the legacy versions they replace, the site extensions that put the theory into practice, and the empirical questions still open. Use it to find the right document and to see how the public site connects to the formal drafts.
 
+> **Terminology authority note**
+>
+> - `GKO` = Governed Knowledge Object.
+> - `GExO` = Governed Execution Object.
+> - `GEsO` = Governed Escalation Object.
+> - `MSHQ` = Minimal Sufficient Human Query.
+> - `SGAR` = State-Governed Agent Regime.
+>
+> To avoid `GEO` carrying both execution and escalation meanings, the site now standardizes on `GExO` for execution objects and `GEsO` for escalation objects.
+
 ## Document Map
 
 The main site is the public explanation layer: intuition first, mechanism second, practice third. The papers and working manuscripts are the formal layer, where concepts, diagnostic categories, governance objects, runtime regimes, and research questions are written in a form that can be cited, compared, and extended.
 
 So this section is not just a reading order. It is a five-layer document map: which role each manuscript plays in the framework, and how the documents connect to one another.
 
-```text
-Core theory layer
--> diagnostic-mechanism layer
--> governance-object layer
--> runtime layer
--> human collaboration layer
-```
-
-:::cards
+:::document-map
 ### Core Theory Layer
 Tag: explain why failure appears
 
@@ -47,7 +49,7 @@ Tag: localize what failed
 ### Governance-Object Layer
 Tag: write control as objects
 
-**Role**: define GKO, GEO / GEsO, Audit Finding, Control Delta, Regression Guard, State Record, and related objects so governance becomes a set of explicit, writeable, checkable entities rather than only principles.
+**Role**: define GKO, GExO, GEsO, Audit Finding, Control Delta, Regression Guard, State Record, and related objects so governance becomes a set of explicit, writeable, checkable entities rather than only principles.
 
 **Corresponding documents**: [Object Model and Interface Specification](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/governed-llm-object-model-interface-specification.md), [Audit Engineering](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/audit-engineering-failure-localization-control-space-writeback.md)
 
@@ -70,7 +72,7 @@ Tag: ask humans only where humans must govern
 
 ## Current Working Manuscripts
 
-:::cards
+:::paper-docs
 ### A Structural Theory of Value Preservation in LLM Systems
 Tag: structural theory working draft
 
@@ -109,7 +111,7 @@ This working draft defines the training-side counterpart to runtime governance. 
 ### Governed LLM Object Model and Interface Specification
 Tag: implementation specification
 
-This companion specification defines the object contracts and interface semantics for governed LLM systems. It unifies GKOs, Governed Escalation Objects (GEOs), Audit Findings, Control Deltas, Regression Guards, Defect Ledgers, State Records, Transition Contracts, Verifier Objects, and Evidence Objects into a lifecycle for audit write-back, regression prevention, and hard-state commitment.
+This companion specification defines the object contracts and interface semantics for governed LLM systems. It unifies GKOs, Governed Execution Objects (GExOs), Audit Findings, Control Deltas, Regression Guards, Defect Ledgers, State Records, Transition Contracts, Verifier Objects, and Evidence Objects into a lifecycle for audit write-back, regression prevention, and hard-state commitment.
 
 [Read the object model specification](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/governed-llm-object-model-interface-specification.md)
 
@@ -179,7 +181,7 @@ This technical report develops specification mismatch as an objective-preservati
 ### Human-Assist Operational Mismatches
 Tag: collaboration supplement
 
-The supplement does not add new primitive mismatches. It consolidates execution blockers into five operational domains, defines hard and expected-loss escalation gates, and develops MSHQs, GEOs, answer validation, and autonomy recovery.
+The supplement does not add new primitive mismatches. It consolidates execution blockers into five operational domains, defines hard and expected-loss escalation gates, and develops MSHQs, GEsOs, answer validation, and autonomy recovery.
 
 [Read the technical supplement](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/human-assist-operational-mismatches.md)
 
@@ -216,7 +218,7 @@ This manuscript develops a pricing envelope for LLM products. It argues that lon
 
 These are earlier drafts kept for reference. Each one is now superseded by a document in the current working manuscripts above, and each card points to its replacement.
 
-:::cards
+:::paper-docs
 ### A Formal Mechanism Layer for LLM Failure
 Tag: legacy intervention-localization draft
 
@@ -273,7 +275,7 @@ The learning page develops the human-role shift in governed collaboration: from 
 ### Open-Source Projects
 Tag: implementation roadmap
 
-The project page only organizes implementation and evaluation directions already present in the manuscripts: GKO lifecycles, GEO escalation protocols, hard-state agent ledgers, and six-mismatch diagnostics. It is not an additional theoretical claim.
+The project page only organizes implementation and evaluation directions already present in the manuscripts: GKO lifecycles, GEsO escalation protocols, hard-state agent ledgers, and six-mismatch diagnostics. It is not an additional theoretical claim.
 ::::
 
 ## Future Empirical Agenda
@@ -284,8 +286,8 @@ The framework is built to be tested, not just argued. These are the open empiric
 - Measure when generated rubrics, edge cases, state matrices, and GKOs correlate with expert judgment.
 - Study positive-alignment profiles for context compression, semantic decompression, query formulation, and structured transformation.
 - Measure the construal gap between noisy natural scenes and clean abstract forms.
-- Compare ordinary human-agent prompting with MSHQ/GEO collaboration protocols on interruption count, answer quality, and autonomy regained.
-- Evaluate whether GKO/GEO stores improve reuse without causing stale governance, over-escalation, or learned helplessness.
+- Compare ordinary human-agent prompting with MSHQ/GEsO collaboration protocols on interruption count, answer quality, and autonomy regained.
+- Evaluate whether GKO/GEsO stores improve reuse without causing stale governance, over-escalation, or learned helplessness.
 - Evaluate whether SGAR-style hard state reduces false completion, state drift, unrecoverable interruptions, and unauditable action loops in long-horizon agents.
 
 ## Project Status

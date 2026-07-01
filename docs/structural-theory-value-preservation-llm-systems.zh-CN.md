@@ -716,7 +716,8 @@ role confusion
 | 对象 | 功能 |
 |---|---|
 | GKO | 存储受治理控制知识。 |
-| GEO（受治理升级对象 / Governed Escalation Object） | 存储受治理执行或协作对象。 |
+| GExO（受治理执行对象 / Governed Execution Object） | 存储任务、计划、行动或工作流项等受治理执行对象。 |
+| GEsO（受治理升级对象 / Governed Escalation Object） | 存储受治理协作与升级对象。 |
 | 审计发现 | 定位失败及其证据。 |
 | 控制增量 | 说明控制空间应如何改变。 |
 | 回归护栏 | 防止一类失败复发。 |
@@ -731,7 +732,7 @@ role confusion
 Candidate Artifact
   → Audit Finding
   → Control Delta
-  → GKO / GEO / Verifier / State Update
+  → GKO / GExO / GEsO / Verifier / State Update
   → Regression Guard
   → Defect Ledger
   → Hard State Commitment

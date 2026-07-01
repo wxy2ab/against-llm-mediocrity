@@ -62,7 +62,7 @@ This document occupies a specific position in the governed LLM theory stack.
 
 The main theory document states the broad thesis: high-value LLM systems are not merely generation systems; they are value-preservation systems. Task value must survive observation, representation, routing, support, aggregation, evaluation, audit, and state transition.
 
-The object specification defines the object layer: Governed Knowledge Object (GKO), Governed Escalation Object (GEO), Audit Finding, Control Delta, Regression Guard, Defect Ledger, State Record, Transition Contract, and Revocation Rule.
+The object specification defines the object layer: Governed Knowledge Object (GKO), Governed Execution Object (GExO), Audit Finding, Control Delta, Regression Guard, Defect Ledger, State Record, Transition Contract, and Revocation Rule.
 
 The Audit Engineering document defines how failures are localized and written back into the control space.
 
@@ -1711,7 +1711,7 @@ Use the following checklist during failure review.
   "source_finding": "finding.id",
   "target_station": "observation_representation | state | routing | support | aggregation | specification",
   "change_type": "add | revise | weaken | revoke | split | merge | escalate",
-  "object_target": "GKO | GEO | Verifier | StateRecord | TransitionContract | RegressionGuard",
+  "object_target": "GKO | GExO | Verifier | StateRecord | TransitionContract | RegressionGuard",
   "before": "current rule, object, or process",
   "after": "proposed revised rule, object, or process",
   "scope": "where the change applies",

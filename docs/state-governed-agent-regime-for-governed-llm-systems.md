@@ -9,7 +9,7 @@
 
 This is a long working paper. The early sections (Abstract through Section 5) motivate the core idea and state the central rule; Sections 6–9 define the state model and transition machinery; Sections 10–13 connect SGAR to the runtime loop, Knowledge Governance, and Audit Engineering; Sections 14–21 cover the failure modes SGAR prevents and the operational disciplines it relies on; Sections 22–24 work through concrete domains; and Sections 25–35 cover the remaining cross-cutting concerns, theory, and conclusion. Two appendices give a compact glossary and a checklist.
 
-A short reader's note on terminology used throughout: a **GKO** is a Governed Knowledge Object (a piece of control knowledge stored as a governed object), and a **GEO** is a Governed Escalation Object (a governed record of an escalation). Both are defined again at first substantive use below.
+A short reader's note on terminology used throughout: a **GKO** is a Governed Knowledge Object (a piece of control knowledge stored as a governed object), and a **GEsO** is a Governed Escalation Object (a governed record of an escalation). Both are defined again at first substantive use below.
 
 - [Abstract](#abstract)
 - [1. Position in the Unified Theory](#1-position-in-the-unified-theory)
@@ -399,11 +399,11 @@ revoked assumptions
 
 ### 6.5 Governance State
 
-Governance state records governed objects. Two acronyms appear here and recur throughout the paper: a GKO is a Governed Knowledge Object (control knowledge stored as a governed object), and a GEO is a Governed Escalation Object (a governed record of an escalation). The governed objects tracked in this surface are:
+Governance state records governed objects. Two acronyms appear here and recur throughout the paper: a GKO is a Governed Knowledge Object (control knowledge stored as a governed object), and a GEsO is a Governed Escalation Object (a governed record of an escalation). The governed objects tracked in this surface are:
 
 ```text
 GKOs
-GEOs
+GEsOs
 Audit Findings
 Control Deltas
 Regression Guards

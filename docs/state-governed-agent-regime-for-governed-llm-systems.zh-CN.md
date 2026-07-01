@@ -9,7 +9,7 @@
 
 这是一篇较长的工作稿。前几节（摘要到第 5 节）阐明核心思路，并给出中心规则；第 6 至 9 节定义状态模型与转移机制；第 10 至 13 节把 SGAR 接入运行时循环、知识治理与审计工程；第 14 至 21 节讲 SGAR 防止的失败模式，以及它所依赖的运行纪律；第 22 至 24 节走过三个具体领域；第 25 至 35 节覆盖其余的横切问题、理论与结论。两个附录分别给出紧凑术语表和检查清单。
 
-先对全文反复出现的术语做一个说明：GKO 指受治理知识对象（Governed Knowledge Object），即以受治理对象形式存储的控制知识；GEO 指受治理升级对象（Governed Escalation Object），即对一次升级的受治理记录。两者在下文首次实质使用处会再次给出定义。
+先对全文反复出现的术语做一个说明：GKO 指受治理知识对象（Governed Knowledge Object），即以受治理对象形式存储的控制知识；GEsO 指受治理升级对象（Governed Escalation Object），即对一次升级的受治理记录。两者在下文首次实质使用处会再次给出定义。
 
 - [摘要](#摘要)
 - [1. 在统一理论中的位置](#1-在统一理论中的位置)
@@ -399,11 +399,11 @@ revoked assumptions
 
 ### 6.5 治理状态
 
-治理状态记录受治理对象。这里出现两个全文反复用到的缩写：GKO 指受治理知识对象（Governed Knowledge Object），即以受治理对象形式存储的控制知识；GEO 指受治理升级对象（Governed Escalation Object），即对一次升级的受治理记录。该状态表面追踪的受治理对象包括：
+治理状态记录受治理对象。这里出现两个全文反复用到的缩写：GKO 指受治理知识对象（Governed Knowledge Object），即以受治理对象形式存储的控制知识；GEsO 指受治理升级对象（Governed Escalation Object），即对一次升级的受治理记录。该状态表面追踪的受治理对象包括：
 
 ```text
 GKOs
-GEOs
+GEsOs
 Audit Findings
 Control Deltas
 Regression Guards

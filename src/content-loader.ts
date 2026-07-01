@@ -208,6 +208,219 @@ ${cards.join("\n")}
 </div>`;
 }
 
+function renderDocumentMap(block: string): string {
+  const chunks = block
+    .trim()
+    .replace(/^###\s+/, "")
+    .split(/\n###\s+/)
+    .filter(Boolean);
+
+  const nodes = chunks.map((chunk, index) => {
+    const [rawTitle = "", ...rawBodyLines] = chunk.split("\n");
+    const title = marked.parseInline(rawTitle.trim()) as string;
+    const lines = rawBodyLines.join("\n").trim().split("\n");
+    const tagMatch = lines[0]?.match(/^Tag:\s*(.+)$/i);
+    const tag = tagMatch ? marked.parseInline(tagMatch[1].trim()) : "";
+    const body = tagMatch ? lines.slice(1).join("\n").trim() : lines.join("\n").trim();
+    const roleMatch = body.match(/\*\*(?:Role|作用)\*\*[：:]\s*([\s\S]*?)(?=\n\n\*\*(?:Corresponding documents|对应内容)\*\*[：:]|$)/i);
+    const docsMatch = body.match(/\*\*(?:Corresponding documents|对应内容)\*\*[：:]\s*([\s\S]*)$/i);
+    const role = marked.parseInline((roleMatch?.[1] ?? body).trim()) as string;
+    const docs = docsMatch ? (marked.parseInline(docsMatch[1].trim()) as string) : "";
+    const number = String(index + 1).padStart(2, "0");
+
+    return `<li class="document-map-node">
+<div class="document-map-marker" aria-hidden="true">${number}</div>
+<div class="document-map-copy">
+${tag ? `<p class="document-map-tag">${tag}</p>` : ""}
+<h3>${title}</h3>
+<p>${role}</p>
+${docs ? `<p class="document-map-docs">${docs}</p>` : ""}
+</div>
+</li>`;
+  });
+
+  return `<figure class="document-map">
+<ol class="document-map-nodes">
+${nodes.join("\n")}
+</ol>
+</figure>`;
+}
+
+function renderPaperDocs(block: string): string {
+  const chunks = block
+    .trim()
+    .replace(/^###\s+/, "")
+    .split(/\n###\s+/)
+    .filter(Boolean);
+
+  const fieldClass = (label: string) => {
+    if (/status|状态/i.test(label)) return " paper-doc-field--status";
+    if (/terms|术语|对象/i.test(label)) return " paper-doc-field--terms";
+    if (/empirical|实证|implementation|实现/i.test(label)) return " paper-doc-field--empirical";
+    return "";
+  };
+
+  const stripMarkdown = (value: string) =>
+    value
+      .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
+      .replace(/[*_`]/g, "")
+      .trim();
+
+  const firstParagraph = (value: string) =>
+    value
+      .split(/\n{2,}/)
+      .map((part) => part.trim())
+      .find((part) => part && !/^\[.+\]\(.+\)/.test(part)) ?? value.trim();
+
+  const extractTerms = (text: string, zh: boolean) => {
+    const terms = [
+      "GKO",
+      "GEO",
+      "GExO",
+      "GEsO",
+      "Audit Finding",
+      "Control Delta",
+      "Regression Guard",
+      "State Record",
+      "Transition Contract",
+      "Verifier Object",
+      "Evidence Object",
+      "Defect Ledger",
+      "SGAR",
+      "Oracle",
+      "No-Go",
+      "MSHQ",
+      "support map",
+      "search warrant",
+      "coverage ledger",
+      "support delta",
+      "dependency graph",
+      "interface contract",
+      "invariant registry",
+      "binding record",
+      "claim-support map",
+      "integration ledger",
+      "composition audit",
+      "scoped objective object",
+    ];
+    const found = terms.filter((term) => new RegExp(term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i").test(text));
+    if (found.length) return found.slice(0, 7);
+    if (/观测|observation/i.test(text)) return zh ? ["观测-表征失配", "通道治理", "变量绑定"] : ["observation-representation mismatch", "channel governance", "variable binding"];
+    if (/状态|state/i.test(text)) return zh ? ["状态假设", "证据绑定", "状态治理"] : ["state hypothesis", "evidence binding", "state governance"];
+    if (/能力|routing|boundary/i.test(text)) return zh ? ["拟合边界", "能力路由", "边界护栏"] : ["fitting boundary", "capability routing", "boundary guard"];
+    if (/目标|objective|specification/i.test(text)) return zh ? ["规格失配", "目标治理", "代理目标"] : ["specification mismatch", "objective governance", "proxy objective"];
+    return zh ? ["文档角色", "治理机制", "验证假设"] : ["document role", "governance mechanism", "validation hypothesis"];
+  };
+
+  const inferStatus = (title: string, tag: string, zh: boolean) => {
+    const source = `${title} ${tag}`;
+    if (/旧版|legacy/i.test(source)) return "legacy";
+    if (/对象模型|interface|implementation specification|实现规范/i.test(source)) return "implementation-backed";
+    if (/价值保存|six primitive|六类原始|structural theory/i.test(source)) return "canonical";
+    if (/price|pricing|价格|实证|empirical/i.test(source)) return "active draft / empirical pending";
+    if (/实践|project|open-source|协作|collaboration/i.test(source)) return "implementation-backed";
+    return zh ? "active draft" : "active draft";
+  };
+
+  const generatedFields = (title: string, tag: string, body: string, zh: boolean) => {
+    const plainSummary = stripMarkdown(firstParagraph(body));
+    const terms = extractTerms(`${title}\n${tag}\n${body}`, zh);
+    const labels = zh
+      ? {
+          positioning: "一句话定位",
+          contribution: "核心贡献",
+          prerequisites: "前置阅读",
+          terms: "引入对象 / 术语",
+          status: "当前状态",
+          empirical: "实证与实现",
+          required: "必读",
+          optional: "可选",
+          cases: "已有案例",
+          pending: "待验证",
+        }
+      : {
+          positioning: "One-line positioning",
+          contribution: "Core contribution",
+          prerequisites: "Prerequisite reading",
+          terms: "Introduced objects / terms",
+          status: "Current status",
+          empirical: "Empirical and implementation",
+          required: "Required",
+          optional: "Optional",
+          cases: "Existing cases",
+          pending: "Pending validation",
+        };
+    const required = zh
+      ? "[价值保存结构理论](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/structural-theory-value-preservation-llm-systems.zh-CN.md), [六类原始失配总图](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/six-primitive-mismatches-pipeline-derived-taxonomy-llm-systems.zh-CN.md)"
+      : "[A Structural Theory of Value Preservation](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/structural-theory-value-preservation-llm-systems.md), [Six Primitive Mismatches](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/six-primitive-mismatches-pipeline-derived-taxonomy-llm-systems.md)";
+    const optional = zh ? "同层或相邻层的机制、对象、运行时文稿。" : "Mechanism, object, or runtime drafts in the same or adjacent layer.";
+    const contribution = zh
+      ? `- 提出 / 整理：${stripMarkdown(tag) || title}。\n- 推进：${plainSummary}`
+      : `- Introduces / organizes: ${stripMarkdown(tag) || title}.\n- Advances: ${plainSummary}`;
+
+    return [
+      [labels.positioning, plainSummary],
+      [labels.contribution, contribution],
+      [labels.prerequisites, `- ${labels.required}: ${required}\n- ${labels.optional}: ${optional}`],
+      [labels.terms, terms.map((term) => `- ${term}`).join("\n")],
+      [labels.status, `- ${inferStatus(title, tag, zh)}`],
+      [
+        labels.empirical,
+        `- ${labels.cases}: Story Insight V6 / Stock Rec V3 / FW-Insight V3\n- ${labels.pending}: ${zh ? "将该文档的机制假设转成可测指标，并与强 baseline 对照。" : "Turn this document's mechanism claims into measurable indicators and compare them with strong baselines."}`,
+      ],
+    ];
+  };
+
+  const docs = chunks.map((chunk) => {
+    const [rawTitle = "", ...rawBodyLines] = chunk.split("\n");
+    const rawBody = rawBodyLines.join("\n").trim();
+    const linkMatch = rawBody.match(/(?:^|\n)(?:Link|链接|阅读)[：:]\s*(.+)(?:\n|$)/i);
+    const trailingLinkMatch = rawBody.match(/(?:^|\n)(\[[^\]]+\]\([^)]+\))(?:\s*\/\s*\[[^\]]+\]\([^)]+\))*\s*$/);
+    const titleLink = (linkMatch?.[1] ?? trailingLinkMatch?.[1])?.trim();
+    const titleLinkParts = titleLink?.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+    const title = marked.parseInline(rawTitle.trim()) as string;
+    const titleText = stripMarkdown(rawTitle.trim());
+    const linkedTitle = titleLinkParts ? `<a href="${titleLinkParts[2]}">${title}</a>` : title;
+    const bodyWithoutExplicitLink = linkMatch ? rawBody.replace(linkMatch[0], "\n").trim() : rawBody;
+    const bodyWithoutLink = trailingLinkMatch ? bodyWithoutExplicitLink.replace(trailingLinkMatch[0], "\n").trim() : bodyWithoutExplicitLink;
+    const fieldMatches = Array.from(
+      bodyWithoutLink.matchAll(/^([^：:\n]+)[：:][ \t]*(?:\r?\n)?([\s\S]*?)(?=^[^：:\n]+[：:][ \t]*(?:\r?\n)?|\s*$)/gm),
+    );
+    const templateFieldPattern =
+      /^(一句话定位|核心贡献|前置阅读|引入对象\s*\/\s*术语|当前状态|实证与实现|One-line positioning|Core contribution|Prerequisite reading|Introduced objects\s*\/\s*terms|Current status|Empirical and implementation)$/i;
+    const tagMatch = bodyWithoutLink.match(/^Tag:\s*(.+)$/im);
+    const fallbackBody = tagMatch ? bodyWithoutLink.replace(tagMatch[0], "").trim() : bodyWithoutLink;
+    const zh = /[\u3400-\u9fff]/.test(`${titleText}\n${bodyWithoutLink}`);
+    const templateFields = fieldMatches
+      .map((match) => [match[1].trim(), match[2].trim()] as [string, string])
+      .filter(([label]) => templateFieldPattern.test(label));
+    const fieldEntries = templateFields.length
+      ? templateFields
+      : generatedFields(titleText, tagMatch?.[1].trim() ?? "", fallbackBody, zh);
+
+    const fields = fieldEntries.map(([label, value]) => {
+      if (!value) return "";
+      return `<section class="paper-doc-field${fieldClass(label)}">
+<h4>${marked.parseInline(label) as string}</h4>
+<div>${marked.parse(value, { async: false }) as string}</div>
+</section>`;
+    });
+
+    return `<article class="paper-doc">
+<header class="paper-doc-header">
+<h3>${linkedTitle}</h3>
+</header>
+<div class="paper-doc-fields">
+${fields.join("\n")}
+</div>
+</article>`;
+  });
+
+  return `<div class="paper-docs">
+${docs.join("\n")}
+</div>`;
+}
+
 function withBasePath(path: string): string {
   const base = import.meta.env.BASE_URL;
   const normalizedBase = base.endsWith("/") ? base : `${base}/`;
@@ -222,13 +435,21 @@ function prefixInternalLinks(html: string): string {
 }
 
 function renderMarkdown(markdown: string): string {
-  // Takeaway fence first (disjoint from cards), then cards, then parse, then
-  // post-process the parsed HTML (flow diagrams + internal-link base prefixing).
+  // Takeaway fence first (disjoint from cards), then custom maps/cards, then
+  // parse, then post-process the parsed HTML (flow diagrams + internal links).
   const withTakeaways = markdown.replace(
     /^(:{3,})takeaway[ \t]*\r?\n([\s\S]*?)^\1[ \t]*\r?$/gm,
     (_match, _fence: string, block: string) => renderTakeaway(block),
   );
-  const withCards = withTakeaways.replace(
+  const withDocumentMaps = withTakeaways.replace(
+    /^(:{3,})document-map[ \t]*\r?\n([\s\S]*?)^\1[ \t]*\r?$/gm,
+    (_match, _fence: string, block: string) => renderDocumentMap(block),
+  );
+  const withPaperDocs = withDocumentMaps.replace(
+    /^(:{3,})paper-docs[ \t]*\r?\n([\s\S]*?)^\1[ \t]*\r?$/gm,
+    (_match, _fence: string, block: string) => renderPaperDocs(block),
+  );
+  const withCards = withPaperDocs.replace(
     /^(:{3,})cards[ \t]*\r?\n([\s\S]*?)^\1[ \t]*\r?$/gm,
     (_match, _fence: string, block: string) => renderCards(block),
   );

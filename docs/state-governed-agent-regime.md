@@ -247,9 +247,9 @@ Observation-representation mismatch asks whether decisive variables enter the mo
 
 Knowledge Governance governs task-specific knowledge. GKOs store validated assertions, conditions, priorities, strengths, lifespans, conflicts, and revocation rules. SGAR gives agent operation a broader state-authority layer in which GKOs may be read, applied, updated, or revoked as part of state transitions.
 
-### GEOs and governed collaboration
+### GEsOs and governed collaboration
 
-GEOs govern escalation: when the agent must ask, whom it should ask, what it should ask, and what it may do while waiting. In SGAR, a human answer should not disappear into chat. It should update a recognized state, GKO, GEO, obligation, or transition record.
+GEsOs govern escalation: when the agent must ask, whom it should ask, what it should ask, and what it may do while waiting. In SGAR, a human answer should not disappear into chat. It should update a recognized state, GKO, GEsO, obligation, or transition record.
 
 ### Audit Engineering
 

@@ -709,7 +709,7 @@ state transition plan
 coverage matrix
 ```
 
-当这些对象具有作用域、证据、强度和撤销条件时，它们就成为受治理知识对象（Governed Knowledge Object / GKO）或受治理升级对象（Governed Escalation Object / GEO）。
+当这些对象具有作用域、证据、强度和撤销条件时，它们就成为受治理知识对象（Governed Knowledge Object / GKO）、受治理执行对象（Governed Execution Object / GExO）或受治理升级对象（Governed Escalation Object / GEsO）。
 
 ### 8.3 局部部分生成
 

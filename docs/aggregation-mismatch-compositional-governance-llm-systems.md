@@ -718,7 +718,7 @@ state transition plan
 coverage matrix
 ```
 
-These objects become Governed Knowledge Objects (GKOs) or Governed Escalation Objects (GEOs) when they have scope, evidence, strength, and revocation conditions.
+These objects become Governed Knowledge Objects (GKOs), Governed Execution Objects (GExOs), or Governed Escalation Objects (GEsOs) when they have scope, evidence, strength, and revocation conditions.
 
 ### 8.3 Local Part Generation
 

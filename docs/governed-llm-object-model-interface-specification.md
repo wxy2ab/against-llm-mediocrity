@@ -9,13 +9,13 @@
 
 This document specifies a unified object model for governed LLM systems. It is designed as the implementation-facing companion to a structural theory of value preservation in LLM systems. The theory identifies six primitive mismatch types—observation-representation, state, fitting-boundary, support, aggregation, and specification mismatch—and argues that high-value LLM systems require mechanisms for preserving task value across observation, representation, capability routing, candidate support, aggregation, evaluation, audit, and state transition.
 
-The present specification defines the objects and interfaces required to make that theory operational. It unifies **Governed Knowledge Objects** (GKOs), **Governed Execution Objects** (GEOs), **Audit Findings**, **Control Deltas**, **Regression Guards**, **Defect Ledgers**, **State Records**, **Transition Contracts**, **Verifier Objects**, and **Evidence Objects** into a single lifecycle. The core flow is:
+The present specification defines the objects and interfaces required to make that theory operational. It unifies **Governed Knowledge Objects** (GKOs), **Governed Execution Objects** (GExOs), **Audit Findings**, **Control Deltas**, **Regression Guards**, **Defect Ledgers**, **State Records**, **Transition Contracts**, **Verifier Objects**, and **Evidence Objects** into a single lifecycle. The core flow is:
 
 ```text
 Candidate Artifact
   → Audit Finding
   → Control Delta
-  → GKO / GEO / Verifier / State Update
+  → GKO / GExO / Verifier / State Update
   → Regression Guard
   → Defect Ledger
   → Hard State Commitment
@@ -188,7 +188,7 @@ Collaboration Layer
   Governed Execution Objects and human-AI coordination records
 ```
 
-These layers are not separate products. They are distinct roles within a single lifecycle. A failure diagnosed at the diagnostic layer should be able to produce an audit finding. An audit finding should produce a control delta. A control delta may update a GKO, a GEO, a verifier, a guard, or a state record. A verified update may become a committed state transition.
+These layers are not separate products. They are distinct roles within a single lifecycle. A failure diagnosed at the diagnostic layer should be able to produce an audit finding. An audit finding should produce a control delta. A control delta may update a GKO, a GExO, a verifier, a guard, or a state record. A verified update may become a committed state transition.
 
 ---
 
@@ -216,7 +216,7 @@ In object form:
 Artifact
   → AuditFinding
   → ControlDelta
-  → {GKO | GEO | VerifierObject | StateRecord | TransitionContract}
+  → {GKO | GExO | VerifierObject | StateRecord | TransitionContract}
   → RegressionGuard
   → DefectLedgerEntry
   → StateTransition
@@ -233,7 +233,7 @@ All governed objects share a common envelope.
 ```json
 {
   "id": "object.unique_identifier",
-  "object_kind": "gko | geo | audit_finding | control_delta | regression_guard | defect_ledger_entry | state_record | transition_contract | verifier | evidence",
+  "object_kind": "gko | gexo | audit_finding | control_delta | regression_guard | defect_ledger_entry | state_record | transition_contract | verifier | evidence",
   "version": "0.1.0",
   "status": "draft | proposed | active | suspended | superseded | deprecated | revoked | archived",
   "created_at": "ISO-8601 timestamp or logical clock",
@@ -421,13 +421,13 @@ audit trail
 
 ## 7. Governed Execution Object
 
-A **Governed Execution Object** represents a task, plan, action, collaboration unit, or workflow item whose execution must be tracked and governed.
+A **Governed Execution Object** (`GExO`) represents a task, plan, action, collaboration unit, or workflow item whose execution must be tracked and governed.
 
-Where GKOs govern knowledge, GEOs govern execution.
+Where GKOs govern knowledge, GExOs govern execution.
 
-### 7.1 GEO Types
+### 7.1 GExO Types
 
-Recommended `geo_type` values:
+Recommended `gexo_type` values:
 
 ```text
 task
@@ -443,15 +443,15 @@ collaboration_contract
 artifact_request
 ```
 
-### 7.2 GEO Schema
+### 7.2 GExO Schema
 
 ```json
 {
-  "id": "geo.unique_identifier",
-  "object_kind": "geo",
+  "id": "gexo.unique_identifier",
+  "object_kind": "gexo",
   "version": "0.1.0",
   "status": "draft | proposed | active | blocked | completed | failed | revoked | archived",
-  "geo_type": "task | subtask | plan | action | handoff | review_request | tool_call | human_decision | workflow_stage | collaboration_contract | artifact_request",
+  "gexo_type": "task | subtask | plan | action | handoff | review_request | tool_call | human_decision | workflow_stage | collaboration_contract | artifact_request",
   "objective": "what this execution object is intended to accomplish",
   "inputs": ["object.id or artifact reference"],
   "outputs_expected": ["expected artifacts or state changes"],
@@ -472,15 +472,15 @@ artifact_request
 }
 ```
 
-### 7.3 GEO Example: Text-to-SQL Candidate Repair
+### 7.3 GExO Example: Text-to-SQL Candidate Repair
 
 ```json
 {
-  "id": "geo.text2sql.repair.empty_result_query.001",
-  "object_kind": "geo",
+  "id": "gexo.text2sql.repair.empty_result_query.001",
+  "object_kind": "gexo",
   "version": "0.1.0",
   "status": "active",
-  "geo_type": "subtask",
+  "gexo_type": "subtask",
   "objective": "Repair a SQL candidate that executes successfully but returns an empty result set unexpectedly.",
   "inputs": ["artifact.sql_candidate.014", "finding.text2sql.empty_result.014"],
   "outputs_expected": ["artifact.sql_candidate.repaired", "evidence.execution_result"],
@@ -1153,7 +1153,7 @@ S' = next committed state
   "status": "active",
   "contract_type": "artifact_commit",
   "scope": "text2sql.sql_candidate_repair",
-  "precondition": "A SQL candidate has a confirmed audit finding and an approved repair GEO.",
+  "precondition": "A SQL candidate has a confirmed audit finding and an approved repair GExO.",
   "action_schema": "Submit repaired SQL plus explanation of changed control objects.",
   "observation_schema": "Execution result, semantic audit result, and guard result.",
   "verifier_refs": ["verifier.sql.execution_engine", "verifier.text2sql.semantic_audit", "guard.text2sql.value_predicate_must_match_observed_values.v1"],
@@ -1314,7 +1314,7 @@ Creates a draft or proposed governed object.
 {
   "operation": "propose_object",
   "input": {
-    "object_kind": "gko | geo | audit_finding | control_delta | regression_guard | state_record | transition_contract | verifier | evidence",
+    "object_kind": "gko | gexo | audit_finding | control_delta | regression_guard | state_record | transition_contract | verifier | evidence",
     "object_payload": {},
     "source_refs": ["object.id"]
   },
@@ -1478,7 +1478,7 @@ Returns active objects relevant to a task, state, artifact, or capability.
 {
   "operation": "query_governed_context",
   "input": {
-    "task_ref": "geo.id or task descriptor",
+    "task_ref": "gexo.id or task descriptor",
     "state_ref": "state.id",
     "artifact_type": "string",
     "capability": "string or null",
@@ -1486,7 +1486,7 @@ Returns active objects relevant to a task, state, artifact, or capability.
   },
   "output": {
     "gko_refs": ["gko.id"],
-    "geo_refs": ["geo.id"],
+    "gexo_refs": ["gexo.id"],
     "guard_refs": ["guard.id"],
     "verifier_refs": ["verifier.id"],
     "state_refs": ["state.id"]
@@ -1594,7 +1594,7 @@ Required objects:
 
 ```text
 Standard Profile objects
-GEO
+GExO
 Transition Contract
 State Transition events
 Rollback records
@@ -1619,7 +1619,7 @@ Each primitive mismatch has characteristic governed objects.
 | Observation-representation | Evidence Object, representation GKO, schema/value binding GKO | change observation channel, add representation schema, require tool inspection | variable-presence check, value-grounding check, raw-log availability check |
 | State | State hypothesis GKO, State Record, Transition Contract | add state discriminator, branch policy, require clarification | state-disambiguation check, transition consistency check |
 | Fitting-boundary | Routing Rule GKO, capability boundary tests | change router, add activation/suppression condition | routing check, boundary perturbation test |
-| Support | Search policy GKO, candidate expansion GEO | expand candidate set, add rare-structure generator | candidate coverage check, low-support pattern check |
+| Support | Search policy GKO, candidate expansion GExO | expand candidate set, add rare-structure generator | candidate coverage check, low-support pattern check |
 | Aggregation | Composition Rule GKO, dependency graph, artifact verifier | add global invariant, change rendering order, enforce dependency | invariant check, nonlocal consistency check |
 | Specification | Rubric GKO, success condition GKO, human judgment evidence | revise rubric, add counterexample, change evaluator | rubric counterexample check, proxy-risk check |
 
@@ -1899,7 +1899,7 @@ A system conforms to the Full SGAR Profile if it additionally satisfies the foll
 [ ] Transition Contracts define precondition, observation schema, verifier, commit condition, and rollback condition.
 [ ] Context narrative alone cannot commit state.
 [ ] Rollback or dispute paths exist for committed state.
-[ ] GEOs track long-horizon tasks, actions, handoffs, and success conditions.
+[ ] GExOs track long-horizon tasks, actions, handoffs, and success conditions.
 ```
 
 ---
@@ -1910,7 +1910,7 @@ The canonical object kinds are:
 
 ```text
 gko
-geo
+gexo
 evidence
 audit_finding
 control_delta

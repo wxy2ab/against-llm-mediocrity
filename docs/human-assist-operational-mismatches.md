@@ -29,7 +29,7 @@ The main *Knowledge Governance* manuscript explains task-value divergence throug
 
 An operational mismatch occurs when an agent cannot reliably continue because a task-critical control variable is unavailable, uncertain, or outside its legitimate authority, and targeted human input can resolve the blocker. Operational mismatches do not expand the primitive mismatch taxonomy. They answer a different question: not why generation diverges from value, but where autonomous execution is blocked and what minimal human contribution restores progress.
 
-The central objects are the **Minimal Sufficient Human Query (MSHQ)** and the **Governed Escalation Object (GEsO)**. Here `GEsO` is intentionally distinct from the object-model's **Governed Execution Object (GEO)**. An MSHQ asks only for the missing human-governed variable. A GEsO records when escalation is required, who should answer, what safe default applies, what work may continue, and how the rule expires or is revoked.
+The central objects are the **Minimal Sufficient Human Query (MSHQ)** and the **Governed Escalation Object (GEsO)**. Here `GEsO` is intentionally distinct from the object-model's **Governed Execution Object (GExO)**. An MSHQ asks only for the missing human-governed variable. A GEsO records when escalation is required, who should answer, what safe default applies, what work may continue, and how the rule expires or is revoked.
 
 In a long-horizon agent, the answer should then be committed into hard state rather than left as context-only memory.
 

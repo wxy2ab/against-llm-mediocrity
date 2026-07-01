@@ -726,7 +726,7 @@ AI 产品可以提供显式模式，而不是把所有姿态藏在一个默认�
 - **流畅性 = 不确定性遮蔽器。** 人侧要记住 fluency is not truth；AI 侧要主动让不确定性可见。
 - **firmness ∝ oracle fidelity。** 强硬不是人格，而是 oracle 驱动的证据姿态。
 - **MSHQ = 只追问真正属于人类治理的变量。** 不为严谨而追问，只为让关键人类变量进入表征而追问。
-- **受治理升级对象（Governed Escalation Object / GEO）= 风险/不可逆性触发升级。** 外部后果越强，AI 越应从执行器切换为闸门。
+- **受治理升级对象（Governed Escalation Object / GEsO）= 风险/不可逆性触发升级。** 外部后果越强，AI 越应从执行器切换为闸门。
 - **SGAR gate = 未验证不提交。** 在工程、发布、迁移、写入、发送等动作前，用验证和回滚锚住状态。
 - **人是 AI 的锚。** 零摩擦让人停止当锚；校准摩擦让人重新进入决定点。
 - **组织是第二锚点。** AI 不能只维护个体与模型的闭环，也要维护团队 review、授权和责任链。
@@ -894,4 +894,3 @@ AI 产品可以提供显式模式，而不是把所有姿态藏在一个默认�
 [23] Chen, Z., & Schmidt, R. *Exploring a Behavioral Model of “Positive Friction” in Human-AI Interaction*. arXiv:2402.09683, 2024. https://arxiv.org/abs/2402.09683
 
 [24] Campagner, A., et al. *The Impact of Misleading Explanations on Accuracy in Human-AI Decision Making*. xAI 2024. https://boa.unimib.it/retrieve/eeecf34c-e56a-4414-a3d3-22ea871b627d/Cabitza-2024-Second%20World%20Conference%2C%20xAI%202024-CCIS-preprint.pdf
-
