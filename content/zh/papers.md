@@ -15,21 +15,58 @@ heroPoints:
 
 这一页是整个项目正式写作的索引。它列出当前的工作稿、被它们替代的旧版本、把理论落到实践的站点延伸，以及仍然敞开的实证问题。你可以用它快速找到该读的文档，也可以看清公开站点如何与正式工作稿对接。
 
-## 深水区怎么读
+## 文档地图
 
-站点正文是公开解释层：先讲直觉，再讲机制，再讲实践。文章与工作稿则是深水区，用来把概念定义、诊断分类、治理对象和后续研究问题写得更完整。
+站点正文是公开解释层：先讲直觉，再讲机制，再讲实践。文章与工作稿则是形式化层：把概念定义、诊断分类、治理对象、运行时体制和研究议程写成可以引用、比较和继续扩展的文稿。
 
-下面是一条从直觉走向形式细节的建议阅读顺序：
+这页不是单纯的“阅读顺序”，而是一张五层文档关系图：看每个文稿在整个框架里承担什么角色，以及它和别的文稿怎样衔接。
 
-1. 先读站点的"为什么重要"和"案例"页，按案例索引建立从控制空间治理到分层治理的直觉。
-2. 再读"机制"、价值保存结构理论和六类原始失配总图，理解价值如何穿过管线，以及受治理控制对象如何保存任务价值。
-3. 然后读协作补充稿，理解能自主推进任务的 AI agent 什么时候应该问人，以及如何构造最小充分人类问题（MSHQ）。
-4. 再读"状态治理智能体范式（SGAR）"，理解长程 agent 为什么需要硬状态，而不是只依赖上下文维持连续性。
-5. 再读"审计工程"，理解系统如何把生成后的失败信号路由回控制空间，并用回归治理防止退化。
-6. 然后读"AI 的认知纪律"，理解个人使用 AI 时如何管理情绪投射、抽象失控、自我确认和现实反馈。
-7. 最后读站点中的协作、学习和项目页，理解这些手稿如何转化为实践和实现方向。
+```text
+核心理论层
+-> 诊断机制层
+-> 治理对象层
+-> 运行时层
+-> 人机协作层
+```
 
-**如果只读站点，重点是获得一条可操作的判断链；如果进入文章，重点是检查这条链的定义、边界和可验证性。**文章页的作用就是把公开解释层和正式工作稿接起来。
+:::cards
+### 核心理论层
+Tag: 说明为什么会失败
+
+**作用**：说明为什么会出现 LLM 平庸、局部对齐和价值保存失败，给整个框架提供最上层解释。
+
+**对应内容**：[价值保存结构理论](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/structural-theory-value-preservation-llm-systems.zh-CN.md)、[六类原始失配总图](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/six-primitive-mismatches-pipeline-derived-taxonomy-llm-systems.zh-CN.md)
+
+### 诊断机制层
+Tag: 把失败定位清楚
+
+**作用**：把失败定位到价值保存管线站点、机制轴和修复层，回答“到底坏在什么地方、该从哪一层修”。
+
+**对应内容**：[形式化机制层](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/formal-mechanism-layer-for-governed-llm-systems.zh-CN.md)、[诊断-机制桥接](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/diagnostic-mechanism-bridge-for-governed-llm-systems.zh-CN.md)、[机制驱动训练](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/mechanism-driven-training-for-governed-llm-systems.zh-CN.md)
+
+### 治理对象层
+Tag: 把控制写成对象
+
+**作用**：定义 GKO、GEO / GEsO、Audit Finding、Control Delta、Regression Guard、State Record 等对象，让治理从抽象原则变成可提交、可写回、可回归检查的实体。
+
+**对应内容**：[对象模型与接口规范](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/governed-llm-object-model-interface-specification.zh-CN.md)、[审计工程](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/audit-engineering-failure-localization-control-space-writeback.zh-CN.md)
+
+### 运行时层
+Tag: 把进展写入硬状态
+
+**作用**：说明 agent 的进展怎样进入硬状态，哪些动作算有效推进，哪些动作必须经过 gate、审计和状态转移才能被承认。
+
+**对应内容**：[SGAR](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)、[Oracle / Audit / SGAR routing](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/oracle-classification-audit-agent-sgar-engine-routing.zh-CN.md)
+
+### 人机协作层
+Tag: 只在人该管的地方问人
+
+**作用**：定义哪些变量必须由人治理，以及怎样把人类打断压缩到最小，同时保证 AI 在拿到答案后能恢复自治推进。
+
+**对应内容**：[Human-Assist Operational Mismatches](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/human-assist-operational-mismatches.zh-CN.md)、[治理式人机协作](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/governed-human-ai-collaboration.zh-CN.md)、[AI 的认知纪律](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/cognitive-discipline-for-ai.zh-CN.md)、[AI 的协作姿态](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/ai-collaborative-posture-calibrated-friction-constructive-firmness.zh-CN.md)
+:::
+
+**如果只读站点，重点是获得一条可操作的判断链；如果进入文章，重点是检查这五层分别如何定义问题、定位失败、承载治理、提交状态和组织协作。** 这页的作用，就是把公开解释层和正式工作稿放到同一张五层地图里。
 
 ## 当前工作稿
 

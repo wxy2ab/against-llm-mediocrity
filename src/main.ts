@@ -804,11 +804,12 @@ function render() {
   const pageBody = page.key === "overview" ? renderOverviewGallery(route.lang) : renderMarkdownSections(page.html);
   document.documentElement.lang = route.lang;
   document.title = `${page.title} | Against LLM Mediocrity`;
+  const pageShellClass = `page-shell${page.key === "glossary" ? " page-shell--glossary" : ""}`;
   appRoot.innerHTML = `
     ${renderNav(route.lang, page)}
     <main>
       ${renderHero(page)}
-      <div class="page-shell">
+      <div class="${pageShellClass}">
         ${pageBody}
       </div>
     </main>
