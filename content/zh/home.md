@@ -39,7 +39,7 @@ alignmentLabels:
 
 认识并对抗这种平庸，可能是 AI 使用者最常面对的任务。实践目标不是压制模型的生成能力，而是保留它真正擅长的部分，同时防止局部流畅伪装成全局价值。
 
-整站的读法按这条链路展开。先说明为什么有些问题不能只靠等模型变强来解决，再解释概率与价值为什么会错开，然后用[六类原始失配](/zh/glossary#six-primitive-mismatches)诊断真正卡住的部分。接着用治理对象体系（[GKO](/zh/glossary#gko) / [GEO](/zh/glossary#geo) / [MSHQ](/zh/glossary#mshq)）和状态治理智能体范式（[SGAR](/zh/glossary#sgar)），把它改写成可搜索、可验证、可复用的工程对象。最后用[审计工程](/zh/glossary#audit-engineering)与回写经验，让下一轮任务比这一轮更稳。换句话说，这不是一组松散文章，而是一条从结构判断到工程交付的完整链路。
+整站的读法按这条链路展开。先说明为什么有些问题不能只靠等模型变强来解决，再解释概率与价值为什么会错开，然后用[六类原始失配](/zh/glossary#six-primitive-mismatches)诊断真正卡住的部分。接着用治理对象体系（[GKO](/zh/glossary#gko) / [GExO](/zh/glossary#gexo) / [GEsO](/zh/glossary#geso) / [MSHQ](/zh/glossary#mshq)）和状态治理智能体范式（[SGAR](/zh/glossary#sgar)），把它改写成可搜索、可验证、可复用的工程对象。最后用[审计工程](/zh/glossary#audit-engineering)与回写经验，让下一轮任务比这一轮更稳。换句话说，这不是一组松散文章，而是一条从结构判断到工程交付的完整链路。
 
 > **说明**
 >
@@ -85,7 +85,7 @@ Tag: 概率与价值同向
 ```text
 识别概率与价值的关系区间
 -> 用六类原始失配诊断卡住的部分
--> 把不对齐的部分转化成治理对象（GKO / GEO / MSHQ）
+-> 把不对齐的部分转化成治理对象（GKO / GExO / GEsO / MSHQ）
 -> 在硬状态体制（SGAR）里执行、验证、提交状态转移
 -> 用审计工程把失败信号写回控制增量
 -> 从受治理状态生成最终答案
@@ -158,7 +158,7 @@ Tag: 机制
 ### 最后看实践
 Tag: 治理与协作
 
-如果你想把框架用起来，进入"治理"和"协作"。核心方法是把困难任务拆成更适合模型的中间对象（GKO / GEO / MSHQ），把长程 agent 的进展提交进硬状态（SGAR），并通过审计工程把失败信号写回控制增量，让人只补足 AI 无法可靠获得的关键变量。
+如果你想把框架用起来，进入"治理"和"协作"。核心方法是把困难任务拆成更适合模型的中间对象（GKO / GExO / GEsO / MSHQ），把长程 agent 的进展提交进硬状态（SGAR），并通过审计工程把失败信号写回控制增量，让人只补足 AI 无法可靠获得的关键变量。
 :::
 
 ## 如何对抗 LLM 平庸
@@ -186,7 +186,7 @@ Tag: 治理与协作
 实践上，困难任务通常不应该直接进入最终文本，而应先经过一组中间对象：
 
 ```text
-输入 -> 任务模型 -> 控制对象（GKO / GEO / MSHQ） -> 硬状态（SGAR） -> 验证 / 审计 -> 最终答案
+输入 -> 任务模型 -> 控制对象（GKO / GEsO / MSHQ） -> 硬状态（SGAR） -> 验证 / 审计 -> 最终答案
 ```
 
 这些对象不是为了增加流程感，而是把高失配的最终输出问题，转化成更小、更容易让模型发挥局部优势的操作。审计工程（[Audit Engineering](docs/audit-engineering-failure-localization-control-space-writeback.zh-CN.md)）则把每一次失败信号结构化为控制增量，让下一轮搜索不至于重复犯同样的错。
@@ -194,7 +194,7 @@ Tag: 治理与协作
 ## 这个项目接下来会做什么
 
 - **公共解释层**：让不读论文的人也能理解 LLM 平庸、局部对齐和 LLM 卓越。
-- **理论层**：展开六类原始失配、知识治理、GKO / GEO / MSHQ、SGAR 和审计工程，详见 [价值保存结构理论](docs/structural-theory-value-preservation-llm-systems.zh-CN.md) 与 [受治理 LLM 对象模型与接口规范](docs/governed-llm-object-model-interface-specification.zh-CN.md)。
+- **理论层**：展开六类原始失配、知识治理、GKO / GExO / GEsO / MSHQ、SGAR 和审计工程，详见 [价值保存结构理论](docs/structural-theory-value-preservation-llm-systems.zh-CN.md) 与 [受治理 LLM 对象模型与接口规范](docs/governed-llm-object-model-interface-specification.zh-CN.md)。
 - **工程层**：沉淀工具与模板，把控制对象、硬状态 ledger、验证循环和最小人类接入点落到真实任务中。
 - **协作层**：把人从普通处理者上移为价值、权限、品味、预算、证据和责任的治理者，详见 [治理式人机协作](docs/governed-human-ai-collaboration.zh-CN.md) 与 [人类协助型操作失配](docs/human-assist-operational-mismatches.zh-CN.md)。
 
@@ -207,7 +207,7 @@ Tag: 治理与协作
 - **真实任务案例**：哪些任务里 LLM 表面表现很好，但最终价值不稳定。
 - **工程模式**：你如何把任务拆成控制对象、验证对象、评分规约或人类决策点。
 - **失败样本**：哪些 prompt、agent 或 workflow 看起来合理，但最后被证明不可控。
-- **概念修正**：对"LLM 平庸""局部对齐""失配""控制空间""GKO / GEO / MSHQ""SGAR""审计工程"等概念的反例、补充或更清晰表达。
+- **概念修正**：对"LLM 平庸""局部对齐""失配""控制空间""GKO / GExO / GEsO / MSHQ""SGAR""审计工程"等概念的反例、补充或更清晰表达。
 - **工具实现**：能把这些治理动作落到代码、模板、评估器或工作流里的最小组件。
 
 贡献不需要一开始就完整。一个具体失败案例、一段可复现流程、一个更准确的术语，或者一次有证据的反驳，都比泛泛而谈更有价值。

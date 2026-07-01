@@ -29,7 +29,7 @@ Candidate Artifact
   → Task-Specific Control Object
   → Mechanism Attribution
   → Control Delta
-  → GKO / GEO / Verifier / State Update
+  → GKO / GExO / GEsO / Verifier / State Update
   → Regression Guard
   → Defect Ledger
   → Future Routing / Search / Rendering / Revocation
@@ -70,7 +70,7 @@ Candidate Artifact
 - [25. 结论](#25-结论)
 - 附录：[A. 紧凑 Schema](#附录-a紧凑-schema) · [B. 审计 Checklist](#附录-b审计-checklist) · [C. 严重度指南](#附录-c严重度指南) · [D. 关闭状态](#附录-d关闭状态)
 
-本文全篇以缩写形式使用几个受治理对象。最重要的三个是：受治理知识对象（GKO, Governed Knowledge Object），即审计写回的持久控制知识单元；受治理升级对象（GEO, Governed Escalation Object），负责把发现送交人类或更高权威审查；状态治理智能体范式（SGAR, State-Governed Agent Regime），在该状态模型下，审计结论只有在经过已提交的转移之后才具有权威。
+本文全篇以缩写形式使用几个受治理对象。最重要的三个是：受治理知识对象（GKO, Governed Knowledge Object），即审计写回的持久控制知识单元；受治理升级对象（GEsO, Governed Escalation Object），负责把发现送交人类或更高权威审查；状态治理智能体范式（SGAR, State-Governed Agent Regime），在该状态模型下，审计结论只有在经过已提交的转移之后才具有权威。
 
 ---
 
@@ -336,7 +336,7 @@ What guard will check whether the change works?
   "id": "delta.unique_identifier",
   "source_finding_id": "finding that produced the delta",
   "operation": "create | update | weaken | strengthen | revoke | split | merge | reorder | escalate",
-  "target_type": "GKO | GEO | verifier | representation | router | state_record | transition_contract | regression_guard",
+  "target_type": "GKO | GExO | GEsO | verifier | representation | router | state_record | transition_contract | regression_guard",
   "target_id": "object being modified, if any",
   "proposed_change": "precise change description",
   "condition": "when this delta should apply",
@@ -1357,7 +1357,7 @@ defect-ledger entry
   "id": "delta.unique_identifier",
   "source_finding_id": "finding id",
   "operation": "create | update | weaken | strengthen | revoke | split | merge | reorder | escalate",
-  "target_type": "GKO | GEO | verifier | representation | router | state_record | transition_contract | regression_guard",
+  "target_type": "GKO | GExO | GEsO | verifier | representation | router | state_record | transition_contract | regression_guard",
   "target_id": "optional target object",
   "proposed_change": "precise change",
   "condition": "when delta applies",

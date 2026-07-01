@@ -116,7 +116,7 @@ AI 时代更重要的问题变成：
 
 ### 治理记忆
 
-把重复判断保存为受治理知识对象（Governed Knowledge Object，GKO）和受治理升级对象（Governed Escalation Object，GEO）。这样下一次任务不必从头重建规则，政策或偏好变化时也方便削弱、撤销。
+把重复判断保存为受治理知识对象（Governed Knowledge Object，GKO）和受治理升级对象（Governed Escalation Object，GEsO）。这样下一次任务不必从头重建规则，政策或偏好变化时也方便削弱、撤销。
 
 ### 硬状态更新
 

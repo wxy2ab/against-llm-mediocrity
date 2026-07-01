@@ -40,8 +40,8 @@ heroPoints:
 机制层用失配做诊断，治理层用对象做动作。下面四个对象把诊断、动作和人类治理缝合成一条可执行链路，它们对应 [受治理 LLM 对象模型与接口规范](docs/governed-llm-object-model-interface-specification.zh-CN.md) 与 [价值保存结构理论](docs/structural-theory-value-preservation-llm-systems.zh-CN.md)：
 
 - **[GKO（Governed Knowledge Object）](/zh/glossary#gko)**：保存任务特定控制知识（已验证主张、条件、优先级、生命周期、撤销规则）。
-- **[GEO（Governed Escalation Object）](/zh/glossary#geo)**：保存"何时升级、升级给谁、问什么、等待期间能做什么"。
-- **[MSHQ（Minimal Sufficient Human Query）](/zh/glossary#mshq)**：GEO 在一次交互中的实例化，只问恢复自治所需最小变量。
+- **[GEsO（Governed Escalation Object）](/zh/glossary#geso)**：保存"何时升级、升级给谁、问什么、等待期间能做什么"。
+- **[MSHQ（Minimal Sufficient Human Query）](/zh/glossary#mshq)**：GEsO 在一次交互中的实例化，只问恢复自治所需最小变量。
 - **[SGAR（State-Governed Agent Regime）](/zh/glossary#sgar)**：把 plan / action / observation / verification / 人类回答 / 审计发现提交到外部硬状态层，让长程 agent 在被承认的状态里推进。
 
 四者一起把治理从"流程感"转成"对象与协议"。
@@ -56,7 +56,7 @@ heroPoints:
 
 [阅读《状态治理智能体范式（SGAR）》](docs/state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)
 
-升级协议与人类边界由 **[治理式人机协作](/zh/glossary#governed-human-ai-collaboration)** 与 **人类协助型操作失配（五个操作域）** 共同支撑：先问环境，再问人；用 [MSHQ](/zh/glossary#mshq) 提问；用 [GEO](/zh/glossary#geo) 保存重复规则；让长程 agent 在硬状态中恢复自治。
+升级协议与人类边界由 **[治理式人机协作](/zh/glossary#governed-human-ai-collaboration)** 与 **人类协助型操作失配（五个操作域）** 共同支撑：先问环境，再问人；用 [MSHQ](/zh/glossary#mshq) 提问；用 [GEsO](/zh/glossary#geso) 保存重复规则；让长程 agent 在硬状态中恢复自治。
 
 [阅读《治理式人机协作》](docs/governed-human-ai-collaboration.zh-CN.md) · [阅读《人类协助型操作失配》](docs/human-assist-operational-mismatches.zh-CN.md)
 
@@ -152,7 +152,7 @@ Tag: 好坏混在一起，选不出来
 - 角色配置
 - 承诺-回收链
 - 状态转移记录
-- GKO / GEO / MSHQ（治理对象体系）
+- GKO / GEsO / MSHQ（治理对象体系）
 
 好的控制空间通常满足三点：
 
@@ -303,7 +303,7 @@ Tag: 什么模式看起来高级，但经常失败
 4. **边界与时机**：规则是否仍然适用？是否触发了撤销条件？
 5. **协调与控制表示**：人类回答应写入硬状态层，而不是只留在聊天上下文。
 
-这五个域对应 [治理式人机协作](docs/governed-human-ai-collaboration.zh-CN.md) 中的 MSHQ / GEO / 硬状态更新。agent 升级时只用 GEO 模板提问（不替换整个任务），等待期间做可逆的准备工作（候选矩阵、低成本实验、回滚路径），回答回来后提交到硬状态并恢复自治。
+这五个域对应 [治理式人机协作](docs/governed-human-ai-collaboration.zh-CN.md) 中的 MSHQ / GEsO / 硬状态更新。agent 升级时只用 GEsO 模板提问（不替换整个任务），等待期间做可逆的准备工作（候选矩阵、低成本实验、回滚路径），回答回来后提交到硬状态并恢复自治。
 
 ## 一个更实用的工程判断
 

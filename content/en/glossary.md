@@ -218,7 +218,7 @@ If you arrived here from another page, it usually makes sense to jump straight t
 - Current structural statement: [Structural Theory of Value Preservation](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/structural-theory-value-preservation-llm-systems.md)
 - Implementation specification: [Governed LLM Object Model and Interface Specification](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/governed-llm-object-model-interface-specification.md)
 
-**Related terms**: [GKO](#gko) · [GEO](#geo) · [audit engineering](#audit-engineering)
+**Related terms**: [GKO](#gko) · [GExO](#gexo) · [GEsO](#geo) · [audit engineering](#audit-engineering)
 
 <a id="gko"></a>
 ### Governed Knowledge Object (GKO)
@@ -235,16 +235,33 @@ If you arrived here from another page, it usually makes sense to jump straight t
 - Current specification: [Governed LLM Object Model and Interface Specification](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/governed-llm-object-model-interface-specification.md)
 - Site-side overview: [Governance](../engineering)
 
-**Related terms**: [knowledge governance](#knowledge-governance) · [GEO](#geo) · [MSHQ](#mshq)
+**Related terms**: [knowledge governance](#knowledge-governance) · [GExO](#gexo) · [GEsO](#geo) · [MSHQ](#mshq)
 
+<a id="gexo"></a>
+### Governed Execution Object (GExO)
+
+**One-line definition**: a governed object that tracks a task, plan, action, handoff, or workflow item whose execution must be explicitly controlled.
+
+**Full explanation**: a GExO carries execution-side authority. It defines what an execution unit is trying to accomplish, what inputs and outputs matter, what counts as success or failure, who may act, which actions are allowed or forbidden, and which governed knowledge, verifiers, or transition contracts must be satisfied before progress is committed. It is the execution-side counterpart to a GKO.
+
+**Why it matters**: it prevents execution from remaining an implicit narrative. Long-horizon work becomes inspectable, governable, and auditable as an explicit object rather than as a loose plan in chat history.
+
+**Source chain**:
+
+- Current specification: [Governed LLM Object Model and Interface Specification](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/governed-llm-object-model-interface-specification.md)
+- Site-side overview: [Governance](../engineering)
+
+**Related terms**: [GKO](#gko) · [GEsO](#geo) · [SGAR](#sgar)
+
+<a id="geso"></a>
 <a id="geo"></a>
-### Governed Escalation Object (GEO)
+### Governed Escalation Object (GEsO)
 
 **One-line definition**: an object that stores when the system should ask a human, what it should ask, whom it should ask, and what it can still do while waiting.
 
-**Full explanation**: a GEO governs the asking itself. It is not an ad hoc interruption. It objectifies the trigger condition, minimal question, default path, human role, risk level, reversible work while waiting, and revocation conditions. This prevents the system from reacting to uncertainty with either blind action or by handing the whole task back to the human.
+**Full explanation**: a GEsO governs the asking itself. It is not an ad hoc interruption. It objectifies the trigger condition, minimal question, default path, human role, risk level, reversible work while waiting, and revocation conditions. This prevents the system from reacting to uncertainty with either blind action or by handing the whole task back to the human.
 
-**Why it matters**: it turns human intervention from a one-off interruption into a reusable, auditable, evolvable protocol. For long-horizon agents, GEOs are tools for restoring autonomy rather than abandoning it.
+**Why it matters**: it turns human intervention from a one-off interruption into a reusable, auditable, evolvable protocol. For long-horizon agents, GEsOs are tools for restoring autonomy rather than abandoning it.
 
 **Source chain**:
 
@@ -252,14 +269,14 @@ If you arrived here from another page, it usually makes sense to jump straight t
 - Technical supplement: [Human-Assist Operational Mismatches](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/human-assist-operational-mismatches.md)
 - Site-side overview: [Collaboration](../collaboration)
 
-**Related terms**: [MSHQ](#mshq) · [GKO](#gko) · [SGAR](#sgar)
+**Related terms**: [MSHQ](#mshq) · [GKO](#gko) · [GExO](#gexo) · [SGAR](#sgar)
 
 <a id="mshq"></a>
 ### Minimal Sufficient Human Query (MSHQ)
 
 **One-line definition**: the smallest human question that can restore autonomous progress in a concrete interaction.
 
-**Full explanation**: an MSHQ is one concrete instantiation of a GEO. A good MSHQ does not ask "what should I do now?" It isolates the one still-human-governed variable whose answer would unblock the task. It usually offers a small option set, explains what each answer changes, states a default path, and avoids handing the whole task back to the human.
+**Full explanation**: an MSHQ is one concrete instantiation of a GEsO. A good MSHQ does not ask "what should I do now?" It isolates the one still-human-governed variable whose answer would unblock the task. It usually offers a small option set, explains what each answer changes, states a default path, and avoids handing the whole task back to the human.
 
 **Why it matters**: it compresses human-AI collaboration from long low-signal dialogue into minimal intervention on a decisive variable. Humans fill only the part AI cannot reliably supply; AI resumes autonomous work once the answer arrives.
 
@@ -269,7 +286,7 @@ If you arrived here from another page, it usually makes sense to jump straight t
 - Technical supplement: [Human-Assist Operational Mismatches](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/human-assist-operational-mismatches.md)
 - Site-side overview: [Collaboration](../collaboration)
 
-**Related terms**: [GEO](#geo) · [SGAR](#sgar) · [governed human-AI collaboration](#governed-human-ai-collaboration)
+**Related terms**: [GEsO](#geo) · [SGAR](#sgar) · [governed human-AI collaboration](#governed-human-ai-collaboration)
 
 ## Engineering and Collaboration
 
@@ -307,14 +324,14 @@ If you arrived here from another page, it usually makes sense to jump straight t
 - Current main statement: [State-Governed Agent Regime for Governed LLM Systems](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime-for-governed-llm-systems.md)
 - Routing supplement: [Oracle Classification, Audit Agent, and SGAR](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/oracle-classification-audit-agent-sgar-engine-routing.md)
 
-**Related terms**: [state mismatch](#state-mismatch) · [GEO](#geo) · [audit engineering](#audit-engineering)
+**Related terms**: [state mismatch](#state-mismatch) · [GEsO](#geo) · [audit engineering](#audit-engineering)
 
 <a id="governed-human-ai-collaboration"></a>
 ### Governed Human-AI Collaboration
 
 **One-line definition**: organizing AI-human collaboration around control variables rather than around a coarse task split.
 
-**Full explanation**: governed human-AI collaboration does not ask "which tasks belong to AI and which belong to humans?" It asks "which variables can AI process, search, and validate, and which variables require human judgment?" AI should ask the environment, tools, and validators first; only when a genuinely human-governed variable remains should it escalate with an MSHQ or GEO. Humans are no longer the default processors of the whole task, but the governors of value, authority, preference, taste, responsibility, and boundaries.
+**Full explanation**: governed human-AI collaboration does not ask "which tasks belong to AI and which belong to humans?" It asks "which variables can AI process, search, and validate, and which variables require human judgment?" AI should ask the environment, tools, and validators first; only when a genuinely human-governed variable remains should it escalate with an MSHQ or GEsO. Humans are no longer the default processors of the whole task, but the governors of value, authority, preference, taste, responsibility, and boundaries.
 
 **Why it matters**: it gives a more precise answer to what humans should do in an AI workflow. Rather than being pushed down into low-value proofreading, humans move up to governing the variables that probability alone cannot replace.
 
@@ -324,4 +341,4 @@ If you arrived here from another page, it usually makes sense to jump straight t
 - Technical supplement: [Human-Assist Operational Mismatches](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/human-assist-operational-mismatches.md)
 - Site-side overview: [Collaboration](../collaboration)
 
-**Related terms**: [GEO](#geo) · [MSHQ](#mshq) · [SGAR](#sgar)
+**Related terms**: [GEsO](#geo) · [MSHQ](#mshq) · [SGAR](#sgar)

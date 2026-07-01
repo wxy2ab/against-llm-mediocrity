@@ -1569,7 +1569,7 @@ Better delta:
 | Capability routing | routing rule; mode state; trigger boundary GKO |
 | Search / execution | search policy; branch record; verifier contract; checkpoint rule |
 
-因此，机制画像也帮助我们判断：什么应当成为 GKO、受治理升级对象（Governed Escalation Object / GEO）、guard 或硬状态记录。
+因此，机制画像也帮助我们判断：什么应当成为 GKO、受治理升级对象（Governed Escalation Object / GEsO）、guard 或硬状态记录。
 
 ---
 
@@ -2175,6 +2175,6 @@ Search / Execution
 | CapabilityRoutingDelta | 对触发边界、模式、角色或路由器的修复。 |
 | SearchExecutionDelta | 对采样、分支搜索、验证、排序、检查点或执行流程的修复。 |
 | GKO（受治理知识对象 / Governed Knowledge Object） | 把控制知识外化后得到的对象，具有作用域、有证据、可撤销。 |
-| GEO（受治理升级对象 / Governed Escalation Object） | 记录失败应在何时、以何种方式升级给人类或更高权威处理的治理对象。 |
+| GEsO（受治理升级对象 / Governed Escalation Object） | 记录失败应在何时、以何种方式升级给人类或更高权威处理的治理对象。 |
 | SGAR（状态治理智能体范式 / State-Governed Agent Regime） | 区分叙述性上下文与硬状态权威、只提交经过验证的状态转移的机制。 |
 | SGAR commitment | 使修复、动作或状态更新成为权威的硬状态转移。 |

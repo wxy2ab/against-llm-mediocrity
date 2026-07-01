@@ -26,10 +26,13 @@ Here is the vocabulary the site builds on, with a one-line definition for each:
 - **Six primitive mismatches** — A taxonomy of the structural reasons a value-preserving pipeline breaks down: aggregation, support, state, specification, fitting-boundary, and observation-representation.
 - **Knowledge governance** — Separating verified, task-specific control knowledge from generation and storing it as reusable objects.
 - **Governed Knowledge Object (GKO)** — A verified unit of control knowledge that downstream generation can start from, instead of from the model's default probabilities.
-- **Governed Escalation Object (GEO)** — A stored rule for when to ask a human, what to ask, and whom to ask.
+- **Governed Execution Object (GExO)** — A governed execution unit for tasks, plans, actions, and workflow items that must be tracked explicitly.
+- **Governed Escalation Object (GEsO)** — A stored rule for when to ask a human, what to ask, and whom to ask.
 - **Audit engineering** — Treating auditing as an independent layer that localizes failures and writes fixes back into control objects, rather than as a post-hoc scorer.
 - **State-Governed Agent Regime (SGAR)** — An agent design that moves long-horizon execution onto an external hard-state layer, so plans, actions, verification, and escalation become governed state transitions.
 - **Governed human-machine collaboration** — Organizing collaboration around control variables (AI advances the searchable parts; humans govern value, preference, and responsibility) instead of around task splits.
+
+Terminology note: the site now uses `GExO` for `Governed Execution Object` and `GEsO` for `Governed Escalation Object`, to avoid overloading `GEO`.
 
 > **How to Read This Material**
 >
@@ -84,7 +87,7 @@ Earlier drafts kept for reference; superseded by the entries above but still cit
 
 How AI and humans should divide work once structural ceilings are taken seriously.
 
-- Human-assist operational mismatches, MSHQs, and GEOs: [English](docs/human-assist-operational-mismatches.md) · [中文](docs/human-assist-operational-mismatches.zh-CN.md) — The technical supplement on when an agent should escalate and how it restores autonomy afterward, using Minimal Sufficient Human Queries (MSHQ) and Governed Escalation Objects (GEO).
+- Human-assist operational mismatches, MSHQs, and GEsOs: [English](docs/human-assist-operational-mismatches.md) · [中文](docs/human-assist-operational-mismatches.zh-CN.md) — The technical supplement on when an agent should escalate and how it restores autonomy afterward, using Minimal Sufficient Human Queries (MSHQ) and Governed Escalation Objects (GEsO).
 - Practical governed-collaboration framework: [English](docs/governed-human-ai-collaboration.md) · [中文](docs/governed-human-ai-collaboration.zh-CN.md) — The practice framework: AI first queries the environment and builds options and proving grounds, then asks humans only for genuinely human-governed variables.
 - Cognitive discipline for AI: [English](docs/cognitive-discipline-for-ai.md) · [中文](docs/cognitive-discipline-for-ai.zh-CN.md) — The cognitive framework for the human side of using AI.
 - AI collaborative posture: calibrated friction and constructive firmness: [English](docs/ai-collaborative-posture-calibrated-friction-constructive-firmness.md) · [中文](docs/ai-collaborative-posture-calibrated-friction-constructive-firmness.zh-CN.md) — How an assistant should push back with calibrated friction instead of agreeing by default.

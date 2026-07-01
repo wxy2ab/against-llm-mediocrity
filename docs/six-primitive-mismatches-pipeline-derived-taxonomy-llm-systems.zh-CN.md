@@ -49,7 +49,7 @@ S_world
 
 主理论文档提出总论点：高价值 LLM 系统不只是生成系统，而是价值保存系统。任务价值必须穿过观测、表征、路由、支持、聚合、评价、审计和状态转移而不被破坏。
 
-对象规范定义对象层：受治理知识对象（Governed Knowledge Object / GKO）、受治理升级对象（Governed Escalation Object / GEO）、Audit Finding、Control Delta、Regression Guard、Defect Ledger、State Record、Transition Contract 和 Revocation Rule。
+对象规范定义对象层：受治理知识对象（Governed Knowledge Object / GKO）、受治理执行对象（Governed Execution Object / GExO）、Audit Finding、Control Delta、Regression Guard、Defect Ledger、State Record、Transition Contract 和 Revocation Rule。
 
 审计工程文档定义失败如何被定位并写回控制空间。
 
@@ -1680,7 +1680,7 @@ SGAR state: Objective update committed with revocation trigger.
   "source_finding": "finding.id",
   "target_station": "observation_representation | state | routing | support | aggregation | specification",
   "change_type": "add | revise | weaken | revoke | split | merge | escalate",
-  "object_target": "GKO | GEO | Verifier | StateRecord | TransitionContract | RegressionGuard",
+  "object_target": "GKO | GExO | Verifier | StateRecord | TransitionContract | RegressionGuard",
   "before": "current rule, object, or process",
   "after": "proposed revised rule, object, or process",
   "scope": "where the change applies",

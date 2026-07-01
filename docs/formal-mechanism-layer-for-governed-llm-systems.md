@@ -1584,7 +1584,7 @@ Mechanism profiles determine which kind of governed knowledge is needed.
 | Capability routing | routing rule; mode state; trigger boundary GKO |
 | Search / execution | search policy; branch record; verifier contract; checkpoint rule |
 
-Mechanism profiles therefore help determine what should become a GKO, a Governed Escalation Object (GEO), a guard, or a hard-state record.
+Mechanism profiles therefore help determine what should become a GKO, a Governed Escalation Object (GEsO), a guard, or a hard-state record.
 
 ---
 
@@ -2193,6 +2193,6 @@ Search / Execution
 | CapabilityRoutingDelta | Repair to trigger boundaries, modes, roles, or routers. |
 | SearchExecutionDelta | Repair to sampling, branch search, verification, ranking, checkpoints, or execution. |
 | GKO (Governed Knowledge Object) | Externalized control knowledge represented as a scoped, evidenced, revocable governance object. |
-| GEO (Governed Escalation Object) | Governance object that records when and how a failure should be escalated for human or higher-authority handling. |
+| GEsO (Governed Escalation Object) | Governance object that records when and how a failure should be escalated for human or higher-authority handling. |
 | SGAR (State-Governed Agent Regime) | Regime that distinguishes narrative context from hard-state authority and commits only verified state transitions. |
 | SGAR commitment | Hard-state transition that makes a repair, action, or state update authoritative. |

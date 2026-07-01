@@ -218,7 +218,7 @@ showInNav: false
 - 当前结构主文：[价值保存结构理论](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/structural-theory-value-preservation-llm-systems.zh-CN.md)
 - 实现规范：[受治理 LLM 对象模型与接口规范](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/governed-llm-object-model-interface-specification.zh-CN.md)
 
-**相关术语**：[GKO](#gko) · [GEO](#geo) · [审计工程](#audit-engineering)
+**相关术语**：[GKO](#gko) · [GExO](#gexo) · [GEsO](#geo) · [审计工程](#audit-engineering)
 
 <a id="gko"></a>
 ### 受治理知识对象（GKO）
@@ -235,16 +235,33 @@ showInNav: false
 - 当前规范主文：[受治理 LLM 对象模型与接口规范](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/governed-llm-object-model-interface-specification.zh-CN.md)
 - 站点综述：[治理](../engineering)
 
-**相关术语**：[知识治理](#knowledge-governance) · [GEO](#geo) · [MSHQ](#mshq)
+**相关术语**：[知识治理](#knowledge-governance) · [GExO](#gexo) · [GEsO](#geo) · [MSHQ](#mshq)
 
+<a id="gexo"></a>
+### 受治理执行对象（GExO）
+
+**一句话定义**：保存任务、计划、行动、交接或工作流项执行约束的治理对象。
+
+**完整解释**：GExO 承载的是执行侧权威。它定义这个执行单元要完成什么、输入输出是什么、什么算成功或失败、谁可以行动、哪些动作被允许或禁止，以及提交进展前必须满足哪些 GKO、验证器或转移契约。它是 GKO 在执行层的对应物。
+
+**为什么重要**：它让执行不再只是聊天里的叙述。长程任务可以被显式追踪、治理和审计，而不是作为松散计划悬在上下文中。
+
+**出处链路**：
+
+- 当前规范主文：[受治理 LLM 对象模型与接口规范](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/governed-llm-object-model-interface-specification.zh-CN.md)
+- 站点综述：[治理](../engineering)
+
+**相关术语**：[GKO](#gko) · [GEsO](#geo) · [SGAR](#sgar)
+
+<a id="geso"></a>
 <a id="geo"></a>
-### 受治理升级对象（GEO）
+### 受治理升级对象（GEsO）
 
 **一句话定义**：保存“什么时候该问人、问什么、问谁、等待期间还能做什么”的升级协议对象。
 
-**完整解释**：GEO 负责治理“问”这个动作本身。它不是临时起意的提问，而是把触发条件、最小问题、默认值、人类角色、风险等级、等待期间的自治工作、撤销条件等一起对象化。这样，系统就不会在遇到不确定性时不是盲冲，就是把整个任务甩回给人。
+**完整解释**：GEsO 负责治理“问”这个动作本身。它不是临时起意的提问，而是把触发条件、最小问题、默认值、人类角色、风险等级、等待期间的自治工作、撤销条件等一起对象化。这样，系统就不会在遇到不确定性时不是盲冲，就是把整个任务甩回给人。
 
-**为什么重要**：它让人类接入从一次性打断，变成可复用、可审计、可演进的协议。对长程 agent 来说，GEO 是恢复自治而不是放弃自治的工具。
+**为什么重要**：它让人类接入从一次性打断，变成可复用、可审计、可演进的协议。对长程 agent 来说，GEsO 是恢复自治而不是放弃自治的工具。
 
 **出处链路**：
 
@@ -252,14 +269,14 @@ showInNav: false
 - 技术补充：[人类协助型操作失配](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/human-assist-operational-mismatches.zh-CN.md)
 - 站点综述：[协作](../collaboration)
 
-**相关术语**：[MSHQ](#mshq) · [GKO](#gko) · [SGAR](#sgar)
+**相关术语**：[MSHQ](#mshq) · [GKO](#gko) · [GExO](#gexo) · [SGAR](#sgar)
 
 <a id="mshq"></a>
 ### 最小充分人类问题（MSHQ）
 
 **一句话定义**：在一次具体交互里，只为恢复自治推进而向人提出的最小问题。
 
-**完整解释**：MSHQ 是 GEO 的一次实例化。好的 MSHQ 不会问“我现在该怎么办”，而会精准隔离那个仍由人治理、且一旦得到答案就能解除阻塞的变量。它通常给出少量选项、解释不同答案会改变什么、说明默认路径，并避免把整个任务重新丢回给人。
+**完整解释**：MSHQ 是 GEsO 的一次实例化。好的 MSHQ 不会问“我现在该怎么办”，而会精准隔离那个仍由人治理、且一旦得到答案就能解除阻塞的变量。它通常给出少量选项、解释不同答案会改变什么、说明默认路径，并避免把整个任务重新丢回给人。
 
 **为什么重要**：它把“人机协作”从大段低效对话，压缩成对关键变量的最小干预。人类只补 AI 不能可靠提供的部分，AI 则在回答回来后继续自治推进。
 
@@ -269,7 +286,7 @@ showInNav: false
 - 技术补充：[人类协助型操作失配](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/human-assist-operational-mismatches.zh-CN.md)
 - 站点综述：[协作](../collaboration)
 
-**相关术语**：[GEO](#geo) · [SGAR](#sgar) · [治理式人机协作](#governed-human-ai-collaboration)
+**相关术语**：[GEsO](#geo) · [SGAR](#sgar) · [治理式人机协作](#governed-human-ai-collaboration)
 
 ## 工程与协作
 
@@ -307,14 +324,14 @@ showInNav: false
 - 当前主文：[面向受治理 LLM 系统的状态治理智能体范式](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)
 - 引擎路由补充：[Oracle、Audit Agent 与 SGAR](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/oracle-classification-audit-agent-sgar-engine-routing.zh-CN.md)
 
-**相关术语**：[状态失配](#state-mismatch) · [GEO](#geo) · [审计工程](#audit-engineering)
+**相关术语**：[状态失配](#state-mismatch) · [GEsO](#geo) · [审计工程](#audit-engineering)
 
 <a id="governed-human-ai-collaboration"></a>
 ### 治理式人机协作
 
 **一句话定义**：不围绕任务分工，而围绕控制变量组织 AI 与人的协作。
 
-**完整解释**：治理式人机协作关心的不是“哪些任务给 AI、哪些任务给人”，而是“哪些变量可以由 AI 处理、搜索、验证，哪些变量必须由人来裁决”。AI 应该先问环境、问工具、问验证器，再在确实遇到人类治理变量时，用 MSHQ 和 GEO 做最小升级。人类不再是默认执行者，而是价值、权限、偏好、品味、责任与边界的治理者。
+**完整解释**：治理式人机协作关心的不是“哪些任务给 AI、哪些任务给人”，而是“哪些变量可以由 AI 处理、搜索、验证，哪些变量必须由人来裁决”。AI 应该先问环境、问工具、问验证器，再在确实遇到人类治理变量时，用 MSHQ 和 GEsO 做最小升级。人类不再是默认执行者，而是价值、权限、偏好、品味、责任与边界的治理者。
 
 **为什么重要**：它为“人该在 AI 时代做什么”给出更精细的答案。不是把人退回到低价值校对工，而是把人上移到真正不能被概率生成替代的变量治理位置。
 
@@ -324,4 +341,4 @@ showInNav: false
 - 技术补充：[人类协助型操作失配](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/human-assist-operational-mismatches.zh-CN.md)
 - 站点综述：[协作](../collaboration)
 
-**相关术语**：[GEO](#geo) · [MSHQ](#mshq) · [SGAR](#sgar)
+**相关术语**：[GEsO](#geo) · [MSHQ](#mshq) · [SGAR](#sgar)

@@ -26,7 +26,7 @@ Good collaboration is neither front-loading a long questionnaire nor letting the
 ```text
 AI: Process → Search → Structure → Simulate → Verify
 Human: Govern → Set values → Authorize → Judge taste → Own responsibility
-System: turn reusable judgments into [GKOs](/glossary#gko) / [GEOs](/glossary#geo) and hard-state transitions
+System: turn reusable judgments into [GKOs](/glossary#gko) / [GEsOs](/glossary#geso) and hard-state transitions
 ```
 
 **In one sentence: AI should move the task to the point where only human-governed variables remain; humans should resolve variables that cannot be reliably obtained from environment, feedback, tools, or simulation; the system should commit the resolved variable into hard state rather than leave it as chat history.**
@@ -48,7 +48,7 @@ Which missing control variable prevents reliable continuation? The blocker may b
 
 ### Escalation Protocol
 
-What is the smallest human contribution that restores autonomy? This is where [Minimal Sufficient Human Queries (MSHQs)](/glossary#mshq) and [Governed Escalation Objects (GEOs)](/glossary#geo) belong.
+What is the smallest human contribution that restores autonomy? This is where [Minimal Sufficient Human Queries (MSHQs)](/glossary#mshq) and [Governed Escalation Objects (GEsOs)](/glossary#geso) belong.
 ::::
 
 ## First Ask Where the Variable Comes From
@@ -161,11 +161,11 @@ If you do not specify, I will ______ because it is the safest or most reversible
 "The main unresolved risk is temporal leakage. Please confirm that all features are available before prediction time, or provide an example or test result."
 :::
 
-## [Governed Escalation Objects](/glossary#geo): Governing When to Ask
+## [Governed Escalation Objects](/glossary#geso): Governing When to Ask
 
-A [Governed Knowledge Object (GKO)](/glossary#gko) governs what the AI should know or obey. A [GEO](/glossary#geo) governs the asking itself: when the AI should ask a human, what it should ask, whom it should ask, and what to do safely if no answer arrives.
+A [Governed Knowledge Object (GKO)](/glossary#gko) governs what the AI should know or obey. A [GEsO](/glossary#geso) governs the asking itself: when the AI should ask a human, what it should ask, whom it should ask, and what to do safely if no answer arrives.
 
-A GEO should specify:
+A GEsO should specify:
 
 - Trigger condition: when must the agent escalate?
 - Minimal question: what exact variable is needed?
@@ -175,7 +175,7 @@ A GEO should specify:
 - Autonomous work while waiting: what drafts, tests, or analysis can continue?
 - Revocation trigger: when does this escalation rule stop applying?
 
-When a human answer turns out to be durable, it can graduate into a GKO — for example, "Any external commitment for this client requires explicit approval before sending." The reverse also holds: a GKO may trigger a GEO when its condition reappears in a future task.
+When a human answer turns out to be durable, it can graduate into a GKO — for example, "Any external commitment for this client requires explicit approval before sending." The reverse also holds: a GKO may trigger a GEsO when its condition reappears in a future task.
 
 For long-horizon agents, the answer should also update the agent's hard state: which fact was confirmed, which boundary now applies, which authorization was granted or denied, and which transition is now allowed. This is the collaboration-side link to the [State-Governed Agent Regime (SGAR)](/glossary#sgar).
 
@@ -189,11 +189,11 @@ Putting the pieces together, a single governed collaboration loop runs in roughl
 4. Query the environment and available tools.
 5. Build proving grounds: scenarios, counterfactuals, stakeholder views, red-team cases, and edge cases.
 6. Identify the remaining human-governed variable.
-7. Issue an MSHQ or instantiate a GEO.
+7. Issue an MSHQ or instantiate a GEsO.
 8. Continue safe reversible work while waiting.
 9. Validate the answer, resume autonomous work, and verify the result.
 10. Commit resolved variables into hard state.
-11. Preserve reusable judgment as GKOs or GEOs, and revoke stale ones when conditions change.
+11. Preserve reusable judgment as GKOs or GEsOs, and revoke stale ones when conditions change.
 
 ## What Humans Should Govern
 
@@ -223,7 +223,7 @@ Good human-AI collaboration is not measured by minimizing all human involvement.
 - Is the question minimal, specific, and answerable?
 - After the human answers, can the AI resume autonomous work?
 - Does the AI avoid unauthorized external actions?
-- Are reusable judgments stored as [GKOs](/glossary#gko) or [GEOs](/glossary#geo) instead of disappearing into the chat?
+- Are reusable judgments stored as [GKOs](/glossary#gko) or [GEsOs](/glossary#geso) instead of disappearing into the chat?
 - Can the agent recover the recognized state after interruption?
 
 That is the move from chat-style use to governed collaboration: AI handles processing, search, and expression; humans govern the variables that probability alone cannot replace.

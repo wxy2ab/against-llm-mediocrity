@@ -9,13 +9,13 @@
 
 本文定义一个用于受治理 LLM 系统的统一对象模型。它是《LLM 系统中价值保存的结构理论》的实现侧配套规范。该结构理论识别了六类原始失配：观测-表征失配、状态失配、拟合边界失配、支持失配、聚合失配和规格失配，并主张高价值 LLM 系统需要在观测、表征、能力路由、候选支持、聚合、评估、审计和状态转移之间保存任务价值。
 
-本规范定义把该理论落到系统实现所需的对象和接口。它把 **受治理知识对象**（GKO）、**受治理执行对象**（GEO）、**审计发现**、**控制增量**、**回归护栏**、**缺陷账本**、**状态记录**、**转移契约**、**验证器对象** 和 **证据对象** 统一到一个生命周期中。核心流是：
+本规范定义把该理论落到系统实现所需的对象和接口。它把 **受治理知识对象**（GKO）、**受治理执行对象**（GExO）、**审计发现**、**控制增量**、**回归护栏**、**缺陷账本**、**状态记录**、**转移契约**、**验证器对象** 和 **证据对象** 统一到一个生命周期中。核心流是：
 
 ```text
 Candidate Artifact
   → Audit Finding
   → Control Delta
-  → GKO / GEO / Verifier / State Update
+  → GKO / GExO / Verifier / State Update
   → Regression Guard
   → Defect Ledger
   → Hard State Commitment
@@ -188,7 +188,7 @@ Collaboration Layer
   Governed Execution Objects and human-AI coordination records
 ```
 
-这些层不是分离的产品，而是同一生命周期中的不同角色。诊断层识别的失败应能产生审计发现；审计发现应产生控制增量；控制增量可能更新 GKO、GEO、验证器、护栏或状态记录；经验证的更新可以成为已提交的状态转移。
+这些层不是分离的产品，而是同一生命周期中的不同角色。诊断层识别的失败应能产生审计发现；审计发现应产生控制增量；控制增量可能更新 GKO、GExO、验证器、护栏或状态记录；经验证的更新可以成为已提交的状态转移。
 
 ---
 
@@ -215,7 +215,7 @@ Collaboration Layer
 Artifact
   → AuditFinding
   → ControlDelta
-  → {GKO | GEO | VerifierObject | StateRecord | TransitionContract}
+  → {GKO | GExO | VerifierObject | StateRecord | TransitionContract}
   → RegressionGuard
   → DefectLedgerEntry
   → StateTransition
@@ -232,7 +232,7 @@ Artifact
 ```json
 {
   "id": "object.unique_identifier",
-  "object_kind": "gko | geo | audit_finding | control_delta | regression_guard | defect_ledger_entry | state_record | transition_contract | verifier | evidence",
+  "object_kind": "gko | gexo | audit_finding | control_delta | regression_guard | defect_ledger_entry | state_record | transition_contract | verifier | evidence",
   "version": "0.1.0",
   "status": "draft | proposed | active | suspended | superseded | deprecated | revoked | archived",
   "created_at": "ISO-8601 timestamp or logical clock",
@@ -390,13 +390,13 @@ audit trail
 
 ## 7. 受治理执行对象
 
-**受治理执行对象**（Governed Execution Object，GEO）表示必须被跟踪和治理的任务、计划、行动、协作单元或工作流项。
+**受治理执行对象**（Governed Execution Object，GExO）表示必须被跟踪和治理的任务、计划、行动、协作单元或工作流项。
 
-GKO 治理知识；GEO 治理执行。
+GKO 治理知识；GExO 治理执行。
 
-### 7.1 GEO 类型
+### 7.1 GExO 类型
 
-推荐 `geo_type` 值：
+推荐 `gexo_type` 值：
 
 ```text
 task
@@ -412,15 +412,15 @@ collaboration_contract
 artifact_request
 ```
 
-### 7.2 GEO Schema
+### 7.2 GExO Schema
 
 ```json
 {
-  "id": "geo.unique_identifier",
-  "object_kind": "geo",
+  "id": "gexo.unique_identifier",
+  "object_kind": "gexo",
   "version": "0.1.0",
   "status": "draft | proposed | active | blocked | completed | failed | revoked | archived",
-  "geo_type": "task | subtask | plan | action | handoff | review_request | tool_call | human_decision | workflow_stage | collaboration_contract | artifact_request",
+  "gexo_type": "task | subtask | plan | action | handoff | review_request | tool_call | human_decision | workflow_stage | collaboration_contract | artifact_request",
   "objective": "what this execution object is intended to accomplish",
   "inputs": ["object.id or artifact reference"],
   "outputs_expected": ["expected artifacts or state changes"],
@@ -441,7 +441,7 @@ artifact_request
 }
 ```
 
-### 7.3 GEO 示例：Text-to-SQL 候选修复
+### 7.3 GExO 示例：Text-to-SQL 候选修复
 
 该示例把“SQL 可执行但意外返回空结果”的修复建模为一个 subtask。它限制可用动作，禁止无语义依据地删除全部过滤条件，并要求执行验证器和语义审计通过后才能提交状态。
 
@@ -1049,7 +1049,7 @@ hard object with valid mechanical evidence
 {
   "operation": "propose_object",
   "input": {
-    "object_kind": "gko | geo | audit_finding | control_delta | regression_guard | state_record | transition_contract | verifier | evidence",
+    "object_kind": "gko | gexo | audit_finding | control_delta | regression_guard | state_record | transition_contract | verifier | evidence",
     "object_payload": {},
     "source_refs": ["object.id"]
   },
@@ -1213,7 +1213,7 @@ hard object with valid mechanical evidence
 {
   "operation": "query_governed_context",
   "input": {
-    "task_ref": "geo.id or task descriptor",
+    "task_ref": "gexo.id or task descriptor",
     "state_ref": "state.id",
     "artifact_type": "string",
     "capability": "string or null",
@@ -1221,7 +1221,7 @@ hard object with valid mechanical evidence
   },
   "output": {
     "gko_refs": ["gko.id"],
-    "geo_refs": ["geo.id"],
+    "gexo_refs": ["gexo.id"],
     "guard_refs": ["guard.id"],
     "verifier_refs": ["verifier.id"],
     "state_refs": ["state.id"]
@@ -1329,7 +1329,7 @@ State records cite evidence and verifier results.
 
 ```text
 Standard Profile objects
-GEO
+GExO
 Transition Contract
 State Transition events
 Rollback records
@@ -1354,7 +1354,7 @@ Transition contracts define precondition, observation, verifier, commit conditio
 | 观测-表征 | Evidence Object、representation GKO、schema/value binding GKO | 改变观测通道、添加表征 schema、要求工具检查 | 变量存在性检查、值落地检查、原始日志可用性检查 |
 | 状态 | State hypothesis GKO、State Record、Transition Contract | 添加状态区分器、分支策略、要求澄清 | 状态消歧检查、转移一致性检查 |
 | 拟合边界 | Routing Rule GKO、能力边界测试 | 改变 router、添加激活/抑制条件 | 路由检查、边界扰动测试 |
-| 支持 | Search policy GKO、candidate expansion GEO | 扩展候选集合、添加稀有结构生成器 | 候选覆盖检查、低支持模式检查 |
+| 支持 | Search policy GKO、candidate expansion GExO | 扩展候选集合、添加稀有结构生成器 | 候选覆盖检查、低支持模式检查 |
 | 聚合 | Composition Rule GKO、依赖图、artifact verifier | 添加全局不变量、改变渲染顺序、执行依赖 | 不变量检查、非局部一致性检查 |
 | 规格 | Rubric GKO、success condition GKO、人类判断证据 | 修订 rubric、添加反例、改变评估器 | rubric 反例检查、代理风险检查 |
 
@@ -1636,7 +1636,7 @@ Which deltas were applied without rollback plans?
 [ ] Transition Contracts define precondition, observation schema, verifier, commit condition, and rollback condition.
 [ ] Context narrative alone cannot commit state.
 [ ] Rollback or dispute paths exist for committed state.
-[ ] GEOs track long-horizon tasks, actions, handoffs, and success conditions.
+[ ] GExOs track long-horizon tasks, actions, handoffs, and success conditions.
 ```
 
 ---
@@ -1647,7 +1647,7 @@ Which deltas were applied without rollback plans?
 
 ```text
 gko
-geo
+gexo
 evidence
 audit_finding
 control_delta

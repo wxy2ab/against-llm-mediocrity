@@ -44,7 +44,7 @@ Core fields include applicability conditions, assertion, evidence strength, prio
 
 ### Escalation Workbench
 
-A workflow surface for agents that should keep moving without taking unauthorized action. Inputs are task state, blocker variable, risk level, and reversible work. Outputs are Minimal Sufficient Human Queries (MSHQs) or Governed Escalation Objects (GEOs).
+A workflow surface for agents that should keep moving without taking unauthorized action. Inputs are task state, blocker variable, risk level, and reversible work. Outputs are Minimal Sufficient Human Queries (MSHQs) or Governed Escalation Objects (GEsOs).
 
 Core fields include trigger condition, question template, options, safe default, human role, autonomous work allowed while waiting, answer validation, and revocation trigger. The success criterion is fewer useless interruptions while preserving hard boundaries around authorization, privacy, finance, law, reputation, and deployment.
 
@@ -65,6 +65,6 @@ Core objects include diagnostic questions, mismatch evidence, recommended interv
 
 - Does the tool reduce repeated output-space sampling on high-mismatch tasks?
 - Do stored GKOs improve later outputs without becoming stale or over-general?
-- Do GEOs reduce unnecessary interruptions while preserving hard governance boundaries?
+- Do GEsOs reduce unnecessary interruptions while preserving hard governance boundaries?
 - Can users see why the system asked a human, used a tool, or revoked a rule?
 - Do mismatch diagnostics predict which intervention works, rather than merely explaining failure after the fact?

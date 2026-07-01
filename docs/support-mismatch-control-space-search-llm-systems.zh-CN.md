@@ -17,7 +17,7 @@
 
 - **LLM** —— Large Language Model，大语言模型。
 - **GKO** —— 受治理知识对象（Governed Knowledge Object）：写回受治理系统、带作用域且可撤销的知识产物。
-- **GEO** —— 受治理升级对象（Governed Escalation Object）：把某个案例路由去升级处理的受治理记录。
+- **GEsO** —— 受治理升级对象（Governed Escalation Object）：把某个案例路由去升级处理的受治理记录。
 - **SGAR** —— 状态治理智能体范式（State-Governed Agent Regime）：面向长程 agent 的硬状态运行时治理层。
 - **RLHF / DPO** —— 基于人类反馈的强化学习（RLHF）／直接偏好优化（DPO），即两类学习组件的训练方法。
 
@@ -584,7 +584,7 @@ claim → mechanism → boundary condition → counterexample → refined claim
 5. Track coverage and diversity structurally, not stylistically.
 6. Protect promising low-probability candidates from premature pruning.
 7. Use verifiers or audits to recognize value.
-8. Convert successful structures into GKOs, GEOs, or state records.
+8. Convert successful structures into GKOs, GExOs, GEsOs, or state records.
 9. Add support regression guards.
 10. Update future routing and search policies.
 ```
