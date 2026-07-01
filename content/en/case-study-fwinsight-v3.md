@@ -48,7 +48,7 @@ Local successes across many versions do not automatically become regeneration ru
 ### State Mismatch
 
 Experiences have lifecycle state. Claims that were once useful, later decayed, or already refuted cannot be mixed with current live claims when guiding regeneration.
-::::
+:::
 
 The case is therefore not about whether an LLM can write a factor framework. It is about how the system decides which experiences deserve to guide the next generation step.
 
@@ -60,7 +60,7 @@ It reads existing framework versions, performance metrics, and V2 claims. It doe
 
 In other words, a claim survives not because it sounds right, but because it actually cuts the sample distribution.
 
-The pipeline below shows how a candidate experience moves from raw samples to a vetted hard experience. (The distribution tests are standard statistical comparisons: MWU and KS check whether two groups differ, Levene checks for a difference in spread, and q90 compares the 90th-percentile tail.)
+The pipeline below shows how a candidate experience moves from raw samples to a vetted hard experience. (The distribution tests are standard statistical comparisons: Mann–Whitney U (MWU) and Kolmogorov–Smirnov (KS) check whether two groups differ, Levene checks for a difference in spread, and q90 compares the 90th-percentile tail.)
 
 <div class="process-flow" aria-label="FW-Insight V3 hard-experience pipeline">
   <section class="process-phase">
@@ -107,7 +107,7 @@ If the high-realization group performs worse, the experience is not simply disca
 ### Maturity Filtering
 
 Live, decayed, and refuted claims must be separated. Only currently valid experience should constrain the next regeneration step.
-::::
+:::
 
 That is the definition of hard experience here: not experience that is more eloquent, but experience that changes a distribution, exposes directionality, and survives the current-state filter.
 
@@ -173,7 +173,7 @@ Experience is not permanent truth. V3 uses a maturity filter to separate Observe
 ### Fitting Boundary: Do Not Bind to One Explanation
 
 A repeated claim, high utility score, or elegant factor story can overfit the historical sample. V3 requires evidence groups, maturity states, and distribution-change checks before a claim can guide future generation.
-::::
+:::
 
 ## Relation to the Other Cases
 

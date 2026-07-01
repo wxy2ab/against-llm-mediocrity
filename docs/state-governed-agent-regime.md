@@ -9,9 +9,13 @@
 
 ## Abstract
 
-State-Governed Agent Regime, or **SGAR**, names the governance regime in which an agent's operative state is externalized, verifiable, updateable, recoverable, and authoritative outside the LLM context. The central claim is simple: an agent is not merely an LLM that calls tools. A reliable long-horizon agent is a system that acts in state and advances goals through governed state transitions.
+State-Governed Agent Regime, or **SGAR**, names the governance regime in which an agent's operative state is externalized, verifiable, updatable, recoverable, and authoritative outside the LLM context.
 
-LLM context can describe state, remember state, summarize state, and simulate continuity. But context is not, by itself, a state authority. It is a narrative workspace. SGAR moves the basis of agent operation from context-maintained narrative to hard state: a governance layer that decides what the system currently recognizes, which actions are admissible, what evidence can validate progress, and whether a task has actually advanced.
+The central claim is simple: an agent is not merely an LLM that calls tools. A reliable long-horizon agent is a system that acts in state and advances goals through governed state transitions.
+
+LLM context can describe state, remember state, summarize state, and simulate continuity. But context is not, by itself, a state authority. It is a narrative workspace.
+
+SGAR moves the basis of agent operation from context-maintained narrative to hard state: a governance layer that decides what the system currently recognizes, which actions are admissible, what evidence can validate progress, and whether a task has actually advanced.
 
 SGAR does not claim to create metaphysically true causality. Its value is more operational and more testable: it creates an **operational scene** in which actions obtain task meaning, consequences become observable state differences, and long-horizon behavior becomes auditable, recoverable, and governable.
 
@@ -21,7 +25,7 @@ The core claim of SGAR is:
 
 > Hard state establishes the operational scene; the scene gives action task meaning; action obtains causal position through state transition; the agent gains governable long-horizon behavior through the state-action-result chain.
 
-Without hard state, an agent can still produce agent-like behavior: it may plan, call tools, revise drafts, run loops, and explain its progress. But if the authority for "where we are," "what is true," "what has been completed," and "what may happen next" lives only inside the LLM's current context, then the system remains a sophisticated LLM application rather than a reliable long-horizon action system.
+Without hard state, an agent can still produce agent-like behavior: it may plan, call tools, revise drafts, run loops, and explain its progress. But if the authority for "where we are," "what is true," "what has been completed," and "what may happen next" lives only inside the LLM's current context, the system remains a sophisticated LLM application rather than a reliable long-horizon action system.
 
 SGAR changes the basic runtime question from:
 
@@ -41,7 +45,7 @@ and which state transition may be committed?
 
 An LLM is stateless in the strict operational sense. It receives a context window and produces a continuation. It can represent prior facts and commitments in that context, but those representations have no independent authority once the context is rewritten, summarized, truncated, contradicted, or interpreted differently.
 
-The decisive issue is not whether an LLM can *simulate* state. It often can. The issue is where state authority lives.
+The decisive issue is not whether an LLM can *simulate* state — it often can. The issue is where state authority lives.
 
 In a context-centric agent, the LLM is asked to be all of these at once:
 
@@ -53,7 +57,7 @@ In a context-centric agent, the LLM is asked to be all of these at once:
 - acceptor;
 - governor.
 
-That role fusion creates predictable failures: false completion, self-rationalization, forgotten constraints, goal substitution, unstable phase recognition, and action loops that look busy but do not reliably advance the task.
+That role fusion creates predictable failures: false completion, self-rationalization, forgotten constraints, goal substitution, unstable phase recognition, and action loops that look busy without reliably advancing the task.
 
 SGAR separates authority:
 
@@ -150,27 +154,27 @@ State drift occurs when the agent's implied position changes without a governed 
 - forgetting that a constraint still applies;
 - carrying forward a stale assumption after new evidence has contradicted it.
 
-Longer context does not solve this by itself. More history can produce more material for reinterpretation.
+Longer context does not solve this by itself. More history only provides more material for reinterpretation.
 
 ### 6.2 State Oscillation
 
-State oscillation occurs when the agent repeatedly switches among interpretations, stages, or priorities because there is no external anchor. The agent appears active but keeps rediscovering where it is.
+State oscillation occurs when the agent repeatedly switches among interpretations, stages, or priorities because there is no external anchor. The agent appears active, yet keeps rediscovering where it is.
 
 Hard state gives the system a stable task skeleton. The agent does not have to infer from the transcript who it is, where it is, and what has been recognized. It reads the current governance state and acts inside it.
 
 ### 6.3 Performative Action
 
-Without state uptake, action becomes performance. Tool calls, plans, summaries, audits, and explanations may look like work, but the system cannot tell whether they changed the recognized task state.
+Without state uptake, action becomes performance. Tool calls, plans, summaries, audits, and explanations may look like work, but the system cannot tell whether they actually changed the recognized task state.
 
 SGAR requires actions to be interpreted through state transitions. If no transition is possible, the action should be recorded as exploration, failed attempt, blocked attempt, or irrelevant activity rather than silently absorbed as progress.
 
 ### 6.4 Role Confusion
 
-When the LLM acts as both operator and final acceptor, it has an incentive to accept its own story of progress. SGAR removes final state authority from the same context that generated the action.
+When the LLM acts as both operator and final acceptor, it has an incentive to accept its own narrative of progress. SGAR removes final state authority from the same context that generated the action.
 
 ## 7. Research Agents Need SGAR
 
-Research tasks make SGAR especially important because uncertainty is not a temporary defect. It is the work itself.
+Research tasks make SGAR especially important because uncertainty is not a temporary defect — it is the work itself.
 
 Research agents must govern:
 
@@ -185,13 +189,13 @@ Research agents must govern:
 - disputed points;
 - next research duties.
 
-Without hard state, a research agent easily forgets failed routes, upgrades weak evidence into strong claims, treats hypotheses as facts, repeats experiments, ignores negative results, or over-rationalizes the current narrative to preserve continuity.
+Without hard state, a research agent easily forgets failed routes, upgrades weak evidence into strong claims, treats hypotheses as facts, repeats similar experiments, ignores negative results, or over-rationalizes the current narrative to preserve continuity.
 
 SGAR does not mechanize research into a rigid workflow. It lets uncertainty be governed rather than forgotten.
 
 ## 8. Causal Legibility, Not Guaranteed True Causality
 
-SGAR should not be overstated as a guarantee of "true causality." A hard-state record can still be incomplete, wrongly designed, poorly observed, or attached to a misleading validator.
+SGAR should not be overstated as a guarantee of "true causality." A hard-state record can still be incomplete, poorly designed, insufficiently observed, or attached to a misleading validator.
 
 The stronger and safer claim is:
 
@@ -211,11 +215,11 @@ and ask:
 - Which commitments or obligations changed?
 - Can the chain be replayed, audited, rolled back, or contested?
 
-This is operational or governed causality. It does not prove the complete external causal structure of the world, but it gives the agent a traceable causal position inside the task.
+This is operational causality — or governed causality. It does not prove the complete external causal structure of the world, but it gives the agent a traceable causal position inside the task.
 
 ## 9. Conditional Reliability Claim
 
-SGAR also should not be stated as "making prediction inherently more reliable." It improves the conditional reliability of next-action selection when the state layer is well designed.
+SGAR also should not be described as "making prediction inherently more reliable." It improves the conditional reliability of next-action selection when the state layer is well designed.
 
 The reliability gain depends on:
 
@@ -227,21 +231,21 @@ The reliability gain depends on:
 - failures and negative evidence being recorded;
 - long-horizon progress being recognized through valid transitions.
 
-When these conditions hold, SGAR reduces uncertainty caused by mis-positioning. The agent chooses next actions from a clearer operative scene. When the state schema is wrong, SGAR can institutionalize the wrong abstraction. Hard state is therefore powerful, but it must itself be governed.
+When these conditions hold, SGAR reduces uncertainty caused by mis-positioning, and the agent chooses next actions from a clearer operative scene. When the state schema is wrong, SGAR can institutionalize the wrong abstraction. Hard state is therefore powerful, but it must itself be governed.
 
 ## 10. Relation to the Existing Framework
 
 ### State mismatch
 
-State mismatch asks: given the current observation channel, which latent state are we in? SGAR is not a seventh primitive mismatch. It is a governance regime for representing, updating, validating, and recovering task state over time.
+State mismatch asks: given the current observation channel, which latent state are we in? SGAR is not a seventh primitive mismatch. It is a governance regime for representing, updating, validating, and recovering task state.
 
 ### Observation-representation mismatch
 
-Observation-representation mismatch asks whether decisive variables enter the model-accessible representation at all. SGAR depends on this: a hard-state layer cannot govern variables that never enter observation, evidence, tools, logs, sensors, or encoded control representations.
+Observation-representation mismatch asks whether decisive variables enter the model-accessible representation at all. SGAR depends on this — a hard-state layer cannot govern variables that never enter observation, evidence, tools, logs, sensors, or encoded control representations.
 
 ### Knowledge Governance and GKOs
 
-Knowledge Governance governs task-specific knowledge. GKOs store validated assertions, conditions, priorities, strengths, lifespans, conflicts, and revocation rules. SGAR gives agent operation a broader state authority layer in which GKOs may be read, applied, updated, or revoked as part of state transitions.
+Knowledge Governance governs task-specific knowledge. GKOs store validated assertions, conditions, priorities, strengths, lifespans, conflicts, and revocation rules. SGAR gives agent operation a broader state-authority layer in which GKOs may be read, applied, updated, or revoked as part of state transitions.
 
 ### GEOs and governed collaboration
 
@@ -249,7 +253,7 @@ GEOs govern escalation: when the agent must ask, whom it should ask, what it sho
 
 ### Audit Engineering
 
-Audit Engineering turns failure signals into control deltas. SGAR supplies the state substrate that absorbs those deltas: a defect is not merely noted; it changes recognized state, allowed actions, verification requirements, regression obligations, or rollback conditions.
+Audit Engineering turns failure signals into control deltas. SGAR supplies the state substrate that absorbs those deltas: a defect is not merely noted — it changes recognized state, allowed actions, verification requirements, regression obligations, or rollback conditions.
 
 ## 11. Evaluation Questions
 

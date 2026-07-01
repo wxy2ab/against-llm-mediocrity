@@ -13,7 +13,7 @@ heroPoints:
   - The scarce capability is judging, giving feedback, validating, and meaningfully directing AI work.
 ---
 
-When AI can already perform most standard tasks, what should a person still learn? This page argues that the answer is not "less knowledge" but a different use of knowledge: less for executing routine work by hand, more for judging, directing, and validating the work AI does. The sections below trace that shift — why knowledge still matters, how the learning target moves up, the capacities worth building, and the daily practices that build them.
+When AI can already perform most standard tasks, what should a person still learn? This page argues that the answer is not "less knowledge" but a *different use of knowledge*: less for executing routine work by hand, more for judging, directing, and validating the work AI does. The sections below trace that shift — why knowledge still matters, how the learning target moves up, the capacities worth building, and the daily practices that build them.
 
 ## Knowledge Still Matters
 
@@ -85,12 +85,12 @@ Learning in the AI era should move beyond reading material and completing assign
 
 ```text
 knowledge base
-→ AI-assisted processing and generation
-→ real task
-→ structured feedback
-→ validation and counterexamples
-→ insight capture
-→ long-term narrative update
+-> AI-assisted processing and generation
+-> real task
+-> structured feedback
+-> validation and counterexamples
+-> insight capture
+-> long-term narrative update
 ```
 
 The point is to make each AI interaction produce reusable objects: problem models, failure modes, contrastive examples, validation checklists, personal judgment rules, insight notes, and next actions.

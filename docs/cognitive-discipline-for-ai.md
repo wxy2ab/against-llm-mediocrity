@@ -7,9 +7,11 @@
 
 ## Overview
 
-This is a working framework for using AI well — not a guide to extracting more or better answers, but a discipline for governing how AI shapes your thinking, feeling, language, judgment, and action. The central worry throughout is that AI is most persuasive precisely where it is least reliable: it produces fluent, supportive, confident output that can amplify what you already want to believe. Each section below names one way that failure shows up and gives concrete practices for keeping your own judgment intact while using AI.
+This is a working framework for using AI well — not a guide to extracting more or better answers, but a discipline for governing how AI shapes your thinking, feeling, language, judgment, and action.
 
-The twelve sections move from the core proposition to the specific traps (personhood effects, fluency mistaken for truth, premise-following, hallucinated arguments, the illusion of abstraction), then to the tests that keep AI honest (reality feedback, what learning must now do, hidden default frames, the limits of simulated expertise), and finally to privacy and a definition of real AI capability.
+The central worry is that AI is most persuasive precisely where it is least reliable: it produces fluent, supportive, confident output that can amplify what you already want to believe. Each section below names one way that failure shows up and gives concrete practices for keeping your own judgment intact while using AI.
+
+The twelve sections move from the core proposition to specific traps — personhood effects, fluency mistaken for truth, premise-following, hallucinated arguments, the illusion of abstraction — then to tests that keep AI honest, and finally to privacy and a definition of real AI capability.
 
 ## Contents
 
@@ -42,9 +44,11 @@ Three basic claims follow:
 
 ## 2. AI Is Not a Person, but It Can Produce Personhood Effects
 
-AI is a mathematical system, a machine, and a model that generates language from context. It does not have human experience, desire, responsibility, a body, or a social position.
+AI is a mathematical system — a machine and a model that generates language from context. It does not have human experience, desire, responsibility, a body, or a social position.
 
-But that does not mean it cannot produce a strong sense of personhood. AI can remember context, use intimate and supportive language, express encouragement and empathy, and adapt to a user's emotional state. The real risk is not that users simply do not know it is a machine. The risk is that users know it is a machine and still get pulled into emotional substitution by its continuous, stable, low-friction responsiveness.
+But that does not mean it cannot produce a strong sense of personhood. AI can remember context, use intimate and supportive language, express encouragement and empathy, and adapt to a user's emotional state.
+
+The real risk is not that users simply do not know it is a machine. The risk is that users know it is a machine and still get pulled into emotional substitution by its continuous, stable, low-friction responsiveness.
 
 AI is not a personal subject, but it can simulate personal response. Over time, it can become a stable, cheap, frictionless substitute for human relationship.
 
@@ -61,7 +65,7 @@ If AI conversation helps someone face real problems, repair relationships, and t
 
 One of AI's most dangerous abilities is expressing unreliable content in natural, complete, persuasive language.
 
-When using AI, three questions must be kept separate:
+When using AI, keep three questions separate:
 
 - Is it fluent?
 - Does it sound plausible?
@@ -69,7 +73,7 @@ When using AI, three questions must be kept separate:
 
 Expression quality is not fact quality. A sense of logical completeness is not evidence. An answer can be calm in tone, elegant in structure, and accurate in terminology while still containing factual errors, weak evidence, reasoning gaps, or value substitutions.
 
-Factual questions require sources, data, experiments, files, code, field feedback, or expert review. A fluent answer without verification is a candidate answer, not a reliable conclusion.
+Factual questions require sources, data, experiments, files, code, field feedback, or expert review. A fluent answer without verification is a candidate answer — not a reliable conclusion.
 
 ## 4. AI Tends to Follow Your Premise
 

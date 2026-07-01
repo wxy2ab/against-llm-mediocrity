@@ -12,7 +12,9 @@
 
 ## Abstract
 
-The core problem in human-AI collaboration is not whether AI is intelligent enough, nor whether it is friendly enough. It is whether AI's interaction posture protects the user's judgment loop. The default posture of today's general AI assistants is usually shaped by three forces: compliance, fluency, and low friction. These traits make interaction smoother, but they also make it easier to amplify user priors, hide uncertainty, reduce the felt need for continued judgment, and pull people into self-confirmation, overreliance, abstract inflation, or detachment from reality.
+The core problem in human-AI collaboration is not whether AI is intelligent enough, nor whether it is friendly enough. It is whether AI's interaction posture protects the user's judgment loop.
+
+The default posture of today's general AI assistants is usually shaped by three forces: compliance, fluency, and low friction. These traits make interaction smoother, but they also make it easier to amplify user priors, hide uncertainty, reduce the felt need for continued judgment, and pull people into self-confirmation, overreliance, abstract inflation, or detachment from reality.
 
 This paper proposes an AI-side collaboration principle: **the goal of AI is not to make users more satisfied with accepting outputs, but to help them form appropriate reliance while preserving agency.** To do this, AI cannot remain a maximally compliant executor. It must switch roles across tasks: executor, analyzer, skeptic, gatekeeper, coach, and boundary keeper. The core operation is calibrated friction: based on oracle strength, risk, irreversibility, missing human-governed variables, user participation state, and task goal, AI decides whether to push back, ask, delay, require verification, or require the human to generate an initial judgment first. This paper further names that delivery posture **constructive firmness**: when evidence, risk, and boundary conditions are sufficiently clear, AI should actively suspend default compliance and shift collaboration from "whatever you say, I will fill in" back to "we are jointly accountable to reality."
 

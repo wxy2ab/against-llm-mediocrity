@@ -7,15 +7,25 @@
 
 ## Abstract
 
-Specification mismatch occurs when the objective that an LLM system can access, optimize, audit, or explain differs from the true task utility that actually matters. The system may satisfy the prompt while disappointing the user, pass a rubric while failing the real task, optimize a benchmark metric while violating semantic intent, produce a defensible answer while missing the decision criterion, or comply with a local instruction while damaging the global objective.
+Specification mismatch occurs when the objective that an LLM system can access, optimize, audit, or explain differs from the true task utility that actually matters.
 
-This paper develops specification mismatch as the sixth primitive mismatch in the structural theory of value preservation in LLM systems. In the world-to-output pipeline, specification mismatch occupies the evaluation station: the relation between the accessible proxy objective \(\tilde{U}\) and the true task utility \(U\). The central question is not whether the system has enough facts, enough reasoning, enough probability mass, or enough local coherence. The central question is: **what exactly is the system being optimized, selected, audited, rewarded, or revised toward, and does that criterion preserve the task value that matters?**
+The system may satisfy the prompt while disappointing the user, pass a rubric while failing the real task, optimize a benchmark metric while violating semantic intent, produce a defensible answer while missing the decision criterion, or comply with a local instruction while damaging the global objective.
 
-The paper distinguishes specification mismatch from observation-representation mismatch, state mismatch, fitting-boundary mismatch, support mismatch, and aggregation mismatch. It then introduces a typology of specification failures: underspecified objectives, proxy overfitting, metric capture, tacit utility loss, scope drift, preference inconsistency, local-global objective conflict, verifier incompleteness, rubric brittleness, and Goodhart-style exploitation. The paper argues that specification mismatch is especially central in LLM systems because many open-ended tasks do not have a complete specification at the beginning. The true success condition is often discovered through candidate failures, edge cases, expert review, execution feedback, user correction, and downstream consequences.
+This paper develops specification mismatch as the sixth primitive mismatch in the structural theory of value preservation in LLM systems. In the world-to-output pipeline, specification mismatch occupies the evaluation station: the relation between the accessible proxy objective \(\tilde{U}\) and the true task utility \(U\).
 
-The constructive response is **Objective Governance**: the disciplined induction, revision, scoping, auditing, and revocation of task objectives. Objective Governance treats rubrics, success conditions, preference rules, evaluation criteria, acceptance tests, verifier contracts, and utility assumptions as governed objects rather than static prompt text. It connects directly to Audit Engineering: failures should not merely lower a score; they should update the specification, create control deltas, add regression guards, and revise the conditions under which an objective applies.
+The central question is not whether the system has enough facts, enough reasoning, enough probability mass, or enough local coherence. The central question is: **what exactly is the system being optimized, selected, audited, rewarded, or revised toward, and does that criterion preserve the task value that matters?**
 
-The paper concludes by placing Objective Governance inside the unified governed LLM architecture. Observation governance ensures that task-relevant variables enter the representation. State governance distinguishes latent regimes. Router governance activates the right capability. Support governance makes high-value candidates reachable. Compositional governance preserves global structure. Objective Governance determines what counts as success and prevents the entire system from optimizing the wrong target.
+The paper distinguishes specification mismatch from observation-representation mismatch, state mismatch, fitting-boundary mismatch, support mismatch, and aggregation mismatch. It then introduces a typology of specification failures: underspecified objectives, proxy overfitting, metric capture, tacit utility loss, scope drift, preference inconsistency, local-global objective conflict, verifier incompleteness, rubric brittleness, and Goodhart-style exploitation.
+
+The paper argues that specification mismatch is especially central in LLM systems because many open-ended tasks do not have a complete specification at the beginning. The true success condition is often discovered through candidate failures, edge cases, expert review, execution feedback, user correction, and downstream consequences.
+
+The constructive response is **Objective Governance**: the disciplined induction, revision, scoping, auditing, and revocation of task objectives. Objective Governance treats rubrics, success conditions, preference rules, evaluation criteria, acceptance tests, verifier contracts, and utility assumptions as governed objects rather than static prompt text.
+
+It connects directly to Audit Engineering: failures should not merely lower a score; they should update the specification, create control deltas, add regression guards, and revise the conditions under which an objective applies.
+
+The paper concludes by placing Objective Governance inside the unified governed LLM architecture. Observation governance ensures that task-relevant variables enter the representation. State governance distinguishes latent regimes. Router governance activates the right capability. Support governance makes high-value candidates reachable. Compositional governance preserves global structure.
+
+Objective Governance determines what counts as success and prevents the entire system from optimizing the wrong target.
 
 ### Relationship to the Diagnostic–Mechanism Bridge
 
