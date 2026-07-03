@@ -95,7 +95,7 @@ Tag: 概率与价值同向
 
 ### 六类原始失配（来自价值保存结构理论）
 
-六类原始失配用于诊断链条中的第二步：为什么普通输出空间搜索会卡住。完整定义见 [六类原始失配总览](docs/six-primitive-mismatches-pipeline-derived-taxonomy-llm-systems.zh-CN.md)，结构推导见 [价值保存结构理论](docs/structural-theory-value-preservation-llm-systems.zh-CN.md)。
+六类原始失配用于诊断链条中的第二步：为什么普通输出空间搜索会卡住。完整定义见 [六类原始失配总览](/docs/six-primitive-mismatches-pipeline-derived-taxonomy-llm-systems.zh-CN.md)，结构推导见 [价值保存结构理论](/docs/structural-theory-value-preservation-llm-systems.zh-CN.md)。
 
 ::::cards
 ### Aggregation：聚合失配
@@ -189,14 +189,14 @@ Tag: 治理与协作
 输入 -> 任务模型 -> 控制对象（GKO / GEsO / MSHQ） -> 硬状态（SGAR） -> 验证 / 审计 -> 最终答案
 ```
 
-这些对象不是为了增加流程感，而是把高失配的最终输出问题，转化成更小、更容易让模型发挥局部优势的操作。审计工程（[Audit Engineering](docs/audit-engineering-failure-localization-control-space-writeback.zh-CN.md)）则把每一次失败信号结构化为控制增量，让下一轮搜索不至于重复犯同样的错。
+这些对象不是为了增加流程感，而是把高失配的最终输出问题，转化成更小、更容易让模型发挥局部优势的操作。审计工程（[Audit Engineering](/docs/audit-engineering-failure-localization-control-space-writeback.zh-CN.md)）则把每一次失败信号结构化为控制增量，让下一轮搜索不至于重复犯同样的错。
 
 ## 这个项目接下来会做什么
 
 - **公共解释层**：让不读论文的人也能理解 LLM 平庸、局部对齐和 LLM 卓越。
-- **理论层**：展开六类原始失配、知识治理、GKO / GExO / GEsO / MSHQ、SGAR 和审计工程，详见 [价值保存结构理论](docs/structural-theory-value-preservation-llm-systems.zh-CN.md) 与 [受治理 LLM 对象模型与接口规范](docs/governed-llm-object-model-interface-specification.zh-CN.md)。
+- **理论层**：展开六类原始失配、知识治理、GKO / GExO / GEsO / MSHQ、SGAR 和审计工程，详见 [价值保存结构理论](/docs/structural-theory-value-preservation-llm-systems.zh-CN.md) 与 [受治理 LLM 对象模型与接口规范](/docs/governed-llm-object-model-interface-specification.zh-CN.md)。
 - **工程层**：沉淀工具与模板，把控制对象、硬状态 ledger、验证循环和最小人类接入点落到真实任务中。
-- **协作层**：把人从普通处理者上移为价值、权限、品味、预算、证据和责任的治理者，详见 [治理式人机协作](docs/governed-human-ai-collaboration.zh-CN.md) 与 [人类协助型操作失配](docs/human-assist-operational-mismatches.zh-CN.md)。
+- **协作层**：把人从普通处理者上移为价值、权限、品味、预算、证据和责任的治理者，详见 [治理式人机协作](/docs/governed-human-ai-collaboration.zh-CN.md) 与 [人类协助型操作失配](/docs/human-assist-operational-mismatches.zh-CN.md)。
 
 ## 欢迎贡献
 

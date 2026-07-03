@@ -77,7 +77,7 @@ Tag: 概率与价值同向
 
 ## 六类原始失配
 
-[六类原始失配](/zh/glossary#six-primitive-mismatches)不是为了给所有失败现象命名，而是为了预测普通输出空间搜索什么时候会进入平台期。每一类都对应一个不同的原因，说明"最容易续写的方向"在哪里开始不再追踪价值。本节是 [六类原始失配总览](docs/six-primitive-mismatches-pipeline-derived-taxonomy-llm-systems.zh-CN.md) 的站点侧综述，结构推导见 [价值保存结构理论](docs/structural-theory-value-preservation-llm-systems.zh-CN.md)。
+[六类原始失配](/zh/glossary#six-primitive-mismatches)不是为了给所有失败现象命名，而是为了预测普通输出空间搜索什么时候会进入平台期。每一类都对应一个不同的原因，说明"最容易续写的方向"在哪里开始不再追踪价值。本节是 [六类原始失配总览](/docs/six-primitive-mismatches-pipeline-derived-taxonomy-llm-systems.zh-CN.md) 的站点侧综述，结构推导见 [价值保存结构理论](/docs/structural-theory-value-preservation-llm-systems.zh-CN.md)。
 
 :::cards
 ### Aggregation：聚合失配
@@ -152,10 +152,10 @@ Tag: 概率与价值同向
 
 机制层告诉我们"为什么会卡住"，但要落地到工程，还需要一组能把诊断翻译成动作的对象。本项目使用四个核心对象，它们一起把失配诊断、控制动作与人类治理缝合成一条可执行链路：
 
-- **[受治理知识对象（Governed Knowledge Object, GKO）](/zh/glossary#gko)**：保存任务特定的控制知识，包括已验证的主张、条件、优先级、强度、生命周期、冲突和撤销规则。GKO 是[知识治理](/zh/glossary#knowledge-governance)的最小存储单位，对应 [受治理 LLM 对象模型与接口规范](docs/governed-llm-object-model-interface-specification.zh-CN.md) 里的对象模型。
+- **[受治理知识对象（Governed Knowledge Object, GKO）](/zh/glossary#gko)**：保存任务特定的控制知识，包括已验证的主张、条件、优先级、强度、生命周期、冲突和撤销规则。GKO 是[知识治理](/zh/glossary#knowledge-governance)的最小存储单位，对应 [受治理 LLM 对象模型与接口规范](/docs/governed-llm-object-model-interface-specification.zh-CN.md) 里的对象模型。
 - **[受治理升级对象（Governed Escalation Object, GEsO）](/zh/glossary#geso)**：定义 agent 什么时候该问人、问谁、问什么、等待期间能做什么。它把"升级给人类"从一句口号变成可复用的协议对象。
 - **[最小充分人类问题（Minimal Sufficient Human Query, MSHQ）](/zh/glossary#mshq)**：在一次具体交互里把 GEsO 实例化，只问恢复自治所需的最小变量。
-- **[状态治理智能体范式（State-Governed Agent Regime, SGAR）](/zh/glossary#sgar)**：把 plan / action / observation / verification / 人类回答 / 审计发现组织成受治理状态转移，让长程 agent 在被承认的硬状态里推进，而不是在自我叙事里漂浮。详见 [SGAR 工作稿](docs/state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)。
+- **[状态治理智能体范式（State-Governed Agent Regime, SGAR）](/zh/glossary#sgar)**：把 plan / action / observation / verification / 人类回答 / 审计发现组织成受治理状态转移，让长程 agent 在被承认的硬状态里推进，而不是在自我叙事里漂浮。详见 [SGAR 工作稿](/docs/state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)。
 
 四者关系可以这样理解：GKO 存"应该知道什么"，GEsO 存"什么时候该问"，MSHQ 是 GEsO 的一次实例化，SGAR 则把这些对象连同观测、验证、人类回答一起提交到外部硬状态层。
 
