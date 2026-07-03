@@ -37,7 +37,7 @@ heroPoints:
 
 ### 从机制到治理：四个核心对象
 
-机制层用失配做诊断，治理层用对象做动作。下面四个对象把诊断、动作和人类治理缝合成一条可执行链路，它们对应 [受治理 LLM 对象模型与接口规范](docs/governed-llm-object-model-interface-specification.zh-CN.md) 与 [价值保存结构理论](docs/structural-theory-value-preservation-llm-systems.zh-CN.md)：
+机制层用失配做诊断，治理层用对象做动作。下面四个对象把诊断、动作和人类治理缝合成一条可执行链路，它们对应 [受治理 LLM 对象模型与接口规范](/docs/governed-llm-object-model-interface-specification.zh-CN.md) 与 [价值保存结构理论](/docs/structural-theory-value-preservation-llm-systems.zh-CN.md)：
 
 - **[GKO（Governed Knowledge Object）](/zh/glossary#gko)**：保存任务特定控制知识（已验证主张、条件、优先级、生命周期、撤销规则）。
 - **[GEsO（Governed Escalation Object）](/zh/glossary#geso)**：保存"何时升级、升级给谁、问什么、等待期间能做什么"。
@@ -50,15 +50,15 @@ heroPoints:
 
 这套验证与回写机制可以进一步独立为 **[审计工程（Audit Engineering）](/zh/glossary#audit-engineering)**：它不把审计当作生成后的打分，而是把审计发现结构化为缺陷证据、修复路由、控制增量和回归测试，从而让尚未充分说明的用户价值在迭代中逐步外化。
 
-[阅读《Audit Engineering：从生成—验证不对称到通用 Agent 治理》](docs/audit-engineering-failure-localization-control-space-writeback.zh-CN.md)
+[阅读《Audit Engineering：从生成—验证不对称到通用 Agent 治理》](/docs/audit-engineering-failure-localization-control-space-writeback.zh-CN.md)
 
 对于长程 agent，这些控制对象还需要一个硬状态层。**[状态治理智能体范式（SGAR）](/zh/glossary#sgar)** 把计划、工具调用、观测、验证结果、人类回答、审计发现和回滚决定都组织成状态转移，而不是松散的聊天历史。这样做不是为了削弱 LLM，而是避免让执行动作的那个上下文，又独自裁决任务是否已经推进。
 
-[阅读《状态治理智能体范式（SGAR）》](docs/state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)
+[阅读《状态治理智能体范式（SGAR）》](/docs/state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)
 
 升级协议与人类边界由 **[治理式人机协作](/zh/glossary#governed-human-ai-collaboration)** 与 **人类协助型操作失配（五个操作域）** 共同支撑：先问环境，再问人；用 [MSHQ](/zh/glossary#mshq) 提问；用 [GEsO](/zh/glossary#geso) 保存重复规则；让长程 agent 在硬状态中恢复自治。
 
-[阅读《治理式人机协作》](docs/governed-human-ai-collaboration.zh-CN.md) · [阅读《人类协助型操作失配》](docs/human-assist-operational-mismatches.zh-CN.md)
+[阅读《治理式人机协作》](/docs/governed-human-ai-collaboration.zh-CN.md) · [阅读《人类协助型操作失配》](/docs/human-assist-operational-mismatches.zh-CN.md)
 
 ## 一个更像工程的治理流程
 
@@ -284,7 +284,7 @@ Tag: 什么模式看起来高级，但经常失败
 
 ## 把验证当工程：审计工程的视角
 
-[审计工程](docs/audit-engineering-failure-localization-control-space-writeback.zh-CN.md) 把"找出失败"和"修复失败"分成两类不同的工程动作，并要求把审计发现转写成可执行的控制增量：
+[审计工程](/docs/audit-engineering-failure-localization-control-space-writeback.zh-CN.md) 把"找出失败"和"修复失败"分成两类不同的工程动作，并要求把审计发现转写成可执行的控制增量：
 
 - **缺陷证据**：哪一类原始失配主导？用了什么反例或扰动？
 - **修复路由**：改 GKO？改评分规约？改依赖图？改硬状态转移？
@@ -295,7 +295,7 @@ Tag: 什么模式看起来高级，但经常失败
 
 ## 五个操作域：什么时候升级给人
 
-[人类协助型操作失配](docs/human-assist-operational-mismatches.zh-CN.md) 把"AI 不能可靠决定什么"拆成五个操作域，每个域对应一组升级门槛：
+[人类协助型操作失配](/docs/human-assist-operational-mismatches.zh-CN.md) 把"AI 不能可靠决定什么"拆成五个操作域，每个域对应一组升级门槛：
 
 1. **信息与证据**：事实状态是否能由环境/工具/检索/测试提供？如果能，就不应过早问人。
 2. **价值与规格**：真实目标是否被外化成评分规约、验收标准或反例？
@@ -303,7 +303,7 @@ Tag: 什么模式看起来高级，但经常失败
 4. **边界与时机**：规则是否仍然适用？是否触发了撤销条件？
 5. **协调与控制表示**：人类回答应写入硬状态层，而不是只留在聊天上下文。
 
-这五个域对应 [治理式人机协作](docs/governed-human-ai-collaboration.zh-CN.md) 中的 MSHQ / GEsO / 硬状态更新。agent 升级时只用 GEsO 模板提问（不替换整个任务），等待期间做可逆的准备工作（候选矩阵、低成本实验、回滚路径），回答回来后提交到硬状态并恢复自治。
+这五个域对应 [治理式人机协作](/docs/governed-human-ai-collaboration.zh-CN.md) 中的 MSHQ / GEsO / 硬状态更新。agent 升级时只用 GEsO 模板提问（不替换整个任务），等待期间做可逆的准备工作（候选矩阵、低成本实验、回滚路径），回答回来后提交到硬状态并恢复自治。
 
 ## 一个更实用的工程判断
 

@@ -31,7 +31,7 @@ AI 会让很多标准技能变便宜：写代码、起草报告、翻译、总�
 
 一句话：**AI 让浅知识更便宜，让深知识更必要。**
 
-这一页把治理式协作的论点延伸到人类一侧。当 AI 成为默认信息处理核心，人就应该从亲手执行每个常规操作，上移到治理那些 AI 不能可靠或合法决定的变量。这一论点与 [治理式人机协作](docs/governed-human-ai-collaboration.zh-CN.md) 的"人类角色：从信息处理者到治理者"一段一一对应。
+这一页把治理式协作的论点延伸到人类一侧。当 AI 成为默认信息处理核心，人就应该从亲手执行每个常规操作，上移到治理那些 AI 不能可靠或合法决定的变量。这一论点与 [治理式人机协作](/docs/governed-human-ai-collaboration.zh-CN.md) 的"人类角色：从信息处理者到治理者"一段一一对应。
 
 所以，学习页不是离开主线去谈教育，而是在回答协作页留下的问题：如果人的价值在于治理变量，那么人应该训练什么，才能给出更好的变量、反馈、验证和撤销判断？
 
@@ -83,7 +83,7 @@ AI 时代更重要的问题变成：
 
 ## 九项人类角色迁移：与治理式协作对应
 
-[治理式人机协作](docs/governed-human-ai-collaboration.zh-CN.md) 描述了一件事：AI 成为默认信息处理核心之后，人应当向上移动到哪些能力。学习侧把这九条角色逐一展开成可训练的对象：
+[治理式人机协作](/docs/governed-human-ai-collaboration.zh-CN.md) 描述了一件事：AI 成为默认信息处理核心之后，人应当向上移动到哪些能力。学习侧把这九条角色逐一展开成可训练的对象：
 
 :::cards
 ### 问题构造
@@ -195,9 +195,9 @@ AI 时代的学习不应停留在"看资料"和"完成作业"，而应该进入�
 
 这一页给出的训练对象，在协作页里有具体出口：
 
-- 问题构造 / 价值设计 → [治理式人机协作](docs/governed-human-ai-collaboration.zh-CN.md) 第 3 节"先问环境，再问人"与第 5 节"治理式协作流程"。
+- 问题构造 / 价值设计 → [治理式人机协作](/docs/governed-human-ai-collaboration.zh-CN.md) 第 3 节"先问环境，再问人"与第 5 节"治理式协作流程"。
 - 品味表达 / 证据判断 → 同上第 3.2 节"反馈可学习型工作"。
 - 授权 / 预算治理 → 同上第 3.4 节"人类治理变量"与第 6 节"AI 应向前推进什么，不应静默决定什么"。
-- 治理记忆 / 硬状态更新 → [状态治理智能体范式（SGAR）](docs/state-governed-agent-regime-for-governed-llm-systems.zh-CN.md) 第 12 节"设计原则"与 [人类协助型操作失配](docs/human-assist-operational-mismatches.zh-CN.md) 的五个操作域。
+- 治理记忆 / 硬状态更新 → [状态治理智能体范式（SGAR）](/docs/state-governed-agent-regime-for-governed-llm-systems.zh-CN.md) 第 12 节"设计原则"与 [人类协助型操作失配](/docs/human-assist-operational-mismatches.zh-CN.md) 的五个操作域。
 
 把训练与协作协议连起来，学习才不会停在"会问几个好问题"，而是变成一条可以沉淀、可以削弱、可以恢复的治理能力。

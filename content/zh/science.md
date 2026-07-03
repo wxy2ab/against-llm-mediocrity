@@ -93,7 +93,7 @@ heroPoints:
 模型把局部支持误当成不变量。扰动场景、指标、审计路径或反馈来源，可以检验这个断言是否真的能泛化。
 ::::
 
-如果你想看更结构化的推导，可以读 [六类原始失配总览](docs/six-primitive-mismatches-pipeline-derived-taxonomy-llm-systems.zh-CN.md) 或其结构基础 [价值保存结构理论](docs/structural-theory-value-preservation-llm-systems.zh-CN.md)。
+如果你想看更结构化的推导，可以读 [六类原始失配总览](/docs/six-primitive-mismatches-pipeline-derived-taxonomy-llm-systems.zh-CN.md) 或其结构基础 [价值保存结构理论](/docs/structural-theory-value-preservation-llm-systems.zh-CN.md)。
 
 ## 一个直观判断
 
@@ -139,11 +139,11 @@ heroPoints:
 
 ### 别让人重新接回整个任务
 
-如果缺失变量确实由人类治理，正确动作也不是"请你重做一遍"。正确动作是一个小问题：确认事实、选择优先级、授权边界、验证假设，或定义停止标准。这一类最小问题被本项目称为 **[最小充分人类问题](/zh/glossary#mshq)**，它来自 [治理式人机协作](docs/governed-human-ai-collaboration.zh-CN.md) 与 [人类协助型操作失配](docs/human-assist-operational-mismatches.zh-CN.md) 的工作稿。
+如果缺失变量确实由人类治理，正确动作也不是"请你重做一遍"。正确动作是一个小问题：确认事实、选择优先级、授权边界、验证假设，或定义停止标准。这一类最小问题被本项目称为 **[最小充分人类问题](/zh/glossary#mshq)**，它来自 [治理式人机协作](/docs/governed-human-ai-collaboration.zh-CN.md) 与 [人类协助型操作失配](/docs/human-assist-operational-mismatches.zh-CN.md) 的工作稿。
 
 ### 别在等待期间让 agent 干等
 
-升级给人之后，长程 agent 仍可以做大量可逆的准备工作：候选矩阵、低成本实验、风格轴、对比样例、查询计划、依赖图、回滚路径。这些动作构成"等待期间的自治"，也正是 [状态治理智能体范式（State-Governed Agent Regime / SGAR）](/zh/glossary#sgar) 所强调的"等待期间继续推进可逆工作"；更完整的展开见 [SGAR 工作稿](docs/state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)。
+升级给人之后，长程 agent 仍可以做大量可逆的准备工作：候选矩阵、低成本实验、风格轴、对比样例、查询计划、依赖图、回滚路径。这些动作构成"等待期间的自治"，也正是 [状态治理智能体范式（State-Governed Agent Regime / SGAR）](/zh/glossary#sgar) 所强调的"等待期间继续推进可逆工作"；更完整的展开见 [SGAR 工作稿](/docs/state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)。
 :::
 
 ## 为什么它会成为很多高价值工作的共同基础
