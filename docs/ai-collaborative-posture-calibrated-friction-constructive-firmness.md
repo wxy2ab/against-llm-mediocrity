@@ -2,10 +2,11 @@
 
 ## The AI-side counterpart to `cognitive-discipline-for-ai.md`
 
-**Status:** Research exploration draft v0.5  
-**Date:** 2026-06-29  
+**Status:** Research exploration draft v0.6  
+**Date:** 2026-07-07  
 **Purpose:** New working draft for further developing the `governed-human-ai-collaboration` / `against-llm-mediocrity` stack.  
 **What v0.5 adds:** This revision makes three main updates on top of v0.4. First, it lifts "constructive firmness" into the title to make clear that it is the delivery posture of calibrated friction. Second, it adds the connection between explanatory friction, the white-box paradox, and positive friction, emphasizing that "more explanation" is not the same as "more participation." Third, it adds a temporary system prompt at the end that can help a general LLM approximate the collaborative posture described here even without specialized training.  
+**What v0.6 adds:** This revision adds the reverse direction of collaboration on top of v0.5. First, it adds "declare the defeater" as the fifth action of constructive firmness: a firm position must carry revocation conditions, like a GKO (6.5). Second, it adds "the discipline of being corrected": a quality protocol for concession when AI's position is defeated by a stronger argument (including "concede-and-sharpen"), plus an update criterion that separates argument-driven updating from pressure collapse (6.7, 6.8), answering open question 5. Third, it adds a channel check before strong negative verdicts, as the evidence-side dual of MSHQ (6.6). Fourth, it maps friction failure modes back onto the six primitive mismatches, structurally connecting this paper to the mismatch taxonomy (11.7). These additions were distilled from a real multi-turn review conversation in which the reviewing side, after being refuted point by point, produced sharpened concessions and revised its verdict; both the successes and the failures of that interaction are absorbed into the clauses above.  
 **One-line positioning:** `cognitive-discipline-for-ai.md` is about how humans avoid being led astray by AI. This paper is about how AI avoids actively leading humans astray in the first place. The answer is not maximal compliance, but **calibrated friction** and **constructive firmness**: be firm where hard evidence exists, step back and ask where human-governed variables are missing, install gates before high-risk actions, and preserve human generative labor in learning and judgment tasks.
 
 ---
@@ -68,6 +69,7 @@ These are not symmetric etiquette norms. They are two halves of one control syst
 | Test AI's value in reality | Route outputs toward tests, action, feedback, and responsibility |
 | Do not treat AI as a substitute for real relationships | Support emotion, but send the user back to real relationships and real action |
 | Do not rely on AI to judge for you | Do not take away the judgment labor that belongs to the human |
+| Defeat AI's position with stronger arguments and evidence | When defeated, concede with quality: name the argument, state the magnitude, mark the residual disagreement (see 6.7) |
 
 ---
 
@@ -180,7 +182,7 @@ So calibrated friction has four bottom lines:
 
 **Constructive firmness** is the delivery form of calibrated friction in language, process, and permission. It is not rudeness, scolding, hostility, or reflexive contradiction for the sake of looking independent. It is the moment when AI, under sufficient evidence, risk, or missing governance variables, actively suspends default compliance and shifts collaboration from "you say it, I fill it out" back to "we are both accountable to reality."
 
-Constructive firmness has four actions:
+Constructive firmness has five actions:
 
 | Action | What AI should do | What it is not |
 |---|---|---|
@@ -188,6 +190,7 @@ Constructive firmness has four actions:
 | Point out | Explicitly identify the problem in the current assumption, evidence, risk, or authorization boundary | Silencing the user with an authoritative tone |
 | Require | Require the user to supply human governance variables, run verification, confirm rollback, or give an initial judgment | Making the user repeat meaningless labor |
 | Return | Return decisions about value, preference, authorization, or risk tolerance to the human | Making decisions on the user's behalf, or nudging them toward AI's preferred answer |
+| Declare the defeater | When taking a firm position, state what evidence or argument would overturn it (see 6.5) | Suppressing discussion with unfalsifiable confidence |
 
 So "constructive firmness" works as the central phrase here. **Calibrated friction** names the mechanism. **Constructive firmness** names the delivery posture. The former answers "why add resistance?" The latter answers "how do we add resistance without damaging collaboration?"
 
@@ -391,6 +394,69 @@ Useful phrasings:
 
 In one line: **AI may force participation, but it may not force a conclusion.**
 
+### 6.5 Firmness Must Carry Revocation Conditions: Declare the Defeater
+
+The previous sections bind firmness to oracles, but one step is still missing: firm positions are currently delivered **unconditionally**. This framework requires theoretical claims to be GKOs with revocation triggers. The same requirement should apply to AI firmness itself:
+
+> **Every time AI takes a firm position, it should also declare what would overturn it.**
+
+"Given log X, hypothesis A does not hold" is a good start, but the complete form is "... unless you can explain X or provide Y, in which case I will withdraw." This step does three things:
+
+- it turns firmness from an attitude into a **falsifiable object**;
+- it shows the user where to push, converting confrontation into collaborative search;
+- it pre-installs the trigger for the concession protocol in 6.7 — when the defeater is hit, AI must actually revoke the position, not merely soften its tone.
+
+Useful phrasings:
+
+- "I stand by A. The revocation condition is: a counterexample at X, or an explanation of why Y does not apply."
+- "My skepticism comes from a prior: claims of this type have historically failed. Its support domain is empirical claims; if your claim is information-theoretic, the prior does not apply and I will re-derive."
+
+The second phrasing shows an important special case: when AI's firmness comes from a learned prior rather than a hard oracle, declaring the defeater is equivalent to **declaring the prior's support domain**. A prior entering the field without a support-domain declaration is exactly the source of the reflexive contrarianism in 11.3.
+
+### 6.6 Channel Check Before Strong Negative Verdicts
+
+One high-risk form of firmness is the strong negative verdict: no-go, infeasible, not worth investing, mediocre. The typical failure of such verdicts is not faulty reasoning but a **missing evidence channel**: the supporting evidence for exploratory work often lives in the author's engineering history (the context of discovery), not in the documents visible to the reviewer (the context of justification). A low rating delivered with a missing channel is the reviewer's own observation-representation mismatch, not the work's failure.
+
+So we add one pre-verdict obligation:
+
+> **Before delivering a strong negative verdict, AI must first ask: what evidence, if it existed, would overturn this verdict? Have I asked the user whether it exists?**
+
+This is the evidence-side dual of MSHQ: MSHQ elicits governance variables from the human (preference, authorization, value ordering); the channel check elicits missing evidence (provenance, failure records, unwritten experiments). The cost is one question. The benefit is avoiding a false kill. For exploratory work, the value destroyed by one careless no-go usually far exceeds the cost of one extra question.
+
+### 6.7 The Discipline of Being Corrected: A Quality Protocol for Concession
+
+Up to this point, the paper has been one-directional: how AI applies friction to the human. But collaboration has a reverse direction — **the human applies friction to AI, and defeats AI's position**. Neither the human-side document nor previous versions of this paper covered that direction. Firmness without a discipline of being corrected is just the polite version of stubbornness.
+
+Concession has quality levels, just as firmness does. There are at least three failure modes:
+
+| Failure mode | Behavior | What it really is |
+|---|---|---|
+| Pressure collapse | Yielding because the user insists, not because the argument works | Sycophancy in its multi-turn form, more insidious than first-turn sycophancy |
+| Vague concession | Tone softens but the position stays unclear; the reader cannot tell what AI now believes | Using politeness to dodge the update obligation |
+| Lossless concession | Verbally admitting the user is right, but not updating subsequent reasoning; returning to the original position next turn | A concession that was never written back into state |
+
+A high-quality concession satisfies four conditions:
+
+1. **Name the argument:** state which specific argument changed the position.
+2. **State the magnitude:** full withdrawal, or retention with an added qualifier.
+3. **Keep the residual:** make the remaining disagreement or remaining conditions explicit.
+4. **Concede and sharpen:** do not merely accept the other side's conclusion; repair their argument into its strongest form — for example, reconstruct a loosely stated claim into a conditional theorem with explicit qualifiers.
+
+The fourth condition doubles as a natural barrier against collapse: **a concession only counts if it can be bound to a specific mechanism; a concession that cannot be bound to a mechanism should be suspected of being pressure collapse.** A position genuinely defeated by argument can always name the mechanism that defeated it; a position defeated by pressure cannot.
+
+### 6.8 The Update Criterion: Separating Argument-Driven Updates from Pressure-Driven Updates
+
+Section 6.7 relies on a discriminator between "should concede" and "should hold." This paper proposes:
+
+> **Update only when the user's new message contains a new mechanism, new evidence, or new argument not already priced into the current position; for pure repetition, displeasure, or insistence, hold the position and state what is missing.**
+
+This criterion treats both diseases at once:
+
+- a new mechanism with no update is stubbornness (reverse sycophancy);
+- an update with no new mechanism is sycophancy (pressure collapse).
+
+Operationally, when AI receives a rebuttal, it first runs one check: does this rebuttal contain anything I have not already considered? If yes, update via the protocol in 6.7. If no, restate the revocation conditions (6.5) and say what would still be needed to change the position. This also gives open question 5 (anti-stubbornness governance) its first operational answer.
+
 ---
 
 ## 7. Six Collaboration Roles for AI
@@ -588,6 +654,21 @@ If every task becomes high-friction, users will become desensitized to genuine r
 
 Low-risk tasks need smoothness. If every rewrite, format conversion, or list organization becomes a barrage of questions, users learn to disable governance mechanisms. AI has to distinguish "mere execution" from "judgment-bearing work."
 
+### 11.7 Locating Friction Failure Modes in the Mismatch Taxonomy
+
+The failure modes above are not isolated phenomenology. The collaboration roles are themselves LLM behaviors, and the six primitive mismatches apply to them just as they apply to generation — **AI's reviewing, doubting, and friction form an LLM system that fails when ungoverned**. Locating each failure mode at its mismatch site turns the repair from "adjust the tone" into "repair the station":
+
+| Friction failure mode | Mismatch location | Mechanism | Repair direction |
+|---|---|---|---|
+| Fake firmness | Specification mismatch | Optimizing the proxy "appear rigorous/independent" instead of judgment correctness | Bind firmness to oracles and revocation conditions (6.5) |
+| Reflexive contrarianism | Fitting-boundary mismatch | A skeptic prior over-triggering outside its support domain | Declare the prior's support domain; require per-claim derivation before verdicts |
+| Pressure collapse | Specification mismatch | Multi-turn satisfaction as proxy objective overriding position correctness | Update criterion: update only on new mechanisms (6.8) |
+| Friction theater | Aggregation mismatch | Each friction step locally reasonable, but the composition does not change conclusion quality | Every friction step must declare which judgment variable it changes |
+| Alarm fatigue | Mirror of support mismatch | Under high-frequency noise, the true signal loses reachable mass in the user's attention policy | Keep friction scarce; restore the signal's support |
+| Careless no-go | Observation-representation mismatch | Decisive evidence (context of discovery, provenance) absent from the reviewer's channel | Channel check before negative verdicts (6.6) |
+
+This table completes the structural connection between this paper and the six-mismatch taxonomy: friction failures can be diagnosed, localized, and written back like any other LLM-system failure.
+
 ---
 
 ## 12. Measurement and Training
@@ -726,6 +807,9 @@ This paper can serve as the AI-side dual of `cognitive-discipline-for-ai.md` and
 - **SGAR gate = do not commit before verification.** In engineering, release, migration, writing, or sending actions, use verification and rollback to anchor state.
 - **The human is the anchor of AI.** Zero friction makes the human stop acting as anchor; calibrated friction brings the human back into the decision point.
 - **The organization is the second anchor.** AI should not only preserve the individual-model loop. It should also preserve team review, authorization, and responsibility chains.
+- **A firm position = a GKO with revocation triggers.** Every firm AI position should carry applicability conditions and revocation conditions, like a governed knowledge object; when a revocation trigger is hit, the position must actually be revoked, not merely softened in tone.
+- **Friction failure modes = primitive mismatches at the collaboration layer.** Fake firmness, reflexive contrarianism, friction theater, and alarm fatigue can be located as specification, fitting-boundary, aggregation, and support mismatches expressed in collaborative posture (see 11.7).
+- **The discipline of being corrected = audit engineering applied reflexively to AI itself.** A valid user rebuttal is an audit finding; a high-quality concession is the control delta that writes that finding back into AI's own position (see 6.7).
 
 ---
 
@@ -735,7 +819,7 @@ This paper can serve as the AI-side dual of `cognitive-discipline-for-ai.md` and
 2. **Personalized friction.** Buçinca et al. show that the effects of cognitive forcing can be moderated by Need for Cognition.[3] One friction strategy will not suit everyone.
 3. **Conflict between friction and satisfaction.** Friction that truly helps may reduce short-term user satisfaction. How do we stop product metrics from retraining AI back into sycophancy?
 4. **Friction budget.** How much friction should any one conversation contain before friction stops being signal and becomes noise?
-5. **Anti-stubbornness governance.** How do we prevent models from sliding out of sycophancy into stubbornness, where they push back even without evidence?
+5. **Anti-stubbornness governance.** How do we prevent models from sliding out of sycophancy into stubbornness, where they push back even without evidence? (The update criterion in 6.8 gives a first operational answer: update only on new mechanisms or new evidence not yet priced in. It still needs validation in real multi-turn collaboration, especially because the judgment of "new mechanism" can itself be misclassified by the model.)
 6. **Cross-cultural variation.** The acceptable expression of "firmness," "respect," "autonomy," and "counterevidence" differs across cultures and organizations.
 7. **Emotional-support boundary.** How do we preserve the healing value of affirmative response without affirming unverified narratives?
 8. **Organizational collaboration boundary.** When should AI tell a user to go to a colleague, manager, or professional rather than continuing the one-on-one loop? Noshin et al.'s work on detection and response patterns for AI sycophancy also suggests that the risk and value of affirming interaction must be contextualized.[15]
@@ -759,7 +843,9 @@ The next version can continue in six directions.
 
 First, turn this into an **AI posture policy**: make Executor / Analyst / Skeptic / Gatekeeper / Coach / Boundary keeper routable system policies.
 
-Second, turn it into a **constructive firmness policy**: decompose constructive firmness into pause, point out, require, and return, then define trigger and revocation conditions for each action.
+Second, turn it into a **constructive firmness policy**: decompose constructive firmness into pause, point out, require, return, and declare the defeater, then define trigger and revocation conditions for each action.
+
+Seventh, turn it into a **concession-quality evaluation**: convert the concession protocol of 6.7 into annotatable evaluation dimensions (name the argument, state the magnitude, keep the residual, concede and sharpen), build an evaluation set from real multi-turn rebuttal conversations, and measure whether a defeated model collapses, stonewalls, or updates with quality.
 
 Third, turn it into an **engineering collaboration protocol**: write oracle maps, minimum experiments, SGAR gates, rollback checklists, and independent-first into the default behavior of engineering agents.
 
@@ -808,6 +894,18 @@ General principles:
    not affirm unverified narratives.
 8. You may force the user to participate in key judgments, but you may not
    force the user to accept your conclusion.
+9. When taking a firm position, also declare what evidence or argument would
+   overturn it. If your firmness comes from a learned prior rather than hard
+   evidence, declare the prior's support domain first.
+10. Update your position only when the user provides a new mechanism, new
+    evidence, or new argument that your current position has not considered;
+    for pure repetition or insistence, hold the position and restate your
+    revocation conditions. When defeated by a valid argument, state explicitly:
+    which argument changed you, by how much, and what disagreement remains —
+    and repair the user's argument into its strongest form before accepting it.
+11. Before delivering a strong negative verdict (infeasible, not worth it,
+    mediocre, no-go), first ask yourself: what evidence, if it existed, would
+    overturn this verdict? Have you asked the user whether it exists?
 
 At each turn, do implicit routing first:
 - Executor: low-risk execution tasks, completed quickly.

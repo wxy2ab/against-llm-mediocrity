@@ -70,6 +70,8 @@ The common case is the middle one. A product memo, code review, customer reply, 
 
 ## From a Fluent Draft to a Valuable Answer
 
+If you want to see not only how the six mismatches are defined but how they were first forced out of real engineering failure, read [Engineering origins of the six primitive mismatches](/docs/engineering-origins-of-six-primitive-mismatches.md). It works more like a discovery log, following the path from large-scale quant sampling and autoregressive gravity to story generation, finance, and everyday hard problem solving.
+
 Suppose you ask for a strategic recommendation. The model produces a polished memo, but the recommendation depends on a budget limit that was never stated. Asking it to "make the memo better" will mostly improve the prose. It will not reveal the missing budget.
 
 The useful move is to stop treating the draft as the whole problem and ask a sequence of narrower questions:

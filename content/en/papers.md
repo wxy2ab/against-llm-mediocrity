@@ -5,10 +5,10 @@ path: /papers
 title: Papers and Working Manuscripts
 navTitle: Working drafts
 kicker: Formalizing the framework
-summary: This section collects the current manuscripts and future empirical directions related to LLM mediocrity, autoregressive extraordinary, Knowledge Governance, hard-state agent governance, governed collaboration, and cognitive discipline for AI.
+summary: This section collects the current manuscripts and future empirical directions related to LLM mediocrity, autoregressive extraordinary, the discovery path of the six primitive mismatches, Knowledge Governance, hard-state agent governance, governed collaboration, and cognitive discipline for AI.
 order: 7
 heroPoints:
-  - "Current synthesis: Structural Theory of Value Preservation and Six Primitive Mismatches."
+  - "Current synthesis: Structural Theory of Value Preservation, Six Primitive Mismatches, and the discovery-path draft on how the six mismatches were forced out of engineering practice."
   - "Working drafts: Formal Mechanism Layer for Governed LLM Systems, Diagnostic-Mechanism Bridge, Mechanism-Driven Training, Governed LLM Object Model, Audit Engineering, Oracle Classification and Engine Routing, State-Governed Agent Regime, Channel Governance, State Governance, Capability Routing, Control-Space Search, Compositional Governance, Objective Governance, and Human-Assist Operational Mismatches."
   - "Extensions and implementation: governed collaboration, hard-state agent governance, cognitive discipline for AI, human learning, and tooling directions derived from the research agenda."
 ---
@@ -76,6 +76,13 @@ Tag: pipeline-derived taxonomy working draft
 This working draft consolidates the six primitive mismatches into one pipeline-derived taxonomy. It derives observation-representation, state, fitting-boundary, support, aggregation, and specification mismatch as distinct value-preservation failure stations. It then maps each one to diagnostic questions, repair targets, audit findings, control deltas, Governed Knowledge Objects (GKOs), regression guards, and SGAR commitments.
 
 [Read the six-mismatch taxonomy](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/six-primitive-mismatches-pipeline-derived-taxonomy-llm-systems.md)
+
+### Engineering Origins of the Six Primitive Mismatches
+Tag: discovery-path working draft
+
+This working draft starts from the discovery path rather than the final definitions. It records how the six primitive mismatches were forced out of repeated engineering friction in large-scale quant sampling, attempts to resist autoregressive gravity, story-generation reproduction, finance tasks, and everyday hard problem solving. It is the practice-first companion to the formal taxonomy.
+
+[Read the engineering-origins draft](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/engineering-origins-of-six-primitive-mismatches.md)
 
 ### Formal Mechanism Layer for Governed LLM Systems
 Tag: intervention-localization working draft
