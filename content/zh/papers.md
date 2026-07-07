@@ -5,10 +5,10 @@ path: /zh/papers
 title: 文章与工作稿
 navTitle: 工作稿
 kicker: 把这套框架正式写清楚
-summary: 这里收集与LLM 平庸、LLM卓越、知识治理、硬状态 Agent 治理、治理式协作和 AI 认知纪律相关的当前工作稿与后续实证方向。
+summary: 这里收集与LLM 平庸、LLM卓越、六类原始失配的发现脉络、知识治理、硬状态 Agent 治理、治理式协作和 AI 认知纪律相关的当前工作稿与后续实证方向。
 order: 7
 heroPoints:
-  - 当前总稿：价值保存结构理论与六类原始失配总图。
+  - 当前总稿：价值保存结构理论、六类原始失配总图，以及六类失配如何被工程实践一步步逼出来的发现脉络稿。
   - 工作稿：面向受治理 LLM 系统的形式化机制层、诊断-机制桥接、机制驱动训练、受治理 LLM 对象模型、审计工程、Oracle 分类与引擎路由、状态治理智能体范式、通道治理、状态治理、能力路由、控制空间搜索、组合治理、目标治理与 Human-Assist Operational Mismatches。
   - 延伸与实现：治理式协作、硬状态 Agent 治理、AI 认知纪律、人类学习与由研究议程直接推导的工具方向。
 ---
@@ -76,6 +76,13 @@ Tag: 管线推导分类法工作稿
 这份工作稿把观测-表征、状态、拟合边界、支持、聚合和规格六类原始失配收束为一张从价值保存管线推导出的总图。然后它把每类失配映射到诊断问题、修复目标、审计发现、控制增量、受治理知识对象（GKO）、回归护栏和 SGAR 提交。
 
 [阅读六类原始失配总图](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/six-primitive-mismatches-pipeline-derived-taxonomy-llm-systems.zh-CN.md)
+
+### 六类原始失配的工程来源
+Tag: 发现脉络工作稿
+
+这份工作稿不再从定义出发，而是回到概念真正长出来的工程现场。它记录六类原始失配如何从大规模量化采样、对抗自回归引力、故事生成复现、金融任务和日常复杂问题中的连续挫败里一步步被逼出来，也解释为什么这套框架首先是工程发现，再被整理成理论语言。
+
+[阅读六类原始失配的工程来源](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/engineering-origins-of-six-primitive-mismatches.zh-CN.md)
 
 ### 受治理 LLM 对象模型与接口规范
 Tag: 实现规范工作稿
