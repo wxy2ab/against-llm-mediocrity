@@ -114,6 +114,8 @@ That step was decisive because it made three things much clearer:
 
 That line of thought later became **support mismatch**: **the high-value structure is not nonexistent, but under the current policy, search procedure, and budget it is unreachable or very unlikely to become a live candidate.**
 
+One piece of real chronology should be preserved here: this summarization actually happened after aggregation mismatch (next section) had been discovered and named. In order of encounter, the shock from the quant sampling came first; but in order of concept naming, aggregation mismatch was the first mismatch to be identified, and the distributional phenomenon of autoregressive gravity was only later folded back into what is now support mismatch. The sections of this document are arranged in order of encounter, an ordering organized with AI assistance.
+
 ---
 
 ## Second Turn: Story Generation Exposed Aggregation Mismatch
