@@ -811,6 +811,57 @@ Verifier hierarchy accepts or rejects finding.
 Control delta is applied only after acceptance.
 ```
 
+### 13.4 验证器缩放
+
+验证器不应只被理解为一个输出 `pass/fail` 或离散分数的判定器。在候选很多、差异细微、单次评估噪声较大的任务里，验证器本身也需要被工程化和缩放。
+
+对 LLM 审计器或 LLM verifier，至少有三条常见的缩放轴：
+
+```text
+score granularity
+repeated evaluation
+criteria decomposition
+```
+
+- **Score granularity**：不要只让验证器输出过粗的 `1-5` 或 `pass/fail`。更细粒度的评分更容易区分“明显错误”“基本可用但缺关键条件”“接近正确但缺少边界处理”等不同失败形态。
+- **Repeated evaluation**：单次 LLM 评估可能受提示顺序、表述风格或偶然噪声影响。重复验证并聚合结果，可以降低方差，避免系统围绕一次脆弱判断过拟合。
+- **Criteria decomposition**：复杂任务不应只靠一个笼统问题来评估。应把验证拆成若干显式 criterion，例如正确性、证据完整性、边界条件、状态一致性、风险披露和渲染保真度，再组合这些结果。
+
+这些技术不改变权威层级；它们只改善 verifier 信号的分辨率、稳定性和可用性。连续或细粒度分数可用于：
+
+```text
+candidate ranking
+best-of-N selection
+progress tracking
+escalation prioritization
+```
+
+但它们默认不应直接替代 acceptance gate、回归 guard 或状态提交条件。高分只能表示“更值得继续检查”或“在当前 verifier 下更可能正确”，而不是自动获得最终权威。
+
+因此，更稳的集成规则是：
+
+```text
+fine-grained verifier score
+  -> ranking / routing / progress estimate
+  -> evidence-backed acceptance check
+  -> regression guard
+  -> committed state update
+```
+
+如果任务允许把 verifier 设计为受治理对象，那么验证器对象还应显式记录：
+
+```json
+{
+  "scoring_granularity": "coarse | medium | fine",
+  "evaluation_repeats": 1,
+  "criteria_set": ["correctness", "coverage", "boundary_conditions"],
+  "aggregation_policy": "mean | weighted_mean | tournament",
+  "uncertainty_policy": "when disagreement triggers escalation"
+}
+```
+
+这类 verifier engineering 很有价值，但它仍然只是审计工程中的一个子系统。它帮助系统更好地区分候选、追踪进度和分配验证预算；真正把失败转化为持久改进的，仍然是失败定位、控制空间写回、回归护栏和状态治理。
+
 ---
 
 ## 14. 审计模式
