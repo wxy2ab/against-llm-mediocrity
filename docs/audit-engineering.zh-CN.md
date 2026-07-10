@@ -108,14 +108,80 @@ Gate:      accept | continue | escalate | stop
 
 ## 4. 第一原理：生成—验证不对称
 
-审计工程建立在两个相对不对称上：
+审计工程建立在三个相对不对称上：
 
 1. 高质量生成难，缺陷识别相对容易。
 2. 完整规格难，反例驱动的规格修订相对容易。
+3. 当当前选择依赖尚未写出的未来结构时，受前缀限制的构造很难；完整候选条件化的修复相对容易，因为完整候选会暴露非局部关系。
 
 在开放式任务里，用户很难提前写出完整目标函数，但可以在看到候选后判断："它缺少 X、过度强调 Y、忽略了 Z、把 A 当成了 B。"如果这类反馈只停留在自然语言意见里，它很容易被下一轮生成稀释；如果被记录为结构化审计发现，它就能成为下一轮的控制信号。
 
-但这种不对称不是无条件成立的。缺陷必须能被定位，标准必须能逐步显式化；在强规格失配下，审计器本身同样需要被验证。审计工程因此既工程化 verifier，也治理 verifier。
+第三种不对称改变了任务的信息结构。首次自回归构造时，模型只能在前缀条件下选择：
+
+```text
+p_theta(y_t | x, y_<t)
+```
+
+但当前最优选择可能依赖只会出现在 `y_>t` 中的接口、回收、矛盾、依赖或承诺。完整候选 `y_0` 存在以后，修复变成候选条件化生成：
+
+```text
+p_theta(y'_t | x, y_0, audit(y_0), y'_<t)
+```
+
+模型仍然是自回归的，但旧的完整 artifact 已成为 witness。它把原本潜在的跨部分约束变成可观察关系，使系统可以搜索修复增量，而不是重新构造整个产物：
+
+```text
+delta* = argmax_delta [U_hat(y_0 + delta) - U_hat(y_0)]
+         subject to preserved constraints and regression guards
+```
+
+这是 tractability transformation，不是全局最优保证。它可以改善初始盆地，并在审计扩大修复邻域时离开初始盆地，但也可能继续被第一版候选或弱 verifier 锚定。
+
+### 4.1 Oracle 获取阶梯
+
+以下 Tier 描述审计信号如何获得。它们是逐步降级的 fallback ladder，不表示数字更高就更有权威。
+
+| Tier | 信号来源 | 可安全支持的主张 |
+| --- | --- | --- |
+| Tier 0 | 原生环境或可执行 oracle：编译器、类型检查器、确定性测试、proof checker、执行参照 | 只认证 oracle 在声明作用域内编码的性质 |
+| Tier 1 | 构造的 hard sub-oracle：不变量、property test、metamorphic relation、临时契约、differential check | 把软目标的一部分局部硬化；语义保真度和覆盖仍需独立 teeth-proof |
+| Tier 2 | 完整候选条件化的 learned verifier | 为排序、定位和修复提供局部 proxy gradient；不认证全局质量 |
+| Tier 3 | 基于分解视角或论点的 context-conditioned 结构化验证 | 可以增加结构覆盖并暴露相关盲点；统计置信度需要外部校准和显式错误模型 |
+
+### 4.2 Tier 2：完整候选条件化的局部优化
+
+当任务价值依赖非局部关系、完整候选能暴露关系违反，并且有界修复能保留大部分既有价值时，Tier 2 最强。它的操作形式是：
+
+```text
+complete candidate
+-> expose violated relation
+-> localize repair target
+-> choose repair radius
+-> apply control delta
+-> run regression audit
+```
+
+修复半径不局限于 token。它可以从 span 扩大到函数或场景，再扩大到模块或章节、架构或情节规划，最后回到修订后的控制空间重新生成。因此，审计引导的是 variable-neighborhood search，而不只是润色当前草稿。
+
+### 4.3 Tier 3：Context-conditioned 正交审计
+
+在同一 context 和同一 prompt 下重复采样，主要估计单个条件分布内部的变化。Tier 3 则构造一个受治理的条件族：
+
+```text
+y_ij ~ p_theta(y | x, context_i, prompt_i, decomposition_i)
+```
+
+并把审计族视为条件混合：
+
+```text
+q_T3(y | x) = sum_i w_i p_theta(y | x, context_i, prompt_i, decomposition_i)
+```
+
+当不同 context 暴露不同证据、表征、假设、反事实、工具或 exemplar 时，它可以扩大有效结构支持。如果每个 branch 只是对同一信息的改写，并且仍路由到同一个已学习盆地，Tier 3 就会退化回伪多样性。
+
+Tier 3 当前的地位是**条件性工作主张**。prompt diversity、context 隔离、问题分解和多来源证据分别在部分领域有支持，但它们的组合不是通用 verifier。没有外部校准时，Tier 3 可以报告跨 context 稳定性、分歧和无支持区域，但不能把模型共识直接翻译成 truth probability。
+
+这些不对称都不是无条件成立的。缺陷必须能定位，标准必须逐步显式化，修复必须保留重要的已满足约束，verifier error 也必须与任务效用保持足够一致。在强规格失配下，审计器本身同样需要被验证。审计工程因此既工程化 verifier，也治理 verifier。
 
 ## 5. 与 Knowledge Governance 的关系
 
@@ -166,7 +232,7 @@ Weak Brief -> Candidate v0
 
 ### 6.4 独立审计候选
 
-审计器负责发现、定位与路由问题，不负责直接重写产物。生成器与审计器应尽量在接口层隔离——这不应只停留在"最好如此"的建议上。即使底层使用同一模型，也应使用不同上下文，并在可验证任务中引入外部工具或专门 verifier。
+审计器负责发现、定位与路由问题，不负责直接重写产物。生成器与审计器应尽量在接口层隔离——这不应只停留在"最好如此"的建议上。即使底层使用同一模型，也应使用不同上下文，并在可验证任务中引入外部工具或专门 verifier。对 Tier 3，各 branch 在聚合前应保持独立，并接收声明清楚的 context contract：root question、视角或论点、证据来源、假设、排除信息、验证标准和输出 schema。
 
 此外，产出修复的模型不应通过任何 fallback 路径自行编写自己的 acceptance test 或 mutation 集。如果这些对象是 promotion 的前提，它们就必须作为独立的操作员输入或 verifier 输入进入系统。
 
@@ -206,6 +272,18 @@ Weak Brief -> Candidate v0
 ```
 
 反复全文重写会退化为普通输出空间采样，并丢失"哪项控制决策导致缺陷"的信息。
+
+局部修复是默认策略，不是牢笼。当 finding 位于结构上游或存在高密度耦合时，auditor 应扩大邻域：
+
+```text
+span edit
+-> function / scene rewrite
+-> module / chapter rewrite
+-> architecture / plot replan
+-> regenerate from revised control space
+```
+
+如果局部 delta 无法修复 finding，或不断破坏需要保留的约束，就必须升级修复半径。
 
 ### 6.7 回归审计
 
@@ -556,6 +634,40 @@ LLM 判断只能 downgrade 或要求复审，不能把失败检查改判为通�
 | Verifier Integrity | 被审计系统能否污染 verifier，以及污染难度有多高 |
 | Cost per Accepted Artifact | 达到验收所需轮次、Token、时间和人工成本 |
 
+Tier 2 与 Tier 3 还需要额外指标：
+
+| 指标 | 含义 |
+| --- | --- |
+| Completion-Conditioned Lift | 候选条件化修复相对等预算重新生成带来的外部效用提升 |
+| Repair-Radius Escalation Rate | 局部修复需要扩大到结构重规划或重新生成的频率 |
+| Basin Escape Rate | 抵达与初始盆地结构不同且外部效用更高的候选族比例 |
+| Within-Context Structural Diversity | 同一 context 与 prompt 下重复采样产生的结构变化 |
+| Between-Context Structural Diversity | 受治理 context 与 prompt 干预产生的结构变化 |
+| Cross-Context Error Correlation | 审计 branch 共享同一错误 finding 或遗漏的程度 |
+| Unique Confirmed Finding Yield | 只有单一 context branch 提出、但最终被独立确认的 finding 数量 |
+| False-Consensus Rate | branch 达成一致但被外部验证拒绝的比例 |
+| Aggregation Loss | 正确局部 finding 在汇总时变成错误全局结论的比例 |
+
+### 14.1 开放实验计划
+
+以下主张有意保留为待直接实验。
+
+**实验 AE-T1：构造 oracle 的杠杆。** 在等预算下比较无构造 oracle、builder 自己构造检查、独立 verifier 构造检查，以及 hidden-gold 上界。测量构造成本、语义 precision、coverage、mutation kill rate、hidden-gold pass rate，以及 verifier 与 builder 的错误相关性。
+
+**实验 AE-T2：完整候选条件化修复。** 在代码、故事和论证组合上比较 fresh regeneration 与候选条件化 audit/repair。植入或标注非局部缺陷，改变 repair radius，测量定位准确率、外部效用提升、回归率、盆地逃逸，以及多轮迭代中 verifier score 与外部 score 的分叉。
+
+**实验 AE-T3：Context-conditioned 结构化验证。** 使用等预算 factorial design：
+
+```text
+A. same context + same prompt + repeated sampling
+B. same context + diverse prompts
+C. diverse contexts + same prompt
+D. diverse contexts + matched decomposition prompts
+E. D + independent evidence or model diversity
+```
+
+每个 cell 内做少量重复，以分离 within-condition noise 和 between-context effect。任务应覆盖：模型熟悉的结构化领域；模型不熟悉但提供充分领域材料的任务；模型不熟悉且缺少决定性知识的负对照。核心检验是：between-context structural diversity 是否超过 within-context diversity，cross-context error correlation 是否下降，聚合后的 hidden-gold 或 human-grounded utility 是否提高。在这些检验通过前，Tier 3 仍是 coverage 与 robustness 机制，而不是 calibrated truth oracle。
+
 ## 15. 适用边界
 
 审计工程最适合：
@@ -591,6 +703,6 @@ LLM 判断只能 downgrade 或要求复审，不能把失败检查改判为通�
 Agent：Candidate -> Audit -> Control Delta -> Rerender -> Gate
 ```
 
-Audit Engineering 不是 Prompt Engineering 的技巧，不是 Context Engineering 的子集，也不是 Hardness Engineering 的替代品。它是把两种关键不对称——生成难而验证相对容易、完整说明难而反例修订相对容易——转化为可复用工程循环的范式。
+Audit Engineering 不是 Prompt Engineering 的技巧，不是 Context Engineering 的子集，也不是 Hardness Engineering 的替代品。它把三个重要不对称——生成与验证、完整规格与反例驱动修订、前缀受限构造与完整候选条件化修复——转化为可复用的工程纪律。Context-conditioned 正交审计是这套纪律的条件性扩展：它可以扩大结构覆盖，但只有独立证据与校准聚合才能把覆盖提升为置信度。
 
 > **Audit Engineering is the discipline of engineering verifier-side control loops that transform underspecified user value into explicit, actionable, and revocable control signals through iterative audit, repair routing, and regression governance.**

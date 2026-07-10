@@ -237,7 +237,28 @@ Hard evidence 不是 agent 说得有多自信，而是：
 
 把一个 IC 标量拆成 per-horizon IC、per-regime IC、turnover attribution，能让 auditor 更知道该往哪里看；但每个分量仍可能是 noisy、sample-dependent、non-causal 的。分解提升的是定位带宽，不自动提升 truth fidelity。
 
-真正买保真度的是逻辑、一致性、形式检查、执行参照、不变量。
+真正买保真度的是逻辑、一致性、形式检查、执行参照、不变量或新的独立证据。context diversity 可以引入这种证据，但只由改写构成的 context diversity 不会自动增加保真度。
+
+### 5.1 Oracle 获取阶梯
+
+Fidelity source taxonomy 和下面的 Tier ladder 回答不同问题。taxonomy 问“判断靠什么支撑”；ladder 问“系统需要降级到哪一层才能获得可用信号”。
+
+| Tier | Oracle 构造方式 | 权威边界 |
+|---|---|---|
+| 0 | 环境提供的原生硬反馈 | 只对已编码性质和声明环境 hard |
+| 1 | 构造的 hard sub-oracle | 构造后机械 hard；语义上仍局部，并需独立 teeth-proof |
+| 2 | 完整候选条件化的 learned verifier | 为排序、定位和修复提供局部 proxy gradient；不是全局质量证书 |
+| 3 | 对分解视角或论点运行的 context-conditioned 结构化 verifier | 在外部 truth 校准前，只是 coverage 与 robustness 机制 |
+
+Tier 2 利用的是 **completion-induced observability**。完整候选把非局部关系暴露为 failure witness，使系统可以搜索 repair delta，并在局部 patch 停滞时扩大 repair radius。
+
+Tier 3 不是普通重复采样。它构造条件分布混合：
+
+```text
+q_T3(y | x) = sum_i w_i p_theta(y | x, context_i, prompt_i, decomposition_i)
+```
+
+只有当 branch 改变了证据、表征、假设、反事实、工具、exemplar 或能力路由时，有效支持才可能扩大。如果每个 branch 只是同一 context 的改写，Tier 3 就是伪多样性。如果 context 引入独立证据，它可能增加 fidelity；如果只是重构现有材料，它主要增加 bandwidth、routing diversity 或 effective support。
 
 ---
 
@@ -610,6 +631,30 @@ expected_cost_to_acquire_oracle
 fallback_soft_prior_if_any
 ```
 
+### 11.4 Tier 1 实验：构造 oracle 的杠杆
+
+在等预算下比较四种条件：无构造 oracle、builder 自己构造检查、独立 verifier 构造检查，以及 hidden-gold oracle 上界。测量构造成本、语义 precision、coverage、mutation kill rate、hidden-gold pass rate，以及 builder-verifier error correlation。
+
+### 11.5 Tier 2 实验：完整候选条件化修复
+
+在代码、故事和论证组合上比较 fresh regeneration 与 candidate-conditioned audit/repair。植入或标注非局部缺陷，改变 repair radius，测量定位准确率、外部效用提升、回归率、盆地逃逸，以及跨轮次 verifier score 与 external score 的分叉。
+
+### 11.6 Tier 3 实验：Context-conditioned 结构化验证
+
+使用等预算 factorial design：
+
+```text
+A. same context + same prompt + repeated sampling
+B. same context + diverse prompts
+C. diverse contexts + same prompt
+D. diverse contexts + matched decomposition prompts
+E. D + independent evidence or model diversity
+```
+
+在每个 cell 内重复，以分离 within-condition 随机方差与 between-context 结构变化。测试模型熟悉的结构化任务、提供充分领域材料的不熟悉任务，以及缺少决定性知识的不熟悉任务作为负对照。测量 between/within-context structural diversity、structural basin coverage、cross-context error correlation、unique confirmed findings、false consensus、calibration、aggregation loss 和 externally grounded utility。
+
+只有当 context-conditioned branch 降低相关错误，并在聚合后提高 held-out 或 human-grounded outcome 时，Tier 3 才能从 coverage 机制进一步 promotion。
+
 ---
 
 ## 12. 最终原则
@@ -626,9 +671,9 @@ fallback_soft_prior_if_any
 
 即使外层目标是软的，也要先寻找最大的硬子问题：invariant、leakage、contract、logic、execution diff、data consistency。
 
-### 原则 3：分解用于买带宽，不要冒充保真度
+### 原则 3：区分带宽、路由、支持、保真度与置信度
 
-高带宽 profile 很有用，但不能自动变成 causal proof。
+高带宽 profile 很有用，但不能自动变成 causal proof。分解主要买 bandwidth；prompt diversity 可以买 routing diversity；context diversity 可以买 representation 与 effective-support diversity；独立且与任务相关的证据可以买 fidelity；经过外部校准的聚合可以买 confidence。
 
 ### 原则 4：audit 不进 trust root
 
@@ -642,6 +687,10 @@ SGAR 不需要 why，但极度依赖 boundary fidelity。gate 不硬，ratchet �
 
 当没有定位 oracle，也没有高保真边界时，继续机械迭代就是伪工作。此时系统应明确报告缺少什么 fidelity source，而不是继续生成更多候选。
 
+### 原则 7：不要把同条件采样与 context intervention 混为一谈
+
+同一 context 下增加样本，只增加已部署条件分布内部的密度。受治理的 context intervention 可能增加结构覆盖，但前提是它产生实质不同的证据或表征，而不是词汇变化。
+
 ---
 
 ## 13. 最终压缩版
@@ -651,6 +700,8 @@ SGAR 不需要 why，但极度依赖 boundary fidelity。gate 不硬，ratchet �
 > 它在 text2sql、文本逻辑、spec/claim、一致性检查、可执行语义任务上强，是因为失败暴露了便宜、高带宽、较高保真的定位 oracle。
 >
 > 它在纯标量 metric gate 上弱，是因为缺少定位带宽；这时应先用分解买带宽，或切到 SGAR。
+>
+> Tier 2 把完整候选作为 candidate-conditioned 局部修复的 witness。Tier 3 通过受治理的 context 与 decomposition intervention 暴露不同 witness，降低 verifier 的共享盲点。没有外部证据和校准时，二者都不能进入 trust root。
 >
 > **SGAR 的本质是 boundary-fidelity exploitation。**
 >

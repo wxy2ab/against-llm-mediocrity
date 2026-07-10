@@ -108,14 +108,80 @@ Four tests distinguish an audit from ordinary commentary:
 
 ## 4. First Principle: Generation–Verification Asymmetry
 
-Audit Engineering rests on two relative asymmetries:
+Audit Engineering rests on three relative asymmetries:
 
 1. Excellent generation is difficult; defect identification is often easier.
 2. Complete specification is difficult; counterexample-driven specification repair is often easier.
+3. Prefix-limited construction is difficult when current choices depend on unwritten future structure; completion-conditioned repair is often easier because the full candidate exposes those nonlocal relations.
 
 In open-ended work, users rarely begin with a complete utility function. Yet after seeing a candidate they can often say: “It omits X, overweights Y, ignores Z, and treats A as B.” If that feedback remains free-form prose, it is easily diluted by the next generation. When recorded as a structured finding, it becomes a control signal.
 
-The asymmetry is not unconditional. Defects must be localizable and criteria must become progressively explicit. Under severe specification mismatch, the auditor itself must be audited. Audit Engineering therefore engineers the verifier and governs the verifier at the same time.
+The third asymmetry changes the information structure of the task. During initial autoregressive construction, the model chooses under a prefix-only condition:
+
+```text
+p_theta(y_t | x, y_<t)
+```
+
+Yet the best current choice may depend on interfaces, payoffs, contradictions, dependencies, or commitments that appear only in `y_>t`. Once a complete candidate `y_0` exists, repair is candidate-conditioned:
+
+```text
+p_theta(y'_t | x, y_0, audit(y_0), y'_<t)
+```
+
+The model is still autoregressive, but the old full artifact now acts as a witness. It makes previously latent cross-part constraints observable and allows the system to search over a repair delta rather than reconstruct the entire artifact:
+
+```text
+delta* = argmax_delta [U_hat(y_0 + delta) - U_hat(y_0)]
+         subject to preserved constraints and regression guards
+```
+
+This is a tractability transformation, not a global-optimum guarantee. It can improve an initial basin, and it can leave that basin when audit selects a larger repair neighborhood, but it may remain anchored by the first candidate or by a weak verifier.
+
+### 4.1 Oracle acquisition ladder
+
+The following tiers classify how an audit signal is acquired. They are a fallback ladder, not an ordering in which higher numbers are more authoritative.
+
+| Tier | Signal source | What it can safely claim |
+| --- | --- | --- |
+| Tier 0 | Native environmental or executable oracle: compiler, type checker, deterministic test, proof checker, execution reference | Certifies only the encoded property within the oracle's declared scope |
+| Tier 1 | Constructed hard sub-oracle: invariant, property test, metamorphic relation, temporary contract, differential check | Locally hardens part of a soft objective; semantic fidelity and coverage still require independent teeth-proof |
+| Tier 2 | Completion-conditioned learned verifier | Provides a local proxy gradient for ranking, localization, and repair; does not certify global quality |
+| Tier 3 | Context-conditioned structured verification across decomposed views or claims | Can increase structural coverage and expose correlated blind spots; statistical confidence requires external calibration and an explicit error model |
+
+### 4.2 Tier 2: completion-conditioned local optimization
+
+Tier 2 is strongest when task value depends on nonlocal relations, a completed candidate exposes violations of those relations, and bounded repairs preserve most already-earned value. Its operational form is:
+
+```text
+complete candidate
+-> expose violated relation
+-> localize repair target
+-> choose repair radius
+-> apply control delta
+-> run regression audit
+```
+
+The repair radius is not restricted to tokens. It may expand from a span to a function or scene, then to a module or chapter, then to an architecture or plot plan, and finally to regeneration from a revised control space. Audit therefore directs variable-neighborhood search rather than merely polishing the current draft.
+
+### 4.3 Tier 3: context-conditioned orthogonal audit
+
+Repeated sampling under one context and one prompt mostly estimates variation inside one conditional distribution. Tier 3 instead constructs a governed family of conditions:
+
+```text
+y_ij ~ p_theta(y | x, context_i, prompt_i, decomposition_i)
+```
+
+and treats the audit family as a conditional mixture:
+
+```text
+q_T3(y | x) = sum_i w_i p_theta(y | x, context_i, prompt_i, decomposition_i)
+```
+
+This can expand effective structural support when different contexts expose different evidence, representations, assumptions, counterfactuals, tools, or exemplars. If every branch is only a paraphrase of the same information and routes to the same learned basin, Tier 3 collapses back into pseudo-diversity.
+
+The current status of Tier 3 is a **conditional working claim**. Prompt diversity, context separation, question decomposition, and multi-source evidence each have supporting evidence in some domains, but their combination is not a universal verifier. Without external calibration, Tier 3 may report cross-context stability, disagreement, and unsupported regions; it must not translate model consensus directly into truth probability.
+
+The asymmetries are not unconditional. Defects must be localizable, criteria must become progressively explicit, repair must preserve important satisfied constraints, and verifier error must remain sufficiently aligned with task utility. Under severe specification mismatch, the auditor itself must be audited. Audit Engineering therefore engineers the verifier and governs the verifier at the same time.
 
 ## 5. Relationship to Knowledge Governance
 
@@ -166,7 +232,7 @@ The contract itself remains auditable because the real standard is rarely comple
 
 ### 6.4 Audit the candidate independently
 
-The auditor finds, localizes, and routes defects; it does not rewrite the artifact. Generator and auditor should be isolated by interface, not merely by guideline, whenever the task admits such separation. Even if they use the same underlying model, they should use separate contexts, with external tools or dedicated verifiers added for verifiable tasks.
+The auditor finds, localizes, and routes defects; it does not rewrite the artifact. Generator and auditor should be isolated by interface, not merely by guideline, whenever the task admits such separation. Even if they use the same underlying model, they should use separate contexts, with external tools or dedicated verifiers added for verifiable tasks. For Tier 3, branches should remain independent until aggregation and each branch should receive a declared context contract: root question, view or claim, evidence provenance, assumptions, excluded information, verification criterion, and output schema.
 
 The producer should not be able to author its own acceptance test or its own mutation set through a fallback path. If those artifacts are required for promotion, they must enter as independent operator or verifier inputs.
 
@@ -206,6 +272,18 @@ repair the control object -> repair local structure -> repair surface expression
 ```
 
 Repeated full rewrites collapse back into output-space sampling and erase information about which control decision caused the defect.
+
+Local repair is a default, not a prison. The auditor should escalate the neighborhood when the finding is structurally upstream or densely coupled:
+
+```text
+span edit
+-> function / scene rewrite
+-> module / chapter rewrite
+-> architecture / plot replan
+-> regenerate from revised control space
+```
+
+Escalation is required when a local delta cannot repair the finding without repeatedly breaking preserved constraints.
 
 ### 6.7 Run regression audit
 
@@ -550,6 +628,40 @@ Audit Engineering should be evaluated not only by final score but by whether the
 | Verifier Integrity | Degree to which the audited system can or cannot tamper with the verifier |
 | Cost per Accepted Artifact | Rounds, tokens, time, and human effort required for acceptance |
 
+Tier 2 and Tier 3 require additional measurements:
+
+| Metric | Meaning |
+| --- | --- |
+| Completion-Conditioned Lift | External-utility gain from candidate-conditioned repair over an equal-budget fresh generation |
+| Repair-Radius Escalation Rate | How often local repair must expand to structural replan or regeneration |
+| Basin Escape Rate | Share of runs that reach a structurally distinct, externally better candidate family than the initial basin |
+| Within-Context Structural Diversity | Structural variation produced by repeated sampling under one context and prompt |
+| Between-Context Structural Diversity | Structural variation induced by governed context and prompt interventions |
+| Cross-Context Error Correlation | Degree to which audit branches share the same false findings or omissions |
+| Unique Confirmed Finding Yield | Independently confirmed findings contributed by only one context branch |
+| False-Consensus Rate | Cases where branches agree but external verification rejects the consensus |
+| Aggregation Loss | Cases where correct local findings become an incorrect global conclusion during synthesis |
+
+### 14.1 Open experimental program
+
+The following claims are intentionally left open for direct testing.
+
+**Experiment AE-T1: constructed-oracle leverage.** Compare equal-budget generation with no constructed oracle, builder-constructed checks, independently constructed checks, and a hidden-gold upper bound. Measure construction cost, semantic precision, coverage, mutation kill rate, hidden-gold pass rate, and verifier-builder error correlation.
+
+**Experiment AE-T2: completion-conditioned repair.** On code, stories, and argument composition, compare fresh regeneration with candidate-conditioned audit and repair. Seed or label nonlocal defects, vary repair radius, and measure localization accuracy, external-utility lift, regression rate, basin escape, and verifier-score versus external-score divergence over repeated rounds.
+
+**Experiment AE-T3: context-conditioned structured verification.** Use an equal-budget factorial design:
+
+```text
+A. same context + same prompt + repeated sampling
+B. same context + diverse prompts
+C. diverse contexts + same prompt
+D. diverse contexts + matched decomposition prompts
+E. D + independent evidence or model diversity
+```
+
+Run several replicates inside each cell to separate within-condition noise from between-context effects. Evaluate familiar structured tasks, unfamiliar tasks with sufficient supplied domain material, and unfamiliar tasks without the decisive knowledge as a negative control. The primary tests are whether between-context structural diversity exceeds within-context diversity, whether cross-context error correlation falls, and whether hidden-gold or human-grounded utility improves after aggregation. Until these tests pass, Tier 3 remains a coverage and robustness mechanism rather than a calibrated truth oracle.
+
 ## 15. Applicability Boundary
 
 Audit Engineering is most useful when:
@@ -585,4 +697,4 @@ Strategy: Frame -> Plan -> Assumption/Counterfactual Audit -> Reframe -> Board-r
 Agent:   Candidate -> Audit -> Control Delta -> Rerender -> Gate
 ```
 
-Audit Engineering is not a Prompt Engineering technique, a subset of Context Engineering, or a substitute for Hardness Engineering. It turns two important asymmetries—generation is hard while verification is often easier, and complete specification is hard while counterexample-driven revision is often easier—into a reusable engineering discipline.
+Audit Engineering is not a Prompt Engineering technique, a subset of Context Engineering, or a substitute for Hardness Engineering. It turns three important asymmetries—generation versus verification, complete specification versus counterexample-driven revision, and prefix-limited construction versus completion-conditioned repair—into a reusable engineering discipline. Context-conditioned orthogonal audit is a conditional extension of that discipline: it can broaden structural coverage, but only independent evidence and calibrated aggregation can promote coverage into confidence.

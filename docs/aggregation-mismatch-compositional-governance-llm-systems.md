@@ -396,6 +396,39 @@ global optimization
 
 Autoregressive mediocrity should therefore be treated as a subcase of aggregation mismatch, not as the whole theory of LLM failure.
 
+### 4.1 Completion-Induced Observability
+
+During first-pass generation, a choice at position `k` is conditioned on the prefix even when its task value depends on later interfaces, payoffs, bindings, or commitments. A completed candidate changes that information condition. The old suffix is not the optimal future, but it is a concrete witness that makes many nonlocal violations observable.
+
+```text
+first pass: p_theta(t_k | t_<k, context)
+
+repair:     p_theta(t'_k | complete_candidate, audit_finding, t'_<k, context)
+```
+
+This is why aggregation audit can be useful even without a guarantee of global optimality: it converts hidden coordination requirements into inspectable residuals.
+
+### 4.2 From Global Synthesis to Variable-Neighborhood Repair
+
+Let `Y_0` be a completed candidate and `N_r(Y_0)` a repair neighborhood of radius `r`. Audit changes the optimization problem from whole-space construction to a sequence of conditional searches:
+
+```text
+delta_r* = argmax_delta in N_r(Y_0)
+           [U_hat(Y_0 + delta) - U_hat(Y_0)]
+```
+
+The radius should be governed rather than fixed:
+
+```text
+span
+→ function / scene
+→ module / chapter
+→ architecture / plot plan
+→ regeneration from revised control space
+```
+
+Small neighborhoods preserve already-good structure. Larger neighborhoods allow the system to leave the initial basin when the defect is upstream, densely coupled, or repeatedly reintroduced by local repair. The mechanism is a tractability transformation and a basin-escape operator, not a proof that local search reaches the global optimum.
+
 ---
 
 ## 5. The Structure of Local-to-Global Failure
@@ -768,6 +801,8 @@ invariant breach
 ```
 
 Each finding should produce a control delta.
+
+Integration repair should also declare the repair radius. If the same relation fails again after a local patch, the system should escalate from part-level repair to interface redesign, composition-plan revision, or regeneration from the governed control space. Repeating the same local neighborhood after evidence of structural coupling is repair theater.
 
 ### 8.7 Final Rendering
 
@@ -1491,6 +1526,8 @@ A reviewer critiques local quality but not integration validity.
 A coordinator merges outputs without resolving conflicts.
 ```
 
+Context-conditioned audit branches create a special aggregation obligation. Different contexts and matched decomposition prompts may expose complementary evidence or structural basins, but their outputs are not independent merely because their role names differ. The workflow should preserve context provenance, assumptions, excluded information, and unique evidence until synthesis. A minority branch carrying the only counterexample must not be erased by majority vote.
+
 ### 16.2 Workflow Composition Objects
 
 Useful objects include:
@@ -1566,6 +1603,10 @@ A useful decision rule is:
 ```text
 Govern composition when expected loss from local-to-global failure exceeds the cost of making composition explicit.
 ```
+
+For candidate-conditioned repair, local improvement is enough only while accepted deltas have positive externally grounded utility and regression guards preserve previously satisfied relations. When verifier score rises but external utility stalls, when the same defect recurs, or when the necessary delta crosses many interfaces, the system should enlarge the neighborhood or restart from a revised composition object.
+
+An open experiment should compare equal-budget fresh generation with candidate-conditioned repair across several radii. Measure localization accuracy, completion-conditioned lift, regression, radius escalation, basin escape, and divergence between verifier score and human or hidden-gold utility. This claim remains conditional until the gains survive held-out artifacts and independent evaluation.
 
 ---
 
@@ -1792,6 +1833,20 @@ The theory should expose its own claims to audit.
   "support_scope": "High-value tasks with meaningful local-to-global failure risk.",
   "revocation_trigger": "If explicit composition objects repeatedly add cost without improving detection, repair, or prevention of local-to-global failures, governance should be reduced or redesigned.",
   "not_supported_claims": "Does not imply heavy decomposition is always beneficial. Does not replace task-specific verification."
+}
+```
+
+### 21.3 Completion-Conditioned Repair Claim
+
+```json
+{
+  "id": "gko.aggregation_mismatch.completion_conditioned_repair",
+  "type": "method_claim",
+  "condition": "A complete candidate exposes nonlocal relation violations and the system can choose and regression-test a repair neighborhood.",
+  "assertion": "Candidate-conditioned audit can reduce aggregation mismatch by converting whole-artifact synthesis into a sequence of localized or variable-neighborhood repairs.",
+  "support_scope": "Code, stories, arguments, plans, and other artifacts whose completed structure reveals interfaces, dependencies, payoffs, or invariants.",
+  "revocation_trigger": "Equal-budget held-out experiments show no external-utility lift over fresh generation, or repeated repair increases regression and proxy overfitting.",
+  "not_supported_claims": "Does not guarantee a global optimum. Does not imply the initial candidate is in a useful basin. Does not authorize a learned verifier to override hard checks."
 }
 ```
 

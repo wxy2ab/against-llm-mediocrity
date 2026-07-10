@@ -452,6 +452,72 @@ or because the candidate family itself is unsupported by the task?
 
 如果是后者，修复不是 revision，而是支持扩展。
 
+### 5.4 固定条件采样不等于 Context Intervention
+
+“更多采样经常失败”这一负结果，以部署条件近似固定为前提：
+
+```text
+Y_j ~ p_theta(Y | x, context_0, prompt_0)
+```
+
+只改变 random seed 或 decoding noise，会增加该条件分布内部的密度，但不必然增加结构盆地覆盖。
+
+受治理的 context intervention 会构造一组不同条件分布：
+
+```text
+Y_ij ~ p_theta(Y | x, context_i, prompt_i, decomposition_i)
+
+q_ctx(Y | x) = sum_i w_i p_theta(Y | x, context_i, prompt_i, decomposition_i)
+```
+
+当 context 引入以下实质差异时，混合分布可能扩大有效支持：
+
+```text
+不同证据来源或数据切片
+不同表征或控制对象
+不同状态假设或反事实
+不同工具、exemplar 或形式规则
+不同 claim target 或 decomposition structure
+```
+
+这并不否定固定条件下海量采样仍然盆地坍缩。它改变的是搜索策略、表征或可观察证据，而不只是增加 `n`。
+
+如果每个 context 都只是从同一缺失知识中生成的改写、模型缺少必要能力且 context 没有补入，或者 aggregation 丢弃了少数 branch 抵达的唯一结构，context intervention 仍然失败。
+
+治理上的区分是：
+
+```text
+same-condition sampling increases density
+context intervention may increase structural coverage
+external evidence may increase fidelity
+```
+
+### 5.5 开放实验：Context-Conditioned 支持扩展
+
+使用等预算 factorial comparison：
+
+```text
+A. same context + same prompt + repeated sampling
+B. same context + diverse prompts
+C. diverse contexts + same prompt
+D. diverse contexts + matched decomposition prompts
+E. D + independent evidence or model diversity
+```
+
+在每个 cell 内重复。盆地身份应使用任务层结构定义，例如 mechanism class、dependency graph、claim family、join path、invariant set 或 strategy family，而不能只看 lexical distance。测量：
+
+```text
+within-context structural diversity
+between-context structural diversity
+new-basin hit rate
+high-value target hit rate
+cross-context error correlation
+aggregation survival of minority structures
+external-utility lift per unit cost
+```
+
+只有当 between-context structural diversity 超过 within-context diversity，并且新盆地提高 hidden-gold 或 human-grounded utility 时，context expansion 主张才得到支持。还应加入所有 context 都缺少决定性知识的不熟悉领域，作为负对照。
+
 ---
 
 ## 6. 控制空间搜索
@@ -1169,6 +1235,8 @@ same proxy objective
 
 多样性剧场指系统要求“diverse answers”，但没有定义结构多样性轴。
 
+当系统创建许多名义上不同的 context，但它们只是同一证据、表征、隐藏假设或已学习先验的改写时，也属于多样性剧场。context 数量不等于 context diversity。
+
 更好的指令：
 
 ```text
@@ -1180,6 +1248,8 @@ Generate candidates that differ by state hypothesis, mechanism class, dependency
 ```text
 Generate five diverse answers.
 ```
+
+受治理的 diversity contract 应声明 root question、context provenance、预期结构轴、假设、排除信息，以及什么结构才算真正的新盆地。
 
 ### 15.3 Critique 剧场
 
