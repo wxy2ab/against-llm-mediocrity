@@ -239,7 +239,28 @@ The single most important sentence is:
 
 Breaking an IC scalar into per-horizon IC, per-regime IC, and turnover attribution helps the auditor know where to look; but each component may still be noisy, sample-dependent, and non-causal. Decomposition improves localization bandwidth, but does not automatically improve truth fidelity.
 
-What truly buys fidelity is logic, consistency, formal checking, execution references, and invariants.
+What truly buys fidelity is logic, consistency, formal checking, execution references, invariants, or new independent evidence. Context diversity can introduce that evidence, but context diversity made only from paraphrases does not.
+
+### 5.1 Oracle acquisition ladder
+
+The fidelity-source taxonomy and the following tier ladder answer different questions. The taxonomy asks *what supports the judgment*. The ladder asks *how far the system must fall back to obtain a usable signal*.
+
+| Tier | Oracle construction | Authority boundary |
+|---|---|---|
+| 0 | Native hard feedback from the environment | hard only for the encoded property and declared environment |
+| 1 | Constructed hard sub-oracle | mechanically hard after construction; semantically local and subject to independent teeth-proof |
+| 2 | Completion-conditioned learned verifier | local proxy gradient for ranking, localization, and repair; not a certificate of global quality |
+| 3 | Context-conditioned structured verifier over decomposed views or claims | coverage and robustness mechanism until calibrated against external truth |
+
+Tier 2 exploits **completion-induced observability**. A full candidate makes nonlocal relations available as a failure witness, allowing the system to search over a repair delta and to enlarge the repair radius when a local patch stalls.
+
+Tier 3 is not ordinary repeated sampling. It constructs a mixture of conditionals:
+
+```text
+q_T3(y | x) = sum_i w_i p_theta(y | x, context_i, prompt_i, decomposition_i)
+```
+
+Its effective support can broaden only when the branches change evidence, representation, assumptions, counterfactuals, tools, exemplars, or capability routing. If every branch is a paraphrase of one context, Tier 3 is pseudo-diversity. If contexts import independent evidence, they may increase fidelity; if they merely reframe existing material, they primarily increase bandwidth, routing diversity, or effective support.
 
 ---
 
@@ -612,6 +633,30 @@ expected_cost_to_acquire_oracle
 fallback_soft_prior_if_any
 ```
 
+### 11.4 Tier 1 experiment: constructed-oracle leverage
+
+Compare equal-budget generation under four conditions: no constructed oracle, builder-constructed checks, independently constructed checks, and a hidden-gold oracle as an upper bound. Measure construction cost, semantic precision, coverage, mutation kill rate, hidden-gold pass rate, and builder-verifier error correlation.
+
+### 11.5 Tier 2 experiment: completion-conditioned repair
+
+On code, stories, and argument composition, compare fresh regeneration with candidate-conditioned audit and repair. Seed or label nonlocal defects, vary repair radius, and measure localization accuracy, external-utility lift, regression rate, basin escape, and verifier-score versus external-score divergence across rounds.
+
+### 11.6 Tier 3 experiment: context-conditioned structured verification
+
+Use an equal-budget factorial design:
+
+```text
+A. same context + same prompt + repeated sampling
+B. same context + diverse prompts
+C. diverse contexts + same prompt
+D. diverse contexts + matched decomposition prompts
+E. D + independent evidence or model diversity
+```
+
+Run replicates inside each cell. Separate within-condition stochastic variance from between-context structural change. Test familiar structured tasks, unfamiliar tasks with sufficient supplied domain material, and unfamiliar tasks without decisive knowledge as a negative control. Measure between- versus within-context structural diversity, structural basin coverage, cross-context error correlation, unique confirmed findings, false consensus, calibration, aggregation loss, and externally grounded utility.
+
+Tier 3 is promoted beyond a coverage mechanism only if context-conditioned branches reduce correlated error and improve held-out or human-grounded outcomes after aggregation.
+
 ---
 
 ## 12. Final Principles
@@ -628,9 +673,9 @@ This is the first question for all tasks.
 
 Even if the outer objective is soft, first look for the largest hard subproblem: invariants, leakage, contracts, logic, execution diffs, data consistency.
 
-### Principle 3: Use Decomposition to Buy Bandwidth, Do Not Pretend It Buys Fidelity
+### Principle 3: Separate Bandwidth, Routing, Support, Fidelity, and Confidence
 
-A high-bandwidth profile is useful, but it does not automatically become causal proof.
+A high-bandwidth profile is useful, but it does not automatically become causal proof. Decomposition primarily buys bandwidth; prompt diversity can buy routing diversity; context diversity can buy representation and effective-support diversity; independent, task-relevant evidence can buy fidelity; externally calibrated aggregation can buy confidence.
 
 ### Principle 4: Audit Does Not Enter the Trust Root
 
@@ -644,6 +689,10 @@ SGAR does not need why, but it depends heavily on boundary fidelity. If the gate
 
 When there is neither a localization oracle nor a high-fidelity boundary, continued mechanical iteration is pseudo-work. At that point, the system should explicitly report which fidelity source is missing, rather than continue generating more candidates.
 
+### Principle 7: Do Not Confuse Same-Condition Sampling with Context Intervention
+
+More samples under one context increase density inside the deployed conditional distribution. Governed context interventions can increase structural coverage, but only when they create substantively different evidence or representations rather than lexical variation.
+
 ---
 
 ## 13. Final Compressed Version
@@ -653,6 +702,8 @@ When there is neither a localization oracle nor a high-fidelity boundary, contin
 > It is strong on text2sql, textual logic, specs/claims, consistency checks, and executable semantic tasks because failure exposes a cheap, high-bandwidth, relatively high-fidelity localization oracle.
 >
 > It is weak on pure scalar metric gates because localization bandwidth is missing; in those cases, we should first use decomposition to buy bandwidth, or switch to SGAR.
+>
+> Tier 2 uses a completed candidate as a witness for candidate-conditioned local repair. Tier 3 uses governed context and decomposition interventions to expose different witnesses and reduce shared verifier blind spots. Neither enters the trust root without external evidence and calibration.
 >
 > **The essence of SGAR is boundary-fidelity exploitation.**
 >

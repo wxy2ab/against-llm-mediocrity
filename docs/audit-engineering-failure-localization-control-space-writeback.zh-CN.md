@@ -237,6 +237,41 @@ LLM 往往擅长局部改进：改写、展开、补空、生成替代方案和�
 
 对话上下文可以包含审计结论，但不会自动使结论具有权威。审计结果只有通过显式接受规则更新受治理对象或硬状态时才具有权威。
 
+### 4.5 前缀-完成不对称
+
+当任务效用依赖非局部关系时，首次自回归构造必须在不完整前缀下做选择，即使当前最优选择依赖尚未写出的未来结构。完整候选改变了这个条件。旧 artifact 会暴露首次生成时仍然潜在的接口、矛盾、延迟回收、依赖违反和其他已实例化关系。
+
+```text
+first pass: p_theta(y_t | x, y_<t)
+
+repair:     p_theta(y'_t | x, y_0, audit(y_0), y'_<t)
+```
+
+修复模型仍然自回归生成，但完整旧候选现在成为 witness。审计因此可以把全 artifact 合成问题转换为候选条件化的 variable-neighborhood search：
+
+```text
+span
+  → function / scene
+  → module / chapter
+  → architecture / plot plan
+  → regeneration from revised control space
+```
+
+这个机制可以改善或离开初始盆地，但不保证全局最优。它的价值取决于 verifier alignment、失败可定位性、已满足约束的保存，以及局部修改停滞时扩大修复邻域的能力。
+
+### 4.6 Oracle 获取阶梯
+
+审计信号可以按获得方式组织。数字表示距离原生硬反馈的 fallback 距离，不表示权威随数字增加：
+
+| Tier | 信号来源 | 默认权威 |
+|---|---|---|
+| Tier 0 | 原生环境或可执行 oracle | 只对已编码性质和声明环境有权威 |
+| Tier 1 | 构造的 hard sub-oracle | 构造后机械 hard；语义上局部，并需 teeth-proof |
+| Tier 2 | 完整候选条件化的 learned verifier | 为排序、定位和修复提供 advisory local proxy gradient |
+| Tier 3 | 对分解视角或论点运行的 context-conditioned 结构化验证 | 在外部校准前，只提供 coverage 与 robustness signal |
+
+这个阶梯与基于风险的审计强度正交。低风险任务也可能使用 Tier 0 反馈；高风险任务可能仍然只有 Tier 3 证据，因此必须升级或进入 No-Go。
+
 ---
 
 ## 5. 价值保存管线中的审计
@@ -862,6 +897,34 @@ fine-grained verifier score
 
 这类 verifier engineering 很有价值，但它仍然只是审计工程中的一个子系统。它帮助系统更好地区分候选、追踪进度和分配验证预算；真正把失败转化为持久改进的，仍然是失败定位、控制空间写回、回归护栏和状态治理。
 
+在此基础上，repeated evaluation 必须进一步区分两类变化：同一 context/prompt 内的重复只能估计 within-condition instability；不同 context 与匹配 prompt 的分支才可能改变可见表征、能力路由和有效支持。对 context-conditioned verification，每个 branch 应声明：
+
+```json
+{
+  "root_question": "所有 branch 共享的不变目标",
+  "view_or_claim": "局部审计目标",
+  "context_provenance": ["来源、转换或工具输出"],
+  "assumptions": ["branch 特定假设"],
+  "excluded_information": ["该 branch 有意不可见的信息"],
+  "verification_criterion": "什么构成 finding",
+  "output_schema": "claim, evidence, verdict, uncertainty"
+}
+```
+
+branch 在聚合前应独立工作。aggregator 应返回 consensus core、context-sensitive findings，以及 unsupported/conflicted regions，而不是只做多数投票。
+
+治理上的区分是：
+
+```text
+decomposition primarily buys bandwidth
+prompt diversity can buy routing diversity
+context diversity can buy representation and effective-support diversity
+independent, task-relevant evidence can buy fidelity
+externally calibrated aggregation can buy confidence
+```
+
+没有外部校准时，context-diversified verifier 可以报告稳健性与分歧，但不能把内部共识直接转换成真值概率。
+
 ---
 
 ## 14. 审计模式
@@ -898,6 +961,21 @@ specification
 ### 14.6 状态提交审计
 
 检查系统是否只有在有效转移后才改变权威状态。适用于 SGAR 集成。
+
+### 14.7 Context-conditioned 正交审计
+
+保持 root question 不变，再构造彼此独立的 audit branch，为它们提供刻意不同的证据切片、表征、反事实假设、工具、exemplar 或 claim target，并使用与 context 匹配的 prompt。直到汇总阶段都保留 branch provenance。
+
+适用于：
+
+```text
+support mismatch
+observation-representation mismatch
+aggregation mismatch
+LLM-verifier shared blind spots
+```
+
+如果 branch 只是互相改写、暗中优化了不同 root objective，或 aggregation 压掉了携带唯一证据的少数 branch，这个模式就无效。
 
 ---
 
@@ -1096,15 +1174,15 @@ Audit intensity should increase with:
   need for persistent state
 ```
 
-风险层级：
+风险层级使用 `R0`-`R4` 命名，避免与 Tier 0-3 oracle 获取阶梯冲突：
 
-| 层级 | 审计强度 | 示例 |
+| 风险层级 | 审计强度 | 示例 |
 |---|---|---|
-| Tier 0 | 无正式审计 | 低风险改写、头脑风暴 |
-| Tier 1 | 轻量批评 | 普通草稿、摘要 |
-| Tier 2 | 结构化发现 | 可复用输出、中等风险 |
-| Tier 3 | 发现 + 增量 + 护栏 | 代码、SQL、操作建议 |
-| Tier 4 | 完整治理 + 状态提交 | 长程 agent、高成本决策 |
+| R0 | 无正式审计 | 低风险改写、头脑风暴 |
+| R1 | 轻量批评 | 普通草稿、摘要 |
+| R2 | 结构化发现 | 可复用输出、中等风险 |
+| R3 | 发现 + 增量 + 护栏 | 代码、SQL、操作建议 |
+| R4 | 完整治理 + 状态提交 | 长程 agent、高成本决策 |
 
 过度审计会通过延迟、脆弱规则、误报和治理债伤害系统。审计层本身也应受成本收益规则治理。
 
@@ -1288,6 +1366,26 @@ Are human escalations meaningful or rubber-stamped?
 }
 ```
 
+### 22.1 开放实验登记
+
+以下主张属于工作理论，但仍待直接实验。
+
+**AE-T2：完整候选条件化修复。** 在代码、故事和论证组合上比较等预算 fresh generation 与 audit-directed repair。植入或标注非局部缺陷，改变 repair radius，测量定位准确率、外部效用提升、回归、盆地逃逸，以及多轮迭代中 verifier score 与外部判断的分叉。
+
+**AE-T3：Context-conditioned 结构化验证。** 比较：
+
+```text
+A. same context + same prompt + repetition
+B. same context + diverse prompts
+C. diverse contexts + same prompt
+D. diverse contexts + matched decomposition prompts
+E. D + independent evidence or model diversity
+```
+
+保持 inference budget 相同，并在每个 cell 内重复，以分离 within-condition noise 与 between-context effect。任务覆盖熟悉的结构化领域、提供充分领域材料的不熟悉任务，以及缺少决定性知识的不熟悉任务作为负对照。测量 structural basin coverage、between/within-context diversity、cross-context error correlation、unique confirmed finding yield、false consensus、calibration、aggregation loss，以及 hidden-gold 或 human-grounded utility。
+
+除非这些实验表明 context-conditioned branch 能降低相关错误，并在聚合后提高外部 grounded outcome，否则 Tier 3 应继续被视为 coverage 与 robustness 机制，而不是 calibrated truth oracle。
+
 ---
 
 ## 23. 与形式传统的关系
@@ -1349,7 +1447,7 @@ Regression guard:
 
 LLM 系统不会仅仅因为增加批评就变得可靠。它们在批评变成审计、审计变成发现、发现变成控制增量、控制增量变成受治理对象，并且受治理对象通过护栏和状态转移变成未来行为时，才会更可靠。
 
-审计工程管理这种转换。它利用一个事实：识别具体缺陷常常比生成卓越产物更容易；从反例修复规格常常比提前写完整规格更容易。
+审计工程管理这种转换。它利用三个事实：识别具体缺陷常常比生成卓越产物更容易；从反例修复规格常常比提前写完整规格更容易；完整候选能够暴露前缀受限构造时尚不可见的非局部关系。Context-conditioned 正交审计是这一机制的条件性扩展，它扩大结构覆盖，但只有独立证据和校准聚合才能把覆盖转换为置信度。
 
 核心不变量是：
 

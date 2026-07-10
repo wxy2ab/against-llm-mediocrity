@@ -239,6 +239,41 @@ LLMs are often good at local improvements: rewriting, elaborating, filling gaps,
 
 The conversation context can contain an audit conclusion, but it does not automatically make that conclusion authoritative. Audit results should update governed objects or hard state only through explicit acceptance rules.
 
+### 4.5 Prefix-Completion Asymmetry
+
+When task utility depends on nonlocal relations, initial autoregressive construction must choose under an incomplete prefix even though the best current choice depends on unwritten future structure. A complete candidate changes that condition. The old artifact exposes realized interfaces, contradictions, delayed payoffs, dependency violations, and other relations that were latent during first-pass generation.
+
+```text
+first pass: p_theta(y_t | x, y_<t)
+
+repair:     p_theta(y'_t | x, y_0, audit(y_0), y'_<t)
+```
+
+The repair model still generates autoregressively, but the complete old candidate now acts as a witness. Audit can therefore transform a whole-artifact synthesis problem into candidate-conditioned variable-neighborhood search:
+
+```text
+span
+  → function / scene
+  → module / chapter
+  → architecture / plot plan
+  → regeneration from revised control space
+```
+
+This mechanism can improve or leave the initial basin; it does not guarantee a global optimum. Its value depends on verifier alignment, failure localizability, preservation of satisfied constraints, and the ability to enlarge the repair neighborhood when local changes stall.
+
+### 4.6 Oracle Acquisition Ladder
+
+Audit signals can be organized by how they are obtained. The numbering describes fallback distance from native hard feedback, not increasing authority:
+
+| Tier | Signal source | Default authority |
+|---|---|---|
+| Tier 0 | Native environmental or executable oracle | authoritative only for the encoded property and declared environment |
+| Tier 1 | Constructed hard sub-oracle | mechanically hard after construction; semantically local and subject to teeth-proof |
+| Tier 2 | Completion-conditioned learned verifier | advisory local proxy gradient for ranking, localization, and repair |
+| Tier 3 | Context-conditioned structured verification across decomposed views or claims | coverage and robustness signal until externally calibrated |
+
+The ladder is orthogonal to risk-based audit intensity. A low-risk task may use Tier 0 feedback; a high-risk task may still have only Tier 3 evidence and therefore require escalation or No-Go.
+
 ---
 
 ## 5. Audit in the Value-Preservation Pipeline
@@ -1010,6 +1045,56 @@ Verifier hierarchy accepts or rejects finding.
 Control delta is applied only after acceptance.
 ```
 
+### 13.4 Verifier Scaling and Context Diversification
+
+An LLM verifier should not be treated only as a component that emits one `pass/fail` value or scalar score. It can be engineered along several distinct axes:
+
+```text
+score granularity
+within-condition repetition
+criteria or claim decomposition
+prompt diversity
+context diversity
+evidence-source diversity
+```
+
+These axes have different epistemic effects:
+
+- finer scores can improve ranking resolution;
+- repetition under one context and prompt estimates within-condition instability but does not remove a shared structural blind spot;
+- criteria and claim decomposition increase localization bandwidth;
+- prompt diversity can activate different reasoning or routing policies;
+- context diversity can change the visible representation and effective support;
+- independent external evidence can increase fidelity.
+
+For context-conditioned verification, each branch should declare a context contract:
+
+```json
+{
+  "root_question": "the invariant target shared by all branches",
+  "view_or_claim": "the local audit target",
+  "context_provenance": ["sources, transformations, or tool outputs"],
+  "assumptions": ["branch-specific assumptions"],
+  "excluded_information": ["what this branch intentionally cannot see"],
+  "verification_criterion": "what counts as a finding",
+  "output_schema": "claim, evidence, verdict, uncertainty"
+}
+```
+
+Branches should work independently until aggregation. The aggregator should return a consensus core, context-sensitive findings, and unsupported or conflicting regions. Majority vote alone is insufficient because shared model priors, source dependence, and aggregation loss can create false consensus.
+
+The governing distinction is:
+
+```text
+decomposition primarily buys bandwidth
+prompt diversity can buy routing diversity
+context diversity can buy representation and effective-support diversity
+independent, task-relevant evidence can buy fidelity
+externally calibrated aggregation can buy confidence
+```
+
+Without external calibration, a context-diversified verifier may report robustness and disagreement, but it must not convert internal consensus directly into a probability of truth.
+
 ---
 
 ## 14. Audit Patterns
@@ -1089,6 +1174,21 @@ Example:
 ```text
 The agent marked a task complete because it generated a plan, but no tool result or human confirmation committed completion.
 ```
+
+### 14.7 Context-Conditioned Orthogonal Audit
+
+Hold the root question fixed, then construct independent audit branches with deliberately different evidence slices, representations, counterfactual assumptions, tools, exemplars, or claim targets. Use matched prompts for those contexts and preserve branch provenance until synthesis.
+
+Useful for:
+
+```text
+support mismatch
+observation-representation mismatch
+aggregation mismatch
+LLM-verifier shared blind spots
+```
+
+This pattern is invalid when the branches merely paraphrase one another, when they silently optimize different root objectives, or when aggregation suppresses a minority branch carrying unique evidence.
 
 ---
 
@@ -1349,15 +1449,15 @@ Audit intensity should increase with:
   need for persistent state
 ```
 
-Risk tiers:
+Risk levels are named `R0`-`R4` to avoid collision with the Tier 0-3 oracle-acquisition ladder:
 
-| Tier | Audit Intensity | Example |
+| Risk Level | Audit Intensity | Example |
 |---|---|---|
-| Tier 0 | No formal audit | Low-risk rewriting, brainstorming |
-| Tier 1 | Lightweight critique | Ordinary drafts, summaries |
-| Tier 2 | Structured finding | Reusable outputs, moderate stakes |
-| Tier 3 | Finding + delta + guard | Code, SQL, operational recommendations |
-| Tier 4 | Full governance + state commitment | Long-horizon agents, high-cost decisions |
+| R0 | No formal audit | Low-risk rewriting, brainstorming |
+| R1 | Lightweight critique | Ordinary drafts, summaries |
+| R2 | Structured finding | Reusable outputs, moderate stakes |
+| R3 | Finding + delta + guard | Code, SQL, operational recommendations |
+| R4 | Full governance + state commitment | Long-horizon agents, high-cost decisions |
 
 Over-auditing can harm the system by adding latency, brittle rules, false positives, and governance debt. The audit layer should itself be governed by cost-benefit rules.
 
@@ -1541,6 +1641,26 @@ Example:
 }
 ```
 
+### 22.1 Open Experimental Register
+
+The following claims are part of the working theory but remain open to direct testing.
+
+**AE-T2: completion-conditioned repair.** Compare equal-budget fresh generation with audit-directed repair on code, stories, and argument composition. Seed or label nonlocal defects, vary repair radius, and measure localization accuracy, external-utility lift, regression, basin escape, and divergence between verifier score and external judgment over repeated rounds.
+
+**AE-T3: context-conditioned structured verification.** Compare:
+
+```text
+A. same context + same prompt + repetition
+B. same context + diverse prompts
+C. diverse contexts + same prompt
+D. diverse contexts + matched decomposition prompts
+E. D + independent evidence or model diversity
+```
+
+Hold inference budget constant. Run replicates within each cell so within-condition noise can be separated from between-context effects. Evaluate familiar structured tasks, unfamiliar tasks supplied with sufficient domain material, and unfamiliar tasks without decisive knowledge as a negative control. Measure structural basin coverage, between- versus within-context diversity, cross-context error correlation, unique confirmed finding yield, false consensus, calibration, aggregation loss, and hidden-gold or human-grounded utility.
+
+Tier 3 should remain a coverage and robustness mechanism unless these experiments show that context-conditioned branches reduce correlated error and improve externally grounded outcomes after aggregation.
+
 ---
 
 ## 23. Relationship to Formal Traditions
@@ -1602,7 +1722,7 @@ This lightweight format is often enough to turn critique into engineering.
 
 LLM systems do not become reliable merely by adding critique. They become more reliable when critique becomes audit, audit becomes finding, finding becomes control delta, control delta becomes governed object, and governed object becomes future behavior through guards and state transitions.
 
-Audit Engineering is the discipline that manages this conversion. It exploits the fact that specific defects are often easier to identify than excellent artifacts are to generate, and that specifications are often easier to repair from counterexamples than to complete upfront.
+Audit Engineering is the discipline that manages this conversion. It exploits the fact that specific defects are often easier to identify than excellent artifacts are to generate, that specifications are often easier to repair from counterexamples than to complete upfront, and that a complete candidate can expose nonlocal relations that were unavailable during prefix-limited construction. Context-conditioned orthogonal audit extends this mechanism conditionally by broadening structural coverage; only independent evidence and calibrated aggregation can turn that coverage into confidence.
 
 The central invariant is:
 

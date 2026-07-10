@@ -461,6 +461,72 @@ or because the candidate family itself is unsupported by the task?
 
 If the latter, the repair is not revision. The repair is support expansion.
 
+### 5.4 Fixed-Condition Sampling Is Not Context Intervention
+
+The negative result about more sampling is conditional on holding the deployed condition approximately fixed:
+
+```text
+Y_j ~ p_theta(Y | x, context_0, prompt_0)
+```
+
+Changing only the random seed or decoding noise increases density inside that conditional distribution. It does not necessarily increase structural-basin coverage.
+
+A governed context intervention constructs a family of different conditionals:
+
+```text
+Y_ij ~ p_theta(Y | x, context_i, prompt_i, decomposition_i)
+
+q_ctx(Y | x) = sum_i w_i p_theta(Y | x, context_i, prompt_i, decomposition_i)
+```
+
+The mixture can broaden effective support when contexts introduce substantively different:
+
+```text
+evidence sources or data slices
+representations or control objects
+state hypotheses or counterfactuals
+tools, exemplars, or formal rules
+claim targets or decomposition structures
+```
+
+This does not contradict basin collapse under massive fixed-condition sampling. It changes the search policy, representation, or observable evidence rather than merely increasing `n`.
+
+Context intervention still fails when every context is generated as a paraphrase from the same missing knowledge, when the model lacks the required capability and the context does not supply it, or when aggregation discards the unique structure reached by a minority branch.
+
+The governing distinction is:
+
+```text
+same-condition sampling increases density
+context intervention may increase structural coverage
+external evidence may increase fidelity
+```
+
+### 5.5 Open Experiment: Context-Conditioned Support Expansion
+
+Use an equal-budget factorial comparison:
+
+```text
+A. same context + same prompt + repeated sampling
+B. same context + diverse prompts
+C. diverse contexts + same prompt
+D. diverse contexts + matched decomposition prompts
+E. D + independent evidence or model diversity
+```
+
+Run replicates within each cell. Define basin identity using task-level structures such as mechanism class, dependency graph, claim family, join path, invariant set, or strategy family—not lexical distance alone. Measure:
+
+```text
+within-context structural diversity
+between-context structural diversity
+new-basin hit rate
+high-value target hit rate
+cross-context error correlation
+aggregation survival of minority structures
+external-utility lift per unit cost
+```
+
+The context-expansion claim is supported only if between-context structural diversity exceeds within-context diversity and the new basins improve hidden-gold or human-grounded utility. An unfamiliar domain with no decisive knowledge in any context should be included as a negative control.
+
 ---
 
 ## 6. Control-Space Search
@@ -1188,6 +1254,8 @@ same proxy objective
 
 Diversity theater occurs when the system asks for "diverse answers" but does not define structural diversity axes.
 
+It also occurs when the system creates many nominally different contexts that are only paraphrases of the same evidence, representation, hidden assumption, or learned prior. Context count is not context diversity.
+
 Better instruction:
 
 ```text
@@ -1199,6 +1267,8 @@ not:
 ```text
 Generate five diverse answers.
 ```
+
+A governed diversity contract should state the root question, context provenance, intended structural axis, assumptions, excluded information, and the structure that would count as a genuinely new basin.
 
 ### 15.3 Critique Theater
 

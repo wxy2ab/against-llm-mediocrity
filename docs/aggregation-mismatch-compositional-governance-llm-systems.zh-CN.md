@@ -391,6 +391,39 @@ global optimization
 
 因此，自回归平庸应被视为聚合失配的一个子情形，而不是 LLM 失败的全部理论。
 
+### 4.1 完成诱导的可观测性
+
+首次生成时，位置 `k` 的选择受前缀条件限制，即使它的任务价值依赖后续接口、回收、绑定或承诺。完整候选改变了这个信息条件。旧 suffix 不是最优未来，但它是一个具体 witness，能使许多非局部违反变得可观察。
+
+```text
+first pass: p_theta(t_k | t_<k, context)
+
+repair:     p_theta(t'_k | complete_candidate, audit_finding, t'_<k, context)
+```
+
+这解释了为什么 aggregation audit 即使不能保证全局最优，仍然有价值：它把隐藏协调要求转换成可检查 residual。
+
+### 4.2 从全局合成到可变邻域修复
+
+令 `Y_0` 为完整候选，`N_r(Y_0)` 为半径 `r` 的修复邻域。审计把优化问题从全空间构造转换为一系列条件搜索：
+
+```text
+delta_r* = argmax_delta in N_r(Y_0)
+           [U_hat(Y_0 + delta) - U_hat(Y_0)]
+```
+
+修复半径应受治理，而不是固定：
+
+```text
+span
+→ function / scene
+→ module / chapter
+→ architecture / plot plan
+→ regeneration from revised control space
+```
+
+小邻域保存已经好的结构；当缺陷位于上游、高度耦合或被局部修复反复重新引入时，大邻域允许系统离开初始盆地。这个机制是 tractability transformation 和 basin-escape operator，不是局部搜索达到全局最优的证明。
+
 ---
 
 ## 5. 局部到全局失败的结构
@@ -759,6 +792,8 @@ invariant breach
 ```
 
 每个发现都应产生控制增量。
+
+集成修复还应声明 repair radius。如果同一关系在局部 patch 后再次失败，系统应从 part-level repair 升级到 interface redesign、composition-plan revision，或从受治理控制空间重新生成。在已有结构耦合证据后仍重复同一局部邻域，属于 repair theater。
 
 ### 8.7 最终渲染
 
@@ -1474,6 +1509,8 @@ reviewer critique 局部质量而非 integration validity。
 coordinator merge outputs 却不解决 conflicts。
 ```
 
+Context-conditioned audit branch 会产生特殊聚合义务。不同 context 与匹配的 decomposition prompt 可能暴露互补证据或不同结构盆地，但 role name 不同并不使输出自动独立。工作流应在汇总前保留 context provenance、假设、排除信息和唯一证据。携带唯一反例的少数 branch 不能被多数投票抹掉。
+
 ### 16.2 工作流组合对象
 
 有用对象包括：
@@ -1549,6 +1586,10 @@ state persists across time
 ```text
 Govern composition when expected loss from local-to-global failure exceeds the cost of making composition explicit.
 ```
+
+对候选条件化修复而言，只有当 accepted delta 具有正的外部 grounded utility，且回归护栏保存此前已满足关系时，局部改进才足够。当 verifier score 上升但外部效用停滞、同一缺陷反复出现，或必要 delta 跨越大量接口时，系统应扩大邻域，或从修订后的组合对象重启。
+
+开放实验应在多个修复半径上比较等预算 fresh generation 与 candidate-conditioned repair。测量定位准确率、completion-conditioned lift、回归、radius escalation、盆地逃逸，以及 verifier score 与 human/hidden-gold utility 的分叉。在增益通过 held-out artifact 和独立评价前，这一主张保持条件性。
 
 ---
 
@@ -1775,6 +1816,20 @@ this plan step requires state S and produces state S'
   "support_scope": "High-value tasks with meaningful local-to-global failure risk.",
   "revocation_trigger": "If explicit composition objects repeatedly add cost without improving detection, repair, or prevention of local-to-global failures, governance should be reduced or redesigned.",
   "not_supported_claims": "Does not imply heavy decomposition is always beneficial. Does not replace task-specific verification."
+}
+```
+
+### 21.3 完整候选条件化修复主张
+
+```json
+{
+  "id": "gko.aggregation_mismatch.completion_conditioned_repair",
+  "type": "method_claim",
+  "condition": "A complete candidate exposes nonlocal relation violations and the system can choose and regression-test a repair neighborhood.",
+  "assertion": "Candidate-conditioned audit can reduce aggregation mismatch by converting whole-artifact synthesis into a sequence of localized or variable-neighborhood repairs.",
+  "support_scope": "Code, stories, arguments, plans, and other artifacts whose completed structure reveals interfaces, dependencies, payoffs, or invariants.",
+  "revocation_trigger": "Equal-budget held-out experiments show no external-utility lift over fresh generation, or repeated repair increases regression and proxy overfitting.",
+  "not_supported_claims": "Does not guarantee a global optimum. Does not imply the initial candidate is in a useful basin. Does not authorize a learned verifier to override hard checks."
 }
 ```
 
