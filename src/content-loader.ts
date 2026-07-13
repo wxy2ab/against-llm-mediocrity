@@ -428,9 +428,21 @@ function withBasePath(path: string): string {
   return `${normalizedBase}${normalizedPath}`;
 }
 
+function rewriteRootRelativeHref(path: string, hash = ""): string {
+  const normalizedPath = path.replace(/^\/+/, "");
+
+  // Docs live in the repo, not in the generated site routes. Rewrite these
+  // links to the canonical GitHub document URL so markdown references stay valid.
+  if (/^docs\/.+\.md$/i.test(normalizedPath)) {
+    return `https://github.com/wxy2ab/against-llm-mediocrity/blob/main/${normalizedPath}${hash}`;
+  }
+
+  return `${withBasePath(normalizedPath)}${hash}`;
+}
+
 function prefixInternalLinks(html: string): string {
   return html.replace(/\shref="\/(?!\/)([^"#]*)(#[^"]*)?"/g, (_match, path: string, hash = "") => {
-    return ` href="${withBasePath(path)}${hash}"`;
+    return ` href="${rewriteRootRelativeHref(path, hash)}"`;
   });
 }
 
