@@ -12,7 +12,9 @@ LLM systems are increasingly built around iterative generation, critique, retrie
 
 A model may critique an answer, produce a better candidate, and still leave the underlying failure mode untouched. The next similar task may fail again because the defect was never localized, written back into the control space, guarded against, or committed into state.
 
-This report introduces **Audit Engineering** as the discipline of converting failures into durable control improvements for governed LLM systems.
+This report introduces **Audit Engineering** as the discipline of converting failures into durable control improvements for governed LLM systems. Its most stable compressed framing has four parts: it takes **generation-verification asymmetry** as a first principle; it prioritizes relatively hard evidence channels such as **environment feedback, compilers, tests, runtime traces, and execution results**; in text, claim, and design-doc tasks it can be operationalized as **claim-evidence-driven structured adversarial audit**; and it can be implemented through independent roles such as an **Auditor, Repair Router, and Regression Auditor**.
+
+These four parts are not fully coequal layers: the first is a first principle, the second is a family of high-value evidence sources, the third is an operational pattern for certain task classes, and the fourth is an implementation architecture. Together they turn audit from post-hoc commentary into a replayable, writable, and governable engineering mechanism; at a higher level, the system still needs **oracle classification / engine routing** to decide when to use audit, when to use SGAR, when to harden a gate first, and when to honestly choose No-Go.
 
 An audit is not a score, a preference judgment, or a generic critique. A useful audit identifies a localized defect, grounds it in evidence, maps it to a mismatch type, and identifies the task-specific control object that should change. It also records mechanism attribution when operationalized, produces a control delta, and creates a regression guard that will fail if the defect family recurs.
 
@@ -78,6 +80,8 @@ This document uses several governed objects by acronym throughout. The most impo
 
 This document is the audit-focused companion to a structural theory of value preservation in LLM systems and to the governed object model specification. The structural theory explains where task value can be lost in a world-to-output pipeline. The object model defines how governed knowledge, execution, findings, deltas, guards, and state records can be represented. This report focuses on the loop that connects failure to repair.
 
+In this document, Audit Engineering is not reduced to a single trick or a single agent. More precisely, it spans failure exploitation grounded in generation-verification asymmetry, high-fidelity signal channels centered on environmental and execution evidence, structured audit operations exemplified by claim-evidence reasoning, and implementation roles such as the Auditor, Repair Router, and Regression Auditor. The later sections expand these aspects without treating them as fully coequal theory layers.
+
 The central question is:
 
 > How should an LLM system convert a failure into a durable improvement rather than a one-time correction?
@@ -133,7 +137,7 @@ Regression guard: re-run representative query requiring A → B → C and fail i
 
 This is a different kind of object. It localizes the defect, names its mechanism, changes the control space, and prevents silent recurrence.
 
-Audit Engineering therefore treats a failure as a resource. The failure reveals something about the task, the system, the specification, the representation, the verifier, or the state transition contract.
+Audit Engineering therefore treats a failure as a resource. The failure reveals something about the task, the system, the specification, the representation, the verifier, or the state transition contract. High-value audit should bind itself as much as possible to reviewable evidence such as compiler errors, failing tests, runtime traces, execution results, type checks, structured claim-evidence constraints, and other repeatable failure witnesses, rather than remain at the level of vague dissatisfaction.
 
 The goal is to capture that information in a form the system can use later.
 

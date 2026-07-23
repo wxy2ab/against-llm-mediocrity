@@ -2,11 +2,13 @@
 
 ## Abstract
 
-Audit Engineering is an inference-time engineering paradigm for LLM and agent systems. It does not place the burden of quality on writing a perfect prompt in advance, nor does it reduce auditing to a score assigned after generation. Instead, it treats the audit loop as the mechanism for discovering the real objective, localizing mismatch, writing findings back into control objects, preserving history, updating hard state when needed, and preventing regression.
+Audit Engineering is an inference-time engineering paradigm for LLM and agent systems. It does not place the burden of quality on writing a perfect prompt in advance, nor does it reduce auditing to a score assigned after generation. Instead, it treats the audit loop as the mechanism for discovering the real objective, localizing mismatch, writing findings back into control objects, preserving history, updating hard state when needed, and preventing regression. The most stable external summary of this paradigm now has four parts: it takes **generation-verification asymmetry** as a first principle; it prioritizes relatively hard evidence such as **environment feedback, compilers, tests, runtime traces, and execution results**; in text, claim, and design-doc tasks it can be operationalized as **claim-evidence-driven structured adversarial audit**; and it can be implemented through independent roles such as an **Auditor, Repair Router, and Regression Auditor**.
 
 Its starting claim is simple: in many open-ended tasks with severe mismatch and tacit standards, generating an excellent artifact directly is difficult, while identifying where an artifact is wrong, incomplete, or misaligned with the real objective is often easier. Audit Engineering turns that **generation–verification asymmetry** into an engineering loop:
 
 > Let generation expose the problem, let audit convert the problem into an actionable control delta, commit any necessary state transition, and let the agent continue from that delta.
+
+These four parts are not fully coequal. The first is a first principle, the second is a family of evidence sources, the third is an operational audit pattern for specific task classes, and the fourth is an implementation layer. At a higher level, the system still needs **oracle classification / engine routing** to choose among audit, SGAR, gate hardening, and No-Go. This document therefore keeps the historical framing of Audit Engineering as a fourth orthogonal dimension, while avoiding the mistake of treating independent audit roles as the top-level framework itself.
 
 This gives Audit Engineering a position alongside Prompt Engineering, Context Engineering, and Hardness Engineering:
 
@@ -23,7 +25,7 @@ Traditional Prompt Engineering often assumes that the user can specify the objec
 
 A user may know that an artifact is wrong without yet being able to state what the right artifact should be. They may recognize failure immediately after seeing a candidate but be unable to define the complete objective before the first generation.
 
-This is not merely a failure of articulation. The task itself may have the following properties:
+This is not merely a failure of articulation. The task itself may have the following properties. They also explain the main landing zones of Audit Engineering in practice: generation-verification asymmetry as first principle, environmental and execution feedback as hard-evidence channels, claim-evidence audit in text-logic tasks, and explicit role separation through the Auditor, Router, and Regression Auditor.
 
 1. **The real objective emerges through generation.** Only after seeing a candidate do the user and auditor learn which dimensions matter.
 2. **The specification is counterexample-driven.** A complete rubric is unavailable initially, but failure cases reveal stable defects.
@@ -38,6 +40,8 @@ The central purpose of Audit Engineering is therefore not to “evaluate the res
 ## 2. Its Relationship to Prompt, Context, and Hardness Engineering
 
 Audit Engineering does not replace the other three paradigms. It adds a fourth, orthogonal control dimension.
+
+Here, “a fourth orthogonal dimension” refers to the governance focus, not to a claim that every related element lives at the same abstraction level. More precisely, this dimension contains distinct layers of first principle, evidence source, operational pattern, and implementation architecture. Together they answer how a system learns from failure, rather than reducing the matter to whether one should simply add an audit agent.
 
 | Paradigm | Control object | Primary question | Typical artifacts | Main limitation |
 | --- | --- | --- | --- | --- |
