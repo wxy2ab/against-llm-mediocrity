@@ -147,6 +147,13 @@ Tag: 组合治理技术报告
 
 [阅读组合治理技术报告](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-compositional-governance-llm-systems.zh-CN.md)
 
+### 聚合失配与生成—验证不对称：受控实验证据
+Tag: 聚合失配研究证据
+
+这份研究说明不展开运行管线细节，而是集中回答“通过什么实验、证明了什么”：相同局部 XOR 规则下，开边界生成与周期闭合生成出现巨大差距；给定完整候选后的全量审计显著恢复；复制、局部检查、长度与锚点对照进一步限定了聚合失配和生成—审计不对称的解释边界。
+
+[阅读聚合失配与生成—验证不对称研究证据](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-generation-verification-asymmetry-evidence.zh-CN.md)
+
 ### LLM 系统中的规格失配与目标治理
 Tag: 目标治理技术报告
 

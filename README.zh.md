@@ -152,6 +152,7 @@ against-llm-mediocrity/
 - [LLM 系统中的拟合边界失配与能力路由](./docs/fitting-boundary-mismatch-capability-routing-llm-systems.zh-CN.md)：能力领域、触发边界与路由治理的配套技术报告。
 - [LLM 系统中的支持失配与控制空间搜索](./docs/support-mismatch-control-space-search-llm-systems.zh-CN.md)：可达性、候选支持与搜索治理的配套技术报告。
 - [LLM 系统中的聚合失配与组合治理](./docs/aggregation-mismatch-compositional-governance-llm-systems.zh-CN.md)：局部价值、全局失败与组合关系治理的配套技术报告。
+- [聚合失配与生成—验证不对称：受控实验证据](./docs/aggregation-mismatch-generation-verification-asymmetry-evidence.zh-CN.md)：用边界拓扑、候选审计、长度与排除性对照说明局部规则能力为何不自动组成全局构造能力。
 - [LLM 系统中的规格失配与目标治理](./docs/specification-mismatch-objective-governance-llm-systems.zh-CN.md)：代理目标、隐性效用与反例驱动规格修复的配套技术报告。
 - 面向受治理 LLM 系统的形式化机制层：[English](./docs/formal-mechanism-layer-for-governed-llm-systems.md) · [中文](./docs/formal-mechanism-layer-for-governed-llm-systems.zh-CN.md)：把结构性诊断接到八条可干预机制轴。
 - 面向受治理 LLM 系统的诊断-机制桥接：[English](./docs/diagnostic-mechanism-bridge-for-governed-llm-systems.md) · [中文](./docs/diagnostic-mechanism-bridge-for-governed-llm-systems.zh-CN.md)：把六类原始失配翻译成修复定位与修复层选择。
