@@ -71,6 +71,7 @@ The core framework: how structural failures arise and how governance turns them 
 - Fitting-boundary mismatch and capability routing: [English](docs/fitting-boundary-mismatch-capability-routing-llm-systems.md) · [中文](docs/fitting-boundary-mismatch-capability-routing-llm-systems.zh-CN.md) — Aligning a capability's trigger boundary with where it actually works, via routing.
 - Support mismatch and control-space search: [English](docs/support-mismatch-control-space-search-llm-systems.md) · [中文](docs/support-mismatch-control-space-search-llm-systems.zh-CN.md) — Reaching high-value structures that sit in low-probability regions.
 - Aggregation mismatch and compositional governance: [English](docs/aggregation-mismatch-compositional-governance-llm-systems.md) · [中文](docs/aggregation-mismatch-compositional-governance-llm-systems.zh-CN.md) — Why good local pieces fail to compose, and how to govern the composition.
+- Aggregation mismatch and generation–verification asymmetry: [中文研究证据](docs/aggregation-mismatch-generation-verification-asymmetry-evidence.zh-CN.md) — Controlled evidence that local rule execution does not automatically become globally consistent construction.
 - Specification mismatch and objective governance: [English](docs/specification-mismatch-objective-governance-llm-systems.md) · [中文](docs/specification-mismatch-objective-governance-llm-systems.zh-CN.md) — Closing the gap between the proxy objective and the real one, driven by counterexamples.
 
 ### Legacy Versions
