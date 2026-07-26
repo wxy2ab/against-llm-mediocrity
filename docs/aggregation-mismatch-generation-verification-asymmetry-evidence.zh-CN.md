@@ -23,6 +23,8 @@
 
 完整实验设计、统计口径与复现资产见 [`llmdealer` 中的研究论文](https://github.com/wxy2ab/llmdealer/blob/main/exp/aggregation_mismatch_experiment/docs/PAPER.md)。
 
+关于哪些结论可以由信息量、依赖图与程序语义直接推出，以及这些结论如何落到 agent 架构，见配套文档：[English](./aggregation-mismatch-theoretical-claims-agent-engineering.md) · [中文](./aggregation-mismatch-theoretical-claims-agent-engineering.zh-CN.md)。
+
 ---
 
 ## 1. 被检验的核心命题
