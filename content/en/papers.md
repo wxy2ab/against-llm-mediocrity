@@ -168,6 +168,13 @@ This technical report develops aggregation mismatch as a local-to-global composi
 
 [Read the compositional governance report](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-compositional-governance-llm-systems.md)
 
+### Aggregation Mismatch: Derivable Claims, Proof Conditions, and Agent Engineering
+Tag: theory-to-engineering bridge
+
+This working draft separates three kinds of conclusions: interface and state properties that follow under explicit assumptions, structural predictions that still require LLM measurement, and empirical questions that depend entirely on the model and task distribution. It derives results for patch commitment surfaces, boundary state, dependency order, verifier gates, local invalidation, conflict-free parallelism, commit safety, and replayable state, then turns them into an implementable agent architecture.
+
+[Read the theoretical claims and agent-engineering implications: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-theoretical-claims-agent-engineering.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-theoretical-claims-agent-engineering.zh-CN.md)
+
 ### Specification Mismatch and Objective Governance in LLM Systems
 Tag: objective governance technical report
 

@@ -154,6 +154,13 @@ Tag: 聚合失配研究证据
 
 [阅读聚合失配与生成—验证不对称研究证据](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-generation-verification-asymmetry-evidence.zh-CN.md)
 
+### 聚合失配：可推导命题、证明条件与 Agent 工程含义
+Tag: 理论—工程桥接
+
+这份工作稿区分三类结论：在明确假设下可证明的接口与状态性质、只能推出结构预测但仍需测量 LLM 的命题，以及完全依赖模型和任务分布的经验问题。它给出 patch 提交面、边界状态、依赖顺序、验证闸门、局部失效传播、无冲突并行、提交安全包络与可回放状态的推导，并把它们转换为可实施的 agent 架构。
+
+[阅读理论命题与 Agent 工程含义：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-theoretical-claims-agent-engineering.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-theoretical-claims-agent-engineering.zh-CN.md)
+
 ### LLM 系统中的规格失配与目标治理
 Tag: 目标治理技术报告
 
