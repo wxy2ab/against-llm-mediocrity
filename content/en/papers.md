@@ -168,6 +168,20 @@ This technical report develops aggregation mismatch as a local-to-global composi
 
 [Read the compositional governance report](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-compositional-governance-llm-systems.md)
 
+### Aggregation Mismatch Artifact-v4: Evidence, Theory Gaps, and Agent Implications
+Tag: aggregation-mismatch research evidence
+
+This bilingual evidence report adjudicates the completed 756-run DeepSeek matrix on boundary-state externalization, candidate/interface decomposition, independently allocated 300/900/1800-second budgets, and output order. It reports the deterministic correction of seven legacy-evaluator rows, distinguishes answer-information recovery from structural cut-set specificity, and translates the theory–evidence gap into agent routing, executor, verifier, and telemetry requirements.
+
+[Read the artifact-v4 report: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v4-claims-theory-gap.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v4-claims-theory-gap.zh-CN.md)
+
+### Patch vs. Full Rewrite: A Controlled Sparse-Repair Experiment
+Tag: aggregation-mismatch research evidence
+
+This evidence note isolates repair delivery from edit discovery. Across 160 new holdouts and 1,920 completed DeepSeek runs, patch plus deterministic execution improves budgeted exact reliability over full rewrite. Oracle-plan, pure-copy, within-response, length, failure-class, and independently preallocated 900-second controls define both the result and its limits.
+
+[Read the controlled experiment: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/patch-vs-full-rewrite-controlled-experiment.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/patch-vs-full-rewrite-controlled-experiment.zh-CN.md)
+
 ### Aggregation Mismatch: Derivable Claims, Proof Conditions, and Agent Engineering
 Tag: theory-to-engineering bridge
 

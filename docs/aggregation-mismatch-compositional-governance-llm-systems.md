@@ -4,6 +4,8 @@
 **Status:** Working Draft v0.1  
 **Series:** A Structural Theory of Value Preservation in LLM Systems
 
+**Empirical companions:** [Artifact-v4 evidence, theory gaps, and agent implications](./aggregation-mismatch-v4-claims-theory-gap.md) · [Patch vs. full rewrite controlled experiment](./patch-vs-full-rewrite-controlled-experiment.md)
+
 ---
 
 ## Abstract

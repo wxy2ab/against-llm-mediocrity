@@ -1,8 +1,8 @@
 # Aggregation Mismatch: Derivable Claims, Proof Conditions, and Implications for Agent Engineering
 
 **Subtitle: Which conclusions do not need more model experiments, and which still require empirical calibration**  
-**Status: Theory-to-engineering bridge working draft v0.1**  
-**Empirical data cutoff: July 24, 2026; artifact-v4 is not treated as evidence because its real-model runs were not complete at this cutoff**  
+**Status: Theory-to-engineering bridge report v0.2**<br>
+**Empirical data cutoff: July 27, 2026; includes the completed and uniformly rescored artifact-v4 P0 matrix**<br>
 **Related topics: aggregation mismatch, patch vs. rewrite, generation–verification asymmetry, hard state, deterministic executors, verifier governance**  
 **中文：** [聚合失配：可推导命题、证明条件与 Agent 工程含义](./aggregation-mismatch-theoretical-claims-agent-engineering.zh-CN.md)  
 **Bilingual synchronization rule:** Keep proposition numbering, formulas, tables, evidence cutoff, and conclusion boundaries aligned across both versions.
@@ -33,6 +33,14 @@ Under explicit conditions, the following conclusions are derivable:
 These claims are already strong enough to guide agent architecture. The model should primarily submit plans, patches, boundary states, and tool arguments. The runtime should own the authoritative object. Deterministic executors should expand and write changes. Verifiers should control commits. Dependency graphs should determine execution order, incremental verification scope, and safe parallel boundaries.
 
 They are not strong enough to justify claims such as “patch always beats rewrite,” “verification is universally easier than generation,” or “more reasoning budget necessarily eliminates aggregation mismatch.” Those remain empirical questions.
+
+The completed artifact-v4 illustrates this boundary directly. Enough correct bits
+strongly recover cyclic construction, but equal-count random correct bits are not
+worse than the structural cut-set. A candidate produces a large gain only when the
+operation changes to audit; full rewrite does not improve. An independent
+1800-second budget nearly recovers only the shortest length, while the
+natural/reverse comparison is ceiling-limited. Theoretical direction and measured
+model benefit are not substitutes.
 
 ---
 
@@ -250,6 +258,20 @@ From-scratch generation must instead find a \(y\) satisfying \(Hy=c\). For linea
 - Give executable constraints to programs. Use LLMs to interpret failures, select repair neighborhoods, and propose candidate operations.
 - Track candidate quality. Random, near-correct, and previously validated candidates should not use the same repair policy.
 
+### 4.4 Artifact-v4 Empirical Verdict
+
+Across 18 DeepSeek holdouts, five-bit candidate full rewrite is −0.111
+[−0.222, −0.019] relative to no candidate, while the random-candidate rewrite
+interval includes zero. Five/random audit minus rewrite is +0.870 / +0.796.
+The result is not that “a candidate is inherently useful,” but:
+
+> A candidate's theoretical task simplification becomes an observed model gain
+> only when the system connects it to a structurally matched residual/audit
+> operation.
+
+Audit versus rewrite still changes both operation and output, so it is not a pure
+verification-ability estimate.
+
 ---
 
 ## 5. Proposition Three: Sufficient Boundary State Can Cut Cyclic Dependency
@@ -299,6 +321,18 @@ Those require paired experiments.
 - Search for sufficient state using rank, dependency cuts, interface contracts, or data-flow analysis rather than merely adding more prose to the prompt.
 - Distinguish “more answer bits” from “structurally appropriate boundary state.” Any additional LLM benefit of the latter must be measured.
 
+### 5.3 Artifact-v4 Empirical Verdict
+
+Full cut-set minus no anchors is +0.741 [0.574, 0.870], but structural cut-set
+minus equal-count random correct bits is −0.019 [−0.056, 0.000]. Compact boundary
+seed plus executor is +0.148 [0.037, 0.259] relative to no anchors.
+
+Artifact-v4 therefore supports “enough answer information and executable compact
+state can help,” not “structural location has already been identified as the
+additional mechanism.” Keep the hard-state/executor architecture, but select state
+representations with answer-information-matched ablations rather than treating a
+cut-set label as a quality guarantee.
+
 ---
 
 ## 6. Proposition Four: Dependency Order Determines the Live State Needed for Online Construction
@@ -341,6 +375,14 @@ Theory can establish that one order has a larger dependency frontier and require
 - Have the planner produce a DAG, preconditions, and unresolved variables. Schedule only ready nodes.
 - If the user requires reverse-order presentation, construct in topological order in the workspace and serialize deterministically afterward.
 - Use `frontier_size`, unresolved bindings, and cross-module interfaces as routing and decomposition signals.
+
+### 6.3 Artifact-v4 Empirical Verdict
+
+Natural order succeeds on 54/54 and reverse order on 53/54, a difference of +0.019
+[0.000, 0.056]. Both are near ceiling, so the structural prediction is not tested
+informatively. Dependency-aware execution remains supported by program semantics
+and state lower bounds, but this experiment does not provide an LLM effect size.
+A follow-up must increase dependency frontier or length.
 
 ---
 
@@ -603,10 +645,10 @@ Tool calling solves interface syntax and parsability, not complete semantic corr
 
 | Original claim | Theory level | What follows | What still requires experiments | Immediate agent adjustment |
 |---|---|---|---|---|
-| P0: externalize boundary state | T + S | Under the rank condition, boundary state uniquely determines the remainder | Whether the LLM can infer the boundary; whether structural anchors beat equal random bits | Explicit interface state; compact-state delivery; programmatic expansion |
-| P0: candidate-audit advantage | T + S | A candidate enables residual computation and removes from-scratch solving responsibility | LLM audit success; separate effects of candidate quality and output interface | Candidate-first flow; programmatic verifier; structured failure witness |
-| P0: recovery with more budget | E | Static theory cannot predict hosted-model wall-clock behavior | Recovery at 300/900/1800 seconds; token and timeout mechanism | Treat budget as a routing variable; do not hard-code recovery claims |
-| P0: natural order beats reverse order | T + S | A topological order removes unresolved predecessors; reverse order needs extra state or delayed commitment | Effect size for a particular LLM | Dependency-aware scheduler; separate execution from presentation |
+| P0: externalize boundary state | T + S + E | Under the rank condition, boundary state determines the remainder; enough bits strongly recover v4 | v4 does not support structural locations over equal random bits; minimum sufficient state and cross-configuration replication remain | Explicit interface state; compact-state delivery; programmatic expansion; answer-information ablations |
+| P0: candidate-audit advantage | T + S + E | A candidate enables residual computation; v4 audit−rewrite composite differences are large | Separate operation, candidate information, and output effects; cross-configuration replication | Candidate→verifier→failure witness→repair, not candidate→full rewrite |
+| P0: recovery with more budget | E | Independent v4 300/900/1800-second success is 0.241/0.370/0.463 | Hosted-service mechanism and more lengths/configurations; these are not a survival curve | Treat budget as a routing variable; do not hard-code “waiting recovers” |
+| P0: natural order beats reverse order | T + S; E unresolved | Topological order removes unresolved predecessors; reverse order needs extra state or delayed commitment | v4 is ceiling-limited; test a larger dependency frontier | Dependency-aware scheduler; separate execution from presentation |
 | P1: edit-density crossover | T + E | Address/payload overhead creates a conditional patch–rewrite threshold | Real task threshold, plan accuracy, and regional coupling | Three-way patch / region rewrite / full rewrite router |
 | P1: verifier–patch loop | T + E | Strict well-founded descent guarantees termination and prevents accepted regressions | Whether it reaches \(V=0\), number of rounds, proxy overfitting | Sandbox, rollback, stall escalation |
 | P1: model scale or reasoning budget | E | Interface theory does not determine it | Effects across models, reasoning modes, and budgets | Make routing configurable and measurable |
@@ -726,7 +768,7 @@ where \(a\) is patch, regional rewrite, full rewrite, or escalation; \(T\) is ti
 
 ## 16. Minimum Implementable Revision
 
-Agents can implement the following changes before the remaining P0 / P1 / P2 experiments finish.
+Agents can implement the following changes now that artifact-v4 has adjudicated part of P0 while the remaining P0 / P1 / P2 claims still require calibration.
 
 ### Phase One: Does Not Depend on New Experiments
 
@@ -815,6 +857,8 @@ The appropriate engineering strategy is therefore neither to wait for every P0 /
 
 ## Related Documents
 
+- [Patch vs. Full Rewrite: A Controlled Experiment on Sparse Repair Delivery](./patch-vs-full-rewrite-controlled-experiment.md)
+- [Aggregation Mismatch Artifact-v4: Experimental Evidence, Theory Gaps, and Agent Implications](./aggregation-mismatch-v4-claims-theory-gap.md)
 - [Controlled evidence for aggregation mismatch and generation–verification asymmetry (Chinese)](./aggregation-mismatch-generation-verification-asymmetry-evidence.zh-CN.md)
 - [Aggregation Mismatch and Compositional Governance in LLM Systems](./aggregation-mismatch-compositional-governance-llm-systems.md)
 - [State-Governed Agent Regime for Governed LLM Systems](./state-governed-agent-regime-for-governed-llm-systems.md)

@@ -1,8 +1,8 @@
 # 聚合失配：可推导命题、证明条件与 Agent 工程含义
 
 **副标题：哪些结论不必等待更多模型实验，哪些只能由实验校准**  
-**状态：理论—工程桥接工作稿 v0.1**  
-**实验数据截点：2026-07-24；未把尚未完成真实模型运行的 artifact-v4 当作证据**  
+**状态：理论—工程桥接报告 v0.2**<br>
+**实验数据截点：2026-07-27；已纳入完成并统一重评分的 artifact-v4 P0**<br>
 **关联主题：聚合失配、patch vs. rewrite、生成—验证不对称、硬状态、确定性执行器、验证器治理**  
 **English:** [Aggregation Mismatch: Derivable Claims, Proof Conditions, and Implications for Agent Engineering](./aggregation-mismatch-theoretical-claims-agent-engineering.md)  
 **双语同步规则：** 两个版本的命题编号、公式、表格、证据截点和结论边界必须同步更新。
@@ -33,6 +33,11 @@
 这些命题足以先指导 agent 架构：让模型主要提交计划、patch、边界状态和工具参数；让运行时持有权威对象；让确定性执行器负责展开和写入；让验证器决定是否提交；让依赖图决定执行顺序、增量验证范围和可并行边界。
 
 它们并不足以写出“patch 永远优于 rewrite”“验证普遍比生成容易”或“更多推理预算一定消除聚合失配”。这些仍需实验。
+
+已完成的 artifact-v4 恰好展示了这条边界：足够正确 bits 强烈恢复周期构造，但等量
+随机正确 bits 不弱于结构 cut-set；候选只有在任务改写为 audit 时产生巨大收益，
+full rewrite 并未改善；独立 1800 秒预算只在较短实例上接近恢复；自然/逆序条件则
+因 ceiling 无法裁决。理论方向与模型收益不能互相替代。
 
 ---
 
@@ -253,6 +258,17 @@ O(\operatorname{nnz}(H)).
 - 能程序验证的约束交给程序；LLM 负责解释、定位修复邻域或提出候选操作。
 - 保留“候选质量”指标。随机候选、近正确候选和历史有效候选不应走同一条修复策略。
 
+### 4.4 Artifact-v4 的经验裁决
+
+在 18 个 DeepSeek holdout 上，five-bit candidate full rewrite 相对无候选为
+−0.111 [−0.222, −0.019]，random candidate rewrite 的区间含 0；five/random
+audit 相对同候选 rewrite 则为 +0.870 / +0.796。它证明的不是“候选天然有用”，而是：
+
+> 候选只有接入与其结构匹配的 residual/audit 操作时，理论上的任务改写才转化为
+> 已观测的模型收益。
+
+Audit 对 rewrite 同时改变操作与输出，仍不能解释为纯 verification ability。
+
 ---
 
 ## 5. 命题三：充分边界状态可以切开循环依赖
@@ -302,6 +318,16 @@ x=Fz+g,
 - 用秩、依赖切分、接口契约或数据流分析寻找“足够状态”，不要只靠 prompt 里增加更多背景文字。
 - 区分“给了更多答案 bits”和“给了结构上正确的边界状态”；后者是否额外有用要测量。
 
+### 5.3 Artifact-v4 的经验裁决
+
+完整 cut-set 相对无锚点为 +0.741 [0.574, 0.870]，但结构 cut-set 相对等量随机
+正确 bits 为 −0.019 [−0.056, 0.000]。Compact boundary seed + executor
+相对无锚点为 +0.148 [0.037, 0.259]。
+
+因此，v4 支持“足够答案信息与可执行紧凑状态可以帮助”，不支持“结构位置本身已经
+识别为额外机制”。工程上应保留 hard-state/executor 架构，同时用答案信息量匹配的
+ablation 选择状态表示，不能把 cut-set 标签硬编码为质量保证。
+
 ---
 
 ## 6. 命题四：依赖顺序决定在线构造所需的活跃状态
@@ -344,6 +370,12 @@ w(\pi)=\max_t |F_t|.
 - planner 先产出 DAG、前置条件和未决变量；scheduler 只调度 ready nodes。
 - 对必须逆序展示的结果，先在隐藏工作区按拓扑顺序构造，再确定性序列化。
 - 把 `frontier_size`、未决绑定数和跨模块接口数作为路由和拆分信号。
+
+### 6.3 Artifact-v4 的经验裁决
+
+自然序为 54/54，逆序为 53/54，差为 +0.019 [0.000, 0.056]。两端接近天花板，
+无法检验理论预测。依赖顺序原则仍由程序语义与状态下界支持，但当前实验不能为它提供
+LLM 收益幅度；后续需要提高依赖前沿或长度后重测。
 
 ---
 
@@ -606,10 +638,10 @@ tool calling 解决的是接口语法与可解析性，不是完整语义正确�
 
 | 原 claim | 理论等级 | 可以推出什么 | 仍需实验什么 | 可立即采用的 agent 调整 |
 |---|---|---|---|---|
-| P0：边界状态外部化 | T + S | 满秩条件下，给定边界状态可唯一确定剩余对象 | LLM 能否求出边界；结构 anchor 是否优于等量随机 bits | 显式 interface state；compact-state delivery；程序展开 |
-| P0：候选审计优势 | T + S | 给定候选可计算 residual，免除从零求解职责 | LLM audit 成功率；候选质量和输出接口各自贡献 | candidate-first；程序 verifier；结构化 failure witness |
-| P0：预算恢复 | E | 无法由静态理论推出托管模型 wall-clock 行为 | 300/900/1800 秒恢复曲线、token 与 timeout 机制 | 把预算作为路由变量，不硬编码恢复结论 |
-| P0：自然顺序优于逆序 | T + S | 拓扑序消除未决前驱；逆序需要额外状态或延迟承诺 | 对具体 LLM 的效应幅度 | dependency-aware scheduler；执行与展示分离 |
+| P0：边界状态外部化 | T + S + E | 满秩条件下，给定边界状态可唯一确定剩余对象；v4 中足够 bits 强恢复 | v4 不支持结构位置优于等量随机 bits；仍需测最小充分状态与跨配置 | 显式 interface state；compact-state delivery；程序展开；答案信息 ablation |
+| P0：候选审计优势 | T + S + E | 给定候选可计算 residual；v4 audit−rewrite 组合差异巨大 | 操作、候选信息和输出各自贡献；跨配置复现 | candidate→verifier→failure witness→repair，而非 candidate→全文重写 |
+| P0：预算恢复 | E | v4 的独立 300/900/1800 秒为 0.241/0.370/0.463 | 托管服务机制、更多长度/配置；不是 survival curve | 把预算作为路由变量，不硬编码“多等必恢复” |
+| P0：自然顺序优于逆序 | T + S；E 未裁决 | 拓扑序消除未决前驱；逆序需要额外状态或延迟承诺 | v4 受 ceiling 限制；需更高 dependency frontier | dependency-aware scheduler；执行与展示分离 |
 | P1：edit-density crossover | T + E | patch 与 rewrite 存在由地址/载荷开销决定的条件阈值 | 真实任务阈值、plan accuracy 与局部耦合 | patch / region rewrite / full rewrite 三路路由 |
 | P1：verifier–patch loop | T + E | 严格良基下降保证终止和不接受回退 | 能否到 \(V=0\)、需要多少轮、是否代理过拟合 | sandbox、rollback、stall escalation |
 | P1：模型规模或 reasoning budget | E | 无法从接口理论推出 | 不同模型、推理模式和预算的效应 | 只做可配置路由与测量 |
@@ -729,7 +761,7 @@ J(a)=
 
 ## 16. 最小可实施修订
 
-在等待剩余 P0 / P1 / P2 实验时，agent 可以先完成以下改造。
+在 artifact-v4 已裁决部分 P0、其余 P0 / P1 / P2 仍需校准时，agent 可以先完成以下改造。
 
 ### 第一阶段：不依赖新实验
 
@@ -818,6 +850,8 @@ J(a)=
 
 ## 相关文档
 
+- [Patch 与完整重写：稀疏修复交付接口的受控实验](./patch-vs-full-rewrite-controlled-experiment.zh-CN.md)
+- [聚合失配 Artifact-v4：实验证据、理论差距与 Agent 工程含义](./aggregation-mismatch-v4-claims-theory-gap.zh-CN.md)
 - [聚合失配与生成—验证不对称：受控实验证据](./aggregation-mismatch-generation-verification-asymmetry-evidence.zh-CN.md)
 - [LLM 系统中的聚合失配与组合治理](./aggregation-mismatch-compositional-governance-llm-systems.zh-CN.md)
 - [面向受治理 LLM 系统的状态治理智能体范式](./state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)
