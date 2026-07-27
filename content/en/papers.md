@@ -182,6 +182,13 @@ This bilingual evidence report adjudicates the completed 756-run DeepSeek matrix
 
 [Read the artifact-v4 report: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v4-claims-theory-gap.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v4-claims-theory-gap.zh-CN.md)
 
+### Aggregation Mismatch Artifact-v5: Stable Editing Agents and the Planning Bottleneck
+Tag: aggregation-mismatch research evidence
+
+This bilingual report adjudicates the completed 288-arm native-tool DeepSeek study. With a correct oracle plan, batch Patch succeeds on 46/48 versus 26/48 for full-object Rewrite, a +41.7-point delivery advantage. Under inferred plans, the end-to-end comparison is 2/96 versus 0/96 and fails its gate. The report explains why the verdict is `delivery_only`, why the crossover remains unadjudicated, and how plan verification must precede write-interface routing.
+
+[Read the artifact-v5 report: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v5-stable-editing-agent.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v5-stable-editing-agent.zh-CN.md)
+
 ### Patch vs. Full Rewrite: A Controlled Sparse-Repair Experiment
 Tag: aggregation-mismatch research evidence
 

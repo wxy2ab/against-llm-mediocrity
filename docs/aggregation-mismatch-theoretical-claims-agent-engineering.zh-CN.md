@@ -1,8 +1,8 @@
 # 聚合失配：可推导命题、证明条件与 Agent 工程含义
 
 **副标题：哪些结论不必等待更多模型实验，哪些只能由实验校准**  
-**状态：理论—工程桥接报告 v0.2**<br>
-**实验数据截点：2026-07-27；已纳入完成并统一重评分的 artifact-v4 P0**<br>
+**状态：理论—工程桥接报告 v0.3**<br>
+**实验数据截点：2026-07-28；已纳入完成的 artifact-v4 P0 与 artifact-v5 稳定编辑 Agent 矩阵**<br>
 **关联主题：聚合失配、patch vs. rewrite、生成—验证不对称、硬状态、确定性执行器、验证器治理**  
 **English:** [Aggregation Mismatch: Derivable Claims, Proof Conditions, and Implications for Agent Engineering](./aggregation-mismatch-theoretical-claims-agent-engineering.md)  
 **双语同步规则：** 两个版本的命题编号、公式、表格、证据截点和结论边界必须同步更新。
@@ -38,6 +38,11 @@
 随机正确 bits 不弱于结构 cut-set；候选只有在任务改写为 audit 时产生巨大收益，
 full rewrite 并未改善；独立 1800 秒预算只在较短实例上接近恢复；自然/逆序条件则
 因 ceiling 无法裁决。理论方向与模型收益不能互相替代。
+
+Artifact-v5 在原生工具边界上检验了 patch 定理。给定同一权威 edit plan 时，
+patch 相对完整重写高 41.7 个百分点；要求模型自行推断 plan 时，两组都接近 floor，
+差异只有 2.1 个百分点。这正是**正确计划下的交付优势**与**经过计划推断后的端到端
+优势**之间的区别。实验支持前者，不支持后者。
 
 ---
 
@@ -209,8 +214,23 @@ artifact-v3 的 DeepSeek 结果与上述条件性推导一致：
 
 第二行最贴近理论：计划被固定，只改变最终交付接口。第一行则额外证明，在该 DeepSeek 配置和冻结任务分布上，patch 的端到端收益没有被 plan inference 抵消。
 
+Artifact-v5 进一步加入了原生编辑 Agent 对照：
+
+| V5 对照 | Patch | Full rewrite | 差异 | 裁决 |
+|---|---:|---:|---:|---|
+| 模型自行推断共享 plan，300 秒 | 2/96（2.1%） | 0/96（0.0%） | +2.1 pp，95% CI [0.0, 6.3] | 未建立端到端优势 |
+| 给定同一权威 plan，300 秒 | 46/48（95.8%） | 26/48（54.2%） | +41.7 pp，95% CI [27.1, 56.3] | 已建立交付优势 |
+
+Oracle 配对比较有 21 个正实例、1 个负实例和 26 个 ties，精确 sign-flip
+\(p=1.10\times10^{-5}\)；infer 比较只有 1 个正实例和 47 个 ties，精确
+\(p=1\)。V5 因而识别出 plan-inference bottleneck：稳定 patch 工具可以减少
+交付错误，却不能把错误的推断计划变正确。
+
 这些数据仍不能把 patch 优势外推为所有模型、所有任务和所有修改密度的普遍定律。
-数据与分析来源见 [`PATCH_VS_REWRITE_V3_REPORT.md`](https://github.com/wxy2ab/llmdealer/blob/main/exp/aggregation_mismatch_experiment/docs/PATCH_VS_REWRITE_V3_REPORT.md)。
+V5 也没有识别 density crossover：6 个 infer cell 中有 5 个共同为零，且未保留
+实际逐 run payload telemetry。来源见
+[artifact-v3 报告](https://github.com/wxy2ab/llmdealer/blob/main/exp/aggregation_mismatch_experiment/docs/PATCH_VS_REWRITE_V3_REPORT.md)
+与 [artifact-v5 报告](https://github.com/wxy2ab/llmdealer/blob/main/exp/aggregation_mismatch_experiment/docs/V5_STABLE_EDITING_AGENT_REPORT.md)。
 
 ---
 
@@ -642,12 +662,12 @@ tool calling 解决的是接口语法与可解析性，不是完整语义正确�
 | P0：候选审计优势 | T + S + E | 给定候选可计算 residual；v4 audit−rewrite 组合差异巨大 | 操作、候选信息和输出各自贡献；跨配置复现 | candidate→verifier→failure witness→repair，而非 candidate→全文重写 |
 | P0：预算恢复 | E | v4 的独立 300/900/1800 秒为 0.241/0.370/0.463 | 托管服务机制、更多长度/配置；不是 survival curve | 把预算作为路由变量，不硬编码“多等必恢复” |
 | P0：自然顺序优于逆序 | T + S；E 未裁决 | 拓扑序消除未决前驱；逆序需要额外状态或延迟承诺 | v4 受 ceiling 限制；需更高 dependency frontier | dependency-aware scheduler；执行与展示分离 |
-| P1：edit-density crossover | T + E | patch 与 rewrite 存在由地址/载荷开销决定的条件阈值 | 真实任务阈值、plan accuracy 与局部耦合 | patch / region rewrite / full rewrite 三路路由 |
+| P1：edit-density crossover | T + E | patch 与 rewrite 存在由地址/载荷开销决定的条件阈值 | V5 扫描了 6 个 \(N,k\) cell，但 infer-plan floor 与缺失的实际 payload telemetry 使阈值仍未识别 | patch / region rewrite / full rewrite 三路路由 |
 | P1：verifier–patch loop | T + E | 严格良基下降保证终止和不接受回退 | 能否到 \(V=0\)、需要多少轮、是否代理过拟合 | sandbox、rollback、stall escalation |
 | P1：模型规模或 reasoning budget | E | 无法从接口理论推出 | 不同模型、推理模式和预算的效应 | 只做可配置路由与测量 |
 | P2：真实领域迁移 | E | 只能在每个领域内部证明 executor / verifier 的局部性质 | XOR 结论能否迁移到代码、文档、数据库 | 先用硬约束领域，逐域建立 verifier contract |
 | P2：结构化输出 | T + E | 受约束 decoder 可保证语法/schema | 语义正确率、可用性与成本 | typed actions + semantic verifier |
-| Patch > rewrite | T + E | 正确计划、稀疏编辑和单调交付风险下成立 | 端到端 plan inference 与真实交叉点 | 默认 patch，但由密度、耦合和信心路由 |
+| Patch > rewrite | T + E | 正确计划、稀疏编辑和单调交付风险下成立；V5 oracle arms 支持交付结论 | V5 infer arms 未建立端到端收益；真实交叉点仍未知 | 先对 plan 做 gate，再条件性优先 patch；按密度、耦合和信心路由 |
 
 ---
 
@@ -682,8 +702,8 @@ tool calling 解决的是接口语法与可解析性，不是完整语义正确�
 ### 14.5 发现与交付的分层测量
 
 **理论核：** 端到端成功是 plan correctness、delivery fidelity、execution 和 commit 的复合事件。  
-**要测：** 各层条件成功率，而不只看最终 exact match。  
-**工程价值：** 失败后能正确决定 replan、re-emit、executor repair 还是 verifier repair。
+**要测：** 各层条件成功率，而不只看最终 exact match。V5 直接说明必要性：oracle-plan patch 提高 41.7 个百分点，infer-plan patch 仅提高 2.1 个百分点。<br>
+**工程价值：** 失败后能正确决定 replan、re-emit、executor repair 还是 verifier repair；不能把交付工具误当作规划干预。
 
 ### 14.6 Canonical state 的可回放与幂等性
 
@@ -761,7 +781,8 @@ J(a)=
 
 ## 16. 最小可实施修订
 
-在 artifact-v4 已裁决部分 P0、其余 P0 / P1 / P2 仍需校准时，agent 可以先完成以下改造。
+在 artifact-v4 已裁决部分 P0、artifact-v5 已分离计划与原生编辑交付，而其余
+P0 / P1 / P2 仍需校准时，agent 可以先完成以下改造。
 
 ### 第一阶段：不依赖新实验
 
@@ -775,6 +796,8 @@ J(a)=
 8. 对局部 patch 运行增量验证，提交前按风险触发全局验证。
 9. 用冲突图决定 multi-agent 是否可以并行合并。
 10. 增加 idempotency key、checkpoint 和 action replay。
+11. 在任何写入前增加 plan-verification gate；低信心或无效 plan 必须 replan，不能只切换交付接口。
+12. 把原生工具参数、事件顺序、payload 大小、repair 调用和前后 hash 作为一等证据持久化。
 
 ### 第二阶段：需要实验校准
 
@@ -784,6 +807,7 @@ J(a)=
 4. 测量结构 anchor 相对随机信息的真实增益。
 5. 测量 verifier–patch loop 的 stall 分布与最佳 repair-radius expansion。
 6. 在代码、配置、数据库和文档任务中分别建立迁移证据。
+7. 在持久保存完整事件的前提下复现冻结 V5 设计，并加入只提升 plan accuracy、而不改变交付接口的干预。
 
 ---
 
@@ -805,6 +829,9 @@ J(a)=
 | `stall_depth` | 修复循环何时停在局部最小值 |
 | `conflict_graph_density` | multi-agent 真实可并行程度 |
 | `replay_success` | 长任务能否从 checkpoint 精确恢复 |
+| `plan_hash / pre_hash / post_hash` | 预期 plan 是否应用到了预期权威版本 |
+| `native_tool_args / event_order / payload_size` | 实际执行了哪些交付操作、顺序如何、提交面多大 |
+| `repair_call_count` | 成功是否依赖多轮 repair，而非一次干净交付 |
 
 这些指标让理论成为诊断工具，而不是只在论文里解释结果。
 
@@ -822,6 +849,8 @@ J(a)=
 - **“更长预算一定恢复周期构造。”** 这是托管模型与运行策略的经验问题。
 - **“结构化 JSON 等于语义可靠。”** schema 只解决语法层。
 - **“GF(2) 的结论可以直接外推真实软件工程。”** 真实领域必须逐域建立 executor、verifier 与迁移证据。
+- **“V5 证明 patch 具有普遍端到端优势。”** infer-plan 比较接近 floor，不能支持该结论。
+- **“V5 已识别 patch–rewrite 的密度交叉点。”** 扫描 cell 受 floor 限制，且缺失实际逐 run payload telemetry。
 
 ---
 
@@ -842,6 +871,10 @@ J(a)=
 
 其中，patch 相对 rewrite 的优势是**部分理论成立**：在正确计划、稀疏修改、可靠 executor 和交付风险随提交面增加的条件下成立；超出这些条件后，必须由路由器和实验决定。
 
+Artifact-v5 补上了原生 Agent 边界检验：它在权威 plan 条件下支持条件性交付定理，
+同时表明相同的工具变化不能自行修复 plan inference。工程结论很直接：先验证计划，
+再优化交付接口。
+
 因此，现阶段最合理的工程策略不是等待所有 P0 / P1 / P2 全部完成，也不是把实验结果写死为规则，而是：
 
 > 先实现“结构化状态 + 最小操作提交 + 确定性执行 + 验证闸门 + 依赖调度 + 可回滚事务”这一可由理论支持的底座；再用实验校准 patch 阈值、预算、候选质量、模型路由和真实领域边界。
@@ -851,6 +884,7 @@ J(a)=
 ## 相关文档
 
 - [Patch 与完整重写：稀疏修复交付接口的受控实验](./patch-vs-full-rewrite-controlled-experiment.zh-CN.md)
+- [聚合失配 Artifact-v5：稳定编辑 Agent、规划瓶颈与条件性 Patch 优势](./aggregation-mismatch-v5-stable-editing-agent.zh-CN.md)
 - [聚合失配 Artifact-v4：实验证据、理论差距与 Agent 工程含义](./aggregation-mismatch-v4-claims-theory-gap.zh-CN.md)
 - [聚合失配与生成—验证不对称：受控实验证据](./aggregation-mismatch-generation-verification-asymmetry-evidence.zh-CN.md)
 - [LLM 系统中的聚合失配与组合治理](./aggregation-mismatch-compositional-governance-llm-systems.zh-CN.md)

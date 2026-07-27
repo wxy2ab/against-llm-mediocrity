@@ -1,8 +1,8 @@
 # 聚合失配与生成—验证不对称：一组受控实验给出的证据
 
 **副标题：为什么会执行局部规则，不等于能构造全局一致对象**  
-**状态：研究证据说明 v0.2**<br>
-**数据截点：2026-07-27；已纳入 artifact-v4 P0 与统一重评分结果**<br>
+**状态：研究证据说明 v0.3**<br>
+**数据截点：2026-07-28；已纳入 artifact-v4 P0 与 artifact-v5 原生编辑 Agent 结果**<br>
 **关联主题：聚合失配、生成—审计差异、候选结构外部化、组合治理**
 
 ---
@@ -20,6 +20,7 @@
 3. **失败不能简单归因于不会 XOR 或不能输出长序列。** 纯复制和单位置 XOR 检查均为 45/45；周期任务在小规模上也可以稳定完成。
 4. **生成—验证差异不是无条件能力排序。** 候选审计同时获得额外结构，并使用不同输出接口，因此证据支持的是“候选条件下的审计相对从零构造具有巨大优势”，而不是“验证在所有任务上普遍比生成容易”。
 5. **Artifact-v4 收窄了机制解释。** 足够正确答案 bits 使周期构造近乎恢复，但等量随机位置 bits 不弱于结构 cut-set；候选 full rewrite 没有改善，audit 才大幅恢复；独立 1800 秒预算也只在较短实例上接近恢复。
+6. **Artifact-v5 把 planning 与 delivery 分开。** 给定权威 plan 时，原生 patch 相对 rewrite 高 41.7 个百分点；自行推断 plan 时只高 2.1 个百分点且未建立端到端优势。稳定编辑工具能改善交付，但不能自行修复规划。
 
 这使“聚合失配”从一个理论描述变成一个可测现象：**局部能力可以保留，但当求解顺序、输出顺序和未外部化状态发生冲突时，局部能力未必能组合成预算内的全局成功。**
 
@@ -32,6 +33,10 @@ Patch 相对完整重写的专项设计、机制控制、预算敏感性与 agen
 Artifact-v4 的完整裁决、理论差距和 Agent 含义见：
 [English](./aggregation-mismatch-v4-claims-theory-gap.md) ·
 [中文](./aggregation-mismatch-v4-claims-theory-gap.zh-CN.md)。
+
+Artifact-v5 的原生 Agent 结果、证据边界和 planning/delivery 分解见：
+[English](./aggregation-mismatch-v5-stable-editing-agent.md) ·
+[中文](./aggregation-mismatch-v5-stable-editing-agent.zh-CN.md)。
 
 ---
 
@@ -178,6 +183,22 @@ C 不是单位置判断。模型仍需检查整个候选，只是不再负责从
 分析器现对全部 756 条可见响应使用冻结 artifact-v4 evaluator 统一重评分：7 行
 修正为 exact success，其余 749 行不变。此修正不增加调用或选择结果。
 
+### Artifact-v5 对原生 Agent 接口的裁决
+
+V5 在 48 个预分配实例、\(N\in\{96,384\}\)、\(k\in\{1,10,20\}\) 上完成
+288/288 个 run，使用稳定原生 patch/rewrite 工具：
+
+| 对照 | Patch | Rewrite | 配对差与 95% interval | 裁决 |
+|---|---:|---:|---:|---|
+| Infer：模型自行推断共享 plan | 2/96 | 0/96 | +0.021 [0.000, 0.063] | 未建立端到端优势 |
+| Oracle：给定同一权威 plan | 46/48 | 26/48 | +0.417 [0.271, 0.563] | 建立条件性交付优势 |
+
+Oracle 对照的精确 sign-flip \(p=1.10\times10^{-5}\)，infer 对照为 \(p=1\)。
+因此，数据支持的是“正确 plan 下 patch 减少交付暴露”，而不是“patch 工具普遍提高
+端到端成功”。V5 的原始正式 JSONL 与完整事件 payload 未保留；endpoint 表由完整
+日志按冻结 spec 重建，所以最终成功、失败类和配对 endpoint 效应可引用，精确
+repair-call、latency/token 与实际逐 run payload ratio 不可引用。
+
 ---
 
 ## 6. 生成—验证不对称到底意味着什么？
@@ -254,6 +275,8 @@ C 不是单位置判断。模型仍需检查整个候选，只是不再负责从
 - 外部化足够正确 bits 或可执行 compact state 是有效干预方向。
 - 候选只有接入 audit/verifier 操作时才出现巨大优势；仅要求 candidate-conditioned full rewrite 没有改善。
 - 更多独立预算会部分恢复，但恢复强烈依赖长度。
+- 给定同一权威 edit plan，稳定原生 patch 接口在 V5 中显著优于完整重写。
+- 更换为稳定 patch 工具并不足以自动改善错误的 plan inference。
 
 ### 当前证据不允许
 
@@ -265,6 +288,7 @@ C 不是单位置判断。模型仍需检查整个候选，只是不再负责从
 - 结构 cut-set 位置相对等量随机正确 bits 已被确认具有额外收益。
 - 1800 秒预算已经普遍消除周期构造差距。
 - artifact-v4 已完成跨模型复现或成功裁决自然序/逆序差异。
+- artifact-v5 已证明普遍的端到端 `patch > rewrite`，或已经定位 edit-density crossover。
 - 合成 GF(2) 结果可以未经验证直接外推到代码、数据库、配置和长文写作。
 
 最稳健的结论是：
@@ -280,7 +304,7 @@ C 不是单位置判断。模型仍需检查整个候选，只是不再负责从
 1. **跨配置复现 v4：** 判断答案信息恢复、candidate rewrite 负/零效应与 audit−rewrite 组合差异能否跨模型。
 2. **候选 × 操作 × 输出拆分：** 用 matched factorial 分离候选信息、计算职责与输出长度/形式。
 3. **答案信息匹配的边界实验：** 匹配正确 bits 数量、熵与位置覆盖，区分 cut-set 结构与通用答案支架。
-4. **Edit-density crossover：** 在相同长度和预算下比较 patch、区域重写与完整重写。
+4. **Edit-density crossover：** V5 的 infer cells 受 floor 限制且缺少实际 payload telemetry；需要先提高 plan accuracy，并在保留原生事件的条件下比较 patch、区域重写与完整重写。
 5. **无 ceiling 的顺序实验：** 提高依赖前沿或长度，再测试自然序与逆序。
 6. **真实任务迁移：** 在代码修复、配置更新、数据库约束和结构化文档修改中比较从零生成与候选—审计—修订流程。
 

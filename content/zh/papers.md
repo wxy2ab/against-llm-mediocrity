@@ -168,6 +168,13 @@ Tag: 聚合失配研究证据
 
 [阅读 artifact-v4 报告：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v4-claims-theory-gap.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v4-claims-theory-gap.zh-CN.md)
 
+### 聚合失配 Artifact-v5：稳定编辑 Agent 与规划瓶颈
+Tag: 聚合失配研究证据
+
+这份双语报告裁决已完成的 288-arm 原生工具 DeepSeek 实验。正确 oracle plan 给定后，batch Patch 为 46/48，完整对象 Rewrite 为 26/48，交付层优势为 +41.7 个百分点；推断计划下的端到端比较为 2/96 对 0/96，没有通过门槛。报告解释为什么最终裁决是 `delivery_only`、为什么 crossover 仍未裁决，以及为什么 Agent 必须在写接口路由之前增加 plan verification。
+
+[阅读 artifact-v5 报告：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v5-stable-editing-agent.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v5-stable-editing-agent.zh-CN.md)
+
 ### Patch 与完整重写：稀疏修复交付接口的受控实验
 Tag: 聚合失配研究证据
 
