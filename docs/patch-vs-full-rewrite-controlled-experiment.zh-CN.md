@@ -1,8 +1,8 @@
 # Patch 与完整重写：稀疏修复交付接口的受控实验
 
 **副标题：模型已经知道或能够找到局部修改时，为什么仍不应要求它重新提交整个对象**<br>
-**状态：研究证据说明 v0.2**<br>
-**数据核验日期：2026-07-27；已纳入 artifact-v4 的边界证据**<br>
+**状态：研究证据说明 v0.3**<br>
+**数据核验日期：2026-07-28；已纳入 artifact-v4 与 artifact-v5 的边界证据**<br>
 **裁决范围：DeepSeek-V4-Flash 单一部署配置；MiniMax 正式矩阵因成本中止，不进入裁决**<br>
 **English:** [Patch vs. Full Rewrite: A Controlled Experiment on Sparse Repair Delivery](./patch-vs-full-rewrite-controlled-experiment.md)<br>
 **双语同步规则：** 两个版本的条件名称、样本量、统计结果、证据截点与结论边界必须同步更新。
@@ -29,6 +29,11 @@
 > **在冻结的 DeepSeek-V4-Flash artifact-v3 稀疏单点修复协议中，patch + deterministic executor 相对完整重写具有更高的预算内端到端严格可靠性。**
 
 它不支持“patch 永远优于 rewrite”、跨模型普遍规律、无限预算结论，或未经验证向真实软件工程任务直接外推。
+
+Artifact-v5 增加了原生工具 Agent 边界。正确 oracle plan 给定后，batch Patch 为
+46/48，完整对象 Rewrite 为 26/48，交付优势为 **+41.7 pp
+[+27.1, +56.25]**。但推断计划下的端到端比较只有 2/96 对 0/96，没有通过
+预注册门槛。因此 v5 裁决是 `delivery_only`，不是端到端 Agent superiority。
 
 ---
 
@@ -293,6 +298,26 @@ I-PR 共 120 条：
 - 单点 GF(2) 修复可直接外推代码、数据库、配置和文档修改；
 - patch 可以替代全局验证；
 - edit plan inference 与 delivery 已在 primary 中完全解耦。
+- artifact-v5 已证明端到端 Agent-level Patch superiority；
+- edit-density crossover 已经识别。
+
+### 8.3 Artifact-v5 原生工具边界
+
+Artifact-v5 在共享 candidate、plan、verifier、300 秒 episode budget 和一次
+delivery repair 的前提下，比较原生 `file_edit_batch` 与原生 `file_write`：
+
+| v5 对比 | Patch | Rewrite | 差值 | 裁决 |
+|---|---:|---:|---:|---|
+| 推断计划 | 2/96 | 0/96 | +2.1 pp [0, 6.25] | V5-C1 未通过 |
+| Oracle 计划 | 46/48 | 26/48 | +41.7 pp [27.1, 56.25] | V5-C2 通过 |
+
+这个结果强化了交付机制，同时收窄了 Agent claim：
+
+> **正确 plan 可以通过原生 batch Patch 得到更可靠的交付；但 planning floor
+> 会阻止这种交付优势转化为端到端 Agent 收益。**
+
+Crossover 仍未裁决，因为 6 个 infer cells 中 5 个双臂均为 0，且正式逐 run
+payload telemetry 未保留。
 
 ---
 
@@ -342,6 +367,25 @@ patch 地址和值的开销相对更高，而且两个条件都受 timeout floor
 > **Patch 优势有一个由 edit density、对象长度、地址开销、依赖耦合和预算共同决定的
 > 适用区间；v3 确认了稀疏长对象区间，v4 阻止我们把它外推成无条件规律。**
 
+### 9.2 Artifact-v5 分离 Planning 与原生交付
+
+Artifact-v5 在原生 tool loop 中复现了 oracle delivery 的量级：v3 的
+O-P−O-R 为 +40.8 个百分点，v5 的 O-P-A−O-R-A 为 +41.7 个百分点；但 v5
+的 infer 端到端比较没有通过。这既支持正确计划下的交付理论，也说明 Agent 为什么
+需要 plan-verification gate。
+
+系统含义是乘法式的：
+
+\[
+P(\text{end-to-end success})
+\approx
+P(\text{plan correct})
+\times
+P(\text{delivery succeeds}\mid\text{plan correct}).
+\]
+
+更强的 editor 改善第二项，不会自动改善第一项。
+
 ---
 
 ## 10. 对 Agent 开发的工程意义
@@ -378,6 +422,9 @@ commit_success
 - executor 失败 → 修复工具或前置条件；
 - verifier 失败 → rollback + failure witness；
 - 长度/预算失败 → patch、区域重写或预算升级。
+
+Artifact-v5 表明，这种分离必须成为写入前闸门，而不只是事后日志。没有通过 schema、
+precondition 与语义检查的 plan 不应获得写权限。
 
 ### 10.3 使用三档修复路由
 
@@ -422,6 +469,8 @@ single_configuration
 ```
 
 跨模型复现仍然是独立研究任务，而不是本文已经完成的结论。
+Artifact-v5 同样只有 DeepSeek 配置；它的 `delivery_only` 裁决不会提高跨配置
+claim 上限。
 
 ---
 
@@ -441,7 +490,13 @@ single_configuration
 - [正式结果报告](https://github.com/wxy2ab/llmdealer/blob/main/exp/aggregation_mismatch_experiment/docs/PATCH_VS_REWRITE_V3_REPORT.md)
 - [机器可读 summary](https://github.com/wxy2ab/llmdealer/blob/main/exp/aggregation_mismatch_experiment/results/patch_rewrite_v3/confirmatory/analysis/summary.json)
 - [覆盖审计](https://github.com/wxy2ab/llmdealer/blob/main/exp/aggregation_mismatch_experiment/results/patch_rewrite_v3/confirmatory/analysis/coverage.json)
+- [Artifact-v5 稳定编辑 Agent 报告](https://github.com/wxy2ab/llmdealer/blob/main/exp/aggregation_mismatch_experiment/docs/V5_STABLE_EDITING_AGENT_REPORT.md)
+- [Artifact-v5 机器可读 summary](https://github.com/wxy2ab/llmdealer/blob/main/exp/aggregation_mismatch_experiment/results/v5_agent_patch_rewrite/confirmatory/analysis/summary.json)
 - [完整实验仓库](https://github.com/wxy2ab/llmdealer/tree/main/exp/aggregation_mismatch_experiment)
+
+v5 正式 endpoint 表在原始 tool-event payload 丢失后，由完整 run log 重建。
+Final success 与 failure class 计数可用；精确 repair-call、latency 与正式实际
+payload telemetry 不可用。
 
 ---
 
@@ -455,6 +510,8 @@ single_configuration
 | 真实领域迁移 | 决定 GF(2) 是否具有工程外部效度 | 代码、JSON/config、数据库 migration、结构化文档 |
 | Verifier / executor 可靠性 | 决定接口优势能否变成提交安全性 | 正确 plan × executor failure × verifier false accept |
 | 预算与提交面 | 决定优势是预算位移还是更稳定的接口规律 | 独立预分配预算 × 输出长度 × visible/reasoning tokens |
+| v5 事件保留版复现 | 恢复完整原生工具审计链 | 同一冻结 288-arm 设计 + 持久事件 payload |
+| Planning lift | 检验脱离 floor 后交付优势能否成为端到端优势 | 已验证或更高成功率 plan × 相同原生 delivery arms |
 
 最优先的是：
 
@@ -484,12 +541,17 @@ single_configuration
 
 在当前证据范围内，这一结论已在 DeepSeek-V4-Flash 的冻结 artifact-v3 协议中得到确认；跨模型、跨编辑密度和跨真实领域的边界仍需继续测量。
 
+Artifact-v5 收紧了 Agent 含义：正确 plan 给定后，原生 Patch 仍有 +41.7 个百分点
+优势，但 infer-plan 端到端 claim 未通过。因此生产规则应是**先验证 plan，再路由
+delivery**，而不是简单“装一个 Patch 工具”。
+
 ---
 
 ## 相关文档
 
 - [Patch vs. Full Rewrite: English](./patch-vs-full-rewrite-controlled-experiment.md)
 - [聚合失配 Artifact-v4：实验证据、理论差距与 Agent 工程含义](./aggregation-mismatch-v4-claims-theory-gap.zh-CN.md)
+- [聚合失配 Artifact-v5：稳定编辑 Agent 与规划瓶颈](./aggregation-mismatch-v5-stable-editing-agent.zh-CN.md)
 - [聚合失配：可推导命题、证明条件与 Agent 工程含义](./aggregation-mismatch-theoretical-claims-agent-engineering.zh-CN.md)
 - [聚合失配与生成—验证不对称：受控实验证据](./aggregation-mismatch-generation-verification-asymmetry-evidence.zh-CN.md)
 - [LLM 系统中的聚合失配与组合治理](./aggregation-mismatch-compositional-governance-llm-systems.zh-CN.md)

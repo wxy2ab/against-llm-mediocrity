@@ -154,6 +154,7 @@ against-llm-mediocrity/
 - [LLM 系统中的聚合失配与组合治理](./docs/aggregation-mismatch-compositional-governance-llm-systems.zh-CN.md)：局部价值、全局失败与组合关系治理的配套技术报告。
 - [聚合失配与生成—验证不对称：受控实验证据](./docs/aggregation-mismatch-generation-verification-asymmetry-evidence.zh-CN.md)：用边界拓扑、候选审计、长度与排除性对照说明局部规则能力为何不自动组成全局构造能力。
 - 聚合失配 artifact-v4 裁决：[English](./docs/aggregation-mismatch-v4-claims-theory-gap.md) · [中文](./docs/aggregation-mismatch-v4-claims-theory-gap.zh-CN.md)：汇总已完成 756 次边界状态、候选/接口、独立预算与顺序实验，区分实验能证明的结论、尚未兑现的理论预测，以及对应的 Agent 调整。
+- 聚合失配 artifact-v5 稳定编辑 Agent：[English](./docs/aggregation-mismatch-v5-stable-editing-agent.md) · [中文](./docs/aggregation-mismatch-v5-stable-editing-agent.zh-CN.md)：汇总 288-arm 原生工具实验；正确计划后的 Patch 交付优势成立，端到端 Agent claim 因 planning floor 未通过，crossover 仍未裁决。
 - Patch 与完整重写：稀疏修复交付接口的受控实验：[English](./docs/patch-vs-full-rewrite-controlled-experiment.md) · [中文](./docs/patch-vs-full-rewrite-controlled-experiment.zh-CN.md)：用 DeepSeek artifact-v3、oracle edit-plan、纯复制与独立 900 秒对照，确认稀疏修复中 patch + 确定性执行器的预算内严格可靠性优势。
 - 聚合失配：可推导命题、证明条件与 Agent 工程含义：[English](./docs/aggregation-mismatch-theoretical-claims-agent-engineering.md) · [中文](./docs/aggregation-mismatch-theoretical-claims-agent-engineering.zh-CN.md)：区分可由信息量、依赖图和程序语义推出的结论与必须实验校准的命题，并把 patch、边界状态、验证闸门、增量验证、并行合并和权威状态转化为 agent 设计原则。
 - [LLM 系统中的规格失配与目标治理](./docs/specification-mismatch-objective-governance-llm-systems.zh-CN.md)：代理目标、隐性效用与反例驱动规格修复的配套技术报告。

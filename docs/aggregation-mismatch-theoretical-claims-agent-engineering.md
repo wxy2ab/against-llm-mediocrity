@@ -1,8 +1,8 @@
 # Aggregation Mismatch: Derivable Claims, Proof Conditions, and Implications for Agent Engineering
 
 **Subtitle: Which conclusions do not need more model experiments, and which still require empirical calibration**  
-**Status: Theory-to-engineering bridge report v0.2**<br>
-**Empirical data cutoff: July 27, 2026; includes the completed and uniformly rescored artifact-v4 P0 matrix**<br>
+**Status: Theory-to-engineering bridge report v0.3**<br>
+**Empirical data cutoff: July 28, 2026; includes the completed artifact-v4 P0 and artifact-v5 stable-editing-agent matrices**<br>
 **Related topics: aggregation mismatch, patch vs. rewrite, generation–verification asymmetry, hard state, deterministic executors, verifier governance**  
 **中文：** [聚合失配：可推导命题、证明条件与 Agent 工程含义](./aggregation-mismatch-theoretical-claims-agent-engineering.zh-CN.md)  
 **Bilingual synchronization rule:** Keep proposition numbering, formulas, tables, evidence cutoff, and conclusion boundaries aligned across both versions.
@@ -41,6 +41,13 @@ operation changes to audit; full rewrite does not improve. An independent
 1800-second budget nearly recovers only the shortest length, while the
 natural/reverse comparison is ceiling-limited. Theoretical direction and measured
 model benefit are not substitutes.
+
+Artifact-v5 tests the patch theorem at a native tool boundary. When the same
+authoritative edit plan is supplied, patch beats full rewrite by 41.7 percentage
+points. When the model must infer the plan, both arms remain near floor and the
+difference is only 2.1 points. This is the expected distinction between
+**delivery advantage given a correct plan** and **end-to-end advantage after plan
+inference**. The experiment supports the first, not the second.
 
 ---
 
@@ -210,7 +217,25 @@ The DeepSeek artifact-v3 results align with the conditional derivation:
 
 The second row is closest to the theorem-aligned comparison: the plan is fixed and only the final delivery interface changes. The first row additionally shows that, for this frozen DeepSeek configuration and task distribution, the end-to-end patch benefit was not erased by plan inference.
 
-The data do not establish patch superiority for every model, task, and edit density. Data and analysis are traceable to [`PATCH_VS_REWRITE_V3_REPORT.md`](https://github.com/wxy2ab/llmdealer/blob/main/exp/aggregation_mismatch_experiment/docs/PATCH_VS_REWRITE_V3_REPORT.md).
+Artifact-v5 adds a native editing-agent test:
+
+| V5 comparison | Patch | Full rewrite | Difference | Verdict |
+|---|---:|---:|---:|---|
+| Model infers the shared plan, 300 seconds | 2/96 (2.1%) | 0/96 (0.0%) | +2.1 pp, 95% CI [0.0, 6.3] | End-to-end advantage not established |
+| Same authoritative plan supplied, 300 seconds | 46/48 (95.8%) | 26/48 (54.2%) | +41.7 pp, 95% CI [27.1, 56.3] | Delivery advantage established |
+
+The paired oracle comparison has 21 positive instances, one negative instance,
+and 26 ties; its exact sign-flip result is \(p=1.10\times10^{-5}\). The inferred
+comparison has one positive instance and 47 ties, so its exact sign-flip result is
+\(p=1\). V5 therefore identifies a plan-inference bottleneck: a stable patch tool
+can reduce delivery failures without making an incorrect inferred plan correct.
+
+The data do not establish patch superiority for every model, task, and edit
+density. V5 also does not identify a density crossover: five of six inferred-plan
+cells are at a joint zero floor, and actual per-run payload telemetry was not
+retained. Sources are the
+[artifact-v3 report](https://github.com/wxy2ab/llmdealer/blob/main/exp/aggregation_mismatch_experiment/docs/PATCH_VS_REWRITE_V3_REPORT.md)
+and [artifact-v5 report](https://github.com/wxy2ab/llmdealer/blob/main/exp/aggregation_mismatch_experiment/docs/V5_STABLE_EDITING_AGENT_REPORT.md).
 
 ---
 
@@ -649,12 +674,12 @@ Tool calling solves interface syntax and parsability, not complete semantic corr
 | P0: candidate-audit advantage | T + S + E | A candidate enables residual computation; v4 audit−rewrite composite differences are large | Separate operation, candidate information, and output effects; cross-configuration replication | Candidate→verifier→failure witness→repair, not candidate→full rewrite |
 | P0: recovery with more budget | E | Independent v4 300/900/1800-second success is 0.241/0.370/0.463 | Hosted-service mechanism and more lengths/configurations; these are not a survival curve | Treat budget as a routing variable; do not hard-code “waiting recovers” |
 | P0: natural order beats reverse order | T + S; E unresolved | Topological order removes unresolved predecessors; reverse order needs extra state or delayed commitment | v4 is ceiling-limited; test a larger dependency frontier | Dependency-aware scheduler; separate execution from presentation |
-| P1: edit-density crossover | T + E | Address/payload overhead creates a conditional patch–rewrite threshold | Real task threshold, plan accuracy, and regional coupling | Three-way patch / region rewrite / full rewrite router |
+| P1: edit-density crossover | T + E | Address/payload overhead creates a conditional patch–rewrite threshold | V5 scanned six \(N,k\) cells but did not identify the threshold because of the inferred-plan floor and missing actual payload telemetry | Three-way patch / region rewrite / full rewrite router |
 | P1: verifier–patch loop | T + E | Strict well-founded descent guarantees termination and prevents accepted regressions | Whether it reaches \(V=0\), number of rounds, proxy overfitting | Sandbox, rollback, stall escalation |
 | P1: model scale or reasoning budget | E | Interface theory does not determine it | Effects across models, reasoning modes, and budgets | Make routing configurable and measurable |
 | P2: transfer to real domains | E | Executor and verifier properties can be proved only within each domain | Transfer from XOR to code, documents, and databases | Start with hard-constraint domains; establish verifier contracts per domain |
 | P2: structured output | T + E | A constrained decoder can guarantee syntax/schema | Semantic accuracy, usability, and cost | Typed actions + semantic verifier |
-| Patch > rewrite | T + E | Holds under correct plan, sparse change, and monotone delivery risk | End-to-end plan inference and the real crossover | Prefer patch conditionally; route by density, coupling, and confidence |
+| Patch > rewrite | T + E | Holds under correct plan, sparse change, and monotone delivery risk; V5 oracle arms support the delivery claim | V5 inferred-plan arms do not establish an end-to-end gain; the real crossover remains unknown | Gate on plan confidence, then prefer patch conditionally; route by density, coupling, and confidence |
 
 ---
 
@@ -689,8 +714,8 @@ Beyond the original P0 / P1 / P2 list, the following claims should be tracked ex
 ### 14.5 Separating Discovery from Delivery
 
 **Theoretical core:** End-to-end success is a composite event involving plan correctness, delivery fidelity, execution, and commit.  
-**What to measure:** Conditional success at each layer instead of final exact match alone.  
-**Engineering value:** Routes failure to replan, re-emit, executor repair, or verifier repair correctly.
+**What to measure:** Conditional success at each layer instead of final exact match alone. V5 directly demonstrates why: oracle-plan patch gains 41.7 points, while inferred-plan patch gains only 2.1 points.<br>
+**Engineering value:** Routes failure to replan, re-emit, executor repair, or verifier repair correctly; a delivery tool must not be mistaken for a planning intervention.
 
 ### 14.6 Replay and Idempotence of Canonical State
 
@@ -768,7 +793,9 @@ where \(a\) is patch, regional rewrite, full rewrite, or escalation; \(T\) is ti
 
 ## 16. Minimum Implementable Revision
 
-Agents can implement the following changes now that artifact-v4 has adjudicated part of P0 while the remaining P0 / P1 / P2 claims still require calibration.
+Agents can implement the following changes now that artifact-v4 has adjudicated
+part of P0 and artifact-v5 has separated planning from native-edit delivery, while
+the remaining P0 / P1 / P2 claims still require calibration.
 
 ### Phase One: Does Not Depend on New Experiments
 
@@ -782,6 +809,8 @@ Agents can implement the following changes now that artifact-v4 has adjudicated 
 8. Run incremental verification for local patches and trigger global verification by risk before commit.
 9. Use a conflict graph to decide which multi-agent results may merge in parallel.
 10. Add idempotency keys, checkpoints, and action replay.
+11. Add a plan-verification gate before any write; low-confidence or invalid plans must replan rather than merely switch delivery interfaces.
+12. Persist native tool arguments, event order, payload size, repair calls, and pre/post hashes as first-class evidence.
 
 ### Phase Two: Requires Empirical Calibration
 
@@ -791,6 +820,7 @@ Agents can implement the following changes now that artifact-v4 has adjudicated 
 4. Measure the benefit of structural anchors relative to random information.
 5. Measure verifier–patch-loop stall distributions and repair-radius expansion policy.
 6. Establish transfer evidence separately for code, configuration, databases, and documents.
+7. Replicate the frozen V5 design with durable event retention and interventions that raise plan accuracy without changing the delivery interface.
 
 ---
 
@@ -812,6 +842,9 @@ Final success alone cannot show whether a theoretical advantage landed in the in
 | `stall_depth` | Where does repair reach a local minimum? |
 | `conflict_graph_density` | How much true multi-agent parallelism exists? |
 | `replay_success` | Can the long-running task recover exactly from a checkpoint? |
+| `plan_hash / pre_hash / post_hash` | Was the intended plan applied to the intended authoritative version? |
+| `native_tool_args / event_order / payload_size` | Which delivery operations were actually executed, in what order, and with what commitment surface? |
+| `repair_call_count` | Did success require repeated repair attempts rather than a clean first delivery? |
 
 These metrics turn theory into a diagnostic instrument rather than a post hoc explanation.
 
@@ -829,6 +862,8 @@ The following statements remain unjustified:
 - **“More budget necessarily recovers cyclic construction.”** This is an empirical question about model and service behavior.
 - **“Structured JSON implies semantic reliability.”** A schema protects only the syntactic layer.
 - **“GF(2) results transfer directly to real software engineering.”** Each real domain needs its own executor, verifier, and transfer evidence.
+- **“V5 proves a universal end-to-end patch advantage.”** Its inferred-plan comparison is near floor and does not establish that claim.
+- **“V5 identifies the patch–rewrite density crossover.”** The scanned cells are floor-limited and actual per-run payload telemetry is unavailable.
 
 ---
 
@@ -849,6 +884,12 @@ reduce model-authored commitment surface
 
 Patch superiority over rewrite is **partly a theoretical result**. It follows under a correct plan, sparse changes, a reliable executor, and delivery risk that increases with commitment surface. Outside those conditions, routing and experiments must decide.
 
+Artifact-v5 supplies the missing native-agent boundary test: it supports the
+conditional delivery theorem under an authoritative plan, while showing that the
+same tool change does not by itself repair plan inference. The engineering
+consequence is concrete: verify the plan first, then optimize the delivery
+interface.
+
 The appropriate engineering strategy is therefore neither to wait for every P0 / P1 / P2 experiment nor to hard-code current empirical effects as universal rules:
 
 > First implement the theoretically supported substrate of structured state, minimal operation submission, deterministic execution, verifier-gated commit, dependency-aware scheduling, and rollback-capable transactions. Then use experiments to calibrate patch thresholds, budgets, candidate quality, model routing, and real-domain boundaries.
@@ -858,6 +899,7 @@ The appropriate engineering strategy is therefore neither to wait for every P0 /
 ## Related Documents
 
 - [Patch vs. Full Rewrite: A Controlled Experiment on Sparse Repair Delivery](./patch-vs-full-rewrite-controlled-experiment.md)
+- [Aggregation Mismatch Artifact-v5: Stable Editing Agent, Planning Bottleneck, and Conditional Patch Advantage](./aggregation-mismatch-v5-stable-editing-agent.md)
 - [Aggregation Mismatch Artifact-v4: Experimental Evidence, Theory Gaps, and Agent Implications](./aggregation-mismatch-v4-claims-theory-gap.md)
 - [Controlled evidence for aggregation mismatch and generation–verification asymmetry (Chinese)](./aggregation-mismatch-generation-verification-asymmetry-evidence.zh-CN.md)
 - [Aggregation Mismatch and Compositional Governance in LLM Systems](./aggregation-mismatch-compositional-governance-llm-systems.md)

@@ -1,8 +1,8 @@
 # Aggregation Mismatch Artifact-v4: Experimental Evidence, Theory Gaps, and Agent Implications
 
 **Subtitle: Which mechanisms are supported, and which hold mathematically but remain unidentified in model behavior**<br>
-**Status: Research evidence report v1.0**<br>
-**Data validated: July 27, 2026**<br>
+**Status: Research evidence report v1.1**<br>
+**Data validated: July 28, 2026; V5 follow-up evidence linked**<br>
 **Evidence scope: One DeepSeek-V4-Flash deployment configuration; Chinese prompts; 18 GF(2) holdouts**<br>
 **中文：** [聚合失配 Artifact-v4：实验证据、理论差距与 Agent 工程含义](./aggregation-mismatch-v4-claims-theory-gap.zh-CN.md)<br>
 **Bilingual synchronization rule:** Keep all numbers, verdicts, evidence limits, and engineering implications aligned across both versions.
@@ -34,6 +34,12 @@ produces four main verdicts:
 Natural- and reverse-order conditions are both near ceiling, leaving the order
 effect unidentified. MiniMax was not run in artifact-v4, so every new verdict is
 configuration-specific.
+
+The subsequent artifact-v5 native-agent study sharpens the patch boundary:
+given the same authoritative plan, patch beats full rewrite by 41.7 percentage
+points [27.1, 56.3], but when the model must infer the plan the difference is only
+2.1 points [0.0, 6.3]. V5 therefore supports a delivery advantage under a correct
+plan, not a universal end-to-end patch advantage.
 
 The most defensible summary is:
 
@@ -243,6 +249,13 @@ Artifact-v4 is near zero for five-bit repair at \(N=24\)–48. These results do 
 conflict; together they constrain the crossover. Edit density, object length,
 address overhead, coupling, and timeout floor all affect the best interface.
 
+Artifact-v5 adds native tool execution and reproduces the theory-aligned split:
+oracle-plan patch is 46/48 versus 26/48 for rewrite, while inferred-plan patch is
+2/96 versus 0/96. The tool fixes delivery exposure; it does not guarantee correct
+plan discovery. V5 does not locate the density crossover because five of six
+inferred-plan cells are at a joint zero floor and actual per-run payload telemetry
+was not retained.
+
 ### 5.4 Budget and Order
 
 Mathematical solvability does not imply completion by a hosted model within a
@@ -260,6 +273,7 @@ predecessors, but the O1/O2 ceiling leaves the model effect unidentified.
 | Compact seed only partially recovers | Compute or validate hard state programmatically, then expand deterministically | Do not assume the model can always infer the seed |
 | Candidate rewrite does not improve | Connect candidates to verifiers, failure witnesses, and minimal repair | Do not merely attach the old object and request a full rewrite |
 | v3 patch positive, v4 patch null | Route by edit density, length, coupling, and address overhead | Do not hard-code `patch > rewrite` |
+| v5 oracle patch positive, inferred-plan comparison near floor | Verify the plan before write, then optimize the delivery interface | Do not treat a stable editor as a substitute for planning |
 | Budget recovery is incomplete | Use checkpoints, algorithmic tools, budget escalation, and fallbacks | Do not extend timeout unconditionally |
 | Order experiment is uninformative | Separate dependency-respecting execution from final presentation | Do not claim a measured order benefit |
 
@@ -299,6 +313,8 @@ Minimum telemetry should separate:
 5. Increase dependency frontier or length and rerun an order study without ceiling.
 6. Replicate in code, configuration, databases, and structured documents with
    executable verifiers.
+7. Replicate V5 with durable native-event retention and a plan-accuracy
+   intervention, so delivery and planning remain separately identifiable.
 
 ---
 
@@ -310,10 +326,19 @@ Minimum telemetry should separate:
 - [Coverage audit](https://github.com/wxy2ab/llmdealer/blob/main/exp/aggregation_mismatch_experiment/results/v4_p0/confirmatory/analysis/coverage.json)
 - [Frozen design](https://github.com/wxy2ab/llmdealer/blob/main/exp/aggregation_mismatch_experiment/docs/V4_P0_DESIGN_FREEZE.md)
 - [Full paper](https://github.com/wxy2ab/llmdealer/blob/main/exp/aggregation_mismatch_experiment/docs/PAPER.md)
+- [Artifact-v5 native-agent report](https://github.com/wxy2ab/llmdealer/blob/main/exp/aggregation_mismatch_experiment/docs/V5_STABLE_EDITING_AGENT_REPORT.md)
+- [Artifact-v5 machine-readable summary](https://github.com/wxy2ab/llmdealer/blob/main/exp/aggregation_mismatch_experiment/results/v5_agent_patch_rewrite/confirmatory/analysis/summary.json)
 
 The raw `merged_runs.jsonl` preserves legacy-evaluator output for auditability.
 Formal aggregation must use the uniform rescoring in `analyze_v4_p0.py`, not the
 raw success fields directly.
+
+For V5, the original merged formal JSONL and full event payload were not retained
+across a branch switch. The 288-row endpoint table was reconstructed from complete
+`run.log` completion records aligned to frozen specs. Final success, failure
+class, condition, instance, \(N\), \(k\), and paired endpoint effects are
+citable; exact repair-call totals, latency/token use, actual per-run payload
+ratios, and event-level arm exclusivity are not.
 
 ---
 
@@ -331,6 +356,10 @@ Artifact-v4 narrows the gap:
 > routing, and telemetry to convert structural advantages into reliable
 > end-to-end behavior.**
 
+Artifact-v5 adds the practical boundary condition: a stable editing tool can
+realize the patch delivery advantage once the plan is correct, but it does not
+remove the upstream planning bottleneck.
+
 ---
 
 ## Related Documents
@@ -338,4 +367,5 @@ Artifact-v4 narrows the gap:
 - [Aggregation Mismatch and Generation–Verification Asymmetry: Controlled Evidence (Chinese)](./aggregation-mismatch-generation-verification-asymmetry-evidence.zh-CN.md)
 - [Aggregation Mismatch: Derivable Claims, Proof Conditions, and Agent Engineering](./aggregation-mismatch-theoretical-claims-agent-engineering.md)
 - [Patch vs. Full Rewrite: A Controlled Sparse-Repair Experiment](./patch-vs-full-rewrite-controlled-experiment.md)
+- [Aggregation Mismatch Artifact-v5: Stable Editing Agent, Planning Bottleneck, and Conditional Patch Advantage](./aggregation-mismatch-v5-stable-editing-agent.md)
 - [Aggregation Mismatch and Compositional Governance in LLM Systems](./aggregation-mismatch-compositional-governance-llm-systems.md)

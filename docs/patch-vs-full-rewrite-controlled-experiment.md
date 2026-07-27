@@ -1,8 +1,8 @@
 # Patch vs. Full Rewrite: A Controlled Experiment on Sparse Repair Delivery
 
 **Subtitle: When a model can find or is given the local change, why should it not be required to resubmit the entire object?**<br>
-**Status: Research evidence note v0.2**<br>
-**Data validated: July 27, 2026; includes artifact-v4 boundary evidence**<br>
+**Status: Research evidence note v0.3**<br>
+**Data validated: July 28, 2026; includes artifact-v4 and artifact-v5 boundary evidence**<br>
 **Claim scope: One DeepSeek-V4-Flash deployment configuration; the MiniMax confirmatory matrix was stopped for cost and is excluded from adjudication**<br>
 **中文：** [Patch 与完整重写：稀疏修复交付接口的受控实验](./patch-vs-full-rewrite-controlled-experiment.zh-CN.md)<br>
 **Bilingual synchronization rule:** Keep condition names, sample sizes, statistical results, evidence cutoff, and claim boundaries aligned across both versions.
@@ -29,6 +29,12 @@ The supported conclusion is:
 > **Under the frozen DeepSeek-V4-Flash artifact-v3 sparse one-bit repair protocol, patch plus a deterministic executor provides higher budgeted end-to-end exact reliability than full rewrite.**
 
 The evidence does not establish that patch always beats rewrite, that the result generalizes across models, that it persists under unlimited budget, or that it transfers directly to real software-engineering tasks.
+
+Artifact-v5 adds a native-tool Agent boundary. With a correct oracle plan, batch
+Patch succeeds on 46/48 versus 26/48 for full-object Rewrite, a **+41.7 pp
+[+27.1, +56.25]** delivery advantage. Under inferred plans, however, the
+end-to-end comparison is only 2/96 versus 0/96 and fails its preregistered gate.
+The v5 verdict is therefore `delivery_only`, not end-to-end Agent superiority.
 
 ---
 
@@ -293,6 +299,28 @@ This is not a single-call survival curve, and 300-second and 900-second outcomes
 - one-bit GF(2) repair transfers directly to code, databases, configuration, or documents;
 - patch removes the need for global verification;
 - plan inference and delivery are fully separated in the primary I-P/I-R comparison.
+- artifact-v5 proves end-to-end Agent-level Patch superiority;
+- the edit-density crossover has been identified.
+
+### 8.3 Artifact-v5 Native-Tool Boundary
+
+Artifact-v5 compares native `file_edit_batch` with native `file_write` while
+sharing candidate, plan, verifier, 300-second episode budget, and one allowed
+delivery repair:
+
+| v5 comparison | Patch | Rewrite | Difference | Verdict |
+|---|---:|---:|---:|---|
+| Inferred plan | 2/96 | 0/96 | +2.1 pp [0, 6.25] | V5-C1 failed |
+| Oracle plan | 46/48 | 26/48 | +41.7 pp [27.1, 56.25] | V5-C2 passed |
+
+This result strengthens the delivery mechanism while narrowing the Agent claim:
+
+> **A correct plan can be delivered more reliably through native batch Patch,
+> but a planning floor can prevent that delivery advantage from improving the
+> end-to-end Agent.**
+
+The crossover remains unadjudicated because five of six infer cells are at a
+two-arm zero floor and observed per-run payload telemetry was not retained.
 
 ---
 
@@ -346,6 +374,26 @@ Together, the studies support a more precise engineering conclusion:
 > a sparse-long-object regime; artifact-v4 prevents unconditional
 > extrapolation.**
 
+### 9.2 Artifact-v5 Separates Planning from Native Delivery
+
+Artifact-v5 reproduces the oracle delivery magnitude in a native-tool loop:
+v3 O-P−O-R is +40.8 points and v5 O-P-A−O-R-A is +41.7 points. But v5's inferred
+end-to-end comparison fails. This supports the correct-plan delivery theory and
+simultaneously shows why an Agent needs a plan-verification gate.
+
+The system implication is multiplicative:
+
+\[
+P(\text{end-to-end success})
+\approx
+P(\text{plan correct})
+\times
+P(\text{delivery succeeds}\mid\text{plan correct}).
+\]
+
+A stronger editor changes the second term. It does not automatically improve the
+first.
+
 ---
 
 ## 10. Engineering Implications for Agent Development
@@ -382,6 +430,10 @@ Failure routing should differ by layer:
 - executor failure → repair tool or preconditions;
 - verifier failure → rollback + failure witness;
 - length/budget failure → patch, regional rewrite, or budget escalation.
+
+Artifact-v5 shows that this separation must be enforced as a gate, not merely
+logged after the fact. A plan that has not passed schema, precondition, and semantic
+checks should not receive write authority.
 
 ### 10.3 Use Three Repair Scales
 
@@ -426,6 +478,8 @@ single_configuration
 ```
 
 Cross-model replication is a separate research task, not an accomplished result of this study.
+Artifact-v5 also uses only the DeepSeek configuration; its `delivery_only` verdict
+does not raise the cross-configuration claim ceiling.
 
 ---
 
@@ -445,7 +499,14 @@ Sources:
 - [Confirmatory report](https://github.com/wxy2ab/llmdealer/blob/main/exp/aggregation_mismatch_experiment/docs/PATCH_VS_REWRITE_V3_REPORT.md)
 - [Machine-readable summary](https://github.com/wxy2ab/llmdealer/blob/main/exp/aggregation_mismatch_experiment/results/patch_rewrite_v3/confirmatory/analysis/summary.json)
 - [Coverage audit](https://github.com/wxy2ab/llmdealer/blob/main/exp/aggregation_mismatch_experiment/results/patch_rewrite_v3/confirmatory/analysis/coverage.json)
+- [Artifact-v5 stable editing Agent report](https://github.com/wxy2ab/llmdealer/blob/main/exp/aggregation_mismatch_experiment/docs/V5_STABLE_EDITING_AGENT_REPORT.md)
+- [Artifact-v5 machine-readable summary](https://github.com/wxy2ab/llmdealer/blob/main/exp/aggregation_mismatch_experiment/results/v5_agent_patch_rewrite/confirmatory/analysis/summary.json)
 - [Complete experiment repository](https://github.com/wxy2ab/llmdealer/tree/main/exp/aggregation_mismatch_experiment)
+
+The v5 formal endpoint table was reconstructed from the complete run log after
+the original tool-event payloads were lost. Its final success and failure-class
+counts are usable; exact repair-call, latency, and observed-payload telemetry are
+not.
 
 ---
 
@@ -459,6 +520,8 @@ Sources:
 | Real-domain transfer | Determines the engineering external validity of GF(2) | Code, JSON/configuration, database migration, structured documents |
 | Verifier / executor reliability | Determines whether interface advantage becomes commit safety | Correct plan × executor failure × verifier false acceptance |
 | Budget and commitment surface | Distinguishes a budget shift from a more stable interface law | Independently allocated budget × output length × visible/reasoning tokens |
+| v5 event-retaining replication | Restores the full native-tool audit trail | Same frozen 288-arm design with durable event payloads |
+| Planning lift | Tests whether delivery advantage becomes end-to-end advantage away from floor | Verified or higher-success plans × the same native delivery arms |
 
 The priorities are:
 
@@ -488,12 +551,18 @@ the model discovers or confirms the change
 
 Within the current evidence scope, this result is confirmed for the frozen DeepSeek-V4-Flash artifact-v3 protocol. Boundaries across models, edit densities, and real domains remain empirical.
 
+Artifact-v5 sharpens the Agent implication: native Patch retains a +41.7-point
+advantage after a correct plan is supplied, but the inferred-plan end-to-end claim
+fails. The production rule is therefore **verify the plan, then route delivery**,
+not simply “install a Patch tool.”
+
 ---
 
 ## Related Documents
 
 - [Patch vs. Full Rewrite: 中文](./patch-vs-full-rewrite-controlled-experiment.zh-CN.md)
 - [Aggregation Mismatch Artifact-v4: Experimental Evidence, Theory Gaps, and Agent Implications](./aggregation-mismatch-v4-claims-theory-gap.md)
+- [Aggregation Mismatch Artifact-v5: Stable Editing Agents and the Planning Bottleneck](./aggregation-mismatch-v5-stable-editing-agent.md)
 - [Aggregation Mismatch: Derivable Claims, Proof Conditions, and Agent Engineering](./aggregation-mismatch-theoretical-claims-agent-engineering.md)
 - [Controlled evidence for aggregation mismatch and generation–verification asymmetry (Chinese)](./aggregation-mismatch-generation-verification-asymmetry-evidence.zh-CN.md)
 - [Aggregation Mismatch and Compositional Governance in LLM Systems](./aggregation-mismatch-compositional-governance-llm-systems.md)

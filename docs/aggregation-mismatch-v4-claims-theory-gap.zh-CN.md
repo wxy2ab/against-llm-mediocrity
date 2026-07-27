@@ -1,8 +1,8 @@
 # 聚合失配 Artifact-v4：实验证据、理论差距与 Agent 工程含义
 
 **副标题：哪些机制得到支持，哪些只在数学上成立但尚未被模型实验识别**<br>
-**状态：研究证据报告 v1.0**<br>
-**数据核验：2026-07-27**<br>
+**状态：研究证据报告 v1.1**<br>
+**数据核验：2026-07-28；已挂载 V5 后续证据**<br>
 **证据范围：单个 DeepSeek-V4-Flash 部署配置；中文提示；18 个 GF(2) holdout**<br>
 **English:** [Aggregation Mismatch Artifact-v4: Experimental Evidence, Theory Gaps, and Agent Implications](./aggregation-mismatch-v4-claims-theory-gap.md)<br>
 **双语同步规则：** 两个版本的数字、裁决、证据边界和工程含义必须同步更新。
@@ -29,6 +29,11 @@ Artifact-v4 在 18 个全新 holdout、3 档长度、12 个 300 秒条件和
 
 输出顺序条件在自然序和逆序两端都接近满分，受 ceiling 限制，无法裁决顺序效应。
 Artifact-v4 没有运行 MiniMax，因此所有新裁决都必须限定为单配置。
+
+后续 artifact-v5 原生 Agent 实验进一步收紧了 patch 的边界：给定同一权威 plan 时，
+patch 相对完整重写高 41.7 个百分点 [27.1, 56.3]；模型自行推断 plan 时，差异只有
+2.1 个百分点 [0.0, 6.3]。因此 V5 支持正确计划下的交付优势，不支持普遍的端到端
+patch 优势。
 
 最稳健的总括是：
 
@@ -220,6 +225,11 @@ Artifact-v3 的单点稀疏、\(N=96\)–384 条件与该理论一致；v4 的 f
 \(N=24\)–48 条件差异为零附近。两者不冲突，而是共同限定 crossover：
 edit density、长度、地址开销、耦合和 timeout floor 都会改变最优接口。
 
+Artifact-v5 加入原生工具执行，并复现理论要求的分层：oracle-plan patch 为
+46/48，rewrite 为 26/48；infer-plan patch 为 2/96，rewrite 为 0/96。
+工具减少交付暴露，但不保证找到正确 plan。V5 也没有定位 density crossover：
+6 个 infer-plan cell 中有 5 个共同为零，且未保留实际逐 run payload telemetry。
+
 ### 5.4 预算与顺序
 
 数学可解性不能推出托管模型在给定 wall-clock 内完成，也不能推出成功率随独立预算点
@@ -236,6 +246,7 @@ edit density、长度、地址开销、耦合和 timeout floor 都会改变最�
 | Compact seed 只部分恢复 | 由程序计算或校验 hard state，再确定性展开 | 不把“模型能推断 seed”当成保证 |
 | Candidate rewrite 不改善 | 候选后接 verifier、failure witness 和最小修复 | 不只把旧对象附到 prompt 后要求全文重写 |
 | v3 patch 正、v4 patch null | 用 edit density、长度、耦合和地址开销路由 | 不硬编码 `patch > rewrite` |
+| v5 oracle patch 正、infer-plan 对照接近 floor | 写入前先验证 plan，再优化交付接口 | 不把稳定编辑器当作规划能力替代品 |
 | 预算恢复不完整 | 使用 checkpoint、算法工具、预算升级和 fallback | 不无条件加 timeout |
 | 顺序实验无裁决 | 内部依赖顺序与最终展示顺序分离 | 不宣称本实验量化了顺序收益 |
 
@@ -271,6 +282,8 @@ authoritative state
 4. 扫描 edit-density crossover，比较 patch、区域重写和全文重写。
 5. 提高依赖前沿或长度，重做不受 ceiling 限制的顺序实验。
 6. 在代码、配置、数据库和结构化文档中用可执行 verifier 做领域复现。
+7. 在保留完整原生事件的条件下复现 V5，并加入提升 plan accuracy 的干预，
+   继续分离 planning 与 delivery。
 
 ---
 
@@ -282,9 +295,17 @@ authoritative state
 - [覆盖审计](https://github.com/wxy2ab/llmdealer/blob/main/exp/aggregation_mismatch_experiment/results/v4_p0/confirmatory/analysis/coverage.json)
 - [冻结设计](https://github.com/wxy2ab/llmdealer/blob/main/exp/aggregation_mismatch_experiment/docs/V4_P0_DESIGN_FREEZE.md)
 - [完整论文](https://github.com/wxy2ab/llmdealer/blob/main/exp/aggregation_mismatch_experiment/docs/PAPER.md)
+- [Artifact-v5 原生 Agent 报告](https://github.com/wxy2ab/llmdealer/blob/main/exp/aggregation_mismatch_experiment/docs/V5_STABLE_EDITING_AGENT_REPORT.md)
+- [Artifact-v5 机器可读 summary](https://github.com/wxy2ab/llmdealer/blob/main/exp/aggregation_mismatch_experiment/results/v5_agent_patch_rewrite/confirmatory/analysis/summary.json)
 
 原始 `merged_runs.jsonl` 保留 legacy evaluator 产物以维持审计链。正式汇总必须通过
 `analyze_v4_p0.py` 的统一重评分，不能直接聚合原始成功字段。
+
+V5 的原始正式 `merged_runs.jsonl` 与完整事件 payload 在一次分支切换中未被保留。
+当前 288 行 endpoint 表由完整 `run.log` 的完成记录按冻结 spec 对齐重建。最终成功、
+failure class、condition、instance、\(N\)、\(k\) 与配对 endpoint 效应可以引用；
+精确 repair-call 总数、latency/token、实际逐 run payload ratio 和 event-level
+arm exclusivity 不可引用。
 
 ---
 
@@ -299,6 +320,9 @@ Artifact-v4 的主要贡献正是收窄二者之间的距离：
 > **可证明的任务简化不等于可保证的模型收益。Agent 必须用权威状态、确定性执行器、
 > verifier gate、可配置路由和遥测，把结构优势转化为可靠的端到端行为。**
 
+Artifact-v5 增加了实际边界条件：正确 plan 已知时，稳定编辑工具能兑现 patch 的
+交付优势；但它不会消除上游 plan-inference bottleneck。
+
 ---
 
 ## 相关文档
@@ -306,4 +330,5 @@ Artifact-v4 的主要贡献正是收窄二者之间的距离：
 - [聚合失配与生成—验证不对称：受控实验证据](./aggregation-mismatch-generation-verification-asymmetry-evidence.zh-CN.md)
 - [聚合失配：可推导命题、证明条件与 Agent 工程含义](./aggregation-mismatch-theoretical-claims-agent-engineering.zh-CN.md)
 - [Patch 与完整重写：稀疏修复交付接口的受控实验](./patch-vs-full-rewrite-controlled-experiment.zh-CN.md)
+- [聚合失配 Artifact-v5：稳定编辑 Agent、规划瓶颈与条件性 Patch 优势](./aggregation-mismatch-v5-stable-editing-agent.zh-CN.md)
 - [LLM 系统中的聚合失配与组合治理](./aggregation-mismatch-compositional-governance-llm-systems.zh-CN.md)
