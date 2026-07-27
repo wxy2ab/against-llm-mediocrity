@@ -4,6 +4,8 @@
 **状态：工作稿 v0.1**  
 **系列：LLM 系统中价值保存的结构理论**
 
+**实验配套：** [Artifact-v4 实验证据、理论差距与 Agent 含义](./aggregation-mismatch-v4-claims-theory-gap.zh-CN.md) · [Patch 与完整重写受控实验](./patch-vs-full-rewrite-controlled-experiment.zh-CN.md)
+
 ---
 
 ## 摘要

@@ -154,6 +154,20 @@ Tag: 聚合失配研究证据
 
 [阅读聚合失配与生成—验证不对称研究证据](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-generation-verification-asymmetry-evidence.zh-CN.md)
 
+### 聚合失配 Artifact-v4：实验证据、理论差距与 Agent 工程含义
+Tag: 聚合失配研究证据
+
+这份双语报告裁决已完成的 756 次 DeepSeek 边界状态、候选/接口、独立 300/900/1800 秒预算与输出顺序实验；披露并修正 7 条 legacy evaluator 误评分，区分“足够答案信息恢复”与“结构 cut-set 位置特异性”，并把理论—证据差距转化为 Agent 路由、执行器、验证器和遥测要求。
+
+[阅读 artifact-v4 报告：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v4-claims-theory-gap.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v4-claims-theory-gap.zh-CN.md)
+
+### Patch 与完整重写：稀疏修复交付接口的受控实验
+Tag: 聚合失配研究证据
+
+这份证据说明把 edit discovery 与 repair delivery 分开：在 160 个全新 holdout 和 1,920 条完整 DeepSeek 运行中，patch + 确定性执行相对完整重写提高了预算内严格可靠性；oracle-plan、纯复制、同次回答、长度、失败类型和独立预分配 900 秒对照共同限定了结论及其边界。
+
+[阅读受控实验：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/patch-vs-full-rewrite-controlled-experiment.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/patch-vs-full-rewrite-controlled-experiment.zh-CN.md)
+
 ### 聚合失配：可推导命题、证明条件与 Agent 工程含义
 Tag: 理论—工程桥接
 
