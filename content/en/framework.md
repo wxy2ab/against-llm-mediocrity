@@ -183,6 +183,8 @@ A local-to-global transformation has four moves:
 
 **That is the path from LLM mediocrity toward autoregressive extraordinary, and it is what Knowledge Governance formalizes.**
 
+If you want the runtime-side quantitative version of that path, continue with the [Agent Hardness Framework](/docs/agent-hardness-framework.md). It puts state commitment, failure write-back, interface design, and Action-Space Optimization inside one experimentally decomposable frame.
+
 The transition from mechanism to governance is therefore direct. The mechanism page explains why direct generation gets stuck; the governance page explains how to rewrite stuck tasks into searchable, verifiable, reusable engineering objects. Without that layer, the six mismatches are only diagnostic labels. With it, they become interventions.
 
 ## Four Ways to Resist Autoregressive Gravity
