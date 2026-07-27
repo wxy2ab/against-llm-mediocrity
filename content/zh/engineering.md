@@ -56,6 +56,8 @@ heroPoints:
 
 [阅读《状态治理智能体范式（SGAR）》](/docs/state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)
 
+如果你想把“审计工程 + SGAR + 控制空间”进一步放进一个可量化、可归因的运行时框架里，可以继续读 [Agent Hardness Framework](/docs/agent-hardness-framework.zh-CN.md)。这份工作稿把 Bridge 与 Action-Space Optimization 分开定义，并明确提出组件主效应、交互项和跨模型迁移的实验对象。
+
 升级协议与人类边界由 **[治理式人机协作](/zh/glossary#governed-human-ai-collaboration)** 与 **人类协助型操作失配（五个操作域）** 共同支撑：先问环境，再问人；用 [MSHQ](/zh/glossary#mshq) 提问；用 [GEsO](/zh/glossary#geso) 保存重复规则；让长程 agent 在硬状态中恢复自治。
 
 [阅读《治理式人机协作》](/docs/governed-human-ai-collaboration.zh-CN.md) · [阅读《人类协助型操作失配》](/docs/human-assist-operational-mismatches.zh-CN.md)
