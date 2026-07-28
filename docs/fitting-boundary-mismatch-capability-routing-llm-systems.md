@@ -3,6 +3,11 @@
 **Capability Domains, Trigger Boundaries, and Router Governance**  
 **Working Draft v0.1**  
 
+Companion conceptual case:
+[Why Models “Rescue” a Fish That Fell into Water](fitting-boundary-mismatch-fish-in-water-case.md)
+— a qualitative illustration and falsifiable hypothesis, not yet a controlled
+mechanism demonstration.
+
 ---
 
 ## Abstract

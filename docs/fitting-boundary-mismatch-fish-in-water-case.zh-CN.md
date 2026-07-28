@@ -8,6 +8,9 @@
 English version:
 [Why Models “Rescue” a Fish That Fell into Water](fitting-boundary-mismatch-fish-in-water-case.md)
 
+理论与工程框架：
+[LLM 系统中的拟合边界失配与能力路由](fitting-boundary-mismatch-capability-routing-llm-systems.zh-CN.md)
+
 ## 1. 案例摘要
 
 向多个大语言模型提出：
