@@ -1,8 +1,8 @@
 # 聚合失配与生成—验证不对称：一组受控实验给出的证据
 
 **副标题：为什么会执行局部规则，不等于能构造全局一致对象**  
-**状态：研究证据说明 v0.3**<br>
-**数据截点：2026-07-28；已纳入 artifact-v4 P0 与 artifact-v5 原生编辑 Agent 结果**<br>
+**状态：研究证据说明 v0.4**<br>
+**数据截点：2026-07-28；已纳入 artifact-v4–v7 结果**<br>
 **关联主题：聚合失配、生成—审计差异、候选结构外部化、组合治理**
 
 ---
@@ -21,6 +21,8 @@
 4. **生成—验证差异不是无条件能力排序。** 候选审计同时获得额外结构，并使用不同输出接口，因此证据支持的是“候选条件下的审计相对从零构造具有巨大优势”，而不是“验证在所有任务上普遍比生成容易”。
 5. **Artifact-v4 收窄了机制解释。** 足够正确答案 bits 使周期构造近乎恢复，但等量随机位置 bits 不弱于结构 cut-set；候选 full rewrite 没有改善，audit 才大幅恢复；独立 1800 秒预算也只在较短实例上接近恢复。
 6. **Artifact-v5 把 planning 与 delivery 分开。** 给定权威 plan 时，原生 patch 相对 rewrite 高 41.7 个百分点；自行推断 plan 时只高 2.1 个百分点且未建立端到端优势。稳定编辑工具能改善交付，但不能自行修复规划。
+7. **Artifact-v6 把问题推进到 Agent 控制面。** scheduler–ledger–renderer 组合、plan-error 路由和 governed commit 分项通过；但 delivery-error 的两个模型 re-emit 策略均为 0/24。
+8. **Artifact-v7 收窄了恢复机制。** requested topo order 与 located receipt 都是正向但未过确认门；deterministic plan compiler 在 48/48 个冻结案例上通过采用门，保护项违规为 0。
 
 这使“聚合失配”从一个理论描述变成一个可测现象：**局部能力可以保留，但当求解顺序、输出顺序和未外部化状态发生冲突时，局部能力未必能组合成预算内的全局成功。**
 
@@ -37,6 +39,10 @@ Artifact-v4 的完整裁决、理论差距和 Agent 含义见：
 Artifact-v5 的原生 Agent 结果、证据边界和 planning/delivery 分解见：
 [English](./aggregation-mismatch-v5-stable-editing-agent.md) ·
 [中文](./aggregation-mismatch-v5-stable-editing-agent.zh-CN.md)。
+
+Artifact-v7 的理论、实验、数据 QA、工程意义和应用见：
+[English](./aggregation-mismatch-v7-mechanism-recovery.md) ·
+[中文](./aggregation-mismatch-v7-mechanism-recovery.zh-CN.md)。
 
 ---
 
@@ -277,6 +283,8 @@ repair-call、latency/token 与实际逐 run payload ratio 不可引用。
 - 更多独立预算会部分恢复，但恢复强烈依赖长度。
 - 给定同一权威 edit plan，稳定原生 patch 接口在 V5 中显著优于完整重写。
 - 更换为稳定 patch 工具并不足以自动改善错误的 plan inference。
+- 依赖调度复合包、plan-error 路由与 governed commit 在 V6 中具有分项工程证据。
+- 正确 plan 已知时，V7 的 deterministic compiler 在冻结 48 个案例上通过采用门。
 
 ### 当前证据不允许
 
@@ -289,11 +297,15 @@ repair-call、latency/token 与实际逐 run payload ratio 不可引用。
 - 1800 秒预算已经普遍消除周期构造差距。
 - artifact-v4 已完成跨模型复现或成功裁决自然序/逆序差异。
 - artifact-v5 已证明普遍的端到端 `patch > rewrite`，或已经定位 edit-density crossover。
+- artifact-v7 已确认 requested topo order 的独立机制，或 located receipt 普遍改善
+  模型 recovery。
+- artifact-v7 的 Rewrite−Located 正差可以写成普遍 `Rewrite > Patch`，或 compiler
+  48/48 等同于生产总体可靠率 100%。
 - 合成 GF(2) 结果可以未经验证直接外推到代码、数据库、配置和长文写作。
 
 最稳健的结论是：
 
-> **聚合失配会在局部规则简单但全局闭合、求解顺序和输出顺序冲突时产生强烈的预算内构造差距；候选结构外部化可以大幅缓解该差距，但生成—审计不对称仍具有接口和预算依赖。**
+> **聚合失配会在局部规则简单但全局闭合、求解顺序和输出顺序冲突时产生强烈的预算内构造差距；候选结构外部化可以大幅缓解该差距，但生成—审计不对称仍具有接口和预算依赖。对正确 plan 后的交付，最新证据支持把可编译动作移出模型采样，交给 deterministic compiler、global verifier 和 atomic commit。**
 
 ---
 
@@ -304,8 +316,14 @@ repair-call、latency/token 与实际逐 run payload ratio 不可引用。
 1. **跨配置复现 v4：** 判断答案信息恢复、candidate rewrite 负/零效应与 audit−rewrite 组合差异能否跨模型。
 2. **候选 × 操作 × 输出拆分：** 用 matched factorial 分离候选信息、计算职责与输出长度/形式。
 3. **答案信息匹配的边界实验：** 匹配正确 bits 数量、熵与位置覆盖，区分 cut-set 结构与通用答案支架。
-4. **Edit-density crossover：** V5 的 infer cells 受 floor 限制且缺少实际 payload telemetry；需要先提高 plan accuracy，并在保留原生事件的条件下比较 patch、区域重写与完整重写。
-5. **无 ceiling 的顺序实验：** 提高依赖前沿或长度，再测试自然序与逆序。
-6. **真实任务迁移：** 在代码修复、配置更新、数据库约束和结构化文档修改中比较从零生成与候选—审计—修订流程。
+4. **Edit-density crossover：** V5 的 infer cells 受 floor 限制；V7 又表明 fallback
+   方向受错误契约影响。需要在 verified-plan 条件下比较 patch、区域重写、完整重写与
+   deterministic compile。
+5. **强制而非请求执行顺序：** V7-A 只改变 requested order，两个 arm 都严格排对；
+   后续应由 runtime readiness gate 或外部 step ledger 强制依赖顺序。
+6. **自然失败分布的 recovery router：** 把 stale state、argument schema、duplicate、
+   verifier failure 分开，按生产基率测量 refresh/rebase/compile/rewrite/replan。
+7. **真实任务迁移：** 在代码修复、配置更新、数据库约束和结构化文档修改中比较从零
+   生成、候选—审计—修订与 verified-plan compilation。
 
 这些实验将决定“聚合失配”最终是一种合成任务现象、一个部署预算现象，还是一种可以跨领域复现的系统结构规律。

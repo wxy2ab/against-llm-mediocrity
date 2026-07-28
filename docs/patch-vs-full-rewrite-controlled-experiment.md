@@ -1,8 +1,8 @@
 # Patch vs. Full Rewrite: A Controlled Experiment on Sparse Repair Delivery
 
 **Subtitle: When a model can find or is given the local change, why should it not be required to resubmit the entire object?**<br>
-**Status: Research evidence note v0.3**<br>
-**Data validated: July 28, 2026; includes artifact-v4 and artifact-v5 boundary evidence**<br>
+**Status: Research evidence note v0.4**<br>
+**Data validated: July 28, 2026; includes artifact-v4, artifact-v5, and artifact-v7 boundary evidence**<br>
 **Claim scope: One DeepSeek-V4-Flash deployment configuration; the MiniMax confirmatory matrix was stopped for cost and is excluded from adjudication**<br>
 **中文：** [Patch 与完整重写：稀疏修复交付接口的受控实验](./patch-vs-full-rewrite-controlled-experiment.zh-CN.md)<br>
 **Bilingual synchronization rule:** Keep condition names, sample sizes, statistical results, evidence cutoff, and claim boundaries aligned across both versions.
@@ -35,6 +35,16 @@ Patch succeeds on 46/48 versus 26/48 for full-object Rewrite, a **+41.7 pp
 [+27.1, +56.25]** delivery advantage. Under inferred plans, however, the
 end-to-end comparison is only 2/96 versus 0/96 and fails its preregistered gate.
 The v5 verdict is therefore `delivery_only`, not end-to-end Agent superiority.
+
+Artifact-v7 adds a different delivery-error boundary. After a correct plan and a
+failed first delivery are fixed, one full-rewrite fallback succeeds on 26/48 cases,
+compared with 13/48 for one field-located patch re-emission, a **+27.1 pp
+[+6.2, +47.9]** difference. That contrast had no preregistered directional pass
+gate and is heterogeneous by failure subtype, so it does not reverse the v3/v5
+conditional Patch result. More importantly, a deterministic plan compiler succeeds
+on 48/48 frozen cases with zero protected violations. The preferred production
+boundary is therefore: **compile a verified plan when possible; route Patch versus
+Rewrite only as a fallback.**
 
 ---
 
@@ -501,6 +511,7 @@ Sources:
 - [Coverage audit](https://github.com/wxy2ab/llmdealer/blob/main/exp/aggregation_mismatch_experiment/results/patch_rewrite_v3/confirmatory/analysis/coverage.json)
 - [Artifact-v5 stable editing Agent report](https://github.com/wxy2ab/llmdealer/blob/main/exp/aggregation_mismatch_experiment/docs/V5_STABLE_EDITING_AGENT_REPORT.md)
 - [Artifact-v5 machine-readable summary](https://github.com/wxy2ab/llmdealer/blob/main/exp/aggregation_mismatch_experiment/results/v5_agent_patch_rewrite/confirmatory/analysis/summary.json)
+- [Artifact-v7 mechanism-recovery validation](https://github.com/wxy2ab/llmdealer/blob/main/exp/aggregation_mismatch_experiment/docs/V7_AGENT_MECHANISM_RECOVERY_VALIDATION.md)
 - [Complete experiment repository](https://github.com/wxy2ab/llmdealer/tree/main/exp/aggregation_mismatch_experiment)
 
 The v5 formal endpoint table was reconstructed from the complete run log after
@@ -556,11 +567,18 @@ advantage after a correct plan is supplied, but the inferred-plan end-to-end cla
 fails. The production rule is therefore **verify the plan, then route delivery**,
 not simply “install a Patch tool.”
 
+Artifact-v7 adds the next routing layer. If a verified plan can be compiled
+deterministically, use the compiler rather than asking the model to re-emit either a
+Patch or a Rewrite. When compilation is unavailable, the fallback remains
+conditional: Rewrite is stronger than one located Patch re-emission in v7 overall,
+but that result is protocol-specific and does not support a universal ordering.
+
 ---
 
 ## Related Documents
 
 - [Patch vs. Full Rewrite: 中文](./patch-vs-full-rewrite-controlled-experiment.zh-CN.md)
+- [Aggregation Mismatch Artifact-v7: Mechanism Recovery and Deterministic Delivery](./aggregation-mismatch-v7-mechanism-recovery.md)
 - [Aggregation Mismatch Artifact-v4: Experimental Evidence, Theory Gaps, and Agent Implications](./aggregation-mismatch-v4-claims-theory-gap.md)
 - [Aggregation Mismatch Artifact-v5: Stable Editing Agents and the Planning Bottleneck](./aggregation-mismatch-v5-stable-editing-agent.md)
 - [Aggregation Mismatch: Derivable Claims, Proof Conditions, and Agent Engineering](./aggregation-mismatch-theoretical-claims-agent-engineering.md)
