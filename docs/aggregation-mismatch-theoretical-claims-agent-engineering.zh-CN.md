@@ -1,8 +1,8 @@
 # 聚合失配：可推导命题、证明条件与 Agent 工程含义
 
 **副标题：哪些结论不必等待更多模型实验，哪些只能由实验校准**  
-**状态：理论—工程桥接报告 v0.3**<br>
-**实验数据截点：2026-07-28；已纳入完成的 artifact-v4 P0 与 artifact-v5 稳定编辑 Agent 矩阵**<br>
+**状态：理论—工程桥接报告 v0.4**<br>
+**实验数据截点：2026-07-28；已纳入完成的 artifact-v4–v7**<br>
 **关联主题：聚合失配、patch vs. rewrite、生成—验证不对称、硬状态、确定性执行器、验证器治理**  
 **English:** [Aggregation Mismatch: Derivable Claims, Proof Conditions, and Implications for Agent Engineering](./aggregation-mismatch-theoretical-claims-agent-engineering.md)  
 **双语同步规则：** 两个版本的命题编号、公式、表格、证据截点和结论边界必须同步更新。
@@ -30,6 +30,9 @@
 9. **权威状态、确定性转移和幂等提交可以保证重放、恢复和去重语义；模型不再负责从对话历史猜测当前状态。**
 10. **受约束解码或 schema 可以保证语法合法，但不能由此推出语义正确。**
 
+作为命题六的推论：**正确 plan 已经绑定到权威状态，并且可以被确定性编译为原生工具
+参数时，再让模型序列化这些参数不会增加任务信息，只会增加一个随机失败面。**
+
 这些命题足以先指导 agent 架构：让模型主要提交计划、patch、边界状态和工具参数；让运行时持有权威对象；让确定性执行器负责展开和写入；让验证器决定是否提交；让依赖图决定执行顺序、增量验证范围和可并行边界。
 
 它们并不足以写出“patch 永远优于 rewrite”“验证普遍比生成容易”或“更多推理预算一定消除聚合失配”。这些仍需实验。
@@ -43,6 +46,13 @@ Artifact-v5 在原生工具边界上检验了 patch 定理。给定同一权威 
 patch 相对完整重写高 41.7 个百分点；要求模型自行推断 plan 时，两组都接近 floor，
 差异只有 2.1 个百分点。这正是**正确计划下的交付优势**与**经过计划推断后的端到端
 优势**之间的区别。实验支持前者，不支持后者。
+
+Artifact-v6 与 v7 进一步检验了这条条件性定理周围的控制面。v6 支持
+scheduler–ledger–renderer 组合、plan-error 路由与 governed commit，但没有识别纯
+order effect。v7 的 requested topological order 与 localized receipt 都有正向但未
+确认的效应；deterministic plan compiler 则在 48/48 个冻结采用案例上通过，保护项
+违规为 0。经验结果支持当前 compiler 实现；偏好编译的理论理由来自：对 verified plan
+再采样没有信息增益。
 
 ---
 
@@ -486,6 +496,23 @@ V(y)=
 - hard verifier 与 learned judge 分层，后者不能无条件覆盖前者。
 - 任何绕过 gate 的写路径都会使上述安全证明失效，应列为架构级缺陷。
 
+### 8.3 推论：编译 verified plan，而不是重新采样 delivery
+
+令 \(p\) 为已经验证且绑定到权威状态 \(s\) 的 plan，\(C(s,p)\) 为保持 plan 语义的
+确定性 compiler。如果状态 hash 仍匹配、执行是原子的，而且全局 verifier 对保护项
+可靠，那么运行时不需要新的模型采样就能生成并检查 delivery：
+
+\[
+\operatorname{Accept}(E(s,C(s,p)))\Rightarrow I(E(s,C(s,p))).
+\]
+
+在这一条件下，新模型调用不会改善 plan 信息。只有 compiler 不可用、plan 不完整，
+或需要模型在语义不同的 fallback 之间选择时，才有必要再次调用模型。
+
+Artifact-v7 验证了一个实现边界：冻结 compiler 在 48/48 案例上通过，invalid
+arguments、collateral changes、hash violations 和 plan violations 均为 0。这是
+adoption test，不是生产可靠率 100% 的证明。
+
 ---
 
 ## 9. 命题七：局部修改具有可计算的失效传播锥
@@ -875,6 +902,11 @@ Artifact-v5 补上了原生 Agent 边界检验：它在权威 plan 条件下支�
 同时表明相同的工具变化不能自行修复 plan inference。工程结论很直接：先验证计划，
 再优化交付接口。
 
+Artifact-v7 又把这条结论收紧：如果 verified plan 能够编译，首选路径就不再是模型
+Patch 与模型 Rewrite 二选一，而是确定性 plan compilation、原生执行、全局验证与
+原子提交。它的 requested-order 与 localized-receipt 效应仍是方向性而非确认性信号，
+不能写死为普遍路由定律。
+
 因此，现阶段最合理的工程策略不是等待所有 P0 / P1 / P2 全部完成，也不是把实验结果写死为规则，而是：
 
 > 先实现“结构化状态 + 最小操作提交 + 确定性执行 + 验证闸门 + 依赖调度 + 可回滚事务”这一可由理论支持的底座；再用实验校准 patch 阈值、预算、候选质量、模型路由和真实领域边界。
@@ -883,6 +915,7 @@ Artifact-v5 补上了原生 Agent 边界检验：它在权威 plan 条件下支�
 
 ## 相关文档
 
+- [聚合失配 Artifact-v7：机制恢复与确定性交付](./aggregation-mismatch-v7-mechanism-recovery.zh-CN.md)
 - [Patch 与完整重写：稀疏修复交付接口的受控实验](./patch-vs-full-rewrite-controlled-experiment.zh-CN.md)
 - [聚合失配 Artifact-v5：稳定编辑 Agent、规划瓶颈与条件性 Patch 优势](./aggregation-mismatch-v5-stable-editing-agent.zh-CN.md)
 - [聚合失配 Artifact-v4：实验证据、理论差距与 Agent 工程含义](./aggregation-mismatch-v4-claims-theory-gap.zh-CN.md)

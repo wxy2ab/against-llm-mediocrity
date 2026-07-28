@@ -1,8 +1,8 @@
 # Patch 与完整重写：稀疏修复交付接口的受控实验
 
 **副标题：模型已经知道或能够找到局部修改时，为什么仍不应要求它重新提交整个对象**<br>
-**状态：研究证据说明 v0.3**<br>
-**数据核验日期：2026-07-28；已纳入 artifact-v4 与 artifact-v5 的边界证据**<br>
+**状态：研究证据说明 v0.4**<br>
+**数据核验日期：2026-07-28；已纳入 artifact-v4、artifact-v5 与 artifact-v7 的边界证据**<br>
 **裁决范围：DeepSeek-V4-Flash 单一部署配置；MiniMax 正式矩阵因成本中止，不进入裁决**<br>
 **English:** [Patch vs. Full Rewrite: A Controlled Experiment on Sparse Repair Delivery](./patch-vs-full-rewrite-controlled-experiment.md)<br>
 **双语同步规则：** 两个版本的条件名称、样本量、统计结果、证据截点与结论边界必须同步更新。
@@ -34,6 +34,13 @@ Artifact-v5 增加了原生工具 Agent 边界。正确 oracle plan 给定后，
 46/48，完整对象 Rewrite 为 26/48，交付优势为 **+41.7 pp
 [+27.1, +56.25]**。但推断计划下的端到端比较只有 2/96 对 0/96，没有通过
 预注册门槛。因此 v5 裁决是 `delivery_only`，不是端到端 Agent superiority。
+
+Artifact-v7 增加了不同的 delivery-error 边界。固定正确 plan 和第一次失败后，一次
+完整 Rewrite fallback 为 26/48，一次字段定位 Patch re-emission 为 13/48，差异为
+**+27.1 pp [+6.2, +47.9]**。该比较没有预注册方向性通过门，而且 failure subtype
+存在异质性，因此不反转 v3/v5 的条件性 Patch 结论。更重要的是，deterministic plan
+compiler 在 48/48 个冻结案例上通过，保护项违规为 0。生产首选边界应当是：
+**能编译 verified plan 时先编译；只有 fallback 才路由 Patch 与 Rewrite。**
 
 ---
 
@@ -492,6 +499,7 @@ claim 上限。
 - [覆盖审计](https://github.com/wxy2ab/llmdealer/blob/main/exp/aggregation_mismatch_experiment/results/patch_rewrite_v3/confirmatory/analysis/coverage.json)
 - [Artifact-v5 稳定编辑 Agent 报告](https://github.com/wxy2ab/llmdealer/blob/main/exp/aggregation_mismatch_experiment/docs/V5_STABLE_EDITING_AGENT_REPORT.md)
 - [Artifact-v5 机器可读 summary](https://github.com/wxy2ab/llmdealer/blob/main/exp/aggregation_mismatch_experiment/results/v5_agent_patch_rewrite/confirmatory/analysis/summary.json)
+- [Artifact-v7 机制恢复验证](https://github.com/wxy2ab/llmdealer/blob/main/exp/aggregation_mismatch_experiment/docs/V7_AGENT_MECHANISM_RECOVERY_VALIDATION.md)
 - [完整实验仓库](https://github.com/wxy2ab/llmdealer/tree/main/exp/aggregation_mismatch_experiment)
 
 v5 正式 endpoint 表在原始 tool-event payload 丢失后，由完整 run log 重建。
@@ -545,11 +553,17 @@ Artifact-v5 收紧了 Agent 含义：正确 plan 给定后，原生 Patch 仍有
 优势，但 infer-plan 端到端 claim 未通过。因此生产规则应是**先验证 plan，再路由
 delivery**，而不是简单“装一个 Patch 工具”。
 
+Artifact-v7 增加下一层路由：verified plan 能够确定性编译时，应使用 compiler，而
+不是再让模型输出 Patch 或 Rewrite。compiler 不可用时，fallback 仍必须条件化：
+v7 总体上 Rewrite 高于一次 located Patch re-emission，但该结果是协议特异的，
+不支持普遍排序。
+
 ---
 
 ## 相关文档
 
 - [Patch vs. Full Rewrite: English](./patch-vs-full-rewrite-controlled-experiment.md)
+- [聚合失配 Artifact-v7：机制恢复与确定性交付](./aggregation-mismatch-v7-mechanism-recovery.zh-CN.md)
 - [聚合失配 Artifact-v4：实验证据、理论差距与 Agent 工程含义](./aggregation-mismatch-v4-claims-theory-gap.zh-CN.md)
 - [聚合失配 Artifact-v5：稳定编辑 Agent 与规划瓶颈](./aggregation-mismatch-v5-stable-editing-agent.zh-CN.md)
 - [聚合失配：可推导命题、证明条件与 Agent 工程含义](./aggregation-mismatch-theoretical-claims-agent-engineering.zh-CN.md)

@@ -1,8 +1,8 @@
 # Aggregation Mismatch: Derivable Claims, Proof Conditions, and Implications for Agent Engineering
 
 **Subtitle: Which conclusions do not need more model experiments, and which still require empirical calibration**  
-**Status: Theory-to-engineering bridge report v0.3**<br>
-**Empirical data cutoff: July 28, 2026; includes the completed artifact-v4 P0 and artifact-v5 stable-editing-agent matrices**<br>
+**Status: Theory-to-engineering bridge report v0.4**<br>
+**Empirical data cutoff: July 28, 2026; includes completed artifacts v4–v7**<br>
 **Related topics: aggregation mismatch, patch vs. rewrite, generation–verification asymmetry, hard state, deterministic executors, verifier governance**  
 **中文：** [聚合失配：可推导命题、证明条件与 Agent 工程含义](./aggregation-mismatch-theoretical-claims-agent-engineering.zh-CN.md)  
 **Bilingual synchronization rule:** Keep proposition numbering, formulas, tables, evidence cutoff, and conclusion boundaries aligned across both versions.
@@ -30,6 +30,11 @@ Under explicit conditions, the following conclusions are derivable:
 9. **Authoritative state, deterministic transitions, and idempotent commits provide replay, recovery, and deduplication semantics; the model no longer has to infer current state from conversational history.**
 10. **Constrained decoding or a schema can guarantee syntactic validity, but not semantic correctness.**
 
+As a corollary of proposition six: **when a correct plan is already bound to the
+authoritative state and can be compiled deterministically into native tool
+arguments, asking the model to serialize those arguments again adds no task
+information and introduces another stochastic failure surface.**
+
 These claims are already strong enough to guide agent architecture. The model should primarily submit plans, patches, boundary states, and tool arguments. The runtime should own the authoritative object. Deterministic executors should expand and write changes. Verifiers should control commits. Dependency graphs should determine execution order, incremental verification scope, and safe parallel boundaries.
 
 They are not strong enough to justify claims such as “patch always beats rewrite,” “verification is universally easier than generation,” or “more reasoning budget necessarily eliminates aggregation mismatch.” Those remain empirical questions.
@@ -48,6 +53,15 @@ points. When the model must infer the plan, both arms remain near floor and the
 difference is only 2.1 points. This is the expected distinction between
 **delivery advantage given a correct plan** and **end-to-end advantage after plan
 inference**. The experiment supports the first, not the second.
+
+Artifacts v6 and v7 test the control plane around that conditional theorem. V6
+supports a scheduler–ledger–renderer package, plan-error routing, and governed
+commit, while not isolating a pure order effect. V7 then finds positive but
+non-confirmatory effects for requested topological order and localized receipts,
+while its deterministic plan compiler passes 48/48 frozen adoption cases with zero
+protected invariant violations. The empirical result supports the compiler
+implementation; the theoretical reason to prefer compilation follows from the
+absence of information gain in resampling a verified plan.
 
 ---
 
@@ -498,6 +512,27 @@ Perfect verification is often unrealistic. Authority should be stratified by inv
 - Keep hard verifiers separate from learned judges. A learned judgment must not silently override a hard failure.
 - Any write path that bypasses the gate invalidates the safety proof and should be treated as an architectural defect.
 
+### 8.3 Corollary: Compile a Verified Plan Instead of Resampling Delivery
+
+Let \(p\) be a plan already verified and bound to authoritative state \(s\), and let
+\(C(s,p)\) be a deterministic compiler that preserves the plan semantics. If state
+hashes still match, execution is atomic, and the global verifier is sound for the
+protected invariants, then the runtime can produce and check the delivery without a
+new model sample:
+
+\[
+\operatorname{Accept}(E(s,C(s,p)))\Rightarrow I(E(s,C(s,p))).
+\]
+
+A new model call does not improve plan information in this setting. It can only be
+justified when compilation is unavailable, the plan is incomplete, or a model is
+needed to choose among semantically distinct fallback actions.
+
+Artifact-v7 validates one implementation boundary: the frozen compiler passes
+48/48 cases with zero invalid arguments, collateral changes, hash violations, or
+plan violations. That is an adoption test, not a proof of 100% production
+reliability.
+
 ---
 
 ## 9. Proposition Seven: Local Changes Have a Computable Invalidation Cone
@@ -890,6 +925,12 @@ same tool change does not by itself repair plan inference. The engineering
 consequence is concrete: verify the plan first, then optimize the delivery
 interface.
 
+Artifact-v7 further sharpens that consequence: if the verified plan can be compiled,
+the preferred path is not model Patch versus model Rewrite. It is deterministic
+plan compilation, native execution, global verification, and atomic commit. Its
+requested-order and localized-receipt effects remain directional rather than
+confirmatory, so they should not be hard-coded as universal routing laws.
+
 The appropriate engineering strategy is therefore neither to wait for every P0 / P1 / P2 experiment nor to hard-code current empirical effects as universal rules:
 
 > First implement the theoretically supported substrate of structured state, minimal operation submission, deterministic execution, verifier-gated commit, dependency-aware scheduling, and rollback-capable transactions. Then use experiments to calibrate patch thresholds, budgets, candidate quality, model routing, and real-domain boundaries.
@@ -898,6 +939,7 @@ The appropriate engineering strategy is therefore neither to wait for every P0 /
 
 ## Related Documents
 
+- [Aggregation Mismatch Artifact-v7: Mechanism Recovery and Deterministic Delivery](./aggregation-mismatch-v7-mechanism-recovery.md)
 - [Patch vs. Full Rewrite: A Controlled Experiment on Sparse Repair Delivery](./patch-vs-full-rewrite-controlled-experiment.md)
 - [Aggregation Mismatch Artifact-v5: Stable Editing Agent, Planning Bottleneck, and Conditional Patch Advantage](./aggregation-mismatch-v5-stable-editing-agent.md)
 - [Aggregation Mismatch Artifact-v4: Experimental Evidence, Theory Gaps, and Agent Implications](./aggregation-mismatch-v4-claims-theory-gap.md)

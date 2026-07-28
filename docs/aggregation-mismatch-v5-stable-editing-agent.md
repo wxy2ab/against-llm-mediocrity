@@ -406,6 +406,7 @@ Patch is a conditional delivery advantage. Planning governance is what allows th
 ## Related Documents
 
 - [Aggregation Mismatch Artifact-v5: 中文](./aggregation-mismatch-v5-stable-editing-agent.zh-CN.md)
+- [Artifact-v7 Follow-up: Mechanism Recovery and Deterministic Delivery](./aggregation-mismatch-v7-mechanism-recovery.md)
 - [Patch vs. Full Rewrite: A Controlled Sparse-Repair Experiment](./patch-vs-full-rewrite-controlled-experiment.md)
 - [Aggregation Mismatch Artifact-v4: Evidence, Theory Gaps, and Agent Implications](./aggregation-mismatch-v4-claims-theory-gap.md)
 - [Aggregation Mismatch: Derivable Claims and Agent Engineering](./aggregation-mismatch-theoretical-claims-agent-engineering.md)
