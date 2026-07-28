@@ -4,7 +4,7 @@
 **Status:** Working Draft v0.1  
 **Series:** A Structural Theory of Value Preservation in LLM Systems
 
-**Empirical companions:** [Artifact-v4 evidence, theory gaps, and agent implications](./aggregation-mismatch-v4-claims-theory-gap.md) · [Artifact-v5 stable editing agent](./aggregation-mismatch-v5-stable-editing-agent.md) · [Artifact-v7 mechanism recovery and deterministic delivery](./aggregation-mismatch-v7-mechanism-recovery.md) · [Artifact-v8 runtime ownership and semantic routing](./aggregation-mismatch-v8-runtime-ownership-routing.md) · [Artifact-v9 minimal scaffold and verifier receipt](./aggregation-mismatch-v9-minimal-scaffold-recovery.md) · [Patch vs. full rewrite controlled experiment](./patch-vs-full-rewrite-controlled-experiment.md)
+**Empirical companions:** [Artifact-v4 evidence, theory gaps, and agent implications](./aggregation-mismatch-v4-claims-theory-gap.md) · [Artifact-v5 stable editing agent](./aggregation-mismatch-v5-stable-editing-agent.md) · [Artifact-v7 mechanism recovery and deterministic delivery](./aggregation-mismatch-v7-mechanism-recovery.md) · [Artifact-v8 runtime ownership and semantic routing](./aggregation-mismatch-v8-runtime-ownership-routing.md) · [Artifact-v9 minimal scaffold and verifier receipt](./aggregation-mismatch-v9-minimal-scaffold-recovery.md) · [Artifact-v10 semantic contracts and runtime canonicalization](./aggregation-mismatch-v10-semantic-contract-canonicalization.md) · [Patch vs. full rewrite controlled experiment](./patch-vs-full-rewrite-controlled-experiment.md)
 
 ---
 

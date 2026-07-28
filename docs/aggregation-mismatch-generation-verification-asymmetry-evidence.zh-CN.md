@@ -2,7 +2,7 @@
 
 **副标题：为什么会执行局部规则，不等于能构造全局一致对象**  
 **状态：研究证据说明 v0.5**<br>
-**数据截点：2026-07-28；已纳入 artifact-v4–v9 结果**<br>
+**数据截点：2026-07-28；已纳入 artifact-v4–v10 结果**<br>
 **关联主题：聚合失配、生成—审计差异、候选结构外部化、组合治理**
 
 ---
@@ -28,6 +28,9 @@
     四臂在更难 strict-order 合同下进入 floor，两个字段主效应未裁决；冻结错误下
     located/causal 相对 generic 都有 +12.5 个百分点正点估计，但未通过确认门。
     77 个 order failure 的 ready-ID 集合全部正确，表明序列化验收合同是主要 floor。
+11. **Artifact-v10 分开了可靠合同与性能承诺。** semantic-set canonicalizer 在
+    1,024/1,024 个离线案例上通过，24 个成功 SET episode 依赖非标准排列规范化；
+    但 SET 相对 STRICT 只提高 +6.25 个百分点，CI 跨 0，未达到 +20 个百分点确认门。
 
 这使“聚合失配”从一个理论描述变成一个可测现象：**局部能力可以保留，但当求解顺序、输出顺序和未外部化状态发生冲突时，局部能力未必能组合成预算内的全局成功。**
 
@@ -56,6 +59,10 @@ Artifact-v8 的理论、实验、数据 QA、工程意义和应用见：
 Artifact-v9 的理论、实验、数据 QA、工程意义和应用见：
 [English](./aggregation-mismatch-v9-minimal-scaffold-recovery.md) ·
 [中文](./aggregation-mismatch-v9-minimal-scaffold-recovery.zh-CN.md)。
+
+Artifact-v10 的理论、实验、数据 QA、工程意义和应用见：
+[English](./aggregation-mismatch-v10-semantic-contract-canonicalization.md) ·
+[中文](./aggregation-mismatch-v10-semantic-contract-canonicalization.zh-CN.md)。
 
 ---
 
@@ -320,6 +327,8 @@ repair-call、latency/token 与实际逐 run payload ratio 不可引用。
   crossover，或 64/64 compiler 等同于生产总体可靠率 100%。
 - artifact-v9 已证明 ready/ledger 字段无效、causal receipt 无效，或推翻了 v8
   scaffold package。
+- artifact-v10 已证明 semantic-set 无效、真实效应严格为零，或相反已经确认了大幅
+  端到端成功率提升。
 - 合成 GF(2) 结果可以未经验证直接外推到代码、数据库、配置和长文写作。
 
 最稳健的结论是：
@@ -338,9 +347,9 @@ repair-call、latency/token 与实际逐 run payload ratio 不可引用。
 4. **Edit-density crossover：** V5 的 infer cells 受 floor 限制；V7 又表明 fallback
    方向受错误契约影响。需要在 verified-plan 条件下比较 patch、区域重写、完整重写与
    deterministic compile。
-5. **非 floor 的 scaffold 拆分与顺序 canonicalization：** V9-A 的 strict-order
-   contract 使四臂 floor；后续应在重叠长度区间分开测 semantic ready-set exact 与
-   serialization-order exact，并由 runtime canonicalize 等价 ID 集合。
+5. **非 floor 的 scaffold 拆分与顺序 canonicalization：** V10 已确认实现机制，但
+   较易矩阵的 strict 臂没有 order 终态；后续应在 V8/V9 的重叠长度区间预先测量
+   order-only failure 基线，并检验相同合同是否产生可观净收益。
 6. **Receipt 非劣效性与成本：** V9-B 的 LOCATED/CAUSAL 都是 30/32，但中位 token
    不同；需要在更低 generic 基线下预注册 LOCATED 对 CAUSAL 的非劣效性与成本门。
 7. **自然失败分布的 recovery router：** 把 stale state、argument schema、duplicate、

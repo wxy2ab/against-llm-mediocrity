@@ -396,6 +396,7 @@ Highest-value follow-ups:
 
 ## Related Documents
 
+- [Artifact-v10 follow-up: Semantic Contracts and Runtime Canonicalization](./aggregation-mismatch-v10-semantic-contract-canonicalization.md)
 - [聚合失配 Artifact-v9：中文](./aggregation-mismatch-v9-minimal-scaffold-recovery.zh-CN.md)
 - [Aggregation Mismatch Artifact-v8](./aggregation-mismatch-v8-runtime-ownership-routing.md)
 - [Aggregation Mismatch and Compositional Governance](./aggregation-mismatch-compositional-governance-llm-systems.md)
