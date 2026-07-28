@@ -2,7 +2,7 @@
 
 **副标题：模型已经知道或能够找到局部修改时，为什么仍不应要求它重新提交整个对象**<br>
 **状态：研究证据说明 v0.5**<br>
-**数据核验日期：2026-07-28；已纳入 artifact-v4、artifact-v5、artifact-v7 与 artifact-v8 的边界证据**<br>
+**数据核验日期：2026-07-28；已纳入 artifact-v4、artifact-v5、artifact-v7、artifact-v8 与 artifact-v9 的边界证据**<br>
 **裁决范围：DeepSeek-V4-Flash 单一部署配置；MiniMax 正式矩阵因成本中止，不进入裁决**<br>
 **English:** [Patch vs. Full Rewrite: A Controlled Experiment on Sparse Repair Delivery](./patch-vs-full-rewrite-controlled-experiment.md)<br>
 **双语同步规则：** 两个版本的条件名称、样本量、统计结果、证据截点与结论边界必须同步更新。
@@ -48,6 +48,12 @@ Patch 为 43/64，semantic-ID Patch 为 63/64，Full Rewrite 为 64/64。ID−IN
 interaction 只有 +3.125 pp，未过门。两条 deterministic compiler 路径均为 64/64。
 工程更新是：**优先编译 delivery；仍需模型交付时，先从模型侧移除物理地址解析，再
 决定 Patch 或 Rewrite。当前数据不允许硬编码 density crossover。**
+
+Artifact-v9 没有重新比较 Patch 与 Rewrite，而是补充合同边界：effort-matched
+ready/ledger 四臂都进入 strict ordered-submission floor，located/causal recovery
+receipt 虽有正点估计，但未通过确认门。Patch/Rewrite 原裁决不变；新增工程经验是把
+semantic edit-set 正确与序列化顺序正确分开，由 runtime canonicalize 顺序，并按实际
+成本与恢复价值分级升级 verifier receipt。
 
 ---
 
@@ -576,6 +582,7 @@ Artifact-v8 增加地址层：semantic-ID Patch 几乎达到 Full Rewrite，并�
 ## 相关文档
 
 - [聚合失配 Artifact-v8：运行时所有权与语义寻址](./aggregation-mismatch-v8-runtime-ownership-routing.zh-CN.md)
+- [聚合失配 Artifact-v9：最小 Scaffold 与 Verifier Receipt](./aggregation-mismatch-v9-minimal-scaffold-recovery.zh-CN.md)
 - [Patch vs. Full Rewrite: English](./patch-vs-full-rewrite-controlled-experiment.md)
 - [聚合失配 Artifact-v7：机制恢复与确定性交付](./aggregation-mismatch-v7-mechanism-recovery.zh-CN.md)
 - [聚合失配 Artifact-v4：实验证据、理论差距与 Agent 工程含义](./aggregation-mismatch-v4-claims-theory-gap.zh-CN.md)

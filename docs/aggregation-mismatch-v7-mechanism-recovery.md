@@ -451,6 +451,7 @@ python -m pytest -q tests/test_v7_*.py
 
 ## Related Documents
 
+- [Artifact-v9 Follow-up: Minimal Scaffold and Verifier Receipt](./aggregation-mismatch-v9-minimal-scaffold-recovery.md)
 - [Artifact-v8 Follow-up: Runtime Ownership and Semantic Addressing](./aggregation-mismatch-v8-runtime-ownership-routing.md)
 - [聚合失配 Artifact-v7：中文](./aggregation-mismatch-v7-mechanism-recovery.zh-CN.md)
 - [Aggregation Mismatch and Compositional Governance](./aggregation-mismatch-compositional-governance-llm-systems.md)
