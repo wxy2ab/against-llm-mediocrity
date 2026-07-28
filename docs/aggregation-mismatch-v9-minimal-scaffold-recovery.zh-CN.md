@@ -367,6 +367,7 @@ failed IDs 可能足以复算修复。此时 causal witness 只是重组已有�
 
 ## 相关文档
 
+- [Artifact-v10 后续：语义合同与 Runtime Canonicalization](./aggregation-mismatch-v10-semantic-contract-canonicalization.zh-CN.md)
 - [Aggregation Mismatch Artifact-v9: English](./aggregation-mismatch-v9-minimal-scaffold-recovery.md)
 - [聚合失配 Artifact-v8](./aggregation-mismatch-v8-runtime-ownership-routing.zh-CN.md)
 - [聚合失配与组合治理](./aggregation-mismatch-compositional-governance-llm-systems.zh-CN.md)

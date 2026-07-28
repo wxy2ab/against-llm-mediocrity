@@ -2,7 +2,7 @@
 
 **Subtitle: Which conclusions do not need more model experiments, and which still require empirical calibration**  
 **Status: Theory-to-engineering bridge report v0.5**<br>
-**Empirical data cutoff: July 28, 2026; includes completed artifacts v4–v9**<br>
+**Empirical data cutoff: July 28, 2026; includes completed artifacts v4–v10**<br>
 **Related topics: aggregation mismatch, patch vs. rewrite, generation–verification asymmetry, hard state, deterministic executors, verifier governance**  
 **中文：** [聚合失配：可推导命题、证明条件与 Agent 工程含义](./aggregation-mismatch-theoretical-claims-agent-engineering.zh-CN.md)  
 **Bilingual synchronization rule:** Keep proposition numbering, formulas, tables, evidence cutoff, and conclusion boundaries aligned across both versions.
@@ -959,6 +959,15 @@ separate semantic-set correctness from serialization order, let the runtime
 canonicalize order when possible, and escalate receipts from generic to located to
 causal based on measured success, cost, and risk.
 
+Artifact-v10 turns that order-only diagnosis into a paired semantic-set versus
+strict-list contract test. The canonicalizer passes 1,024/1,024 offline cases, and
+24 successful SET episodes rely on accepting a noncanonical permutation. Yet SET
+improves strict success by only 6.25 points (30/32 versus 28/32), with a confidence
+interval crossing zero and below the preregistered +20-point gate. This sharpens
+the theory-to-engineering boundary: representation invariance supports the
+semantic-set interface as a sound substrate, but it cannot promise a large
+deployment gain unless order-only false rejects are common in the target workload.
+
 The appropriate engineering strategy is therefore neither to wait for every P0 / P1 / P2 experiment nor to hard-code current empirical effects as universal rules:
 
 > First implement the theoretically supported substrate of structured state, minimal operation submission, deterministic execution, verifier-gated commit, dependency-aware scheduling, and rollback-capable transactions. Then use experiments to calibrate patch thresholds, budgets, candidate quality, model routing, and real-domain boundaries.
@@ -967,6 +976,7 @@ The appropriate engineering strategy is therefore neither to wait for every P0 /
 
 ## Related Documents
 
+- [Aggregation Mismatch Artifact-v10: Semantic Contracts and Runtime Canonicalization](./aggregation-mismatch-v10-semantic-contract-canonicalization.md)
 - [Aggregation Mismatch Artifact-v9: Minimal Scaffold and Verifier Receipt](./aggregation-mismatch-v9-minimal-scaffold-recovery.md)
 - [Aggregation Mismatch Artifact-v8: Runtime Ownership and Semantic Addressing](./aggregation-mismatch-v8-runtime-ownership-routing.md)
 - [Aggregation Mismatch Artifact-v7: Mechanism Recovery and Deterministic Delivery](./aggregation-mismatch-v7-mechanism-recovery.md)
