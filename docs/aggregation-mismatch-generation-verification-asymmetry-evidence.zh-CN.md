@@ -2,7 +2,7 @@
 
 **副标题：为什么会执行局部规则，不等于能构造全局一致对象**  
 **状态：研究证据说明 v0.5**<br>
-**数据截点：2026-07-28；已纳入 artifact-v4–v8 结果**<br>
+**数据截点：2026-07-28；已纳入 artifact-v4–v9 结果**<br>
 **关联主题：聚合失配、生成—审计差异、候选结构外部化、组合治理**
 
 ---
@@ -24,6 +24,10 @@
 7. **Artifact-v6 把问题推进到 Agent 控制面。** scheduler–ledger–renderer 组合、plan-error 路由和 governed commit 分项通过；但 delivery-error 的两个模型 re-emit 策略均为 0/24。
 8. **Artifact-v7 收窄了恢复机制。** requested topo order 与 located receipt 都是正向但未过确认门；deterministic plan compiler 在 48/48 个冻结案例上通过采用门，保护项违规为 0。
 9. **Artifact-v8 确认了 runtime ownership 与 semantic addressing。** readiness–ledger–staged-interaction 相对 static 提高 59.4 个百分点，但 token 约 7×；semantic ID 相对物理 index 提高 31.25 个百分点；local verifier 受 ceiling 限制，density crossover 未过门，compiler 双路径 64/64 通过。
+10. **Artifact-v9 阻止了对 package 结果的过度拆分。** effort-matched ready×ledger
+    四臂在更难 strict-order 合同下进入 floor，两个字段主效应未裁决；冻结错误下
+    located/causal 相对 generic 都有 +12.5 个百分点正点估计，但未通过确认门。
+    77 个 order failure 的 ready-ID 集合全部正确，表明序列化验收合同是主要 floor。
 
 这使“聚合失配”从一个理论描述变成一个可测现象：**局部能力可以保留，但当求解顺序、输出顺序和未外部化状态发生冲突时，局部能力未必能组合成预算内的全局成功。**
 
@@ -48,6 +52,10 @@ Artifact-v7 的理论、实验、数据 QA、工程意义和应用见：
 Artifact-v8 的理论、实验、数据 QA、工程意义和应用见：
 [English](./aggregation-mismatch-v8-runtime-ownership-routing.md) ·
 [中文](./aggregation-mismatch-v8-runtime-ownership-routing.zh-CN.md)。
+
+Artifact-v9 的理论、实验、数据 QA、工程意义和应用见：
+[English](./aggregation-mismatch-v9-minimal-scaffold-recovery.md) ·
+[中文](./aggregation-mismatch-v9-minimal-scaffold-recovery.zh-CN.md)。
 
 ---
 
@@ -310,6 +318,8 @@ repair-call、latency/token 与实际逐 run payload ratio 不可引用。
   48/48 等同于生产总体可靠率 100%。
 - artifact-v8 已确认 local verifier 增量、地址漂移原因或 Patch/Rewrite density
   crossover，或 64/64 compiler 等同于生产总体可靠率 100%。
+- artifact-v9 已证明 ready/ledger 字段无效、causal receipt 无效，或推翻了 v8
+  scaffold package。
 - 合成 GF(2) 结果可以未经验证直接外推到代码、数据库、配置和长文写作。
 
 最稳健的结论是：
@@ -328,11 +338,14 @@ repair-call、latency/token 与实际逐 run payload ratio 不可引用。
 4. **Edit-density crossover：** V5 的 infer cells 受 floor 限制；V7 又表明 fallback
    方向受错误契约影响。需要在 verified-plan 条件下比较 patch、区域重写、完整重写与
    deterministic compile。
-5. **强制而非请求执行顺序：** V7-A 只改变 requested order，两个 arm 都严格排对；
-   后续应由 runtime readiness gate 或外部 step ledger 强制依赖顺序。
-6. **自然失败分布的 recovery router：** 把 stale state、argument schema、duplicate、
+5. **非 floor 的 scaffold 拆分与顺序 canonicalization：** V9-A 的 strict-order
+   contract 使四臂 floor；后续应在重叠长度区间分开测 semantic ready-set exact 与
+   serialization-order exact，并由 runtime canonicalize 等价 ID 集合。
+6. **Receipt 非劣效性与成本：** V9-B 的 LOCATED/CAUSAL 都是 30/32，但中位 token
+   不同；需要在更低 generic 基线下预注册 LOCATED 对 CAUSAL 的非劣效性与成本门。
+7. **自然失败分布的 recovery router：** 把 stale state、argument schema、duplicate、
    verifier failure 分开，按生产基率测量 refresh/rebase/compile/rewrite/replan。
-7. **真实任务迁移：** 在代码修复、配置更新、数据库约束和结构化文档修改中比较从零
+8. **真实任务迁移：** 在代码修复、配置更新、数据库约束和结构化文档修改中比较从零
    生成、候选—审计—修订与 verified-plan compilation。
 
 这些实验将决定“聚合失配”最终是一种合成任务现象、一个部署预算现象，还是一种可以跨领域复现的系统结构规律。

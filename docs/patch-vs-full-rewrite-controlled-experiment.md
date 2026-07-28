@@ -2,7 +2,7 @@
 
 **Subtitle: When a model can find or is given the local change, why should it not be required to resubmit the entire object?**<br>
 **Status: Research evidence note v0.5**<br>
-**Data validated: July 28, 2026; includes artifact-v4, artifact-v5, artifact-v7, and artifact-v8 boundary evidence**<br>
+**Data validated: July 28, 2026; includes artifact-v4, artifact-v5, artifact-v7, artifact-v8, and artifact-v9 boundary evidence**<br>
 **Claim scope: One DeepSeek-V4-Flash deployment configuration; the MiniMax confirmatory matrix was stopped for cost and is excluded from adjudication**<br>
 **中文：** [Patch 与完整重写：稀疏修复交付接口的受控实验](./patch-vs-full-rewrite-controlled-experiment.zh-CN.md)<br>
 **Bilingual synchronization rule:** Keep condition names, sample sizes, statistical results, evidence cutoff, and claim boundaries aligned across both versions.
@@ -54,6 +54,14 @@ only +3.125 pp and fails its gate. Both deterministic compiler paths pass 64/64.
 The engineering update is: **prefer compiled delivery; when model delivery remains
 necessary, remove physical address resolution from the model before deciding
 between Patch and Rewrite. Do not hard-code a density crossover from current data.**
+
+Artifact-v9 does not rerun Patch versus Rewrite. It adds a contract boundary:
+effort-matched ready/ledger arms all hit a strict ordered-submission floor, and
+located/causal recovery receipts show positive point estimates without passing
+their confirmatory gates. The Patch/Rewrite verdict is unchanged. The additional
+engineering lesson is to separate semantic edit-set correctness from serialization
+order, canonicalize order in the runtime, and escalate verifier receipts by
+measured cost and recovery value.
 
 ---
 
@@ -594,6 +602,7 @@ fallbacks rather than using a fixed edit-density threshold.
 ## Related Documents
 
 - [Aggregation Mismatch Artifact-v8: Runtime Ownership and Semantic Addressing](./aggregation-mismatch-v8-runtime-ownership-routing.md)
+- [Aggregation Mismatch Artifact-v9: Minimal Scaffold and Verifier Receipt](./aggregation-mismatch-v9-minimal-scaffold-recovery.md)
 - [Patch vs. Full Rewrite: 中文](./patch-vs-full-rewrite-controlled-experiment.zh-CN.md)
 - [Aggregation Mismatch Artifact-v7: Mechanism Recovery and Deterministic Delivery](./aggregation-mismatch-v7-mechanism-recovery.md)
 - [Aggregation Mismatch Artifact-v4: Experimental Evidence, Theory Gaps, and Agent Implications](./aggregation-mismatch-v4-claims-theory-gap.md)

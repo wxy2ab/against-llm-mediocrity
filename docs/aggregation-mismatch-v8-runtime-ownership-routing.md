@@ -414,6 +414,21 @@ The highest-value next studies are:
 - semantic-ID and compiler transfer to real code/configuration tasks;
 - replication on a second low-cost, version-fixed configuration.
 
+### Artifact-v9 follow-up
+
+Artifact-v9 completed the planned ready × ledger and receipt follow-up with 192
+semantic episodes. Its effort-matched scaffold arms reach 0/24, 0/24, 0/24, and
+1/24 under a harder \(N=24/48\) strict-order contract, so the ready and ledger
+main effects are **not adjudicated because of floor**. In frozen-error recovery,
+GENERIC, LOCATED, and CAUSAL reach 26/32, 30/32, and 30/32; both +12.5-point
+contrasts fail their preregistered gates. All 77 order failures nevertheless
+submit the correct ready-ID set and differ only in permutation.
+
+These results do not revise v8's raw verdicts. They prevent a stronger attribution:
+v8-A1 remains evidence for the full runtime package, not for either visible field
+alone. They also motivate runtime order canonicalization and cost-gated receipt
+escalation. See [Artifact-v9](./aggregation-mismatch-v9-minimal-scaffold-recovery.md).
+
 ## 9. Reproducibility and Sources
 
 Canonical sources:
@@ -435,6 +450,7 @@ Canonical sources:
 
 ## Related Documents
 
+- [Aggregation Mismatch Artifact-v9](./aggregation-mismatch-v9-minimal-scaffold-recovery.md)
 - [聚合失配 Artifact-v8：中文](./aggregation-mismatch-v8-runtime-ownership-routing.zh-CN.md)
 - [Aggregation Mismatch and Compositional Governance](./aggregation-mismatch-compositional-governance-llm-systems.md)
 - [Aggregation Mismatch: Derivable Claims and Agent Engineering](./aggregation-mismatch-theoretical-claims-agent-engineering.md)

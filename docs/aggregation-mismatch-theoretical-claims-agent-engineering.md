@@ -2,7 +2,7 @@
 
 **Subtitle: Which conclusions do not need more model experiments, and which still require empirical calibration**  
 **Status: Theory-to-engineering bridge report v0.5**<br>
-**Empirical data cutoff: July 28, 2026; includes completed artifacts v4–v8**<br>
+**Empirical data cutoff: July 28, 2026; includes completed artifacts v4–v9**<br>
 **Related topics: aggregation mismatch, patch vs. rewrite, generation–verification asymmetry, hard state, deterministic executors, verifier governance**  
 **中文：** [聚合失配：可推导命题、证明条件与 Agent 工程含义](./aggregation-mismatch-theoretical-claims-agent-engineering.zh-CN.md)  
 **Bilingual synchronization rule:** Keep proposition numbering, formulas, tables, evidence cutoff, and conclusion boundaries aligned across both versions.
@@ -947,6 +947,18 @@ engineering consequence is therefore conditional: own dependency state and addre
 resolution in the runtime, but route scaffold intensity by cost and keep
 Patch/Rewrite thresholds configurable.
 
+Artifact-v9 then tests whether the v8 package can be decomposed into visible
+ready-set and ledger fields under matched staged effort. It cannot adjudicate
+those main effects because all four arms hit a strict-order floor. In frozen-error
+recovery, located and causal receipts each improve the point estimate by 12.5
+points over generic rejection, but neither passes its confirmatory gate. The new
+engineering rule is therefore about contracts, not another universal component:
+all 77 order failures submit the correct ready-ID set and differ only in
+permutation, so
+separate semantic-set correctness from serialization order, let the runtime
+canonicalize order when possible, and escalate receipts from generic to located to
+causal based on measured success, cost, and risk.
+
 The appropriate engineering strategy is therefore neither to wait for every P0 / P1 / P2 experiment nor to hard-code current empirical effects as universal rules:
 
 > First implement the theoretically supported substrate of structured state, minimal operation submission, deterministic execution, verifier-gated commit, dependency-aware scheduling, and rollback-capable transactions. Then use experiments to calibrate patch thresholds, budgets, candidate quality, model routing, and real-domain boundaries.
@@ -955,6 +967,7 @@ The appropriate engineering strategy is therefore neither to wait for every P0 /
 
 ## Related Documents
 
+- [Aggregation Mismatch Artifact-v9: Minimal Scaffold and Verifier Receipt](./aggregation-mismatch-v9-minimal-scaffold-recovery.md)
 - [Aggregation Mismatch Artifact-v8: Runtime Ownership and Semantic Addressing](./aggregation-mismatch-v8-runtime-ownership-routing.md)
 - [Aggregation Mismatch Artifact-v7: Mechanism Recovery and Deterministic Delivery](./aggregation-mismatch-v7-mechanism-recovery.md)
 - [Patch vs. Full Rewrite: A Controlled Experiment on Sparse Repair Delivery](./patch-vs-full-rewrite-controlled-experiment.md)

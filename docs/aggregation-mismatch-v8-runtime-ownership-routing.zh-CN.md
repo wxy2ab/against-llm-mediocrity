@@ -383,6 +383,20 @@ readiness 与 ledger path。
 - semantic-ID/compiler 向真实代码/配置任务迁移；
 - 在第二个低成本、版本固定配置上复现。
 
+### Artifact-v9 后续证据
+
+Artifact-v9 已用 192 个 semantic episodes 完成计划中的 ready × ledger 与 receipt
+后续实验。更难的 \(N=24/48\) strict-order 合同下，effort-matched scaffold 四臂为
+0/24、0/24、0/24、1/24，所以 ready 与 ledger 主效应因 floor **未裁决**。冻结错误
+修复中，GENERIC、LOCATED、CAUSAL 为 26/32、30/32、30/32；两个 +12.5 个百分点
+对比都没有通过预注册门。77 个 order failure 的 ready-ID 集合其实全部正确，只有
+排列不同。
+
+这些结果不修改 V8 的原始裁决，但阻止更强归因：V8-A1 仍然是完整 runtime package
+的证据，不是任一可见字段的单独证据。它们也支持继续检验 runtime 顺序 canonicalization
+与成本门控的 receipt 升级。详见
+[Artifact-v9](./aggregation-mismatch-v9-minimal-scaffold-recovery.zh-CN.md)。
+
 ## 9. 可复现性与来源
 
 Canonical sources：
@@ -403,6 +417,7 @@ Canonical sources：
 
 ## 相关文档
 
+- [聚合失配 Artifact-v9](./aggregation-mismatch-v9-minimal-scaffold-recovery.zh-CN.md)
 - [Aggregation Mismatch Artifact-v8: English](./aggregation-mismatch-v8-runtime-ownership-routing.md)
 - [聚合失配与组合治理](./aggregation-mismatch-compositional-governance-llm-systems.zh-CN.md)
 - [聚合失配：可推导命题与 Agent 工程](./aggregation-mismatch-theoretical-claims-agent-engineering.zh-CN.md)

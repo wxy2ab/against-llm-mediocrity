@@ -2,7 +2,7 @@
 
 **副标题：哪些结论不必等待更多模型实验，哪些只能由实验校准**  
 **状态：理论—工程桥接报告 v0.5**<br>
-**实验数据截点：2026-07-28；已纳入完成的 artifact-v4–v8**<br>
+**实验数据截点：2026-07-28；已纳入完成的 artifact-v4–v9**<br>
 **关联主题：聚合失配、patch vs. rewrite、生成—验证不对称、硬状态、确定性执行器、验证器治理**  
 **English:** [Aggregation Mismatch: Derivable Claims, Proof Conditions, and Implications for Agent Engineering](./aggregation-mismatch-theoretical-claims-agent-engineering.md)  
 **双语同步规则：** 两个版本的命题编号、公式、表格、证据截点和结论边界必须同步更新。
@@ -920,6 +920,14 @@ semantic ID 相对模型提交物理 index 提高 31.25 个百分点。但前者
 因此仍是条件性的：runtime 应持有依赖状态与地址解析，但 scaffold 强度需要成本路由，
 Patch/Rewrite 阈值保持可配置。
 
+Artifact-v9 随后在 staged effort 匹配条件下检验 V8 package 能否拆成显式 ready set
+与 ledger 字段。由于四臂都进入 strict-order floor，两个主效应未裁决。冻结错误修复
+中，located 与 causal 相对 generic 都有 +12.5 个百分点的正点估计，但均未通过
+确认门。因此新增的工程规则不是另一个普遍组件定律，而是合同治理：把 semantic set
+正确与序列化顺序正确分开——77 个 order failure 的 ready-ID 集合全部正确，只有
+排列不同；能 canonicalize 的顺序交给 runtime；receipt 按
+generic→located→causal 逐级升级，并用成功率、成本与风险校准。
+
 因此，现阶段最合理的工程策略不是等待所有 P0 / P1 / P2 全部完成，也不是把实验结果写死为规则，而是：
 
 > 先实现“结构化状态 + 最小操作提交 + 确定性执行 + 验证闸门 + 依赖调度 + 可回滚事务”这一可由理论支持的底座；再用实验校准 patch 阈值、预算、候选质量、模型路由和真实领域边界。
@@ -928,6 +936,7 @@ Patch/Rewrite 阈值保持可配置。
 
 ## 相关文档
 
+- [聚合失配 Artifact-v9：最小 Scaffold 与 Verifier Receipt](./aggregation-mismatch-v9-minimal-scaffold-recovery.zh-CN.md)
 - [聚合失配 Artifact-v8：运行时所有权与语义寻址](./aggregation-mismatch-v8-runtime-ownership-routing.zh-CN.md)
 - [聚合失配 Artifact-v7：机制恢复与确定性交付](./aggregation-mismatch-v7-mechanism-recovery.zh-CN.md)
 - [Patch 与完整重写：稀疏修复交付接口的受控实验](./patch-vs-full-rewrite-controlled-experiment.zh-CN.md)
