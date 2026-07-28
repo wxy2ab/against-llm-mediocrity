@@ -1,8 +1,8 @@
 # Patch 与完整重写：稀疏修复交付接口的受控实验
 
 **副标题：模型已经知道或能够找到局部修改时，为什么仍不应要求它重新提交整个对象**<br>
-**状态：研究证据说明 v0.4**<br>
-**数据核验日期：2026-07-28；已纳入 artifact-v4、artifact-v5 与 artifact-v7 的边界证据**<br>
+**状态：研究证据说明 v0.5**<br>
+**数据核验日期：2026-07-28；已纳入 artifact-v4、artifact-v5、artifact-v7 与 artifact-v8 的边界证据**<br>
 **裁决范围：DeepSeek-V4-Flash 单一部署配置；MiniMax 正式矩阵因成本中止，不进入裁决**<br>
 **English:** [Patch vs. Full Rewrite: A Controlled Experiment on Sparse Repair Delivery](./patch-vs-full-rewrite-controlled-experiment.md)<br>
 **双语同步规则：** 两个版本的条件名称、样本量、统计结果、证据截点与结论边界必须同步更新。
@@ -41,6 +41,13 @@ Artifact-v7 增加了不同的 delivery-error 边界。固定正确 plan 和第�
 存在异质性，因此不反转 v3/v5 的条件性 Patch 结论。更重要的是，deterministic plan
 compiler 在 48/48 个冻结案例上通过，保护项违规为 0。生产首选边界应当是：
 **能编译 verified plan 时先编译；只有 fallback 才路由 Patch 与 Rewrite。**
+
+Artifact-v8 检验了更强的 Patch 接口边界。相同正确 semantic plan 下，物理 INDEX
+Patch 为 43/64，semantic-ID Patch 为 63/64，Full Rewrite 为 64/64。ID−INDEX
+以 **+31.25 pp [+20.3, +42.2]** 通过预注册门；sparse 与 dense 的 ID−FULL
+interaction 只有 +3.125 pp，未过门。两条 deterministic compiler 路径均为 64/64。
+工程更新是：**优先编译 delivery；仍需模型交付时，先从模型侧移除物理地址解析，再
+决定 Patch 或 Rewrite。当前数据不允许硬编码 density crossover。**
 
 ---
 
@@ -500,6 +507,7 @@ claim 上限。
 - [Artifact-v5 稳定编辑 Agent 报告](https://github.com/wxy2ab/llmdealer/blob/main/exp/aggregation_mismatch_experiment/docs/V5_STABLE_EDITING_AGENT_REPORT.md)
 - [Artifact-v5 机器可读 summary](https://github.com/wxy2ab/llmdealer/blob/main/exp/aggregation_mismatch_experiment/results/v5_agent_patch_rewrite/confirmatory/analysis/summary.json)
 - [Artifact-v7 机制恢复验证](https://github.com/wxy2ab/llmdealer/blob/main/exp/aggregation_mismatch_experiment/docs/V7_AGENT_MECHANISM_RECOVERY_VALIDATION.md)
+- [Artifact-v8 运行时所有权验证](https://github.com/wxy2ab/llmdealer/blob/main/exp/aggregation_mismatch_experiment/docs/V8_RUNTIME_OWNERSHIP_ROUTING_VALIDATION.md)
 - [完整实验仓库](https://github.com/wxy2ab/llmdealer/tree/main/exp/aggregation_mismatch_experiment)
 
 v5 正式 endpoint 表在原始 tool-event payload 丢失后，由完整 run log 重建。
@@ -558,10 +566,16 @@ Artifact-v7 增加下一层路由：verified plan 能够确定性编译时，应
 v7 总体上 Rewrite 高于一次 located Patch re-emission，但该结果是协议特异的，
 不支持普遍排序。
 
+Artifact-v8 增加地址层：semantic-ID Patch 几乎达到 Full Rewrite，并显著高于模型
+提交物理 INDEX Patch，但预注册 density interaction 未通过。生产 router 因此应
+优先 compiler，其次 stable-ID operation；regional/full Rewrite 保持可配置 fallback，
+而不是使用固定 edit-density 阈值。
+
 ---
 
 ## 相关文档
 
+- [聚合失配 Artifact-v8：运行时所有权与语义寻址](./aggregation-mismatch-v8-runtime-ownership-routing.zh-CN.md)
 - [Patch vs. Full Rewrite: English](./patch-vs-full-rewrite-controlled-experiment.md)
 - [聚合失配 Artifact-v7：机制恢复与确定性交付](./aggregation-mismatch-v7-mechanism-recovery.zh-CN.md)
 - [聚合失配 Artifact-v4：实验证据、理论差距与 Agent 工程含义](./aggregation-mismatch-v4-claims-theory-gap.zh-CN.md)

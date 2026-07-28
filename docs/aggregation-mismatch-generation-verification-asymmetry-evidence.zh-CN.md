@@ -1,8 +1,8 @@
 # 聚合失配与生成—验证不对称：一组受控实验给出的证据
 
 **副标题：为什么会执行局部规则，不等于能构造全局一致对象**  
-**状态：研究证据说明 v0.4**<br>
-**数据截点：2026-07-28；已纳入 artifact-v4–v7 结果**<br>
+**状态：研究证据说明 v0.5**<br>
+**数据截点：2026-07-28；已纳入 artifact-v4–v8 结果**<br>
 **关联主题：聚合失配、生成—审计差异、候选结构外部化、组合治理**
 
 ---
@@ -23,6 +23,7 @@
 6. **Artifact-v5 把 planning 与 delivery 分开。** 给定权威 plan 时，原生 patch 相对 rewrite 高 41.7 个百分点；自行推断 plan 时只高 2.1 个百分点且未建立端到端优势。稳定编辑工具能改善交付，但不能自行修复规划。
 7. **Artifact-v6 把问题推进到 Agent 控制面。** scheduler–ledger–renderer 组合、plan-error 路由和 governed commit 分项通过；但 delivery-error 的两个模型 re-emit 策略均为 0/24。
 8. **Artifact-v7 收窄了恢复机制。** requested topo order 与 located receipt 都是正向但未过确认门；deterministic plan compiler 在 48/48 个冻结案例上通过采用门，保护项违规为 0。
+9. **Artifact-v8 确认了 runtime ownership 与 semantic addressing。** readiness–ledger–staged-interaction 相对 static 提高 59.4 个百分点，但 token 约 7×；semantic ID 相对物理 index 提高 31.25 个百分点；local verifier 受 ceiling 限制，density crossover 未过门，compiler 双路径 64/64 通过。
 
 这使“聚合失配”从一个理论描述变成一个可测现象：**局部能力可以保留，但当求解顺序、输出顺序和未外部化状态发生冲突时，局部能力未必能组合成预算内的全局成功。**
 
@@ -43,6 +44,10 @@ Artifact-v5 的原生 Agent 结果、证据边界和 planning/delivery 分解见
 Artifact-v7 的理论、实验、数据 QA、工程意义和应用见：
 [English](./aggregation-mismatch-v7-mechanism-recovery.md) ·
 [中文](./aggregation-mismatch-v7-mechanism-recovery.zh-CN.md)。
+
+Artifact-v8 的理论、实验、数据 QA、工程意义和应用见：
+[English](./aggregation-mismatch-v8-runtime-ownership-routing.md) ·
+[中文](./aggregation-mismatch-v8-runtime-ownership-routing.zh-CN.md)。
 
 ---
 
@@ -285,6 +290,8 @@ repair-call、latency/token 与实际逐 run payload ratio 不可引用。
 - 更换为稳定 patch 工具并不足以自动改善错误的 plan inference。
 - 依赖调度复合包、plan-error 路由与 governed commit 在 V6 中具有分项工程证据。
 - 正确 plan 已知时，V7 的 deterministic compiler 在冻结 48 个案例上通过采用门。
+- V8 中 runtime readiness/ledger package 与 semantic-ID 接口通过确认门，deterministic
+  compiler 双路径在冻结 64 个案例上通过采用门；scaffold 成本需单独路由。
 
 ### 当前证据不允许
 
@@ -301,11 +308,13 @@ repair-call、latency/token 与实际逐 run payload ratio 不可引用。
   模型 recovery。
 - artifact-v7 的 Rewrite−Located 正差可以写成普遍 `Rewrite > Patch`，或 compiler
   48/48 等同于生产总体可靠率 100%。
+- artifact-v8 已确认 local verifier 增量、地址漂移原因或 Patch/Rewrite density
+  crossover，或 64/64 compiler 等同于生产总体可靠率 100%。
 - 合成 GF(2) 结果可以未经验证直接外推到代码、数据库、配置和长文写作。
 
 最稳健的结论是：
 
-> **聚合失配会在局部规则简单但全局闭合、求解顺序和输出顺序冲突时产生强烈的预算内构造差距；候选结构外部化可以大幅缓解该差距，但生成—审计不对称仍具有接口和预算依赖。对正确 plan 后的交付，最新证据支持把可编译动作移出模型采样，交给 deterministic compiler、global verifier 和 atomic commit。**
+> **聚合失配会在局部规则简单但全局闭合、求解顺序和输出顺序冲突时产生强烈的预算内构造差距；候选结构外部化可以大幅缓解该差距，但生成—审计不对称仍具有接口和预算依赖。对正确 plan 后的交付，最新证据支持把依赖状态、物理地址解析与可编译动作移出模型采样，交给 runtime ledger、semantic-ID resolver、deterministic compiler、global verifier 和 atomic commit，并对 scaffold 成本做条件路由。**
 
 ---
 

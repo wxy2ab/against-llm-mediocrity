@@ -1,8 +1,8 @@
 # Aggregation Mismatch: Derivable Claims, Proof Conditions, and Implications for Agent Engineering
 
 **Subtitle: Which conclusions do not need more model experiments, and which still require empirical calibration**  
-**Status: Theory-to-engineering bridge report v0.4**<br>
-**Empirical data cutoff: July 28, 2026; includes completed artifacts v4–v7**<br>
+**Status: Theory-to-engineering bridge report v0.5**<br>
+**Empirical data cutoff: July 28, 2026; includes completed artifacts v4–v8**<br>
 **Related topics: aggregation mismatch, patch vs. rewrite, generation–verification asymmetry, hard state, deterministic executors, verifier governance**  
 **中文：** [聚合失配：可推导命题、证明条件与 Agent 工程含义](./aggregation-mismatch-theoretical-claims-agent-engineering.zh-CN.md)  
 **Bilingual synchronization rule:** Keep proposition numbering, formulas, tables, evidence cutoff, and conclusion boundaries aligned across both versions.
@@ -533,6 +533,13 @@ Artifact-v7 validates one implementation boundary: the frozen compiler passes
 plan violations. That is an adoption test, not a proof of 100% production
 reliability.
 
+Artifact-v8 extends that boundary to semantic addressing. Both index and ID
+compilers pass 64/64 frozen cases with zero protected violations. When the model
+must deliver the same verified semantic plan, ID Patch succeeds on 63/64 cases
+versus 43/64 for physical-index Patch, a +31.25-point base-cluster effect. This
+supports runtime-owned physical address resolution in the tested object family. It
+does not prove a universal ID advantage or identify relocation as the cause.
+
 ---
 
 ## 9. Proposition Seven: Local Changes Have a Computable Invalidation Cone
@@ -931,6 +938,15 @@ plan compilation, native execution, global verification, and atomic commit. Its
 requested-order and localized-receipt effects remain directional rather than
 confirmatory, so they should not be hard-coded as universal routing laws.
 
+Artifact-v8 adds runtime ownership before and during delivery. Its
+readiness–ledger–staged-interaction package raises exact success by 59.4 points,
+while semantic ID raises delivery success by 31.25 points relative to model-authored
+physical indexes. The first result fails a 4× token-cost guardrail, local-verifier
+increment is ceiling-limited, and the density crossover fails its gate. The
+engineering consequence is therefore conditional: own dependency state and address
+resolution in the runtime, but route scaffold intensity by cost and keep
+Patch/Rewrite thresholds configurable.
+
 The appropriate engineering strategy is therefore neither to wait for every P0 / P1 / P2 experiment nor to hard-code current empirical effects as universal rules:
 
 > First implement the theoretically supported substrate of structured state, minimal operation submission, deterministic execution, verifier-gated commit, dependency-aware scheduling, and rollback-capable transactions. Then use experiments to calibrate patch thresholds, budgets, candidate quality, model routing, and real-domain boundaries.
@@ -939,6 +955,7 @@ The appropriate engineering strategy is therefore neither to wait for every P0 /
 
 ## Related Documents
 
+- [Aggregation Mismatch Artifact-v8: Runtime Ownership and Semantic Addressing](./aggregation-mismatch-v8-runtime-ownership-routing.md)
 - [Aggregation Mismatch Artifact-v7: Mechanism Recovery and Deterministic Delivery](./aggregation-mismatch-v7-mechanism-recovery.md)
 - [Patch vs. Full Rewrite: A Controlled Experiment on Sparse Repair Delivery](./patch-vs-full-rewrite-controlled-experiment.md)
 - [Aggregation Mismatch Artifact-v5: Stable Editing Agent, Planning Bottleneck, and Conditional Patch Advantage](./aggregation-mismatch-v5-stable-editing-agent.md)
