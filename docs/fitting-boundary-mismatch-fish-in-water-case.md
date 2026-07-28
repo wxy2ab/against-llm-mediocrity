@@ -8,6 +8,9 @@ Candidate mechanism: **explicit-frame dominance**, also described as
 中文版本：
 [为什么模型会“救掉进水里的鱼”](fitting-boundary-mismatch-fish-in-water-case.zh-CN.md)
 
+Theory and engineering framework:
+[Fitting-Boundary Mismatch and Capability Routing in LLM Systems](fitting-boundary-mismatch-capability-routing-llm-systems.md)
+
 ## 1. Case Summary
 
 Multiple large language models were given the same question:
