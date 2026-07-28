@@ -1,8 +1,8 @@
 # Patch vs. Full Rewrite: A Controlled Experiment on Sparse Repair Delivery
 
 **Subtitle: When a model can find or is given the local change, why should it not be required to resubmit the entire object?**<br>
-**Status: Research evidence note v0.4**<br>
-**Data validated: July 28, 2026; includes artifact-v4, artifact-v5, and artifact-v7 boundary evidence**<br>
+**Status: Research evidence note v0.5**<br>
+**Data validated: July 28, 2026; includes artifact-v4, artifact-v5, artifact-v7, and artifact-v8 boundary evidence**<br>
 **Claim scope: One DeepSeek-V4-Flash deployment configuration; the MiniMax confirmatory matrix was stopped for cost and is excluded from adjudication**<br>
 **中文：** [Patch 与完整重写：稀疏修复交付接口的受控实验](./patch-vs-full-rewrite-controlled-experiment.zh-CN.md)<br>
 **Bilingual synchronization rule:** Keep condition names, sample sizes, statistical results, evidence cutoff, and claim boundaries aligned across both versions.
@@ -45,6 +45,15 @@ conditional Patch result. More importantly, a deterministic plan compiler succee
 on 48/48 frozen cases with zero protected violations. The preferred production
 boundary is therefore: **compile a verified plan when possible; route Patch versus
 Rewrite only as a fallback.**
+
+Artifact-v8 tests a stronger Patch interface boundary. With the same correct
+semantic plan, physical-index Patch succeeds on 43/64 cases, semantic-ID Patch on
+63/64, and Full Rewrite on 64/64. ID−INDEX passes its preregistered gate at
+**+31.25 pp [+20.3, +42.2]**, while the sparse-versus-dense ID−FULL interaction is
+only +3.125 pp and fails its gate. Both deterministic compiler paths pass 64/64.
+The engineering update is: **prefer compiled delivery; when model delivery remains
+necessary, remove physical address resolution from the model before deciding
+between Patch and Rewrite. Do not hard-code a density crossover from current data.**
 
 ---
 
@@ -512,6 +521,7 @@ Sources:
 - [Artifact-v5 stable editing Agent report](https://github.com/wxy2ab/llmdealer/blob/main/exp/aggregation_mismatch_experiment/docs/V5_STABLE_EDITING_AGENT_REPORT.md)
 - [Artifact-v5 machine-readable summary](https://github.com/wxy2ab/llmdealer/blob/main/exp/aggregation_mismatch_experiment/results/v5_agent_patch_rewrite/confirmatory/analysis/summary.json)
 - [Artifact-v7 mechanism-recovery validation](https://github.com/wxy2ab/llmdealer/blob/main/exp/aggregation_mismatch_experiment/docs/V7_AGENT_MECHANISM_RECOVERY_VALIDATION.md)
+- [Artifact-v8 runtime-ownership validation](https://github.com/wxy2ab/llmdealer/blob/main/exp/aggregation_mismatch_experiment/docs/V8_RUNTIME_OWNERSHIP_ROUTING_VALIDATION.md)
 - [Complete experiment repository](https://github.com/wxy2ab/llmdealer/tree/main/exp/aggregation_mismatch_experiment)
 
 The v5 formal endpoint table was reconstructed from the complete run log after
@@ -573,10 +583,17 @@ Patch or a Rewrite. When compilation is unavailable, the fallback remains
 conditional: Rewrite is stronger than one located Patch re-emission in v7 overall,
 but that result is protocol-specific and does not support a universal ordering.
 
+Artifact-v8 adds the address layer: semantic-ID Patch nearly matches Full Rewrite
+and substantially exceeds model-authored physical-index Patch, but the preregistered
+density interaction fails. A production router should therefore prefer compiler,
+then stable-ID operations, while retaining regional/full Rewrite as configurable
+fallbacks rather than using a fixed edit-density threshold.
+
 ---
 
 ## Related Documents
 
+- [Aggregation Mismatch Artifact-v8: Runtime Ownership and Semantic Addressing](./aggregation-mismatch-v8-runtime-ownership-routing.md)
 - [Patch vs. Full Rewrite: 中文](./patch-vs-full-rewrite-controlled-experiment.zh-CN.md)
 - [Aggregation Mismatch Artifact-v7: Mechanism Recovery and Deterministic Delivery](./aggregation-mismatch-v7-mechanism-recovery.md)
 - [Aggregation Mismatch Artifact-v4: Experimental Evidence, Theory Gaps, and Agent Implications](./aggregation-mismatch-v4-claims-theory-gap.md)

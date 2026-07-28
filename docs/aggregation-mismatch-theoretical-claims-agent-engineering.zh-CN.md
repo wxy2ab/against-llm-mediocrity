@@ -1,8 +1,8 @@
 # 聚合失配：可推导命题、证明条件与 Agent 工程含义
 
 **副标题：哪些结论不必等待更多模型实验，哪些只能由实验校准**  
-**状态：理论—工程桥接报告 v0.4**<br>
-**实验数据截点：2026-07-28；已纳入完成的 artifact-v4–v7**<br>
+**状态：理论—工程桥接报告 v0.5**<br>
+**实验数据截点：2026-07-28；已纳入完成的 artifact-v4–v8**<br>
 **关联主题：聚合失配、patch vs. rewrite、生成—验证不对称、硬状态、确定性执行器、验证器治理**  
 **English:** [Aggregation Mismatch: Derivable Claims, Proof Conditions, and Implications for Agent Engineering](./aggregation-mismatch-theoretical-claims-agent-engineering.md)  
 **双语同步规则：** 两个版本的命题编号、公式、表格、证据截点和结论边界必须同步更新。
@@ -513,6 +513,12 @@ Artifact-v7 验证了一个实现边界：冻结 compiler 在 48/48 案例上通
 arguments、collateral changes、hash violations 和 plan violations 均为 0。这是
 adoption test，不是生产可靠率 100% 的证明。
 
+Artifact-v8 把这条边界扩展到 semantic addressing。index 与 ID compiler 在 64/64
+冻结案例上都通过，受保护违规为 0。模型交付相同 verified semantic plan 时，ID Patch
+为 63/64，物理 INDEX Patch 为 43/64，base-cluster 差为 +31.25 个百分点。这支持
+当前对象族中的 runtime-owned 物理地址解析，但不证明普遍 ID 优势，也没有识别
+relocation 是原因。
+
 ---
 
 ## 9. 命题七：局部修改具有可计算的失效传播锥
@@ -907,6 +913,13 @@ Patch 与模型 Rewrite 二选一，而是确定性 plan compilation、原生执
 原子提交。它的 requested-order 与 localized-receipt 效应仍是方向性而非确认性信号，
 不能写死为普遍路由定律。
 
+Artifact-v8 在 delivery 前和 delivery 中增加了 runtime 所有权。
+readiness–ledger–staged-interaction package 使严格成功提高 59.4 个百分点；
+semantic ID 相对模型提交物理 index 提高 31.25 个百分点。但前者未通过 4× token
+成本门，local verifier 增量受 ceiling 限制，density crossover 也未过门。工程结论
+因此仍是条件性的：runtime 应持有依赖状态与地址解析，但 scaffold 强度需要成本路由，
+Patch/Rewrite 阈值保持可配置。
+
 因此，现阶段最合理的工程策略不是等待所有 P0 / P1 / P2 全部完成，也不是把实验结果写死为规则，而是：
 
 > 先实现“结构化状态 + 最小操作提交 + 确定性执行 + 验证闸门 + 依赖调度 + 可回滚事务”这一可由理论支持的底座；再用实验校准 patch 阈值、预算、候选质量、模型路由和真实领域边界。
@@ -915,6 +928,7 @@ Patch 与模型 Rewrite 二选一，而是确定性 plan compilation、原生执
 
 ## 相关文档
 
+- [聚合失配 Artifact-v8：运行时所有权与语义寻址](./aggregation-mismatch-v8-runtime-ownership-routing.zh-CN.md)
 - [聚合失配 Artifact-v7：机制恢复与确定性交付](./aggregation-mismatch-v7-mechanism-recovery.zh-CN.md)
 - [Patch 与完整重写：稀疏修复交付接口的受控实验](./patch-vs-full-rewrite-controlled-experiment.zh-CN.md)
 - [聚合失配 Artifact-v5：稳定编辑 Agent、规划瓶颈与条件性 Patch 优势](./aggregation-mismatch-v5-stable-editing-agent.zh-CN.md)

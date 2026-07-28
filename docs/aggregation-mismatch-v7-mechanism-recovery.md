@@ -451,6 +451,7 @@ python -m pytest -q tests/test_v7_*.py
 
 ## Related Documents
 
+- [Artifact-v8 Follow-up: Runtime Ownership and Semantic Addressing](./aggregation-mismatch-v8-runtime-ownership-routing.md)
 - [聚合失配 Artifact-v7：中文](./aggregation-mismatch-v7-mechanism-recovery.zh-CN.md)
 - [Aggregation Mismatch and Compositional Governance](./aggregation-mismatch-compositional-governance-llm-systems.md)
 - [Aggregation Mismatch: Derivable Claims and Agent Engineering](./aggregation-mismatch-theoretical-claims-agent-engineering.md)

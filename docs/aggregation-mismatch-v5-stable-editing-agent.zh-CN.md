@@ -406,6 +406,7 @@ Patch 是条件性交付优势；planning governance 决定这种优势能否成
 ## 相关文档
 
 - [Aggregation Mismatch Artifact-v5: English](./aggregation-mismatch-v5-stable-editing-agent.md)
+- [Artifact-v8 后续：运行时所有权与语义寻址](./aggregation-mismatch-v8-runtime-ownership-routing.zh-CN.md)
 - [Artifact-v7 后续：机制恢复与确定性交付](./aggregation-mismatch-v7-mechanism-recovery.zh-CN.md)
 - [Patch 与完整重写：稀疏修复受控实验](./patch-vs-full-rewrite-controlled-experiment.zh-CN.md)
 - [聚合失配 Artifact-v4：证据、理论差距与 Agent 含义](./aggregation-mismatch-v4-claims-theory-gap.zh-CN.md)

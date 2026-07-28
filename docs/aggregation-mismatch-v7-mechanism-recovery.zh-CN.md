@@ -409,6 +409,7 @@ python -m pytest -q tests/test_v7_*.py
 
 ## 相关文档
 
+- [Artifact-v8 后续：运行时所有权与语义寻址](./aggregation-mismatch-v8-runtime-ownership-routing.zh-CN.md)
 - [Aggregation Mismatch Artifact-v7: English](./aggregation-mismatch-v7-mechanism-recovery.md)
 - [LLM 系统中的聚合失配与组合治理](./aggregation-mismatch-compositional-governance-llm-systems.zh-CN.md)
 - [聚合失配：可推导命题与 Agent 工程](./aggregation-mismatch-theoretical-claims-agent-engineering.zh-CN.md)
