@@ -2,7 +2,7 @@
 
 **Subtitle: Which conclusions do not need more model experiments, and which still require empirical calibration**  
 **Status: Theory-to-engineering bridge report v0.5**<br>
-**Empirical data cutoff: July 28, 2026; includes completed artifacts v4–v10**<br>
+**Empirical data cutoff: July 29, 2026; includes completed artifacts v4–v11**<br>
 **Related topics: aggregation mismatch, patch vs. rewrite, generation–verification asymmetry, hard state, deterministic executors, verifier governance**  
 **中文：** [聚合失配：可推导命题、证明条件与 Agent 工程含义](./aggregation-mismatch-theoretical-claims-agent-engineering.zh-CN.md)  
 **Bilingual synchronization rule:** Keep proposition numbering, formulas, tables, evidence cutoff, and conclusion boundaries aligned across both versions.
@@ -968,6 +968,16 @@ the theory-to-engineering boundary: representation invariance supports the
 semantic-set interface as a sound substrate, but it cannot promise a large
 deployment gain unless order-only false rejects are common in the target workload.
 
+Artifact-v11 adds a paired relocation test on production-shaped synthetic JSON.
+The relocation × (semantic ID−physical index) interaction is +21.875 points and
+passes its preregistered gate, but all seven differences occur at \(N=48\);
+\(N=24\) is at ceiling. This is direct empirical support for the theoretical
+invariance rule—models should name semantic objects and runtimes should resolve
+current physical addresses—while showing that the measured gain depends on scale
+and workload. V11-B does not establish Patch reliability superiority because all
+four Patch/Rewrite cells are 32/32. It does show a large descriptive Patch cost
+advantage, so reliability routing and cost routing should remain separate.
+
 The appropriate engineering strategy is therefore neither to wait for every P0 / P1 / P2 experiment nor to hard-code current empirical effects as universal rules:
 
 > First implement the theoretically supported substrate of structured state, minimal operation submission, deterministic execution, verifier-gated commit, dependency-aware scheduling, and rollback-capable transactions. Then use experiments to calibrate patch thresholds, budgets, candidate quality, model routing, and real-domain boundaries.
@@ -976,6 +986,7 @@ The appropriate engineering strategy is therefore neither to wait for every P0 /
 
 ## Related Documents
 
+- [Aggregation Mismatch Artifact-v11: Address Drift and Configuration Delivery](./aggregation-mismatch-v11-config-delivery-transfer.md)
 - [Aggregation Mismatch Artifact-v10: Semantic Contracts and Runtime Canonicalization](./aggregation-mismatch-v10-semantic-contract-canonicalization.md)
 - [Aggregation Mismatch Artifact-v9: Minimal Scaffold and Verifier Receipt](./aggregation-mismatch-v9-minimal-scaffold-recovery.md)
 - [Aggregation Mismatch Artifact-v8: Runtime Ownership and Semantic Addressing](./aggregation-mismatch-v8-runtime-ownership-routing.md)

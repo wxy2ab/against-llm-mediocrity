@@ -1,8 +1,8 @@
 # 聚合失配与生成—验证不对称：一组受控实验给出的证据
 
 **副标题：为什么会执行局部规则，不等于能构造全局一致对象**  
-**状态：研究证据说明 v0.5**<br>
-**数据截点：2026-07-28；已纳入 artifact-v4–v10 结果**<br>
+**状态：研究证据说明 v0.6**<br>
+**数据截点：2026-07-29；已纳入 artifact-v4–v11 结果**<br>
 **关联主题：聚合失配、生成—审计差异、候选结构外部化、组合治理**
 
 ---
@@ -31,6 +31,10 @@
 11. **Artifact-v10 分开了可靠合同与性能承诺。** semantic-set canonicalizer 在
     1,024/1,024 个离线案例上通过，24 个成功 SET episode 依赖非标准排列规范化；
     但 SET 相对 STRICT 只提高 +6.25 个百分点，CI 跨 0，未达到 +20 个百分点确认门。
+12. **Artifact-v11 确认了条件化地址漂移 interaction。** 同 host relocation 使
+    semantic ID 相对模型提交 physical index 提高 +21.875 个百分点并通过确认门，
+    但 7 个差异全部发生在 \(N=48\)。Patch/Rewrite 四臂均 32/32，可靠性未裁决；
+    Patch 只在 token、延迟与响应体积上表现出明确成本优势。
 
 这使“聚合失配”从一个理论描述变成一个可测现象：**局部能力可以保留，但当求解顺序、输出顺序和未外部化状态发生冲突时，局部能力未必能组合成预算内的全局成功。**
 
@@ -63,6 +67,10 @@ Artifact-v9 的理论、实验、数据 QA、工程意义和应用见：
 Artifact-v10 的理论、实验、数据 QA、工程意义和应用见：
 [English](./aggregation-mismatch-v10-semantic-contract-canonicalization.md) ·
 [中文](./aggregation-mismatch-v10-semantic-contract-canonicalization.zh-CN.md)。
+
+Artifact-v11 的理论、实验、数据 QA、工程意义和应用见：
+[English](./aggregation-mismatch-v11-config-delivery-transfer.md) ·
+[中文](./aggregation-mismatch-v11-config-delivery-transfer.zh-CN.md)。
 
 ---
 
@@ -329,6 +337,8 @@ repair-call、latency/token 与实际逐 run payload ratio 不可引用。
   scaffold package。
 - artifact-v10 已证明 semantic-set 无效、真实效应严格为零，或相反已经确认了大幅
   端到端成功率提升。
+- artifact-v11 已证明 ID 在所有规模和布局下都更可靠、Patch 比 Rewrite 更可靠，
+  或合成配置结果已经迁移到真实生产仓库。
 - 合成 GF(2) 结果可以未经验证直接外推到代码、数据库、配置和长文写作。
 
 最稳健的结论是：
@@ -345,8 +355,8 @@ repair-call、latency/token 与实际逐 run payload ratio 不可引用。
 2. **候选 × 操作 × 输出拆分：** 用 matched factorial 分离候选信息、计算职责与输出长度/形式。
 3. **答案信息匹配的边界实验：** 匹配正确 bits 数量、熵与位置覆盖，区分 cut-set 结构与通用答案支架。
 4. **Edit-density crossover：** V5 的 infer cells 受 floor 限制；V7 又表明 fallback
-   方向受错误契约影响。需要在 verified-plan 条件下比较 patch、区域重写、完整重写与
-   deterministic compile。
+   方向受错误契约影响；V11-B 四臂则全部 ceiling。需要在 verified-plan、非 ceiling
+   条件下比较 patch、区域重写、完整重写与 deterministic compile。
 5. **非 floor 的 scaffold 拆分与顺序 canonicalization：** V10 已确认实现机制，但
    较易矩阵的 strict 臂没有 order 终态；后续应在 V8/V9 的重叠长度区间预先测量
    order-only failure 基线，并检验相同合同是否产生可观净收益。
@@ -354,7 +364,9 @@ repair-call、latency/token 与实际逐 run payload ratio 不可引用。
    不同；需要在更低 generic 基线下预注册 LOCATED 对 CAUSAL 的非劣效性与成本门。
 7. **自然失败分布的 recovery router：** 把 stale state、argument schema、duplicate、
    verifier failure 分开，按生产基率测量 refresh/rebase/compile/rewrite/replan。
-8. **真实任务迁移：** 在代码修复、配置更新、数据库约束和结构化文档修改中比较从零
+8. **地址漂移的规模分解：** 复现 V11-A1，并连续操纵对象规模、edit 数、target
+   分散度与 permutation distance，区分 relocation 与上下文负担。
+9. **真实任务迁移：** 在代码修复、配置更新、数据库约束和结构化文档修改中比较从零
    生成、候选—审计—修订与 verified-plan compilation。
 
 这些实验将决定“聚合失配”最终是一种合成任务现象、一个部署预算现象，还是一种可以跨领域复现的系统结构规律。

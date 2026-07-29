@@ -597,10 +597,20 @@ density interaction fails. A production router should therefore prefer compiler,
 then stable-ID operations, while retaining regional/full Rewrite as configurable
 fallbacks rather than using a fixed edit-density threshold.
 
+Artifact-v11 separates two later questions on production-shaped synthetic JSON.
+First, same-host relocation makes semantic-ID delivery 21.875 points more reliable
+than model-authored physical index in the larger tested configurations. Second,
+Sparse and Dense Patch/Rewrite all score 32/32, so V11 does **not** establish a
+new reliability ordering or density crossover. At equal observed success, Patch
+uses 33–43% fewer tokens, 69–84% less wall time, and 83–96% fewer response bytes.
+This extends the routing rule: prefer runtime-resolved IDs, and treat Patch's V11
+evidence as a cost advantage rather than an additional reliability theorem.
+
 ---
 
 ## Related Documents
 
+- [Aggregation Mismatch Artifact-v11: Address Drift and Configuration Delivery](./aggregation-mismatch-v11-config-delivery-transfer.md)
 - [Aggregation Mismatch Artifact-v8: Runtime Ownership and Semantic Addressing](./aggregation-mismatch-v8-runtime-ownership-routing.md)
 - [Aggregation Mismatch Artifact-v9: Minimal Scaffold and Verifier Receipt](./aggregation-mismatch-v9-minimal-scaffold-recovery.md)
 - [Patch vs. Full Rewrite: 中文](./patch-vs-full-rewrite-controlled-experiment.zh-CN.md)

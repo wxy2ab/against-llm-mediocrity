@@ -175,6 +175,13 @@ This technical report develops aggregation mismatch as a local-to-global composi
 
 [Read the compositional governance report](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-compositional-governance-llm-systems.md)
 
+### Aggregation Mismatch Artifact-v11: Address Drift and Configuration Delivery
+Tag: aggregation-mismatch research evidence
+
+This bilingual report validates 256 DeepSeek delivery episodes and 1,024 offline executor cases on production-shaped synthetic JSON configurations. The relocation × (ID−INDEX) interaction passes at +21.875 points, with all differences concentrated at \(N=48\). Patch and Rewrite both reach ceiling reliability, while Patch substantially reduces tokens, latency, and response bytes.
+
+[Read the artifact-v11 report: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v11-config-delivery-transfer.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v11-config-delivery-transfer.zh-CN.md)
+
 ### Aggregation Mismatch Artifact-v4: Evidence, Theory Gaps, and Agent Implications
 Tag: aggregation-mismatch research evidence
 

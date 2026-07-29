@@ -161,6 +161,13 @@ Tag: 聚合失配研究证据
 
 [阅读聚合失配与生成—验证不对称研究证据](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-generation-verification-asymmetry-evidence.zh-CN.md)
 
+### 聚合失配 Artifact-v11：地址漂移与配置交付
+Tag: 聚合失配研究证据
+
+这份双语报告验证了 production-shaped 合成 JSON 配置上的 256 个 DeepSeek 交付 episode 与 1,024 个离线执行器案例。Relocation × (ID−INDEX) interaction 以 +21.875 个百分点通过，差异全部集中于 \(N=48\)。Patch 与 Rewrite 的可靠性均达到 ceiling，但 Patch 明显减少 token、延迟和响应字节。
+
+[阅读 artifact-v11 报告：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v11-config-delivery-transfer.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v11-config-delivery-transfer.zh-CN.md)
+
 ### 聚合失配 Artifact-v4：实验证据、理论差距与 Agent 工程含义
 Tag: 聚合失配研究证据
 
