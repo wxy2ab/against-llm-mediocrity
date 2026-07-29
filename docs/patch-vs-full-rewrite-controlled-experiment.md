@@ -606,10 +606,21 @@ uses 33–43% fewer tokens, 69–84% less wall time, and 83–96% fewer response
 This extends the routing rule: prefer runtime-resolved IDs, and treat Patch's V11
 evidence as a cost advantage rather than an additional reliability theorem.
 
+Artifact-v12 deliberately moves the same delivery question outside the V11
+ceiling by using larger \(N=96/144\) configurations. Under a correct frozen
+plan, Sparse Patch scores 24/24 and Sparse Full Rewrite 17/24:
+\(\Delta=+0.2917\), 95% CI [0.125, 0.4583], Holm \(p=0.03125\). All seven
+discordant tasks are Patch success / Full timeout under the 300-second endpoint.
+This is new confirmatory reliability evidence for sparse budgeted delivery, but
+not proof of unlimited-budget semantic superiority. Regional Rewrite is 24/24
+in sparse tasks and only 8/24 in dense tasks; because those comparisons are
+exploratory, they do not establish a universal middle scale or crossover.
+
 ---
 
 ## Related Documents
 
+- [Aggregation Mismatch Artifact-v12: Drift Dose and Delivery-Scale Routing](./aggregation-mismatch-v12-scale-routing-transfer.md)
 - [Aggregation Mismatch Artifact-v11: Address Drift and Configuration Delivery](./aggregation-mismatch-v11-config-delivery-transfer.md)
 - [Aggregation Mismatch Artifact-v8: Runtime Ownership and Semantic Addressing](./aggregation-mismatch-v8-runtime-ownership-routing.md)
 - [Aggregation Mismatch Artifact-v9: Minimal Scaffold and Verifier Receipt](./aggregation-mismatch-v9-minimal-scaffold-recovery.md)
