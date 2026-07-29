@@ -305,6 +305,7 @@ Sparse Patch−Rewrite 的观察差为 0，CI [0,0]，raw/Holm \(p=1\)。按冻�
 
 ## 相关文档
 
+- [下一代：聚合失配 Artifact-v12](./aggregation-mismatch-v12-scale-routing-transfer.zh-CN.md)
 - [Aggregation Mismatch Artifact-v11: English](./aggregation-mismatch-v11-config-delivery-transfer.md)
 - [聚合失配 Artifact-v10](./aggregation-mismatch-v10-semantic-contract-canonicalization.zh-CN.md)
 - [Patch 与完整重写](./patch-vs-full-rewrite-controlled-experiment.zh-CN.md)

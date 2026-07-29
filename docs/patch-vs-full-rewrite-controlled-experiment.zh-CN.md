@@ -585,10 +585,19 @@ Patch 少用 33–43% tokens、69–84% wall time 和 83–96% response bytes。
 收紧路由规则：优先 runtime-resolved ID，并把 V11 的 Patch 证据解释为成本优势，
 而不是新的可靠性定理。
 
+Artifact-v12 通过更大的 \(N=96/144\) 配置，让同一交付问题离开 V11 ceiling。
+给定正确冻结计划，Sparse Patch 为 24/24，Sparse Full Rewrite 为 17/24：
+\(\Delta=+0.2917\)，95% CI [0.125, 0.4583]，Holm \(p=0.03125\)。七个配对差异
+全部是 Patch 成功、Full 在 300 秒 endpoint 超时。这为稀疏预算内交付增加了新的
+确认性可靠性证据，但不证明无限预算下的语义优越性。Regional Rewrite 在 sparse
+为 24/24，在 dense 仅为 8/24；这些对比属于 exploratory，不能建立通用中间尺度
+或 crossover。
+
 ---
 
 ## 相关文档
 
+- [聚合失配 Artifact-v12：漂移剂量与交付尺度路由](./aggregation-mismatch-v12-scale-routing-transfer.zh-CN.md)
 - [聚合失配 Artifact-v11：地址漂移与配置交付](./aggregation-mismatch-v11-config-delivery-transfer.zh-CN.md)
 - [聚合失配 Artifact-v8：运行时所有权与语义寻址](./aggregation-mismatch-v8-runtime-ownership-routing.zh-CN.md)
 - [聚合失配 Artifact-v9：最小 Scaffold 与 Verifier Receipt](./aggregation-mismatch-v9-minimal-scaffold-recovery.zh-CN.md)

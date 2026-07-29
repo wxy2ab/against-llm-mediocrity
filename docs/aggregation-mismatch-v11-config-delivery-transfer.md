@@ -333,6 +333,7 @@ and idempotency mutations.
 
 ## Related documents
 
+- [Next: Aggregation Mismatch Artifact-v12](./aggregation-mismatch-v12-scale-routing-transfer.md)
 - [聚合失配 Artifact-v11：中文](./aggregation-mismatch-v11-config-delivery-transfer.zh-CN.md)
 - [Aggregation Mismatch Artifact-v10](./aggregation-mismatch-v10-semantic-contract-canonicalization.md)
 - [Patch versus Full Rewrite](./patch-vs-full-rewrite-controlled-experiment.md)

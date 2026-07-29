@@ -2,7 +2,7 @@
 
 **Subtitle: Which conclusions do not need more model experiments, and which still require empirical calibration**  
 **Status: Theory-to-engineering bridge report v0.5**<br>
-**Empirical data cutoff: July 29, 2026; includes completed artifacts v4–v11**<br>
+**Empirical data cutoff: July 29, 2026; includes completed artifacts v4–v12**<br>
 **Related topics: aggregation mismatch, patch vs. rewrite, generation–verification asymmetry, hard state, deterministic executors, verifier governance**  
 **中文：** [聚合失配：可推导命题、证明条件与 Agent 工程含义](./aggregation-mismatch-theoretical-claims-agent-engineering.zh-CN.md)  
 **Bilingual synchronization rule:** Keep proposition numbering, formulas, tables, evidence cutoff, and conclusion boundaries aligned across both versions.
@@ -978,6 +978,18 @@ and workload. V11-B does not establish Patch reliability superiority because all
 four Patch/Rewrite cells are 32/32. It does show a large descriptive Patch cost
 advantage, so reliability routing and cost routing should remain separate.
 
+Artifact-v12 moves delivery outside the V11 ceiling and separates a simple
+address effect from a drift-dose interaction. Semantic ID remains at 24/24 under
+both low and high drift, while Index scores 6/24 and 7/24. Yet the preregistered
+interaction is −4.17 points and fails: the data do not support a monotone rule
+that higher drift further enlarges the ID advantage. In sparse verified-plan
+delivery, Patch scores 24/24 and Full Rewrite 17/24; the +29.17-point,
+300-second strict-success effect passes. The engineering update is conditional:
+adopt invariant semantic IDs without requiring a drift threshold, prefer Patch
+for sparse verified plans, and keep Regional/Full routes governed by typed
+failure, budget, and verifier coverage. V12 does not establish unlimited-budget
+semantic superiority or a universal density crossover.
+
 The appropriate engineering strategy is therefore neither to wait for every P0 / P1 / P2 experiment nor to hard-code current empirical effects as universal rules:
 
 > First implement the theoretically supported substrate of structured state, minimal operation submission, deterministic execution, verifier-gated commit, dependency-aware scheduling, and rollback-capable transactions. Then use experiments to calibrate patch thresholds, budgets, candidate quality, model routing, and real-domain boundaries.
@@ -986,6 +998,7 @@ The appropriate engineering strategy is therefore neither to wait for every P0 /
 
 ## Related Documents
 
+- [Aggregation Mismatch Artifact-v12: Drift Dose and Delivery-Scale Routing](./aggregation-mismatch-v12-scale-routing-transfer.md)
 - [Aggregation Mismatch Artifact-v11: Address Drift and Configuration Delivery](./aggregation-mismatch-v11-config-delivery-transfer.md)
 - [Aggregation Mismatch Artifact-v10: Semantic Contracts and Runtime Canonicalization](./aggregation-mismatch-v10-semantic-contract-canonicalization.md)
 - [Aggregation Mismatch Artifact-v9: Minimal Scaffold and Verifier Receipt](./aggregation-mismatch-v9-minimal-scaffold-recovery.md)
