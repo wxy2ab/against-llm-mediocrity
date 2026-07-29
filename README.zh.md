@@ -136,6 +136,19 @@ against-llm-mediocrity/
 - [Stock Rec V3](/zh/case-study-stock-rec-v3)：在金融策略生产中让 LLM 仅参与发现，不赋予生产权；所有影响策略的对象都必须经过 shadow、promotion、active 生命周期。
 - [FW-Insight V3](/zh/case-study-fwinsight-v3)：从大量已生成因子框架样本中提取能改变下一轮再生的硬经验。
 
+### Agent 操作指南
+
+面向 Codex 等编码 Agent 的可执行、可组合工作手册：
+
+- [Agent Guidelines 使用与引用路由](./docs/guidelines/guidelines.md)：按任务场景选择作为提示词的指南，并标明每条路线的理论或实验依据。
+- [中文指南索引](./docs/guidelines/README.zh-CN.md) · [English index](./docs/guidelines/README.md)：根据授权、状态转移、verifier 和交付边界路由任务。
+- [任务接入与指南路由](./docs/guidelines/task-intake-and-guideline-routing.zh-CN.md) · [English](./docs/guidelines/task-intake-and-guideline-routing.md)
+- [代码库侦察与影响分析](./docs/guidelines/codebase-reconnaissance-and-impact-analysis.zh-CN.md) · [English](./docs/guidelines/codebase-reconnaissance-and-impact-analysis.md)
+- [故障诊断与根因定位](./docs/guidelines/failure-diagnosis-and-root-cause-localization.zh-CN.md) · [English](./docs/guidelines/failure-diagnosis-and-root-cause-localization.md)
+- [局部修复与 Bug Fix](./docs/guidelines/bounded-repair-and-bug-fix.zh-CN.md) · [English](./docs/guidelines/bounded-repair-and-bug-fix.md)
+- [功能、重构与迁移交付](./docs/guidelines/feature-refactor-and-migration-delivery.zh-CN.md) · [English](./docs/guidelines/feature-refactor-and-migration-delivery.md)
+- [Agent 诊断与改进](./docs/guidelines/agent-diagnosis-and-improvement.zh-CN.md) · [English](./docs/guidelines/agent-diagnosis-and-improvement.md)
+
 ### 工作稿（[docs](./docs)）
 
 这些都是工作稿，每篇提供中英双语。链接后的一句话说明它讲什么、值不值得读。
