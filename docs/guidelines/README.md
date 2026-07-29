@@ -16,7 +16,8 @@ Chinese index: [README.zh-CN.md](./README.zh-CN.md)
 
 The current foundation is:
 
-- [Chinese scenario, prompt, and evidence router](./guidelines.md)
+- Scenario, prompt, and evidence router:
+  [English](./guidelines.md) · [中文](./guidelines.zh-CN.md)
 - [Agent Five-Knob Operating Guidelines (Chinese)](./agent-five-knob-operating-guidelines.zh-CN.md)
 
 It defines the common substrate: authoritative state, semantic plans, candidates,

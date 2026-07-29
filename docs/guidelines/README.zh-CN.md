@@ -16,7 +16,8 @@ English index：[README.md](./README.md)
 
 当前共同基础是：
 
-- [Agent Guidelines 使用与引用路由](./guidelines.md)
+- Agent Guidelines 使用与引用路由：
+  [中文](./guidelines.zh-CN.md) · [English](./guidelines.md)
 - [Agent 五旋钮操作规范](./agent-five-knob-operating-guidelines.zh-CN.md)
 
 它定义权威状态、semantic plan、candidate、verifier、semantic ID、确定性编译、
