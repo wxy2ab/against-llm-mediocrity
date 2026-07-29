@@ -140,7 +140,7 @@ against-llm-mediocrity/
 
 面向 Codex 等编码 Agent 的可执行、可组合工作手册：
 
-- [Agent Guidelines 使用与引用路由](./docs/guidelines/guidelines.md)：按任务场景选择作为提示词的指南，并标明每条路线的理论或实验依据。
+- Agent Guidelines 使用与引用路由：[中文](./docs/guidelines/guidelines.zh-CN.md) · [English](./docs/guidelines/guidelines.md)：按任务场景选择作为提示词的指南，并标明每条路线的理论或实验依据。
 - [中文指南索引](./docs/guidelines/README.zh-CN.md) · [English index](./docs/guidelines/README.md)：根据授权、状态转移、verifier 和交付边界路由任务。
 - [任务接入与指南路由](./docs/guidelines/task-intake-and-guideline-routing.zh-CN.md) · [English](./docs/guidelines/task-intake-and-guideline-routing.md)
 - [代码库侦察与影响分析](./docs/guidelines/codebase-reconnaissance-and-impact-analysis.zh-CN.md) · [English](./docs/guidelines/codebase-reconnaissance-and-impact-analysis.md)
