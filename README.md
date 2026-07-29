@@ -52,6 +52,19 @@ This project focuses on three questions:
 
 The docs are working drafts, grouped by theme. Each entry ships in English and 中文; the gloss after each link says why you might read it.
 
+### Agent Operating Guidelines
+
+Executable, composable playbooks for Codex and other coding agents:
+
+- [Scenario, prompt, and evidence router (Chinese)](docs/guidelines/guidelines.md) — Selects which guide to use as the operating prompt and identifies its theoretical or experimental basis.
+- [Guidelines index](docs/guidelines/README.md) · [中文索引](docs/guidelines/README.zh-CN.md) — Route a request by authority, state transition, verifier, and delivery boundary.
+- [Task intake and guideline routing](docs/guidelines/task-intake-and-guideline-routing.md) · [中文](docs/guidelines/task-intake-and-guideline-routing.zh-CN.md)
+- [Codebase reconnaissance and impact analysis](docs/guidelines/codebase-reconnaissance-and-impact-analysis.md) · [中文](docs/guidelines/codebase-reconnaissance-and-impact-analysis.zh-CN.md)
+- [Failure diagnosis and root-cause localization](docs/guidelines/failure-diagnosis-and-root-cause-localization.md) · [中文](docs/guidelines/failure-diagnosis-and-root-cause-localization.zh-CN.md)
+- [Bounded repair and bug fix](docs/guidelines/bounded-repair-and-bug-fix.md) · [中文](docs/guidelines/bounded-repair-and-bug-fix.zh-CN.md)
+- [Feature, refactor, and migration delivery](docs/guidelines/feature-refactor-and-migration-delivery.md) · [中文](docs/guidelines/feature-refactor-and-migration-delivery.zh-CN.md)
+- [Agent diagnosis and improvement](docs/guidelines/agent-diagnosis-and-improvement.md) · [中文](docs/guidelines/agent-diagnosis-and-improvement.zh-CN.md)
+
 ### Knowledge Governance
 
 The core framework: how structural failures arise and how governance turns them into verifiable, reusable fixes.
