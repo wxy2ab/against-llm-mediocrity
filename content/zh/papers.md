@@ -168,6 +168,35 @@ Tag: 聚合失配研究证据
 
 [阅读 artifact-v11 报告：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v11-config-delivery-transfer.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v11-config-delivery-transfer.zh-CN.md)
 
+### 聚合失配 Artifact-v12：漂移剂量与交付尺度路由
+Tag: 聚合失配研究证据
+
+这份双语报告验证 240 个 DeepSeek episodes 与 768 个离线执行器案例。预注册的漂移
+剂量交互未通过；稀疏 verified-plan Patch 相对 Full Rewrite 提高 300 秒预算内严格
+成功率 29.17 个百分点。Regional Rewrite 仍为探索性且表现异质。
+
+[阅读 artifact-v12 报告：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v12-scale-routing-transfer.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v12-scale-routing-transfer.zh-CN.md)
+
+### 聚合失配 Artifact-v14：Post-Compile Drift 与 Exact Recovery
+Tag: 聚合失配研究证据
+
+这份双语报告在严格 seal-before-drift 时序下验证 96 个正式 DeepSeek episodes、
+768 个离线执行器案例与 1,416 条可重建事件。Compatible Exact 24/24 被安全判 stale
+并恢复；+19.3% token interaction 为正，但未达到预注册 +20% 最小效应门。
+
+[阅读 artifact-v14 报告：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v14-post-compile-drift-recovery.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v14-post-compile-drift-recovery.zh-CN.md)
+
+### 聚合失配 V1–V12 与 V14：证据合成与 Agent 工程
+Tag: 实验总览与工程指南
+
+双语实验总览把每个 artifact 映射到已支持、未支持和不可推广的 claim，并明确排除
+已归档 V13。工程经验文档把证据转化为参考架构、路由策略、telemetry、governed
+commit、落地顺序和应用映射。
+
+[阅读实验总览：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v1-v12-v14-experiment-summary.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v1-v12-v14-experiment-summary.zh-CN.md)
+
+[阅读工程经验：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-agent-engineering-lessons-v1-v12-v14.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-agent-engineering-lessons-v1-v12-v14.zh-CN.md)
+
 ### 聚合失配 Artifact-v4：实验证据、理论差距与 Agent 工程含义
 Tag: 聚合失配研究证据
 

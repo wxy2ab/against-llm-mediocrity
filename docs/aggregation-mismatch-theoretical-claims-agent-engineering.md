@@ -990,6 +990,25 @@ for sparse verified plans, and keep Regional/Full routes governed by typed
 failure, budget, and verifier coverage. V12 does not establish unlimited-budget
 semantic superiority or a universal density crossover.
 
+Artifact-v13 tests post-plan state drift with Intent versus Exact contracts on
+repository-shaped multi-file state. Formal coverage is 96/96, pilot 12/12, and
+offline 768/768 with false accept/reject = 0/0. All four arms succeed 24/24, so
+the preregistered interaction is 0.0 and **not adjudicated** under the ceiling
+rule. V13 is retained as an archived method-development artifact and excluded
+from the V1–V12 + V14 synthesis.
+
+Artifact-v14 corrects the timing to genuine post-compile drift: the provider
+sees \(S_0\), the runtime seals the payload, and only then injects \(S_1\).
+Compatible Exact is rejected stale and recovered 24/24; Compatible Intent
+commits 24/24 on the first attempt; unsafe commit is zero. The paired log-token
+interaction is 0.176459 (about +19.3%), with CI [0.168331, 0.184575] and exact
+\(p=1.1921\times10^{-7}\), but it misses the preregistered
+\(\log(1.20)\) minimum. Engineering implication: implement payload seal,
+execution-time state revalidation, typed stale recovery, and governed commit as
+safety substrate. Preserve both Intent and Exact+recovery routes; the failed
+cost gate does not establish equivalence, zero overhead, or universal Intent
+superiority.
+
 The appropriate engineering strategy is therefore neither to wait for every P0 / P1 / P2 experiment nor to hard-code current empirical effects as universal rules:
 
 > First implement the theoretically supported substrate of structured state, minimal operation submission, deterministic execution, verifier-gated commit, dependency-aware scheduling, and rollback-capable transactions. Then use experiments to calibrate patch thresholds, budgets, candidate quality, model routing, and real-domain boundaries.
@@ -998,6 +1017,10 @@ The appropriate engineering strategy is therefore neither to wait for every P0 /
 
 ## Related Documents
 
+- [Aggregation Mismatch V1–V12 and V14: Agent Engineering Lessons](./aggregation-mismatch-agent-engineering-lessons-v1-v12-v14.md)
+- [Aggregation Mismatch V1–V12 and V14: Experiment Summary](./aggregation-mismatch-v1-v12-v14-experiment-summary.md)
+- [Aggregation Mismatch Artifact-v14: Post-Compile Drift and Exact Recovery](./aggregation-mismatch-v14-post-compile-drift-recovery.md)
+- [Aggregation Mismatch Artifact-v13: State Drift and Intent Rebase](./aggregation-mismatch-v13-state-drift-intent-rebase.md)
 - [Aggregation Mismatch Artifact-v12: Drift Dose and Delivery-Scale Routing](./aggregation-mismatch-v12-scale-routing-transfer.md)
 - [Aggregation Mismatch Artifact-v11: Address Drift and Configuration Delivery](./aggregation-mismatch-v11-config-delivery-transfer.md)
 - [Aggregation Mismatch Artifact-v10: Semantic Contracts and Runtime Canonicalization](./aggregation-mismatch-v10-semantic-contract-canonicalization.md)
