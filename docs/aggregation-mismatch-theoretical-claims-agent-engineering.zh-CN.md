@@ -2,7 +2,7 @@
 
 **副标题：哪些结论不必等待更多模型实验，哪些只能由实验校准**  
 **状态：理论—工程桥接报告 v0.5**<br>
-**实验数据截点：2026-07-28；已纳入完成的 artifact-v4–v10**<br>
+**实验数据截点：2026-07-29；已纳入完成的 artifact-v4–v11**<br>
 **关联主题：聚合失配、patch vs. rewrite、生成—验证不对称、硬状态、确定性执行器、验证器治理**  
 **English:** [Aggregation Mismatch: Derivable Claims, Proof Conditions, and Implications for Agent Engineering](./aggregation-mismatch-theoretical-claims-agent-engineering.md)  
 **双语同步规则：** 两个版本的命题编号、公式、表格、证据截点和结论边界必须同步更新。
@@ -935,6 +935,14 @@ Artifact-v10 把这一 order-only 诊断转化成 semantic-set 与 strict-list �
 表示不变性支持 semantic-set 作为可靠接口底座，却不能在目标 workload 缺少足够
 order-only false reject 时承诺大幅部署收益。
 
+Artifact-v11 又在 production-shaped 合成 JSON 上加入同 host relocation 配对。
+Relocation × (semantic ID−physical index) interaction 为 +21.875 个百分点并通过
+预注册门，但 7 个差异全部发生在 \(N=48\)，\(N=24\) 全部 ceiling。这为理论上的
+不变性规则提供了直接经验支持——模型命名语义对象，runtime 解析当前物理地址——同时
+表明实际收益取决于规模和 workload。V11-B 的 Patch/Rewrite 四个单元均为 32/32，
+不能建立 Patch 可靠性优势；但 Patch 的描述性成本明显更低，因此可靠性路由和成本路由
+必须保持分离。
+
 因此，现阶段最合理的工程策略不是等待所有 P0 / P1 / P2 全部完成，也不是把实验结果写死为规则，而是：
 
 > 先实现“结构化状态 + 最小操作提交 + 确定性执行 + 验证闸门 + 依赖调度 + 可回滚事务”这一可由理论支持的底座；再用实验校准 patch 阈值、预算、候选质量、模型路由和真实领域边界。
@@ -943,6 +951,7 @@ order-only false reject 时承诺大幅部署收益。
 
 ## 相关文档
 
+- [聚合失配 Artifact-v11：地址漂移与配置交付](./aggregation-mismatch-v11-config-delivery-transfer.zh-CN.md)
 - [聚合失配 Artifact-v10：语义合同与 Runtime Canonicalization](./aggregation-mismatch-v10-semantic-contract-canonicalization.zh-CN.md)
 - [聚合失配 Artifact-v9：最小 Scaffold 与 Verifier Receipt](./aggregation-mismatch-v9-minimal-scaffold-recovery.zh-CN.md)
 - [聚合失配 Artifact-v8：运行时所有权与语义寻址](./aggregation-mismatch-v8-runtime-ownership-routing.zh-CN.md)

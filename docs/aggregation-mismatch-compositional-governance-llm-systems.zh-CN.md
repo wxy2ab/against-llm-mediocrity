@@ -4,7 +4,7 @@
 **状态：工作稿 v0.1**  
 **系列：LLM 系统中价值保存的结构理论**
 
-**实验配套：** [Artifact-v4 实验证据、理论差距与 Agent 含义](./aggregation-mismatch-v4-claims-theory-gap.zh-CN.md) · [Artifact-v5 稳定编辑 Agent](./aggregation-mismatch-v5-stable-editing-agent.zh-CN.md) · [Artifact-v7 机制恢复与确定性交付](./aggregation-mismatch-v7-mechanism-recovery.zh-CN.md) · [Artifact-v8 运行时所有权与语义寻址](./aggregation-mismatch-v8-runtime-ownership-routing.zh-CN.md) · [Artifact-v9 最小 scaffold 与 verifier receipt](./aggregation-mismatch-v9-minimal-scaffold-recovery.zh-CN.md) · [Artifact-v10 语义合同与 runtime canonicalization](./aggregation-mismatch-v10-semantic-contract-canonicalization.zh-CN.md) · [Patch 与完整重写受控实验](./patch-vs-full-rewrite-controlled-experiment.zh-CN.md)
+**实验配套：** [Artifact-v4 实验证据、理论差距与 Agent 含义](./aggregation-mismatch-v4-claims-theory-gap.zh-CN.md) · [Artifact-v5 稳定编辑 Agent](./aggregation-mismatch-v5-stable-editing-agent.zh-CN.md) · [Artifact-v7 机制恢复与确定性交付](./aggregation-mismatch-v7-mechanism-recovery.zh-CN.md) · [Artifact-v8 运行时所有权与语义寻址](./aggregation-mismatch-v8-runtime-ownership-routing.zh-CN.md) · [Artifact-v9 最小 scaffold 与 verifier receipt](./aggregation-mismatch-v9-minimal-scaffold-recovery.zh-CN.md) · [Artifact-v10 语义合同与 runtime canonicalization](./aggregation-mismatch-v10-semantic-contract-canonicalization.zh-CN.md) · [Artifact-v11 地址漂移与配置交付](./aggregation-mismatch-v11-config-delivery-transfer.zh-CN.md) · [Patch 与完整重写受控实验](./patch-vs-full-rewrite-controlled-experiment.zh-CN.md)
 
 ---
 

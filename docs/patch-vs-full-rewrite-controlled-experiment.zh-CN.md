@@ -577,10 +577,19 @@ Artifact-v8 增加地址层：semantic-ID Patch 几乎达到 Full Rewrite，并�
 优先 compiler，其次 stable-ID operation；regional/full Rewrite 保持可配置 fallback，
 而不是使用固定 edit-density 阈值。
 
+Artifact-v11 在 production-shaped 合成 JSON 上进一步拆开两个问题。第一，同 host
+relocation 使 semantic-ID delivery 在较大受测配置中比模型提交 physical index 高
+21.875 个百分点。第二，Sparse 与 Dense 的 Patch/Rewrite 四个单元均为 32/32，
+因此 V11 **没有**建立新的可靠性排序或 density crossover。在观察成功率相同时，
+Patch 少用 33–43% tokens、69–84% wall time 和 83–96% response bytes。这进一步
+收紧路由规则：优先 runtime-resolved ID，并把 V11 的 Patch 证据解释为成本优势，
+而不是新的可靠性定理。
+
 ---
 
 ## 相关文档
 
+- [聚合失配 Artifact-v11：地址漂移与配置交付](./aggregation-mismatch-v11-config-delivery-transfer.zh-CN.md)
 - [聚合失配 Artifact-v8：运行时所有权与语义寻址](./aggregation-mismatch-v8-runtime-ownership-routing.zh-CN.md)
 - [聚合失配 Artifact-v9：最小 Scaffold 与 Verifier Receipt](./aggregation-mismatch-v9-minimal-scaffold-recovery.zh-CN.md)
 - [Patch vs. Full Rewrite: English](./patch-vs-full-rewrite-controlled-experiment.md)
