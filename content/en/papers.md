@@ -182,6 +182,40 @@ This bilingual report validates 256 DeepSeek delivery episodes and 1,024 offline
 
 [Read the artifact-v11 report: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v11-config-delivery-transfer.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v11-config-delivery-transfer.zh-CN.md)
 
+### Aggregation Mismatch Artifact-v12: Drift Dose and Delivery-Scale Routing
+Tag: aggregation-mismatch research evidence
+
+This bilingual report validates 240 DeepSeek episodes and 768 offline executor
+cases. The preregistered drift-dose interaction fails, while sparse
+verified-plan Patch improves 300-second strict success over Full Rewrite by
+29.17 points. Regional Rewrite remains exploratory and heterogeneous.
+
+[Read the artifact-v12 report: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v12-scale-routing-transfer.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v12-scale-routing-transfer.zh-CN.md)
+
+### Aggregation Mismatch Artifact-v14: Post-Compile Drift and Exact Recovery
+Tag: aggregation-mismatch research evidence
+
+This bilingual report validates 96 formal DeepSeek episodes, 768 offline
+executor cases, and 1,416 reconstructable events under strict
+seal-before-drift timing. Compatible Exact is safely rejected stale and
+recovered 24/24. Its +19.3% token interaction is positive but misses the
+preregistered +20% minimum-effect gate.
+
+[Read the artifact-v14 report: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v14-post-compile-drift-recovery.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v14-post-compile-drift-recovery.zh-CN.md)
+
+### Aggregation Mismatch V1–V12 and V14: Evidence and Agent Engineering
+Tag: experiment synthesis and engineering guide
+
+The bilingual experiment synthesis maps each artifact to its supported,
+unsupported, and non-generalizable claims, explicitly excluding archived V13.
+Its engineering companion turns that evidence into a reference architecture,
+routing policy, telemetry schema, governed-commit protocol, implementation
+sequence, and application map.
+
+[Read the experiment summary: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v1-v12-v14-experiment-summary.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v1-v12-v14-experiment-summary.zh-CN.md)
+
+[Read the engineering lessons: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-agent-engineering-lessons-v1-v12-v14.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-agent-engineering-lessons-v1-v12-v14.zh-CN.md)
+
 ### Aggregation Mismatch Artifact-v4: Evidence, Theory Gaps, and Agent Implications
 Tag: aggregation-mismatch research evidence
 

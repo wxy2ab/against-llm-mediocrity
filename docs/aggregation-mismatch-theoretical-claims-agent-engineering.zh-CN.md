@@ -952,6 +952,20 @@ Semantic ID 在低、高漂移下均为 24/24，Index 分别为 6/24 与 7/24；
 预算与 verifier coverage 治理。V12 没有建立无限预算语义优势或普遍 density
 crossover。
 
+Artifact-v13 在 repository-shaped 多文件状态下检验计划后状态漂移下的 Intent 与
+Exact 契约。正式 96/96、pilot 12/12、offline 768/768，false accept/reject=0/0。
+四臂均为 24/24，预注册交互为 0.0，因 ceiling 规则 **未裁决**。工程含义：可实现
+V13 作为方法开发 artifact 归档，不进入 V1–V12 + V14 证据合成。
+
+Artifact-v14 将时序修正为真正的 post-compile drift：provider 只见 \(S_0\)，runtime
+封存 payload 后才注入 \(S_1\)。Compatible Exact 24/24 被判 stale 并恢复；
+Compatible Intent 24/24 一次 commit；unsafe commit=0。配对 log-token interaction
+为 0.176459（约 +19.3%），CI [0.168331, 0.184575]，exact
+\(p=1.1921\times10^{-7}\)，但未达到预注册 \(\log(1.20)\) 最小效应。工程含义：
+将 payload seal、执行时状态重验、typed stale recovery 与 governed commit 作为安全
+substrate；保留 Intent 和 Exact+recovery 双路径。成本门未过不等于两者等价、恢复
+无开销或 Intent 普遍优越。
+
 因此，现阶段最合理的工程策略不是等待所有 P0 / P1 / P2 全部完成，也不是把实验结果写死为规则，而是：
 
 > 先实现“结构化状态 + 最小操作提交 + 确定性执行 + 验证闸门 + 依赖调度 + 可回滚事务”这一可由理论支持的底座；再用实验校准 patch 阈值、预算、候选质量、模型路由和真实领域边界。
@@ -960,6 +974,10 @@ crossover。
 
 ## 相关文档
 
+- [V1–V12 与 V14：Agent 工程经验](./aggregation-mismatch-agent-engineering-lessons-v1-v12-v14.zh-CN.md)
+- [V1–V12 与 V14 实验总览](./aggregation-mismatch-v1-v12-v14-experiment-summary.zh-CN.md)
+- [聚合失配 Artifact-v14：Post-Compile Drift 与 Exact Recovery](./aggregation-mismatch-v14-post-compile-drift-recovery.zh-CN.md)
+- [聚合失配 Artifact-v13：状态漂移与 Intent Rebase](./aggregation-mismatch-v13-state-drift-intent-rebase.zh-CN.md)
 - [聚合失配 Artifact-v12：漂移剂量与交付尺度路由](./aggregation-mismatch-v12-scale-routing-transfer.zh-CN.md)
 - [聚合失配 Artifact-v11：地址漂移与配置交付](./aggregation-mismatch-v11-config-delivery-transfer.zh-CN.md)
 - [聚合失配 Artifact-v10：语义合同与 Runtime Canonicalization](./aggregation-mismatch-v10-semantic-contract-canonicalization.zh-CN.md)
