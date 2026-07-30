@@ -198,9 +198,10 @@ English: [Agent Guidelines Usage and Reference Router](./guidelines.md)
 
 - [Patch 与完整重写受控实验](../patch-vs-full-rewrite-controlled-experiment.zh-CN.md)
 - [聚合失配：可推导命题与 Agent 工程](../aggregation-mismatch-theoretical-claims-agent-engineering.zh-CN.md)
-- [V1–V12、V14–V16：Agent 工程经验](../aggregation-mismatch-agent-engineering-lessons-v1-v12-v14-v16.zh-CN.md)
+- [V1–V12、V14–V17：Agent 工程经验](../aggregation-mismatch-agent-engineering-lessons-v1-v12-v14-v17.zh-CN.md)
 - [Artifact-v15：Intent 冲突治理](../aggregation-mismatch-v15-intent-conflict-governance.zh-CN.md)
 - [Artifact-v16：匹配冲突恢复](../aggregation-mismatch-v16-matched-conflict-recovery.zh-CN.md)
+- [Artifact-v17：Unlock 信息与不可解除升级](../aggregation-mismatch-v17-unlock-info-escalate.zh-CN.md)
 - [Artifact-v12：漂移剂量与交付尺度路由](../aggregation-mismatch-v12-scale-routing-transfer.zh-CN.md)
 - [Artifact-v14：Post-Compile Drift 与 Exact Recovery](../aggregation-mismatch-v14-post-compile-drift-recovery.zh-CN.md)
 - [聚合失配与组合治理](../aggregation-mismatch-compositional-governance-llm-systems.zh-CN.md)
@@ -329,7 +330,7 @@ English: [Agent Guidelines Usage and Reference Router](./guidelines.md)
 - [诊断—机制桥接](../diagnostic-mechanism-bridge-for-governed-llm-systems.zh-CN.md)
 - [状态治理智能体范式](../state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)
 - [聚合失配：可推导命题与 Agent 工程](../aggregation-mismatch-theoretical-claims-agent-engineering.zh-CN.md)
-- [V1–V12、V14–V16：Agent 工程经验](../aggregation-mismatch-agent-engineering-lessons-v1-v12-v14-v16.zh-CN.md)
+- [V1–V12、V14–V17：Agent 工程经验](../aggregation-mismatch-agent-engineering-lessons-v1-v12-v14-v17.zh-CN.md)
 - [Artifact-v8：Runtime 所有权与语义路由](../aggregation-mismatch-v8-runtime-ownership-routing.zh-CN.md)
 - [Artifact-v10：语义合同与 Runtime Canonicalization](../aggregation-mismatch-v10-semantic-contract-canonicalization.zh-CN.md)
 - [Artifact-v11：地址漂移与配置交付](../aggregation-mismatch-v11-config-delivery-transfer.zh-CN.md)
@@ -412,7 +413,7 @@ English: [Agent Guidelines Usage and Reference Router](./guidelines.md)
 
 | 观察到的失败 | 追加阅读 | 常见修复位置 |
 |---|---|---|
-| 局部正确、整体组合失败 | [聚合失配与组合治理](../aggregation-mismatch-compositional-governance-llm-systems.zh-CN.md)；[V1–V12、V14–V16 工程经验](../aggregation-mismatch-agent-engineering-lessons-v1-v12-v14-v16.zh-CN.md) | plan、runtime、compiler、verifier、conflict governor、commit |
+| 局部正确、整体组合失败 | [聚合失配与组合治理](../aggregation-mismatch-compositional-governance-llm-systems.zh-CN.md)；[V1–V12、V14–V17 工程经验](../aggregation-mismatch-agent-engineering-lessons-v1-v12-v14-v17.zh-CN.md) | plan、runtime、compiler、verifier、conflict governor、commit |
 | 正确候选很难被采样到 | [支持失配与控制空间搜索](../support-mismatch-control-space-search-llm-systems.zh-CN.md) | candidate、search、GKO |
 | 行为依赖隐藏或动态状态 | [状态失配与状态治理](../state-mismatch-state-governance-llm-systems.zh-CN.md) | observation、state authority、router |
 | 优化代理目标却伤害真实结果 | [规格失配与目标治理](../specification-mismatch-objective-governance-llm-systems.zh-CN.md) | specification、verifier、human gate |

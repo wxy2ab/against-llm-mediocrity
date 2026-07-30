@@ -226,18 +226,32 @@ and a frozen-manifest Pilot metadata deviation require a
 
 [Read the artifact-v16 report: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v16-matched-conflict-recovery.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v16-matched-conflict-recovery.zh-CN.md)
 
-### Aggregation Mismatch V1–V12 and V14–V16: Evidence and Agent Engineering
+### Aggregation Mismatch Artifact-v17: Unlock Information and Escalation
+Tag: aggregation-mismatch research evidence
+
+This bilingual report validates 192 formal DeepSeek episodes, 1,536 offline
+cases, and 3,840 reconstructable events. All four post-unlock information arms
+reach 24/24, so the preregistered superiority claim fails at ceiling; complete
+old-state context costs 74.9% more median tokens than receipt-only. Under an
+unresolvable lock, typed Escalate reaches 24/24 accepted non-commit outcomes.
+The latter is a governance-terminal contrast with different endpoints, not a
+task-completion advantage.
+
+[Read the artifact-v17 report: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v17-unlock-info-escalate.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v17-unlock-info-escalate.zh-CN.md)
+
+### Aggregation Mismatch V1–V12 and V14–V17: Evidence and Agent Engineering
 Tag: experiment synthesis and engineering guide
 
 The bilingual experiment synthesis maps each artifact to its supported,
 unsupported, and non-generalizable claims, explicitly excluding archived V13.
 Its engineering companion turns that evidence into a reference architecture,
 routing policy, telemetry schema, governed-commit protocol, implementation
-sequence, conflict governor, and application map.
+sequence, conflict governor, minimum-context disclosure, typed terminal states,
+and application map.
 
-[Read the experiment summary: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v1-v12-v14-v16-experiment-summary.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v1-v12-v14-v16-experiment-summary.zh-CN.md)
+[Read the experiment summary: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v1-v12-v14-v17-experiment-summary.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v1-v12-v14-v17-experiment-summary.zh-CN.md)
 
-[Read the engineering lessons: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-agent-engineering-lessons-v1-v12-v14-v16.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-agent-engineering-lessons-v1-v12-v14-v16.zh-CN.md)
+[Read the engineering lessons: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-agent-engineering-lessons-v1-v12-v14-v17.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-agent-engineering-lessons-v1-v12-v14-v17.zh-CN.md)
 
 ### Aggregation Mismatch Artifact-v4: Evidence, Theory Gaps, and Agent Implications
 Tag: aggregation-mismatch research evidence
