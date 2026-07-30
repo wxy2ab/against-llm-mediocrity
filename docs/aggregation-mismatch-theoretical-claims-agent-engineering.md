@@ -995,7 +995,7 @@ repository-shaped multi-file state. Formal coverage is 96/96, pilot 12/12, and
 offline 768/768 with false accept/reject = 0/0. All four arms succeed 24/24, so
 the preregistered interaction is 0.0 and **not adjudicated** under the ceiling
 rule. V13 is retained as an archived method-development artifact and excluded
-from the V1–V12 + V14–V15 synthesis.
+from the V1–V12 + V14–V16 synthesis.
 
 Artifact-v14 corrects the timing to genuine post-compile drift: the provider
 sees \(S_0\), the runtime seals the payload, and only then injects \(S_1\).
@@ -1021,6 +1021,16 @@ implication: return typed conflict receipts and let a bounded governor choose
 wait, rebase once, replan, escalate, or stop; do not infer general model
 conflict-solving ability.
 
+Artifact-v16 matches the second provider turn across three conflict arms.
+Generic Retry and Reread Only remain in locked \(S_1\) and finish 0/24, while
+runtime Unlock + Rebase enters \(S_2\) and finishes 24/24. This empirically
+supports the theoretically derived rule that another model call is not a valid
+recovery unless authoritative state or authority changes and preconditions are
+revalidated. It does not isolate information: only Rebase receives unlock,
+\(S_2\), and a target-state slice. The frozen manifest also retains a stale
+Pilot `stop_if`, so the machine primary is `passed` while evidence sharing is
+`share_with_caveats`.
+
 The appropriate engineering strategy is therefore neither to wait for every P0 / P1 / P2 experiment nor to hard-code current empirical effects as universal rules:
 
 > First implement the theoretically supported substrate of structured state, minimal operation submission, deterministic execution, verifier-gated commit, dependency-aware scheduling, and rollback-capable transactions. Then use experiments to calibrate patch thresholds, budgets, candidate quality, model routing, and real-domain boundaries.
@@ -1029,8 +1039,9 @@ The appropriate engineering strategy is therefore neither to wait for every P0 /
 
 ## Related Documents
 
-- [Aggregation Mismatch V1–V12, V14, and V15: Agent Engineering Lessons](./aggregation-mismatch-agent-engineering-lessons-v1-v12-v14-v15.md)
-- [Aggregation Mismatch V1–V12, V14, and V15: Experiment Summary](./aggregation-mismatch-v1-v12-v14-v15-experiment-summary.md)
+- [Aggregation Mismatch V1–V12 and V14–V16: Agent Engineering Lessons](./aggregation-mismatch-agent-engineering-lessons-v1-v12-v14-v16.md)
+- [Aggregation Mismatch V1–V12 and V14–V16: Experiment Summary](./aggregation-mismatch-v1-v12-v14-v16-experiment-summary.md)
+- [Aggregation Mismatch Artifact-v16: Matched Conflict Recovery](./aggregation-mismatch-v16-matched-conflict-recovery.md)
 - [Aggregation Mismatch Artifact-v15: Intent Conflict Governance](./aggregation-mismatch-v15-intent-conflict-governance.md)
 - [Aggregation Mismatch Artifact-v14: Post-Compile Drift and Exact Recovery](./aggregation-mismatch-v14-post-compile-drift-recovery.md)
 - [Aggregation Mismatch Artifact-v13: State Drift and Intent Rebase](./aggregation-mismatch-v13-state-drift-intent-rebase.md)
