@@ -995,7 +995,7 @@ repository-shaped multi-file state. Formal coverage is 96/96, pilot 12/12, and
 offline 768/768 with false accept/reject = 0/0. All four arms succeed 24/24, so
 the preregistered interaction is 0.0 and **not adjudicated** under the ceiling
 rule. V13 is retained as an archived method-development artifact and excluded
-from the V1–V12 + V14 synthesis.
+from the V1–V12 + V14–V15 synthesis.
 
 Artifact-v14 corrects the timing to genuine post-compile drift: the provider
 sees \(S_0\), the runtime seals the payload, and only then injects \(S_1\).
@@ -1009,6 +1009,18 @@ safety substrate. Preserve both Intent and Exact+recovery routes; the failed
 cost gate does not establish equivalence, zero overhead, or universal Intent
 superiority.
 
+Artifact-v15 adds locked concurrent conflict and makes a further theoretical
+separation: **safe rejection** follows from precondition, lock, and atomicity
+semantics, while **permission to recover** is a runtime policy choice. All 72
+conflict-arm first commits reject; terminal Intent-Naive ends 0/24, whereas one
+governed Intent/Exact rebase recovers 48/48. The +1.0 machine primary passes,
+but it mainly identifies recovery authority because Naive is structurally
+forbidden to recover. The frozen Pilot success gate also differs from the
+executable gate, so the artifact is shared with caveats. Engineering
+implication: return typed conflict receipts and let a bounded governor choose
+wait, rebase once, replan, escalate, or stop; do not infer general model
+conflict-solving ability.
+
 The appropriate engineering strategy is therefore neither to wait for every P0 / P1 / P2 experiment nor to hard-code current empirical effects as universal rules:
 
 > First implement the theoretically supported substrate of structured state, minimal operation submission, deterministic execution, verifier-gated commit, dependency-aware scheduling, and rollback-capable transactions. Then use experiments to calibrate patch thresholds, budgets, candidate quality, model routing, and real-domain boundaries.
@@ -1017,8 +1029,9 @@ The appropriate engineering strategy is therefore neither to wait for every P0 /
 
 ## Related Documents
 
-- [Aggregation Mismatch V1–V12 and V14: Agent Engineering Lessons](./aggregation-mismatch-agent-engineering-lessons-v1-v12-v14.md)
-- [Aggregation Mismatch V1–V12 and V14: Experiment Summary](./aggregation-mismatch-v1-v12-v14-experiment-summary.md)
+- [Aggregation Mismatch V1–V12, V14, and V15: Agent Engineering Lessons](./aggregation-mismatch-agent-engineering-lessons-v1-v12-v14-v15.md)
+- [Aggregation Mismatch V1–V12, V14, and V15: Experiment Summary](./aggregation-mismatch-v1-v12-v14-v15-experiment-summary.md)
+- [Aggregation Mismatch Artifact-v15: Intent Conflict Governance](./aggregation-mismatch-v15-intent-conflict-governance.md)
 - [Aggregation Mismatch Artifact-v14: Post-Compile Drift and Exact Recovery](./aggregation-mismatch-v14-post-compile-drift-recovery.md)
 - [Aggregation Mismatch Artifact-v13: State Drift and Intent Rebase](./aggregation-mismatch-v13-state-drift-intent-rebase.md)
 - [Aggregation Mismatch Artifact-v12: Drift Dose and Delivery-Scale Routing](./aggregation-mismatch-v12-scale-routing-transfer.md)
