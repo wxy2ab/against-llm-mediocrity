@@ -955,7 +955,7 @@ crossover。
 Artifact-v13 在 repository-shaped 多文件状态下检验计划后状态漂移下的 Intent 与
 Exact 契约。正式 96/96、pilot 12/12、offline 768/768，false accept/reject=0/0。
 四臂均为 24/24，预注册交互为 0.0，因 ceiling 规则 **未裁决**。工程含义：可实现
-V13 作为方法开发 artifact 归档，不进入 V1–V12 + V14–V15 证据合成。
+V13 作为方法开发 artifact 归档，不进入 V1–V12 + V14–V16 证据合成。
 
 Artifact-v14 将时序修正为真正的 post-compile drift：provider 只见 \(S_0\)，runtime
 封存 payload 后才注入 \(S_1\)。Compatible Exact 24/24 被判 stale 并恢复；
@@ -975,6 +975,13 @@ runtime policy。三个冲突臂的 72 次首提交全部拒绝；terminal Inten
 governor 选择 wait、rebase once、replan、escalate 或 stop；不能据此推断模型具有
 通用冲突能力。
 
+Artifact-v16 匹配三个 conflict 臂的第二 provider turn。Generic Retry 与 Reread
+Only 仍停在锁定 \(S_1\)，均为 0/24；runtime Unlock + Rebase 进入 \(S_2\)，为
+24/24。这在经验上支持可由程序语义推出的规则：如果权威状态或权限未改变、precondition
+未重验，额外一次模型调用不构成有效恢复。它没有识别纯信息效应，因为只有 Rebase
+得到 unlock、\(S_2\) 和 target slice。冻结 manifest 还残留陈旧 Pilot `stop_if`，
+因此机器主检验为 `passed`，整体证据分享为 `share_with_caveats`。
+
 因此，现阶段最合理的工程策略不是等待所有 P0 / P1 / P2 全部完成，也不是把实验结果写死为规则，而是：
 
 > 先实现“结构化状态 + 最小操作提交 + 确定性执行 + 验证闸门 + 依赖调度 + 可回滚事务”这一可由理论支持的底座；再用实验校准 patch 阈值、预算、候选质量、模型路由和真实领域边界。
@@ -983,8 +990,9 @@ governor 选择 wait、rebase once、replan、escalate 或 stop；不能据此�
 
 ## 相关文档
 
-- [V1–V12、V14 与 V15：Agent 工程经验](./aggregation-mismatch-agent-engineering-lessons-v1-v12-v14-v15.zh-CN.md)
-- [V1–V12、V14 与 V15 实验总览](./aggregation-mismatch-v1-v12-v14-v15-experiment-summary.zh-CN.md)
+- [V1–V12、V14–V16：Agent 工程经验](./aggregation-mismatch-agent-engineering-lessons-v1-v12-v14-v16.zh-CN.md)
+- [V1–V12、V14–V16 实验总览](./aggregation-mismatch-v1-v12-v14-v16-experiment-summary.zh-CN.md)
+- [聚合失配 Artifact-v16：匹配冲突恢复](./aggregation-mismatch-v16-matched-conflict-recovery.zh-CN.md)
 - [聚合失配 Artifact-v15：Intent 冲突治理](./aggregation-mismatch-v15-intent-conflict-governance.zh-CN.md)
 - [聚合失配 Artifact-v14：Post-Compile Drift 与 Exact Recovery](./aggregation-mismatch-v14-post-compile-drift-recovery.zh-CN.md)
 - [聚合失配 Artifact-v13：状态漂移与 Intent Rebase](./aggregation-mismatch-v13-state-drift-intent-rebase.zh-CN.md)

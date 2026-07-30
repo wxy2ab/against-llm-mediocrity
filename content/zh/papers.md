@@ -196,16 +196,26 @@ Tag: 聚合失配研究证据
 
 [阅读 artifact-v15 报告：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v15-intent-conflict-governance.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v15-intent-conflict-governance.zh-CN.md)
 
-### 聚合失配 V1–V12、V14 与 V15：证据合成与 Agent 工程
+### 聚合失配 Artifact-v16：匹配冲突恢复
+Tag: 聚合失配研究证据
+
+这份双语报告验证 96 个正式 DeepSeek episodes、768 个离线执行器案例和 1,752 条
+可重建事件。匹配第二 turn 后，Generic/Reread 仍锁定为 0/24，runtime
+Unlock + Rebase 为 24/24。机器主检验通过；authority/state/info 组合与冻结
+manifest 的 Pilot 元数据偏差要求整体裁决为 `share_with_caveats`。
+
+[阅读 artifact-v16 报告：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v16-matched-conflict-recovery.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v16-matched-conflict-recovery.zh-CN.md)
+
+### 聚合失配 V1–V12、V14–V16：证据合成与 Agent 工程
 Tag: 实验总览与工程指南
 
 双语实验总览把每个 artifact 映射到已支持、未支持和不可推广的 claim，并明确排除
 已归档 V13。工程经验文档把证据转化为参考架构、路由策略、telemetry、governed
 commit、冲突治理、落地顺序和应用映射。
 
-[阅读实验总览：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v1-v12-v14-v15-experiment-summary.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v1-v12-v14-v15-experiment-summary.zh-CN.md)
+[阅读实验总览：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v1-v12-v14-v16-experiment-summary.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v1-v12-v14-v16-experiment-summary.zh-CN.md)
 
-[阅读工程经验：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-agent-engineering-lessons-v1-v12-v14-v15.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-agent-engineering-lessons-v1-v12-v14-v15.zh-CN.md)
+[阅读工程经验：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-agent-engineering-lessons-v1-v12-v14-v16.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-agent-engineering-lessons-v1-v12-v14-v16.zh-CN.md)
 
 ### 聚合失配 Artifact-v4：实验证据、理论差距与 Agent 工程含义
 Tag: 聚合失配研究证据
