@@ -955,7 +955,7 @@ crossover。
 Artifact-v13 在 repository-shaped 多文件状态下检验计划后状态漂移下的 Intent 与
 Exact 契约。正式 96/96、pilot 12/12、offline 768/768，false accept/reject=0/0。
 四臂均为 24/24，预注册交互为 0.0，因 ceiling 规则 **未裁决**。工程含义：可实现
-V13 作为方法开发 artifact 归档，不进入 V1–V12 + V14 证据合成。
+V13 作为方法开发 artifact 归档，不进入 V1–V12 + V14–V15 证据合成。
 
 Artifact-v14 将时序修正为真正的 post-compile drift：provider 只见 \(S_0\)，runtime
 封存 payload 后才注入 \(S_1\)。Compatible Exact 24/24 被判 stale 并恢复；
@@ -966,6 +966,15 @@ Compatible Intent 24/24 一次 commit；unsafe commit=0。配对 log-token inter
 substrate；保留 Intent 和 Exact+recovery 双路径。成本门未过不等于两者等价、恢复
 无开销或 Intent 普遍优越。
 
+Artifact-v15 加入 locked concurrent conflict，并进一步分离两个理论问题：
+**安全拒绝**由 precondition、lock 与 atomicity 语义推出，**是否允许恢复**则属于
+runtime policy。三个冲突臂的 72 次首提交全部拒绝；terminal Intent-Naive 为 0/24，
+而一次受治理 Intent/Exact rebase 恢复 48/48。+1.0 的机器主检验通过，但因为 Naive
+被结构性禁止 recovery，该结果主要识别恢复权限。冻结 Pilot success gate 还与
+可执行门不同，因此只能带限制分享。工程含义是返回 typed conflict receipt，由有界
+governor 选择 wait、rebase once、replan、escalate 或 stop；不能据此推断模型具有
+通用冲突能力。
+
 因此，现阶段最合理的工程策略不是等待所有 P0 / P1 / P2 全部完成，也不是把实验结果写死为规则，而是：
 
 > 先实现“结构化状态 + 最小操作提交 + 确定性执行 + 验证闸门 + 依赖调度 + 可回滚事务”这一可由理论支持的底座；再用实验校准 patch 阈值、预算、候选质量、模型路由和真实领域边界。
@@ -974,8 +983,9 @@ substrate；保留 Intent 和 Exact+recovery 双路径。成本门未过不等�
 
 ## 相关文档
 
-- [V1–V12 与 V14：Agent 工程经验](./aggregation-mismatch-agent-engineering-lessons-v1-v12-v14.zh-CN.md)
-- [V1–V12 与 V14 实验总览](./aggregation-mismatch-v1-v12-v14-experiment-summary.zh-CN.md)
+- [V1–V12、V14 与 V15：Agent 工程经验](./aggregation-mismatch-agent-engineering-lessons-v1-v12-v14-v15.zh-CN.md)
+- [V1–V12、V14 与 V15 实验总览](./aggregation-mismatch-v1-v12-v14-v15-experiment-summary.zh-CN.md)
+- [聚合失配 Artifact-v15：Intent 冲突治理](./aggregation-mismatch-v15-intent-conflict-governance.zh-CN.md)
 - [聚合失配 Artifact-v14：Post-Compile Drift 与 Exact Recovery](./aggregation-mismatch-v14-post-compile-drift-recovery.zh-CN.md)
 - [聚合失配 Artifact-v13：状态漂移与 Intent Rebase](./aggregation-mismatch-v13-state-drift-intent-rebase.zh-CN.md)
 - [聚合失配 Artifact-v12：漂移剂量与交付尺度路由](./aggregation-mismatch-v12-scale-routing-transfer.zh-CN.md)

@@ -215,7 +215,8 @@ foundation theory document loaded again.
 
 - [Patch vs. Full Rewrite Controlled Experiment](../patch-vs-full-rewrite-controlled-experiment.md)
 - [Aggregation Mismatch: Theoretical Claims and Agent Engineering](../aggregation-mismatch-theoretical-claims-agent-engineering.md)
-- [V1–V12 and V14 Agent Engineering Lessons](../aggregation-mismatch-agent-engineering-lessons-v1-v12-v14.md)
+- [V1–V12, V14, and V15 Agent Engineering Lessons](../aggregation-mismatch-agent-engineering-lessons-v1-v12-v14-v15.md)
+- [Artifact-v15: Intent Conflict Governance](../aggregation-mismatch-v15-intent-conflict-governance.md)
 - [Artifact-v12: Drift Dose and Delivery-Scale Routing](../aggregation-mismatch-v12-scale-routing-transfer.md)
 - [Artifact-v14: Post-Compile Drift and Exact Recovery](../aggregation-mismatch-v14-post-compile-drift-recovery.md)
 - [Aggregation Mismatch and Compositional Governance](../aggregation-mismatch-compositional-governance-llm-systems.md)
@@ -354,7 +355,7 @@ foundation theory document loaded again.
 - [Diagnostic–Mechanism Bridge](../diagnostic-mechanism-bridge-for-governed-llm-systems.md)
 - [State-Governed Agent Regime](../state-governed-agent-regime-for-governed-llm-systems.md)
 - [Aggregation Mismatch: Theoretical Claims and Agent Engineering](../aggregation-mismatch-theoretical-claims-agent-engineering.md)
-- [V1–V12 and V14 Agent Engineering Lessons](../aggregation-mismatch-agent-engineering-lessons-v1-v12-v14.md)
+- [V1–V12, V14, and V15 Agent Engineering Lessons](../aggregation-mismatch-agent-engineering-lessons-v1-v12-v14-v15.md)
 - [Artifact-v8: Runtime Ownership and Semantic Routing](../aggregation-mismatch-v8-runtime-ownership-routing.md)
 - [Artifact-v10: Semantic Contracts and Runtime Canonicalization](../aggregation-mismatch-v10-semantic-contract-canonicalization.md)
 - [Artifact-v11: Address Drift and Configuration Delivery](../aggregation-mismatch-v11-config-delivery-transfer.md)
@@ -441,7 +442,7 @@ not substitute a theory label for local diagnosis.
 
 | Observed failure | Additional reading | Common repair location |
 |---|---|---|
-| Locally correct parts fail when composed | [Aggregation Mismatch and Compositional Governance](../aggregation-mismatch-compositional-governance-llm-systems.md); [V1–V12 and V14 Engineering Lessons](../aggregation-mismatch-agent-engineering-lessons-v1-v12-v14.md) | plan, runtime, compiler, verifier, commit |
+| Locally correct parts fail when composed | [Aggregation Mismatch and Compositional Governance](../aggregation-mismatch-compositional-governance-llm-systems.md); [V1–V12, V14, and V15 Engineering Lessons](../aggregation-mismatch-agent-engineering-lessons-v1-v12-v14-v15.md) | plan, runtime, compiler, verifier, conflict governor, commit |
 | Correct candidate is difficult to sample | [Support Mismatch and Control-Space Search](../support-mismatch-control-space-search-llm-systems.md) | candidate, search, GKO |
 | Behavior depends on hidden or dynamic state | [State Mismatch and State Governance](../state-mismatch-state-governance-llm-systems.md) | observation, state authority, router |
 | Optimizing a proxy harms the real outcome | [Specification Mismatch and Objective Governance](../specification-mismatch-objective-governance-llm-systems.md) | specification, verifier, human gate |
