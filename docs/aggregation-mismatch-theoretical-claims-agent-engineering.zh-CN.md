@@ -955,7 +955,7 @@ crossover。
 Artifact-v13 在 repository-shaped 多文件状态下检验计划后状态漂移下的 Intent 与
 Exact 契约。正式 96/96、pilot 12/12、offline 768/768，false accept/reject=0/0。
 四臂均为 24/24，预注册交互为 0.0，因 ceiling 规则 **未裁决**。工程含义：可实现
-V13 作为方法开发 artifact 归档，不进入 V1–V12 + V14–V16 证据合成。
+V13 作为方法开发 artifact 归档，不进入 V1–V12 + V14–V17 证据合成。
 
 Artifact-v14 将时序修正为真正的 post-compile drift：provider 只见 \(S_0\)，runtime
 封存 payload 后才注入 \(S_1\)。Compatible Exact 24/24 被判 stale 并恢复；
@@ -982,6 +982,15 @@ Only 仍停在锁定 \(S_1\)，均为 0/24；runtime Unlock + Rebase 进入 \(S_
 得到 unlock、\(S_2\) 和 target slice。冻结 manifest 还残留陈旧 Pilot `stop_if`，
 因此机器主检验为 `passed`，整体证据分享为 `share_with_caveats`。
 
+Artifact-v17 固定 unlock authority 与权威 \(S_2\)，只改变恢复信息。Module A 四臂
+均为 24/24，并发出完全相同的绝对 operations，因此预注册 target-slice superiority
+claim 在 ceiling 下未通过；这不等于总体等价。完整旧态比 receipt-only 多 74.9%
+中位 token。不可解除锁下 typed Escalate 为 24/24 合法 non-commit 终态，而
+Force/Generic 合计 0/48 commit。由于两侧 endpoint 不同、tool/runtime 路由又是
+结构性施加，这验证的是治理合同，不是通用任务完成优势。工程含义是：权威状态迁移后
+使用最小充分上下文梯度，并把 typed escalation 做成区别于 commit 和下游解决的一等
+终态。
+
 因此，现阶段最合理的工程策略不是等待所有 P0 / P1 / P2 全部完成，也不是把实验结果写死为规则，而是：
 
 > 先实现“结构化状态 + 最小操作提交 + 确定性执行 + 验证闸门 + 依赖调度 + 可回滚事务”这一可由理论支持的底座；再用实验校准 patch 阈值、预算、候选质量、模型路由和真实领域边界。
@@ -990,8 +999,9 @@ Only 仍停在锁定 \(S_1\)，均为 0/24；runtime Unlock + Rebase 进入 \(S_
 
 ## 相关文档
 
-- [V1–V12、V14–V16：Agent 工程经验](./aggregation-mismatch-agent-engineering-lessons-v1-v12-v14-v16.zh-CN.md)
-- [V1–V12、V14–V16 实验总览](./aggregation-mismatch-v1-v12-v14-v16-experiment-summary.zh-CN.md)
+- [V1–V12、V14–V17：Agent 工程经验](./aggregation-mismatch-agent-engineering-lessons-v1-v12-v14-v17.zh-CN.md)
+- [V1–V12、V14–V17 实验总览](./aggregation-mismatch-v1-v12-v14-v17-experiment-summary.zh-CN.md)
+- [聚合失配 Artifact-v17：Unlock 信息与不可解除升级](./aggregation-mismatch-v17-unlock-info-escalate.zh-CN.md)
 - [聚合失配 Artifact-v16：匹配冲突恢复](./aggregation-mismatch-v16-matched-conflict-recovery.zh-CN.md)
 - [聚合失配 Artifact-v15：Intent 冲突治理](./aggregation-mismatch-v15-intent-conflict-governance.zh-CN.md)
 - [聚合失配 Artifact-v14：Post-Compile Drift 与 Exact Recovery](./aggregation-mismatch-v14-post-compile-drift-recovery.zh-CN.md)

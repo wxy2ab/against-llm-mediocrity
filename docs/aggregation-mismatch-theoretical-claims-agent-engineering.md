@@ -995,7 +995,7 @@ repository-shaped multi-file state. Formal coverage is 96/96, pilot 12/12, and
 offline 768/768 with false accept/reject = 0/0. All four arms succeed 24/24, so
 the preregistered interaction is 0.0 and **not adjudicated** under the ceiling
 rule. V13 is retained as an archived method-development artifact and excluded
-from the V1–V12 + V14–V16 synthesis.
+from the V1–V12 + V14–V17 synthesis.
 
 Artifact-v14 corrects the timing to genuine post-compile drift: the provider
 sees \(S_0\), the runtime seals the payload, and only then injects \(S_1\).
@@ -1031,6 +1031,19 @@ revalidated. It does not isolate information: only Rebase receives unlock,
 Pilot `stop_if`, so the machine primary is `passed` while evidence sharing is
 `share_with_caveats`.
 
+Artifact-v17 holds unlock authority and authoritative \(S_2\) fixed while
+varying recovery information. Its four Module A arms all reach 24/24 and emit
+identical absolute operations, so the preregistered target-slice superiority
+claim fails at ceiling; this is not equivalence. Complete old-state context
+raises median tokens by 74.9% over receipt-only. Under an unresolvable lock,
+typed Escalate reaches 24/24 accepted non-commit outcomes while Force/Generic
+produce 0/48 commits. Because the contrast uses different endpoints and
+tool/runtime routing is structural, it validates a governance contract rather
+than a general task-completion advantage. Engineering implication: use a
+minimum-sufficient-context ladder after an authoritative transition and make
+typed escalation a first-class terminal state distinct from commit and
+downstream resolution.
+
 The appropriate engineering strategy is therefore neither to wait for every P0 / P1 / P2 experiment nor to hard-code current empirical effects as universal rules:
 
 > First implement the theoretically supported substrate of structured state, minimal operation submission, deterministic execution, verifier-gated commit, dependency-aware scheduling, and rollback-capable transactions. Then use experiments to calibrate patch thresholds, budgets, candidate quality, model routing, and real-domain boundaries.
@@ -1039,8 +1052,9 @@ The appropriate engineering strategy is therefore neither to wait for every P0 /
 
 ## Related Documents
 
-- [Aggregation Mismatch V1–V12 and V14–V16: Agent Engineering Lessons](./aggregation-mismatch-agent-engineering-lessons-v1-v12-v14-v16.md)
-- [Aggregation Mismatch V1–V12 and V14–V16: Experiment Summary](./aggregation-mismatch-v1-v12-v14-v16-experiment-summary.md)
+- [Aggregation Mismatch V1–V12 and V14–V17: Agent Engineering Lessons](./aggregation-mismatch-agent-engineering-lessons-v1-v12-v14-v17.md)
+- [Aggregation Mismatch V1–V12 and V14–V17: Experiment Summary](./aggregation-mismatch-v1-v12-v14-v17-experiment-summary.md)
+- [Aggregation Mismatch Artifact-v17: Unlock Information and Escalation](./aggregation-mismatch-v17-unlock-info-escalate.md)
 - [Aggregation Mismatch Artifact-v16: Matched Conflict Recovery](./aggregation-mismatch-v16-matched-conflict-recovery.md)
 - [Aggregation Mismatch Artifact-v15: Intent Conflict Governance](./aggregation-mismatch-v15-intent-conflict-governance.md)
 - [Aggregation Mismatch Artifact-v14: Post-Compile Drift and Exact Recovery](./aggregation-mismatch-v14-post-compile-drift-recovery.md)

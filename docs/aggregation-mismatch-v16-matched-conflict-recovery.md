@@ -214,8 +214,8 @@ one real Git/configuration workflow.
 
 ## Related documents
 
-- [V1–V12, V14–V16 experiment summary](./aggregation-mismatch-v1-v12-v14-v16-experiment-summary.md)
-- [V1–V12, V14–V16 agent engineering lessons](./aggregation-mismatch-agent-engineering-lessons-v1-v12-v14-v16.md)
+- [V1–V12, V14–V17 experiment summary](./aggregation-mismatch-v1-v12-v14-v17-experiment-summary.md)
+- [V1–V12, V14–V17 agent engineering lessons](./aggregation-mismatch-agent-engineering-lessons-v1-v12-v14-v17.md)
 - [Artifact-v15: Intent Conflict Governance](./aggregation-mismatch-v15-intent-conflict-governance.md)
 - [Aggregation Mismatch and Compositional Governance](./aggregation-mismatch-compositional-governance-llm-systems.md)
 

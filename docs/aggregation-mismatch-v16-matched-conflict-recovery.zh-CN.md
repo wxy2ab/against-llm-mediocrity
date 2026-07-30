@@ -186,8 +186,8 @@ Git/配置流程复现。
 
 ## 相关文档
 
-- [V1–V12、V14–V16 实验总览](./aggregation-mismatch-v1-v12-v14-v16-experiment-summary.zh-CN.md)
-- [V1–V12、V14–V16 Agent 工程经验](./aggregation-mismatch-agent-engineering-lessons-v1-v12-v14-v16.zh-CN.md)
+- [V1–V12、V14–V17 实验总览](./aggregation-mismatch-v1-v12-v14-v17-experiment-summary.zh-CN.md)
+- [V1–V12、V14–V17 Agent 工程经验](./aggregation-mismatch-agent-engineering-lessons-v1-v12-v14-v17.zh-CN.md)
 - [Artifact-v15：Intent 冲突治理](./aggregation-mismatch-v15-intent-conflict-governance.zh-CN.md)
 - [聚合失配与组合治理](./aggregation-mismatch-compositional-governance-llm-systems.zh-CN.md)
 
