@@ -196,9 +196,6 @@ function renderNav(lang: Lang, current: Page) {
   const site = content[lang];
   const overviewPath = pagePath(lang, "overview");
   const overviewActive = current.key === "overview" ? " active" : "";
-  const guidelinesUrl = `${githubDocsBase}/guidelines/${
-    lang === "zh" ? "guidelines.zh-CN.md" : "guidelines.md"
-  }`;
   return `
     <header class="site-header">
       <a class="brand" href="${withBase(pagePath(lang, "home"))}" data-route="${pagePath(lang, "home")}">
@@ -213,7 +210,6 @@ function renderNav(lang: Lang, current: Page) {
             return `<a class="${active}" href="${withBase(page.path)}" data-route="${page.path}">${page.navTitle}</a>`;
           })
           .join("")}
-        ${link(guidelinesUrl, lang === "zh" ? "指南" : "Guidelines")}
       </nav>
       <div class="header-actions">
         ${link(`/interactive.html?lang=${lang}`, lang === "zh" ? "交互实验" : "Interactive Lab", "ghost-button")}
