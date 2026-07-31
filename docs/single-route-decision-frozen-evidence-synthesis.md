@@ -1,6 +1,6 @@
-# Single-Route Decisions: A Synthesis of Frozen RR1–RR7 and RR-v2 Evidence
+# Single-Route Decisions: Frozen Evidence from RR1–RR7 and RR-v2 Decisive Rounds
 
-**Date:** 2026-07-31<br>
+**Date:** 2026-08-01<br>
 **Status:** `evidence synthesis` (no frozen stage, denominator, or Freeze SHA is rewritten)<br>
 **Scope:** routing from a task to one Skill, action path, DeliveryMode, recovery action,
 or a Top-1 / Rank-Pick / Abstain decision over a single candidate set
@@ -14,8 +14,10 @@ the corresponding frozen stages, and machine-readable results.
 
 ## Technical summary
 
-The experiments did not identify an “intelligent router” that should be enabled
-globally by default. They support a set of conditional boundaries:
+RR-v2 decisive round 2 still did not identify an “intelligent router” that should
+be enabled globally by default. It moved the conditional boundaries into an
+independent Skill ecosystem, same-task Delivery crossover, and blind Failure
+diagnosis:
 
 1. **Execute directly only when external evidence certifies exactly one legal
    candidate.** Across six independent CSP-2R holdout base cases satisfying complete
@@ -33,21 +35,37 @@ globally by default. They support a set of conditional boundaries:
    was below 0.40 and the one-sided Clopper–Pearson upper bound≈0.221 exceeded
    0.20. The preregistered stopping rule closes further BM25 score/margin Top-1
    threshold search.
-4. **Typed abstention has live-LLM evidence, but only at narrow-canary strength.**
-   On 36 lexical-OOD holdout cases with three repeats each, DeepSeek V4 Flash plus
-   abstention achieved 106/108 success, wrong=2/108, and legal coverage=1.000 in
-   P0-A-ood. This supports retaining and canarying the interface, not enabling it
-   globally or extrapolating to natural OOD traffic.
-5. **Do not route between equivalent paths; use conditional selection only when
+4. **Typed abstention now has evidence from an independent Skill ecosystem and
+   real executors, but still only at canary strength.** Across 32 A-EXT holdout
+   task families—64 paired registry views and four whole-domain holdouts—A1
+   LLM+abstain reduced wrong execution from forced-LLM A0=0.500 to 0.219, produced
+   zero false abstentions when a Skill was present, and increased eventual
+   completion from 0.500 to 0.781 in all 4/4 domains. Non-LLM
+   similarity+abstain A2 reached wrong=0.062, so the strongest claim is that
+   candidate absence must be first-class—not that an LLM is required.
+5. **Top-5 shortlisting remains primarily a cost result.** In A-EXT, A3 preserved
+   complete-view recall=1.000, reached wrong=0.203 versus A1=0.219, and reduced
+   tokens per family from about 485 to 319. This confirms CSP-1's efficiency
+   direction, not universal picker reliability.
+6. **Do not route between equivalent paths; use conditional selection only when
    paths are materially inequivalent.** In RR4, redundant route+compile+duplicate
    invoke increased mean actions from 1 to 4 while success remained 1.0. In the
    planted inequivalent layer of P1-D, the conditional rule achieved D3=1.000,
    while the weakest fixed arm achieved D1=0.250.
-6. **Delivery and Failure evidence still does not justify changing production
-   defaults.** P0-B-real exercised real writes plus pytest, but always-EXACT and
-   sparsity-aware both achieved 1.0. P0-C-exec exercised executable recovery
-   operators, but C3 and C4 used the same policy. These mechanisms remain
-   experimental harnesses or isolated TRIAGE paths.
+7. **Delivery now has a real hint-based crossover, but not a production-default
+   result.** On 24 holdout tasks from three structurally distinct repository
+   families, B-XOVER found always-PATCH=0.625, always-EXACT=0.625, and adaptive
+   B2=1.000. The policy×density interaction was 1.500, 95% CI [1.167, 1.833].
+   This supports conditional PATCH/EXACT routing when a trusted runtime
+   `edit_scope_hint` exists; it does not show that a model can infer density from
+   natural language.
+8. **Blind LLM recovery did not beat mechanical signatures; the default should
+   remain mechanical classification plus safe stop.** Across 60 independent
+   C-BLIND incidents—40 recoverable and 20 unrecovered—mechanical C3 recovered
+   0.750 versus live-LLM C4=0.275, a difference of −0.475, 95% CI
+   [−0.625, −0.325]; C4 correct-stop=0.950. C4 also had 47/60 infrastructure
+   timeouts. The result rejects default-enabling this operational C4 configuration,
+   but it is not a general lower bound on model diagnosis ability.
 
 The most defensible single-route policy is therefore neither “always Top-1” nor
 “always Rank-Pick”:
@@ -59,7 +77,11 @@ uncertain existence, soft absence, lexical trap    → verifier / confirm / safe
 raw score or margin only                            → not a production fast-path certificate
 known-equivalent action paths                       → disable redundant router
 materially inequivalent action paths                → constrained conditional rule
+trusted edit_scope_hint=sparse|dense                 → experimental PATCH/EXACT route
+no trusted delivery hint                             → retain DefaultDeliveryRouter
 plan error                                          → bounded replan
+known mechanical failure signature                  → isolated TRIAGE + verifier
+blind LLM failure diagnosis                          → disabled by default; experiment only
 unknown delivery error                              → stop / escalate; never blind re-emit
 ```
 
@@ -94,8 +116,9 @@ When wording differs, this synthesis uses the following order:
 
 1. each stage's frozen result section, claim table, and Freeze section;
 2. machine-readable result JSON;
-3. post-hoc Decisive Evidence Audit revisions to the permitted extrapolation;
-4. roadmap and overview prose.
+3. post-hoc Decisive Evidence Audit revisions to round-1 extrapolation;
+4. the decisive round-2 roadmap;
+5. other roadmap and overview prose.
 
 The post-hoc audit does not alter frozen numbers. It lowers headline claims that
 the design did not identify. For example:
@@ -118,6 +141,9 @@ the design did not identify. For example:
 | CSP-1 | 36 holdout tasks; 3 reps per arm | Candidate Sort→Pick | claiming a reliability gain at ceiling |
 | CSP-2 | 72 holdout cases | first adaptive gate; instrument defect exposure | estimating a clean gate mechanism |
 | CSP-2R | 36 holdout base cases; 72 paired risk views | decisive rerun after instrument repair | treating views or reps as larger independent n |
+| A-EXT | 32 holdout families; 64 paired registry views; 4 holdout domains | independent Skill ecosystem + real tempfile executor | treating 64 views as 64 independent families; claiming LLM beats A2 |
+| B-XOVER | 48 frozen tasks; formal holdout 24 tasks / 3 repo families; 3-arm crossover per task | fair PATCH/EXACT + hint-based adaptive | treating arms as independent tasks; extrapolating the designed drift ratio |
+| C-BLIND | 60 incident families; 40 recoverable + 20 unrecovered | blind diagnosis + executable recovery | merging 47/60 C4 infrastructure timeouts with model errors |
 
 Endpoints, evidence grades, and denominators differ. Mode agreement, stub accuracy,
 live e2e, and selective risk must not be plotted as one comparable success ranking.
@@ -141,7 +167,7 @@ RR3's stub rule table reached accuracy=0.917 on the same 12-case confusion pack,
 improving 0.417 over random while remaining 0.083 below oracle. Its `Stub-LLM` is
 identical to the rule table, so it validates wiring, not live-LLM capability.
 
-### 3.2 Typed abstention is the strongest live Skill result
+### 3.2 P0-A-ood first established lexical-OOD typed-abstention evidence
 
 P0-A-ood removed direct-answer fields such as `UNAVAILABLE` and `gold_skill`. On
 holdout phrases from the same four domains and registry, it produced:
@@ -161,9 +187,40 @@ Flash followed a constrained `skill | abstain` protocol. When the correct Skill
 might be missing, typed abstention sharply reduced wrong execution.
 
 **Not permitted:** natural OOD, transfer across registries or domains, real Skill
-executors, cross-model transfer, or production-default validation. The executor
+executors, cross-model transfer, or production-default validation. That executor
 writes only a marker, and absent tasks are easier to reject than realistic adjacent
 capability gaps.
+
+### 3.3 A-EXT extends the result to real executors without showing that LLM routing is optimal
+
+A-EXT reused none of the P0/CSP domains or Skill names, split development and
+holdout by whole domain, and paired complete and ablated registry views within each
+task family. The formal holdout contains four domains, 32 families, and 64 views.
+Every Skill produces a real effect in a tempfile workspace that a verifier checks.
+
+| Arm | Policy | wrong | eventual completion | tokens / family≈ |
+|---|---|---:|---:|---:|
+| A0 | forced LLM choice | 0.500 | 0.500 | 495 |
+| A1 | LLM + typed abstain | 0.219 | 0.781 | 485 |
+| A2 | similarity threshold + abstain | 0.062 | 0.938 | 0 |
+| A3 | Top-5 BM25 → LLM pick/abstain | 0.203 | 0.797 | 319 |
+| A4 | oracle | 0.000 | 1.000 | 0 |
+
+The family-level paired A0−A1 wrong difference was 0.281, 95% CI
+[0.188, 0.359]; A1−A0 eventual completion was also 0.281, 95% CI
+[0.203, 0.359]. A1 produced zero false abstentions when a valid Skill was present,
+and reduced wrong execution in all four holdout domains. A3 complete-view Top-5
+gold recall was 1.000 with fewer tokens than A1.
+
+**Upgraded permitted interpretation:** In a new controlled Skill ecosystem with
+adjacent capability gaps and real tempfile executors, explicit
+`abstain → clarification/fallback` substantially outperforms forced LLM choice;
+Top-5 shortlisting preserves recall while lowering picker cost.
+
+**Still not permitted:** an LLM is the optimal or necessary router; A1 beats
+non-LLM A2; or the result validates natural multi-organization registries,
+cross-model transfer, or a production default. A2 outperformed A1 in this fixture,
+and present cases were perfectly separable by token overlap.
 
 ## 4. Candidate Sort→Pick mainly improves cost, not reliability
 
@@ -188,6 +245,12 @@ These results support:
 They do not establish that Top-K is more reliable than the full set because S0 and
 S2 are both at ceiling, nor that K, the ranker, or the token ratio transfers across
 models and registries.
+
+A-EXT provides a same-direction replication in a separate ecosystem: A3 preserved
+complete-view Top-5 recall=1.000, reached wrong=0.203 versus A1=0.219, and reduced
+tokens per family from about 485 to 319. Because the protocol did not preregister
+an A3-over-A1 e2e superiority gate, the valid promotion remains **shortlist
+efficiency**, not “ranking itself improves accuracy.”
 
 ## 5. The Top-1 / Rank-Pick boundary is a structural certificate, not a score threshold
 
@@ -273,7 +336,7 @@ P1-D remains a planted stub with no live-LLM action chooser. It does not justify
 enabling an Action Router by default; it establishes **path inequivalence as an
 enable condition**.
 
-## 7. Delivery routing shows that mode matters, not that a new default wins
+## 7. Delivery routing identifies a hint-based crossover, not natural density learning
 
 In RR5's small planted pack, SparseStub mode agreement=1.0 and Default=0.5.
 P0-B-real then wrote real files in isolated workspaces and ran pytest:
@@ -285,17 +348,34 @@ P0-B-real then wrote real files in isolated workspaces and ran pytest:
 | always EXACT | 1.0 | 1.0 | tied with sparsity-aware at ceiling |
 | sparsity-aware | 1.0 | 1.0 | succeeds in fixture; does not beat always-EXACT |
 
-The experiment supports that DeliveryMode can create observable real-write
-differences; local PATCH payloads can succeed on single-file tasks and fail on
-preset multi-file tasks because of inadequate coverage; and the real write+pytest
-evaluation chain is operational.
+That round-1 result established the execution chain but did not identify an
+independent policy effect. B-XOVER then used six structurally distinct repository
+families, fair unified-diff and full-file payloads derived from the same frozen
+target state, and a same-task three-arm crossover from identical snapshots. The
+formal holdout contains 24 tasks from three families:
 
-It does not support adding sparsity/density to `DefaultDeliveryRouter`, claiming
-sparsity-aware superiority over always-EXACT, or treating the tested PATCH as a
-real hunk editor. There are only two workspace templates, and changed lines,
-rollback, retry, tokens, and unintended surface are insufficient for a Pareto claim.
+| Policy | overall | sparse | dense | Main failure mode |
+|---|---:|---:|---:|---|
+| B0 always-PATCH | 0.625 | 1.000 | 0.250 | patch context fails after dense reflow |
+| B1 always-EXACT | 0.625 | 0.250 | 1.000 | full rewrite removes sparse local modification |
+| B2 adaptive | 1.000 | 1.000 | 1.000 | no observed failure |
 
-## 8. Failure routing must distinguish choosing a recovery from recovering
+The policy×density interaction was 1.500, 95% CI [1.167, 1.833]. B2−B1 on sparse
+tasks was 0.750, 95% CI [0.500, 1.000], and zero on dense tasks. All arms had
+`unsafe=0`; B2 had no rollback, patch-apply failure, or regression failure.
+
+**Permitted interpretation:** When runtime provides a trusted discrete
+`edit_scope_hint=sparse|dense`, PATCH for sparse work and EXACT for dense work beat
+both fixed policies in this multi-family tempfile harness and removed their
+complementary failures.
+
+**Not permitted:** a model learned density from natural language; the designed
+3/4 drift ratio represents production traffic; a strict zero-fuzz applier transfers
+to 3-way or fuzzy patching; or `DefaultDeliveryRouter` should be changed. B-XOVER
+made no LLM calls. It identifies the value of an explicit hint, not the ability to
+acquire that hint from natural tasks.
+
+## 8. Failure routing favors mechanical signatures here; it does not prove that LLMs cannot diagnose
 
 RR6's stub results show stage-aware replan improving plan-error recovery from 0 to
 1.0 relative to generic retry. For delivery error, re-emit and stage-aware recovery
@@ -314,14 +394,39 @@ The post-hoc audit nevertheless found:
 - there was no live-LLM diagnosis, noisy logging, compound failure, or multi-step
   recovery.
 
+C-BLIND removed `EXPECTED`, fatal markers, gold subtype/action fields, and made C3
+mechanical signatures and C4 live-LLM diagnosis genuinely different policies.
+Sixty incident families contain 40 recoverable and 20 unrecovered cases; operators
+do not read an evaluator answer key, and real pytest outcomes determine recovery:
+
+| Arm | diagnosis | recovered (40) | correct stop (20) | secondary damage | infra |
+|---|---:|---:|---:|---:|---:|
+| C1 generic retry | 0.083 | 0.000 | 0.000 | 0.000 | 0 |
+| C2 oracle | 1.000 | 1.000 | 1.000 | 0.000 | 0 |
+| C3 mechanical signature | 0.750 | 0.750 | 1.000 | 0.033 | 0 |
+| C4 blind live LLM | 0.283 | 0.275 | 0.950 | 0.000 | 47/60 |
+
+C4−C3 recovered was −0.475, 95% CI [−0.625, −0.325]. In the non-mechanical
+evidence subset it remained −0.400, 95% CI [−0.600, −0.200]. C4 beat generic
+retry and passed the 0.90 correct-stop threshold, but failed the primary comparison
+against C3 and the G6 infrastructure gate.
+
 The current policy is therefore:
 
 ```text
-plan_error                    → bounded replan + re-verify
-known mapped delivery subtype → isolated deterministic TRIAGE + verifier
-unknown/noisy delivery error  → stop / escalate
-blind retry or blind re-emit  → DISABLE
+plan_error                           → bounded replan + re-verify
+known mechanical delivery signature → isolated deterministic TRIAGE + verifier
+blind LLM diagnosis                  → DISABLE by default; controlled experiment only
+unknown/noisy delivery error         → stop / escalate
+blind retry or blind re-emit         → DISABLE
 ```
+
+This is enough to reject adding a default LLM router for errors already covered by
+mechanical signatures in this fixture. However, 47/60 infrastructure timeouts mix
+model answers with service availability. The result must not be generalized into a
+pure model-capability bound or a cross-model negative claim. It is decision-ready
+for the default-policy question; a model-capability question requires a rerun with
+matched availability and budget.
 
 ## 9. RR7 is a policy skeleton, not production-benefit evidence
 
@@ -342,16 +447,18 @@ deferred.
 | Routing layer | Condition | Current action | Evidence grade |
 |---|---|---|---|
 | Skill | registry≤1 or caller has a certified Skill ID | no chooser; direct by name | RR1 instrument + RR7 skeleton |
-| Skill | several legal candidates; correct one may be absent | Top-K→picker with typed abstain | CSP-1 efficiency; P0-A-ood live canary |
+| Skill | several legal candidates; correct one may be absent | Top-K→picker with typed abstain + fallback | A-EXT live real-executor canary; CSP-1 efficiency |
 | Skill | complete registry + validated filter + one legal candidate | skip picker; direct | CSP-2R R1 supported |
 | Skill | only score/margin is high | not a direct certificate | CSP-2R R2 unsupported + stop rule |
 | Skill | lexical trap / soft absence / high risk | verifier/confirm after picker; safe stop allowed | CSP-2R residual failures |
 | Action | paths equivalent | shortest direct path; disable redundant route | RR4 supported |
 | Action | permission, information, or side effects differ | constrained conditional rule; no default live LLM | P1-D fixture-supported |
-| Delivery | current production path | retain `DefaultDeliveryRouter` | P0-B-real has no replacement Pareto |
+| Delivery | trusted `edit_scope_hint` says sparse/dense | PATCH/EXACT conditional route in isolated canary | B-XOVER adaptive_wins; hint-based |
+| Delivery | hint unvalidated, inferred from natural language, or uncalibrated | retain `DefaultDeliveryRouter` | B-XOVER acquisition/transfer untested |
 | Failure | plan error | bounded replan + re-verify | RR6 supported in stub |
-| Failure | mapped delivery subtype | isolated TRIAGE + post-verifier | P0-C-exec fixture-supported |
-| Failure | unknown delivery error | stop/escalate; never blind re-emit | RR6 + P0-C audit |
+| Failure | validated mechanical signature | isolated TRIAGE + post-verifier | C-BLIND C3=0.750; fixture-supported |
+| Failure | blind LLM diagnosis | disabled by default; controlled rerun only | C-BLIND C4<C3; infra gate failed |
+| Failure | unknown delivery error | stop/escalate; never blind re-emit | RR6 + C-BLIND |
 
 ### 10.2 Reference pseudocode
 
@@ -379,17 +486,23 @@ route_action(context):
         return SHORTEST_DIRECT_PATH
     return RESTRICTED_RULE_ROUTE
 
+route_delivery(plan, runtime):
+    if runtime.edit_scope_hint_is_validated:
+        return PATCH if runtime.edit_scope_hint == "sparse" else EXACT
+    return DEFAULT_DELIVERY_ROUTER
+
 route_failure(failure):
     if failure.layer == PLAN_ERROR:
         return BOUNDED_REPLAN
-    if failure.subtype in VALIDATED_ISOLATED_OPS:
+    if failure.mechanical_signature in VALIDATED_ISOLATED_OPS:
         return TRIAGE_WITH_POST_VERIFY
     return STOP_AND_ESCALATE
 ```
 
 This is an evidence synthesis, not a committed production implementation. The
-`receipts`, candidate-recall verifier, execution guard, and natural-task error
-matrix still require productization.
+`receipts`, candidate-recall verifier, the source and validation of
+`edit_scope_hint`, execution guard, and natural-task error matrix still require
+productization.
 
 ## 11. Supported, partial, and explicitly unpromoted claims
 
@@ -397,15 +510,18 @@ matrix still require productization.
 
 - unregistered Skill names are rejected; registered but confusable wrong Skills
   may still execute;
-- live typed abstention sharply reduces wrong execution in the tested lexical-OOD
-  fixture;
-- with validated Recall@5, Top-K substantially reduces picker tokens without
-  lowering current e2e;
+- live typed abstention reduces forced-choice wrong execution in both lexical-OOD
+  and the independent controlled A-EXT ecosystem; A-EXT uses real tempfile
+  executors;
+- with validated Recall@5, Top-K lowers picker tokens in CSP-1 and A-EXT without
+  triggering the preregistered reliability-degradation gates;
 - raw ranker Top-1 cannot replace picker/abstain;
 - externally certified uniqueness permits skipping the picker;
 - redundant Action routing has no value when paths are equivalent;
 - conditional rules can add value under planted path inequivalence;
-- real write+pytest Delivery/Recovery evaluation paths are operational;
+- fair PATCH/EXACT delivery has an explicit edit-scope-hint crossover in B-XOVER;
+- C-BLIND mechanical C3 substantially outperforms live-LLM C4 in the tested blind
+  operational fixture;
 - plan error and delivery error require different recovery boundaries.
 
 ### 11.2 Partially supported or fixture-limited
@@ -414,21 +530,29 @@ matrix still require productization.
 - Top-K→picker is a cost optimization, not a confirmed reliability gain here;
 - score gate shows a descriptive 12/36 with zero wrong, but fails confirmation;
 - risk-aware gate reduces picker calls by 20%, below the 25% minimum effect;
-- DeliveryMode depends on task structure, but sparsity-aware does not beat strong
-  fixed EXACT;
-- five delivery-recovery operators execute, but only in isolated TRIAGE.
+- B-XOVER adaptive beats fixed PATCH/EXACT in a controlled crossover, but reads an
+  explicit `edit_scope_hint`; hint acquisition, production distribution, and
+  Default replacement remain untested;
+- C4 beats generic retry and reaches correct-stop=0.950, but does not beat C3 and
+  has 47/60 infrastructure timeouts;
+- five delivery-recovery operators execute, but mechanical signatures remain
+  isolated-TRIAGE evidence.
 
 ### 11.3 Explicitly forbidden claims
 
 - an LLM Skill Router is ready as a production default;
 - Top-1 or Rank-Pick is universally optimal;
 - raw BM25 score/margin proves that Top-1 is safe;
-- typed abstention is generally reliable for natural adjacent capability gaps or
-  soft absence;
+- typed abstention is generally reliable across natural multi-organization
+  registries, every adjacent capability gap, or soft absence;
+- A-EXT proves that an LLM router beats the non-LLM similarity baseline;
 - risk context is useless for all high-risk tasks;
 - density should be added to `DefaultDeliveryRouter`;
-- PATCH or sparsity-aware routing generally beats EXACT in real repositories;
-- C4 stage-aware recovery beats C3, or delivery errors are generally recoverable;
+- a model can reliably infer `edit_scope_hint` from natural language, or B-XOVER's
+  drift ratio represents production traffic;
+- PATCH, EXACT, or adaptive routing is universally optimal in real repositories;
+- C4 blind LLM recovery beats C3, or delivery errors are generally recoverable;
+- C-BLIND proves that LLM diagnosis ability is generally poor;
 - `unsafe_commit=0` is a production incident-rate upper bound;
 - one-model, one-fixture results transfer directly across registries, domains,
   models, and tools;
@@ -440,11 +564,15 @@ matrix still require productization.
 ### 12.1 Main limitations
 
 - Live evidence uses only DeepSeek V4 Flash; there is no cross-model confirmation.
-- P0-A-ood changes phrase libraries, not registry, domain, or true Skill semantics.
-- P0-A's Skill executor writes a marker instead of invoking a real tool chain.
-- P0-B-real has only two workspace templates, with payload quality preset by the
-  fixture.
-- P0-C-exec exposes explicit failure clues and `EXPECTED` oracle content.
+- A-EXT changes domains and Skills and uses real tempfile executors, but remains a
+  synthetic ecosystem; present cases are fully token-separable, and non-LLM A2
+  outperforms A1.
+- B-XOVER's positive effect depends on a frozen `edit_scope_hint`, a designed 3/4
+  drift ratio, and a zero-fuzz patch applier. It makes no LLM calls and does not
+  measure hint acquisition.
+- C-BLIND removes oracle-like clues, but C4 has 47/60 infrastructure timeouts. Its
+  difference is an operational result for one model, service, and 60-second budget,
+  not a pure model-capability estimate.
 - CSP-1/CSP-2R use planted candidate fixtures; picker lexical-trap failures may
   depend on prompt, registry, and model configuration.
 - Cost coverage is incomplete, preventing unified production net-benefit or budget
@@ -456,18 +584,21 @@ matrix still require productization.
 
 1. **Picker robustness:** keep the correct candidate in-set and isolate lexical
    traps, pairwise contrast, claim-evidence selection, and verifier assistance.
-2. **Candidate existence:** separate “does any legal candidate exist?” from “which
-   one?”, focusing on soft absence and adjacent capability gaps.
-3. **Real Skill executors:** reproduce typed abstention with new registries, new
-   domains, real side effects, and realistic error matrices.
-4. **Fair Delivery comparison:** generate PATCH/EXACT/INTENT payloads through the
-   same planner/editor over real historical diffs, measuring rollback, unintended
-   surface, tokens, and latency.
-5. **Real Failure diagnosis:** remove fatal markers and `EXPECTED`; use noisy logs,
-   compound failures, and real plan artifacts so deterministic mapping, LLM
-   diagnosis, and stage-aware routing are actually different.
-6. **Independent-model replication:** replicate only effects that survive the
-   realism upgrades above.
+   A-EXT's abstention result does not erase CSP-2R's residual picker failures.
+2. **Candidate existence:** train and calibrate “does any legal candidate exist?”
+   separately from “which one?”, then reproduce A-EXT under natural registry churn,
+   several adjacent gaps, and real wrong-Skill side effects.
+3. **Hint acquisition:** turn B-XOVER's frozen `edit_scope_hint` into an auditable
+   extractor; measure hint error, calibration, unknown states, and wrong-hint loss;
+   replicate with historical diffs and several patch backends.
+4. **Failure availability control:** if the question is model diagnosis ability,
+   separate C4 timeouts/service errors from answer errors and rerun with matched
+   availability and budget. For default policy, the current stop decision is enough.
+5. **Natural Failure distribution:** compare mechanical signatures, LLM diagnosis,
+   hybrid verification, and safe stop on noisy logs, compound faults, and real plan
+   artifacts rather than expanding the same fixture.
+6. **Independent-model and environment replication:** replicate only effects that
+   survive the realism upgrades above.
 
 Workflow and complex orchestration are not part of this list. They need an
 independent task population, workflow verifier, and endpoint and must not be added
@@ -489,6 +620,9 @@ to the single-route denominator.
 | CSP-1 | `828a86d73` | [Candidate Sort→Pick](https://github.com/wxy2ab/llmdealer/blob/main/core/agent_runtime/docs/routing_reliability_v2/stages/RRV2_CSP1_candidate_sort_pick.md) |
 | CSP-2 | `2f409ead3` | [Adaptive Gate](https://github.com/wxy2ab/llmdealer/blob/main/core/agent_runtime/docs/routing_reliability_v2/stages/RRV2_CSP2_candidate_adaptive_gate.md) |
 | CSP-2R | `499d9f645`; record `2a99430a1` | [Instrument Repair](https://github.com/wxy2ab/llmdealer/blob/main/core/agent_runtime/docs/routing_reliability_v2/stages/RRV2_CSP2R_instrument_repair.md) · [Result analysis](https://github.com/wxy2ab/llmdealer/blob/main/core/agent_runtime/docs/routing_reliability_v2/RRV2_CSP2R_RESULT_ANALYSIS.md) |
+| A-EXT | protocol `3a0e02579`; results `38d3df97b` | [independent Skill ecosystem](https://github.com/wxy2ab/llmdealer/blob/main/core/agent_runtime/docs/routing_reliability_v2/stages/RRV2_A_EXT_skill_ecosystem.md) |
+| B-XOVER | protocol `3a0e02579`; results `38d3df97b` | [Delivery crossover](https://github.com/wxy2ab/llmdealer/blob/main/core/agent_runtime/docs/routing_reliability_v2/stages/RRV2_B_XOVER_delivery_crossover.md) |
+| C-BLIND | protocol `62d3a5153`; results `38d3df97b` | [blind recovery diagnosis](https://github.com/wxy2ab/llmdealer/blob/main/core/agent_runtime/docs/routing_reliability_v2/stages/RRV2_C_BLIND_recovery_diagnosis.md) |
 
 This is the decision-facing synthesis. It neither promotes stub pilots to a
 production default nor merges single-route evidence into Workflow, SGAR, S/CF/G/AA,
