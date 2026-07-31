@@ -161,16 +161,16 @@ This technical report develops fitting-boundary mismatch as a capability-routing
 
 [Read the capability routing report](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/fitting-boundary-mismatch-capability-routing-llm-systems.md)
 
-### Single-Route Decisions: Frozen RR1–RR7 and RR-v2 Evidence
+### Single-Route Decisions: RR1–RR7 and RR-v2 Decisive Evidence
 Tag: routing-reliability research evidence
 
-This bilingual evidence synthesis consolidates the frozen single-route experiments
-for Skill choice, Candidate Sort→Pick, Top-1 versus Rank-Pick, Action paths,
-DeliveryMode, Failure recovery, and the RR7 enable-policy skeleton. It supports
-direct execution only under externally certified uniqueness, Top-K→picker with
-typed abstention as a conditional fallback, and disabling redundant routing across
-equivalent paths. It also records the failed score-gate, Delivery, and Failure
-promotion claims and explicitly excludes Workflow, SGAR, and complex orchestration.
+This bilingual evidence synthesis consolidates RR1–RR7 and both RR-v2 decisive
+rounds. A-EXT extends typed abstention and Top-5 shortlisting to an independent
+controlled Skill ecosystem with real tempfile executors; B-XOVER identifies a
+strong PATCH/EXACT crossover when a trusted runtime edit-scope hint is supplied;
+C-BLIND finds mechanical signatures outperforming the tested live-LLM recovery
+configuration, with an explicit infrastructure-timeout caveat. Production defaults
+remain unchanged, and Workflow, SGAR, and complex orchestration remain out of scope.
 
 [Read the single-route synthesis: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/single-route-decision-frozen-evidence-synthesis.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/single-route-decision-frozen-evidence-synthesis.zh-CN.md)
 
