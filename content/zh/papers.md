@@ -140,6 +140,17 @@ Tag: 能力路由技术报告
 
 [阅读能力路由技术报告](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/fitting-boundary-mismatch-capability-routing-llm-systems.zh-CN.md)
 
+### 单路由决策：RR1–RR7 与 RR-v2 冻结证据
+Tag: 路由可靠性研究证据
+
+这份双语证据综合汇总 Skill 选择、Candidate Sort→Pick、Top-1 与 Rank-Pick、Action
+path、DeliveryMode、Failure recovery 和 RR7 启用策略骨架的冻结实验。当前证据只支持在
+外部认证唯一候选时直接执行，把 Top-K→picker + typed abstain 作为条件化 fallback，并在
+路径等价时关闭冗余路由；分数门控、Delivery 和 Failure 的升格 claim 均未通过。文档也
+明确排除 Workflow、SGAR 与复杂编排，避免把单路由结论越界外推。
+
+[阅读单路由证据综合：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/single-route-decision-frozen-evidence-synthesis.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/single-route-decision-frozen-evidence-synthesis.zh-CN.md)
+
 ### LLM 系统中的支持失配与控制空间搜索
 Tag: 控制空间搜索技术报告
 
