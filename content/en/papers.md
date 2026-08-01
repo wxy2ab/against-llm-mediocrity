@@ -9,7 +9,7 @@ summary: This section collects the current manuscripts and future empirical dire
 order: 7
 heroPoints:
   - "Current synthesis: Structural Theory of Value Preservation, Six Primitive Mismatches, and the discovery-path draft on how the six mismatches were forced out of engineering practice."
-  - "Working drafts: Formal Mechanism Layer for Governed LLM Systems, Diagnostic-Mechanism Bridge, Mechanism-Driven Training, Governed LLM Object Model, Audit Engineering, Oracle Classification and Engine Routing, State-Governed Agent Regime, Agent Hardness Framework, Channel Governance, State Governance, Capability Routing, Control-Space Search, Compositional Governance, Objective Governance, and Human-Assist Operational Mismatches."
+  - "Working drafts: Formal Mechanism Layer for Governed LLM Systems, Diagnostic-Mechanism Bridge, Mechanism-Driven Training, Governed LLM Object Model, Audit Engineering, Oracle Classification and Engine Routing, State-Governed Agent Regime, Agent Hardness Framework, multi-scale aggregation mismatch, Channel Governance, State Governance, Capability Routing, Control-Space Search, Compositional Governance, Objective Governance, and Human-Assist Operational Mismatches."
   - "Extensions and implementation: governed collaboration, hard-state agent governance, cognitive discipline for AI, human learning, and tooling directions derived from the research agenda."
 ---
 
@@ -48,7 +48,7 @@ Tag: commit progress into hard state
 
 **Role**: explain how agent progress enters hard state, and which actions count as real progress only after gating, audit, and verified state transition.
 
-**Corresponding documents**: [SGAR](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime-for-governed-llm-systems.md), [Oracle / Audit / SGAR routing](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/oracle-classification-audit-agent-sgar-engine-routing.md), [Agent Hardness Framework](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-hardness-framework.md)
+**Corresponding documents**: [SGAR](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime-for-governed-llm-systems.md), [Oracle / Audit / SGAR routing](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/oracle-classification-audit-agent-sgar-engine-routing.md), [Agent Hardness Framework](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-hardness-framework.md), [Aggregation mismatch across scales](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-across-scales-from-single-call-reasoning-to-agent-trajectories.md)
 
 ### Human Collaboration Layer
 Tag: ask humans only where humans must govern
@@ -139,6 +139,13 @@ Tag: runtime science working draft
 This working draft pushes Agent Engineering from empirical harness recipes toward quantifiable runtime science. It separates the model-conditioned capability frontier, Bridge, and Action-Space Optimization; introduces a dual view of system residual and execution residual; and lays out an experimental program for measuring bridge submechanisms, interface design, component interaction, and cross-model transfer.
 
 [Read the Agent Hardness Framework: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-hardness-framework.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-hardness-framework.zh-CN.md)
+
+### Aggregation Mismatch Across Scales: From Single-Call Reasoning to Agent Trajectories
+Tag: runtime bridge working draft
+
+This working draft extends aggregation mismatch from single-call reasoning into agent trajectories. It separates semantic prefix lock-in from causal path lock-in, and explains when external Plan, Candidate, Audit, Hard State, Patch, Rollback, and Replan stop being duplicate reasoning and become a persistent control plane plus search frontier across stages.
+
+[Read the multi-scale aggregation mismatch draft: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-across-scales-from-single-call-reasoning-to-agent-trajectories.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-across-scales-from-single-call-reasoning-to-agent-trajectories.zh-CN.md)
 
 ### Observation-Representation Mismatch and Channel Governance in LLM Systems
 Tag: channel governance technical report
