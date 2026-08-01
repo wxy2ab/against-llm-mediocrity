@@ -48,7 +48,7 @@ Tag: commit progress into hard state
 
 **Role**: explain how agent progress enters hard state, and which actions count as real progress only after gating, audit, and verified state transition.
 
-**Corresponding documents**: [SGAR](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime-for-governed-llm-systems.md), [Oracle / Audit / SGAR routing](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/oracle-classification-audit-agent-sgar-engine-routing.md), [Agent Hardness Framework](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-hardness-framework.md), [Aggregation mismatch across scales](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-across-scales-from-single-call-reasoning-to-agent-trajectories.md)
+**Corresponding documents**: [SGAR](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime-for-governed-llm-systems.md), [Oracle / Audit / SGAR routing](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/oracle-classification-audit-agent-sgar-engine-routing.md), [Agent Hardness Framework](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-hardness-framework.md), [Aggregation mismatch across scales](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-across-scales-from-single-call-reasoning-to-agent-trajectories.md), [Step versus Stage iteration evidence](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v18-v19-step-vs-stage-iteration.md)
 
 ### Human Collaboration Layer
 Tag: ask humans only where humans must govern
@@ -146,6 +146,19 @@ Tag: runtime bridge working draft
 This working draft extends aggregation mismatch from single-call reasoning into agent trajectories. It separates semantic prefix lock-in from causal path lock-in, and explains when external Plan, Candidate, Audit, Hard State, Patch, Rollback, and Replan stop being duplicate reasoning and become a persistent control plane plus search frontier across stages.
 
 [Read the multi-scale aggregation mismatch draft: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-across-scales-from-single-call-reasoning-to-agent-trajectories.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-across-scales-from-single-call-reasoning-to-agent-trajectories.zh-CN.md)
+
+### Aggregation Mismatch Artifacts v18/v19: Step versus Stage Iteration
+Tag: aggregation-mismatch agent-loop evidence
+
+This bilingual evidence report compares local Step revision with full Stage
+replanning on globally dependent DAG tasks. Under a three-revision budget,
+Stage achieved 62.5% while Step achieved 0%; under a shared eight-provider-turn
+budget, Stage achieved 68.8% while Step reached 10.4%. All preregistered primary
+claims failed because they predicted the opposite direction, so the report
+mounts the repeated Stage advantage as `share_with_caveats` engineering evidence,
+not as a universal default law.
+
+[Read the v18/v19 report: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v18-v19-step-vs-stage-iteration.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v18-v19-step-vs-stage-iteration.zh-CN.md)
 
 ### Observation-Representation Mismatch and Channel Governance in LLM Systems
 Tag: channel governance technical report

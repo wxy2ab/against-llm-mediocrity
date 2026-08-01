@@ -48,7 +48,7 @@ Tag: 把进展写入硬状态
 
 **作用**：说明 agent 的进展怎样进入硬状态，哪些动作算有效推进，哪些动作必须经过 gate、审计和状态转移才能被承认。
 
-**对应内容**：[SGAR](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)、[Oracle / Audit / SGAR routing](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/oracle-classification-audit-agent-sgar-engine-routing.zh-CN.md)、[Agent Hardness Framework](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-hardness-framework.zh-CN.md)、[多尺度聚合失配](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-across-scales-from-single-call-reasoning-to-agent-trajectories.zh-CN.md)
+**对应内容**：[SGAR](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)、[Oracle / Audit / SGAR routing](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/oracle-classification-audit-agent-sgar-engine-routing.zh-CN.md)、[Agent Hardness Framework](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-hardness-framework.zh-CN.md)、[多尺度聚合失配](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-across-scales-from-single-call-reasoning-to-agent-trajectories.zh-CN.md)、[Step 与 Stage 迭代证据](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v18-v19-step-vs-stage-iteration.zh-CN.md)
 
 ### 人机协作层
 Tag: 只在人该管的地方问人
@@ -125,6 +125,17 @@ Tag: 运行时桥接工作稿
 这份工作稿把聚合失配从单次调用扩展到 Agent 轨迹，区分语义前缀锁定与因果路径锁定，并说明外部 Plan、Candidate、Audit、Hard State、Patch、Rollback 与 Replan 何时不再只是重复 reasoning，而成为跨阶段持续生效的控制面与搜索前沿。
 
 [阅读多尺度聚合失配工作稿：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-across-scales-from-single-call-reasoning-to-agent-trajectories.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-across-scales-from-single-call-reasoning-to-agent-trajectories.zh-CN.md)
+
+### 聚合失配 Artifact-v18/v19：Step 迭代与 Stage 迭代
+Tag: 聚合失配 Agent 外循环证据
+
+这份双语证据报告在全局依赖 DAG 任务上比较局部 Step 修订与完整 Stage
+replan。在 3 次修订预算下，Stage 为 62.5%、Step 为 0%；换成共享最多 8 次
+provider turn 后，Stage 为 68.8%、Step 为 10.4%。由于所有预注册 primary 都预测了
+相反方向并未通过，本报告以 `share_with_caveats` 挂载重复出现的 Stage 优势，
+不把它升格为无条件默认。
+
+[阅读 v18/v19 报告：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v18-v19-step-vs-stage-iteration.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v18-v19-step-vs-stage-iteration.zh-CN.md)
 
 ### LLM 系统中的观测-表征失配与通道治理
 Tag: 通道治理技术报告
