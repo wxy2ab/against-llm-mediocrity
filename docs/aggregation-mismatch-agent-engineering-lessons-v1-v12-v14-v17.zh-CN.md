@@ -1,5 +1,8 @@
 # 从聚合失配 V1–V12、V14–V17 到 Agent 工程：完整经验总结
 
+> **历史工程基线。** V1–V25 证据、写作/Stage 边界、后续探针与更新后的工程含义见
+> [当前完整总览](./aggregation-mismatch-v1-v25-and-supplementary-experiments.zh-CN.md)。
+
 **证据截止：** 2026-07-30
 
 **定位：** 将受控实验转化为可实现、可度量、可撤销的 Agent 架构原则。

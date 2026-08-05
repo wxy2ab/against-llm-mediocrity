@@ -48,7 +48,7 @@ Tag: commit progress into hard state
 
 **Role**: explain how agent progress enters hard state, and which actions count as real progress only after gating, audit, and verified state transition.
 
-**Corresponding documents**: [SGAR](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime-for-governed-llm-systems.md), [Oracle / Audit / SGAR routing](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/oracle-classification-audit-agent-sgar-engine-routing.md), [Agent Hardness Framework](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-hardness-framework.md), [Aggregation mismatch across scales](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-across-scales-from-single-call-reasoning-to-agent-trajectories.md), [Step versus Stage iteration evidence](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v18-v19-step-vs-stage-iteration.md)
+**Corresponding documents**: [SGAR](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime-for-governed-llm-systems.md), [Oracle / Audit / SGAR routing](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/oracle-classification-audit-agent-sgar-engine-routing.md), [Agent Hardness Framework](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-hardness-framework.md), [Aggregation mismatch across scales](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-across-scales-from-single-call-reasoning-to-agent-trajectories.md), [V1–V25 evidence synthesis](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v1-v25-and-supplementary-experiments.md), [Step versus Stage iteration evidence](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v18-v19-step-vs-stage-iteration.md)
 
 ### Human Collaboration Layer
 Tag: ask humans only where humans must govern
@@ -159,6 +159,24 @@ mounts the repeated Stage advantage as `share_with_caveats` engineering evidence
 not as a universal default law.
 
 [Read the v18/v19 report: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v18-v19-step-vs-stage-iteration.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v18-v19-step-vs-stage-iteration.zh-CN.md)
+
+### Aggregation Mismatch V1–V25 and Supplementary Experiments
+Tag: complete evidence synthesis
+
+This bilingual synthesis reconciles the complete numbered program with the
+Wave34, MiniMax, T1, and writing follow-ups. It keeps strict GF(2)/Agent
+endpoints separate from natural-writing quality, records the authority and
+claim ceiling of every version, and translates the evidence into runtime,
+delivery, conflict-governance, Ladder, and Stage-repair decisions. The headline
+is conditional: externalization and runtime ownership are robust engineering
+directions; Patch, Ladder, and Stage require routing rather than universal
+defaults.
+
+[Read the V1–V25 synthesis: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v1-v25-and-supplementary-experiments.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v1-v25-and-supplementary-experiments.zh-CN.md)
+
+[Read the V20–V25 writing/Stage group: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v20-v25-writing-and-stage-repair.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v20-v25-writing-and-stage-repair.zh-CN.md)
+
+[Read the Wave34/cross-configuration group: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-wave34-and-cross-configuration-probes.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-wave34-and-cross-configuration-probes.zh-CN.md)
 
 ### Observation-Representation Mismatch and Channel Governance in LLM Systems
 Tag: channel governance technical report
@@ -272,15 +290,15 @@ task-completion advantage.
 
 [Read the artifact-v17 report: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v17-unlock-info-escalate.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v17-unlock-info-escalate.zh-CN.md)
 
-### Aggregation Mismatch V1–V12 and V14–V17: Evidence and Agent Engineering
-Tag: experiment synthesis and engineering guide
+### Aggregation Mismatch V1–V12 and V14–V17: Historical Detail and Agent Engineering
+Tag: historical experiment synthesis and engineering guide
 
-The bilingual experiment synthesis maps each artifact to its supported,
+This historical bilingual synthesis maps each earlier artifact to its supported,
 unsupported, and non-generalizable claims, explicitly excluding archived V13.
 Its engineering companion turns that evidence into a reference architecture,
 routing policy, telemetry schema, governed-commit protocol, implementation
 sequence, conflict governor, minimum-context disclosure, typed terminal states,
-and application map.
+and application map. The V1–V25 synthesis above is the current complete entry.
 
 [Read the experiment summary: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v1-v12-v14-v17-experiment-summary.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v1-v12-v14-v17-experiment-summary.zh-CN.md)
 

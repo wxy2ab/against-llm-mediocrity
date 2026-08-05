@@ -260,7 +260,41 @@ escalation_budget
 
 这些都是由当前机制推导出的工程候选，不是 V18/V19 已经直接验证过的生产场景。
 
-## 7. 下一步最有价值的实验
+## 7. 后续实测与剩余实验
+
+### 7.1 Early Global Closure：已经实测，获得条件性支持
+
+V18/V19 启发了一个尚未被这两版实验直接检验的长文本写作命题：
+
+> 对全局依赖的超长写作任务，在相同 Plan、Control Space、最终篇幅和总预算约束下，
+> `Full Skeleton → MVP Full Story → Full Story` 这种覆盖全文、逐级提高保真度的路径，
+> 可能比直接进入 Full Story 或按局部前缀顺序扩写获得更高全局质量，并减少无效 token。
+
+这个命题可以称为 **Early Global Closure（早期全局闭合）**。它不是“阶段越多越好”，
+而是要求每个低保真中间对象已经覆盖全文：Skeleton 固定章节、claim-evidence binding、
+转折和结尾；MVP 已经能从头读到尾并完成全部核心论证；Full Story 再增加细节与文体
+完成度。高完成度的局部前缀不算全局闭合。
+
+建议把质量和成本拆成独立 claim：
+
+1. 在相同 provider-turn 和 episode token ceiling 下，progressive-fidelity ladder 是否
+   提高最终 `global_pass`；
+2. 只有质量至少 non-inferior 时，才裁决总 token 是否降低；
+3. 同时加入等调用的 `DIRECT-FULL` 与 `PREFIX-STEP`，避免把“更多调用”误当成中间表示
+   的价值。
+
+V18/V19 只为这个推论提供“完整 residual + 全局修复作用域”的机制依据，**没有直接证明
+Skeleton/MVP 有效，也没有证明 token 必然减少**。详细草案记录在
+`llm_dealer/exp/aggregation_mismatch_experiment/docs/V20_EARLY_GLOBAL_CLOSURE_WRITING_DESIGN.md`。
+
+后续 V20–V25 已经检验这项命题，结果是一条边界而非普遍胜出：V20 未过主门；V20R
+在低负荷任务上观察到质量下降与编排税；V21 因 Ladder treatment 存在工程缺陷而无法作
+因果裁决；clean-tree V22-r6 则在 9 个 high-load 故事上得到
+`Ladder − Direct = +9.74 [6.32, 13.67]`，在 6 个 low-load 故事上近似为零。后续
+Stage 实验建立了修复能力，但 V25 对 Stage 相对 Fixed 的平均质量仍为 inconclusive。
+完整结论见双语 [V20–V25 写作与 Stage 综合](./aggregation-mismatch-v20-v25-writing-and-stage-repair.zh-CN.md)。
+
+### 7.2 仍需完成的后续验证
 
 1. **Hybrid primary：**预注册 `STEP_GATE + STAGE_REPLAN` 对纯 STEP 与纯 STAGE，区分
    局部安全 gate 和语义修订。

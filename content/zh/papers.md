@@ -48,7 +48,7 @@ Tag: 把进展写入硬状态
 
 **作用**：说明 agent 的进展怎样进入硬状态，哪些动作算有效推进，哪些动作必须经过 gate、审计和状态转移才能被承认。
 
-**对应内容**：[SGAR](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)、[Oracle / Audit / SGAR routing](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/oracle-classification-audit-agent-sgar-engine-routing.zh-CN.md)、[Agent Hardness Framework](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-hardness-framework.zh-CN.md)、[多尺度聚合失配](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-across-scales-from-single-call-reasoning-to-agent-trajectories.zh-CN.md)、[Step 与 Stage 迭代证据](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v18-v19-step-vs-stage-iteration.zh-CN.md)
+**对应内容**：[SGAR](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)、[Oracle / Audit / SGAR routing](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/oracle-classification-audit-agent-sgar-engine-routing.zh-CN.md)、[Agent Hardness Framework](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-hardness-framework.zh-CN.md)、[多尺度聚合失配](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-across-scales-from-single-call-reasoning-to-agent-trajectories.zh-CN.md)、[V1–V25 证据综合](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v1-v25-and-supplementary-experiments.zh-CN.md)、[Step 与 Stage 迭代证据](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v18-v19-step-vs-stage-iteration.zh-CN.md)
 
 ### 人机协作层
 Tag: 只在人该管的地方问人
@@ -136,6 +136,21 @@ provider turn 后，Stage 为 68.8%、Step 为 10.4%。由于所有预注册 pri
 不把它升格为无条件默认。
 
 [阅读 v18/v19 报告：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v18-v19-step-vs-stage-iteration.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v18-v19-step-vs-stage-iteration.zh-CN.md)
+
+### 聚合失配 V1–V25 与后续补充实验
+Tag: 完整实验与证据综合
+
+这份双语综合对账完整编号实验，以及 Wave34、MiniMax、T1 和写作 follow-up。它把
+GF(2)/Agent 严格端点与自然写作质量分开，记录每一版的权威来源与 claim ceiling，并把
+证据转化为 runtime、交付、冲突治理、Ladder 与 Stage Repair 决策。核心结论是条件性的：
+外部化与 runtime ownership 是稳健工程方向；Patch、Ladder 和 Stage 必须经路由启用，
+不能作为普遍默认。
+
+[阅读 V1–V25 总览：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v1-v25-and-supplementary-experiments.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v1-v25-and-supplementary-experiments.zh-CN.md)
+
+[阅读 V20–V25 写作/Stage 实验组：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v20-v25-writing-and-stage-repair.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v20-v25-writing-and-stage-repair.zh-CN.md)
+
+[阅读 Wave34/跨配置实验组：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-wave34-and-cross-configuration-probes.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-wave34-and-cross-configuration-probes.zh-CN.md)
 
 ### LLM 系统中的观测-表征失配与通道治理
 Tag: 通道治理技术报告
@@ -246,12 +261,13 @@ Tag: 聚合失配研究证据
 
 [阅读 artifact-v17 报告：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v17-unlock-info-escalate.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v17-unlock-info-escalate.zh-CN.md)
 
-### 聚合失配 V1–V12、V14–V17：证据合成与 Agent 工程
-Tag: 实验总览与工程指南
+### 聚合失配 V1–V12、V14–V17：历史细节与 Agent 工程
+Tag: 历史实验总览与工程指南
 
-双语实验总览把每个 artifact 映射到已支持、未支持和不可推广的 claim，并明确排除
+这份历史双语总览把早期 artifact 映射到已支持、未支持和不可推广的 claim，并明确排除
 已归档 V13。工程经验文档把证据转化为参考架构、路由策略、telemetry、governed
-commit、冲突治理、最小上下文披露、typed 终态、落地顺序和应用映射。
+commit、冲突治理、最小上下文披露、typed 终态、落地顺序和应用映射。上文 V1–V25
+总览是当前完整入口。
 
 [阅读实验总览：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v1-v12-v14-v17-experiment-summary.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v1-v12-v14-v17-experiment-summary.zh-CN.md)
 
