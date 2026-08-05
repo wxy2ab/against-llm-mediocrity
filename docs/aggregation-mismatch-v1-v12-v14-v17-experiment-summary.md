@@ -1,5 +1,9 @@
 # Aggregation Mismatch V1–V12 and V14–V17: Experiment Summary
 
+> **Historical detail entry.** The current synthesis, including V18–V25 and
+> all completed supplements, is [Aggregation Mismatch V1–V25 and Supplementary Experiments](./aggregation-mismatch-v1-v25-and-supplementary-experiments.md).
+> This document remains authoritative for the detailed V1–V17 cutoff only.
+
 **Evidence cutoff:** July 30, 2026
 
 **Purpose:** Explain what each artifact tested, its strongest evidence, which

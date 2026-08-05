@@ -1,5 +1,9 @@
 # From Aggregation Mismatch V1–V12 and V14–V17 to Agent Engineering
 
+> **Historical engineering baseline.** The V1–V25 evidence, writing/Stage
+> boundary, supplementary probes, and updated engineering consequences are in
+> the [current complete synthesis](./aggregation-mismatch-v1-v25-and-supplementary-experiments.md).
+
 **Evidence cutoff:** July 30, 2026
 
 **Purpose:** Translate controlled experiments into implementable, measurable,

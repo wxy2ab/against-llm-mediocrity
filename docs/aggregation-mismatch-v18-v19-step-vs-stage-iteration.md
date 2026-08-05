@@ -309,7 +309,50 @@ information.
 These are engineering candidates derived from the mechanism, not production
 domains directly validated by V18/V19.
 
-## 7. Highest-value next experiments
+## 7. Downstream tests and remaining experiments
+
+### 7.1 Early Global Closure: now tested, conditionally supported
+
+V18/V19 motivate a long-form writing claim that neither artifact directly
+tests:
+
+> For a globally dependent long-form writing task, under the same Plan,
+> Control Space, final-length target, and total budget, a full-scope
+> `Full Skeleton → MVP Full Story → Full Story` fidelity ladder may produce
+> higher global quality and less wasted token use than entering Full Story
+> directly or expanding a high-fidelity local prefix in sequence.
+
+This claim is called **Early Global Closure**. It does not say that more stages
+are inherently better. Every lower-fidelity intermediate artifact must already
+cover the whole work: the Skeleton fixes sections, claim-evidence bindings,
+turns, and the ending; the MVP can be read end to end and completes every core
+argument; the Full Story then adds detail and prose fidelity. A polished partial
+prefix is not global closure.
+
+Quality and cost should be adjudicated separately:
+
+1. Under the same provider-turn and episode-token ceilings, does the
+   progressive-fidelity ladder improve final `global_pass`?
+2. Only if quality is at least non-inferior should the experiment adjudicate
+   whether total tokens decrease.
+3. Include call-matched `DIRECT-FULL` and `PREFIX-STEP` controls so that extra
+   calls are not mistaken for the value of the intermediate representations.
+
+V18/V19 provide only a mechanism warrant based on complete residuals and global
+repair scope. They **do not establish that Skeleton/MVP stages work or that
+tokens necessarily fall**. The detailed draft is recorded at
+`llm_dealer/exp/aggregation_mismatch_experiment/docs/V20_EARLY_GLOBAL_CLOSURE_WRITING_DESIGN.md`.
+
+Subsequent V20–V25 experiments have now tested this proposal. The result is a
+boundary, not a universal win: V20 missed its primary gate; V20R found a
+low-load quality loss and orchestration tax; V21 was non-adjudicating because
+the Ladder treatment had engineering defects; and the clean V22-r6 run found
+`Ladder − Direct = +9.74 [6.32, 13.67]` on nine high-load stories but
+approximately zero on six low-load stories. Later Stage studies show repair
+capacity, while V25 remains inconclusive on average Stage-over-Fixed quality.
+See the bilingual [V20–V25 writing and Stage synthesis](./aggregation-mismatch-v20-v25-writing-and-stage-repair.md).
+
+### 7.2 Remaining follow-up validation
 
 1. **Hybrid primary:** preregister `STEP_GATE + STAGE_REPLAN` against pure Step
    and pure Stage, separating local safety gates from semantic revision.
