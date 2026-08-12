@@ -15,6 +15,7 @@
 - [Aggregation Mismatch: Derivable Claims, Proof Conditions, and Implications for Agent Engineering](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-theoretical-claims-agent-engineering.md)
 - [Aggregation Mismatch Artifact-v4: Experimental Evidence, Theory Gaps, and Agent Implications](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v4-claims-theory-gap.md)
 - [Patch vs. Full Rewrite: A Controlled Experiment on Sparse Repair Delivery](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/patch-vs-full-rewrite-controlled-experiment.md)
+- [Agent 工程为什么必须重视受控实验](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/why-agent-engineering-needs-controlled-experiments.zh-CN.md)
 - *Towards Long-Horizon Agents: A Survey — Foundation, Evolution, Harness, Optimization, Application, and Frontier*
 
 ---

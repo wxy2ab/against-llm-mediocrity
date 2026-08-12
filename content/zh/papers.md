@@ -119,6 +119,13 @@ Tag: 运行时科学工作稿
 
 [阅读 Agent Hardness Framework：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-hardness-framework.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-hardness-framework.zh-CN.md)
 
+### Agent 工程为什么必须重视受控实验
+Tag: 受控实验方法论工作稿
+
+这份双语报告综述 Agent 研究从模型中心 Benchmark 转向 Harness 与系统证据的前沿变化，解释现有发现为什么仍不足以形成可累积的因果知识，并把观测—表征、状态、拟合边界、支持、聚合和规格六类失配展开成可执行的受控实验纲领。其核心主张严格受限：模型升级移动失配边界，受控实验识别并重新校准边界上的治理机制。
+
+[阅读受控实验报告：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/why-agent-engineering-needs-controlled-experiments.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/why-agent-engineering-needs-controlled-experiments.zh-CN.md) · [双语 Word 版](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/assets/agent-engineering-controlled-experiments-bilingual.docx)
+
 ### 聚合失配：从单次推理到 Agent 轨迹的多尺度局部最优坍缩
 Tag: 运行时桥接工作稿
 

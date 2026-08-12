@@ -140,6 +140,13 @@ This working draft pushes Agent Engineering from empirical harness recipes towar
 
 [Read the Agent Hardness Framework: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-hardness-framework.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-hardness-framework.zh-CN.md)
 
+### Why Agent Engineering Must Take Controlled Experiments Seriously
+Tag: controlled-experiment methodology working draft
+
+This bilingual report reviews the frontier shift from model-centric benchmarks to harness- and system-level evidence, explains why current findings still fall short of causal accumulation, and turns observation-representation, state, fitting-boundary, support, aggregation, and specification mismatch into a concrete controlled-experiment program. Its central claim is bounded: models move mismatch boundaries, while controlled experiments identify and recalibrate the governance mechanisms at those boundaries.
+
+[Read the controlled-experiment report: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/why-agent-engineering-needs-controlled-experiments.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/why-agent-engineering-needs-controlled-experiments.zh-CN.md) · [Bilingual Word edition](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/assets/agent-engineering-controlled-experiments-bilingual.docx)
+
 ### Aggregation Mismatch Across Scales: From Single-Call Reasoning to Agent Trajectories
 Tag: runtime bridge working draft
 
