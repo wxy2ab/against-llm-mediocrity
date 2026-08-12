@@ -9,7 +9,7 @@ summary: This section collects the current manuscripts and future empirical dire
 order: 7
 heroPoints:
   - "Current synthesis: Structural Theory of Value Preservation, Six Primitive Mismatches, and the discovery-path draft on how the six mismatches were forced out of engineering practice."
-  - "Working drafts: Formal Mechanism Layer for Governed LLM Systems, Diagnostic-Mechanism Bridge, Mechanism-Driven Training, Governed LLM Object Model, Audit Engineering, Oracle Classification and Engine Routing, State-Governed Agent Regime, Agent Hardness Framework, multi-scale aggregation mismatch, Channel Governance, State Governance, Capability Routing, Control-Space Search, Compositional Governance, Objective Governance, and Human-Assist Operational Mismatches."
+  - "Working drafts: Formal Mechanism Layer for Governed LLM Systems, Diagnostic-Mechanism Bridge, Mechanism-Driven Training, Governed LLM Object Model, Audit Engineering, Oracle Classification and Engine Routing, State-Governed Agent Regime, Governed Delegation, Agent Hardness Framework, multi-scale aggregation mismatch, Channel Governance, State Governance, Capability Routing, Control-Space Search, Compositional Governance, Objective Governance, and Human-Assist Operational Mismatches."
   - "Extensions and implementation: governed collaboration, hard-state agent governance, cognitive discipline for AI, human learning, and tooling directions derived from the research agenda."
 ---
 
@@ -48,7 +48,7 @@ Tag: commit progress into hard state
 
 **Role**: explain how agent progress enters hard state, and which actions count as real progress only after gating, audit, and verified state transition.
 
-**Corresponding documents**: [SGAR](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime-for-governed-llm-systems.md), [Oracle / Audit / SGAR routing](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/oracle-classification-audit-agent-sgar-engine-routing.md), [Agent Hardness Framework](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-hardness-framework.md), [Aggregation mismatch across scales](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-across-scales-from-single-call-reasoning-to-agent-trajectories.md), [V1–V25 evidence synthesis](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v1-v25-and-supplementary-experiments.md), [Step versus Stage iteration evidence](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v18-v19-step-vs-stage-iteration.md)
+**Corresponding documents**: [SGAR](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime-for-governed-llm-systems.md), [Governed Delegation](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/from-fixed-workflows-to-governed-delegation.md), [Oracle / Audit / SGAR routing](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/oracle-classification-audit-agent-sgar-engine-routing.md), [Agent Hardness Framework](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-hardness-framework.md), [Aggregation mismatch across scales](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-across-scales-from-single-call-reasoning-to-agent-trajectories.md), [V1–V25 evidence synthesis](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v1-v25-and-supplementary-experiments.md), [Step versus Stage iteration evidence](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v18-v19-step-vs-stage-iteration.md)
 
 ### Human Collaboration Layer
 Tag: ask humans only where humans must govern
@@ -177,6 +177,13 @@ defaults.
 [Read the V20–V25 writing/Stage group: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v20-v25-writing-and-stage-repair.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v20-v25-writing-and-stage-repair.zh-CN.md)
 
 [Read the Wave34/cross-configuration group: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-wave34-and-cross-configuration-probes.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-wave34-and-cross-configuration-probes.zh-CN.md)
+
+### From Fixed Workflows to Governed Delegation
+Tag: software architecture working draft
+
+This working draft explains the design shift from enumerating execution paths to governing runtime decisions. It introduces six layers of responsibility, capability mounting, hard and soft gates, authority separation, and a staged path from deterministic workflows to governed adaptive orchestration, while positioning SGAR as the hard-state runtime discipline beneath that architecture.
+
+[Read the governed-delegation draft](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/from-fixed-workflows-to-governed-delegation.md) / [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/from-fixed-workflows-to-governed-delegation.zh-CN.md)
 
 ### Observation-Representation Mismatch and Channel Governance in LLM Systems
 Tag: channel governance technical report

@@ -9,7 +9,7 @@ summary: 这里收集与LLM 平庸、LLM卓越、六类原始失配的发现脉�
 order: 7
 heroPoints:
   - 当前总稿：价值保存结构理论、六类原始失配总图，以及六类失配如何被工程实践一步步逼出来的发现脉络稿。
-  - 工作稿：面向受治理 LLM 系统的形式化机制层、诊断-机制桥接、机制驱动训练、受治理 LLM 对象模型、审计工程、Oracle 分类与引擎路由、状态治理智能体范式、Agent Hardness Framework、多尺度聚合失配、通道治理、状态治理、能力路由、控制空间搜索、组合治理、目标治理与 Human-Assist Operational Mismatches。
+  - 工作稿：面向受治理 LLM 系统的形式化机制层、诊断-机制桥接、机制驱动训练、受治理 LLM 对象模型、审计工程、Oracle 分类与引擎路由、状态治理智能体范式、受治理委托、Agent Hardness Framework、多尺度聚合失配、通道治理、状态治理、能力路由、控制空间搜索、组合治理、目标治理与 Human-Assist Operational Mismatches。
   - 延伸与实现：治理式协作、硬状态 Agent 治理、AI 认知纪律、人类学习与由研究议程直接推导的工具方向。
 ---
 
@@ -48,7 +48,7 @@ Tag: 把进展写入硬状态
 
 **作用**：说明 agent 的进展怎样进入硬状态，哪些动作算有效推进，哪些动作必须经过 gate、审计和状态转移才能被承认。
 
-**对应内容**：[SGAR](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)、[Oracle / Audit / SGAR routing](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/oracle-classification-audit-agent-sgar-engine-routing.zh-CN.md)、[Agent Hardness Framework](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-hardness-framework.zh-CN.md)、[多尺度聚合失配](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-across-scales-from-single-call-reasoning-to-agent-trajectories.zh-CN.md)、[V1–V25 证据综合](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v1-v25-and-supplementary-experiments.zh-CN.md)、[Step 与 Stage 迭代证据](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v18-v19-step-vs-stage-iteration.zh-CN.md)
+**对应内容**：[SGAR](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)、[受治理委托](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/from-fixed-workflows-to-governed-delegation.zh-CN.md)、[Oracle / Audit / SGAR routing](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/oracle-classification-audit-agent-sgar-engine-routing.zh-CN.md)、[Agent Hardness Framework](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-hardness-framework.zh-CN.md)、[多尺度聚合失配](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-across-scales-from-single-call-reasoning-to-agent-trajectories.zh-CN.md)、[V1–V25 证据综合](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v1-v25-and-supplementary-experiments.zh-CN.md)、[Step 与 Stage 迭代证据](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v18-v19-step-vs-stage-iteration.zh-CN.md)
 
 ### 人机协作层
 Tag: 只在人该管的地方问人
@@ -151,6 +151,13 @@ GF(2)/Agent 严格端点与自然写作质量分开，记录每一版的权威�
 [阅读 V20–V25 写作/Stage 实验组：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v20-v25-writing-and-stage-repair.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v20-v25-writing-and-stage-repair.zh-CN.md)
 
 [阅读 Wave34/跨配置实验组：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-wave34-and-cross-configuration-probes.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-wave34-and-cross-configuration-probes.zh-CN.md)
+
+### 从固定流程到受治理委托
+Tag: 软件架构工作稿
+
+这份工作稿解释软件设计如何从枚举执行路径转向治理运行时决策。它提出六层责任模型、能力挂载、硬软 Gate、权威分离，以及从确定性工作流逐步演进到受治理自适应编排的路径，并把 SGAR 定位为这套架构下的硬状态运行纪律。
+
+[阅读受治理委托工作稿](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/from-fixed-workflows-to-governed-delegation.zh-CN.md) / [English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/from-fixed-workflows-to-governed-delegation.md)
 
 ### LLM 系统中的观测-表征失配与通道治理
 Tag: 通道治理技术报告
