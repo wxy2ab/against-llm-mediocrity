@@ -197,6 +197,7 @@ against-llm-mediocrity/
 - [治理式人机协作](./docs/governed-human-ai-collaboration.zh-CN.md)：从聊天式使用到变量治理。
 - [AI 的认知纪律](./docs/cognitive-discipline-for-ai.zh-CN.md)：AI 使用侧的认知框架。
 - [模型最高价格](./docs/maximum-price-of-llms.zh-CN.md)：LLM 定价与商品化的数学。
+- Agent 工程为什么必须重视受控实验：[English](./docs/why-agent-engineering-needs-controlled-experiments.md) · [中文](./docs/why-agent-engineering-needs-controlled-experiments.zh-CN.md)：综述 Harness 与系统评价的前沿证据，批判其因果归因局限，并提出由六类失配组织的受控实验纲领。
 
 ### 旧版本
 
