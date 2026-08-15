@@ -129,9 +129,9 @@ def make_continuum(path: Path) -> None:
     draw.text((70, 112), "不是否定自回归，而是判断概率路径与任务价值是否同向。", font=small, fill=MUTED)
 
     cards = [
-        ("LLM 平庸", "流畅、合理、可迭代\n但停在低价值盆地", "#FCEBED", RED),
-        ("局部对齐", "局部步骤有价值\n全局仍可能偏移", "#FFF4D8", GOLD),
-        ("LLM 卓越", "局部续写与全局价值\n彼此增强", "#E8F6EE", GREEN),
+        ("LLM 平庸", "未必高价值高质量\n可能只是平庸答复", "#FCEBED", RED),
+        ("局部对齐", "擅长一部分\n另一部分平庸无价值", "#FFF4D8", GOLD),
+        ("LLM 卓越", "模型擅长这类问题\n答案就是你需要的", "#E8F6EE", GREEN),
     ]
     x0, y0, w, h = 80, 230, 500, 280
     for i, (name, desc, bg, accent) in enumerate(cards):
@@ -474,8 +474,8 @@ def build_pdf(assets: dict[str, Path]) -> None:
     c.drawString(margin, y, "三个保留点")
     y -= 30
     takeaways = [
-        "LLM 平庸不是模型的普遍属性，而是任务、表征、状态、规格和预算共同形成的运行区间。",
-        "局部对齐是常态：模型能生成有价值部件，但全局目标仍可能漂移。",
+        "LLM 平庸不是模型没用，而是答案看起来像样，却还没碰到真正决定成败的部分。",
+        "局部对齐是常态：模型能把一些环节做好，但这些环节不会自动拼成整体成功。",
         "知识治理的目的，是把可验证、可撤销、可复用的控制知识从上下文叙事中外化出来。",
     ]
     for item in takeaways:
@@ -764,8 +764,8 @@ def build_docx(assets: dict[str, Path]) -> None:
     add_figure(doc, assets["continuum"], "图 1：三段式视角 - 平庸、局部对齐与卓越")
     add_heading(doc, "三个保留点", level=1)
     for item in [
-        "LLM 平庸是一种依赖任务、表征、状态、规格和预算的运行区间。",
-        "局部对齐是常态：模型能生成有价值部件，但全局目标仍可能漂移。",
+        "LLM 平庸不是模型没用，而是答案看起来像样，却还没碰到真正决定成败的部分。",
+        "局部对齐是常态：模型能把一些环节做好，但这些环节不会自动拼成整体成功。",
         "知识治理把可验证、可撤销、可复用的控制知识从上下文叙事中外化出来。",
     ]:
         add_bullet(doc, item)
