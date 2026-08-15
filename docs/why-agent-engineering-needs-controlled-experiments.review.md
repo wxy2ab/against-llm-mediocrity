@@ -47,7 +47,7 @@ Corrections: completed the six experimental contracts, added controls and mediat
 发现并纠正：
 
 - 对齐中英文的章节结构、六类实验顺序、反证条件、研究路线与 13 项参考文献。
-- 修复互链和相关框架链接，并将中英文稿与 Word 合订版挂载到 README、论文索引及 Agent Hardness Framework 页面。
+- 修复互链和相关框架链接，并将中英文稿与 Word 合订版挂载到 README、论文索引及 Agent Harness Framework 页面。
 - 保持两种语言的证据边界一致，避免英文或中文单方面扩大主张。
 
 Corrections: aligned the bilingual topology, experiment order, falsifiers, roadmap, and bibliography; repaired cross-links; mounted the work in repository indexes; and kept claim boundaries equivalent across languages.

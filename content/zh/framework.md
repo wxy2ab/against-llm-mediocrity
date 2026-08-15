@@ -194,7 +194,7 @@ Tag: 概率与价值同向
 
 **这就是从 LLM 平庸走向LLM卓越的核心路径，也是知识治理要形式化的事情。**
 
-如果你想把这条路径进一步写成运行时层的量化框架，可以继续读 [Agent Hardness Framework](/docs/agent-hardness-framework.zh-CN.md)：它把状态提交、失败写回、接口设计与 Action-Space Optimization 放到同一个可实验分解里。
+如果你想把这条路径进一步写成运行时层的量化框架，可以继续读 [Agent Harness Framework](/docs/agent-harness-framework.zh-CN.md)：它把状态提交、失败写回、接口设计与 Action-Space Optimization 放到同一个可实验分解里。
 
 因此，机制页到治理页的过渡很直接：机制页回答"为什么直接生成会卡住"，治理页回答"怎样把卡住的任务改写成可搜索、可验证、可复用的工程对象"。如果没有这一层，六类失配只是诊断标签；有了治理流程，它们才会变成可执行的干预。
 
