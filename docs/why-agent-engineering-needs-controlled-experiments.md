@@ -5,7 +5,7 @@
 **Status:** Working Draft v0.1
 **Date:** 2026-08-12
 **Companion:** [中文版本](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/why-agent-engineering-needs-controlled-experiments.zh-CN.md)
-**Related framework:** [Agent Hardness Framework](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-hardness-framework.md) · [Six Primitive Mismatches](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/six-primitive-mismatches-pipeline-derived-taxonomy-llm-systems.md)
+**Related framework:** [Agent Harness Framework](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-harness-framework.md) · [Six Primitive Mismatches](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/six-primitive-mismatches-pipeline-derived-taxonomy-llm-systems.md)
 
 ---
 

@@ -9,7 +9,7 @@
 - [Chinese version](./aggregation-mismatch-across-scales-from-single-call-reasoning-to-agent-trajectories.zh-CN.md)
 - [Aggregation Mismatch and Compositional Governance in LLM Systems](./aggregation-mismatch-compositional-governance-llm-systems.md)
 - [State-Governed Agent Regime for Governed LLM Systems](./state-governed-agent-regime-for-governed-llm-systems.md)
-- [Agent Hardness Framework](./agent-hardness-framework.md)
+- [Agent Harness Framework](./agent-harness-framework.md)
 - [Oracle, Audit Agent, and SGAR](./oracle-classification-audit-agent-sgar-engine-routing.md)
 
 ---

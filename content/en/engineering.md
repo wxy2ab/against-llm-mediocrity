@@ -43,7 +43,7 @@ For long-horizon agents, these control objects also need a hard-state layer. The
 
 [Read "State-Governed Agent Regime"](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime.md)
 
-If you want to place "Audit Engineering + SGAR + control space" inside a quantifiable runtime frame, continue with the [Agent Hardness Framework](/docs/agent-hardness-framework.md). It separates Bridge from Action-Space Optimization and makes component main effects, interaction terms, and cross-model transfer part of the explicit experimental target.
+If you want to place "Audit Engineering + SGAR + control space" inside a quantifiable runtime frame, continue with the [Agent Harness Framework](/docs/agent-harness-framework.md). It separates Bridge from Action-Space Optimization and makes component main effects, interaction terms, and cross-model transfer part of the explicit experimental target.
 
 ## A More Useful Governance Workflow
 

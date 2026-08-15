@@ -7,7 +7,7 @@
 - [English version](./aggregation-mismatch-across-scales-from-single-call-reasoning-to-agent-trajectories.md)
 - [LLM 系统中的聚合失配与组合治理](./aggregation-mismatch-compositional-governance-llm-systems.zh-CN.md)
 - [面向受治理 LLM 系统的状态治理智能体范式](./state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)
-- [Agent Hardness Framework](./agent-hardness-framework.zh-CN.md)
+- [Agent Harness Framework](./agent-harness-framework.zh-CN.md)
 - [Oracle、Audit Agent 与 SGAR](./oracle-classification-audit-agent-sgar-engine-routing.zh-CN.md)
 
 ---

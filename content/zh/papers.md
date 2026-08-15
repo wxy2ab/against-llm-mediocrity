@@ -9,7 +9,7 @@ summary: 这里收集与LLM 平庸、LLM卓越、六类原始失配的发现脉�
 order: 7
 heroPoints:
   - 当前总稿：价值保存结构理论、六类原始失配总图，以及六类失配如何被工程实践一步步逼出来的发现脉络稿。
-  - 工作稿：面向受治理 LLM 系统的形式化机制层、诊断-机制桥接、机制驱动训练、受治理 LLM 对象模型、审计工程、Oracle 分类与引擎路由、状态治理智能体范式、受治理委托、Agent Hardness Framework、多尺度聚合失配、通道治理、状态治理、能力路由、控制空间搜索、组合治理、目标治理与 Human-Assist Operational Mismatches。
+  - 工作稿：面向受治理 LLM 系统的形式化机制层、诊断-机制桥接、机制驱动训练、受治理 LLM 对象模型、审计工程、Oracle 分类与引擎路由、状态治理智能体范式、受治理委托、Agent Harness Framework、多尺度聚合失配、通道治理、状态治理、能力路由、控制空间搜索、组合治理、目标治理与 Human-Assist Operational Mismatches。
   - 延伸与实现：治理式协作、硬状态 Agent 治理、AI 认知纪律、人类学习与由研究议程直接推导的工具方向。
 ---
 
@@ -48,7 +48,7 @@ Tag: 把进展写入硬状态
 
 **作用**：说明 agent 的进展怎样进入硬状态，哪些动作算有效推进，哪些动作必须经过 gate、审计和状态转移才能被承认。
 
-**对应内容**：[SGAR](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)、[受治理委托](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/from-fixed-workflows-to-governed-delegation.zh-CN.md)、[Oracle / Audit / SGAR routing](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/oracle-classification-audit-agent-sgar-engine-routing.zh-CN.md)、[Agent Hardness Framework](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-hardness-framework.zh-CN.md)、[多尺度聚合失配](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-across-scales-from-single-call-reasoning-to-agent-trajectories.zh-CN.md)、[V1–V25 证据综合](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v1-v25-and-supplementary-experiments.zh-CN.md)、[Step 与 Stage 迭代证据](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v18-v19-step-vs-stage-iteration.zh-CN.md)
+**对应内容**：[SGAR](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)、[受治理委托](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/from-fixed-workflows-to-governed-delegation.zh-CN.md)、[Oracle / Audit / SGAR routing](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/oracle-classification-audit-agent-sgar-engine-routing.zh-CN.md)、[Agent Harness Framework](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-harness-framework.zh-CN.md)、[多尺度聚合失配](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-across-scales-from-single-call-reasoning-to-agent-trajectories.zh-CN.md)、[V1–V25 证据综合](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v1-v25-and-supplementary-experiments.zh-CN.md)、[Step 与 Stage 迭代证据](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v18-v19-step-vs-stage-iteration.zh-CN.md)
 
 ### 人机协作层
 Tag: 只在人该管的地方问人
@@ -112,12 +112,12 @@ Tag: 运行时治理工作稿
 
 [阅读 SGAR 受治理系统工作稿](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)
 
-### Agent Hardness Framework
+### Agent Harness Framework
 Tag: 运行时科学工作稿
 
 这份工作稿把 Agent Engineering 从“经验上的 harness 配方”往“可量化的运行时科学”推进了一步。它区分模型条件能力前沿、Bridge 与 Action-Space Optimization，提出系统残差与执行残差的双重视角，并给出量化 Bridge 子机制、接口设计、组件交互与跨模型迁移的实验路线。
 
-[阅读 Agent Hardness Framework：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-hardness-framework.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-hardness-framework.zh-CN.md)
+[阅读 Agent Harness Framework：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-harness-framework.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-harness-framework.zh-CN.md)
 
 ### Agent 工程为什么必须重视受控实验
 Tag: 受控实验方法论工作稿

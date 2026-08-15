@@ -1,14 +1,14 @@
-# Agent Hardness Framework
+# Agent Harness Framework
 
 ## 从模型条件能力前沿、运行时桥接到可量化的 Action-Space Optimization
 
 **状态：** Working Draft v0.1  
 **日期：** 2026-07-27  
 **缩写：** AHF  
-**中文暂译：** Agent 硬度框架；更精确的解释是“Agent 能力兑现与运行时硬化框架”  
+**中文暂译：** Agent Harness Framework；更精确的解释是“Agent 能力兑现与运行时 harness 框架”
 **相关文档：**
 
-- [English version](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-hardness-framework.md)
+- [English version](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-harness-framework.md)
 - [Audit Engineering](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/audit-engineering.md)
 - [State-Governed Agent Regime](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime.md)
 - [Aggregation Mismatch and Compositional Governance in LLM Systems](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-compositional-governance-llm-systems.md)
@@ -24,27 +24,27 @@
 
 长程 Agent 研究正在从 Prompt Engineering、Context Engineering 进入 Runtime Harness 时代，但当前主流讨论仍主要停留在组件分类和经验配方层面：工作流、记忆、工具、编排、Hooks、Verification 被不断加入系统，最终只通过一个端到端分数判断“这个 Agent 是否更好”。这种方法能够发现有效方案，却难以回答更基础的问题：提升究竟来自模型、环境、工具、验证器，还是某一段 Harness？不同组件能否独立量化？一个框架为何在某个模型上有效、换一个模型却失效？更多迭代究竟是在产生结构性进展，还是只是在同一条件分布下重复采样？
 
-Agent Hardness Framework 提出一个面向**能力归因、运行时控制和实验量化**的功能性框架。在固定任务分布、外部能力基座、预算和评价标准的条件下，基础模型决定一个 **model-conditioned capability frontier**：该模型在允许的运行时设计空间中能够达到的最佳系统表现。具体 Agent Hardness 决定实际系统距离这一前沿有多远，以及逼近前沿的概率、稳定性、成本和风险。由此，总体问题残差可以分解为模型条件能力缺口和 Hardness 能力兑现缺口。
+Agent Harness Framework 提出一个面向**能力归因、运行时控制和实验量化**的功能性框架。在固定任务分布、外部能力基座、预算和评价标准的条件下，基础模型决定一个 **model-conditioned capability frontier**：该模型在允许的运行时设计空间中能够达到的最佳系统表现。具体 Agent Harness 决定实际系统距离这一前沿有多远，以及逼近前沿的概率、稳定性、成本和风险。由此，总体问题残差可以分解为模型条件能力缺口和 Harness 能力兑现缺口。
 
-本框架把 Agent Hardness 的最小功能核心分为两个相互正交但高度互补的部分：
+本框架把 Agent Harness 的最小功能核心分为两个相互正交但高度互补的部分：
 
 1. **Bridge**：闭合模型、环境、观测、验证、控制增量和硬状态之间的回路，使模型输出能够成为可验证、可提交、可恢复的任务进展。SGAR 构成正向的状态提交桥，Audit Engineering 构成反向的失败写回桥。
 2. **Action-Space Optimization（ASO）**：在固定模型参数下，优化模型当前面对的操作形式、责任边界、搜索邻域、提交范围和候选结构，使一次模型调用更可能带来经过验证的任务残差下降，而不是仅仅生成另一个完整答案。
 
-该框架进一步提出双重残差视角：系统层面测量模型与 Hardness 分别留下多少能力残差；轨迹层面测量每次动作是否真正减少了未解决的任务残差。通过成对控制实验、全因子设计、交互项估计、Shapley 归因、预算—成功曲线和跨模型迁移实验，Agent Engineering 有可能从“提出一个看起来有效的 Harness”转向“识别、量化和预测每个运行时机制的边际作用”。当前围绕 patch、rewrite、audit、boundary state 和 operation interface 的聚合失配实验，只是 Action-Space Optimization 的第一步。若 Bridge、状态治理、审计、验证、上下文、工具暴露、编排和预算路由都能获得独立、可复现的效应估计，Agent Engineering 将从经验工程走向科学工程。
+该框架进一步提出双重残差视角：系统层面测量模型与 Harness 分别留下多少能力残差；轨迹层面测量每次动作是否真正减少了未解决的任务残差。通过成对控制实验、全因子设计、交互项估计、Shapley 归因、预算—成功曲线和跨模型迁移实验，Agent Engineering 有可能从“提出一个看起来有效的 Harness”转向“识别、量化和预测每个运行时机制的边际作用”。当前围绕 patch、rewrite、audit、boundary state 和 operation interface 的聚合失配实验，只是 Action-Space Optimization 的第一步。若 Bridge、状态治理、审计、验证、上下文、工具暴露、编排和预算路由都能获得独立、可复现的效应估计，Agent Engineering 将从经验工程走向科学工程。
 
 ---
 
 ## 1. 核心命题
 
-Agent Hardness Framework 的中心命题是：
+Agent Harness Framework 的中心命题是：
 
-> **在固定任务分布、环境、工具、Oracle、预算和允许的运行时设计空间下，模型决定模型条件能力前沿；Agent Hardness 决定这一前沿被兑现的概率、稳定性、成本和风险。**
+> **在固定任务分布、环境、工具、Oracle、预算和允许的运行时设计空间下，模型决定模型条件能力前沿；Agent Harness 决定这一前沿被兑现的概率、稳定性、成本和风险。**
 
 其最小结构为：
 
 ```text
-Agent Hardness = Bridge × Action-Space Optimization
+Agent Harness = Bridge × Action-Space Optimization
 ```
 
 这里的乘号表示互补性，而不是简单的数值乘法：
@@ -59,7 +59,7 @@ Agent Hardness = Bridge × Action-Space Optimization
 
 ---
 
-## 2. 为什么需要一个新的 Agent Hardness 视角
+## 2. 为什么需要一个新的 Agent Harness 视角
 
 ### 2.1 当前 Harness 研究解决了“有什么”，但还没有解决“为什么有效”
 
@@ -80,11 +80,11 @@ Agent Hardness = Bridge × Action-Space Optimization
 
 这套分类对描述系统组成非常有用，但它仍然是**组件分类**，不是**因果分解**。两个 Agent 可以都拥有上述六类组件，却表现完全不同；一个组件被加入后端到端分数上升，也不等于已经知道它通过何种机制起效。
 
-Agent Hardness Framework 不替代 Harness taxonomy，而是对它进行功能性重参数化：
+Agent Harness Framework 不替代 Harness taxonomy，而是对它进行功能性重参数化：
 
 ```text
 Harness taxonomy：系统由哪些部件组成？
-Agent Hardness：这些部件通过什么基本机制改变任务成功率？
+Agent Harness：这些部件通过什么基本机制改变任务成功率？
 Quantification：每个机制在固定条件下贡献了多少？
 ```
 
@@ -106,7 +106,7 @@ Quantification：每个机制在固定条件下贡献了多少？
 |---|---|---|
 | **外部能力基座** | 改变系统拥有什么信息和能力 | 新工具、新数据、新环境、新 Oracle、外部求解器 |
 | **模型策略** | 决定语义判断、候选生成和利用外部能力的能力 | 基础模型、推理模型、训练后策略 |
-| **Agent Hardness** | 决定已有能力如何被组织、验证、提交和高效兑现 | Bridge、Action-Space Optimization |
+| **Agent Harness** | 决定已有能力如何被组织、验证、提交和高效兑现 | Bridge、Action-Space Optimization |
 
 只有在外部能力基座固定时，“模型 + Hardness”的残差归因才是可识别的。
 
@@ -147,7 +147,7 @@ Agent B：68%
 
 但如果新一轮没有增加信息、没有改变硬状态、没有改变动作空间、也没有改变模型策略，那么它只是在相同条件分布下继续采样。采样仍可能获得 best-of-N 收益，但没有新的结构性进展来源。
 
-Agent Hardness 关注的不是“运行了多少轮”，而是每一轮是否改变了：
+Agent Harness 关注的不是“运行了多少轮”，而是每一轮是否改变了：
 
 \[
 (I_t,\;S_t,\;\mathcal A_t,\;\pi_t)
@@ -159,7 +159,7 @@ Agent Hardness 关注的不是“运行了多少轮”，而是每一轮是否�
 
 ## 3. 术语边界
 
-### 3.1 Task Hardness、Boundary Hardening 与 Agent Hardness
+### 3.1 Task Hardness、Boundary Hardening 与 Agent Harness
 
 “Hardness”容易同时指向三种不同概念：
 
@@ -167,15 +167,15 @@ Agent Hardness 关注的不是“运行了多少轮”，而是每一轮是否�
 |---|---|---|
 | **Task Hardness** | 任务本身的难度、依赖深度、部分可观测性、搜索复杂度 | 外生任务属性 |
 | **Boundary / Acceptance Hardening** | 强化验收门槛，防止弱代理目标和可钻漏洞的测试欺骗系统 | Bridge 中的验证约束，也是 ASO 的可行动作边界 |
-| **Agent Hardness** | 系统把概率性模型输出转化为可验证、可积累、可恢复任务进展的能力 | 本文的上位框架 |
+| **Agent Harness** | 系统把概率性模型输出转化为可验证、可积累、可恢复任务进展的能力 | 本文的上位框架 |
 
-因此，本文不把 Agent Hardness 等同于“把 benchmark 做难”，也不把它等同于安全领域常见的 system hardening。
+因此，本文不把 Agent Harness 等同于“把 benchmark 做难”，也不把它等同于安全领域常见的 system hardening。
 
 ### 3.2 Hardness 是系统属性，Hardening 是改造过程
 
-- **Agent Hardness**：系统在当前任务、模型和外部能力基座下表现出的运行时属性；
+- **Agent Harness**：系统在当前任务、模型和外部能力基座下表现出的运行时属性；
 - **Agent Hardening**：通过实验和工程改造提升这一属性的过程；
-- **Agent Hardness Framework**：用于定义、分解、量化和优化该属性的理论与实验框架。
+- **Agent Harness Framework**：用于定义、分解、量化和优化该属性的理论与实验框架。
 
 ### 3.3 Hardness 不是一个天然的单标量
 
@@ -204,7 +204,7 @@ Agent Hardness 关注的不是“运行了多少轮”，而是每一轮是否�
 - \(\Omega\)：Action-Space Optimizer；
 - \(J(D;\theta,X,\mathcal B,\Omega,b)\)：系统在任务分布上的期望效用。
 
-Agent Hardness 的最小核心记为：
+Agent Harness 的最小核心记为：
 
 \[
 \mathcal H=(\mathcal B,\Omega)
@@ -261,7 +261,7 @@ ASO 不要求必须由另一个 LLM 实现。它可以是规则、路由器、�
 
 ## 5. 双重残差视角
 
-Agent Hardness Framework 同时使用两种残差：
+Agent Harness Framework 同时使用两种残差：
 
 1. **系统能力残差**：一个具体 Agent 距离可达前沿还有多远；
 2. **执行任务残差**：一次运行中还有多少任务义务尚未解决。
@@ -297,13 +297,13 @@ C^*-J(\theta,\mathcal H)
 =
 \underbrace{C^*-C_\theta}_{\text{模型条件能力缺口}}
 +
-\underbrace{C_\theta-J(\theta,\mathcal H)}_{\text{Hardness 能力兑现缺口}}
+\underbrace{C_\theta-J(\theta,\mathcal H)}_{\text{Harness 能力兑现缺口}}
 \]
 
 该分解的意义不是声称两个量已经可直接观测，而是建立一个清晰的归因目标：
 
-- **模型条件能力缺口**：即使为当前模型选择最佳允许的 Hardness，仍然无法消除的部分；
-- **Hardness 能力兑现缺口**：模型本来可能做得到，但当前运行时没有稳定兑现的部分。
+- **模型条件能力缺口**：即使为当前模型选择最佳允许的 Harness，仍然无法消除的部分；
+- **Harness 能力兑现缺口**：模型本来可能做得到，但当前运行时没有稳定兑现的部分。
 
 ### 5.2 经验前沿与下界
 
@@ -325,9 +325,9 @@ C^*-J(\theta,\mathcal H)
 \widehat J(\theta,\mathcal H)
 \]
 
-是当前已测试空间内的经验 Hardness gap。在忽略估计误差时，它只是对真实能力兑现缺口的下界；新的 Hardness 可能继续提高经验前沿。
+是当前已测试空间内的经验 Harness gap。在忽略估计误差时，它只是对真实能力兑现缺口的下界；新的 Harness 可能继续提高经验前沿。
 
-### 5.3 Hardness leverage、Model leverage 与互补项
+### 5.3 Harness leverage、Model leverage 与互补项
 
 可定义：
 
@@ -340,7 +340,7 @@ L_H(\theta)
 
 表示固定模型下，Hardness 相对基线能够兑现多少额外能力。
 
-对于固定 Hardness：
+对于固定 Harness：
 
 \[
 L_M(\mathcal H)
@@ -352,7 +352,7 @@ L_M(\mathcal H)
 
 表示模型变化带来的能力差异。
 
-模型与 Hardness 可能存在强交互。以基线模型 \(\theta_0\) 和基线 Hardness \(\mathcal H_0\) 为例：
+模型与 Hardness 可能存在强交互。以基线模型 \(\theta_0\) 和基线 Harness \(\mathcal H_0\) 为例：
 
 \[
 I_{M\times H}
@@ -706,7 +706,7 @@ I_{B\times O}
 J(B_1,O_1)-J(B_1,O_0)-J(B_0,O_1)+J(B_0,O_0)
 \]
 
-若交互项很大，只报告“Bridge 提升多少”或“ASO 提升多少”会产生误导。Agent Hardness 的量化必须显式建模交互，而不是默认组件作用可简单相加。
+若交互项很大，只报告“Bridge 提升多少”或“ASO 提升多少”会产生误导。Agent Harness 的量化必须显式建模交互，而不是默认组件作用可简单相加。
 
 ---
 
@@ -782,7 +782,7 @@ ASO：改变 action space A
 
 ### 10.1 需要估计的不是一个分数，而是一组 estimands
 
-一个完整的 Agent Hardness 实验至少应区分：
+一个完整的 Agent Harness 实验至少应区分：
 
 1. 端到端任务效用；
 2. 固定预算下的严格成功率；
@@ -908,7 +908,7 @@ Y_{ijk}
 - 对高方差 Agent 报告尾部失败、最坏分位数和恢复成本；
 - 对跨模型、跨任务迁移显式报告异质性，而不是只给 pooled average。
 
-### 10.7 Agent Hardness 量化成熟度
+### 10.7 Agent Harness 量化成熟度
 
 | 等级 | 特征 | 仍然缺少什么 |
 |---|---|---|
@@ -965,7 +965,7 @@ Agent Engineering 从经验工程进入科学工程，不是因为使用了更�
 
 ## 12. 现有聚合失配实验在框架中的位置
 
-当前 patch、rewrite、audit、boundary state 和 budget 实验不是整个 Agent Hardness Framework 的证明，而是 ASO 方向的第一批可控证据。
+当前 patch、rewrite、audit、boundary state 和 budget 实验不是整个 Agent Harness Framework 的证明，而是 ASO 方向的第一批可控证据。
 
 ### 12.1 Artifact-v3：稀疏 repair delivery
 
@@ -1031,7 +1031,7 @@ audit > generation
 当前工作因此可以被视为：
 
 ```text
-Agent Hardness Framework
+Agent Harness Framework
 └── Action-Space Optimization
     └── Operation-interface experiments
         ├── patch vs rewrite
@@ -1055,7 +1055,7 @@ Agent Hardness Framework
 | Audit Engineering | failure localization and write-back | 失败如何变成 control delta？ | 反向 Bridge |
 | SGAR | hard-state authority | 什么状态被系统承认？ | 正向 Bridge 和状态提交层 |
 | Knowledge Governance | governed task knowledge | 任务知识如何外部化、验证、更新和撤销？ | 为 Bridge 和 ASO 提供控制对象 |
-| Mismatch Theory | value loss diagnosis | 价值在哪一个结构站点丢失？ | 为 Hardness 路由提供诊断，不是 Hardness 的同层组件 |
+| Mismatch Theory | value loss diagnosis | 价值在哪一个结构站点丢失？ | 为 Harness 路由提供诊断，不是 Harness 的同层组件 |
 | Agentic RL | internalized policy optimization | 如何改变模型策略？ | 改变 \(\pi\)，与 inference-time ASO 区分，但可互相内化 |
 
 ### 13.1 Harness component 与 Hardness function 的映射
@@ -1147,7 +1147,7 @@ Bridge 和 ASO 不是第七、第八类 mismatch。
 - 预算；
 - 其他 Hardness 组件。
 
-因此，Agent Hardness Science 的目标不应只是得到一个平均提升，而是建立条件化效应曲线和 crossover law。
+因此，Agent Harness Science 的目标不应只是得到一个平均提升，而是建立条件化效应曲线和 crossover law。
 
 ---
 
@@ -1209,7 +1209,7 @@ Bridge 和 ASO 不是第七、第八类 mismatch。
 - oracle bandwidth 与 audit value 的关系；
 - 成功率、成本、方差和风险之间的 Pareto frontier。
 
-### Phase 5：自适应 Agent Hardness Optimizer
+### Phase 5：自适应 Agent Harness Optimizer
 
 当组件效应能够被预测后，Hardness 本身可以成为运行时优化对象：
 
@@ -1241,7 +1241,7 @@ current governed state
 
 ## 16. 新增 Hardness 轴的准入标准
 
-Bridge 和 ASO 是当前提出的最小功能核心，不主张它们已经穷尽所有可能的 Agent Hardness 维度。未来若提出第三个独立轴，应至少满足：
+Bridge 和 ASO 是当前提出的最小功能核心，不主张它们已经穷尽所有可能的 Agent Harness 维度。未来若提出第三个独立轴，应至少满足：
 
 1. **独立控制对象**：它治理的对象不能被 Bridge 或 ASO 充分描述；
 2. **独立干预**：在保持其他变量固定时可以被单独改变；
@@ -1272,11 +1272,11 @@ C^*-J=(C^*-C_\theta)+(C_\theta-J)
 
 是定义上的恒等分解。
 
-**不代表：** \(C_\theta\) 已经可观测，或模型与 Hardness 的内部贡献天然可加。
+**不代表：** \(C_\theta\) 已经可观测，或模型与 Harness 的内部贡献天然可加。
 
-### 命题 2：经验前沿只给出 Hardness gap 的下界（T）
+### 命题 2：经验前沿只给出 Harness gap 的下界（T）
 
-已测试配置的最大值不超过真实可达前沿，因此新的 Hardness 仍可能继续提高表现。
+已测试配置的最大值不超过真实可达前沿，因此新的 Harness 仍可能继续提高表现。
 
 **撤销条件：** 若把经验最大值误称为真实绝对上限，则该主张失效。
 
@@ -1314,7 +1314,7 @@ v3/v4 结果已经表明 patch 优势依赖 edit density、对象长度、预算
 
 ## 18. 最小研究协议
 
-一个符合 Agent Hardness Framework 的研究项目，至少应回答：
+一个符合 Agent Harness Framework 的研究项目，至少应回答：
 
 ### 18.1 归因对象
 
@@ -1354,7 +1354,7 @@ v3/v4 结果已经表明 patch 优势依赖 edit density、对象长度、预算
 
 ## 19. 结论：从 Harness 配方到 Agent Science
 
-Agent Hardness Framework 的主要贡献，不是再增加一组 Agent 组件，而是改变 Agent Engineering 的问题形式。
+Agent Harness Framework 的主要贡献，不是再增加一组 Agent 组件，而是改变 Agent Engineering 的问题形式。
 
 旧的问题通常是：
 
@@ -1369,7 +1369,7 @@ Agent Hardness Framework 的主要贡献，不是再增加一组 Agent 组件，
 
 ```text
 固定外部能力基座后，模型条件前沿在哪里？
-当前系统离该前沿还有多少 Hardness gap？
+当前系统离该前沿还有多少 Harness gap？
 残差来自 Bridge、ASO、模型，还是它们的交互？
 哪一种 operator 在当前状态、模型和预算下最可能减少经验证残差？
 这个效应能否被控制实验重复，并预测到新的任务？
@@ -1439,7 +1439,7 @@ Agent Hardness Framework 的主要贡献，不是再增加一组 Agent 组件，
 | \(\pi_\theta\) | 基础模型策略 |
 | \(\mathcal B\) | Bridge |
 | \(\Omega\) | Action-Space Optimizer |
-| \(\mathcal H\) | Agent Hardness，\((\mathcal B,\Omega)\) |
+| \(\mathcal H\) | Agent Harness，\((\mathcal B,\Omega)\) |
 | \(s_t\) | 潜在真实环境状态 |
 | \(o_t\) | 环境观测 |
 | \(g_t\) | governed hard state |
@@ -1505,7 +1505,7 @@ ASO：
 
 系统残差：
 C* - J = (C* - Cθ) + (Cθ - J)
-          模型条件缺口      Hardness 兑现缺口
+          模型条件缺口      Harness 兑现缺口
 
 结构性迭代：
 只有信息、硬状态、动作空间或模型策略发生变化，
@@ -1513,7 +1513,7 @@ C* - J = (C* - Cθ) + (Cθ - J)
 
 量化：
 paired controls → factorial design → interaction → Shapley attribution
-→ cross-model transfer → budget/success curves → adaptive hardness routing
+→ cross-model transfer → budget/success curves → adaptive harness routing
 
 目标：
 Agent Engineering 从“提出一个有效框架”

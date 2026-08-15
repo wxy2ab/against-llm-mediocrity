@@ -1,14 +1,14 @@
-# Agent Hardness Framework
+# Agent Harness Framework
 
 ## From the Model-Conditioned Capability Frontier and Runtime Bridging to Quantifiable Action-Space Optimization
 
 **Status:** Working Draft v0.1
 **Date:** 2026-07-27
 **Abbreviation:** AHF
-**Chinese rendering:** Agent Hardness Framework; more precisely, "an agent capability realization and runtime hardening framework"
+**Chinese rendering:** Agent Harness Framework; more precisely, "an agent capability realization and runtime harness framework"
 **Related Documents:**
 
-- [中文版本](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-hardness-framework.zh-CN.md)
+- [中文版本](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-harness-framework.zh-CN.md)
 - [Audit Engineering](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/audit-engineering.md)
 - [State-Governed Agent Regime](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime.md)
 - [Aggregation Mismatch and Compositional Governance in LLM Systems](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-compositional-governance-llm-systems.md)
@@ -24,27 +24,27 @@
 
 Long-range Agent research is moving from Prompt Engineering and Context Engineering into the Runtime Harness era, but current mainstream discussions still mainly stay at the level of component classification and empirical recipes: workflow, memory, tools, orchestration, Hooks, and Verification are continuously added to the system, and ultimately only one end-to-end score is used to judge "whether this Agent is better." This method can discover effective solutions, but it is difficult to answer more basic questions: Does the improvement come from the model, environment, tools, validators, or a certain Harness? Can different components be quantified independently? Why is a framework effective on a certain model but not effective on another model? Do more iterations produce structural progress, or are they just repeated sampling from the same conditional distribution?
 
-Agent Hardness Framework proposes a functional framework for capability attribution, runtime control, and experimental quantification. Under conditions of fixed task distribution, external capability base, budget and evaluation criteria, the base model determines a **model-conditioned capability frontier**: the best system performance that the model can achieve in the allowed runtime design space. The specific Agent Hardness determines how far the actual system is from this frontier, as well as the probability, stability, cost, and risk of approaching the frontier. From this, the overall problem residual can be decomposed into the model conditional capability gap and the Hardness capability realization gap.
+Agent Harness Framework proposes a functional framework for capability attribution, runtime control, and experimental quantification. Under conditions of fixed task distribution, external capability base, budget and evaluation criteria, the base model determines a **model-conditioned capability frontier**: the best system performance that the model can achieve in the allowed runtime design space. The specific Agent Harness determines how far the actual system is from this frontier, as well as the probability, stability, cost, and risk of approaching the frontier. From this, the overall problem residual can be decomposed into the model conditional capability gap and the Harness capability realization gap.
 
-This framework divides the minimal functional core of Agent Hardness into two mutually orthogonal but highly complementary parts:
+This framework divides the minimal functional core of Agent Harness into two mutually orthogonal but highly complementary parts:
 
 1. **Bridge**: Close the loop between model, environment, observation, verification, control increment and hard state, so that model output can become verifiable, committable and recoverable task progress. SGAR forms the forward state-commit bridge, and Audit Engineering forms the reverse failure writeback bridge.
 2. **Action-Space Optimization (ASO)**: Under fixed model parameters, optimize the operation form, responsibility boundary, search neighborhood, submission range and candidate structure currently faced by the model, making a model call more likely to bring about a verified reduction in task residuals, rather than just generating another complete answer.
 
-The framework further proposes a dual residual perspective: the system level measures how much capability residuals are left by the model and Hardness respectively; the trajectory level measures whether each action truly reduces the unresolved task residuals. Through paired control experiments, full factorial designs, interaction term estimation, Shapley attribution, budget-success curves, and cross-model transfer experiments, Agent Engineering makes it possible to move from "proposing a Harness that looks valid" to "identifying, quantifying, and predicting the marginal contribution of each runtime mechanism." The current aggregation mismatch experiments around patch, rewrite, audit, boundary state, and operation interface are just the first step in Action-Space Optimization. If Bridge, state governance, auditing, verification, context, tool exposure, orchestration, and budget routing can all obtain independent, reproducible effect estimates, Agent Engineering will move from empirical engineering to scientific engineering.
+The framework further proposes a dual residual perspective: the system level measures how much capability residuals are left by the model and Harness respectively; the trajectory level measures whether each action truly reduces the unresolved task residuals. Through paired control experiments, full factorial designs, interaction term estimation, Shapley attribution, budget-success curves, and cross-model transfer experiments, Agent Engineering makes it possible to move from "proposing a Harness that looks valid" to "identifying, quantifying, and predicting the marginal contribution of each runtime mechanism." The current aggregation mismatch experiments around patch, rewrite, audit, boundary state, and operation interface are just the first step in Action-Space Optimization. If Bridge, state governance, auditing, verification, context, tool exposure, orchestration, and budget routing can all obtain independent, reproducible effect estimates, Agent Engineering will move from empirical engineering to scientific engineering.
 
 ---
 
 ## 1. Core proposition
 
-The central proposition of the Agent Hardness Framework is:
+The central proposition of the Agent Harness Framework is:
 
-> **Under fixed task distribution, environment, tools, Oracle, budget and allowed runtime design space, the model determines the model-conditioned capability frontier; Agent Hardness determines the probability, stability, cost and risk of this frontier being realized. **
+> **Under fixed task distribution, environment, tools, Oracle, budget and allowed runtime design space, the model determines the model-conditioned capability frontier; Agent Harness determines the probability, stability, cost and risk of this frontier being realized. **
 
 Its minimum structure is:
 
 ```text
-Agent Hardness = Bridge × Action-Space Optimization
+Agent Harness = Bridge × Action-Space Optimization
 ```
 
 The multiplication sign here indicates complementarity, rather than simple numerical multiplication:
@@ -59,7 +59,7 @@ More fully:
 
 ---
 
-## 2. Why a new Agent Hardness perspective is needed
+## 2. Why a new Agent Harness perspective is needed
 
 ### 2.1 Current Harness research addresses "what" but not "why" it works
 
@@ -80,11 +80,11 @@ Among them, \(\pi_\theta\) is the basic model strategy, and \(H\) is the Harness
 
 This classification is very useful for describing system composition, but it is still a component classification, not a causal decomposition. Two agents can both have the above six types of components, but their performance is completely different; if a component is added and the end-to-end score increases, it does not mean that the mechanism through which it works is known.
 
-Agent Hardness Framework does not replace Harness taxonomy, but functionally reparameterizes it:
+Agent Harness Framework does not replace Harness taxonomy, but functionally reparameterizes it:
 
 ```text
 Harness taxonomy: what components make up the system?
-Agent Hardness: through what basic mechanisms do those components change task success?
+Agent Harness: through what basic mechanisms do those components change task success?
 Quantification: how much does each mechanism contribute under fixed conditions?
 ```
 
@@ -106,7 +106,7 @@ Therefore, this framework strictly distinguishes between:
 |---|---|---|
 | **External Capability Base** | Change what information and capabilities the system has | New tools, new data, new environments, new Oracles, external solvers |
 | **Model Strategy** | Determines semantic judgment, candidate generation and the ability to utilize external capabilities | Basic model, inference model, post-training strategy |
-| **Agent Hardness** | Determine how existing capabilities are organized, verified, delivered, and efficiently realized | Bridge, Action-Space Optimization |
+| **Agent Harness** | Determine how existing capabilities are organized, verified, delivered, and efficiently realized | Bridge, Action-Space Optimization |
 
 The residual attribution of "Model + Hardness" is identifiable only when the external capability base is fixed.
 
@@ -147,7 +147,7 @@ generate
 
 But if the new round does not add information, does not change the hard state, does not change the action space, and does not change the model strategy, then it just continues sampling under the same conditional distribution. Sampling may still yield best-of-N gains, but there is no new source of structural progress.
 
-Agent Hardness is not concerned with "how many rounds have been run", but whether it has changed in each round:
+Agent Harness is not concerned with "how many rounds have been run", but whether it has changed in each round:
 
 \[
 (I_t,\;S_t,\;\mathcal A_t,\;\pi_t)
@@ -159,7 +159,7 @@ That is, at least one of information, authoritative state, action space, or mode
 
 ## 3. Term boundaries
 
-### 3.1 Task Hardness, Boundary Hardening and Agent Hardness
+### 3.1 Task Hardness, Boundary Hardening and Agent Harness
 
 "Hardness" easily refers to three different concepts at the same time:
 
@@ -167,15 +167,15 @@ That is, at least one of information, authoritative state, action space, or mode
 |---|---|---|
 | **Task Hardness** | The difficulty of the task itself, depth of dependency, partial observability, search complexity | Exogenous task attributes |
 | **Boundary / Acceptance Hardening** | Strengthen the acceptance threshold to prevent weak proxy targets and exploitable vulnerabilities from deceiving the system | The verification constraints in Bridge are also the feasible action boundaries of ASO |
-| **Agent Hardness** | The system's ability to transform probabilistic model output into verifiable, accumulating, and recoverable task progress | The upper framework of this article |
+| **Agent Harness** | The system's ability to transform probabilistic model output into verifiable, accumulating, and recoverable task progress | The upper framework of this article |
 
-Therefore, this article does not equate Agent Hardness with "making the benchmark difficult", nor does it equate it with system hardening, which is common in the security field.
+Therefore, this article does not equate Agent Harness with "making the benchmark difficult", nor does it equate it with system hardening, which is common in the security field.
 
 ### 3.2 Hardness is the system property, Hardening is the transformation process
 
-- **Agent Hardness**: The runtime properties exhibited by the system under the current task, model and external capability base;
+- **Agent Harness**: The runtime properties exhibited by the system under the current task, model and external capability base;
 - **Agent Hardening**: The process of improving this attribute through experimentation and engineering modification;
-- **Agent Hardness Framework**: A theoretical and experimental framework for defining, decomposing, quantifying and optimizing this property.
+- **Agent Harness Framework**: A theoretical and experimental framework for defining, decomposing, quantifying and optimizing this property.
 
 ### 3.3 Hardness is not a natural single scalar
 
@@ -204,7 +204,7 @@ set up:
 - \(\Omega\): Action-Space Optimizer;
 - \(J(D;\theta,X,\mathcal B,\Omega,b)\): The expected utility of the system on task distribution.
 
-The minimum core of Agent Hardness is recorded as:
+The minimum core of Agent Harness is recorded as:
 
 \[
 \mathcal H=(\mathcal B,\Omega)
@@ -261,14 +261,14 @@ ASO does not require that it be implemented by another LLM. It can be a rule, a 
 
 ## 5. Dual residual perspective
 
-Agent Hardness Framework uses two types of residuals simultaneously:
+Agent Harness Framework uses two types of residuals simultaneously:
 
 1. **System capability residual**: How far is a specific Agent from the reachable frontier;
 2. **Execution Task Residual**: How many task obligations remain unresolved in a run.
 
 The two answer respectively "Where is the system not strong enough" and "Does the current action really advance the mission?"
 
-### 5.1 System capability residuals: Decomposition of model and Hardness
+### 5.1 System capability residuals: Decomposition of model and Harness
 
 Define the model-conditioned capability frontier under fixed \(D,X,b\) and the set of allowed Hardness designs \(\mathfrak H\):
 
@@ -279,7 +279,7 @@ C_\theta(D,X,b,\mathfrak H)
 J(D;\theta,X,\mathcal H,b)
 \]
 
-It represents: the system frontier that can be achieved when the optimal Hardness is selected under a given model and external capability base.
+It represents: the system frontier that can be achieved when the optimal Harness is selected under a given model and external capability base.
 
 Redefine the ideal system frontier based on this external capability base:
 
@@ -297,12 +297,12 @@ C^*-J(\theta,\mathcal H)
 =
 \underbrace{C^*-C_\theta}_{\text{Model conditional capability gap}}
 +
-\underbrace{C_\theta-J(\theta,\mathcal H)}_{\text{Hardness capability fulfillment gap}}
+\underbrace{C_\theta-J(\theta,\mathcal H)}_{\text{Harness capability fulfillment gap}}
 \]
 
 The point of this decomposition is not to claim that two quantities are directly observable, but to establish a clear attribution goal:
 
-- **Model Condition Capability Gap**: The part that cannot be eliminated even if the best allowed Hardness is selected for the current model;
+- **Model Condition Capability Gap**: The part that cannot be eliminated even if the best allowed Harness is selected for the current model;
 - **Hardness Capability Fulfillment Gap**: The model may have been able to do it, but there is no stable realization part during the current run.
 
 ### 5.2 Empirical frontier and lower bound
@@ -325,9 +325,9 @@ then:
 \widehat J(\theta,\mathcal H)
 \]
 
-is the current empirical Hardness gap in the tested space. When ignoring estimation error, it is only a lower bound on the true capability realization gap; new Hardness may continue to improve the empirical frontier.
+is the current empirical Harness gap in the tested space. When ignoring estimation error, it is only a lower bound on the true capability realization gap; new Harness may continue to improve the empirical frontier.
 
-### 5.3 Hardness leverage, Model leverage and complementary terms
+### 5.3 Harness leverage, Model leverage and complementary terms
 
 Definable:
 
@@ -340,7 +340,7 @@ L_H(\theta)
 
 Indicates how much additional capability Hardness can achieve relative to the baseline under a fixed model.
 
-For fixed Hardness:
+For fixed Harness:
 
 \[
 L_M(\mathcal H)
@@ -352,7 +352,7 @@ L_M(\mathcal H)
 
 Indicates the difference in capabilities caused by model changes.
 
-There may be strong interactions between the model and Hardness. Take the baseline model \(\theta_0\) and baseline Hardness \(\mathcal H_0\) as examples:
+There may be strong interactions between the model and Harness. Take the baseline model \(\theta_0\) and baseline Harness \(\mathcal H_0\) as examples:
 
 \[
 I_{M\times H}
@@ -706,7 +706,7 @@ I_{B\times O}
 J(B_1,O_1)-J(B_1,O_0)-J(B_0,O_1)+J(B_0,O_0)
 \]
 
-If the interaction term is large, just reporting "how much Bridge improves" or "how much ASO improves" can be misleading. Quantification of Agent Hardness must explicitly model interactions, rather than the default component effects being simply additive.
+If the interaction term is large, just reporting "how much Bridge improves" or "how much ASO improves" can be misleading. Quantification of Agent Harness must explicitly model interactions, rather than the default component effects being simply additive.
 
 ---
 
@@ -782,7 +782,7 @@ This principle provides long-range agents with clearer continuation conditions t
 
 ### 10.1 What needs to be estimated is not a score, but a set of estimands
 
-A complete Agent Hardness experiment should at least distinguish:
+A complete Agent Harness experiment should at least distinguish:
 
 1. End-to-end task effectiveness;
 2. Strict success rate under fixed budget;
@@ -908,7 +908,7 @@ It can answer:
 - Report tail failure, worst quantile and recovery cost for high variance Agents;
 - Explicitly report heterogeneity for cross-model and cross-task migration, instead of just pooled average.
 
-### 10.7 Agent Hardness Quantifying Maturity
+### 10.7 Agent Harness Quantifying Maturity
 
 | Levels | Features | What's Still Missing |
 |---|---|---|
@@ -965,7 +965,7 @@ Agent Engineering moved from empirical engineering to scientific engineering not
 
 ## 12. Place of existing aggregation mismatch experiments in the framework
 
-The current patch, rewrite, audit, boundary state and budget experiments are not proof of the entire Agent Hardness Framework, but the first batch of controllable evidence in the direction of ASO.
+The current patch, rewrite, audit, boundary state and budget experiments are not proof of the entire Agent Harness Framework, but the first batch of controllable evidence in the direction of ASO.
 
 ### 12.1 Artifact-v3: Sparse repair delivery
 
@@ -1031,7 +1031,7 @@ They at least demonstrate that a long-neglected object in Agent Engineering dese
 The current job can therefore be viewed as:
 
 ```text
-Agent Hardness Framework
+Agent Harness Framework
 └── Action-Space Optimization
     └── Operation-interface experiments
         ├── patch vs rewrite
@@ -1055,7 +1055,7 @@ It is the first step in the system, not the end.
 | Audit Engineering | failure localization and write-back | How does failure become control delta? | Reverse Bridge |
 | SGAR | hard-state authority | What states are recognized by the system? | Forward Bridge and State Commitment Layer |
 | Knowledge Governance | governed task knowledge | How is task knowledge externalized, verified, updated and revoked? | Provides control objects for Bridge and ASO |
-| Mismatch Theory | value loss diagnosis | At which structural site is the value lost? | Provides diagnostics for Hardness routing, not a peer component of Hardness |
+| Mismatch Theory | value loss diagnosis | At which structural site is the value lost? | Provides diagnostics for Harness routing, not a peer component of Harness |
 | Agentic RL | internalized policy optimization | How to change the model policy? | Change \(\pi\), distinguished from inference-time ASO, but can be internalized into each other |
 
 ### 13.1 Mapping of Harness component and Hardness function
@@ -1147,7 +1147,7 @@ The effect of a component may depend on:
 - budget;
 - Other Hardness components.
 
-Therefore, the goal of Agent Hardness Science should not just be to get an average improvement, but to establish conditional effect curves and crossover laws.
+Therefore, the goal of Agent Harness Science should not just be to get an average improvement, but to establish conditional effect curves and crossover laws.
 
 ---
 
@@ -1209,7 +1209,7 @@ Need to enter from static effect size:
 -The relationship between oracle bandwidth and audit value;
 - Pareto frontier between success rate, cost, variance and risk.
 
-### Phase 5: Adaptive Agent Hardness Optimizer
+### Phase 5: Adaptive Agent Harness Optimizer
 
 When component effects can be predicted, Hardness itself can become the object of runtime optimization:
 
@@ -1241,7 +1241,7 @@ External Hardness and internal model optimization thus form a closed loop, but t
 
 ## 16. Added admission criteria for Hardness axis
 
-Bridge and ASO are the minimum functional cores currently proposed, and it is not claimed that they have exhausted all possible Agent Hardness dimensions. If a third independent axis is proposed in the future, it should at least satisfy:
+Bridge and ASO are the minimum functional cores currently proposed, and it is not claimed that they have exhausted all possible Agent Harness dimensions. If a third independent axis is proposed in the future, it should at least satisfy:
 
 1. **Independent Control Object**: The object it governs cannot be fully described by Bridge or ASO;
 2. **Independent Intervention**: Can be changed independently while keeping other variables fixed;
@@ -1272,11 +1272,11 @@ C^*-J=(C^*-C_\theta)+(C_\theta-J)
 
 It is an identity decomposition by definition.
 
-**Does not mean:** \(C_\theta\) is already observable, or the internal contribution of the model and Hardness is naturally additive.
+**Does not mean:** \(C_\theta\) is already observable, or the internal contribution of the model and Harness is naturally additive.
 
-### Proposition 2: The empirical frontier only gives the lower bound (T) of the Hardness gap
+### Proposition 2: The empirical frontier only gives the lower bound (T) of the Harness gap
 
-The maximum value of the tested configuration does not exceed the true reachability frontier, so the new Hardness may still continue to improve performance.
+The maximum value of the tested configuration does not exceed the true reachability frontier, so the new Harness may still continue to improve performance.
 
 **Revocation conditions:** If the empirical maximum value is mistakenly called the real absolute upper limit, the claim will be invalid.
 
@@ -1314,7 +1314,7 @@ Agent design is no longer just an empirical recipe when component effects have r
 
 ## 18. Minimal Research Protocol
 
-A research project consistent with the Agent Hardness Framework should at least answer:
+A research project consistent with the Agent Harness Framework should at least answer:
 
 ### 18.1 Attribution objects
 
@@ -1354,7 +1354,7 @@ A research project consistent with the Agent Hardness Framework should at least 
 
 ## 19. Conclusion: From Harness Formula to Agent Science
 
-The main contribution of the Agent Hardness Framework is not to add another set of Agent components, but to change the problem form of Agent Engineering.
+The main contribution of the Agent Harness Framework is not to add another set of Agent components, but to change the problem form of Agent Engineering.
 
 Old questions usually are:
 
@@ -1369,7 +1369,7 @@ The new question is:
 
 ```text
 After fixing the external capability base, where is the model-conditioned frontier?
-How much Hardness gap remains between the current system and that frontier?
+How much Harness gap remains between the current system and that frontier?
 Does the residual come from Bridge, ASO, the model, or their interaction?
 Which operator is most likely to reduce verified residual under the current state, model, and budget?
 Can this effect be reproduced by controlled experiments and predict to new tasks?
@@ -1439,7 +1439,7 @@ It will begin to take on the basic form of scientific engineering:
 | \(\pi_\theta\) | Basic model strategy |
 | \(\mathcal B\) | Bridge |
 | \(\Omega\) | Action-Space Optimizer |
-| \(\mathcal H\) | Agent Hardness,\((\mathcal B,\Omega)\) |
+| \(\mathcal H\) | Agent Harness,\((\mathcal B,\Omega)\) |
 | \(s_t\) | Potential real environment state |
 | \(o_t\) | Environmental Observation |
 | \(g_t\) | governed hard state |
@@ -1505,7 +1505,7 @@ the goal is to maximize verified task-residual reduction, not just improve the c
 
 System residual:
 C* - J = (C* - Cθ) + (Cθ - J)
-          model-conditioned gap      Hardness realization gap
+          model-conditioned gap      Harness realization gap
 
 Structural iteration:
 Only when information, hard state, action space, or model policy changes
@@ -1513,7 +1513,7 @@ does an iteration gain a new structural source of problem solving; otherwise it 
 
 Quantification:
 paired controls -> factorial design -> interaction -> Shapley attribution
--> cross-model transfer -> budget/success curves -> adaptive hardness routing
+-> cross-model transfer -> budget/success curves -> adaptive harness routing
 
 Goal:
 Agent Engineering shifts from "proposing a framework that seems to work"
