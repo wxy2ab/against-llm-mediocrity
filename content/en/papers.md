@@ -48,7 +48,7 @@ Tag: commit progress into hard state
 
 **Role**: explain how agent progress enters hard state, and which actions count as real progress only after gating, audit, and verified state transition.
 
-**Corresponding documents**: [SGAR](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime-for-governed-llm-systems.md), [Governed Delegation](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/from-fixed-workflows-to-governed-delegation.md), [Oracle / Audit / SGAR routing](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/oracle-classification-audit-agent-sgar-engine-routing.md), [Agent Harness Framework](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-harness-framework.md), [Aggregation mismatch across scales](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-across-scales-from-single-call-reasoning-to-agent-trajectories.md), [V1–V25 evidence synthesis](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v1-v25-and-supplementary-experiments.md), [Step versus Stage iteration evidence](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v18-v19-step-vs-stage-iteration.md)
+**Corresponding documents**: [An Agent Is Not a Longer Chat](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-is-not-a-longer-chat.md), [SGAR](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime-for-governed-llm-systems.md), [Governed Delegation](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/from-fixed-workflows-to-governed-delegation.md), [Oracle / Audit / SGAR routing](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/oracle-classification-audit-agent-sgar-engine-routing.md), [Agent Harness Framework](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-harness-framework.md), [Aggregation mismatch across scales](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-across-scales-from-single-call-reasoning-to-agent-trajectories.md), [V1–V25 evidence synthesis](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v1-v25-and-supplementary-experiments.md), [Step versus Stage iteration evidence](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v18-v19-step-vs-stage-iteration.md)
 
 ### Human Collaboration Layer
 Tag: ask humans only where humans must govern
@@ -125,6 +125,13 @@ Tag: oracle routing working draft
 This working draft unifies audit, SGAR, gate hardening, and No-Go into a single oracle-classification and engine-routing framework. It explains when systems should use high-bandwidth failure localization, when they should rely on high-fidelity boundary gates, and when honest progress requires acquiring a new fidelity source instead of iterating blindly.
 
 [Read the oracle-classification and engine-routing draft](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/oracle-classification-audit-agent-sgar-engine-routing.md)
+
+### An Agent Is Not a Longer Chat
+Tag: practitioner-oriented agent architecture
+
+This bilingual article explains the authority boundary between Chat, Bot, and Agent systems for ordinary practitioners. It corrects the overly broad claim that an LLM cannot be first-class: the LLM can remain a first-class capability, but not the sole highest task authority. It then gives a risk-proportional design, a seven-object minimum governance stack, and a concrete code-repair transition.
+
+[Read the article: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-is-not-a-longer-chat.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-is-not-a-longer-chat.zh-CN.md)
 
 ### State-Governed Agent Regime for Governed LLM Systems
 Tag: runtime governance working draft

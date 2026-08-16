@@ -48,7 +48,7 @@ Tag: 把进展写入硬状态
 
 **作用**：说明 agent 的进展怎样进入硬状态，哪些动作算有效推进，哪些动作必须经过 gate、审计和状态转移才能被承认。
 
-**对应内容**：[SGAR](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)、[受治理委托](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/from-fixed-workflows-to-governed-delegation.zh-CN.md)、[Oracle / Audit / SGAR routing](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/oracle-classification-audit-agent-sgar-engine-routing.zh-CN.md)、[Agent Harness Framework](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-harness-framework.zh-CN.md)、[多尺度聚合失配](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-across-scales-from-single-call-reasoning-to-agent-trajectories.zh-CN.md)、[V1–V25 证据综合](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v1-v25-and-supplementary-experiments.zh-CN.md)、[Step 与 Stage 迭代证据](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v18-v19-step-vs-stage-iteration.zh-CN.md)
+**对应内容**：[Agent 不是更长的 Chat](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-is-not-a-longer-chat.zh-CN.md)、[SGAR](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)、[受治理委托](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/from-fixed-workflows-to-governed-delegation.zh-CN.md)、[Oracle / Audit / SGAR routing](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/oracle-classification-audit-agent-sgar-engine-routing.zh-CN.md)、[Agent Harness Framework](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-harness-framework.zh-CN.md)、[多尺度聚合失配](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-across-scales-from-single-call-reasoning-to-agent-trajectories.zh-CN.md)、[V1–V25 证据综合](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v1-v25-and-supplementary-experiments.zh-CN.md)、[Step 与 Stage 迭代证据](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v18-v19-step-vs-stage-iteration.zh-CN.md)
 
 ### 人机协作层
 Tag: 只在人该管的地方问人
@@ -104,6 +104,13 @@ Tag: oracle 路由工作稿
 这份工作稿把 audit、SGAR、gate hardening 与 No-Go 收束到同一个 oracle 分类与引擎路由框架里。它解释系统什么时候应使用高带宽失败定位，什么时候应依赖高保真边界 gate，以及什么时候真正负责任的进展不是盲目迭代，而是先去获取新的 fidelity source。
 
 [阅读 oracle 分类与引擎路由工作稿](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/oracle-classification-audit-agent-sgar-engine-routing.zh-CN.md) / [English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/oracle-classification-audit-agent-sgar-engine-routing.md)
+
+### Agent 不是更长的 Chat
+Tag: 面向从业者的 Agent 架构文章
+
+这份双语文章面向普通从业者解释 Chat、Bot 与 Agent 的任务权威边界。它把“LLM 不能成为一等对象”的过度表述修正为：LLM 可以继续是一等能力对象，但不能成为唯一的最高任务权威；随后给出按风险实施的设计原则、七对象最小治理栈和一个代码修复状态转移例子。
+
+[阅读文章：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-is-not-a-longer-chat.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-is-not-a-longer-chat.zh-CN.md)
 
 ### 面向受治理 LLM 系统的状态治理智能体范式
 Tag: 运行时治理工作稿
