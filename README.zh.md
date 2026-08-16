@@ -159,6 +159,7 @@ against-llm-mediocrity/
 - [受治理 LLM 对象模型与接口规范](./docs/governed-llm-object-model-interface-specification.zh-CN.md)：价值保存结构理论的配套实现规范。
 - [面向受治理 LLM 系统的审计工程](./docs/audit-engineering-failure-localization-control-space-writeback.zh-CN.md)：失败定位、控制空间写回与回归治理的配套技术报告。
 - [Oracle、Audit Agent 与 SGAR：从硬反馈到引擎路由的统一框架](./docs/oracle-classification-audit-agent-sgar-engine-routing.zh-CN.md)：把 oracle 分类、audit、SGAR 与 No-Go 统一到同一引擎路由判断链中的工作稿。
+- Agent 不是更长的 Chat：[English](./docs/agent-is-not-a-longer-chat.md) · [中文](./docs/agent-is-not-a-longer-chat.zh-CN.md)：面向普通从业者解释为什么持续委托需要显式任务状态、证据、Gate、提交和按风险分层的审计，而不只是更长的模型循环。
 - [面向受治理 LLM 系统的状态治理智能体范式](./docs/state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)：硬状态权威、转移契约与运行时治理的新工作稿。
 - [聚合失配：从单次推理到 Agent 轨迹的多尺度局部最优坍缩](./docs/aggregation-mismatch-across-scales-from-single-call-reasoning-to-agent-trajectories.zh-CN.md)：把单次推理中的语义前缀锁定与 Agent 轨迹中的因果路径锁定放进同一控制框架，并说明持久化 Plan / Candidate 何时真正有系统价值。
 - 从固定流程到受治理委托：[English](./docs/from-fixed-workflows-to-governed-delegation.md) · [中文](./docs/from-fixed-workflows-to-governed-delegation.zh-CN.md)：从预定义执行路径走向受能力、权限、证据、Gate 与提交规则约束的运行时决策，是连接传统软件与受治理自适应系统的软件设计桥梁。
