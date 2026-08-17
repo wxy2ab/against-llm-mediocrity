@@ -1,7 +1,7 @@
 # The Maximum Price of Models
 
 **A Mathematical Model of LLM Willingness to Pay, Task Commoditization, and Token Value Extraction**  
-Revised edition | 2026-06-12
+Revised edition (with 2026-08 market update) | 2026-08-17
 
 ---
 
@@ -397,6 +397,67 @@ execution layer -> drive marginal execution cost down; sell governed throughput
 The premium layer must bundle planning with validation, delivery, and accountability, so that users cannot easily export its highest-value intermediate states. The execution layer must reduce marginal token cost through routing, distillation, caching, local inference, and tighter tool loops, because raw execution volume is economically unforgiving.
 
 The transient two-model stack is useful, but it is not a durable pricing foundation. It is a symptom of mismatch between where task value is created and where tokens are consumed.
+
+---
+
+### 6.5 Summer 2026 pricing update: frontier premiums hold, execution layers crack first
+
+If we place the public pricing moves of summer 2026 back inside this paper's framework, one correction becomes clear: **the market is not simply lifting all top-end models together. It is preserving premium pricing at the frontier while compressing price aggressively in the high-throughput execution layers.**
+
+Anthropic's moves look more like a two-level price architecture:
+
+- Fable 5 pushes the frontier tier higher (`$10 / $50` input/output per MTok);
+- Opus 4.8 / Opus 5 stay in the upper-middle band (`$5 / $25`);
+- Sonnet 5 remains in the lower price band (`$2 / $10`) and carries more of the volume.
+
+But there is a subscription-layer detail here that matters even more than the API sticker price. When Fable 5 returned, it was not initially made a permanent included part of every paid plan. Anthropic's June 30 announcement said that `Pro / Max / Team / select Enterprise` users could use `Fable 5` within **up to 50% of their weekly limits only through July 7**; after that, it would move to `usage credits`. Anthropic then extended that promotional inclusion window to **July 12**, and then again to **July 19**. That sequence suggests the company did not begin with a stable premium-subscription equilibrium. It kept stepping back to reduce the gap between frontier pricing ambition and actual willingness to pay.
+
+And after July 19 the result was not a simple "Fable 5 is now permanently included for everyone." Anthropic's later support documentation is explicit: starting **July 20**, only `Max`, `Team premium`, and `seat-based Enterprise premium` tiers include `Fable 5` as a standard part of the plan, still up to `50%` of weekly limits at no extra charge. `Pro` and `Team standard` do not include Fable 5 anymore; they move directly to `usage credits`, with only a one-time promotional credit to smooth the transition. So the more accurate statement is not "Fable 5 ended up permanently included." It is: **Anthropic converted Fable 5 from a temporary subscription promotion into a permanently included feature only for higher-ARPU tiers, while pushing lower-price tiers toward metered usage.**
+
+That also makes the "implicit price cuts" more concrete. Anthropic canceled the planned Sonnet 5 increase to `$3 / $15`, extended the **50% increase in Claude Code weekly limits** through July 19, and repeatedly extended the subscription-side Fable 5 promotion. These moves are not all labeled as price cuts in accounting language, but from the perspective of effective user cost and obtainable throughput, they are all forms of **pricing concession**. In the language of this paper, that is not a simple price hike. It is a segmented response to different `S_i`, `theta_i`, and `K_i` profiles across task layers.
+
+OpenAI's moves make the "execution tail commoditizes first" point even more explicit. GPT-5.6 launched with an approximate ladder of `Sol $5 / $30`, `Terra $2.5 / $15`, and `Luna $1 / $6`; it then cut Terra to `$2 / $12` and Luna to `$0.20 / $1.20` while leaving Sol at the frontier tier. What breaks first, then, is not usually the rare oracle moment. It is the **high-frequency, long-tail, routable execution token**. This is the real-world version of the token leverage ratio from Section 6.1: once `L` is large, users migrate the high-volume portion of the route toward the cheapest acceptable layer.
+
+Section 6.1 therefore needs one more precise sentence:
+
+```text
+What usually loses pricing power first is not the top-end reasoning token,
+but the routable mid- and low-tier execution token.
+```
+
+This market cycle also surfaces a correction that sticker-price comparisons often miss: **posted token prices are not the same thing as effective task cost.** Anthropic's own documentation notes that Claude 4.7 and later models use a newer tokenizer that can produce more tokens for the same text. The relevant comparison is therefore not just:
+
+```text
+nominal price per million tokens
+```
+
+but:
+
+```text
+real cost per completed task
+= nominal token price
+× actual tokenizer token count
+× retry / validation / handoff multipliers
+```
+
+That strengthens the paper's original claim: **tokens are a billing unit, not a value unit.** A model that looks cheaper on paper may not be cheaper once tokenizer expansion, tool loops, retries, and validation are included. Conversely, a model that looks more expensive per token may still be cheaper overall if it compresses `L`, reduces rework, or shrinks the handoff burden.
+
+The split between subscription usage and usage credits reinforces the same point. Anthropic's own support docs are direct: once a user moves beyond included limits, `usage credits` are billed at **standard API rates**. For `Fable 5`, that means the frontier API sticker price can pass straight through to out-of-plan usage. What many users experience, then, is not just "what does the subscription cost?" but "how sharply does the marginal cost jump once I leave the included bucket?" That is not identical to an API list-price cut, but it matters just as much to perceived and effective price.
+
+`Opus 5` also fits this pattern. Anthropic's own positioning is that it comes close to Fable 5 frontier intelligence at roughly half the cost, while keeping the same `$5 / $25` pricing as `Opus 4.8`. We should not claim from public evidence alone that this was an emergency response. But structurally, it serves exactly that market function: without directly cutting the Fable 5 sticker price, Anthropic introduced a cheaper, strong-enough everyday alternative for high-frequency use. That too is a response to pricing pressure.
+
+There is also a broader market correction now: closed API vendors are no longer constrained only by each other's price ladders. They are also constrained by steady improvement in open-weight models, which lowers the outside option. In the notation of Chapter 3, this pushes `H_i(t)` lower: the customer's next-best substitute is no longer only another closed API, but potentially a hosted, distilled, or local open-model workflow. Commoditization is therefore happening not only across APIs, but also across the boundary between closed frontier layers and open execution layers.
+
+So the core conclusion of the paper still holds, but the illustrative case now needs to be stated more concretely for the 2026 market structure:
+
+```text
+frontier layer: try to preserve scarcity rents
+middle layer: defend workflow entry and seat position
+execution layer: absorb the fiercest price pressure and collapse fastest toward cost
+open models: keep lowering the outside-option baseline
+```
+
+These new facts make the four-ceiling envelope clearer, not weaker. Price ceilings are not set by leaderboard position alone. They are set by **which layer still has scarcity, which layer has become routable, and which layer has actually driven cost down far enough to survive volume.**
 
 ---
 
