@@ -147,6 +147,13 @@ This working draft pushes Agent Engineering from empirical harness recipes towar
 
 [Read the Agent Harness Framework: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-harness-framework.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-harness-framework.zh-CN.md)
 
+### Residual Control: A Unified Framework for Target-Effective Repair in Agents
+Tag: residual-governance working draft
+
+This bilingual working draft turns residuals from a loose error description into a production control object. It separates observable task residuals, latent internal mechanisms, and intervention-measurable repair response; then unifies Oracle-addressable residuals, mismatch routing, repair locus selection, closure guards, goal-valid repair, and evidence-carrying repair into one layered loop for deciding what to repair first, how to repair it, and when the system may honestly treat the repair as complete.
+
+[Read the residual-control draft: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/residual-control-agent-measurement-routing-target-effective-repair.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/residual-control-agent-measurement-routing-target-effective-repair.zh-CN.md)
+
 ### Why Agent Engineering Must Take Controlled Experiments Seriously
 Tag: controlled-experiment methodology working draft
 

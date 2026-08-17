@@ -126,6 +126,13 @@ Tag: 运行时科学工作稿
 
 [阅读 Agent Harness Framework：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-harness-framework.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-harness-framework.zh-CN.md)
 
+### 残差控制：Agent 中从测量、路由到目标有效修复的统一框架
+Tag: 残差治理工作稿
+
+这份双语工作稿把 residual 从“错误描述”推进为一套生产可执行的控制对象。它区分可观测任务残差、潜在内部机制与可通过干预测量的修复响应，把 Oracle-addressable residual、mismatch routing、repair locus、closure guards、goal-valid repair 与 evidence-carrying repair 接到同一条分层闭环里，用来回答 Agent 失败后究竟该先修什么、怎么修、何时算真的修好。
+
+[阅读残差控制工作稿：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/residual-control-agent-measurement-routing-target-effective-repair.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/residual-control-agent-measurement-routing-target-effective-repair.zh-CN.md)
+
 ### Agent 工程为什么必须重视受控实验
 Tag: 受控实验方法论工作稿
 
