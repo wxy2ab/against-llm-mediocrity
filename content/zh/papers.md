@@ -133,6 +133,13 @@ Tag: 残差治理工作稿
 
 [阅读残差控制工作稿：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/residual-control-agent-measurement-routing-target-effective-repair.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/residual-control-agent-measurement-routing-target-effective-repair.zh-CN.md)
 
+### 从 Agent Loop 到动态 Agent Graph：认知预算的视角
+Tag: 运行时编排工作稿
+
+这份双语工作稿从认知预算视角统一解释 Route、Workflow 与动态 Graph：Route 是认知投资决策，Workflow 是投资执行合同，Graph 是多次预算承诺之间的依赖结构与运行账本。它的核心主张是，Agent 从自由 Loop 演化出专用 Workflow、Fan-out / Fan-in、Recovery 与 Human Gate，并不是因为任务“长得像图”，而是因为复杂问题需要持续、受保护且带验收条件的认知投入。
+
+[阅读 Agent Graph 工作稿：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/from-agent-loop-to-dynamic-agent-graph-cognitive-budget-perspective.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/from-agent-loop-to-dynamic-agent-graph-cognitive-budget-perspective.zh-CN.md)
+
 ### Agent 工程为什么必须重视受控实验
 Tag: 受控实验方法论工作稿
 
