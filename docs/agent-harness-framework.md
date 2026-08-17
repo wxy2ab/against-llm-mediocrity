@@ -108,7 +108,7 @@ Therefore, this framework strictly distinguishes between:
 | **Model Strategy** | Determines semantic judgment, candidate generation and the ability to utilize external capabilities | Basic model, inference model, post-training strategy |
 | **Agent Harness** | Determine how existing capabilities are organized, verified, delivered, and efficiently realized | Bridge, Action-Space Optimization |
 
-The residual attribution of "Model + Hardness" is identifiable only when the external capability base is fixed.
+The residual attribution of "Model + Harness" is identifiable only when the external capability base is fixed.
 
 ### 2.3 The end-to-end score mixes different problems into one number
 
@@ -157,27 +157,7 @@ That is, at least one of information, authoritative state, action space, or mode
 
 ---
 
-## 3. Term boundaries
-
-### 3.1 Task Hardness, Boundary Hardening and Agent Harness
-
-"Hardness" easily refers to three different concepts at the same time:
-
-| Concept | Meaning | Location of this article |
-|---|---|---|
-| **Task Hardness** | The difficulty of the task itself, depth of dependency, partial observability, search complexity | Exogenous task attributes |
-| **Boundary / Acceptance Hardening** | Strengthen the acceptance threshold to prevent weak proxy targets and exploitable vulnerabilities from deceiving the system | The verification constraints in Bridge are also the feasible action boundaries of ASO |
-| **Agent Harness** | The system's ability to transform probabilistic model output into verifiable, accumulating, and recoverable task progress | The upper framework of this article |
-
-Therefore, this article does not equate Agent Harness with "making the benchmark difficult", nor does it equate it with system hardening, which is common in the security field.
-
-### 3.2 Hardness is the system property, Hardening is the transformation process
-
-- **Agent Harness**: The runtime properties exhibited by the system under the current task, model and external capability base;
-- **Agent Hardening**: The process of improving this attribute through experimentation and engineering modification;
-- **Agent Harness Framework**: A theoretical and experimental framework for defining, decomposing, quantifying and optimizing this property.
-
-### 3.3 Hardness is not a natural single scalar
+## 3. Agent Harness is a multidimensional runtime property
 
 A system might:
 
@@ -186,7 +166,7 @@ A system might:
 - High success rate, but huge cost;
 - High average performance, but unacceptable tail failure risk.
 
-Therefore, Hardness is first of all a multidimensional profile rather than a natural total score. Only after the utility function, budget and risk weights are clarified can it be condensed into a single objective.
+Therefore, Agent Harness should first be treated as a multidimensional runtime profile rather than a natural total score. Only after the utility function, budget, and risk weights are made explicit can it be compressed into a single objective.
 
 ---
 
@@ -270,7 +250,7 @@ The two answer respectively "Where is the system not strong enough" and "Does th
 
 ### 5.1 System capability residuals: Decomposition of model and Harness
 
-Define the model-conditioned capability frontier under fixed \(D,X,b\) and the set of allowed Hardness designs \(\mathfrak H\):
+Define the model-conditioned capability frontier under fixed \(D,X,b\) and the set of allowed Harness designs \(\mathfrak H\):
 
 \[
 C_\theta(D,X,b,\mathfrak H)
@@ -303,11 +283,11 @@ C^*-J(\theta,\mathcal H)
 The point of this decomposition is not to claim that two quantities are directly observable, but to establish a clear attribution goal:
 
 - **Model Condition Capability Gap**: The part that cannot be eliminated even if the best allowed Harness is selected for the current model;
-- **Hardness Capability Fulfillment Gap**: The model may have been able to do it, but there is no stable realization part during the current run.
+- **Harness Capability Fulfillment Gap**: The model may have been able to do it, but there is no stable realization part during the current run.
 
 ### 5.2 Empirical frontier and lower bound
 
-The true \(C_\theta\) is usually unknowable. Experiments can only form empirical frontiers on the tested Hardness set \(\mathfrak H_{test}\):
+The true \(C_\theta\) is usually unknowable. Experiments can only form empirical frontiers on the tested Harness set \(\mathfrak H_{test}\):
 
 \[
 \widehat C_\theta
@@ -338,7 +318,7 @@ L_H(\theta)
 -J(\theta,\mathcal H_0)
 \]
 
-Indicates how much additional capability Hardness can achieve relative to the baseline under a fixed model.
+Indicates how much additional capability the Harness can achieve relative to the baseline under a fixed model.
 
 For fixed Harness:
 
@@ -363,7 +343,7 @@ J(\theta_1,\mathcal H_1)
 +J(\theta_0,\mathcal H_0)
 \]
 
-If \(I_{M\times H}\neq0\), then "how much this Harness is improved" is not a model-independent constant. A Hardness may help weak models more, or it may only be exploited by strong models.
+If \(I_{M\times H}\neq0\), then "how much this Harness improves things" is not a model-independent constant. A given Harness may help weak models more, or it may only be exploitable by strong models.
 
 ### 5.4 Execution task residuals
 
@@ -797,7 +777,7 @@ A complete Agent Harness experiment should at least distinguish:
 
 ### 10.2 Freezing principle in experiments
 
-To quantify a certain Hardness component, it must be as fixed as possible:
+To quantify a certain Harness component, it must be as fixed as possible:
 
 - Same task instance;
 - The same input information;
@@ -895,7 +875,7 @@ It can answer:
 - Whether a certain Bridge only helps weak models;
 - Whether a certain ASO requires a strong model to be exploited;
 - Whether a strong bridge amplifies or weakens the advantages of a certain action interface;
-- Whether the model sorting will change with Hardness;
+- Whether the model sorting will change with Harness design;
 - How much of the so-called "model capability gap" is actually harness compatibility.
 
 ### 10.6 Recommended statistical units
@@ -917,7 +897,7 @@ It can answer:
 | **Q2 Paired Control Experiment** | Same instance, same budget, only changing one mechanism | Still limited to a single model or single task |
 | **Q3 factor and interaction experiment** | Model × Bridge × ASO, estimating main effects and interactions | Cross-domain rules have not yet been established |
 | **Q4 migration curve and crossover law** | Can predict when patch, audit, rewrite, branching is better | Still need dynamic decision-making |
-| **Q5 Adaptive Hardness Optimizer** | Online selection of mechanisms based on state, residuals and budget, validated on OOD | Near-learnable scientific runtime |
+| **Q5 Adaptive Agent Harness Optimizer** | Online selection of mechanisms based on state, residuals and budget, validated on OOD | Near-learnable scientific runtime |
 
 ### 10.8 Criteria for scientific engineering
 
@@ -1058,9 +1038,9 @@ It is the first step in the system, not the end.
 | Mismatch Theory | value loss diagnosis | At which structural site is the value lost? | Provides diagnostics for Harness routing, not a peer component of Harness |
 | Agentic RL | internalized policy optimization | How to change the model policy? | Change \(\pi\), distinguished from inference-time ASO, but can be internalized into each other |
 
-### 13.1 Mapping of Harness component and Hardness function
+### 13.1 Mapping of Harness component and runtime function
 
-| Harness component | When used as an external ability base | When used as Hardness |
+| Harness component | When used as an external ability base | When used as runtime design |
 |---|---|---|
 | Tools | Whether the tool exists and what it can do | Tool discovery, exposure, parameterization, authorization, execution and verification |
 | Context | Whether the information source exists | Information selection, compression, evidentiaryization, and operator-specific rendering |
@@ -1069,7 +1049,7 @@ It is the first step in the system, not the end.
 | Orchestration | Whether there are multiple execution principals | action-space decomposition, routing, parallelism, and aggregation strategies |
 | Verification | Check capability exists | Oracle selection, gating, failure localization and commit authority |
 
-This mapping illustrates that the same Harness component may contain both "Ability Base" and "Hardness Control" parts. Quantitative experiments must separate the two.
+This mapping illustrates that the same Harness component may contain both "Ability Base" and "runtime control" parts. Quantitative experiments must separate the two.
 
 ### 13.2 Relationship with six types of mismatch
 
@@ -1093,11 +1073,11 @@ Bridge and ASO are not Category 7 or 8 mismatches.
 
 ---
 
-## 14. Boundaries and failure modes of Hardness
+## 14. Boundaries and failure modes of Agent Harness
 
-### 14.1 Strong Hardness cannot create non-existent semantic discrimination ability
+### 14.1 Strong Harness cannot create non-existent semantic discrimination ability
 
-Hardness cannot produce truth out of thin air if the ability to distinguish between right and wrong does not exist in the model, tools, environment, data, and Oracle. It can:
+Agent Harness cannot produce truth out of thin air if the ability to distinguish between right and wrong does not exist in the model, tools, environment, data, and Oracle. It can:
 
 - Reduce unnecessary commitments;
 - Keep the correct area;
@@ -1108,7 +1088,7 @@ Hardness cannot produce truth out of thin air if the ability to distinguish betw
 
 But it does not guarantee the generation of new solutions beyond the base of models and external capabilities.
 
-### 14.2 Wrong Hardness Institutionalizes Mistakes
+### 14.2 Poor Harness design can institutionalize mistakes
 
 - The error state schema will stably save the error abstraction;
 - Error verifier will make the system more stable in optimizing error targets;
@@ -1116,10 +1096,10 @@ But it does not guarantee the generation of new solutions beyond the base of mod
 - Too strong local patch constraints will prevent necessary global reconstruction;
 - Excessive branching amplifies costs and provenance confusion;
 - Excessive auditing will cause the system to be stuck in inspection without action;
-- Excessively hard threshold will increase false rejection;
+- Excessively strict thresholds will increase false rejection;
 - Fixed routes may be valid for one model but not for another model.
 
-### 14.3 Hardness does not guarantee global optimality or monotonic convergence
+### 14.3 Agent Harness does not guarantee global optimality or monotonic convergence
 
 Even if only the changes passed by verifier are submitted each time, it is possible:
 
@@ -1131,7 +1111,7 @@ Even if only the changes passed by verifier are submitted each time, it is possi
 
 The safest proposition is:
 
-> Hardness improves task structure, state governability and capability fulfillment conditions; it is not equal to global optimal guarantee.
+> Agent Harness improves task structure, state governability and capability fulfillment conditions; it is not equal to a global optimality guarantee.
 
 ### 14.4 Component effects are not fixed constants
 
@@ -1145,7 +1125,7 @@ The effect of a component may depend on:
 - Oracle Bandwidth;
 - Environmental reversibility;
 - budget;
-- Other Hardness components.
+- Other Harness components.
 
 Therefore, the goal of Agent Harness Science should not just be to get an average improvement, but to establish conditional effect curves and crossover laws.
 
@@ -1195,7 +1175,7 @@ This stage can reveal:
 - Whether model ranking depends on Harness;
 - whether weak models benefit more from strong structures;
 - Whether strong models can take advantage of freer action space;
-- Whether some Hardness is just temporary compensation for model deficiencies;
+- Whether some Harness designs are just temporary compensation for model deficiencies;
 - What mechanisms enable stable cross-model migration.
 
 ### Phase 4: Establish conditional rules and prediction models
@@ -1211,7 +1191,7 @@ Need to enter from static effect size:
 
 ### Phase 5: Adaptive Agent Harness Optimizer
 
-When component effects can be predicted, Hardness itself can become the object of runtime optimization:
+When component effects can be predicted, the Harness itself can become the object of runtime optimization:
 
 ```text
 current governed state
@@ -1224,9 +1204,9 @@ current governed state
 
 At this time, Agent Runtime no longer relies on a fixed experience process, but makes dynamic selections based on measured conditional effects.
 
-### Phase 6: Internalize the verified Hardness laws into the model
+### Phase 6: Internalize the verified Harness laws into the model
 
-After external Hardness produces high-quality, attributable trajectory and failure records, it can be further used to:
+After external Harness produces high-quality, attributable trajectory and failure records, it can be further used to:
 
 - SFT; 
 - on-policy distillation; 
@@ -1235,11 +1215,11 @@ After external Hardness produces high-quality, attributable trajectory and failu
 - harness-robust training; 
 - learned state and action-space policies.
 
-External Hardness and internal model optimization thus form a closed loop, but the two should still remain distinguishable in experiments, otherwise it is impossible to know where the ability is internalized.
+External Harness and internal model optimization thus form a closed loop, but the two should still remain distinguishable in experiments, otherwise it is impossible to know where the ability is internalized.
 
 ---
 
-## 16. Added admission criteria for Hardness axis
+## 16. Added admission criteria for a new Harness axis
 
 Bridge and ASO are the minimum functional cores currently proposed, and it is not claimed that they have exhausted all possible Agent Harness dimensions. If a third independent axis is proposed in the future, it should at least satisfy:
 
@@ -1399,7 +1379,7 @@ After fixing the Capability Substrate:
 =
 \text{Model-Conditioned Gap}
 +
-\text{Hardness Realization Gap}
+\text{Harness Realization Gap}
 }
 \]
 
@@ -1492,7 +1472,7 @@ Fixed conditions:
 task distribution D + external capability base X + budget b + evaluation criterion
 
 System:
-Model πθ + Hardness H
+Model πθ + Harness H
 H = Bridge B + Action-Space Optimization Ω
 
 Bridge: 
