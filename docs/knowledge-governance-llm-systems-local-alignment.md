@@ -1,6 +1,6 @@
 # Knowledge Governance for Large Language Model Systems
 
-# From LLM Mediocrity through Local Alignment to Autoregressive Extraordinary
+# From LLM Mediocrity through Local Alignment to Positive Probability-Value Alignment
 
 **Xinyun Wang**, **Shuliang Liang**
 
@@ -30,9 +30,9 @@ For this reason, the broader failure regime is better named LLM mediocrity. Aggr
 
 This paper argues that LLM mediocrity is not a universal property of LLMs. It is a task-, representation-, state-observation-, specification-, and budget-dependent regime.
 
-Between mediocrity and extraordinary lies the regime that most often appears in real human-facing tasks: **autoregressive local alignment**, or probability-value local alignment. In this regime, the model's local continuation tendencies are genuinely aligned with parts of the task value function, but that alignment is partial, conditional, and insufficient to guarantee global success. The system can produce locally correct, fluent, useful, or even insightful components while still drifting at the level of task construal, long-range coordination, hidden state, support, or true objective.
+Between mediocrity and extraordinary lies the regime that most often appears in real human-facing tasks: **probability-value local alignment**. In this regime, the model's local continuation tendencies are genuinely aligned with parts of the task value function, but that alignment is partial, conditional, and insufficient to guarantee global success. The system can produce locally correct, fluent, useful, or even insightful components while still drifting at the level of task construal, long-range coordination, hidden state, support, or true objective.
 
-At the positive pole, which we call **autoregressive extraordinary**, the model's local continuation tendencies, learned semantic representations, genre priors, and surface fluency are positively aligned with task value at both local and global levels. In such cases, autoregressive generation is not a bottleneck but an advantage: local improvement compounds into global quality, high-value outputs are easy to reach, relevant state is explicit or stable, and the fluent output space itself may already be an adequate control space. Context compression and high-dimensional semantic mapping are central examples, but the same positive-alignment regime also appears in semantic decompression, register transfer, surface polishing, structured transformation, taxonomy generation, hypothesis generation, edge-case enumeration, query formulation, and boilerplate synthesis.
+At the positive pole, which we call **positive probability-value alignment**, the model's local continuation tendencies, learned semantic representations, genre priors, and surface fluency are positively aligned with task value at both local and global levels. In such cases, autoregressive generation is not a bottleneck but an advantage: local improvement compounds into global quality, high-value outputs are easy to reach, relevant state is explicit or stable, and the fluent output space itself may already be an adequate control space. Context compression and high-dimensional semantic mapping are central examples, but the same positive-alignment regime also appears in semantic decompression, register transfer, surface polishing, structured transformation, taxonomy generation, hypothesis generation, edge-case enumeration, query formulation, and boilerplate synthesis.
 
 ### Policy-Value Compression
 
@@ -57,7 +57,7 @@ A key clarification is that many recurrent failures are not additional primitive
 
 The central intervention principle of the paper is therefore broader than any single architecture: preserve and exploit the parts of a task that are already locally aligned, while transforming the poorly aligned parts into lower-mismatch, positively aligned subtasks. We call this principle **Mediocrity-to-Extraordinary Transformation**.
 
-A system can avoid mediocre output-space search if it can convert a difficult final-output problem into subtasks such as compression, construal extraction, rubric generation, state enumeration, edge-case generation, query formulation, structural outlining, constraint induction, and semantic decompression. These subtasks are often autoregressive-extraordinary or at least more locally aligned than the original task.
+A system can avoid mediocre output-space search if it can convert a difficult final-output problem into subtasks such as compression, construal extraction, rubric generation, state enumeration, edge-case generation, query formulation, structural outlining, constraint induction, and semantic decompression. These subtasks often exhibit positive probability-value alignment or are at least more locally aligned than the original task.
 
 ### Knowledge Governance
 
@@ -87,7 +87,7 @@ LLM mediocrity should also be distinguished from classical **mode collapse**. Mo
 
 Most practical tasks, however, are not pure cases of mediocrity. They contain regions where autoregression is useful and regions where it is misleading. A model may be excellent at compressing context, drafting an outline, producing fluent prose, generating edge cases, or reformatting information, while still failing to identify the decisive success condition, preserve a nonlocal dependency, condition on a hidden state, surface a low-support structure, or optimize the user's true value function.
 
-We call this middle regime **autoregressive local alignment**. It occurs when statistical continuation and task value are aligned over some prefixes, subtasks, representations, or local operations, but the alignment does not remain stable over the whole task. Local alignment explains why many LLM outputs feel partly impressive and partly unsatisfactory: the model is not simply wrong, but neither is it globally governed by the task's value structure.
+We call this middle regime **probability-value local alignment**. It occurs when statistical continuation and task value are aligned over some prefixes, subtasks, representations, or local operations, but the alignment does not remain stable over the whole task. Local alignment explains why many LLM outputs feel partly impressive and partly unsatisfactory: the model is not simply wrong, but neither is it globally governed by the task's value structure.
 
 Local alignment is therefore the ordinary human-facing regime. Users typically bring messy, partially specified, state-dependent tasks that include both routine components and tacit high-value constraints. The system's challenge is not to suppress autoregressive generation; it is to identify where autoregression is already aligned, where it is only locally aligned, and where governance or reparameterization is needed to prevent local fluency from substituting for global value.
 
@@ -99,9 +99,9 @@ This compression is one reason modern LLM systems keep improving. As feedback im
 
 At the positive pole, LLMs also display a stronger phenomenon: they often outperform humans on tasks where the task value function is naturally aligned with the model's representational and generative strengths. A typical example is **context compression**: taking a large body of context and mapping it into a compact, high-dimensional semantic representation, summary, taxonomy, or decision-relevant abstraction. Humans are limited by working memory, fatigue, and serial attention. LLMs can often preserve many semantic relations, compress them into a useful structure, and then re-render them for a particular purpose.
 
-We call this positive regime **autoregressive extraordinary**. It occurs when local continuation, surface fluency, learned genre priors, semantic association, and iterative refinement point in the same direction as task value across the task, not merely inside isolated fragments. In these regimes, autoregressive generation is not the source of mediocrity. It is the mechanism of excellence. The model's tendency to continue plausibly, fill gaps, preserve register, expand sparse prompts into complete text, or enumerate adjacent concepts can itself produce unusually high value.
+We call this positive regime **positive probability-value alignment**. It occurs when local continuation, surface fluency, learned genre priors, semantic association, and iterative refinement point in the same direction as task value across the task, not merely inside isolated fragments. In these regimes, autoregressive generation is not the source of mediocrity. It is the mechanism of excellence. The model's tendency to continue plausibly, fill gaps, preserve register, expand sparse prompts into complete text, or enumerate adjacent concepts can itself produce unusually high value.
 
-This observation changes the architecture question. The goal is not always to leave output space, construct a decoupled control space, and then render back into fluent text. That is one important method. The more general goal is to **change the form of the task as it appears to the model**. If a hard task can be reparameterized into a sequence of subtasks that fall inside autoregressive-extraordinary regimes, then ordinary generation can become an asset rather than a bottleneck.
+This observation changes the architecture question. The goal is not always to leave output space, construct a decoupled control space, and then render back into fluent text. That is one important method. The more general goal is to **change the form of the task as it appears to the model**. If a hard task can be reparameterized into a sequence of subtasks that exhibit positive probability-value alignment, then ordinary generation can become an asset rather than a bottleneck.
 
 For example, instead of asking a model to directly produce a high-value strategic analysis, one may ask it to:
 
@@ -114,11 +114,11 @@ For example, instead of asking a model to directly produce a high-value strategi
 7. render the final answer from that outline;
 8. validate the result against the earlier failure modes.
 
-Each subtask is easier than the original task and may be closer to an autoregressive-extraordinary regime. The system avoids mediocrity not by making the model less autoregressive, but by presenting the model with subtasks where autoregression is well aligned with value.
+Each subtask is easier than the original task and may be closer to a positive probability-value alignment regime. The system avoids mediocrity not by making the model less autoregressive, but by presenting the model with subtasks where autoregression is well aligned with value.
 
 The core claim of this paper is therefore three-regime rather than two-sided. First, LLM mediocrity is often predictable from structural mismatches between what an LLM system can observe, represent, specify, support, locally aggregate, and robustly generalize from local context and what the task actually rewards. We formalize this through a **six-mismatch view**: aggregation, support, state, specification, fitting-boundary, and observation-representation mismatch. These six axes are not intended to label every surface failure. Instead, they define primitive sources of divergence between reachable generation and task value.
 
-Second, autoregressive local alignment describes the regime in which most deployed tasks actually live: local model strengths are real, but they are not sufficient to guarantee global task value. Third, autoregressive extraordinary provides the central design principle for intervention. A system can mitigate mediocrity by transforming high-mismatch or only locally aligned final-output tasks into lower-mismatch, positively aligned intermediate tasks. Knowledge Governance is a disciplined implementation of this transformation: it creates explicit control artifacts, validates them, stores them as governed knowledge, and uses them to guide fluent rendering.
+Second, probability-value local alignment describes the regime in which most deployed tasks actually live: local model strengths are real, but they are not sufficient to guarantee global task value. Third, positive probability-value alignment provides the central design principle for intervention. A system can mitigate mediocrity by transforming high-mismatch or only locally aligned final-output tasks into lower-mismatch, positively aligned intermediate tasks. Knowledge Governance is a disciplined implementation of this transformation: it creates explicit control artifacts, validates them, stores them as governed knowledge, and uses them to guide fluent rendering.
 
 This distinction matters because many intuitive failure categories are tempting but not primitive.
 
@@ -135,10 +135,10 @@ This paper makes eight contributions.
 1. It defines **LLM mediocrity** as a budgeted, task-dependent concentration of inference around plausible but suboptimal output regions.
 2. It retires **autoregressive mediocrity** as a mixed mechanism label and distinguishes mechanism-independent aggregation mismatch from the empirical, support-side tendency nicknamed “autoregressive gravity.”
 3. It proposes six primitive mismatches as a diagnostic theory for predicting when ordinary output-space search is likely to plateau.
-4. It defines **autoregressive local alignment** as the common intermediate regime in which probability and task value are locally but not globally aligned.
+4. It defines **probability-value local alignment** as the common intermediate regime in which probability and task value are locally but not globally aligned.
 5. It introduces **policy-value compression** as the mechanism by which alignment training converts proxy task value into policy probability, thereby expanding local alignment without eliminating structural mismatch.
-6. It defines **autoregressive extraordinary** as the positive-alignment regime in which autoregressive continuation and task value reinforce each other across the relevant task structure.
-7. It proposes **Mediocrity-to-Extraordinary Transformation** as a general anti-mediocrity principle: preserve locally aligned operations while converting high-mismatch components into lower-mismatch, autoregressive-extraordinary subtasks; and it develops this principle into six reusable operational method patterns, each mapped to the primitive mismatch it counters (Section 6.8).
+6. It defines **positive probability-value alignment** as the regime in which model probability and task value reinforce each other across the relevant task structure.
+7. It proposes **Mediocrity-to-Extraordinary Transformation** as a general anti-mediocrity principle: preserve locally aligned operations while converting high-mismatch components into lower-mismatch, positive-alignment subtasks; and it develops this principle into six reusable operational method patterns, each mapped to the primitive mismatch it counters (Section 6.8).
 8. It presents **Knowledge Governance** as an inference-time control framework for externalizing, validating, revoking, and reusing task-specific control knowledge while distinguishing primitive mismatches from derivative and compound patterns.
 
 ---
@@ -187,7 +187,7 @@ This **scene-to-model abstraction** step is not identical to solving the abstrac
 
 Most inference-time improvement methods can be understood not only as adding compute but also as changing the task distribution faced by the model. A prompt that asks for a plan before an answer transforms final-output generation into plan generation plus rendering. A rubric transforms a vague preference into an explicit evaluation structure. Retrieval transforms unsupported factual generation into grounded synthesis. A checklist transforms open-ended quality judgment into localized verification. These transformations can succeed when the new subtasks are more aligned with the model's strengths than the original task.
 
-This paper makes that observation explicit through two concepts: autoregressive local alignment and autoregressive extraordinary. The anti-mediocrity question becomes: which parts of a task are already locally aligned, which parts are misaligned, and can the misaligned parts be transformed into a sequence of tasks whose intermediate values are well aligned with continuation?
+This paper makes that observation explicit through two concepts: probability-value local alignment and positive probability-value alignment. The anti-mediocrity question becomes: which parts of a task are already locally aligned, which parts are misaligned, and can the misaligned parts be transformed into a sequence of tasks whose intermediate values are well aligned with continuation?
 
 ---
 
@@ -500,10 +500,10 @@ Let $\Gamma_{\mathrm{feas}}$ be the set of observation-representation channels f
 V_{\mathrm{feas}}
 =
 \sup_{(\phi',\psi')\in\Gamma_{\mathrm{feas}}}
-\max_{\pi:Z'\to Y}\mathbb{E}[U(\pi(Z');S)].
+\max_{\pi:Z'_{\le t}\to Y}\mathbb{E}[U(\pi(Z'_{\le t});S_t)].
 \]
 
-Only $V_Z<V_{\mathrm{feas}}$ is an observation-representation mismatch attributable to the current channel. The value $V_S$ of a direct-state policy remains a full-information upper bound, but $V_S-V_{\mathrm{feas}}$ is irreducible partial observability under the feasible intervention set and is not counted as system mismatch. The remediable gap cannot be eliminated by longer reasoning over the same representation; it requires changing the observation channel, adding measurements, using tools, querying the environment, or constructing a richer control representation.
+Here $Z'_{\le t}$ is the representation history produced by $(\phi',\psi')$, and $V_Z$ is evaluated over the same history-dependent policy class, $\pi:Z_{\le t}\to Y$; for a static task, set $t=1$. Only $V_Z<V_{\mathrm{feas}}$ is an observation-representation mismatch attributable to the current channel. The value $V_S$ of a direct-state policy remains a full-information upper bound, but $V_S-V_{\mathrm{feas}}$ is irreducible partial observability under the feasible intervention set and is not counted as system mismatch. The remediable gap cannot be eliminated by longer reasoning over the same representation; it requires changing the observation channel, adding measurements, using tools, querying the environment, or constructing a richer control representation.
 
 Typical examples include physical affordances not visible in images, social cues not preserved in text, temporal dynamics lost in static frames, verification signals absent from generated answers, and embodied variables such as weight, force, resistance, temperature, fragility, and action cost.
 
@@ -676,9 +676,9 @@ This matters because the same application may instantiate several mismatch sourc
 
 ---
 
-## 4. Autoregressive Local Alignment
+## 4. Probability-Value Local Alignment
 
-LLM mediocrity and autoregressive extraordinary are useful poles of a wider probability-value spectrum, but most real tasks live between them. We call this middle regime **autoregressive local alignment**, or **probability-value local alignment**. It is the state in which the model's statistical continuation tendencies are aligned with some parts of the task value function, but the alignment is partial, conditional, and not sufficient to guarantee global success.
+LLM mediocrity and positive probability-value alignment are useful poles of a wider probability-value spectrum, but most real tasks live between them. We call this middle regime **probability-value local alignment**. It is the state in which the model's statistical continuation tendencies are aligned with some parts of the task value function, but the alignment is partial, conditional, and not sufficient to guarantee global success.
 
 Local alignment is not a weak version of mediocrity. It is a distinct operating regime. The system can genuinely perform useful work: compress context, preserve register, generate candidate structures, produce clear prose, enumerate edge cases, or instantiate familiar patterns. The failure risk appears when these locally valuable operations are mistaken for global task completion.
 
@@ -686,7 +686,7 @@ Local alignment is not a weak version of mediocrity. It is a distinct operating 
 
 Let $x$ denote the input, $s$ the relevant latent or environmental state, and $y$ the final output.
 
-A task instance exhibits **autoregressive local alignment** under an inference procedure $\Pi_B$ when two conditions hold:
+A task instance exhibits **probability-value local alignment** under an inference procedure $\Pi_B$ when two conditions hold:
 
 1. Some reachable local operations are positively aligned with task value.
 2. The final-output process is not globally guaranteed to reach the near-optimal set $\mathcal{H}_\tau(x,s)$.
@@ -741,8 +741,8 @@ is intermediate, unstable, or highly sensitive to representation, validation, an
 This distinguishes local alignment from both neighboring regimes:
 
 - In **LLM mediocrity**, the system remains in a low-value basin because one or more primitive mismatches prevent reachable probability from tracking task value.
-- In **autoregressive local alignment**, many local operations are useful, but their composition is not automatically value-preserving.
-- In **autoregressive extraordinary**, local operations tend to compose into global quality under the available budget and representation.
+- In **probability-value local alignment**, many local operations are useful, but their composition is not automatically value-preserving.
+- In **positive probability-value alignment**, local operations tend to compose into global quality under the available budget and representation.
 
 ### 4.3 Local Alignment as the Default Human Task Regime
 
@@ -807,8 +807,8 @@ The resulting three-regime view is:
 | Regime | Probability-value relation | Typical output | Preferred intervention |
 |---|---|---|---|
 | **LLM mediocrity** | Systematic divergence or low reachability | Fluent but low-value basin | Reparameterize, search control space, validate hard. |
-| **Autoregressive local alignment** | Local positive alignment with global instability | Useful parts, incomplete whole | Preserve aligned parts; govern boundaries and composition. |
-| **Autoregressive extraordinary** | Stable positive alignment | Local improvement compounds into global value | Use direct generation or lightweight search. |
+| **Probability-value local alignment** | Local positive alignment with global instability | Useful parts, incomplete whole | Preserve aligned parts; govern boundaries and composition. |
+| **Positive probability-value alignment** | Stable positive alignment | Local improvement compounds into global value | Use direct generation or lightweight search. |
 
 This middle regime is important because it is where most practical user tasks begin. Users rarely face an LLM that is wholly useless on the task. They face a system that is useful enough to create local value, but not governed enough to ensure that local value becomes final task success.
 
@@ -825,7 +825,7 @@ U_{\mathrm{proxy}} \rightarrow \pi_{\theta}^{\mathrm{aligned}}(y \mid x).
 
 This is the precise sense in which reinforcement learning and preference optimization can be understood as task-value alignment. They do not make the model stop using probability. They reshape the probability landscape so that many valuable continuations become easier to reach. The output remains autoregressive; the probability distribution has absorbed proxy value.
 
-This explains why the region of autoregressive local alignment expands as models are trained with better feedback. More tasks move from probability-value divergence into probability-value partial alignment, and some tasks move further into autoregressive extraordinary. The model becomes increasingly likely to generate locally useful, instruction-following, preference-aligned, and task-relevant continuations.
+This explains why the region of probability-value local alignment expands as models are trained with better feedback. More tasks move from probability-value divergence into probability-value partial alignment, and some tasks move further into positive probability-value alignment. The model becomes increasingly likely to generate locally useful, instruction-following, preference-aligned, and task-relevant continuations.
 
 Thinking and test-time reasoning extend this process at inference time. Chain-of-thought, self-consistency, tree search, process feedback, and iterative revision do not merely add tokens. They create intermediate states in which the original task can be decomposed into smaller operations:
 
@@ -848,17 +848,17 @@ The distinction can be summarized as follows:
 | **Retrieval and tools** | External facts, external state, executable checks, current evidence | The system still needs the right question, control representation, and value criterion. |
 | **Knowledge Governance** | Externalized, validated, revocable task-control knowledge | It depends on control-space quality, validation strength, and governance cost. |
 
-This is why autoregressive local alignment is the dominant practical regime. The model is neither a raw next-token frequency machine nor a fully value-governed reasoner. It is a system whose policy has absorbed many proxy values, whose reasoning can expose additional local structure, but whose outputs still require governance when local alignment fails to compose into global task success.
+This is why probability-value local alignment is the dominant practical regime. The model is neither a raw next-token frequency machine nor a fully value-governed reasoner. It is a system whose policy has absorbed many proxy values, whose reasoning can expose additional local structure, but whose outputs still require governance when local alignment fails to compose into global task success.
 
 ---
 
-## 5. Autoregressive Extraordinary
+## 5. Positive Probability-Value Alignment
 
-Autoregressive local alignment describes the common mixed regime, but some tasks exhibit a stronger property: the model's autoregressive continuation process naturally moves toward high-value outputs across the relevant task structure. We call this positive pole **autoregressive extraordinary**.
+Probability-value local alignment describes the common mixed regime, but some tasks exhibit a stronger property: the model's deployed policy naturally moves toward high-value outputs across the relevant task structure. We call this positive pole **positive probability-value alignment**.
 
 ### 5.1 Definition
 
-Let $\mathcal{H}_\tau(x,s)$ be the near-optimal set defined above. A task instance exhibits **autoregressive extraordinary** under $\Pi_B$ when high-value outputs are not tail events but are easily reachable under the inference procedure: the reachability score of Section 3.2.2,
+Let $\mathcal{H}_\tau(x,s)$ be the near-optimal set defined above. A task instance exhibits **positive probability-value alignment** under $\Pi_B$ when high-value outputs are not tail events but are easily reachable under the inference procedure: the reachability score of Section 3.2.2,
 
 \[
 r_{\tau,B}(x,s)=
@@ -874,13 +874,13 @@ Informally:
 \text{local likelihood gradient} \approx \text{task-value gradient}.
 \]
 
-In LLM mediocrity, what is easy to continue is not what is truly valuable. In autoregressive local alignment, what is easy to continue is often valuable locally but not sufficient globally. In autoregressive extraordinary, what is easy to continue is often exactly what the task rewards across the task.
+In LLM mediocrity, what is easy to continue is not what is truly valuable. In probability-value local alignment, what is easy to continue is often valuable locally but not sufficient globally. In positive probability-value alignment, what is easy to continue is often exactly what the task rewards across the task.
 
 This distinction is essential. The same model can be mediocre on one task, locally aligned on another, and extraordinary on a third. The difference is not simply model intelligence. It is the alignment relation among the model distribution, the inference procedure, the active representation, and the task utility.
 
 ### 5.2 Positive-Alignment Conditions
 
-Autoregressive extraordinary tends to appear when several conditions hold.
+Positive probability-value alignment tends to appear when several conditions hold.
 
 #### 5.2.1 High-Support Excellence
 
@@ -912,7 +912,7 @@ The fluent output space itself is a good enough control space. For many tasks, n
 
 When representation adequacy holds, a decoupled control space may add little value. The output space is already sufficiently aligned with task control.
 
-### 5.3 Major Autoregressive-Extraordinary Patterns
+### 5.3 Major Positive-Alignment Patterns
 
 The following patterns are not guaranteed successes, but they are common positive-alignment regimes.
 
@@ -920,7 +920,7 @@ The following patterns are not guaranteed successes, but they are common positiv
 
 The model takes a large context and compresses it into a summary, taxonomy, decision matrix, semantic map, or task-relevant abstraction. This is often difficult for humans because of working-memory limits and attention fatigue. LLMs can preserve many semantic relations simultaneously and render them into compact form.
 
-This is a central autoregressive-extraordinary regime because compression quality often aligns with the model's learned semantic representations.
+This is a central positive-alignment regime because compression quality often aligns with the model's learned semantic representations.
 
 #### 5.3.2 Semantic Decompression and Surface Realization
 
@@ -1002,7 +1002,7 @@ The model can convert expert fragments, meeting notes, rough instructions, or re
 
 The boundary is invention. The model may fill gaps with plausible but nonexistent steps. Expert validation remains necessary.
 
-### 5.4 Autoregressive Extraordinary Is a Regime, Not a Task Label
+### 5.4 Positive Probability-Value Alignment Is a Regime, Not a Task Label
 
 No task category is permanently extraordinary. Summarization can be extraordinary when the source is explicit and the goal is clear; it can become locally aligned when the model compresses the text well but misidentifies what matters; and it can become mediocre when hidden legal, political, or strategic criteria dominate. Code generation can be extraordinary for scaffolds, locally aligned for idiomatic but incompletely validated implementations, and mediocre for leakage-sensitive systems. Teaching can be extraordinary when the learner state is clear, locally aligned when the explanation is good but the misconception is only partly identified, and mediocre when the actual misconception is hidden. Comparison matrices can be extraordinary for structure, locally aligned for organizing uncertain facts, and mediocre when unsupported cells are treated as truth.
 
@@ -1018,13 +1018,13 @@ The correct unit of analysis is therefore not the task name but the alignment re
 | SOP drafting | Process is conventional or supplied. | A good first-pass protocol exists but local organizational constraints are missing. | Organization-specific constraints are missing. |
 | Tone adjustment | Meaning is stable. | Tone improves but diplomatic, legal, or reputational boundaries remain tacit. | Diplomatic, legal, or reputational boundaries are tacit. |
 
-This regime view is critical for system design. It prevents both overuse and underuse of governance. If the task is already autoregressive-extraordinary, heavy governance may waste compute. If the task is locally aligned, selective governance should protect the aligned operations while controlling the unstable boundaries. If the task is high-mismatch, direct generation may produce only fluent mediocrity.
+This regime view is critical for system design. It prevents both overuse and underuse of governance. If the task already exhibits positive probability-value alignment, heavy governance may waste compute. If the task is locally aligned, selective governance should protect the aligned operations while controlling the unstable boundaries. If the task is high-mismatch, direct generation may produce only fluent mediocrity.
 
 ---
 
 ## 6. Mediocrity-to-Extraordinary Transformation
 
-Autoregressive extraordinary provides a general strategy for mitigating LLM mediocrity, but the practical starting point is often autoregressive local alignment. The core idea is simple:
+Positive probability-value alignment provides a general strategy for mitigating LLM mediocrity, but the practical starting point is often probability-value local alignment. The core idea is simple:
 
 > Do not always ask the model to solve the high-mismatch or only locally aligned final-output task directly. Instead, preserve the locally aligned operations and transform the unstable parts into lower-mismatch subtasks whose values are positively aligned with autoregressive generation.
 
@@ -1066,7 +1066,7 @@ The intermediate objects may include:
 - candidate invariant;
 - GKO set.
 
-The transformation works when the intermediate operations are themselves autoregressive-extraordinary, locally aligned in a controllable way, or at least lower-mismatch than the original task. The final answer is then not generated from an underconstrained prompt but rendered from a structured, validated, and task-relevant representation.
+The transformation works when the intermediate operations exhibit positive probability-value alignment, are locally aligned in a controllable way, or are at least lower-mismatch than the original task. The final answer is then not generated from an underconstrained prompt but rendered from a structured, validated, and task-relevant representation.
 
 ### 6.2 From Local Alignment to Global Alignment
 
@@ -1182,7 +1182,7 @@ A ← {x, c}
    Identify likely aggregation, support, state, specification, and fitting-boundary mismatch.
 
 2. Select transformation operators
-   Choose subtasks that are likely autoregressive-extraordinary:
+   Choose subtasks that are likely to exhibit positive probability-value alignment:
    compression, rubric generation, state enumeration, edge-case generation,
    query formulation, outline construction, semantic decompression, or checklist verification.
 
@@ -1234,9 +1234,9 @@ Knowledge Governance is a disciplined implementation of Mediocrity-to-Extraordin
 In short:
 
 - **LLM mediocrity** is the broad failure regime.
-- **Autoregressive local alignment** is the common mixed regime in which local value exists but global value is unstable.
+- **Probability-value local alignment** is the common mixed regime in which local value exists but global value is unstable.
 - **Primitive mismatches** are the diagnostic axes that identify where local alignment breaks; aggregation mismatch and support mismatch remain distinct, mechanism-independent axes.
-- **Autoregressive extraordinary** is the stable positive-alignment regime.
+- **Positive probability-value alignment** is the stable positive-alignment regime.
 - **Mediocrity-to-Extraordinary Transformation** is the general intervention principle.
 - **Knowledge Governance** is a strong, inspectable implementation for high-stakes, high-mismatch, or only locally aligned cases.
 
@@ -1272,7 +1272,7 @@ The method is therefore to write the control space before writing the output. Co
 
 If the result is inadequate, **revise the control space rather than immediately rewriting the full text**. This rule is a credit-assignment principle: it moves the locus of correction from the output layer to the control layer. Without it, repeated rewriting degenerates into ordinary output-space sampling, and the system loses the information about which control decision caused the defect.
 
-The loop exploits a **generation-evaluation asymmetry**: on many tasks, directly producing an excellent artifact is unstable, while recognizing defects, naming clichés, and checking constraint violations is substantially easier. The asymmetry has a scope condition, however. It holds when defects are localizable and criteria can be made explicit. Under strong specification mismatch, the evaluator inherits the same specification gap as the generator, and the rubric itself becomes a candidate object requiring contrastive validation (Sections 6.8.6 and 8.2). With that caveat, the method rewrites a high-aggregation- or high-support-mismatch task as a chain of autoregressive-extraordinary subtasks: enumerate requirements, render under constraints, detect violations, repair the control state.
+The loop exploits a **generation-evaluation asymmetry**: on many tasks, directly producing an excellent artifact is unstable, while recognizing defects, naming clichés, and checking constraint violations is substantially easier. The asymmetry has a scope condition, however. It holds when defects are localizable and criteria can be made explicit. Under strong specification mismatch, the evaluator inherits the same specification gap as the generator, and the rubric itself becomes a candidate object requiring contrastive validation (Sections 6.8.6 and 8.2). With that caveat, the method rewrites a high-aggregation- or high-support-mismatch task as a chain of positive-alignment subtasks: enumerate requirements, render under constraints, detect violations, repair the control state.
 
 #### 6.8.3 Search in Control Space Rather Than Brute-Force Search in Output Space
 
@@ -1416,7 +1416,7 @@ A GKO may function as:
 - a **diagnostic test**: reject a candidate if this boundary condition fails;
 - a **construal rule**: identify the relevant goal, carrier, state variable, or abstraction;
 - a **source-prior correction**: separate dominant narrative from evidence and evaluation metric;
-- a **transformation rule**: convert the current task into an autoregressive-extraordinary subtask.
+- a **transformation rule**: convert the current task into a positive-alignment subtask.
 
 The key design principle is that control knowledge is explicit, conditional, persistent, and revisable. It is no longer buried inside one particular output. This stands in contrast to what we call **soft experience**: plausible-sounding, fluent statements that appear useful but fail to provide reliable behavioral constraints when tested.
 
@@ -1533,7 +1533,7 @@ For example, a model may draft a strong outline but miss the decisive evaluation
 
 Fluent outputs entangle content, style, local coherence, and latent constraints into a single object. A rewrite that improves one part of the surface can silently break a long-range dependency elsewhere. By moving to fragmented units and explicit relations, the controller can represent nonlocal dependencies directly rather than hoping they survive repeated rewriting.
 
-The mediocrity-to-extraordinary transformation is to make global structure local. Once the global structure is represented as a checklist, graph, beat map, dependency table, or invariant set, final rendering becomes a semantic-decompression task - often an autoregressive-extraordinary operation.
+The mediocrity-to-extraordinary transformation is to make global structure local. Once the global structure is represented as a checklist, graph, beat map, dependency table, or invariant set, final rendering becomes a semantic-decompression task - often a positive-alignment operation.
 
 Examples include story payoff, cross-module code constraints, multi-step customer-service escalation, and physical reasoning tasks where one early abstraction choice determines all later reasoning.
 
@@ -1553,7 +1553,7 @@ The transformation is to replace a single hidden-state answer with a state-condi
 
 When the available proxy differs from true utility, optimizing the proxy more strongly can produce polished mediocrity. A decoupled control layer can help by making the proxy explicit, collecting contrastive evidence, refining rubrics, and representing newly discovered preferences as revisable GKOs.
 
-The transformation is to turn tacit value into explicit evaluation artifacts. Rubric generation, contrastive comparison, failure-mode enumeration, and checklist verification are frequently autoregressive-extraordinary operations. The danger is false rubrics; therefore validation and revocation are essential.
+The transformation is to turn tacit value into explicit evaluation artifacts. Rubric generation, contrastive comparison, failure-mode enumeration, and checklist verification are frequently positive-alignment operations. The danger is false rubrics; therefore validation and revocation are essential.
 
 ### 9.6 Under Noisy-Context Construal Failure
 
@@ -1821,7 +1821,7 @@ The practical rule is strict: a new primitive class should be added only when it
 
 ### 11.3 Local Alignment and Extraordinary Are Not Guarantees
 
-Autoregressive local alignment and autoregressive extraordinary are regimes, not promises. A task may begin as extraordinary and become locally aligned or mediocre when hidden constraints, factual uncertainty, high stakes, or nonlocal coupling enter. For example, generating a code scaffold may be extraordinary; adapting it to a real architecture may be locally aligned; ensuring that it is secure, leakage-free, scalable, and temporally valid may not be. A comparison matrix may be extraordinary as a structuring device, locally aligned as a reasoning aid, and still require verification for factual cells.
+Probability-value local alignment and positive probability-value alignment are regimes, not promises. A task may begin positively aligned and become locally aligned or mediocre when hidden constraints, factual uncertainty, high stakes, or nonlocal coupling enter. For example, generating a code scaffold may be positively aligned; adapting it to a real architecture may be locally aligned; ensuring that it is secure, leakage-free, scalable, and temporally valid may not be. A comparison matrix may be positively aligned as a structuring device, locally aligned as a reasoning aid, and still require verification for factual cells.
 
 These concepts should therefore be used diagnostically, not as a blanket endorsement of direct generation.
 
@@ -1849,7 +1849,7 @@ Mediocrity-to-Extraordinary transformation helps by converting vague outcome sig
 
 Governance adds overhead. Fragmentation, perturbation, validation, memory management, and conflict resolution all consume compute and latency. When task value is already globally aligned with local likelihood, the extra machinery may not be worth it.
 
-The framework should therefore be used selectively. It is most appropriate when the cost of mediocre outputs is high, when recurring failures can be converted into reusable control knowledge, and when the task is locally aligned but not globally stable. When the task is autoregressive-extraordinary, simpler methods may dominate.
+The framework should therefore be used selectively. It is most appropriate when the cost of mediocre outputs is high, when recurring failures can be converted into reusable control knowledge, and when the task is locally aligned but not globally stable. When the task exhibits positive probability-value alignment, simpler methods may dominate.
 
 ### 11.8 Floor vs. Ceiling
 
@@ -1861,7 +1861,7 @@ Similarly, adaptive compute can raise the threshold at which complex-task collap
 
 Not all tasks need this architecture. Routine translation, straightforward summarization, many factual QA settings with strong retrieval, clean symbolic tasks with reliable validators, surface polish, register transfer, standard documentation, and first-pass ideation may have low mismatch profiles. In such cases, ordinary prompting, retrieval, limited search, or tool use may be sufficient.
 
-This is not a weakness of the framework. It is a consequence of the central theory. When the task is already in an autoregressive-extraordinary regime, the system should exploit that regime rather than impose unnecessary control machinery. When the task is locally aligned, governance should be selective rather than maximal: govern the unstable boundary, not every token.
+This is not a weakness of the framework. It is a consequence of the central theory. When the task is already in a positive probability-value alignment regime, the system should exploit that regime rather than impose unnecessary control machinery. When the task is locally aligned, governance should be selective rather than maximal: govern the unstable boundary, not every token.
 
 ### 11.10 Empirical Work Still Needed
 
@@ -1877,7 +1877,7 @@ A full empirical study should compare Knowledge Governance and Mediocrity-to-Ext
 
 For noisy-context reasoning, empirical work should also measure the construal gap: performance difference between noisy natural scene formulations and clean abstract formulations. This would separate failures of problem solving from failures of problem construction.
 
-For autoregressive local alignment, empirical work should measure where local value stops predicting global value: when clear prose masks wrong construal, when candidate lists fail to surface the decisive invariant, when generated rubrics correlate only weakly with expert judgment, and when state enumeration improves conditional correctness. For autoregressive extraordinary, empirical work should identify positive-alignment profiles: when local edits improve global value, when semantic decompression preserves control state, when query formulation improves retrieval, and when generated rubrics actually correlate with expert judgment.
+For probability-value local alignment, empirical work should measure where local value stops predicting global value: when clear prose masks wrong construal, when candidate lists fail to surface the decisive invariant, when generated rubrics correlate only weakly with expert judgment, and when state enumeration improves conditional correctness. For positive probability-value alignment, empirical work should identify positive-alignment profiles: when local edits improve global value, when semantic decompression preserves control state, when query formulation improves retrieval, and when generated rubrics actually correlate with expert judgment.
 
 ---
 
@@ -1887,11 +1887,11 @@ As LLM systems increasingly rely on inference-time compute, it becomes important
 
 A central revision of this version is the separation of terminology from mechanism. **Autoregressive mediocrity** is no longer used as a formal mechanism name: autoregressive chain factorization can encode arbitrary global constraints. When a local proxy, limited search, or irreversible commitment diverges from global completion value, the problem is aggregation mismatch. When a current model and decoder concentrate probability mass on common, fluent, low-value regions, the problem is primarily support mismatch; “autoregressive gravity” is at most an empirical nickname for that tendency. LLM mediocrity also includes state mismatch, where the actual belief at fixed representation diverges from the evidence-warranted belief and changes action ranking; specification mismatch, where the prompt, training-data norm, evaluator, or proxy reward fails to define what counts as good; fitting-boundary mismatch, where local evidence, metrics, templates, or feedback are bound too tightly and fail to generalize across adjacent scenes; and observation-representation mismatch, where the current channel fails to acquire or preserve task-relevant information that a feasible intervention could have supplied.
 
-The paper also introduced **autoregressive local alignment** as the common middle regime. In this regime, probability and task value are aligned over local operations, fragments, or subtasks, but the alignment does not automatically compose into global task success. This is the regime most users actually face: the model is useful enough to create real local value, but not governed enough to ensure that local value satisfies the task's true objective.
+The paper also introduced **probability-value local alignment** as the common middle regime. In this regime, probability and task value are aligned over local operations, fragments, or subtasks, but the alignment does not automatically compose into global task success. This is the regime most users actually face: the model is useful enough to create real local value, but not governed enough to ensure that local value satisfies the task's true objective.
 
 A further clarification is that modern alignment does not invalidate the probability-value framework. Training-time alignment compresses proxy task value into policy probability, and thinking expands the reachable space of locally aligned intermediate states. These mechanisms explain why LLM systems continue to improve and why more tasks become locally aligned over time. But they do not remove structural mismatch in open-ended tasks, because true utility may still depend on nonlocal aggregation, low-support structures, incorrectly formed or updated state beliefs, feasibly obtainable but missing channel variables, or underspecified goals. Irreducible state uncertainty is not itself mismatch; the correct belief-conditioned policy is the attainable benchmark under that information structure.
 
-At the positive pole, the paper argued that LLM mediocrity has an opposite: **autoregressive extraordinary**. In stable positive-alignment regimes, autoregressive continuation is not the bottleneck but the advantage. Context compression, semantic decompression, register transfer, surface polish, structured transformation, taxonomy generation, edge-case enumeration, query formulation, comparison-matrix synthesis, and scaffold generation can all be cases where local continuation and task value reinforce each other.
+At the positive pole, the paper argued that LLM mediocrity has an opposite: **positive probability-value alignment**. In stable positive-alignment regimes, autoregressive continuation is not the bottleneck but can be an advantage. Context compression, semantic decompression, register transfer, surface polish, structured transformation, taxonomy generation, edge-case enumeration, query formulation, comparison-matrix synthesis, and scaffold generation can all be cases where local continuation and task value reinforce each other.
 
 This three-regime view changes the intervention principle. The goal is not always to abandon output space or impose a heavy control architecture. The more general goal is **Mediocrity-to-Extraordinary Transformation**: preserve the locally aligned operations, reparameterize the high-mismatch components into lower-mismatch, positively aligned subtasks, then compose and validate their outputs. Multi-request interaction becomes useful when each round produces persistent intermediate artifacts that change the task distribution faced by the next round.
 

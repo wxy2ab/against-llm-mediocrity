@@ -10,7 +10,7 @@ order: 2
 heroPoints:
   - "LLM mediocrity: fluent, plausible outputs remain concentrated away from high-value regions."
   - "Local alignment: the model performs useful local operations, but local value does not automatically compose into global value."
-  - "Autoregressive extraordinary: local continuation and task value reinforce each other."
+  - "Positive probability-value alignment: model probability and task value reinforce each other."
 ---
 
 ## The Core Question: Does Probability Track Value?
@@ -181,7 +181,7 @@ A local-to-global transformation has four moves:
 3. Govern the boundary: turn the boundary into state matrices, rubrics, constraints, counterexamples, failure modes, or GKOs.
 4. Render after stabilization: let the model produce the final fluent artifact from governed intermediate objects, then check that the control objects survived rendering.
 
-**That is the path from LLM mediocrity toward autoregressive extraordinary, and it is what Knowledge Governance formalizes.**
+**That is the path from LLM mediocrity toward positive probability-value alignment, and it is what Knowledge Governance formalizes.**
 
 If you want the runtime-side quantitative version of that path, continue with the [Agent Harness Framework](/docs/agent-harness-framework.md). It puts state commitment, failure write-back, interface design, and Action-Space Optimization inside one experimentally decomposable frame.
 
@@ -208,7 +208,7 @@ Tasks such as stories, long-form writing, course design, or complex proposals of
 
 In practice, this means constructing a control space first: character arcs, conflict gradients, thematic constraints, scene beats, reveal order, forbidden cliches, and evaluation rubrics. Then the model generates the story or artifact under that control space, and a relatively more reliable evaluation task checks whether the result drifts, becomes generic, violates setup, or collapses into cliche.
 
-If the result is weak, do not immediately rewrite the whole output. Modify the control space itself. This exploits the asymmetry between generation and evaluation: producing a truly excellent artifact may be unstable, but spotting defects, detecting cliche, and checking constraint violations is often much easier. A mediocre autoregressive task is thus rewritten into a sequence of autoregressive-extraordinary tasks.
+If the result is weak, do not immediately rewrite the whole output. Modify the control space itself. This exploits the asymmetry between generation and evaluation: producing a truly excellent artifact may be unstable, but spotting defects, detecting cliche, and checking constraint violations is often much easier. A mediocre autoregressive task is thus rewritten into a sequence of positive-alignment tasks.
 
 ### Search in Control Space, Not Only in Output Space
 Tag: the most general method

@@ -182,20 +182,22 @@ Z = ψ(O) = ψ(φ(s))
 A downstream policy chooses an action from `Z`:
 
 ```text
-π: Z → A
+π: Z_≤t → A
 ```
 
 The best achievable value under representation `Z` is:
 
 ```text
-V_Z = max_π E_s [ U(π(Z(s)), s) ]
+V_Z = max_π E_s [ U(π(Z_≤t), s_t) ]
 ```
 
 Let `Γ_feas` be the set of channel-representation pairs allowed under authorization, cost, latency, privacy, and tool constraints. The best achievable value under the feasible information structure is:
 
 ```text
-V_feas = sup_(φ',ψ')∈Γ_feas  max_π E_s [ U(π(ψ'(φ'(s))), s) ]
+V_feas = sup_(φ',ψ')∈Γ_feas  max_(π:Z'_≤t→A) E_s [ U(π(Z'_≤t), s_t) ]
 ```
+
+Here `Z'_≤t` is the representation history produced by `(φ',ψ')`.
 
 A **repairable** representation-induced ceiling exists when:
 
@@ -203,7 +205,7 @@ A **repairable** representation-induced ceiling exists when:
 V_Z < V_feas
 ```
 
-The ideal value under direct state access may still be written as `V_S = max_π E_s[U(π(s),s)]`, but the gap `V_S - V_feas` is irreducible partial observability imposed by the task's information structure and is not observation-representation mismatch. This mismatch counts only the current system's loss relative to the feasible best channel, `V_feas - V_Z`.
+Both `V_Z` and `V_feas` optimize over history-dependent policies; for a static task, set `t=1`. The ideal value under direct state access may still be written as `V_S = max_(π:S_≤t→A) E_s[U(π(S_≤t),s_t)]`, but the gap `V_S - V_feas` is irreducible partial observability imposed by the task's information structure and is not observation-representation mismatch. This mismatch counts only the current system's loss relative to the feasible best channel, `V_feas - V_Z`.
 
 ### 3.1 Equivalence Classes Induced by Representation
 

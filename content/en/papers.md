@@ -5,7 +5,7 @@ path: /papers
 title: Papers and Working Manuscripts
 navTitle: Working drafts
 kicker: Formalizing the framework
-summary: This section collects the current manuscripts and future empirical directions related to LLM mediocrity, autoregressive extraordinary, the discovery path of the six primitive mismatches, Knowledge Governance, hard-state agent governance, governed collaboration, and cognitive discipline for AI.
+summary: This section collects the current manuscripts and future empirical directions related to LLM mediocrity, positive probability-value alignment, the discovery path of the six primitive mismatches, Knowledge Governance, hard-state agent governance, governed collaboration, and cognitive discipline for AI.
 order: 7
 heroPoints:
   - "Current synthesis: Structural Theory of Value Preservation, Six Primitive Mismatches, and the discovery-path draft on how the six mismatches were forced out of engineering practice."

@@ -48,7 +48,7 @@ The collaboration unit is not the whole task. It is the **control variable**. Fo
 
 ## 2. When Governance Is and Is Not Needed
 
-Governed collaboration is useful for high-mismatch, high-risk, preference-heavy, cross-role, or reusable work. It should not burden tasks that already sit in an autoregressive-extraordinary regime.
+Governed collaboration is useful for high-mismatch, high-risk, preference-heavy, cross-role, or reusable work. It should not burden tasks that already sit in a positive probability-value alignment regime.
 
 The design rule is:
 

@@ -78,7 +78,7 @@ V_Z
 V_{\mathrm{feas}}
 :=
 \sup_{(\phi',\psi')\in\Gamma_{\mathrm{feas}}}
-\max_{\pi:Z'\to Y}\mathbb{E}[U(\pi(Z');S)].
+\max_{\pi:Z'_{\le t}\to Y}\mathbb{E}[U(\pi(Z'_{\le t});S_t)].
 \]
 
 The remediable channel loss is:
@@ -89,7 +89,7 @@ The remediable channel loss is:
 V_{\mathrm{feas}}-V_Z.
 \]
 
-The value of a direct-state policy remains a full-information upper bound, but its gap from \(V_{\mathrm{feas}}\) is irreducible partial observability and is not counted as system mismatch. The remediable gap cannot be eliminated by longer reasoning over the same representation. It requires changing the observation channel, adding measurement, querying the environment, using tools, requesting raw data, or constructing a richer control representation.
+Here \(Z'_{\le t}\) is the representation history produced by \((\phi',\psi')\). Both \(V_Z\) and \(V_{\mathrm{feas}}\) optimize over the same history-dependent policy class; for a static task, set \(t=1\). The value of a direct-state policy remains a full-information upper bound, but its gap from \(V_{\mathrm{feas}}\) is irreducible partial observability and is not counted as system mismatch. The remediable gap cannot be eliminated by longer reasoning over the same representation. It requires changing the observation channel, adding measurement, querying the environment, using tools, requesting raw data, or constructing a richer control representation.
 
 ## 2. Six Ceilings Imposed by the Channel
 

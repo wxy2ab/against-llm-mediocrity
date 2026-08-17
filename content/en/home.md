@@ -15,7 +15,7 @@ heroPoints:
 alignmentLabels:
   probability: statistical probability
   value: task value
-  extraordinary: Autoregressive extraordinary
+  extraordinary: Positive probability-value alignment
   mediocre: LLM mediocrity
   local: Local alignment
   aligned: probability and value rise together
@@ -60,7 +60,7 @@ Tag: the common real-world regime
 
 The model can perform many local operations well, such as compression, rewriting, enumeration, comparison, and structuring. But those local successes do not automatically compose into global success.
 
-### Autoregressive Extraordinary
+### Positive Probability-Value Alignment
 Tag: probability and value align
 
 When local continuation reliably points toward task value, autoregression is not the problem; it is the advantage. Context compression, semantic expansion, structured transformation, and register transfer often live here.
@@ -188,11 +188,11 @@ Those artifacts may include rubrics, state matrices, hard-state ledgers, depende
 
 ## Where This Is Going
 
-- The public layer will explain LLM mediocrity, local alignment, and autoregressive extraordinary without requiring the reader to begin with the paper.
+- The public layer will explain LLM mediocrity, local alignment, and positive probability-value alignment without requiring the reader to begin with the paper.
 - The theory layer develops the [six primitive mismatches](/glossary#six-primitive-mismatches), [Knowledge Governance](/glossary#knowledge-governance), [GKO](/glossary#gko) / [GExO](/glossary#gexo) / [GEsO](/glossary#geso), the [State-Governed Agent Regime (SGAR)](/glossary#sgar), governance loops, and the quantifiable runtime view in the [Agent Harness Framework](/docs/agent-harness-framework.md).
 - The engineering layer turns control objects, hard-state ledgers, validation loops, and minimal human intervention points into usable tools and templates.
 - The collaboration layer reframes the human role: not as a processor of every task, but as the governor of value, authority, taste, budget, evidence, and responsibility.
-- **The public layer** will explain LLM mediocrity, local alignment, and autoregressive extraordinary without requiring the reader to begin with the paper.
+- **The public layer** will explain LLM mediocrity, local alignment, and positive probability-value alignment without requiring the reader to begin with the paper.
 - **The theory layer** develops the [six primitive mismatches](/glossary#six-primitive-mismatches), [Knowledge Governance](/glossary#knowledge-governance), [GKO](/glossary#gko) / [GExO](/glossary#gexo) / [GEsO](/glossary#geso), the [State-Governed Agent Regime (SGAR)](/glossary#sgar), governance loops, and the quantifiable runtime view in the [Agent Harness Framework](/docs/agent-harness-framework.md).
 - **The engineering layer** turns control objects, hard-state ledgers, validation loops, and minimal human intervention points into usable tools and templates.
 - **The collaboration layer** reframes the human role: not as a processor of every task, but as the governor of value, authority, taste, budget, evidence, and responsibility.

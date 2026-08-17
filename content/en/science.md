@@ -151,9 +151,9 @@ AI is restructuring the basic way information gets processed: retrieval, compres
 
 That means that once a workflow starts using AI as its information engine, it will eventually face the same question: how do you stop the model's default continuation path from pulling the work toward fluent but mediocre answers? Put differently, **once AI becomes the engine of information processing, interaction with autoregressive gravity becomes unavoidable.**
 
-### What Falls Into Autoregressive Extraordinary Gets Automated Fast
+### What Falls Into Positive Probability-Value Alignment Gets Automated Fast
 
-Any task that already sits in an autoregressive-extraordinary regime is a strong candidate for productization, pipeline automation, and near-complete removal of human labor. In those tasks, local model continuation and task value already point in the same direction, so relatively little additional governance is needed.
+Any task that already sits in a positive probability-value alignment regime is a strong candidate for productization, pipeline automation, and near-complete removal of human labor. In those tasks, local model continuation and task value already point in the same direction, so relatively little additional governance is needed.
 
 As a result, the parts that still require substantial human involvement are usually not the parts AI can already handle fluently. They are the parts where the model looks locally competent but still fails globally, behaves unstably, or cannot reliably choose the right candidate. In other words, the work that remains valuable, judgment-heavy, and organizationally important tends to cluster around LLM mediocrity.
 
@@ -168,7 +168,7 @@ Those are also the places where LLMs are most likely to distort the task. The mo
 - real validation rather than surface fluency
 - human preference, authorization, and responsibility boundaries that default distributions do not capture
 
-This also explains why, once a high-value task becomes reliably solvable in an autoregressive-extraordinary way, it quickly loses some of its scarcity. It becomes cheaper, more standardized, and often less important as a specialized human activity. What remains persistently valuable shifts toward the region where default model generation still cannot reliably win.
+This also explains why, once a high-value task reaches stable positive probability-value alignment, it quickly loses some of its scarcity. It becomes cheaper, more standardized, and often less important as a specialized human activity. What remains persistently valuable shifts toward the region where default model generation still cannot reliably win.
 ::::
 
 So understanding LLM mediocrity is not a niche prompt-writing trick. It is becoming shared infrastructure for many kinds of work. You may not study models every day, but you increasingly need to know:

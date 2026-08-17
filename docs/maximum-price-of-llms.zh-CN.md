@@ -28,7 +28,7 @@
 用户不为模型的"能力感"、参数规模、推理长度或 token 消耗付款，只为**可验证的增量价值**付款。LLM 在任一任务上的长期最高价格同时受四个上限约束：
 
 ```text
-P_i^* <= theta_i * r_i(C,G,B) * S_i(C,m_i) * V_i^0 - K_i
+P_i^* <= max[ 0, theta_i * { r_i(C,G,B) * S_i(C,m_i) * V_i^0 - K_i } ]，前提是 EU_i^H >= 0
 ```
 
 | 约束 | 符号 | 含义 |
@@ -118,10 +118,10 @@ K_i = K_token + K_integration + K_supervision + K_verification + K_risk
 任务成功概率不单由 C 决定，而由 C、G、B 与任务的结构性 mismatch 共同决定。mismatch 负荷写成：
 
 ```text
-L_i = w_A * A_i + w_U * U_i + w_D * D_i + w_M * M_i + w_F * F_i + w_R * R_i + sum_{j<k} w_jk * m_ij * m_ik
+L_i = w_A * A_i + w_U * U_i + w_D * D_i + w_M * M_i + w_B * B_i + w_R * R_i + sum_{j<k} w_jk * m_ij * m_ik
 ```
 
-六个分量：`A_i` 聚合失配（aggregation mismatch，部署局部代理、有限搜索或不可逆提交偏离全局补全价值）、`U_i` 支持失配（support mismatch，高价值结构位于低支持区域）、`D_i` 状态失配（state mismatch，固定表征下实际信念偏离证据支持信念并改变行动排序）、`M_i` 规格失配（specification mismatch，目标本身不可完全形式化）、`F_i` 拟合边界失配（fitting-boundary mismatch，局部证据、指标或话术被绑定得太死，跨场景不稳健）、`R_i` 观测-表征失配（observation-representation mismatch，可行通道本可提供的决定性信息没有进入模型可操作表征）。交叉项表示 mismatch 之间是超加性的：两种失配同时出现时的难度大于各自难度之和。
+六个分量：`A_i` 聚合失配（aggregation mismatch，部署局部代理、有限搜索或不可逆提交偏离全局补全价值）、`U_i` 支持失配（support mismatch，高价值结构位于低支持区域）、`D_i` 状态失配（state mismatch，固定表征下实际信念偏离证据支持信念并改变行动排序）、`M_i` 规格失配（specification mismatch，目标本身不可完全形式化）、`B_i` 拟合边界失配（fitting-boundary mismatch，局部证据、指标或话术被绑定得太死，跨场景不稳健）、`R_i` 观测-表征失配（observation-representation mismatch，可行通道本可提供的决定性信息没有进入模型可操作表征）。交叉项表示 mismatch 之间是超加性的：两种失配同时出现时的难度大于各自难度之和。
 
 成功概率建模为受 mismatch 封顶的饱和函数：
 
@@ -135,7 +135,7 @@ L_i^eff(G) = L_irreducible + L_transformable * exp(-phi_i * G)
 三个要点：
 
 1. `r_max` 不是 1。即使 C 趋于无穷，纯自回归直接输出的成功率也会被有效 mismatch 卡住。
-2. 工程治理 G 的作用，不是"增加模型能力"，而是**把可转化的 mismatch 转出模型**（检索和经验沉淀解 U_i、状态注入解 D_i、规格化 rubric 解 M_i、路由边界治理解 F_i、补测量与控制表征解 R_i），也就是降低 `L_i^eff`。
+2. 工程治理 G 的作用，不是"增加模型能力"，而是**把可转化的 mismatch 转出模型**（检索和经验沉淀解 U_i、状态注入解 D_i、规格化 rubric 解 M_i、路由边界治理解 B_i、补测量与控制表征解 R_i），也就是降低 `L_i^eff`。
 3. 推理预算 B 进入 `r_max` 的方式是对数的——这为第 6 章的 token 边际递减埋下伏笔。
 
 ### 2.3 支付意愿
@@ -233,10 +233,14 @@ dP_i^*/dC = (V_i^0 * S_i + F_i) * dr_i/dC      （正项：能力提升可靠性
 ```text
 P_i^* = max[ 0, theta_i * { (H_i - K_i) + (r_i - r_i^H) * (V_i^0 * S_i + F_i) } ]
 
-P_i^* <= theta_i * r_i(C,G,B) * S_i(C,m_i) * V_i^0 - K_i
+若 EU_i^H >= 0，则：
+P_i^* <= max[ 0, theta_i * { r_i(C,G,B) * S_i(C,m_i) * V_i^0 - (1-r_i) * F_i - K_i } ]
+      <= max[ 0, theta_i * { r_i(C,G,B) * S_i(C,m_i) * V_i^0 - K_i } ]
 ```
 
 `theta_i` 由议价结构决定：当价值实现依赖客户的 IP、专有数据、组织流程、监管牌照或分发渠道时，客户捕获大头，工具方 `theta_i` 低；当工具方绑定了验证管线、交付闭环或专有数据时，`theta_i` 高。
+
+上述包络不等式要求次优替代方案的期望净价值非负，即 `EU_i^H >= 0`。若没有这个前提，替代方案本身可能毁损价值，增量支付意愿就可能高于 AI 系统自身的期望净价值。成本项仍位于 `theta_i` 的缩放之内，因为这与上面的支付意愿公式采用同一计价约定。
 
 四个上限缺一不可：`r_i` 低则无物可卖；`S_i` 低则卖的东西不稀缺；`theta_i` 低则稀缺价值轮不到工具方；`K_i` 高则利润被成本吃掉。**第 5 章将逐行业检查这四个量。**
 

@@ -28,7 +28,7 @@ This is a long working paper. The Core Conclusion and Argument Map below give th
 Users do not pay for a model's aura of capability, parameter count, reasoning length, or token burn. They pay for **verifiable incremental value**. For any task, an LLM's long-run maximum price is jointly constrained by four ceilings:
 
 ```text
-P_i^* <= theta_i * r_i(C,G,B) * S_i(C,m_i) * V_i^0 - K_i
+P_i^* <= max[ 0, theta_i * { r_i(C,G,B) * S_i(C,m_i) * V_i^0 - K_i } ], if EU_i^H >= 0
 ```
 
 | Constraint | Symbol | Meaning |
@@ -76,7 +76,7 @@ This matches the three-regime split:
 
 | Task type | Model performance | Pricing destiny |
 |---|---|---|
-| Autoregressive extraordinary | Direct output is already near-optimal | Commoditizes fastest |
+| Positive probability-value alignment | Direct output is already near-optimal | Commoditizes fastest |
 | Local alignment | Locally correct but globally drifting | Has real value but needs governance |
 | LLM mediocrity | Even brute-force sampling rarely reaches a near-optimal result | Highest rents, but the model cannot capture them |
 
@@ -114,7 +114,7 @@ K_i = K_token + K_integration + K_supervision + K_verification + K_risk
 Success is jointly determined by `C`, `G`, `B`, and the task's mismatch load:
 
 ```text
-L_i = w_A * A_i + w_U * U_i + w_D * D_i + w_M * M_i + w_F * F_i + w_R * R_i + sum_{j<k} w_jk * m_ij * m_ik
+L_i = w_A * A_i + w_U * U_i + w_D * D_i + w_M * M_i + w_B * B_i + w_R * R_i + sum_{j<k} w_jk * m_ij * m_ik
 ```
 
 where:
@@ -123,7 +123,7 @@ where:
 - `U_i`: support mismatch
 - `D_i`: state mismatch
 - `M_i`: specification mismatch
-- `F_i`: fitting-boundary mismatch
+- `B_i`: fitting-boundary mismatch
 - `R_i`: observation-representation mismatch
 
 Success probability is capped by effective mismatch:
@@ -219,10 +219,14 @@ Introduce `theta_i`, the share of incremental value the tool vendor can actually
 ```text
 P_i^* = max[ 0, theta_i * { (H_i - K_i) + (r_i - r_i^H) * (V_i^0 * S_i + F_i) } ]
 
-P_i^* <= theta_i * r_i(C,G,B) * S_i(C,m_i) * V_i^0 - K_i
+If EU_i^H >= 0, then:
+P_i^* <= max[ 0, theta_i * { r_i(C,G,B) * S_i(C,m_i) * V_i^0 - (1-r_i) * F_i - K_i } ]
+      <= max[ 0, theta_i * { r_i(C,G,B) * S_i(C,m_i) * V_i^0 - K_i } ]
 ```
 
 `theta_i` is low when value depends on the customer's IP, proprietary data, organization, license, or distribution. It rises when the tool binds validation pipelines, delivery loops, or proprietary data.
+
+The envelope inequalities require the next-best substitute to have nonnegative expected net value, `EU_i^H >= 0`. Without that premise, the substitute can be value-destroying and the incremental willingness to pay can exceed the AI system's own expected net value. The cost term remains inside the `theta_i` scaling because that is the pricing convention used in the willingness-to-pay equation above.
 
 All four ceilings matter:
 
