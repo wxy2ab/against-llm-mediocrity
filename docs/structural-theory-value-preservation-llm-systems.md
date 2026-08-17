@@ -457,7 +457,7 @@ global likelihood direction ≠ global task-value direction
 
 ### 5.3 Positive Probability-Value Alignment
 
-At the positive pole, model probability and task value reinforce each other across the task. This regime may be called **autoregressive extraordinary** or, more neutrally, **positive probability-value alignment**.
+At the positive pole, model probability and task value reinforce each other across the task. This regime is called **positive probability-value alignment**.
 
 In this regime:
 

@@ -685,7 +685,7 @@ Heavy governance is usually unnecessary for:
 - information extraction under explicit criteria;
 - one-off light rewriting;
 - local polishing;
-- tasks already in the Autoregressive Extraordinary regime.
+- tasks already in the positive probability-value alignment regime.
 
 Governance should selectively target mismatch boundaries, not every token.
 
