@@ -196,7 +196,7 @@ Support mismatch is easiest to understand by separating it from neighboring mism
 
 ### 3.1 Not Observation-Representation Mismatch
 
-Observation-representation mismatch occurs when decisive variables never enter the operational representation `Z`.
+Observation-representation mismatch occurs when decision-relevant information available through a feasible channel never enters the operational representation `Z`.
 
 Support mismatch assumes the high-value structure is at least expressible from the representation. The issue is not that the variable is absent, but that the system's search process is unlikely to instantiate the structure that uses it correctly.
 
@@ -212,9 +212,9 @@ Support failure:
 
 ### 3.2 Not State Mismatch
 
-State mismatch occurs when the system cannot identify which latent state it is in.
+State mismatch occurs when, at fixed `Z`, the system's formed or updated state belief diverges from the belief warranted by the same evidence and changes action ranking. Uncertainty alone is not mismatch.
 
-Support mismatch can occur even after the state is known. The system may know the task regime but still fail to produce the rare structure required by that regime.
+Support mismatch can occur even when state belief is correct. The system may know the task regime but still fail to produce the rare structure required by that regime.
 
 Example:
 

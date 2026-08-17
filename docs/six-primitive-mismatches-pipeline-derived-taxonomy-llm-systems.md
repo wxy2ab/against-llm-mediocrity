@@ -16,6 +16,7 @@ The central abstraction is a world-to-output pipeline:
 S_world
   -> O
   -> Z
+  -> belief formation / update
   -> capability routing
   -> candidate support
   -> aggregation
@@ -24,8 +25,8 @@ S_world
 
 A high-value LLM system must preserve task-relevant value structure across this pipeline. Failures arise when:
 
-- decisive variables do not enter the representation,
-- latent states are not identifiable,
+- feasibly obtainable decisive variables do not enter the representation,
+- system beliefs diverge from the available evidence,
 - capabilities are routed to the wrong domains,
 - high-value structures are unreachable under the system policy,
 - locally plausible components fail to compose, or
@@ -101,6 +102,7 @@ A generic high-level pipeline is:
 S_world
   --phi--> O
   --psi--> Z
+  --B_theta--> b
   --rho--> C
   --p_theta, B--> K
   --A--> Y
@@ -115,6 +117,8 @@ phi     = observation, sensing, logging, retrieval, input acquisition
 O       = observed data available to the system
 psi     = representation function: encoding, compression, tokenization, schema extraction, prompt construction
 Z       = model-accessible operational representation
+B_theta = belief formation and update over latent task state
+b       = belief state actually maintained by the system
 rho     = routing function that activates capabilities, roles, tools, or strategies
 C       = activated capabilities / strategies / tools / behavioral modes
 p_theta = model or system policy over continuations, candidates, plans, or actions
@@ -169,8 +173,8 @@ lack of planning
 But these descriptions may point to different structural causes:
 
 ```text
-The relevant column was absent from representation.          -> observation-representation mismatch
-The question intent depended on an ambiguous latent state.   -> state mismatch
+An obtainable relevant column was absent from representation. -> observation-representation mismatch
+Intent evidence was present, but the belief was misranked.     -> state mismatch
 The model used template SQL when schema audit was needed.    -> fitting-boundary mismatch
 The correct join path was low-support under direct decoding. -> support mismatch
 The clauses were locally plausible but globally inconsistent.-> aggregation mismatch
@@ -193,7 +197,7 @@ The pipeline-derived taxonomy answers these questions by assigning each primitiv
 | Pipeline station | Primitive mismatch | Core question | Primary repair target |
 |---|---|---|---|
 | `S_world -> O -> Z` | Observation-representation mismatch | Did the decisive variable enter the operational representation? | Channel / representation repair |
-| `Z -> latent state` | State mismatch | Given the representation, do we know which state we are in? | State discrimination / branching |
+| `Z -> B_theta -> b` | State mismatch | Is the actual belief faithful to the representation evidence? | Belief calibration / update / branching |
 | `Z -> C` | Fitting-boundary mismatch | Are the right capabilities activated in the right domains? | Router governance |
 | `p_theta, B -> K` | Support mismatch | Can the high-value structure become a live candidate? | Control-space search |
 | `K -> Y` | Aggregation mismatch | Do locally good parts compose into global value? | Composition governance |
@@ -250,7 +254,7 @@ This criterion makes independence operational. The taxonomy is not merely semant
 
 ### 6.1 Definition
 
-Observation-representation mismatch occurs when task-decisive variables in the world fail to enter the system's operational representation.
+Observation-representation mismatch occurs when task-decisive variables obtainable under the declared authorization, cost, latency, and tool constraints fail to enter the system's operational representation.
 
 The system may observe the world through logs, documents, retrieved passages, database schemas, user messages, tool outputs, screenshots, sensors, or prompt context. Those observations are then compressed, encoded, tokenized, summarized, filtered, and formatted. At either stage, a variable required for high task value may be omitted, aliased, distorted, or made inaccessible.
 
@@ -274,9 +278,7 @@ but:
 psi(phi(S1)) ~= psi(phi(S2))
 ```
 
-from the perspective of the system's policy, evaluator, or control procedure.
-
-The decisive distinction exists in the world, but it has been erased or made unavailable in the representation.
+from the perspective of the system's policy, evaluator, or control procedure, the current `Z` has decision-relevant aliasing. Observation-representation mismatch exists only if the feasible channel set also contains some `(phi', psi')` that can expose the distinction in `Z'` at an allowed cost. If no feasible channel can distinguish `S1` and `S2`, this is irreducible partial observability; the system should act on the correct belief state rather than be diagnosed with a missing-variable failure.
 
 ### 6.3 Diagnostic Question
 
@@ -329,13 +331,13 @@ A channel governance object should record:
 
 Observation-representation mismatch concerns variable entry.
 
-State mismatch concerns state inference after representation exists.
+State mismatch concerns whether belief formation and update are faithful to evidence after a fixed representation exists.
 
 In short:
 
 ```text
-Observation-representation mismatch: Is the decisive variable in Z?
-State mismatch: Given Z, which latent state are we in?
+Observation-representation mismatch: Is the feasibly obtainable decisive variable in Z?
+State mismatch: Given fixed Z≤t, does b_hat_t match the evidence-warranted belief b*t?
 ```
 
 ---
@@ -344,32 +346,28 @@ State mismatch: Given Z, which latent state are we in?
 
 ### 7.1 Definition
 
-State mismatch occurs when the correct policy, interpretation, or evaluation depends on a latent state that is not identifiable from the current representation.
+State mismatch occurs when policy, interpretation, or evaluation depends on latent state and the belief formed or updated from a fixed current representation diverges from the evidence-warranted belief in a decision-relevant way.
 
-The system may have relevant variables in context but still not know which regime it is operating in. The same observed features may support multiple hidden states with different optimal actions.
+The system may have relevant variables in context but still collapse, misrank, forget, or stale its state belief without warrant. The same observations may legitimately support multiple hidden states; that uncertainty is not itself a failure. Mishandling it is.
 
 ### 7.2 Formal Signature
 
-Let `H` be a latent state space. Let the correct action depend on `h in H`.
+Let `H` be a latent state space, let `b*t(h)=P(h_t=h|Z≤t)` be the evidence-warranted belief, and let `b_hat_t=B_theta(Z≤t)` be the system's actual belief.
 
 State mismatch exists when:
 
 ```text
-P(h | Z) is ambiguous, unstable, or misranked
+argmax_a E_(h~b_hat_t) U(a | h)
+  !=
+argmax_a E_(h~b*t) U(a | h)
 ```
 
-and:
-
-```text
-argmax_a U(a | h1) != argmax_a U(a | h2)
-```
-
-for plausible states `h1` and `h2`.
+If `b_hat_t=b*t` and the system takes the belief-optimal, risk-bounded, branching, or conditional action, continued uncertainty about the true state is not state mismatch.
 
 ### 7.3 Diagnostic Question
 
 ```text
-Given the available representation, do we know which latent state or regime the task is in?
+Given fixed Z≤t, does b_hat_t match the evidence-warranted belief b*t closely enough to preserve action ranking?
 ```
 
 ### 7.4 Typical Symptoms
@@ -584,7 +582,7 @@ Aggregation mismatch concerns whether reachable components compose into a global
 
 Aggregation mismatch occurs when locally plausible, locally correct, or locally valuable components fail to compose into a globally valuable artifact.
 
-This is the precise structural home of autoregressive mediocrity. The problem is not that every local step is bad. The problem is that local value is not compositionally faithful to global value.
+This is an architecture-independent local-global failure. The problem is not that every local step is bad. It is that the deployed local proxy and commitment rule are not compositionally faithful to global value. Autoregressive factorization can represent any joint distribution exactly and is therefore not the structural cause of this mismatch.
 
 ### 10.2 Formal Signature
 
@@ -732,8 +730,8 @@ The following table is the shortest practical diagnostic version of the taxonomy
 
 | If the failure is that... | Diagnose primarily as... | Ask... | Repair by... |
 |---|---|---|---|
-| The decisive fact, variable, schema element, log, value, or measurement is absent or compressed away. | Observation-representation | Did the variable enter Z? | Fix channel or representation. |
-| The same representation supports multiple hidden regimes with different correct actions. | State | Which state are we in? | Track, discriminate, branch, clarify. |
+| A feasibly obtainable decisive fact, variable, schema element, log, value, or measurement is absent or compressed away. | Observation-representation | Did the feasible variable enter Z? | Fix channel or representation. |
+| Under the same representation, the belief is collapsed without warrant, misranked, stale, forgotten, or not updated. | State | Is the belief faithful to evidence? | Calibrate, update, preserve hypotheses, branch. |
 | The model has the capability but activates it in the wrong conditions. | Fitting-boundary | Is the right capability routed? | Govern trigger boundaries. |
 | The correct structure rarely appears as a candidate. | Support | Is the structure reachable? | Search control space; expand candidates. |
 | Good local pieces fail as a whole. | Aggregation | Do parts compose? | Govern dependencies and invariants. |
@@ -743,7 +741,7 @@ A practical rule:
 
 ```text
 If the answer could not possibly be right because needed information was absent, start with observation-representation.
-If the answer could be right in one hidden regime but wrong in another, start with state.
+If the system belief is not warranted by the fixed available evidence, start with state; uncertainty alone is not failure.
 If the needed operation is known but not invoked, start with fitting-boundary.
 If the needed structure is never proposed, start with support.
 If the pieces are good but the whole is bad, start with aggregation.
@@ -763,13 +761,13 @@ It does not claim that every computational failure in every possible system is e
 For an LLM system modeled as:
 
 ```text
-S_world -> O -> Z -> C -> K -> Y -> U_hat
+S_world -> O -> Z -> b -> C -> K -> Y -> U_hat
 ```
 
 with true utility `U`, any failure of value preservation must involve at least one of the following:
 
-1. A value-relevant distinction in `S_world` is not preserved into `Z`.
-2. A value-relevant latent state is not identifiable from `Z`.
+1. A feasibly obtainable value-relevant distinction is not preserved into `Z`.
+2. The maintained belief `b` diverges from the belief warranted by the evidence in `Z`.
 3. A value-relevant capability is not activated in its true domain or is activated outside it.
 4. A value-relevant structure is not reachable or live under the candidate-generation process.
 5. Value-relevant relations among candidate parts are not preserved by aggregation.
@@ -804,7 +802,7 @@ The completeness claim is feed-forward rather than fully dynamical.
 
 ```text
 It applies to a single forward pass:
-S_world -> O -> Z -> C -> K -> Y -> U_hat
+S_world -> O -> Z -> b -> C -> K -> Y -> U_hat
 ```
 
 Cross-turn feedback, oscillation, retry loops, state accumulation, and commitment dynamics are runtime phenomena. They matter greatly in deployed systems, but they are governed by SGAR and related runtime objects rather than being additional primitive stations in this taxonomy.
@@ -821,15 +819,15 @@ Each mismatch can be varied while holding the others approximately fixed, and ea
 
 ### 14.1 Observation-Representation Minimal Pair
 
-Two systems have the same model, prompt, search procedure, objective, and aggregation method. One receives a schema with a decisive column and sample values. The other receives a compressed schema that omits them.
+Two systems have the same model, belief updater, search procedure, objective, and aggregation method. One receives a schema with a decisive column and sample values obtainable through an authorized channel. The other receives a compressed schema that omits them.
 
 If only the first system can solve the task, the failure is not state, support, aggregation, routing, or objective. It is variable entry.
 
 ### 14.2 State Minimal Pair
 
-Two systems receive the same variables, but one receives a disambiguating state signal and the other does not. The correct action differs across states.
+Two systems hold `phi`, `psi`, `Z≤t`, and the objective fixed. One uses an evidence-calibrated `B_theta` that maintains `b*t`; the other updater misranks, goes stale, or collapses prematurely and therefore selects a different action.
 
-If ambiguity alone causes failure, the mismatch is state.
+If repairing belief formation or update alone restores performance, the mismatch is state. Ambiguity alone is not failure.
 
 ### 14.3 Fitting-Boundary Minimal Pair
 
@@ -1531,13 +1529,13 @@ If those conditions are met, the current count of six would no longer be stable.
 ### 32.1 Observation-Representation Mismatch
 
 ```text
-A failure in which task-decisive variables in S_world are lost, aliased, compressed, omitted, or made operationally inaccessible before entering Z.
+A failure in which task-decisive variables feasibly obtainable under the declared channel constraints are lost, aliased, compressed, omitted, or made operationally inaccessible before entering Z.
 ```
 
 ### 32.2 State Mismatch
 
 ```text
-A failure in which the correct policy depends on a latent state that is not identifiable under the available representation.
+A failure in which the maintained belief over latent state diverges from the belief warranted by the fixed available representation, changing the action ranking.
 ```
 
 ### 32.3 Fitting-Boundary Mismatch
@@ -1572,8 +1570,8 @@ A failure in which the accessible objective U_hat ranks candidates differently f
 
 ```text
 Station: S_world -> O -> Z
-Question: Did decisive variables enter Z?
-Failure: Variable absent, aliased, compressed, inaccessible.
+Question: Did feasibly obtainable decisive variables enter Z?
+Failure: Feasible variable absent, aliased, compressed, inaccessible.
 Audit evidence: Supplying variable changes answer; system cannot cite variable.
 Control delta: Add observation channel or representation field.
 GKO: Required Variable / Channel Rule.
@@ -1584,13 +1582,13 @@ SGAR state: Variable observed and committed.
 ### A.2 State Card
 
 ```text
-Station: Z -> latent state
-Question: Which state are we in?
-Failure: Ambiguous or misranked latent regime.
-Audit evidence: Alternative state explains defect; small discriminator flips action.
-Control delta: Add state hypothesis and discriminator.
+Station: Z≤t -> B_theta -> b_hat_t
+Question: Is the maintained belief faithful to the evidence?
+Failure: Unsupported collapse, misranking, staleness, forgetting, or failed belief update.
+Audit evidence: With Z fixed, a calibrated belief update changes the defective action.
+Control delta: Calibrate belief update or preserve warranted hypotheses.
 GKO: State Hypothesis / Branch Policy.
-Regression guard: Ambiguous case requires branch or clarification.
+Regression guard: A case with warranted uncertainty must not collapse beyond the evidence.
 SGAR state: State committed, rejected, or held open.
 ```
 

@@ -40,11 +40,11 @@
 
 决定性变量不是被推理错了，而是根本没有进入可操作表征；或者它虽然进入了，却以混叠、扁平化、去语境化、截断、过期、未绑定或无法用于控制的形式进入。
 
-本文把 **观测-表征失配** 展开为 LLM 系统价值保存结构理论中的第一类原始失配。若 `S_world` 是任务世界，`φ` 是观测函数，`ψ` 是表征函数，`Z = ψ(φ(S_world))` 是模型可访问的控制表征，那么当 `S_world` 中与任务价值相关的区分在 `Z` 中被折叠，或在操作上不可访问时，就发生观测-表征失配。
+本文把 **观测-表征失配** 展开为 LLM 系统价值保存结构理论中的第一类原始失配。若 `S_world` 是任务世界，`φ` 是观测函数，`ψ` 是表征函数，`Z = ψ(φ(S_world))` 是模型可访问的控制表征，那么当一个在授权、成本、时延和工具约束下可行获得的任务相关区分，在 `Z` 中被折叠或变得不可操作时，就发生观测-表征失配。
 
 其结果是一个 **表征诱导上限**：在同一个 `Z` 上继续推理、批判、重排或自我反思，都无法可靠恢复上游已经丢失的价值。
 
-本文澄清观测-表征失配与状态失配的边界。状态失配问的是：在已有表征下，我们处于哪个潜在状态？观测-表征失配问的是：为了区分状态或价值而需要的变量，是否已经进入表征？前者是给定表征下的推断问题；后者是进入表征之前的转导问题。
+本文澄清观测-表征失配与状态失配的边界。状态失配问的是：在固定的已有表征下，系统形成和更新的信念是否与证据相符？观测-表征失配问的是：一个可行取得的必要变量是否进入了表征？前者是信念形成问题；后者是进入表征之前的转导问题。原则上不可直接观测的真实状态，不因不可观测本身构成任何一类系统失配。
 
 随后本文引入 **通道治理**：一种发生在知识治理之前的前治理纪律，用来确保价值关键变量进入通道、在表征中存活、被正确绑定、保持可区分，并成为控制空间中的可操作变量。
 
@@ -94,7 +94,7 @@ S_world --φ--> O --ψ--> Z
 - `ψ` 是表征函数：编码、tokenization、prompt 构造、schema 序列化、摘要、embedding、压缩、过滤或格式化。
 - `Z` 是模型和周边系统使用的操作表征。
 
-当 `S_world → O → Z` 没有保存任务相关区分时，就发生观测-表征失配。一旦区分丢失，下游推理面对的就不再是任务本身，而是任务的一个投影。
+当 `S_world → O → Z` 没有保存一个在声明的可行通道集合中本可取得的任务相关区分时，就发生观测-表征失配。一旦区分丢失，下游推理面对的就不再是可行信息所支持的最佳任务投影，而是一个可修复的贫化投影。
 
 因此，观测-表征失配必须被看作原始失配，而不是幻觉、缺上下文或弱推理的特殊情况。它在管线中有独立位置，有独立失败机制，也有独立修复目标。
 
@@ -123,6 +123,7 @@ repair the representation contract
 S_world
   -- φ --> O
   -- ψ --> Z
+  -- Bθ --> belief state
   -- ρ --> activated capabilities
   -- pθ --> candidate support
   -- A --> output aggregation
@@ -134,7 +135,7 @@ S_world
 | 管线站点 | 原始失配 | 问题 |
 |---|---|---|
 | `S_world → O → Z` | 观测-表征失配 | 决定性变量是否进入操作表征？ |
-| `Z → latent state` | 状态失配 | 给定表征，我们处在哪个潜在状态？ |
+| `Z → belief state` | 状态失配 | 实际信念是否与表征证据所支持的信念一致？ |
 | `Z → capability activation` | 拟合边界失配 | 正确能力是否在正确领域被激活？ |
 | `pθ` 与搜索预算 | 支持失配 | 高价值结构在策略和预算下是否可达？ |
 | 局部部分 → 全局产物 | 聚合失配 | 局部好片段能否组合成全局价值？ |
@@ -188,19 +189,19 @@ Z = ψ(O) = ψ(φ(s))
 V_Z = max_π E_s [ U(π(Z(s)), s) ]
 ```
 
-直接访问 `S` 时可达到的最佳价值是：
+令 `Γ_feas` 是在授权、成本、时延、隐私和工具约束下可采用的通道—表征对集合。可行信息结构下可达到的最佳价值是：
 
 ```text
-V_S = max_π E_s [ U(π(s), s) ]
+V_feas = sup_(φ',ψ')∈Γ_feas  max_π E_s [ U(π(ψ'(φ'(s))), s) ]
 ```
 
-当以下不等式成立时，就存在表征诱导上限：
+当以下不等式成立时，就存在**可修复的**表征诱导上限：
 
 ```text
-V_Z < V_S
+V_Z < V_feas
 ```
 
-这个差距不一定来自弱推断。它可能来自 `φ` 或 `ψ` 引入的粗化。
+直接访问世界状态的理想值仍可写为 `V_S = max_π E_s[U(π(s),s)]`，但 `V_feas < V_S` 的部分是任务信息结构造成的不可约部分可观测性，不应算作观测-表征失配。观测-表征失配只计算当前系统相对于可行最佳通道的损失 `V_feas - V_Z`。
 
 ### 3.1 表征诱导的等价类
 
@@ -224,7 +225,7 @@ argmax_a U(a, s1) ≠ argmax_a U(a, s2)
 
 那么任何基于 `Z` 的确定性策略都不可能同时对二者最优。即便随机策略也无法完全恢复丢失区分，除非任务效用结构恰好奖励这种混合押注。
 
-这就是观测-表征失配的核心。
+这说明当前 `Z` 存在决策相关混叠，但还不足以单独诊断观测-表征失配。还必须存在 `(φ',ψ') ∈ Γ_feas`，使 `Z'(s1) ≠ Z'(s2)`，或至少把同一行动造成的损失降到阈值以内。若所有可行通道都折叠这两个状态，系统应维护正确的信念分布；该混叠属于信息边界，而不是漏接变量。
 
 ### 3.2 控制充分性
 
@@ -238,7 +239,7 @@ Z(s1) = Z(s2)  ⇒  Argmax_a U(a, s1) = Argmax_a U(a, s2)
 
 或者，在较弱意义上，若在每个等价类上使用同一行动造成的价值损失低于可接受阈值，则可以视为足够。
 
-当 `Z` 不是控制充分的，就存在观测-表征失配。
+当 `Z` 不是控制充分的，并且 `Γ_feas` 中存在更控制充分的可行通道或表征时，才存在观测-表征失配。
 
 ### 3.3 变量进入
 
@@ -274,7 +275,7 @@ schema 被检索了，但外键约束被省略了。
 状态失配问：
 
 ```text
-Given Z, which latent state h are we in?
+Given fixed Z≤t, does b_hat_t = Bθ(Z≤t) match the evidence-warranted belief b*t?
 ```
 
 观测-表征失配问：
@@ -287,24 +288,24 @@ Did the variables required to distinguish task-relevant states or utilities ente
 
 | 问题 | 观测-表征失配 | 状态失配 |
 |---|---|---|
-| 管线位置 | `S_world → O → Z` | 基于 `Z` 对潜在状态推断 |
-| 核心失败 | 变量或区分在推理前丢失 | 已有表征下状态仍然歧义 |
-| 典型症状 | 模型无法考虑决定性因素 | 模型能看到多个可能状态，但误判或未分支 |
-| 修复目标 | 测量、检索、序列化、schema、通道、表征 | 状态枚举、判别器、澄清、信念更新、分支策略 |
-| 关键问题 | 变量进入了吗？ | 在已进入变量下，我们处在哪个状态？ |
+| 管线位置 | `S_world → O → Z` | `Z≤t → Bθ → b_hat_t` |
+| 核心失败 | 可行取得的变量或区分在推理前丢失 | 实际信念偏离证据所支持的信念，或错误塌缩不确定性 |
+| 典型症状 | 接入可行变量后性能恢复 | 固定同一 `Z`，改变信念更新或跟踪就改变行动质量 |
+| 修复目标 | 测量、检索、序列化、schema、通道、表征 | 证据校准、信念更新、假设保存、分支策略 |
+| 关键问题 | 可行变量进入了吗？ | 信念是否忠于已有证据？ |
 
-即便通道修复完成，状态失配也可能存在。例如，用户提供了所有可得症状，但诊断仍不确定。这是状态歧义。
+即便通道修复完成，状态失配也可能存在。例如，用户提供了所有可得症状，证据支持一个分布式诊断，但系统仍无依据地押注单一病因，或忘记新证据。这是信念形成或更新失败。相反，如果系统保留诊断不确定性，并采取信念条件下的最优检查或有界处置，那么诊断仍不确定并不构成状态失配。
 
 观测-表征失配发生在相关症状从未被收集、被摘要掉，或以模型无法使用的方式表示时。
 
 修复不同。状态失配邀请：
 
 ```text
-ask a clarifying question
 maintain multiple hypotheses
 compute value of information
 branch policy by state
 track belief updates
+calibrate belief to available evidence
 ```
 
 观测-表征失配邀请：
@@ -771,7 +772,8 @@ Channel Governance → Knowledge Governance → Audit Engineering → State Gove
 如果区分状态所需的变量缺席，状态推断会变得不可能或不稳定。系统看似不确定，但不确定性来自表征折叠。
 
 ```text
-missing discriminative variable → latent states aliased → state mismatch
+missing feasible discriminative variable → observation-representation mismatch
+incorrect belief over the resulting Z → state mismatch
 ```
 
 修复必须从通道修复开始，而不只是更好的状态推理。
@@ -1174,7 +1176,7 @@ failure is expensive or hard to detect locally
   "condition": "LLM systems whose task-relevant world variables must pass through observation and representation functions before model control is possible.",
   "assertion": "If value-relevant variables are lost, aliased, stale, unbound, or made operationally inaccessible before entering Z, downstream reasoning over Z faces a representation-induced ceiling.",
   "strength": "structural-relative",
-  "support_scope": "Applies to value-preservation failures caused by the map S_world → O → Z.",
+  "support_scope": "Applies when a task-relevant distinction obtainable within the declared feasible channel set is lost in S_world → O → Z.",
   "revocation_trigger": "Show that all such failures can be reduced to state, fitting-boundary, support, aggregation, or specification mismatches without losing intervention specificity.",
   "not_supported_claims": "Does not claim that every missing fact is an observation-representation mismatch; does not claim that all tasks require exhaustive observation; does not claim that more context always improves control."
 }
@@ -1230,7 +1232,7 @@ Govern the channel before governing the knowledge.
 | 观测函数 `φ` | 世界成为被观测数据的过程。 |
 | 表征函数 `ψ` | 被观测数据成为操作表征的过程。 |
 | 操作表征 `Z` | 可用于模型控制、路由、搜索、审计、渲染和状态更新的表征。 |
-| 观测-表征失配 | `S_world → O → Z` 未保存任务相关区分。 |
+| 观测-表征失配 | `S_world → O → Z` 未保存可行取得的任务相关区分；不可约部分可观测性不计入。 |
 | 变量进入 | 任务关键变量被观测、被保留、被绑定、可区分、可操作。 |
 | 控制充分性 | 表征保存高价值行动所需的全部区分。 |
 | 表征诱导上限 | 表征中被折叠区分施加的最大价值损失。 |

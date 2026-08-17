@@ -35,7 +35,7 @@ Tag: probability peak misses value peak
 
 Under the available budget, reachable candidates remain concentrated in outputs that are fluent, plausible, and locally improvable but far from high-value solutions. More sampling or polishing may improve average quality without exposing the decisive structure.
 
-Autoregressive mediocrity is the aggregation-mismatch subcase: local token probabilities keep producing reasonable continuations while the global value structure is diluted.
+“Autoregressive mediocrity” is no longer used as a mechanism term. Autoregressive chain factorization can encode global constraints exactly. Divergence of a local proxy, finite search, or irreversible commitment from global completion value is aggregation mismatch. Concentration of a current model-and-decoder distribution on common, low-value regions is primarily support mismatch and may be nicknamed “autoregressive gravity.”
 
 ### [Local alignment](/glossary#local-alignment)
 Tag: the common practical state
@@ -82,15 +82,15 @@ The [six primitive mismatches](/glossary#six-primitive-mismatches) are not an at
 :::cards
 ### Aggregation
 
-Local improvements do not reliably compose into global value. Stories, code architecture, strategy, customer communication, and complex reasoning often depend on long-range coordination, delayed payoff, or coupled constraints. This is where autoregressive mediocrity appears as a local-probability mechanism.
+Deployed local proxies, finite search, or irreversible commitments do not reliably recover global completion value. Stories, code architecture, strategy, customer communication, and complex reasoning often depend on long-range coordination, delayed payoff, or coupled constraints. The mismatch is architecture-independent; autoregression is only one possible sequential implementation.
 
 ### Support
 
-The high-value answer is hard to reach under the current model, search operator, and budget. It may involve low-salience evidence, a minority frame, rare structure, counterintuitive option, or unusual boundary condition.
+The high-value answer is hard to reach under the current model, search operator, and budget. It may involve low-salience evidence, a minority frame, rare structure, counterintuitive option, or unusual boundary condition. “Autoregressive gravity” is only an empirical nickname for this concentration of probability mass, not an architectural theorem.
 
 ### State
 
-The ranking of answers depends on hidden, changing, or underspecified state. User emotion, market regime, legal jurisdiction, production environment, time window, and organizational authority can reverse the value of the same answer.
+At a fixed accessible representation, the system's formed or updated state belief diverges from the belief warranted by the evidence and thereby changes answer or action ranking. Uncertainty alone is not mismatch: a correctly maintained broad posterior with a belief-conditioned policy reaches the attainable benchmark for that information structure.
 
 ### Specification
 
@@ -102,7 +102,7 @@ The system binds too tightly to a local evidence chain, metric, scene default, r
 
 ### Observation-Representation
 
-The decisive world variable never reaches the model in a task-sufficient form. The system may need measurement, raw logs, tool feedback, richer modality, sensor data, or a structured control representation before reasoning can close.
+Decision-relevant information that a feasible intervention could have acquired or preserved never reaches the model. The system may need measurement, raw logs, tool feedback, richer modality, sensor data, or a structured control representation before reasoning can close. Partial observability that no feasible channel can remove is not counted as system mismatch.
 :::
 
 A task rarely contains only one mismatch. A useful diagnosis asks for the **mismatch profile**: which mismatch dominates, which ones are secondary, and which intervention follows from that profile. The cards below pair each dominant mismatch with the move that tends to address it.
@@ -141,10 +141,10 @@ This discipline matters because each diagnosis should imply a different interven
 
 - Aggregation mismatch: make global structure explicit first.
 - Support mismatch: pull tail structures into context.
-- State mismatch: enumerate states and produce conditional policies.
+- State mismatch: hold the available evidence fixed and repair belief formation, updating, memory, and conditional policy.
 - Specification mismatch: externalize the value function through rubrics, counterexamples, and acceptance criteria.
 - Fitting-boundary mismatch: perturb nearby scenes and mark the boundary of each local claim.
-- Observation-representation mismatch: acquire or encode the variables the current channel dropped.
+- Observation-representation mismatch: acquire or encode decision-relevant information that a feasible channel could provide but the current channel dropped.
 
 The same discipline also prevents taxonomy inflation. If a proposed new failure label does not predict a different intervention, it is usually better treated as a derivative pattern rather than a primitive mismatch.
 

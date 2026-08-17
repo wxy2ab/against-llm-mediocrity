@@ -169,7 +169,7 @@ The six mismatches occupy different points in a world-to-commit pipeline:
 ```text
 world
 → observation and representation
-→ state identification
+→ belief formation and update
 → capability routing
 → candidate support
 → global aggregation
@@ -179,8 +179,8 @@ world
 
 | Mismatch | Structural question | What training can improve | What training alone cannot guarantee |
 |---|---|---|---|
-| Observation-representation | Did the decisive variable enter, survive, bind to the right entity, and remain usable? | Compression, extraction, tool use, prior-based inference. | Recovery of a variable absent from every accessible channel. |
-| State | Does the system know which latent world or workflow state it is in? | Belief tracking and state inference. | Correct action in observationally identical states that require opposite actions. |
+| Observation-representation | Did decision-relevant information available through a feasible channel enter, survive, bind to the right entity, and remain usable? | Compression, extraction, tool use, prior-based inference. | Recovery of information absent from every feasible channel; that remaining gap is an irreducible information limit, not system mismatch. |
+| State | At fixed accessible evidence, is actual belief evidence-warranted and does it support the correct action ranking? | Belief tracking, state inference, and uncertainty preservation. | Evidence-faithful belief updating under every open dynamic; training also cannot remove irreducible uncertainty. |
 | Fitting-boundary | Is a capability activated exactly where its competence applies? | Routing on known distributions. | Permanent calibration under open distribution shift and newly discovered boundaries. |
 | Support | Can the deployed search process reach and retain high-value structures? | Probability mass on known useful patterns. | Adequate support for every future rare structure under finite search and budget. |
 | Aggregation | Do locally plausible parts compose into global value? | Longer reasoning, planning, and backtracking. | Elimination of commitment risk in arbitrarily long, coupled, non-locally decomposable tasks. |
@@ -196,6 +196,8 @@ Training can absorb a governance **policy**—for example, when to query, verify
 
 The six mismatches do more than classify failures. They define experimental manipulations, expected mediators, outcome measures, and falsifiers. Each experiment below should be run with paired task seeds, isolated environments, repeated trials, fixed budgets, and versioned model/harness contracts.
 
+A general measurement rule is to **manipulate and report task-side structural dose separately from system-side mismatch**. Dependency coupling or low `α_k` is task nonlocality; a diffuse state posterior or high `δ_amb` is task ambiguity. These quantities say how much pressure a system faces. Aggregation mismatch must be measured by ranking error or regret of the deployed proxy relative to global completion value. State mismatch must be measured by calibration or belief-conditioned decision regret of the actual belief relative to the evidence-warranted belief. High task dose with zero system regret is successful governance, not severe residual mismatch.
+
 ### 5.1 Observation-representation mismatch: manipulate the channel, not the answer prompt
 
 **Question.** Does adding or preserving a decisive variable repair performance because it increases usable information, rather than because it merely lengthens the prompt?
@@ -206,21 +208,21 @@ The six mismatches do more than classify failures. They define experimental mani
 
 **Falsifier.** If relevant and irrelevant enrichment produce the same gain, or if the agent succeeds without accessing the variable, the information-channel explanation is not established.
 
-**Diagnostic boundary.** Use this label only when the decisive variable is absent, degraded, unbound, stale, or unusable in the accessible representation. If the variable is available but several latent states remain plausible, the primary diagnosis moves to state mismatch.
+**Diagnostic boundary.** Use this label only when decision-relevant information available through a feasible channel is absent, degraded, unbound, stale, or unusable in the accessible representation. If information is available but several latent states remain plausible, the diagnosis does not automatically move to state mismatch. State mismatch requires incorrect collapse, misranking, forgetting, or stale belief at fixed evidence that changes action ranking; correctly preserving a broad posterior is not failure.
 
 **Transfer test.** Increase loss severity, freshness demands, modality, and context distance across model generations. The expected transferable object is the channel condition and mediation path, not a fixed percentage gain.
 
-### 5.2 State mismatch: separate remembered narrative from authoritative state
+### 5.2 State mismatch: hold evidence fixed and isolate belief-update error
 
-**Question.** Does an explicit state surface and transition contract reduce errors that natural-language context cannot reliably govern?
+**Question.** Without adding observations, does an explicit belief surface reduce decision errors caused by unjustified collapse, misranking, forgetting, or stale belief?
 
-**Design.** Create episodes with the same conversational history but different authoritative environment states. Cross two factors: state source (context-only versus queryable hard state) and transition control (free-form action versus typed precondition/commit contract). Include stale-context and partial-commit conditions. Use a clean environment per trial.
+**Design.** Hold each episode's observation and representation `Z≤t` fixed. Cross two factors: belief update (ordinary contextual continuation versus an explicit hypothesis-evidence-probability/ranking table) and action policy (unconditional point action versus belief-conditioned branching or risk-bounded action). Include evidence that demands updating, forgetting checks, and state transitions while keeping accessible facts identical across groups. Run queryable-hard-state and typed-commit-contract experiments separately: the former changes the channel, while the latter tests SGAR authority and neither is the primitive-state minimal pair.
 
-**Measurements.** Invalid transition rate, false-completion rate, stale-read rate, recovery success, rollback integrity, and agreement between claimed, verified, and committed state.
+**Measurements.** Calibration error relative to the evidence-warranted belief, state-misranking rate, evidence-forgetting rate, stale-belief rate, belief-conditioned decision regret, and correct preservation of irreducible uncertainty. In the separate SGAR experiment, measure invalid transitions, false completion, rollback integrity, and commit consistency.
 
-**Falsifier.** If hard-state access does not improve state discrimination or if gains vanish when context length is matched, the proposed state-authority mechanism needs revision.
+**Falsifier.** If the explicit belief surface does not improve calibration, updating, or decision regret after information and budget are fixed, it does not establish repair of state mismatch. If gains appear only after adding hard state, the evidence supports observation-representation repair rather than a fixed-`Z` state repair.
 
-**Diagnostic boundary.** The authoritative state must be available through some valid channel. If the environment never exposes it, the upstream failure is observation-representation mismatch; if the state is known but an illegal action is still selected, action or commit governance may be the closer mechanism target.
+**Diagnostic boundary.** If feasibly obtainable authoritative information does not enter `Z`, the upstream failure is observation-representation mismatch. If no feasible channel exposes true state but the system maintains the correct posterior and takes a belief-optimal or risk-bounded action, there is no state mismatch. If belief is correct but an illegal action is still selected, action or commit governance is the closer mechanism target.
 
 **Transfer test.** Move from toy state machines to files, databases, tickets, calendars, and multi-agent ownership. Stronger models may make fewer mistakes, but the distinction between belief and authority remains testable.
 
@@ -368,7 +370,7 @@ Version harnesses, isolate environments, capture traces, expose authoritative st
 
 ### Stage 1: Establish diagnostic microbenchmarks
 
-For each mismatch, build small paired tasks that vary one structural dose: observation loss, state ambiguity, boundary distance, support rarity, dependency coupling, or objective ambiguity. The goal is not realism first; it is identification.
+For each mismatch, build small paired tasks that orthogonalize task pressure and system defect. Observation loss, state ambiguity, boundary distance, support rarity, dependency coupling, and objective ambiguity can be task-side doses. Channel fidelity, belief updater, capability router, deployed proxy, search, and evaluator quality are system-side factors. The goal is not realism first; it is to identify which task pressure breaks which system component, without labeling a system mismatched merely because task dose is high.
 
 ### Stage 2: Estimate mechanism and interaction effects
 
@@ -389,8 +391,9 @@ Deploy only after offline identification. Use guarded rollouts to test whether t
 The output of this program is not a universal “best agent.” It is a library of conditional engineering laws:
 
 ```text
-When state ambiguity exceeds c,
-query authoritative state before commit.
+When state ambiguity exceeds c, a feasible authoritative query exists,
+and its value of information is positive, query before commit;
+otherwise act optimally or conservatively under the warranted belief.
 
 When edit density is below d and the plan is verified,
 prefer bounded patch delivery.

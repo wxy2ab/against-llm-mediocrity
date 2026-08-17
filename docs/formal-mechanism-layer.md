@@ -614,18 +614,18 @@ The mechanism layer is not a replacement for the six primitive mismatches. A saf
 
 | Six primitive mismatches | Common mechanism sources | Explanation |
 |---|---|---|
-| Aggregation mismatch | belief / representation, capability support, capability routing, search / execution | When global constraints cannot be recovered from local continuation, the system may need external state, specialized operators, or structured search |
+| Aggregation mismatch | belief / representation, capability support, capability routing, search / execution | When a deployed local proxy, finite search procedure, or commitment policy cannot recover global completion value, the system may need external state, specialized operators, or structured search; autoregressive factorization is not itself a mechanism axis |
 | Support mismatch | observation availability, capability support, action / interface, search / execution | High-value structures may be unreachable because information, capability, or action is missing, or because search coverage is insufficient under budget |
 | Specification mismatch | specification / reward, belief / representation | The objective itself may be wrong, or it may be written correctly but misread or forgotten by the system |
-| State mismatch | observation availability, belief / representation, dynamics / world model | State may be unobservable, unstably estimated, or incorrectly modeled in transition |
+| State mismatch | belief / representation, dynamics / world model | At fixed accessible representation, actual belief may misrank, forget, or lag the evidence-warranted belief, or transitions may be modeled incorrectly; missing observations that were feasibly obtainable are upstream observation-representation mismatch |
 | Fitting-boundary mismatch | capability routing, capability support, search / execution | The core mechanism is routing-boundary misalignment, sometimes amplified by low support and path lock-in |
-| Observation-representation mismatch | observation availability, belief / representation, action / interface | Decisive variables may fail to enter observation, or enter without becoming operational representation; sometimes new tools, sensors, logs, tests, or raw-data interfaces are needed |
+| Observation-representation mismatch | observation availability, belief / representation, action / interface | Decision-relevant information available through feasible channels may fail to enter observation, or enter without becoming operational representation; uncertainty no feasible channel can remove is not counted as system mismatch |
 
 Therefore:
 
 > The six primitive mismatches are task-value structural diagnostic axes; the eight mechanism mismatches are system-intervention diagnostic axes.
 
-Using both layers gives a fuller diagnosis. For example, "state mismatch" says that a task depends on a latent state that was not stably identified; the mechanism layer further distinguishes whether the state was unobserved, incorrectly represented, or mispredicted through a world model. "Observation-representation mismatch" further asks whether the decisive variable failed to enter observation space, or entered but was not encoded into an operational control variable.
+Using both layers gives a fuller diagnosis. For example, "state mismatch" says that belief formation, updating, or use at fixed accessible representation contains a decision-relevant error; the mechanism layer further distinguishes representation binding, memory update, and transition-model failures. "Observation-representation mismatch" asks, relative to feasible channels, whether decision-relevant information failed to enter observation space or entered but was not encoded into an operational control variable. If no feasible channel can remove the uncertainty, a correctly broad posterior is not mismatch.
 
 ---
 

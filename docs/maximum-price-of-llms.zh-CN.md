@@ -121,7 +121,7 @@ K_i = K_token + K_integration + K_supervision + K_verification + K_risk
 L_i = w_A * A_i + w_U * U_i + w_D * D_i + w_M * M_i + w_F * F_i + w_R * R_i + sum_{j<k} w_jk * m_ij * m_ik
 ```
 
-六个分量：`A_i` 聚合失配（aggregation mismatch，最优解需要全局聚合而非局部延续）、`U_i` 支持失配（support mismatch，高价值结构位于低支持区域）、`D_i` 状态失配（state mismatch，任务依赖当前通道下不可识别的外部隐藏状态）、`M_i` 规格失配（specification mismatch，目标本身不可完全形式化）、`F_i` 拟合边界失配（fitting-boundary mismatch，局部证据、指标或话术被绑定得太死，跨场景不稳健）、`R_i` 观测-表征失配（observation-representation mismatch，决定性变量没有进入模型可操作表征）。交叉项表示 mismatch 之间是超加性的：两种失配同时出现时的难度大于各自难度之和。
+六个分量：`A_i` 聚合失配（aggregation mismatch，部署局部代理、有限搜索或不可逆提交偏离全局补全价值）、`U_i` 支持失配（support mismatch，高价值结构位于低支持区域）、`D_i` 状态失配（state mismatch，固定表征下实际信念偏离证据支持信念并改变行动排序）、`M_i` 规格失配（specification mismatch，目标本身不可完全形式化）、`F_i` 拟合边界失配（fitting-boundary mismatch，局部证据、指标或话术被绑定得太死，跨场景不稳健）、`R_i` 观测-表征失配（observation-representation mismatch，可行通道本可提供的决定性信息没有进入模型可操作表征）。交叉项表示 mismatch 之间是超加性的：两种失配同时出现时的难度大于各自难度之和。
 
 成功概率建模为受 mismatch 封顶的饱和函数：
 

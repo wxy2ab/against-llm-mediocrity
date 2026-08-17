@@ -588,7 +588,7 @@ ObservationDelta:
 
 #### Primitive mismatch relations
 
-Observation availability contributes to **observation-representation mismatch** when decisive variables never enter the system. It contributes to **state mismatch** when latent states cannot be distinguished. It can also create apparent support failures because the system cannot generate structures that require missing variables.
+Observation availability contributes to **observation-representation mismatch** when decision-relevant information available through a feasible channel never enters the system. It can also create apparent support failures because the system cannot generate structures that require missing variables. Latent states remaining indistinguishable under every feasible channel is irreducible partial observability, not itself state mismatch; state mismatch begins with belief-formation, update, or use error at fixed representation.
 
 ---
 
@@ -1054,8 +1054,8 @@ Search / execution contributes to **support mismatch** when reachable candidates
 
 | Primitive mismatch | Common mechanism sources | Explanation |
 |---|---|---|
-| Observation-representation | observation availability; belief / representation; action / interface | Decisive variables may fail to enter observation, enter but fail to become operational, or require a tool/interface to observe. |
-| State | observation availability; belief / representation; dynamics / world model; SGAR transition state | Relevant latent state may be unobserved, misrepresented, mispredicted across transition, or not committed as hard state. |
+| Observation-representation | observation availability; belief / representation; action / interface | Decision-relevant information available through feasible channels may fail to enter observation, enter but fail to become operational, or require a tool/interface to observe. |
+| State | belief / representation; dynamics / world model | At fixed accessible representation, the evidence-warranted belief may be misranked, forgotten, wrongly collapsed, or made stale across transition in a way that changes action ranking. SGAR hard-state commitment is diagnosed separately. |
 | Fitting-boundary | capability routing; capability support; search / execution | Capability may exist but be misrouted; low support or path lock-in may amplify boundary failure. |
 | Support | capability support; observation availability; action / interface; search / execution | High-value structures may be unreachable because the system lacks information, tools, capability prior, or search coverage. |
 | Aggregation | belief / representation; capability support; capability routing; search / execution; dynamics | Local parts may fail to compose because dependencies are not represented, the right composition operator is absent, routing is wrong, or execution loses structure. |
@@ -1066,7 +1066,7 @@ Search / execution contributes to **support mismatch** when reachable candidates
 | Mechanism axis | Possible primitive symptoms |
 |---|---|
 | Specification / reward | specification mismatch; induced routing, support, or aggregation failures. |
-| Observation availability | observation-representation mismatch; state mismatch; apparent support failure. |
+| Observation availability | observation-representation mismatch; apparent support failure. |
 | Belief / representation | observation-representation mismatch; state mismatch; aggregation mismatch; specification misread. |
 | Dynamics / world model | state mismatch; aggregation mismatch in multi-step plans; specification failure under false consequence assumptions. |
 | Action / interface | observation-representation mismatch; support mismatch; SGAR false completion. |
@@ -1757,7 +1757,7 @@ support mismatch:
   event-specific operator family and conditional alpha structures are not explored.
 
 state mismatch:
-  post-event attention-continuation state is not represented.
+  available post-event evidence does not update the attention-continuation belief correctly.
 ```
 
 ### 13.2 Mechanism profile

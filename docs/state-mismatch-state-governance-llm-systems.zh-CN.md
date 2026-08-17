@@ -50,9 +50,9 @@ S_world → O → Z → state belief / state hypothesis → capability routing �
 
 核心主张是：
 
-> 当正确策略或评价依赖一个系统未识别、未保存或未更新的潜在状态，并且候选行动在多个可行状态下具有不同价值排序时，就会发生状态失配。
+> 当正确策略或评价依赖潜在状态，而系统实际形成、保存或更新的信念偏离可用证据所支持的信念，并以决策相关的方式改变行动排序时，就会发生状态失配。
 
-这把状态失配与观测-表征失配区分开来。观测-表征失配问的是：决定性变量是否进入了操作表征？状态失配问的是：在已有操作表征的前提下，系统能否判断哪个潜在区间、阶段、用户意图、环境条件、数据状态、依赖结构或任务状态正在生效？
+这把状态失配与观测-表征失配区分开来。观测-表征失配问的是：可行取得的决定性变量是否进入了操作表征？状态失配问的是：在固定已有表征的前提下，系统维护的信念是否忠于证据？真实状态可以不可直接测量；只要系统在正确的信念状态上行动，状态仍不确定并不是失败。
 
 本文提出状态失配的形式模型、状态失败模式分类、诊断特征、状态治理对象、审计发现、控制增量、回归护栏，以及它与知识治理、审计工程和状态治理智能体范式的集成规则。它也解释状态失配如何与其他原始失配复合，以及为什么状态不确定性经常必须被显式表示，而不是过早塌缩成一个单一答案。
 
@@ -81,14 +81,14 @@ repair_layer ∈ agent | training | hybrid
 ```text
 State Mismatch:
   认识论 / 诊断问题。
-  我们处于哪个潜在任务状态？
+  固定可访问证据后，系统信念是否忠于证据并保存正确行动排序？
 
 State-Governed Agent Regime:
   运行时权威问题。
   哪些状态转移已经真正提交？
 ```
 
-状态失配关注**状态识别**。SGAR 关注**状态提交**。系统可能识别了正确的潜在状态，却没有正确提交它——那是 SGAR 失败。系统也可能维护完美的硬状态日志，却在错误的潜在状态假设下行动——那是状态失配。
+状态失配关注**信念形成与更新**。SGAR 关注**状态提交**。系统可能维护了证据支持的正确信念，却没有正确提交相应运行时状态——那是 SGAR 失败。系统也可能维护完美的硬状态日志，却在同一证据下形成错误、过期或误排的潜在状态信念并据此行动——那是状态失配。
 
 本文的治理原则是：
 
@@ -188,10 +188,16 @@ H = {h1, h2, ..., hn}
 
 表示与行动选择或评价相关的潜在任务状态集合。
 
-令系统隐式或显式维护一个状态信念：
+令可用表征历史为 `Z≤t`。证据所支持的信念是：
 
 ```text
-b(h | Z)
+b*t(h) = P(h_t = h | Z≤t)
+```
+
+系统通过信念组件 `Bθ` 隐式或显式维护：
+
+```text
+b_hat_t(h) = Bθ(Z≤t)
 ```
 
 令候选行动、输出、计划或产物为：
@@ -206,50 +212,69 @@ a ∈ A
 U(a | h, S_world)
 ```
 
-当三个条件同时成立时，发生状态失配。
+当下面的证据—信念—行动链条发生决策相关偏离时，发生状态失配。
 
-### 条件 1：状态不确定性
+### 条件 1：证据所支持的信念
 
-表征无法识别单一相关状态：
+`b*t` 是在当前可行信息结构下应当维护的控制对象。它可以集中在一个状态，也可以在多个状态上保留质量：
 
 ```text
-H_plausible(Z) = {h : b(h | Z) > ε}
+H_plausible(Z≤t) = {h : b*t(h) > ε}
 ```
 
-其中包含不止一个可行状态。
+多个状态仍然可行只是任务的信息属性，不是系统失败。
 
 ### 条件 2：策略敏感性
 
-候选行动的价值排序在可行状态之间不同：
+潜在状态对行动价值有决策影响。等价地，使用系统信念与使用证据信念会得到不同选择：
 
 ```text
-∃ h_i, h_j ∈ H_plausible(Z), ∃ a_m, a_n ∈ A
-such that
-
-U(a_m | h_i) > U(a_n | h_i)
-but
-U(a_m | h_j) < U(a_n | h_j)
+argmax_a E_{h ~ b_hat_t}[U(a | h)]
+  ≠
+argmax_a E_{h ~ b*t}[U(a | h)]
 ```
 
-### 条件 3：过早或错误塌缩
+### 条件 3：信念形成、保存或更新失败
 
-系统选择、路由、评价或提交时，表现得像单一状态已经已知：
+系统的 `b_hat_t` 因无依据塌缩、误排、证据遗忘、陈旧或漏更新而偏离 `b*t`，并据此选择、路由、评价或提交。过早塌缩是常见形式，但不是唯一形式：
 
 ```text
-π(a | Z) ≈ π(a | Z, h_hat)
+b_hat_t != b*t
+and
+decision(b_hat_t) != decision(b*t)
 ```
-
-其中 `h_hat` 缺乏支持、理由不足、已经陈旧或是错误的。
 
 合起来：
 
-> 当多个潜在状态在系统表征下仍然可行，候选行动具有状态依赖的价值排序，而系统没有保存、判别或分支处理这种不确定性时，就存在状态失配。
+> 当固定表征与观测历史所支持的信念为 `b*t`，系统实际信念 `b_hat_t` 却因形成、保存或更新失败而产生不同的行动排序时，就存在状态失配。
 
 紧凑定义：
 
 ```text
-State mismatch = unresolved state uncertainty × state-sensitive policy × premature state collapse.
+State mismatch = evidence-belief divergence × decision sensitivity.
 ```
+
+这里有两个不能混用的量。若在预先固定的候选对分布 `ν` 上定义
+
+```text
+δ_amb(Z≤t)
+  = E_{h,h' ~ b*t} Pr_{a,a' ~ ν}
+    [ranking_h(a,a') != ranking_h'(a,a')]
+```
+
+则 `δ_amb` 描述的是 **给定信息结构下的任务状态歧义度**：后验中仍然可能的状态，会在多大程度上改变行动排序。它不包含系统信念 `b_hat_t`，所以不能被解释为状态失配严重度；它也不能区分当前通道漏失可行信息与不可约部分可观测性。前者需要另测可行通道价值差，并归入观测-表征失配。
+
+系统相对的状态失配严重度应以证据所支持信念下的可达最优为基准。例如，令 `a_hat` 是系统按 `b_hat_t` 选择的行动，可定义
+
+```text
+Reg_state(Bθ; Z≤t)
+  = max_a E_{h ~ b*t}[U(a | h)]
+    - E_{h ~ b*t}[U(a_hat | h)]
+```
+
+也可以报告 `b_hat_t` 相对 `b*t` 的决策加权校准误差。一个正确执行信念最优策略的系统满足 `Reg_state = 0`，即使 `δ_amb` 很高。
+
+若 `b*t` 本身无法收敛到真实状态，但系统按它采取 Bayes-optimal、风险有界、分支或条件化行动，则不存在状态失配。真实状态不可直接描述，是信息边界；错误处理这个边界，才是系统失配。
 
 ---
 
@@ -262,10 +287,10 @@ State mismatch = unresolved state uncertainty × state-sensitive policy × prema
 状态站点可以写成：
 
 ```text
-Z → B(H) → state-conditioned policy
+Z≤t → Bθ → b_hat_t → state-conditioned policy
 ```
 
-其中 `B(H)` 是信念状态、假设集合、状态标签或分支结构。
+其中 `Bθ` 是可独立审计与扰动的信念形成和更新组件，`b_hat_t` 是信念状态、假设集合、状态标签或分支结构。
 
 如果这个站点失败，下游操作可能局部连贯，却不适用于真实状态。一个完全流畅的答案可能错在它回答了错误的隐藏问题。一个执行良好的工具动作可能错在它假设了错误的任务阶段。一个强验证器也可能错在它检查了错误的状态条件化标准。
 
@@ -273,7 +298,7 @@ Z → B(H) → state-conditioned policy
 
 ### 3.1 不是观测-表征失配
 
-观测-表征失配关注决定性变量是否进入了 `Z`。状态失配关注可用变量是否识别了活跃状态。
+观测-表征失配关注一个可行取得的决定性变量是否进入了 `Z`。状态失配关注固定同一 `Z≤t` 后，`Bθ` 是否形成了证据所支持的信念。
 
 一个简单对比：
 
@@ -282,10 +307,13 @@ Observation-representation mismatch:
   The database schema or sample values needed to infer intent are absent.
 
 State mismatch:
-  The schema and sample values are present, but multiple intents remain plausible.
+  The same schema and sample values are present,
+  but the system misranks or prematurely collapses the warranted intent belief.
 ```
 
-第一种情况需要修复通道或表征。第二种情况需要状态判别、分支或信息获取。
+第一种情况需要修复通道或表征。第二种情况需要修复证据校准、信念维护或不确定性保存。主动询问可以由信念策略触发；如果询问结果本可进入却没有进入 `Z`，该具体失败仍属于上游观测-表征站点。
+
+这也给出真正的最小对：固定 `φ`、`ψ`、`Z≤t` 和任务目标，只替换 `Bθ`。证据校准的更新器维护 `b*t`，失败更新器误排、陈旧或过早塌缩。二者需要的修复目标不同，因此没有通过扰动观测站点来证明状态站点。
 
 ### 3.2 不是规格失配
 
@@ -378,7 +406,7 @@ If not, should it branch, ask, defer, or produce a conditional answer?
 
 ### 5.1 隐藏区间失配
 
-任务属于多个区间之一，但表面观测无法识别是哪一个。
+任务属于多个区间之一，而系统错误折叠、误排或没有更新现有观测所支持的区间信念。若观测不可约地只支持宽后验，而系统正确保留该后验，则不存在失配。
 
 例子：
 
@@ -1030,7 +1058,7 @@ audit finding invalidates assumption
 
 | 机制目标 | 在状态失配中的角色 |
 |---|---|
-| `observation_availability` | 因为缺少所需证据，系统无法区分状态 |
+| `observation_availability` | 上游伴随目标；若可行证据没有进入 `Z`，主诊断应是观测-表征失配 |
 | `belief_representation` | 证据存在，但没有被维护为状态 |
 | `dynamics_world_model` | 系统错误预测了行动如何改变状态 |
 | `search_execution` | 系统没有对状态假设进行分支、测试或判别 |
@@ -1038,8 +1066,8 @@ audit finding invalidates assumption
 状态失配不应被自动修成“再多推理一点”。真正的修法取决于机制定位：
 
 ```text
-missing evidence:
-  repair observation_availability.
+missing feasible evidence from Z:
+  diagnose observation-representation mismatch first.
 
 unstructured or forgotten evidence:
   repair belief_representation.
@@ -1107,9 +1135,9 @@ Has the state been committed by an authorized verifier or merely narrated by the
 {
   "id": "finding.state_mismatch.unique_identifier",
   "artifact": "output, plan, query, patch, action, or decision being audited",
-  "finding": "The artifact assumes state h1, but h1 is unsupported, stale, contradicted, or not uniquely identified.",
+  "finding": "The artifact commits to h1 with confidence or consequences not warranted by the evidence; the belief is unsupported, misranked, stale, or contradicted.",
   "evidence": [
-    "specific evidence showing ambiguity or contradiction"
+    "specific evidence showing belief miscalibration, failed update, staleness, or contradiction"
   ],
   "mismatch_type": "state",
   "state_family": "intent | phase | environment | data | dependency | verifier | regime",
@@ -1174,7 +1202,7 @@ Verifier guard:
   system must select verifier after state classification.
 ```
 
-只有当重新引入代表性状态歧义会导致护栏失败时，护栏才真正有牙齿。
+只有当重新引入代表性的信念处理缺陷——例如无依据塌缩、误排、遗忘或陈旧更新——会导致护栏失败时，护栏才真正有牙齿。重新引入不可约歧义本身不应让一个正确的信念条件策略失败。
 
 ---
 
@@ -1257,7 +1285,7 @@ Verifier guard:
 
 状态失配和 SGAR 关系紧密，但并不相同。
 
-状态失配问的是哪个潜在任务状态为真。SGAR 问的是哪个状态转移已经被正式提交。前者是对不确定性或误识别的诊断；后者是一种运行时权威体制。
+状态失配问的是：固定可访问证据后，系统信念是否符合证据并支持正确行动排序。SGAR 问的是哪个状态转移已经被正式提交。前者诊断信念形成、更新与使用错误，而不是把不确定性本身当作失败；后者是一种运行时权威体制。
 
 ### 12.1 信念状态与已提交状态
 
@@ -1769,7 +1797,7 @@ Proceed with a reversible, low-risk step that is useful across states.
 
 ### 18.1 POMDP
 
-部分可观测马尔可夫决策过程建模隐藏状态下的智能体行动。状态失配在概念上相关：系统有观测、潜在状态、信念更新和状态条件化策略。
+部分可观测马尔可夫决策过程建模隐藏状态下的智能体行动。状态失配在概念上相关：系统有观测、潜在状态、信念更新和状态条件化策略。关键边界是，POMDP 中的信念状态是可用观测历史的充分统计量；无法直接知道真实状态并不构成缺陷。若 `b_hat_t = b*t` 且系统采用信念条件下的最优或风险有界策略，就没有状态失配。失配只在实际信念或其使用偏离可用证据时发生。
 
 不同之处在于，LLM 系统经常运行于开放任务空间，其中：
 
@@ -1853,11 +1881,11 @@ Ask, branch, or inspect only when state uncertainty is action-relevant.
   "id": "gko.primitive_mismatch.state",
   "type": "primitive_mismatch_claim",
   "condition": "LLM systems modeled as value-preservation pipelines in which action value may depend on latent task state",
-  "assertion": "State mismatch occurs when multiple latent states remain plausible under the representation, action value differs across those states, and the system prematurely collapses or mismanages the state.",
+  "assertion": "State mismatch occurs when the system belief diverges from the belief warranted by a fixed available representation and that divergence changes action ranking.",
   "strength": "structural-relative",
   "support_scope": "Tasks where hidden regimes, user intent, environment conditions, data states, phase states, dependency states, or verifier states affect policy or evaluation",
   "revocation_trigger": "Show that state-sensitive failures can always be reduced to observation-representation, fitting-boundary, support, aggregation, or specification mismatch without losing intervention specificity.",
-  "not_supported_claims": "Does not claim that all uncertainty is state mismatch; does not require exhaustive state enumeration; does not claim that systems should always ask clarifying questions."
+  "not_supported_claims": "Does not claim that latent-state uncertainty or irreducible partial observability is itself a mismatch; does not require exhaustive state enumeration; does not claim that systems should always ask clarifying questions."
 }
 ```
 
@@ -1867,6 +1895,7 @@ Ask, branch, or inspect only when state uncertainty is action-relevant.
 
 ```text
 state uncertainty exists but does not affect action value
+the system maintains the evidence-warranted belief and acts optimally under it
 the problem is actually missing variables rather than latent-state ambiguity
 the problem is a bad objective rather than wrong state identification
 the system has a complete verifier that makes state irrelevant
@@ -1911,7 +1940,7 @@ the user explicitly wants a default assumption and low-cost action
 
 ## 22. 结论
 
-状态失配是 LLM 系统中的一种原始价值保存失败。它发生在系统基于缺乏支持、已经陈旧、被塌缩或错误的潜在状态假设行动，并且候选行动价值在多个可行状态之间不同时。
+状态失配是 LLM 系统中的一种原始价值保存失败。它发生在系统基于缺乏支持、已经陈旧、被错误塌缩或误排的信念行动，并且该信念错误改变了候选行动排序时。潜在状态仍然不确定并不等于失配；按证据所支持的信念正确行动，就是当前信息结构下的可达最优。
 
 这种失败很常见，因为 LLM 很擅长从欠规格上下文中生成连贯续写。连贯性会隐藏状态不确定性。模型可能推断一个可行状态并流畅推进，但任务真正需要的是保存多个假设、获取判别证据，或在未解决状态上条件化行动。
 
@@ -1934,7 +1963,8 @@ Case 1:
 
 Case 2:
   The schema includes revenue and order count,
-  but the phrase "most active" is ambiguous between them.
+  and the evidence warrants keeping both meanings plausible,
+  but the belief updater commits to revenue without evidence.
   Failure: state mismatch.
 ```
 
@@ -2053,9 +2083,11 @@ add_state_regression_guard
 ```text
 State mismatch occurs when:
 
-1. Multiple latent task states remain plausible under the system representation;
-2. candidate actions have different value rankings across those states; and
-3. the system prematurely collapses, ignores, misupdates, or miscommits the state.
+1. A fixed representation history Z≤t warrants belief b*t over latent task state;
+2. the system forms or maintains b_hat_t != b*t through collapse, misranking, staleness, forgetting, or failed update; and
+3. acting on b_hat_t changes the decision relative to acting on b*t.
+
+Irreducible uncertainty is not itself mismatch. If the system preserves b*t and acts optimally under it, no state mismatch exists.
 
 Repair requires:
 

@@ -50,9 +50,9 @@ S_world → O → Z → state belief / state hypothesis → capability routing �
 
 The core claim is:
 
-> State mismatch occurs when the correct policy or evaluation depends on a latent state that is not identified, preserved, or updated by the system, and candidate actions have different value rankings across plausible states.
+> State mismatch occurs when policy or evaluation depends on latent state, the belief actually formed, preserved, or updated by the system diverges from the belief warranted by available evidence, and that divergence changes the action ranking.
 
-This distinguishes state mismatch from observation-representation mismatch. Observation-representation mismatch asks whether the decisive variables enter the operational representation at all. State mismatch asks whether, given the operational representation, the system can determine which latent regime, phase, user intent, environment condition, data regime, dependency structure, or task state is active.
+This distinguishes state mismatch from observation-representation mismatch. Observation-representation mismatch asks whether feasibly obtainable decisive variables enter the operational representation. State mismatch asks whether, given a fixed available representation, the maintained belief is faithful to the evidence. The true state may be impossible to measure directly; if the system acts on the correct belief state, continued uncertainty is not a failure.
 
 The document introduces a formal model of state mismatch, a taxonomy of state failure modes, diagnostic signatures, state-governance objects, audit findings, control deltas, regression guards, and integration rules with Knowledge Governance, Audit Engineering, and State-Governed Agent Regime. It also explains how state mismatch compounds with the other primitive mismatches and why state uncertainty must often be represented explicitly rather than collapsed prematurely into a single answer.
 
@@ -81,14 +81,14 @@ It should be read as distinct from, but connected to, the SGAR runtime document:
 ```text
 State Mismatch:
   epistemic / diagnostic problem.
-  Which latent task state are we in?
+  At fixed accessible evidence, is system belief evidence-faithful and action-ranking preserving?
 
 State-Governed Agent Regime:
   runtime authority problem.
   Which state transitions are actually committed?
 ```
 
-State mismatch concerns **state identification**. SGAR concerns **state commitment**. A system can identify the correct latent state but fail to commit it correctly; that is an SGAR failure. A system can maintain perfect hard-state logs while acting under the wrong latent-state hypothesis; that is state mismatch.
+State mismatch concerns **belief formation and updating**. SGAR concerns **state commitment**. A system can maintain the correct evidence-warranted belief yet fail to commit the corresponding runtime state; that is an SGAR failure. A system can maintain perfect hard-state logs while forming a wrong, stale, or misranked latent-state belief under the same evidence and acting on it; that is state mismatch.
 
 The governing principle of this document is:
 
@@ -188,10 +188,16 @@ H = {h1, h2, ..., hn}
 
 be the set of latent task states relevant to action choice or evaluation.
 
-Let the system maintain, implicitly or explicitly, a belief over states:
+Let the available representation history be `Z≤t`. The evidence-warranted belief is:
 
 ```text
-b(h | Z)
+b*t(h) = P(h_t = h | Z≤t)
+```
+
+Through a belief component `Bθ`, the system implicitly or explicitly maintains:
+
+```text
+b_hat_t(h) = Bθ(Z≤t)
 ```
 
 Let candidate actions, outputs, plans, or artifacts be:
@@ -206,50 +212,69 @@ and let true utility be state-conditioned:
 U(a | h, S_world)
 ```
 
-State mismatch occurs when three conditions hold:
+State mismatch occurs when the following evidence-belief-action chain diverges in a decision-relevant way.
 
-### Condition 1: State uncertainty
+### Condition 1: Evidence-Warranted Belief
 
-The representation does not identify a single relevant state:
+`b*t` is the control object warranted under the current feasible information structure. It may concentrate on one state or preserve mass over several:
 
 ```text
-H_plausible(Z) = {h : b(h | Z) > ε}
+H_plausible(Z≤t) = {h : b*t(h) > ε}
 ```
 
-contains more than one plausible state.
+Multiple plausible states are an information property of the task, not a system failure.
 
 ### Condition 2: Policy sensitivity
 
-The value ranking over candidate actions differs across plausible states:
+Latent state matters to action value. Equivalently, using the system belief and using the warranted belief produce different choices:
 
 ```text
-∃ h_i, h_j ∈ H_plausible(Z), ∃ a_m, a_n ∈ A
-such that
-
-U(a_m | h_i) > U(a_n | h_i)
-but
-U(a_m | h_j) < U(a_n | h_j)
+argmax_a E_{h ~ b_hat_t}[U(a | h)]
+  ≠
+argmax_a E_{h ~ b*t}[U(a | h)]
 ```
 
-### Condition 3: Premature or incorrect collapse
+### Condition 3: Belief Formation, Preservation, or Update Failure
 
-The system selects, routes, evaluates, or commits as if a single state were known:
+The system's `b_hat_t` diverges from `b*t` through unsupported collapse, misranking, forgotten evidence, staleness, or failed update, and it selects, routes, evaluates, or commits on that basis. Premature collapse is one common form, not the only form:
 
 ```text
-π(a | Z) ≈ π(a | Z, h_hat)
+b_hat_t != b*t
+and
+decision(b_hat_t) != decision(b*t)
 ```
-
-where `h_hat` is unsupported, under-justified, stale, or wrong.
 
 Together:
 
-> State mismatch exists when multiple latent states remain plausible under the system representation, candidate actions have state-dependent value rankings, and the system fails to preserve, discriminate, or branch over that uncertainty.
+> State mismatch exists when a fixed representation and observation history warrant belief `b*t`, but the system's actual belief `b_hat_t` produces a different action ranking because belief formation, preservation, or update failed.
 
 A compact definition:
 
 ```text
-State mismatch = unresolved state uncertainty × state-sensitive policy × premature state collapse.
+State mismatch = evidence-belief divergence × decision sensitivity.
 ```
+
+Two quantities must not be conflated. On a preregistered candidate-pair distribution `ν`, define
+
+```text
+δ_amb(Z≤t)
+  = E_{h,h' ~ b*t} Pr_{a,a' ~ ν}
+    [ranking_h(a,a') != ranking_h'(a,a')]
+```
+
+`δ_amb` measures **task state ambiguity under a given information structure**: the extent to which states that remain possible under the posterior change action rankings. It contains no system belief `b_hat_t` and therefore cannot be interpreted as state-mismatch severity. It also cannot distinguish information dropped by a feasibly repairable current channel from irreducible partial observability; the former requires a separate feasible-channel value-gap test and belongs upstream to observation-representation mismatch.
+
+System-relative state-mismatch severity must use the attainable optimum under the evidence-warranted belief as its baseline. If `a_hat` is selected by the system under `b_hat_t`, one measure is
+
+```text
+Reg_state(Bθ; Z≤t)
+  = max_a E_{h ~ b*t}[U(a | h)]
+    - E_{h ~ b*t}[U(a_hat | h)]
+```
+
+A decision-weighted calibration error between `b_hat_t` and `b*t` may also be reported. A system that implements the belief-optimal policy has `Reg_state = 0` even when `δ_amb` is high.
+
+If `b*t` cannot collapse to the true state but the system takes the Bayes-optimal, risk-bounded, branching, or conditional action under that belief, there is no state mismatch. Inability to describe the true state directly is an information boundary; mishandling that boundary is the system failure.
 
 ---
 
@@ -262,10 +287,10 @@ It occurs after the system has an operational representation `Z`, but before it 
 The state station can be written as:
 
 ```text
-Z → B(H) → state-conditioned policy
+Z≤t → Bθ → b_hat_t → state-conditioned policy
 ```
 
-where `B(H)` is a belief state, hypothesis set, state label, or branch structure.
+where `Bθ` is an independently auditable and perturbable belief-formation and update component, and `b_hat_t` is a belief state, hypothesis set, state label, or branch structure.
 
 If this station fails, downstream operations may be locally coherent but state-inappropriate. A perfectly fluent answer can be wrong because it answers the wrong hidden question. A perfectly executed tool action can be wrong because it assumes the wrong task phase. A strong verifier can be wrong because it checks against the wrong state-conditioned criterion.
 
@@ -273,7 +298,7 @@ State mismatch is not reducible to any other primitive mismatch.
 
 ### 3.1 Not Observation-Representation Mismatch
 
-Observation-representation mismatch concerns whether the decisive variables enter `Z`. State mismatch concerns whether the available variables identify the active state.
+Observation-representation mismatch concerns whether a feasibly obtainable decisive variable enters `Z`. State mismatch concerns whether, holding the same `Z≤t` fixed, `Bθ` forms the belief warranted by the evidence.
 
 A simple contrast:
 
@@ -282,10 +307,13 @@ Observation-representation mismatch:
   The database schema or sample values needed to infer intent are absent.
 
 State mismatch:
-  The schema and sample values are present, but multiple intents remain plausible.
+  The same schema and sample values are present,
+  but the system misranks or prematurely collapses the warranted intent belief.
 ```
 
-In the first case, repair requires channel or representation repair. In the second, repair requires state discrimination, branching, or information acquisition.
+In the first case, repair requires channel or representation repair. In the second, repair requires evidence calibration, belief maintenance, or uncertainty preservation. Active questioning may be selected by the belief policy; if the answer is feasibly available but fails to enter `Z`, that concrete failure remains at the upstream observation-representation station.
+
+This also yields the correct minimal pair: hold `φ`, `ψ`, `Z≤t`, and the task objective fixed, and vary only `Bθ`. The calibrated updater maintains `b*t`; the failing updater misranks, goes stale, or collapses prematurely. The state station is thus isolated without perturbing the observation station.
 
 ### 3.2 Not Specification Mismatch
 
@@ -378,7 +406,7 @@ State mismatch appears in several recurrent forms.
 
 ### 5.1 Hidden-Regime Mismatch
 
-The task belongs to one of several regimes, but surface observations do not identify which one.
+The task belongs to one of several regimes, and the system incorrectly collapses, misranks, or fails to update the regime belief supported by the available observations. If the observations irreducibly support a broad posterior and the system preserves it correctly, there is no mismatch.
 
 Examples:
 
@@ -1030,7 +1058,7 @@ State mismatch is a primitive value-preservation diagnosis. Its mechanism profil
 
 | Mechanism target | State-mismatch role |
 |---|---|
-| `observation_availability` | state cannot be distinguished because the needed evidence is missing |
+| `observation_availability` | Upstream companion target; if feasible evidence never enters `Z`, the primary diagnosis is observation-representation mismatch. |
 | `belief_representation` | evidence exists but is not maintained as state |
 | `dynamics_world_model` | the system mispredicts how actions change state |
 | `search_execution` | the system fails to branch, test, or discriminate state hypotheses |
@@ -1038,8 +1066,8 @@ State mismatch is a primitive value-preservation diagnosis. Its mechanism profil
 State mismatch should not be automatically repaired by asking for more reasoning. The repair depends on mechanism localization:
 
 ```text
-missing evidence:
-  repair observation_availability.
+missing feasible evidence from Z:
+  diagnose observation-representation mismatch first.
 
 unstructured or forgotten evidence:
   repair belief_representation.
@@ -1107,9 +1135,9 @@ An audit finding for state mismatch should identify not only that the output is 
 {
   "id": "finding.state_mismatch.unique_identifier",
   "artifact": "output, plan, query, patch, action, or decision being audited",
-  "finding": "The artifact assumes state h1, but h1 is unsupported, stale, contradicted, or not uniquely identified.",
+  "finding": "The artifact commits to h1 with confidence or consequences not warranted by the evidence; the belief is unsupported, misranked, stale, or contradicted.",
   "evidence": [
-    "specific evidence showing ambiguity or contradiction"
+    "specific evidence showing belief miscalibration, failed update, staleness, or contradiction"
   ],
   "mismatch_type": "state",
   "state_family": "intent | phase | environment | data | dependency | verifier | regime",
@@ -1174,7 +1202,7 @@ Verifier guard:
   system must select verifier after state classification.
 ```
 
-A guard has teeth only if reintroducing the representative state ambiguity causes the guard to fail.
+A guard has teeth only if reintroducing the representative belief-handling defect—unsupported collapse, misranking, forgetting, or stale updating—causes it to fail. Reintroducing irreducible ambiguity alone should not fail a correct belief-conditioned policy.
 
 ---
 
@@ -1257,7 +1285,7 @@ State objects can be GKOs when they function as reusable task-control knowledge.
 
 State mismatch and SGAR are closely related but not identical.
 
-State mismatch asks which latent task state is true. SGAR asks which state transition has been officially committed. The former is a diagnosis of uncertainty or misidentification; the latter is a runtime authority regime.
+State mismatch asks whether, at fixed accessible evidence, the system's belief is evidence-faithful and supports the correct action ranking. SGAR asks which state transition has been officially committed. The former diagnoses belief-formation, update, and use errors rather than uncertainty itself; the latter is a runtime authority regime.
 
 ### 12.1 Belief State vs Committed State
 
@@ -1769,7 +1797,7 @@ State mismatch relates to several existing traditions, but the governed LLM sett
 
 ### 18.1 POMDPs
 
-Partially observable Markov decision processes model agents acting under hidden state. State mismatch is conceptually related: the system has observations, latent states, belief updates, and state-conditioned policies.
+Partially observable Markov decision processes model agents acting under hidden state. State mismatch is conceptually related: the system has observations, latent states, belief updates, and state-conditioned policies. The key boundary is that a POMDP belief state is a sufficient statistic of the available observation history; inability to know the true state directly is not a defect. If `b_hat_t = b*t` and the system uses the belief-optimal or a risk-bounded policy, no state mismatch exists. Mismatch begins only when the actual belief or its use diverges from the available evidence.
 
 The difference is that LLM systems often operate in open-ended task spaces where:
 
@@ -1853,11 +1881,11 @@ The theory should govern its own claims.
   "id": "gko.primitive_mismatch.state",
   "type": "primitive_mismatch_claim",
   "condition": "LLM systems modeled as value-preservation pipelines in which action value may depend on latent task state",
-  "assertion": "State mismatch occurs when multiple latent states remain plausible under the representation, action value differs across those states, and the system prematurely collapses or mismanages the state.",
+  "assertion": "State mismatch occurs when the system belief diverges from the belief warranted by a fixed available representation and that divergence changes action ranking.",
   "strength": "structural-relative",
   "support_scope": "Tasks where hidden regimes, user intent, environment conditions, data states, phase states, dependency states, or verifier states affect policy or evaluation",
   "revocation_trigger": "Show that state-sensitive failures can always be reduced to observation-representation, fitting-boundary, support, aggregation, or specification mismatch without losing intervention specificity.",
-  "not_supported_claims": "Does not claim that all uncertainty is state mismatch; does not require exhaustive state enumeration; does not claim that systems should always ask clarifying questions."
+  "not_supported_claims": "Does not claim that latent-state uncertainty or irreducible partial observability is itself a mismatch; does not require exhaustive state enumeration; does not claim that systems should always ask clarifying questions."
 }
 ```
 
@@ -1867,6 +1895,7 @@ State mismatch should be downgraded when:
 
 ```text
 state uncertainty exists but does not affect action value
+the system maintains the evidence-warranted belief and acts optimally under it
 the problem is actually missing variables rather than latent-state ambiguity
 the problem is a bad objective rather than wrong state identification
 the system has a complete verifier that makes state irrelevant
@@ -1911,7 +1940,7 @@ Use this checklist before high-stakes generation, tool action, or state commitme
 
 ## 22. Conclusion
 
-State mismatch is a primitive value-preservation failure in LLM systems. It occurs when the system acts under an unsupported, stale, collapsed, or wrong latent-state assumption, and when the value of candidate actions differs across plausible states.
+State mismatch is a primitive value-preservation failure in LLM systems. It occurs when the system acts on an unsupported, stale, wrongly collapsed, or misranked belief and that belief error changes the candidate-action ranking. Continued latent-state uncertainty is not itself mismatch; acting correctly on the evidence-warranted belief is the attainable optimum under the current information structure.
 
 This failure is common because LLMs are powerful at producing coherent continuations from underspecified context. Coherence can hide state uncertainty. The model may infer one plausible state and proceed fluently, while the task required preserving multiple hypotheses, acquiring discriminating evidence, or conditioning actions on the unresolved state.
 
@@ -1934,7 +1963,8 @@ Case 1:
 
 Case 2:
   The schema includes revenue and order count,
-  but the phrase "most active" is ambiguous between them.
+  and the evidence warrants keeping both meanings plausible,
+  but the belief updater commits to revenue without evidence.
   Failure: state mismatch.
 ```
 
@@ -2053,9 +2083,11 @@ add_state_regression_guard
 ```text
 State mismatch occurs when:
 
-1. Multiple latent task states remain plausible under the system representation;
-2. candidate actions have different value rankings across those states; and
-3. the system prematurely collapses, ignores, misupdates, or miscommits the state.
+1. A fixed representation history Z≤t warrants belief b*t over latent task state;
+2. the system forms or maintains b_hat_t != b*t through collapse, misranking, staleness, forgetting, or failed update; and
+3. acting on b_hat_t changes the decision relative to acting on b*t.
+
+Irreducible uncertainty is not itself mismatch. If the system preserves b*t and acts optimally under it, no state mismatch exists.
 
 Repair requires:
 

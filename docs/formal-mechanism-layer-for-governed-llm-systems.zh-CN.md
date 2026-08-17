@@ -573,7 +573,7 @@ ObservationDelta:
 
 #### 与原始失配的关系
 
-当决定性变量从未进入系统时，观测可得性会导致 **观测-表征失配**。当潜在状态无法区分时，它会导致 **状态失配**。它也可能制造表面的支持失败，因为系统无法生成那些依赖缺失变量的结构。
+当可行通道本可提供的决定性信息没有进入系统时，观测可得性会导致 **观测-表征失配**。它也可能制造表面的支持失败，因为系统无法生成那些依赖缺失变量的结构。潜在状态在所有可行通道下仍不可区分，本身只是不可约部分可观测性；只有固定表征后的信念形成、更新或使用错误才是状态失配。
 
 ---
 
@@ -1039,8 +1039,8 @@ SearchExecutionDelta:
 
 | Primitive mismatch | Common mechanism sources | Explanation |
 |---|---|---|
-| Observation-representation | observation availability; belief / representation; action / interface | 决定性变量可能没进入观测；进入后没变成可操作状态；或必须依赖某个工具 / 接口才能观测。 |
-| State | observation availability; belief / representation; dynamics / world model; SGAR transition state | 相关潜在状态可能未被观测、被误表示、在转移中被误预测，或没被提交成硬状态。 |
+| Observation-representation | observation availability; belief / representation; action / interface | 可行通道本可提供的决定性信息可能没进入观测；进入后没变成可操作状态；或必须依赖某个工具 / 接口才能观测。 |
+| State | belief / representation; dynamics / world model | 固定可访问表征后，证据支持信念可能被误排、遗忘、错误塌缩或在转移中变得过期，并改变行动排序。SGAR 的硬状态提交问题另行诊断。 |
 | Fitting-boundary | capability routing; capability support; search / execution | 能力可能存在但被误路由；低支持或路径锁定会放大边界失败。 |
 | Support | capability support; observation availability; action / interface; search / execution | 高价值结构可能因缺信息、缺工具、缺能力先验或搜索覆盖不足而不可达。 |
 | Aggregation | belief / representation; capability support; capability routing; search / execution; dynamics | 局部部分可能因依赖未被表示、缺少正确组合算子、路由错误或执行过程丢失结构而无法组合。 |
@@ -1051,7 +1051,7 @@ SearchExecutionDelta:
 | Mechanism axis | Possible primitive symptoms |
 |---|---|
 | Specification / reward | specification mismatch; induced routing, support, or aggregation failures. |
-| Observation availability | observation-representation mismatch; state mismatch; apparent support failure. |
+| Observation availability | observation-representation mismatch; apparent support failure. |
 | Belief / representation | observation-representation mismatch; state mismatch; aggregation mismatch; specification misread. |
 | Dynamics / world model | state mismatch; aggregation mismatch in multi-step plans; specification failure under false consequence assumptions. |
 | Action / interface | observation-representation mismatch; support mismatch; SGAR false completion. |
@@ -1742,7 +1742,7 @@ support mismatch:
   event-specific operator family and conditional alpha structures are not explored.
 
 state mismatch:
-  post-event attention-continuation state is not represented.
+  available post-event evidence does not update the attention-continuation belief correctly.
 ```
 
 ### 13.2 机制画像

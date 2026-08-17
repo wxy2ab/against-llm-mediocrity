@@ -100,9 +100,9 @@ If you arrived here from another page, it usually makes sense to jump straight t
 <a id="aggregation-mismatch"></a>
 ### Aggregation Mismatch
 
-**One-line definition**: locally good parts fail to compose into a globally valuable whole.
+**One-line definition**: a deployed local proxy, finite search procedure, or irreversible commitment fails to recover global completion value.
 
-**Full explanation**: aggregation mismatch is the most familiar structural location of autoregressive mediocrity. The model may make every paragraph sound good and every component look plausible, yet the task value depends on cross-part constraints, long-range dependency, or a governing tradeoff that never becomes explicit. Stories lose setup-payoff structure, code breaks cross-module invariants, and proposals miss the real decisive tradeoff.
+**Full explanation**: aggregation mismatch occurs when a deployed local score or decoding rule diverges from the best global completion value attainable after that local decision, while early commitment shrinks the reachable future set. Stories lose setup-payoff structure, code breaks cross-module invariants, and proposals miss the governing tradeoff. Autoregressive chain factorization can encode global dependencies exactly and is neither necessary nor sufficient for the mismatch; “autoregressive mediocrity” is no longer used as its mechanism name. Task nonlocal coupling is only a pressure dose; severity must be measured by ranking error or regret of the deployed proxy relative to global completion value.
 
 **Why it matters**: it reframes the problem from "which paragraph is weak?" to "which global relationship was never represented or governed?" The usual repair is not finer polish but dependency graphs, global invariants, compositional validators, and structured control objects.
 
@@ -119,7 +119,7 @@ If you arrived here from another page, it usually makes sense to jump straight t
 
 **One-line definition**: high-value structure sits in a low-probability, low-support, or currently unreachable region of search.
 
-**Full explanation**: support mismatch does not mean the answer does not exist. It means direct sampling almost never reaches it. The system may occasionally recognize the right structure without reliably generating it. Valuable solutions may depend on low-salience evidence, rare frames, non-obvious candidates, or intermediate structure search that default continuation rarely visits.
+**Full explanation**: support mismatch does not mean the answer does not exist. It means direct sampling almost never reaches it. The system may occasionally recognize the right structure without reliably generating it. Valuable solutions may depend on low-salience evidence, rare frames, non-obvious candidates, or intermediate structure search that default continuation rarely visits. The empirical tendency of a current model and decoder to fall back to common, fluent, low-value regions may be nicknamed “autoregressive gravity”; it is not a structural theorem about autoregressive architectures.
 
 **Why it matters**: once the problem is recognized as support mismatch, the question changes from "how do we make the model write more?" to "how do we bring tail structure into context or control space?" That typically means retrieval, perturbation, counterexamples, recombination, candidate expansion, and structured search.
 
@@ -134,11 +134,11 @@ If you arrived here from another page, it usually makes sense to jump straight t
 <a id="state-mismatch"></a>
 ### State Mismatch
 
-**One-line definition**: the correct action depends on hidden, changing, or unstated state that the current representation cannot reliably disambiguate.
+**One-line definition**: at fixed accessible representation, the system's formed or updated state belief diverges from the evidence-warranted belief and changes action ranking.
 
-**Full explanation**: state mismatch happens when the same answer flips value across conditions. User mood, market regime, deployment status, legal jurisdiction, authority boundary, and time window can all reverse what the right action is. If the current representation cannot distinguish those states, the model treats a condition-sensitive problem as if it were a single stable one.
+**Full explanation**: user mood, market regime, deployment status, legal jurisdiction, authority boundary, and time window can all change the optimal action. Their being hard to know does not by itself create mismatch. State mismatch occurs when the belief component incorrectly collapses hypotheses, misranks probabilities, omits or forgets evidence, or carries stale state forward under the same evidence and thereby chooses the wrong action. If the system correctly maintains a broad posterior and uses an optimal, conservative, or branching belief-conditioned policy, there is no state mismatch. A diffuse posterior or ranking reversal across states measures task ambiguity; severity is the system's decision regret relative to the belief-optimal baseline.
 
-**Why it matters**: it shows that the repair target is not better prose but state discrimination, state enumeration, conditional policy, and state authority. For long-horizon agents, it also explains why chat context alone is not enough to hold runtime state.
+**Why it matters**: it localizes repair to belief formation, updating, memory, conditional policy, and state authority. If improvement requires new measurements, tool feedback, or richer representation, the upstream diagnosis is observation-representation mismatch instead.
 
 **Source chain**:
 
@@ -185,9 +185,9 @@ If you arrived here from another page, it usually makes sense to jump straight t
 <a id="observation-representation-mismatch"></a>
 ### Observation-Representation Mismatch
 
-**One-line definition**: the world variable that actually decides success never enters the model's operational representation in a task-sufficient form.
+**One-line definition**: decision-relevant information that a feasible intervention could have acquired or preserved never enters the model's operational representation.
 
-**Full explanation**: the model may reason very well over what it sees, but if the decisive variable was dropped, compressed, aliased, or hidden before it entered representation, a longer reasoning chain only works over the wrong coordinates. Missing logs, missing sensor data, absent tools, over-compressed summaries, and variables that never reach context are all instances of observation-representation mismatch.
+**Full explanation**: the model may reason very well over what it sees, but if a key variable available through a feasible channel was dropped, compressed, aliased, or hidden before it entered representation, a longer reasoning chain only works over the wrong coordinates. Missing logs, unconnected available sensors or tools, and raw signals overwritten by summaries are examples. If no feasible measurement or representation can remove the uncertainty, the remaining gap is an irreducible information constraint of the task rather than system mismatch.
 
 **Why it matters**: it corrects the common mistake of treating the problem as insufficient reasoning when the real repair is channel repair. Measurement, raw evidence access, tool integration, environment querying, and representation redesign often matter more than more thinking.
 

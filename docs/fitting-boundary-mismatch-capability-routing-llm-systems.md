@@ -149,7 +149,7 @@ Its distinct role is to explain failures in **capability activation**. The quest
 
 ```text
 Does the system have the information?
-Does the system have the latent state?
+Does the system form and update the evidence-warranted state belief?
 Does the correct output exist in the candidate space?
 Can local pieces compose?
 Is the objective correctly specified?
@@ -207,8 +207,8 @@ It is the failure of capability routing.
 
 This position matters. Each station in the pipeline has its own failure mode:
 
-- If the decisive variable never enters `Z`, the failure is observation-representation mismatch.
-- If `Z` is insufficient to infer the relevant latent state, the failure is state mismatch.
+- If decision-relevant information available through a feasible channel never enters `Z`, the failure is observation-representation mismatch.
+- If, at fixed `Z`, system belief diverges from the evidence-warranted belief and changes action ranking, the failure is state mismatch; correctly preserving irreducible uncertainty is not system mismatch.
 - If the capability is not activated despite being appropriate, or activated despite being inappropriate, the failure is fitting-boundary mismatch.
 - If the capability is active but the correct structure has low probability under the policy, the failure is support mismatch.
 - If local capability outputs fail to compose, the failure is aggregation mismatch.
@@ -528,7 +528,7 @@ If the schema is missing from the prompt, the problem is observation-representat
 State mismatch asks:
 
 ```text
-Which latent state are we in?
+Given fixed Z, is the maintained belief warranted by the evidence?
 ```
 
 Fitting-boundary mismatch asks:
@@ -537,7 +537,7 @@ Fitting-boundary mismatch asks:
 Which capability did we activate for this represented situation?
 ```
 
-The two interact. A wrong state hypothesis can trigger the wrong capability. But the repair targets differ: state mismatch requires better state discrimination; fitting-boundary mismatch requires better capability routing.
+The two interact. A wrong or stale belief can trigger the wrong capability. But the repair targets differ: state mismatch requires repairing belief formation, updating, or use; fitting-boundary mismatch requires better capability routing. If feasibly obtainable information is missing, the upstream diagnosis is observation-representation mismatch.
 
 ### 8.3 Not Support Mismatch
 

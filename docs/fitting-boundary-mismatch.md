@@ -316,7 +316,7 @@ The overfitting and underfitting sides need not occur in a single sample at the 
 
 To prevent "underfitting" from swallowing the first four mismatch classes, the fifth class must satisfy a strict prerequisite:
 
-> The model does not entirely lack the relevant support; the target is not wholly unclear; the state is not unidentifiable; and local results are not impossible to aggregate. The relevant capability, strategy, or audit mode already exists. The error mainly concerns whether it is invoked and where it is invoked.
+> The model does not entirely lack the relevant support; the target is not wholly unclear; state belief is not incorrectly formed; and local results are not impossible to aggregate. The relevant capability, strategy, or audit mode already exists. The error mainly concerns whether it is invoked and where it is invoked.
 
 Thus the fifth mismatch concerns **capability routing**. It does not ask "is the data present?", "is the goal clear?", "is the state visible?", or "can local results form a global result?" It asks:
 
@@ -357,13 +357,13 @@ Examples:
 
 ### 5.4 Boundary with State Mismatch
 
-State mismatch asks whether the true state is observable and identifiable.
+State mismatch asks whether, at fixed accessible representation, the system forms, updates, and uses the state belief warranted by the evidence.
 
-Fitting-boundary mismatch asks whether, when the state is already identifiable enough, the model still wrongly generalizes a capability that works in one state to other states, or fails to invoke the correct capability in the target state.
+Fitting-boundary mismatch asks whether, when state belief is already accurate enough, the model still wrongly generalizes a capability that works in one state to other states, or fails to invoke the correct capability in the target state.
 
 Examples:
 
-- State mismatch: the model does not know the current market regime.
+- State mismatch: market evidence has changed, but the model still misranks the regime posterior or carries a stale belief.
 - Fitting-boundary mismatch: the model treats a signal or risk-control logic that works in one regime as a cross-regime rule.
 
 ## 6. Machine-Learning Interpretation
@@ -1010,18 +1010,18 @@ With fitting-boundary mismatch included, the six mismatches can be placed side b
 
 | Mismatch | Essential problem | Machine-learning interpretation | Error direction |
 |---|---|---|---|
-| Aggregation mismatch | Multiple different modes are averaged into one high-probability output | autoregressive conditional-distribution aggregation | over-averaging |
+| Aggregation mismatch | The deployed local proxy ranking diverges from global completion value while early commitment shrinks reachable futures | local-proxy / search / commitment mismatch | local-global divergence |
 | Support mismatch | The target region lacks sufficient probability or data support | support coverage / long-tail sparsity | cannot reach it |
 | Specification mismatch | The objective function is not clearly specified | underspecified objective / proxy mismatch | does not know what to optimize |
-| State mismatch | Observation cannot recover the latent state | latent-state non-identifiability / POMDP | does not know the true state |
+| State mismatch | At fixed representation, actual belief diverges from evidence-warranted belief and changes action ranking | belief formation / update mismatch | misranked, forgotten, or stale belief |
 | Fitting-boundary mismatch | The trigger boundary of a learned capability does not match its true application boundary | decision-boundary mismatch / negative transfer / over-under fitting / representation interference | over-triggering or under-triggering |
-| Observation-representation mismatch | Task-sufficient variables do not enter the operational representation | channel insufficiency / representation bottleneck | cannot see or encode the decisive variables |
+| Observation-representation mismatch | Decision-relevant information available through a feasible channel does not enter operational representation | feasible-channel insufficiency / representation bottleneck | loses obtainable information |
 
 The key sentence for the fifth class is:
 
 > The capability exists; the routing is wrong.
 
-This is why it deserves to remain a primitive mismatch. It is not "the model did not learn it," but "a capability the model learned covers too much or is invoked too narrowly." It is not "the target was unclear," but "an already learned capability was routed incorrectly." It is not "the state was invisible," but "after the state is clear enough, the capability invocation boundary is still displaced." Nor is it "the decisive variable did not enter representation"; that belongs to observation-representation mismatch.
+This is why it deserves to remain a primitive mismatch. It is not "the model did not learn it," but "a capability the model learned covers too much or is invoked too narrowly." It is not "the target was unclear," but "an already learned capability was routed incorrectly." It is not a belief-formation error, but a displaced invocation boundary after the belief is already accurate enough. Nor is it the loss of decision-relevant information available through a feasible channel; that belongs to observation-representation mismatch.
 
 ## 14. Summary
 
