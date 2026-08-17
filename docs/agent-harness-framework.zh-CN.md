@@ -108,7 +108,7 @@ Quantification：每个机制在固定条件下贡献了多少？
 | **模型策略** | 决定语义判断、候选生成和利用外部能力的能力 | 基础模型、推理模型、训练后策略 |
 | **Agent Harness** | 决定已有能力如何被组织、验证、提交和高效兑现 | Bridge、Action-Space Optimization |
 
-只有在外部能力基座固定时，“模型 + Hardness”的残差归因才是可识别的。
+只有在外部能力基座固定时，“模型 + Harness”的残差归因才是可识别的。
 
 ### 2.3 端到端分数把不同问题混成了一个数字
 
@@ -157,27 +157,7 @@ Agent Harness 关注的不是“运行了多少轮”，而是每一轮是否改
 
 ---
 
-## 3. 术语边界
-
-### 3.1 Task Hardness、Boundary Hardening 与 Agent Harness
-
-“Hardness”容易同时指向三种不同概念：
-
-| 概念 | 含义 | 本文位置 |
-|---|---|---|
-| **Task Hardness** | 任务本身的难度、依赖深度、部分可观测性、搜索复杂度 | 外生任务属性 |
-| **Boundary / Acceptance Hardening** | 强化验收门槛，防止弱代理目标和可钻漏洞的测试欺骗系统 | Bridge 中的验证约束，也是 ASO 的可行动作边界 |
-| **Agent Harness** | 系统把概率性模型输出转化为可验证、可积累、可恢复任务进展的能力 | 本文的上位框架 |
-
-因此，本文不把 Agent Harness 等同于“把 benchmark 做难”，也不把它等同于安全领域常见的 system hardening。
-
-### 3.2 Hardness 是系统属性，Hardening 是改造过程
-
-- **Agent Harness**：系统在当前任务、模型和外部能力基座下表现出的运行时属性；
-- **Agent Hardening**：通过实验和工程改造提升这一属性的过程；
-- **Agent Harness Framework**：用于定义、分解、量化和优化该属性的理论与实验框架。
-
-### 3.3 Hardness 不是一个天然的单标量
+## 3. Agent Harness 是多维运行时属性
 
 一个系统可能：
 
@@ -186,7 +166,7 @@ Agent Harness 关注的不是“运行了多少轮”，而是每一轮是否改
 - 成功率高，但成本巨大；
 - 平均表现高，但尾部失败风险不可接受。
 
-因此，Hardness 首先是一个多维 profile，而不是一个天然总分。只有在明确效用函数、预算和风险权重后，才可以压缩为单一目标。
+因此，Agent Harness 首先应被视为一个多维运行时 profile，而不是天然总分。只有在明确效用函数、预算和风险权重后，才可以压缩为单一目标。
 
 ---
 
@@ -268,9 +248,9 @@ Agent Harness Framework 同时使用两种残差：
 
 二者分别回答“系统哪里还不够强”和“当前动作是否真正推进任务”。
 
-### 5.1 系统能力残差：模型与 Hardness 的分解
+### 5.1 系统能力残差：模型与 Harness 的分解
 
-在固定 \(D,X,b\) 和允许的 Hardness 设计集合 \(\mathfrak H\) 下，定义模型条件能力前沿：
+在固定 \(D,X,b\) 和允许的 Harness 设计集合 \(\mathfrak H\) 下，定义模型条件能力前沿：
 
 \[
 C_\theta(D,X,b,\mathfrak H)
@@ -279,7 +259,7 @@ C_\theta(D,X,b,\mathfrak H)
 J(D;\theta,X,\mathcal H,b)
 \]
 
-它表示：在给定模型和外部能力基座下，允许选择最佳 Hardness 时能够达到的系统前沿。
+它表示：在给定模型和外部能力基座下，允许选择最佳 Harness 时能够达到的系统前沿。
 
 再定义该外部能力基座上的理想系统前沿：
 
@@ -307,7 +287,7 @@ C^*-J(\theta,\mathcal H)
 
 ### 5.2 经验前沿与下界
 
-真实的 \(C_\theta\) 通常不可知。实验只能在已测试 Hardness 集合 \(\mathfrak H_{test}\) 上形成经验前沿：
+真实的 \(C_\theta\) 通常不可知。实验只能在已测试 Harness 集合 \(\mathfrak H_{test}\) 上形成经验前沿：
 
 \[
 \widehat C_\theta
@@ -338,7 +318,7 @@ L_H(\theta)
 -J(\theta,\mathcal H_0)
 \]
 
-表示固定模型下，Hardness 相对基线能够兑现多少额外能力。
+表示固定模型下，Harness 相对基线能够兑现多少额外能力。
 
 对于固定 Harness：
 
@@ -352,7 +332,7 @@ L_M(\mathcal H)
 
 表示模型变化带来的能力差异。
 
-模型与 Hardness 可能存在强交互。以基线模型 \(\theta_0\) 和基线 Harness \(\mathcal H_0\) 为例：
+模型与 Harness 可能存在强交互。以基线模型 \(\theta_0\) 和基线 Harness \(\mathcal H_0\) 为例：
 
 \[
 I_{M\times H}
@@ -363,7 +343,7 @@ J(\theta_1,\mathcal H_1)
 +J(\theta_0,\mathcal H_0)
 \]
 
-若 \(I_{M\times H}\neq0\)，则“这个 Harness 提升多少”不是模型无关的常数。一个 Hardness 可能帮助弱模型更多，也可能只有强模型才能利用。
+若 \(I_{M\times H}\neq0\)，则“这个 Harness 提升多少”不是模型无关的常数。某个 Harness 可能帮助弱模型更多，也可能只有强模型才能利用。
 
 ### 5.4 执行任务残差
 
@@ -797,7 +777,7 @@ ASO：改变 action space A
 
 ### 10.2 实验中的冻结原则
 
-要量化某一 Hardness 组件，必须尽量固定：
+要量化某一 Harness 组件，必须尽量固定：
 
 - 同一任务实例；
 - 同一输入信息；
@@ -895,7 +875,7 @@ Y_{ijk}
 - 某个 Bridge 是否只帮助弱模型；
 - 某个 ASO 是否需要强模型才能利用；
 - 强 Bridge 是否放大或削弱某个 action interface 的优势；
-- 模型排序是否会随 Hardness 改变；
+- 模型排序是否会随 Harness 设计改变；
 - 所谓“模型能力差距”中有多少其实是 harness compatibility。
 
 ### 10.6 推荐统计单位
@@ -917,7 +897,7 @@ Y_{ijk}
 | **Q2 成对控制实验** | 同实例、同预算，只改变一个机制 | 仍局限于单模型或单任务 |
 | **Q3 因子与交互实验** | Model × Bridge × ASO，估计主效应和交互 | 跨域规律尚未建立 |
 | **Q4 迁移曲线与 crossover law** | 能预测何时 patch、audit、rewrite、branching 更优 | 仍需要动态决策 |
-| **Q5 自适应 Hardness Optimizer** | 根据状态、残差和预算在线选择机制，并在 OOD 上验证 | 接近可学习的科学运行时 |
+| **Q5 自适应 Agent Harness Optimizer** | 根据状态、残差和预算在线选择机制，并在 OOD 上验证 | 接近可学习的科学运行时 |
 
 ### 10.8 科学工程的判定标准
 
@@ -1058,9 +1038,9 @@ Agent Harness Framework
 | Mismatch Theory | value loss diagnosis | 价值在哪一个结构站点丢失？ | 为 Harness 路由提供诊断，不是 Harness 的同层组件 |
 | Agentic RL | internalized policy optimization | 如何改变模型策略？ | 改变 \(\pi\)，与 inference-time ASO 区分，但可互相内化 |
 
-### 13.1 Harness component 与 Hardness function 的映射
+### 13.1 Harness component 与运行时函数的映射
 
-| Harness 组件 | 作为外部能力基座时 | 作为 Hardness 时 |
+| Harness 组件 | 作为外部能力基座时 | 作为运行时设计时 |
 |---|---|---|
 | Tools | 工具是否存在、能做什么 | 工具发现、暴露、参数化、授权、执行和验证 |
 | Context | 信息源是否存在 | 信息选择、压缩、证据化和 operator-specific rendering |
@@ -1069,7 +1049,7 @@ Agent Harness Framework
 | Orchestration | 是否有多个执行主体 | action-space 分解、路由、并行和聚合策略 |
 | Verification | 是否存在检查能力 | Oracle 选择、门控、failure localization 和 commit authority |
 
-这一映射说明：同一个 Harness 组件可能同时包含“能力基座”和“Hardness 控制”两部分。量化实验必须将两者分开。
+这一映射说明：同一个 Harness 组件可能同时包含“能力基座”和“运行时控制”两部分。量化实验必须将两者分开。
 
 ### 13.2 与六类 mismatch 的关系
 
@@ -1093,11 +1073,11 @@ Bridge 和 ASO 不是第七、第八类 mismatch。
 
 ---
 
-## 14. Hardness 的边界与失败模式
+## 14. Agent Harness 的边界与失败模式
 
-### 14.1 强 Hardness 不能创造不存在的语义判别能力
+### 14.1 强 Harness 不能创造不存在的语义判别能力
 
-若模型、工具、环境、数据和 Oracle 中都不存在区分正确与错误的能力，Hardness 无法凭空产生真值。它可以：
+若模型、工具、环境、数据和 Oracle 中都不存在区分正确与错误的能力，Agent Harness 无法凭空产生真值。它可以：
 
 - 降低不必要的承诺；
 - 保留已正确区域；
@@ -1108,7 +1088,7 @@ Bridge 和 ASO 不是第七、第八类 mismatch。
 
 但它不能保证产生模型和外部能力基座之外的新解。
 
-### 14.2 错误的 Hardness 会把错误制度化
+### 14.2 糟糕的 Harness 设计会把错误制度化
 
 - 错误 state schema 会稳定保存错误抽象；
 - 错误 verifier 会让系统更稳定地优化错误目标；
@@ -1116,10 +1096,10 @@ Bridge 和 ASO 不是第七、第八类 mismatch。
 - 过强局部 patch 约束会阻止必要的全局重构；
 - 过度分支会放大成本和 provenance 混乱；
 - 过度审计会让系统陷入检查而不行动；
-- 过度硬门槛会提高 false rejection；
+- 过严门槛会提高 false rejection；
 - 固定路由可能对某一模型有效、对另一模型失效。
 
-### 14.3 Hardness 不保证全局最优或单调收敛
+### 14.3 Agent Harness 不保证全局最优或单调收敛
 
 即使每次只提交通过 verifier 的改动，也可能：
 
@@ -1131,7 +1111,7 @@ Bridge 和 ASO 不是第七、第八类 mismatch。
 
 最安全的主张是：
 
-> Hardness 改善任务结构、状态可治理性和能力兑现条件；它不等于全局最优保证。
+> Agent Harness 改善任务结构、状态可治理性和能力兑现条件；它不等于全局最优保证。
 
 ### 14.4 组件效应不是固定常数
 
@@ -1145,7 +1125,7 @@ Bridge 和 ASO 不是第七、第八类 mismatch。
 - Oracle 带宽；
 - 环境可逆性；
 - 预算；
-- 其他 Hardness 组件。
+- 其他 Harness 组件。
 
 因此，Agent Harness Science 的目标不应只是得到一个平均提升，而是建立条件化效应曲线和 crossover law。
 
@@ -1195,7 +1175,7 @@ Bridge 和 ASO 不是第七、第八类 mismatch。
 - 模型排名是否依赖 Harness；
 - 弱模型是否从强结构中获益更多；
 - 强模型是否能利用更自由的 action space；
-- 某些 Hardness 是否只是对模型缺陷的临时补偿；
+- 某些 Harness 设计是否只是对模型缺陷的临时补偿；
 - 哪些机制可以稳定跨模型迁移。
 
 ### Phase 4：建立条件化规律和预测模型
@@ -1211,7 +1191,7 @@ Bridge 和 ASO 不是第七、第八类 mismatch。
 
 ### Phase 5：自适应 Agent Harness Optimizer
 
-当组件效应能够被预测后，Hardness 本身可以成为运行时优化对象：
+当组件效应能够被预测后，Harness 本身可以成为运行时优化对象：
 
 ```text
 current governed state
@@ -1224,9 +1204,9 @@ current governed state
 
 此时 Agent Runtime 不再依赖固定经验流程，而是根据测得的条件效应进行动态选择。
 
-### Phase 6：把已验证的 Hardness 规律内化到模型
+### Phase 6：把已验证的 Harness 规律内化到模型
 
-外部 Hardness 产生高质量、可归因的 trajectory 和 failure records 后，可以进一步用于：
+外部 Harness 产生高质量、可归因的 trajectory 和 failure records 后，可以进一步用于：
 
 - SFT；
 - on-policy distillation；
@@ -1235,11 +1215,11 @@ current governed state
 - harness-robust training；
 - learned state and action-space policies。
 
-外部 Hardness 与内部模型优化由此形成闭环，但二者仍应在实验中保持可区分，否则无法知道能力究竟被内化到了哪里。
+外部 Harness 与内部模型优化由此形成闭环，但二者仍应在实验中保持可区分，否则无法知道能力究竟被内化到了哪里。
 
 ---
 
-## 16. 新增 Hardness 轴的准入标准
+## 16. 新增 Harness 轴的准入标准
 
 Bridge 和 ASO 是当前提出的最小功能核心，不主张它们已经穷尽所有可能的 Agent Harness 维度。未来若提出第三个独立轴，应至少满足：
 
@@ -1399,7 +1379,7 @@ Agent Harness Framework 的主要贡献，不是再增加一组 Agent 组件，�
 =
 \text{Model-Conditioned Gap}
 +
-\text{Hardness Realization Gap}
+\text{Harness Realization Gap}
 }
 \]
 
@@ -1492,7 +1472,7 @@ Agent Harness Framework 的主要贡献，不是再增加一组 Agent 组件，�
 任务分布 D + 外部能力基座 X + 预算 b + 评价标准
 
 系统：
-Model πθ + Hardness H
+Model πθ + Harness H
 H = Bridge B + Action-Space Optimization Ω
 
 Bridge：
