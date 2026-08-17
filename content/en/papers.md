@@ -154,6 +154,13 @@ This bilingual working draft turns residuals from a loose error description into
 
 [Read the residual-control draft: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/residual-control-agent-measurement-routing-target-effective-repair.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/residual-control-agent-measurement-routing-target-effective-repair.zh-CN.md)
 
+### From Agent Loop to Dynamic Agent Graph: A Cognitive-Budget Perspective
+Tag: runtime-orchestration working draft
+
+This bilingual working draft gives a unified cognitive-budget account of Route, Workflow, and dynamic Graph: Route is a cognitive investment decision, Workflow is the execution contract of that investment, and Graph is the dependency structure plus runtime ledger across many such commitments. Its central claim is that agents do not evolve from a free Loop into specialized Workflows, Fan-out / Fan-in, Recovery, and Human Gates merely because tasks "look like graphs," but because complex problems require persistent, protected, acceptance-bound cognitive investment.
+
+[Read the Agent Graph draft: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/from-agent-loop-to-dynamic-agent-graph-cognitive-budget-perspective.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/from-agent-loop-to-dynamic-agent-graph-cognitive-budget-perspective.zh-CN.md)
+
 ### Why Agent Engineering Must Take Controlled Experiments Seriously
 Tag: controlled-experiment methodology working draft
 
