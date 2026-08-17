@@ -8,12 +8,12 @@
 
 Large language model (LLM) systems increasingly rely on inference-time procedures: repeated sampling, critique, planning, retrieval, tool use, reranking, execution feedback, and iterative revision. These procedures can substantially improve task performance, but they also reveal a persistent limitation. On many high-value tasks, the system does not fail by producing arbitrary nonsense. Instead, it remains concentrated in outputs that are fluent, locally coherent, defensible, and incrementally improvable — while still missing the structural conditions that determine true task value. We call this regime **LLM mediocrity**.
 
-This paper proposes a structural account of when and why that regime appears. The central claim is that high-value LLM system design is not merely a problem of better generation. It is a problem of **value preservation** across a world-to-output pipeline. Task value must survive observation, representation, latent-state identification, capability routing, policy support, local-to-global aggregation, and specification. Failures arise when value-relevant structure is lost, aliased, routed to the wrong capability, assigned insufficient probability mass, locally optimized but globally broken, or evaluated under the wrong proxy. We formalize these as six primitive mismatches: **observation-representation mismatch**, **state mismatch**, **fitting-boundary mismatch**, **support mismatch**, **aggregation mismatch**, and **specification mismatch**.
+This paper proposes a structural account of when and why that regime appears. The central claim is that high-value LLM system design is not merely a problem of better generation. It is a problem of **value preservation** across a world-to-output pipeline. Task value must survive observation, representation, state-belief formation and updating, capability routing, policy support, local-to-global aggregation, and specification. Failures arise when value-relevant structure is lost, aliased, turned into a wrong or stale belief, routed to the wrong capability, assigned insufficient probability mass, locally optimized but globally broken, or evaluated under the wrong proxy. We formalize these as six primitive mismatches: **observation-representation mismatch**, **state mismatch**, **fitting-boundary mismatch**, **support mismatch**, **aggregation mismatch**, and **specification mismatch**.
 
 The six mismatches are not presented as a loose taxonomy of surface errors. They are derived from structurally distinct stations in a generic LLM system pipeline:
 
 ```text
-S_world → O → Z → capability routing → candidate support → aggregation → evaluation
+S_world → O → Z → belief formation / update → capability routing → candidate support → aggregation → evaluation
 ```
 
 Under this abstraction, the taxonomy has a relative completeness claim: any failure of task-value preservation must occur at one or more of these stations or in their interactions. It also has an independence claim: each mismatch can be perturbed while holding the others fixed, producing failures with distinct repair targets.
@@ -68,7 +68,7 @@ This paper develops a structural theory of that middle regime and its failure bo
 
 First, task-value failure in LLM systems can be analyzed as failure of preservation across a world-to-output pipeline. The pipeline is abstract enough to cover pure prompting, retrieval-augmented generation, tool-using agents, execution-guided code synthesis, text-to-SQL systems, and long-horizon autonomous workflows.
 
-Second, six primitive mismatches correspond to six structurally distinct stations in that pipeline. Observation-representation mismatch concerns whether decisive world variables enter the model-accessible representation. State mismatch concerns whether the relevant latent state is identifiable under the available observations. Fitting-boundary mismatch concerns whether learned capabilities are activated in the right domain. Support mismatch concerns whether high-value structures have enough probability mass or reachability under the system policy. Aggregation mismatch concerns whether local improvements compose into global value. Specification mismatch concerns whether the accessible proxy objective represents the true task utility.
+Second, six primitive mismatches correspond to six structurally distinct stations in that pipeline. Observation-representation mismatch concerns whether decisive variables obtainable under the feasible channel and representation budget enter the model-accessible representation. State mismatch concerns whether the system forms, preserves, and updates the belief state warranted by the available representation. Fitting-boundary mismatch concerns whether learned capabilities are activated in the right domain. Support mismatch concerns whether high-value structures have enough probability mass or reachability under the system policy. Aggregation mismatch concerns whether local improvements compose into global value. Specification mismatch concerns whether the accessible proxy objective represents the true task utility.
 
 Third, compound failures are often super-additive because repair operations are coupled. A specification repair may be useless if the decisive variable never entered the representation. An aggregation repair may be useless if the system is operating under the wrong latent-state hypothesis. A support expansion may be useless if the correct candidate is later routed to the wrong evaluator. These interactions are not incidental. They follow from the pipeline structure.
 
@@ -100,6 +100,7 @@ A more explicit pipeline is:
 S_world
   -- φ --> O
   -- ψ --> Z
+  -- Bθ --> b
   -- ρ --> C
   -- pθ --> K
   -- A --> Y
@@ -112,6 +113,8 @@ where:
 - `O` is the observed data available to the system.
 - `ψ` is the representation function: encoding, tokenization, retrieval, compression, schema extraction, prompt construction, or tool-result formatting.
 - `Z` is the model-accessible, operational representation.
+- `Bθ` is the belief-formation and update component that maps current and historical representations into an operational belief over latent task state.
+- `b` is the belief state, hypothesis set, or state branch actually maintained by the system. It does not require the latent state to be directly observable.
 - `ρ` is the capability-routing function: it decides which learned strategy, role, behavior, tool, audit pattern, or reasoning mode becomes active.
 - `C` is the set of activated capabilities or strategies.
 - `pθ` is the model/system policy over candidate continuations, reasoning traces, plans, or artifacts.
@@ -131,7 +134,7 @@ The six primitive mismatches are derived by asking where task value can be struc
 
 ### 3.1 Observation-Representation Mismatch
 
-Observation-representation mismatch occurs when task-relevant variables in the world are lost, compressed, aliased, omitted, or made operationally inaccessible before they enter the system's working representation.
+Observation-representation mismatch occurs when a task-relevant distinction that is obtainable under the system's declared authorization, cost, latency, and tool constraints is lost, compressed, aliased, omitted, or made operationally inaccessible before it enters the working representation.
 
 Formally, let `V*` be a set of variables in `S_world` that are necessary for high utility. Let:
 
@@ -139,7 +142,7 @@ Formally, let `V*` be a set of variables in `S_world` that are necessary for hig
 Z = ψ(φ(S_world))
 ```
 
-Observation-representation mismatch exists when there are two world states `S1` and `S2` such that:
+Suppose there are two world states `S1` and `S2` such that:
 
 ```text
 U*(S1) ≠ U*(S2)
@@ -147,7 +150,13 @@ but
 ψ(φ(S1)) ≈ ψ(φ(S2))
 ```
 
-for the purposes of the policy or control procedure. The system has collapsed two value-distinct situations into the same operational representation.
+for the purposes of the policy or control procedure. The current representation then induces decision-relevant aliasing. To diagnose that aliasing as observation-representation mismatch, there must also be a **feasible channel or representation intervention** `(φ', ψ')` that exposes the distinction at an allowed cost without changing the task objective:
+
+```text
+Z'(S1) = ψ'(φ'(S1))  not≈  ψ'(φ'(S2)) = Z'(S2)
+```
+
+If no intervention in the declared feasible channel set can expose the distinction, the gap belongs to the task's information structure or irreducible partial observability, not to a system failure to ingest an available variable. The downstream system should then act on the correct belief state; inability to observe the true state directly is not itself observation-representation mismatch.
 
 This mismatch is upstream of reasoning. It cannot be reliably repaired by asking the model to think longer over the same representation. If the decisive variable is absent from `Z`, longer reasoning only elaborates an impoverished projection of the task.
 
@@ -174,23 +183,42 @@ Before governing knowledge, verify that the variables to be governed have entere
 
 ### 3.2 State Mismatch
 
-State mismatch occurs when utility depends on a latent state that is not identifiable under the current observation channel or representation.
+State mismatch occurs when utility depends on latent state and the system forms, preserves, or updates a decision-relevant wrong belief under a fixed available representation.
 
-Observation-representation mismatch asks whether the necessary variables enter the representation. State mismatch asks whether, given the representation, the system can infer which state it is in.
+Observation-representation mismatch asks whether feasibly obtainable necessary variables enter the representation. State mismatch asks whether, given the representation and observation history, the system's actual belief matches the belief warranted by the evidence. The latent state may be impossible to observe directly; the correct control object is then a belief distribution, not an assumed-to-be-available true-state label.
 
-Let `H` be a latent state space and let the correct policy depend on `h ∈ H`. State mismatch exists when:
-
-```text
-P(h | Z) is ambiguous or misranked
-```
-
-and the utility of candidate actions differs sharply across possible states:
+Let `H` be a latent state space and `Z≤t` the available representation history. Define the warranted belief and the belief actually maintained by the system:
 
 ```text
-argmax_a U(a | h1) ≠ argmax_a U(a | h2)
+b*t(h) = P(h_t = h | Z≤t)
+b_hat_t(h) = Bθ(Z≤t)
 ```
 
-This mismatch is common in dialogue, planning, diagnosis, user modeling, market interpretation, code debugging, long-horizon agents, and dynamic environments. A system may see the same surface text under multiple hidden regimes and choose a policy that is locally plausible but state-inappropriate.
+State mismatch exists when their difference changes the action ranking:
+
+```text
+argmax_a E_{h ~ b_hat_t}[U(a | h)]
+  ≠
+argmax_a E_{h ~ b*t}[U(a | h)]
+```
+
+Errors include unsupported collapse to one state, misranking, forgotten evidence, stale beliefs, and failure to update after new observations. Ambiguity in `b*t` alone is not a mismatch. If the system preserves that uncertainty and takes the belief-optimal action, branches, clarifies, or emits a bounded conditional output, it is acting correctly under the current information structure.
+
+This requires separating **task state ambiguity** from **system state mismatch**. On a fixed candidate-pair distribution `ν`, the rate of ranking reversal across posterior states,
+
+```text
+δ_amb(Z≤t) = E_{h,h' ~ b*t} Pr_{a,a' ~ ν}[ranking_h(a,a') != ranking_h'(a,a')]
+```
+
+measures the task's decision sensitivity under the current information structure. It contains no `b_hat_t`, cannot measure state-mismatch severity, and cannot by itself distinguish a feasibly repairable channel loss from irreducible uncertainty. The former boundary requires a separate `V_feas - V_Z` test. System mismatch must instead be evaluated against the belief-optimal baseline, for example:
+
+```text
+Reg_state(Bθ; Z≤t)
+  = max_a E_{h ~ b*t}[U(a | h)]
+    - E_{h ~ b*t}[U(a_hat | h)]
+```
+
+where `a_hat` is selected under `b_hat_t`. A belief-optimal system can have high `δ_amb` and zero `Reg_state` at the same time.
 
 Repair targets include:
 
@@ -281,7 +309,15 @@ explicit enumeration of rare patterns
 
 Aggregation mismatch occurs when local improvements do not compose into global value.
 
-This is the narrow home of **autoregressive mediocrity**. Autoregressive generation proceeds through locally plausible continuations. In many tasks, local plausibility is useful. But when global value depends on nonlocal dependencies, exact coordination, delayed commitments, long-range consistency, or structural invariants, local goodness can be insufficient or actively misleading.
+Aggregation mismatch is architecture-independent. It occurs when the proxy used for an irreversible or costly local commitment diverges from whole-completion value. The autoregressive factorization `p(y|x)=∏_t p(y_t|x,y_<t)` can represent any joint distribution exactly, and exact conditionals can encode global constraints; autoregression is therefore neither sufficient nor necessary for aggregation mismatch. The deployed risk comes from conditional approximation error, greedy or truncated decoding, limited search, irreversible commitment order, and disagreement between a local proxy and global completion value.
+
+Task properties and system failure must also be separated here. The ability of a window-limited function class to approximate true utility, `α_k`, measures task local decomposability only. Because it contains no model, deployed proxy, or search process, a low `α_k` cannot by itself imply severe system aggregation mismatch. On a fixed evaluation decision set, a system-relative measure compares the deployed proxy `q_hat_t` with global completion value `Q*t`, using argmax disagreement or regret such as
+
+```text
+Reg_agg(M, Π; h_t) = Q*t(d*t) - Q*t(d_hat_t)
+```
+
+where `d_hat_t` is the system's actual choice and `d*t` maximizes `Q*t` on that same evaluation set. A system that externalizes the global constraints can drive `Reg_agg` near zero even when task `α_k` is low; a bad proxy can create high regret even when `α_k` is high.
 
 Let `Y` be composed of parts:
 
@@ -348,7 +384,7 @@ The six mismatches are not claimed to be an absolute ontology of all possible co
 Under the pipeline abstraction, task value can fail to be preserved in six structurally distinct ways:
 
 1. The decisive world variable may fail to enter the representation.
-2. The relevant latent state may be unidentifiable from the representation.
+2. The system's formed or updated belief state may diverge from the belief warranted by the representation evidence.
 3. The right capability may fail to activate, or the wrong one may activate.
 4. The high-value structure may have insufficient support under the policy and budget.
 5. Local decisions may fail to compose into global value.
@@ -356,7 +392,7 @@ Under the pipeline abstraction, task value can fail to be preserved in six struc
 
 Any system failure that affects task value must either occur at one of these stations or arise from an interaction among them. This yields a relative completeness thesis:
 
-> For LLM systems modeled as world-observation-representation-routing-support-aggregation-evaluation pipelines, the six primitive mismatches and their compound interactions exhaust the primitive stations at which task value can be structurally lost.
+> For LLM systems modeled as world-observation-representation-belief-routing-support-aggregation-evaluation pipelines, the six primitive mismatches and their compound interactions exhaust the primitive stations at which task value can be structurally lost.
 
 This is a deliberately bounded claim. It does not assert that every surface error is easy to classify. It does not assert that every failure has a single cause. It does not deny implementation bugs, resource failures, or adversarial interference. It says that when the question is how task value is lost in an LLM-mediated pipeline, these are the primitive value-preservation stations.
 
@@ -372,8 +408,8 @@ Equivalently, a proposed subdivision does not become a new primitive mismatch if
 
 For example:
 
-- Observation-representation can be perturbed by removing a decisive database column from the prompt while keeping the objective, state, policy, and aggregation procedure unchanged.
-- State can be perturbed by making two latent regimes observationally ambiguous while preserving the same variables and task objective.
+- Observation-representation can be perturbed by removing from the prompt a decisive database column that is obtainable through an authorized channel, while keeping the belief updater, objective, policy, and aggregation procedure unchanged.
+- State can be perturbed while holding `φ`, `ψ`, `Z`, and the objective fixed, by replacing an evidence-calibrated belief updater with one that misranks, goes stale, or collapses prematurely.
 - Fitting-boundary can be perturbed by changing trigger evidence so that the same capability is activated in the wrong domain.
 - Support can be perturbed by lowering the probability or reachability of the correct structure without changing its utility or the evaluator.
 - Aggregation can be perturbed by preserving local part quality while changing global composition dependencies.
@@ -802,7 +838,7 @@ AGM-style belief revision and truth-maintenance systems study how beliefs are ju
 
 ### 13.4 POMDPs, Active Perception, and State Mismatch
 
-State mismatch is related to partial observability. The system must often choose whether to act under uncertainty, branch policies, ask clarifying questions, query tools, or acquire additional observations. Observation-representation mismatch adds an upstream issue: the system may not merely be uncertain over states; the decisive variables may never have entered the representation.
+State mismatch is related to partial observability, but partial observability is not itself a failure. In a POMDP, the belief state is a sufficient statistic of the available observation history; a system taking the optimal or risk-bounded action under that belief has no state mismatch. Mismatch occurs when the actual belief diverges from the evidence-warranted belief or when uncertainty is not preserved. Asking, querying tools, and active perception may be part of a belief policy; the upstream primary diagnosis becomes observation-representation mismatch only when a feasible evidence channel that should be connected is absent or damaged.
 
 ### 13.5 Event Sourcing, Transactions, and SGAR
 
@@ -904,7 +940,7 @@ This self-audit matters because it makes the theory falsifiable in principle. It
 
 ## 16. Conclusion
 
-High-value LLM systems fail not only because models generate imperfect text, but because task value is difficult to preserve across a multi-stage pipeline. The decisive variable may not enter the representation. The latent state may remain unidentified. The correct capability may not activate. The high-value structure may have low support. Local improvements may fail to compose. The accessible evaluator may optimize the wrong proxy.
+High-value LLM systems fail not only because models generate imperfect text, but because task value is difficult to preserve across a multi-stage pipeline. A feasibly obtainable decisive variable may not enter the representation. The system's belief may diverge from the state distribution warranted by the evidence. The correct capability may not activate. The high-value structure may have low support. Local improvements may fail to compose. The accessible evaluator may optimize the wrong proxy.
 
 This paper has argued that these are not merely surface errors. They are six primitive mismatch types corresponding to structurally distinct stations in the world-to-output pipeline. Under this abstraction, they provide a relatively complete and operationally independent map of value-preservation failure.
 
@@ -921,7 +957,7 @@ The central problem of advanced LLM systems is therefore not generation alone. I
 | Term | Definition |
 |---|---|
 | LLM mediocrity | Budgeted concentration in plausible but suboptimal output regions. |
-| Autoregressive mediocrity | Aggregation-driven subcase where local continuations fail to compose into global value. |
+| Autoregressive gravity (empirical nickname) | Empirical concentration of probability mass or reachable candidates in common but suboptimal regions under a current model and decoder; diagnose primarily as support mismatch, not as a theorem about autoregressive factorization. |
 | Local alignment | Regime where model likelihood and task value align locally but not globally. |
 | Positive probability-value alignment | Regime where model tendencies reinforce task value across the relevant structure. |
 | Mediocrity-to-Extraordinary Transformation | Reparameterizing high-mismatch tasks into lower-mismatch, positively aligned control tasks. |

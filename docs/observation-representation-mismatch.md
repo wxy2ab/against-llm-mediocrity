@@ -8,7 +8,7 @@
 
 ## Abstract
 
-**Observation-representation mismatch** occurs when task-relevant world variables are lost, compressed, aliased, or made operationally inaccessible by the observation, encoding, tokenization, embedding, context-compression, or control-representation channel through which the world reaches an LLM system.
+**Observation-representation mismatch** occurs when task-relevant information that a feasible intervention could have acquired or preserved is lost, compressed, aliased, or made operationally inaccessible by the observation, encoding, tokenization, embedding, context-compression, or control-representation channel through which the world reaches an LLM system.
 
 It is not merely that the current latent state is unknown. More precisely, the available representation is not a task-sufficient representation of the world state. The system may reason well over the variables it has, yet still be capped by the variables that never entered its controllable representation.
 
@@ -16,8 +16,9 @@ The practical alias is **observation-channel mismatch**. The formal name is **ob
 
 The core contrast is:
 
-> State mismatch asks: given the current observation channel, which latent state are we in?  
-> Observation-representation mismatch asks: did the decisive world variables enter the model-accessible representation at all?
+> State mismatch asks: at fixed representation, does the system form and update the belief warranted by the available evidence?
+>
+> Observation-representation mismatch asks: did decision-relevant information obtainable through a feasible channel enter the model-accessible representation?
 
 ## 1. Core Claim
 
@@ -42,7 +43,7 @@ where:
 - \(Z\) is the model-accessible and operationally controllable representation;
 - \(Y\) is the output or action.
 
-State mismatch asks whether \(O\) is sufficient to identify \(S\), under a given observation channel. Observation-representation mismatch asks the prior interface-level question:
+State mismatch compares the evidence-warranted and actual beliefs after fixing \(Z\). Observation-representation mismatch asks the prior interface-level question:
 
 \[
 Z=\psi(\phi(S))
@@ -67,29 +68,34 @@ and that difference changes the ranking of candidate outputs or actions:
 \arg\max_y U(y;s_1) \ne \arg\max_y U(y;s_2).
 \]
 
-Equivalently, the best achievable policy over the model-accessible representation is strictly worse than the best achievable policy over the true state:
+This is observation-representation mismatch only if a feasible alternative channel or representation can separate the pair and improve decision value.
+
+Let \(\Gamma_{\mathrm{feas}}\) be the set of channels feasible under deployment constraints. Mismatch occurs when the current representation value \(V_Z\) is strictly below the best feasible-channel value:
 
 \[
-\max_{\pi:Z\to Y}\mathbb{E}[U(\pi(Z);S)]
+V_Z
 <
-\max_{\pi:S\to Y}\mathbb{E}[U(\pi(S);S)].
+V_{\mathrm{feas}}
+:=
+\sup_{(\phi',\psi')\in\Gamma_{\mathrm{feas}}}
+\max_{\pi:Z'\to Y}\mathbb{E}[U(\pi(Z');S)].
 \]
 
-The gap is a representation-induced ceiling:
+The remediable channel loss is:
 
 \[
 \Delta_{\text{channel}}
 =
-U^\star_S-U^\star_Z.
+V_{\mathrm{feas}}-V_Z.
 \]
 
-This gap cannot be eliminated by longer reasoning over the same representation. It requires changing the observation channel, adding measurement, querying the environment, using tools, requesting raw data, constructing a richer control representation, or explicitly marking the missing variables as unavailable.
+The value of a direct-state policy remains a full-information upper bound, but its gap from \(V_{\mathrm{feas}}\) is irreducible partial observability and is not counted as system mismatch. The remediable gap cannot be eliminated by longer reasoning over the same representation. It requires changing the observation channel, adding measurement, querying the environment, using tools, requesting raw data, or constructing a richer control representation.
 
 ## 2. Six Ceilings Imposed by the Channel
 
 ### 2.1 Information Sufficiency Ceiling
 
-If task value depends on a variable \(v^\star(S)\) that never enters \(Z\), even an optimal policy can only be Bayes-optimal with respect to \(Z\), not optimal with respect to \(S\). The system may appear to reason carefully while optimizing only the projection it can see.
+If task value depends on a variable \(v^\star(S)\) that never enters \(Z\), even an optimal policy can only be Bayes-optimal with respect to \(Z\), below the full-information upper bound based on \(S\). This gap is observation-representation mismatch only when a feasible alternative channel could bring \(v^\star\) into representation; otherwise it is an irreducible information constraint.
 
 Typical signs include decisions based on summaries that omit decisive evidence, recommendations drawn from stale snapshots, and answers that treat user reports as complete state rather than partial observations.
 
@@ -119,7 +125,7 @@ Many tasks depend on state transitions rather than static object identity — me
 
 Text transcripts often lose tone, pause, facial expression, shared attention, power relation, humiliation, sarcasm, exhaustion, intimacy, tension, and scene pressure.
 
-The sentence "Sure, you're impressive" can be praise, anger, sarcasm, surrender, flirtation, teasing, or social self-protection. If the system receives only text tokens, multiple interaction states collapse into one observation. State mismatch can describe the latent dialogue-state uncertainty, while observation-representation mismatch names the lower-level cause: the social variables never entered the representation.
+The sentence "Sure, you're impressive" can be praise, anger, sarcasm, surrender, flirtation, teasing, or social self-protection. If feasible voice, expression, or interaction-history channels could distinguish these states but the system receives only text tokens, their collapse is observation-representation mismatch. At fixed text, state mismatch arises only if the system unjustifiably collapses, misranks, or forgets the latent dialogue-state belief; correctly preserving the ambiguity is not mismatch.
 
 ### 2.5 Verification Ceiling
 
@@ -137,14 +143,14 @@ In a car-wash problem, the key variable is not how far a person moves but which 
 
 | Dimension | State mismatch | Observation-representation mismatch |
 |---|---|---|
-| Core question | Which latent state are we in? | Did the channel preserve the task-sufficient variables? |
-| Mathematical object | Uncertainty in \(P(S_t \mid O_{1:t})\) | Whether \(\psi(\phi(S))\) is task-sufficient |
-| Typical condition | Dynamic, hidden, changing, or partially observable state | A stable scene can fail because the channel drops decisive variables |
-| Typical error | A response is reasonable for one state and wrong for another | A physical, social, temporal, or verification problem is reduced to a visible proxy |
-| Standard repair | State enumeration, scenario matrix, if-then policy, revocation trigger | New measurement, richer modality, tool call, sensor, raw data, environmental query, structured representation |
-| Success criterion | Conditional policy covers the relevant states | Performance jumps after the observation or representation channel changes |
+| Core question | At fixed \(Z\), is belief formed and updated according to the evidence? | Relative to feasible channels, did the current channel preserve decision-relevant information? |
+| Mathematical object | Decision-relevant divergence between \(\hat b_t=B_\theta(Z_{\le t})\) and \(b_t^\star=P(H_t\mid Z_{\le t})\) | \(V_{\mathrm{feas}}-V_Z\) |
+| Typical condition | Incorrect collapse, misranking, forgetting, or stale belief | A stable scene can fail because the current channel drops obtainable information |
+| Typical error | The same evidence produces the wrong belief and action | A physical, social, temporal, or verification problem is reduced to a visible proxy |
+| Standard repair | Repair belief updating, memory, and conditional or conservative policy | New measurement, richer modality, tool call, sensor, raw data, environmental query, structured representation |
+| Success criterion | Belief and action ranking recover at fixed input | Performance jumps after the observation or representation channel changes |
 
-State mismatch should first make state explicit: enumerate plausible latent states, identify variables that change action ranking, construct scenario matrices, write conditional policies, and add revocation triggers.
+State-mismatch repair holds the evidence fixed and repairs the belief updater: enumerate plausible latent states, rank them according to evidence, preserve warranted uncertainty, and use conditional, conservative, or branching policies. Correctly maintaining a broad posterior is not mismatch.
 
 Observation-representation mismatch asks a different first question:
 
@@ -271,4 +277,4 @@ Observation-representation mismatch qualifies as a sixth primitive because it sa
 2. it predicts nonlinear improvement from channel enhancement;
 3. it requires a different intervention point: interface, sensing, encoding, measurement, verification, and control representation.
 
-State mismatch asks which state the system is in. Observation-representation mismatch asks whether the important variables of that state entered the system's operational representation at all.
+State mismatch asks whether, at fixed representation, system belief is evidence-faithful and supports the correct action. Observation-representation mismatch asks whether important information available through a feasible channel entered the operational representation.

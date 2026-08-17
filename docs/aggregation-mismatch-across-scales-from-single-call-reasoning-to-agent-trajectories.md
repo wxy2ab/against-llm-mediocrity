@@ -16,7 +16,7 @@
 
 ## Abstract
 
-Aggregation mismatch appears in a class of sequential decision systems where the system can commit only one local decision at a time, while task value is determined mainly by the completed structure. Early decisions form prefixes and change the reachable future, so a choice that looks locally reasonable need not belong to a globally high-value solution.
+Aggregation mismatch appears in sequential decision systems whose deployed procedure commits one local decision at a time without exact access to global value-to-go, while task value is determined mainly by the completed structure. Early decisions form prefixes and change the reachable future, so a choice preferred by the local proxy need not belong to a globally high-value solution. Autoregressive chain factorization can itself encode global dependencies exactly; the mismatch lies in the proxy, search, or commitment policy diverging from global completion value.
 
 In LLM systems, aggregation mismatch appears at at least two scales:
 
@@ -76,6 +76,34 @@ Aggregation mismatch appears when the local ranking and the true value-to-go ran
 \arg\max_d Q_t^*(d)
 \]
 
+### 1.1 Task Nonlocality Is Not System Mismatch Severity
+
+Let `α_k` denote how well true utility can be approximated by bounded-complexity, window-`k`, locally additive functions. `α_k` contains no model, `q_t`, searcher, or commitment rule. It therefore measures **task local decomposability**; `1-α_k` is a task-nonlocality dose, not aggregation-mismatch severity.
+
+Aggregation mismatch must be measured relative to the deployed system. Let `μ_eval` be a common evaluation-history distribution held fixed across systems. On a preregistered evaluation decision set `C_eval(h_t)`, define
+
+\[
+\hat d_t=\arg\max_{d\in C_{\mathrm{eval}}(h_t)}q_t(d\mid h_t),
+\qquad
+d_t^\star=\arg\max_{d\in C_{\mathrm{eval}}(h_t)}Q_t^\star(h_t,d).
+\]
+
+One may then report argmax disagreement
+
+\[
+e_{\mathrm{agg}}=\Pr_{h_t\sim\mu_{\mathrm{eval}}}[\hat d_t\ne d_t^\star]
+\]
+
+and global-completion-value regret
+
+\[
+\operatorname{Reg}_{\mathrm{agg}}=
+\mathbb E_{h_t\sim\mu_{\mathrm{eval}}}
+\left[Q_t^\star(h_t,d_t^\star)-Q_t^\star(h_t,\hat d_t)\right].
+\]
+
+`μ_eval`, `C_eval`, and tie-breaking should all be fixed before comparison. If `C_eval` contains only candidates available to both compared systems, the metric primarily isolates ranking and commitment quality. If it is the full feasible set, the metric also absorbs support and search failure and must be labeled accordingly. Replacing `μ_eval` with each system's own `μ_Π` instead measures on-policy aggregation burden and should be reported separately. A GF(2)-style task can have low task local decomposability while a system with externalized complete constraints has near-zero aggregation regret.
+
 This is not merely the vague claim that "systems can make mistakes." It has four structural conditions:
 
 1. **Sequential commitment**: the system cannot complete all decisions at once and must build the result step by step.
@@ -111,13 +139,21 @@ But the task is evaluated on the complete sequence:
 J(y_1,\ldots,y_T)
 \]
 
-The locally likely or linguistically natural next token need not belong to the highest-value complete output:
+Autoregressive conditional probability must not itself be treated as a locality assumption. The chain rule
 
 \[
-\arg\max_{y_t}p_\theta(y_t\mid x,y_{<t})
-\neq
-\left[\arg\max_y J(y)\right]_t
+p_\theta(y\mid x)=\prod_t p_\theta(y_t\mid x,y_{<t})
 \]
+
+can represent any joint distribution exactly, and each conditional may encode global constraints. Single-call aggregation mismatch instead compares a deployed local proxy $q_t$ with global completion value:
+
+\[
+Q_t^\star(d)=\sup_{y_{>t}}J(y_{<t},d,y_{>t}),
+\qquad
+\arg\max_d q_t(d)\ne\arg\max_d Q_t^\star(d).
+\]
+
+Here $q_t$ may combine approximate conditionals, greedy or truncated decoding scores, finite-search heuristics, and the current control state. Only when this ranking divergence combines with prefix lock-in does the local choice instantiate aggregation mismatch.
 
 Single-call reasoning aggregation mismatch shows up as:
 
@@ -142,7 +178,7 @@ task understanding
 → final output
 ```
 
-It tries to upgrade local generation from something governed by next-token probability into something governed by longer-range task value.
+It tries to upgrade generation governed by a deployed local proxy into choices that better approximate longer-range completion value. This changes approximation, search, and available control state, not the expressive capacity of autoregressive factorization.
 
 So reasoning can be understood as:
 
@@ -1034,7 +1070,7 @@ What these methods can support more plausibly is:
 
 > reducing premature stopping caused by local attractors, preserving more high-value futures, and increasing the probability of migrating from the current local optimum into a higher-value region.
 
-### 13.2 Agent-Level "Autoregression" Is a Structural Analogy, Not the Same Generative Mechanism
+### 13.2 Use the Agent-Trajectory Aggregation Term Strictly
 
 The outer layer of an agent is not necessarily a token-autoregressive model in the strict sense. It may include deterministic code, tools, state machines, and environment transitions.
 
@@ -1042,7 +1078,7 @@ So the precise term should be:
 
 > **agent-trajectory aggregation mismatch**
 
-while "agent-level autoregressive mediocrity" can still be used as an intuitive phrase for the shared local-global structure.
+The phrase “agent-level autoregressive mediocrity” is no longer retained even as an intuition pump. It turns a structural analogy into a claim about generative mechanism and again mixes support-side probability concentration with aggregation-side local-global divergence. The shared cross-scale structure is simply **agent-trajectory aggregation mismatch**.
 
 ### 13.3 The Countermeasures Themselves Can Create New Local Optima
 
@@ -1064,7 +1100,7 @@ So the goal of fighting aggregation mismatch is not to add infinite structure. I
 
 ### Proposition 1: Single-Call Reasoning Aggregation Mismatch
 
-When full-output value cannot be decomposed accurately into local token value, and the generated prefix constrains later reachable sequences, a locally likely token need not belong to a globally high-value output. Reasoning uses internal Plan, Candidate, comparison, backtracking, and verification to make local generation better approximate complete-output value.
+When full-output value cannot be recovered accurately by the deployed local proxy, the proxy ranking diverges from global value-to-go, and the generated prefix constrains later reachable sequences, a token preferred by that proxy need not belong to a globally high-value output. Reasoning uses internal Plan, Candidate, comparison, backtracking, and verification to make local generation better approximate complete-output value. The proposition does not identify autoregressive factorization itself as the source of mismatch.
 
 ### Proposition 2: Agent-Trajectory Aggregation Mismatch
 

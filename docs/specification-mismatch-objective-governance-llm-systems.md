@@ -108,8 +108,8 @@ Each primitive mismatch corresponds to a structurally distinct station in this p
 
 | Pipeline station | Primitive mismatch | Core question |
 |---|---|---|
-| World to observation / representation | Observation-representation mismatch | Did the decisive variables enter the operational representation? |
-| Representation to latent situation | State mismatch | Which hidden state or regime are we in? |
+| World to observation / representation | Observation-representation mismatch | Did decision-relevant information available through a feasible channel enter operational representation? |
+| Representation to state belief | State mismatch | At fixed representation, is belief evidence-warranted and does it support the correct action ranking? |
 | Representation to capability activation | Fitting-boundary mismatch | Is the right capability triggered in the right domain? |
 | Policy and search over candidates | Support mismatch | Is the high-value structure reachable under the search process? |
 | Local parts to global artifact | Aggregation mismatch | Do locally good parts compose into globally valuable output? |
@@ -289,7 +289,7 @@ If the system receives downtime constraints but uses a rubric that rewards elega
 State mismatch asks:
 
 ```text
-Which latent situation are we in?
+At fixed representation, is the maintained belief warranted by the evidence?
 ```
 
 Specification mismatch asks:
@@ -304,7 +304,7 @@ Example:
 Task: decide whether a failing test indicates a real bug or flaky infrastructure.
 ```
 
-If the system cannot tell whether the environment is flaky, that is state mismatch.
+If the logs are already represented but the system unjustifiably collapses, misranks, or forgets the evidence over “real bug / flaky infrastructure,” that is state mismatch. If no feasible evidence can distinguish the two and the system preserves the posterior and acts risk-boundedly, it is not mismatch; if feasibly obtainable logs are missing, it is observation-representation mismatch.
 
 If it knows the environment is flaky but treats "make all tests pass" as the only objective, ignoring reproducibility and root-cause isolation, that is specification mismatch.
 

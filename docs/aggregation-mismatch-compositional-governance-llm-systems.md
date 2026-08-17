@@ -16,7 +16,7 @@ Consider a few examples. A SQL query may have a reasonable `SELECT`, a plausible
 
 This paper develops **aggregation mismatch** as one of the primitive mismatch types in the structural theory of value preservation for LLM systems. Aggregation mismatch occurs when local value signals do not preserve global task utility under the composition operation that builds the final artifact.
 
-It is the core structural form behind what may be narrowly called **autoregressive mediocrity**: the tendency of locally likely continuations, local refinements, and local critiques to produce fluent but globally suboptimal artifacts. This tendency appears whenever the task depends on nonlocal dependencies, delayed commitments, interface consistency, global invariants, or end-to-end semantics.
+Aggregation mismatch is a mechanism-independent local-to-global failure: a deployed local proxy, finite search procedure, or irreversible commitment fails to preserve global completion value. Autoregressive chain factorization can exactly represent arbitrary joint distributions and global constraints, so it is not a sufficient cause of the mismatch. The old label “autoregressive mediocrity” conflated aggregation failure with support-side concentration of probability mass and is no longer used here as a mechanism term.
 
 Aggregation mismatch is not identical to support mismatch, specification mismatch, state mismatch, observation-representation mismatch, or fitting-boundary mismatch. It can occur even when:
 
@@ -63,7 +63,7 @@ This is a long working paper. The reader's map:
 - [1. Position in the Unified Theory](#1-position-in-the-unified-theory)
 - [2. Core Definition](#2-core-definition)
 - [3. Why Aggregation Is a Primitive Mismatch](#3-why-aggregation-is-a-primitive-mismatch)
-- [4. Aggregation and Autoregressive Mediocrity](#4-aggregation-and-autoregressive-mediocrity)
+- [4. Aggregation and Autoregressive Implementations](#4-aggregation-and-autoregressive-implementations)
 - [5. The Structure of Local-to-Global Failure](#5-the-structure-of-local-to-global-failure)
 - [6. Local Value Is Not a Homomorphism](#6-local-value-is-not-a-homomorphism)
 - [7. Compositional Governance](#7-compositional-governance)
@@ -241,6 +241,14 @@ A temporary state transition is necessary for recoverability.
 
 Aggregation mismatch therefore cannot be solved by optimizing each part independently. The system must govern the relation between parts.
 
+### 2.4 Task Coupling and System Mismatch Must Be Separated
+
+Whether true utility can be approximated by bounded-complexity, window-limited, locally additive functions is a task-side structural property. Let `α_k` denote this local decomposability and `1-α_k` the nonlocal-coupling dose. Because the quantity contains no model, deployed scorer, search, or commitment rule, a low `α_k` says only that the task places pressure on local proxies. It does not show that a particular system has severe aggregation mismatch.
+
+The system-side quantity should compare its actual local ranking with global completion value `Q*` over a fixed candidate or decision set. Suitable measures include argmax disagreement, rank correlation, or the regret `Reg_agg` of the system's actual choice relative to the `Q*`-optimal choice. When the set contains only candidates available to both systems, the measure primarily localizes composition, ranking, and commitment. Relative to the full feasible set, it also absorbs support and search failure. Experiments must state which conditioning set they use.
+
+This distinction explains how a scaffold can repair the same strongly coupled task: task `α_k` does not change, but the system's available global state, search process, and actual local proxy do, reducing `Reg_agg`. Conversely, a bad scorer or commitment rule can break a locally decomposable task.
+
 ---
 
 ## 3. Why Aggregation Is a Primitive Mismatch
@@ -267,7 +275,7 @@ The repair is not to add missing variables. The repair is to govern how clauses 
 
 ### 3.2 Not State Mismatch
 
-State mismatch asks whether the system knows which latent state it is in.
+State mismatch asks whether, at fixed representation, the system forms or updates the evidence-warranted belief and preserves the correct action ranking.
 
 Aggregation mismatch can occur even when the state is known.
 
@@ -348,29 +356,31 @@ This minimal pair establishes aggregation as a primitive failure station.
 
 ---
 
-## 4. Aggregation and Autoregressive Mediocrity
+## 4. Aggregation and Autoregressive Implementations
 
-Autoregressive generation is a special case of aggregation. Each next token or segment is selected under a local continuation policy, and the final output is the sequence-level composition of these local decisions.
+Autoregressive generation is one way to implement a sequence joint distribution:
 
-```text
-Y = (t_1, t_2, ..., t_n)
-```
+\[
+p_\theta(Y\mid x)=\prod_{k=1}^{n}p_\theta(t_k\mid t_{<k},x).
+\]
 
-The local policy optimizes:
+This is the exact chain rule and imposes no locality restriction on the global dependencies that can be represented. Exact conditionals can encode global checks, long-range bindings, and future constraints. It therefore does not follow from “autoregressive” that a locally likely choice must dilute global value.
 
-```text
-p(t_k | t_1, ..., t_{k-1}, context)
-```
+The relevant comparison is between the deployed local proxy and global completion value. For a candidate decision $d$ at position $k$, define
 
-But the task utility depends on:
+\[
+Q_k^\star(d)=\sup_{Y_{>k}}U(Y_{<k},d,Y_{>k};S_{\mathrm{world}}).
+\]
 
-```text
-U(t_1, ..., t_n, S_world)
-```
+Aggregation mismatch occurs when the local score, decoder, or finite search uses $q_k(d)$ such that
 
-Autoregressive mediocrity occurs when locally likely continuations do not preserve global utility.
+\[
+\arg\max_d q_k(d)\ne\arg\max_d Q_k^\star(d),
+\]
 
-This is not a universal defect of autoregression. In many tasks, local continuation is highly aligned with global value:
+and early commitment shrinks the reachable future set. Approximation error in the conditionals, greedy or truncated decoding, insufficient search, unexternalized future constraints, and irreversible commitment can all create this divergence. Diffusion generation, MCTS node selection, human serial writing, or any stepwise assembly process can exhibit the same mismatch; autoregressive generation with exact conditionals, coherent search, or sufficiently externalized state need not.
+
+In many tasks, the deployed local proxy is highly aligned with global value:
 
 ```text
 surface polishing
@@ -381,9 +391,9 @@ boilerplate construction
 contextual elaboration
 ```
 
-In those tasks, local likelihood can be a useful proxy for local and global quality.
+In those tasks, local likelihood can be a useful proxy for local and global quality. That is an empirical alignment among the task, trained model, and decoding rule, not a theorem about autoregressive factorization.
 
-Aggregation mismatch appears when the task depends on properties that are not locally visible at the point of generation:
+Aggregation mismatch commonly appears when the task depends on nonlocal properties not yet represented, searched, or verified by the deployed process:
 
 ```text
 long-range consistency
@@ -396,7 +406,9 @@ nonlocal reference binding
 global optimization
 ```
 
-Autoregressive mediocrity should therefore be treated as a subcase of aggregation mismatch, not as the whole theory of LLM failure.
+The controlled evidence also supports this localization without identifying factorization as the cause. In V2, direct cyclic construction by the same model class scored `2/45`, whereas auditing supplied invalid candidates scored `176/180`. In V4, externalizing the full answer bits raised cyclic construction from `13/54` to `53/54` without changing the autoregressive architecture. These comparisons have candidate-conditioned-auditing and ceiling limitations, respectively, but both localize recovery to available global information, search burden, and the construction-verification division rather than to becoming “less autoregressive.” See [generation-verification asymmetry evidence](./aggregation-mismatch-generation-verification-asymmetry-evidence.md) and the [Artifact-v4 theory-gap analysis](./aggregation-mismatch-v4-claims-theory-gap.md).
+
+Accordingly, “autoregressive mediocrity” is no longer used as a subtype or mechanism name for aggregation mismatch. When the probability mass induced by a current model and decoder empirically pulls generation toward common, fluent, low-value regions, “autoregressive gravity” may be used as an informal nickname, but support mismatch is the primary diagnosis.
 
 ### 4.1 Completion-Induced Observability
 
@@ -1876,7 +1888,7 @@ The broader lesson for LLM systems is simple:
 | Composition operator | The procedure that assembles parts into a final artifact or state transition. |
 | Local value | A part-level quality signal, such as plausibility, correctness, fluency, or local usefulness. |
 | Global utility | Task-level value of the assembled artifact. |
-| Autoregressive mediocrity | Aggregation mismatch in sequential token or segment generation. |
+| Autoregressive gravity (empirical nickname) | Support-side tendency of a current model and decoder to fall back to common, fluent, low-value regions; not an architectural theorem. |
 | Compositional Governance | Governance of dependencies, interfaces, invariants, bindings, and assembly rules. |
 | Dependency graph | Object recording how parts rely on one another. |
 | Interface contract | Object specifying assumptions and guarantees between producer and consumer parts. |

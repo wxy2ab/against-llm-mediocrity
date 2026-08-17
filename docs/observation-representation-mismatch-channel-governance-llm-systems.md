@@ -40,13 +40,13 @@ Large language model systems do not act directly on the world. They act on obser
 
 This report develops **observation-representation mismatch** as the first primitive mismatch in a structural theory of value preservation for LLM systems.
 
-Formally, let `S_world` be the task world, `φ` the observation function, `ψ` the representation function, and `Z = ψ(φ(S_world))` the model-accessible control representation. Observation-representation mismatch occurs when task-relevant distinctions in `S_world` are collapsed or made operationally inaccessible in `Z`. The resulting failure is a **representation-induced ceiling**: no amount of downstream reasoning, critique, reranking, or self-reflection over the same `Z` can reliably recover the value that was lost upstream.
+Formally, let `S_world` be the task world, `φ` the observation function, `ψ` the representation function, and `Z = ψ(φ(S_world))` the model-accessible control representation. Observation-representation mismatch occurs when a task-relevant distinction obtainable under feasible authorization, cost, latency, and tool constraints is collapsed or made operationally inaccessible in `Z`. The resulting failure is a **representation-induced ceiling**: no amount of downstream reasoning, critique, reranking, or self-reflection over the same `Z` can reliably recover the value that was lost upstream.
 
 The report clarifies the boundary between observation-representation mismatch and state mismatch.
 
-State mismatch asks: given the available representation, which latent state are we in? Observation-representation mismatch asks: did the variables needed to make that state or value distinction enter the representation at all?
+State mismatch asks whether, under a fixed available representation, the system's formed and updated belief matches the evidence. Observation-representation mismatch asks whether a feasibly obtainable variable needed for that state or value distinction entered the representation at all.
 
-The first is a problem of inference under a representation. The second is a problem of transduction into that representation.
+The first is a problem of belief formation under a representation. The second is a problem of transduction into that representation. A true state that is impossible to observe directly is not, merely by being unobservable, a system mismatch of either kind.
 
 We then introduce **channel governance**: a pre-governance discipline for ensuring that value-critical variables enter, survive, bind correctly, remain discriminative, and become operational in the control space.
 
@@ -96,7 +96,7 @@ where:
 - `ψ` is the representation function: encoding, tokenization, prompt construction, schema serialization, summarization, embedding, compression, filtering, or formatting.
 - `Z` is the operational representation used by the model and the surrounding system.
 
-Observation-representation mismatch occurs when the map `S_world → O → Z` fails to preserve task-relevant distinctions. Once the distinction is lost, downstream reasoning operates over a projection of the task rather than the task itself.
+Observation-representation mismatch occurs when the map `S_world → O → Z` fails to preserve a task-relevant distinction obtainable within the declared feasible channel set. Once the distinction is lost, downstream reasoning operates over a reparably impoverished projection rather than the best task projection supported by feasible information.
 
 This is why observation-representation mismatch must be treated as a primitive mismatch, not as a special case of hallucination, missing context, or weak reasoning. It has a distinct location in the pipeline, a distinct failure mechanism, and distinct repair targets.
 
@@ -125,6 +125,7 @@ The structural theory of value preservation models an LLM system as a world-to-o
 S_world
   -- φ --> O
   -- ψ --> Z
+  -- Bθ --> belief state
   -- ρ --> activated capabilities
   -- pθ --> candidate support
   -- A --> output aggregation
@@ -136,7 +137,7 @@ The six primitive mismatches correspond to structurally distinct stations in thi
 | Pipeline Station | Primitive Mismatch | Question |
 |---|---|---|
 | `S_world → O → Z` | Observation-representation mismatch | Did the decisive variable enter the operational representation? |
-| `Z → latent state` | State mismatch | Given the representation, which latent state are we in? |
+| `Z → belief state` | State mismatch | Does the actual belief match the belief warranted by the representation evidence? |
 | `Z → capability activation` | Fitting-boundary mismatch | Was the right capability activated in the right domain? |
 | `pθ` and search budget | Support mismatch | Is the high-value structure reachable under the policy and budget? |
 | local parts → global artifact | Aggregation mismatch | Do locally good parts compose into global value? |
@@ -190,19 +191,19 @@ The best achievable value under representation `Z` is:
 V_Z = max_π E_s [ U(π(Z(s)), s) ]
 ```
 
-The best achievable value under direct access to `S` is:
+Let `Γ_feas` be the set of channel-representation pairs allowed under authorization, cost, latency, privacy, and tool constraints. The best achievable value under the feasible information structure is:
 
 ```text
-V_S = max_π E_s [ U(π(s), s) ]
+V_feas = sup_(φ',ψ')∈Γ_feas  max_π E_s [ U(π(ψ'(φ'(s))), s) ]
 ```
 
-A representation-induced ceiling exists when:
+A **repairable** representation-induced ceiling exists when:
 
 ```text
-V_Z < V_S
+V_Z < V_feas
 ```
 
-This gap is not necessarily caused by weak inference. It may be caused by the coarsening introduced by `φ` or `ψ`.
+The ideal value under direct state access may still be written as `V_S = max_π E_s[U(π(s),s)]`, but the gap `V_S - V_feas` is irreducible partial observability imposed by the task's information structure and is not observation-representation mismatch. This mismatch counts only the current system's loss relative to the feasible best channel, `V_feas - V_Z`.
 
 ### 3.1 Equivalence Classes Induced by Representation
 
@@ -226,7 +227,7 @@ argmax_a U(a, s1) ≠ argmax_a U(a, s2)
 
 then no deterministic policy over `Z` can be optimal for both. Even stochastic policies cannot fully recover the lost distinction unless the utility structure rewards hedging in exactly the right way.
 
-This is the core of observation-representation mismatch.
+This establishes decision-relevant aliasing in the current `Z`, but is not sufficient by itself to diagnose observation-representation mismatch. There must also be some `(φ',ψ') ∈ Γ_feas` for which `Z'(s1) ≠ Z'(s2)`, or which reduces the loss from using one action below the accepted threshold. If every feasible channel collapses the two states, the system should maintain the correct belief distribution; the aliasing is an information boundary, not a missing-variable failure.
 
 ### 3.2 Control Sufficiency
 
@@ -240,7 +241,7 @@ Z(s1) = Z(s2)  ⇒  Argmax_a U(a, s1) = Argmax_a U(a, s2)
 
 or, more weakly, when the value loss from using the same action over each equivalence class is below an acceptable threshold.
 
-Observation-representation mismatch exists when `Z` is not control-sufficient.
+Observation-representation mismatch exists when `Z` is not control-sufficient and `Γ_feas` contains a more control-sufficient feasible channel or representation.
 
 ### 3.3 Variable Entry
 
@@ -278,7 +279,7 @@ Observation-representation mismatch and state mismatch are closely related but d
 State mismatch asks:
 
 ```text
-Given Z, which latent state h are we in?
+Given fixed Z≤t, does b_hat_t = Bθ(Z≤t) match the evidence-warranted belief b*t?
 ```
 
 Observation-representation mismatch asks:
@@ -291,13 +292,13 @@ The boundary can be summarized as follows:
 
 | Issue | Observation-Representation Mismatch | State Mismatch |
 |---|---|---|
-| Pipeline location | `S_world → O → Z` | inference over latent state from `Z` |
-| Core failure | variable or distinction lost before reasoning | state ambiguous under available representation |
-| Typical symptom | model cannot consider the decisive factor | model considers multiple plausible regimes but misidentifies or fails to branch |
-| Repair target | measurement, retrieval, serialization, schema, channel, representation | state enumeration, discriminator, clarification, belief update, branching policy |
-| Question | Did the variable enter? | Given entered variables, what state are we in? |
+| Pipeline location | `S_world → O → Z` | `Z≤t → Bθ → b_hat_t` |
+| Core failure | feasibly obtainable variable or distinction lost before reasoning | actual belief diverges from the evidence-warranted belief or collapses uncertainty incorrectly |
+| Typical symptom | performance recovers when a feasible variable is connected | with the same fixed `Z`, changing only belief update or tracking changes action quality |
+| Repair target | measurement, retrieval, serialization, schema, channel, representation | evidence calibration, belief update, hypothesis preservation, branching policy |
+| Question | Did the feasible variable enter? | Is the belief faithful to the available evidence? |
 
-A state mismatch can remain even after channel repair. For example, a user may provide all available symptoms, yet the diagnosis remains uncertain. That is state ambiguity.
+A state mismatch can remain even after channel repair. For example, the user provides all available symptoms and the evidence supports a distributed diagnosis, but the system still commits without warrant to one cause or forgets new evidence. That is a belief-formation or update failure. Conversely, if the system preserves diagnostic uncertainty and takes the belief-optimal test or bounded action, continued uncertainty is not state mismatch.
 
 An observation-representation mismatch occurs when the relevant symptom was never collected, was summarized away, or was represented in a way that prevents the model from using it.
 
@@ -306,11 +307,11 @@ The distinction matters because the repair differs.
 State mismatch invites:
 
 ```text
-ask a clarifying question
 maintain multiple hypotheses
 compute value of information
 branch policy by state
 track belief updates
+calibrate belief to available evidence
 ```
 
 Observation-representation mismatch invites:
@@ -799,7 +800,8 @@ Observation-representation mismatch is upstream, but it rarely acts alone. It of
 If the variables needed to distinguish states are absent, state inference becomes impossible or unstable. The system may appear uncertain, but the uncertainty is caused by representation collapse.
 
 ```text
-missing discriminative variable → latent states aliased → state mismatch
+missing feasible discriminative variable → observation-representation mismatch
+incorrect belief over the resulting Z → state mismatch
 ```
 
 Repair must begin with channel repair, not merely better state reasoning.
@@ -1230,7 +1232,7 @@ Observation-representation mismatch should be represented as a governed theoreti
   "condition": "LLM systems whose task-relevant world variables must pass through observation and representation functions before model control is possible.",
   "assertion": "If value-relevant variables are lost, aliased, stale, unbound, or made operationally inaccessible before entering Z, downstream reasoning over Z faces a representation-induced ceiling.",
   "strength": "structural-relative",
-  "support_scope": "Applies to value-preservation failures caused by the map S_world → O → Z.",
+  "support_scope": "Applies when a task-relevant distinction obtainable within the declared feasible channel set is lost in S_world → O → Z.",
   "revocation_trigger": "Show that all such failures can be reduced to state, fitting-boundary, support, aggregation, or specification mismatches without losing intervention specificity.",
   "not_supported_claims": "Does not claim that every missing fact is an observation-representation mismatch; does not claim that all tasks require exhaustive observation; does not claim that more context always improves control."
 }
@@ -1286,7 +1288,7 @@ A system that ignores this rule may build sophisticated governance over an impov
 | Observation function `φ` | The process by which the world becomes observed data. |
 | Representation function `ψ` | The process by which observed data becomes operational representation. |
 | Operational representation `Z` | The representation available for model control, routing, search, audit, rendering, and state update. |
-| Observation-representation mismatch | Failure of `S_world → O → Z` to preserve task-relevant distinctions. |
+| Observation-representation mismatch | Failure of `S_world → O → Z` to preserve a feasibly obtainable task-relevant distinction; irreducible partial observability is excluded. |
 | Variable entry | The condition that a task-critical variable is observed, retained, bound, discriminative, and operational. |
 | Control sufficiency | A representation preserves all distinctions needed for high-value action. |
 | Representation-induced ceiling | The maximum value loss imposed by distinctions collapsed in the representation. |

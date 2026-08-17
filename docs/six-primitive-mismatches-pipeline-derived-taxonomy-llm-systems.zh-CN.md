@@ -16,13 +16,14 @@
 S_world
   -> O
   -> Z
+  -> belief formation / update
   -> capability routing
   -> candidate support
   -> aggregation
   -> evaluation
 ```
 
-高价值 LLM 系统必须让任务相关价值结构穿过这条管线并被保存。失败可能发生在：决定性变量没有进入表征，潜在状态不可识别，能力被路由到错误领域，高价值结构在系统策略下不可达，局部合理组件无法组合，或可访问目标偏离真实任务效用。
+高价值 LLM 系统必须让任务相关价值结构穿过这条管线并被保存。失败可能发生在：可行取得的决定性变量没有进入表征，系统信念偏离已有证据，能力被路由到错误领域，高价值结构在系统策略下不可达，局部合理组件无法组合，或可访问目标偏离真实任务效用。
 
 这些失败对应六类原始失配：
 
@@ -88,6 +89,7 @@ LLM 系统并不直接作用于世界，也不直接优化真实效用。它通�
 S_world
   --phi--> O
   --psi--> Z
+  --B_theta--> b
   --rho--> C
   --p_theta, B--> K
   --A--> Y
@@ -102,6 +104,8 @@ phi     = observation, sensing, logging, retrieval, input acquisition
 O       = observed data available to the system
 psi     = representation function: encoding, compression, tokenization, schema extraction, prompt construction
 Z       = model-accessible operational representation
+B_theta = belief formation and update over latent task state
+b       = belief state actually maintained by the system
 rho     = routing function that activates capabilities, roles, tools, or strategies
 C       = activated capabilities / strategies / tools / behavioral modes
 p_theta = model or system policy over continuations, candidates, plans, or actions
@@ -156,8 +160,8 @@ lack of planning
 但这些描述可能指向不同结构原因：
 
 ```text
-The relevant column was absent from representation.          -> observation-representation mismatch
-The question intent depended on an ambiguous latent state.   -> state mismatch
+An obtainable relevant column was absent from representation. -> observation-representation mismatch
+Intent evidence was present, but the belief was misranked.     -> state mismatch
 The model used template SQL when schema audit was needed.    -> fitting-boundary mismatch
 The correct join path was low-support under direct decoding. -> support mismatch
 The clauses were locally plausible but globally inconsistent.-> aggregation mismatch
@@ -180,7 +184,7 @@ The metric rewarded executable SQL but not semantic intent.   -> specification m
 | 管线站点 | 原始失配 | 核心问题 | 主要修复目标 |
 |---|---|---|---|
 | `S_world -> O -> Z` | 观测-表征失配 | 决定性变量是否进入操作表征？ | 通道 / 表征修复 |
-| `Z -> latent state` | 状态失配 | 给定表征，我们是否知道自己处于哪个状态？ | 状态判别 / 分支 |
+| `Z -> B_theta -> b` | 状态失配 | 实际信念是否忠于表征证据？ | 信念校准 / 更新 / 分支 |
 | `Z -> C` | 拟合边界失配 | 正确能力是否在正确领域激活？ | 路由治理 |
 | `p_theta, B -> K` | 支持失配 | 高价值结构能否成为活候选？ | 控制空间搜索 |
 | `K -> Y` | 聚合失配 | 局部好 parts 是否组合成全局价值？ | 组合治理 |
@@ -237,7 +241,7 @@ The metric rewarded executable SQL but not semantic intent.   -> specification m
 
 ### 6.1 定义
 
-观测-表征失配发生在世界中的任务决定性变量没有进入系统操作表征时。
+观测-表征失配发生在一个可在声明的授权、成本、时延与工具约束下取得的任务决定性变量没有进入系统操作表征时。
 
 系统可能通过日志、文档、检索段落、数据库 schema、用户消息、工具输出、截图、传感器或 prompt 上下文观测世界。随后这些观测被压缩、编码、tokenize、摘要、过滤和格式化。在任一阶段，高任务价值所需变量都可能被省略、混叠、扭曲或变得不可访问。
 
@@ -261,9 +265,7 @@ U*(S1) != U*(S2)
 psi(phi(S1)) ~= psi(phi(S2))
 ```
 
-则存在观测-表征失配。
-
-决定性区分存在于世界中，但在表征里被擦除或不可用。
+则当前 `Z` 存在决策相关混叠。只有当可行通道集合中还存在 `(phi', psi')` 能以允许成本使该区分进入 `Z'` 时，才存在观测-表征失配。若任何可行通道都不能区分 `S1` 与 `S2`，这属于不可约部分可观测性；系统应在正确的信念状态上行动，而不是被判定为漏接变量。
 
 ### 6.3 诊断问题
 
@@ -314,11 +316,11 @@ structured variable introduction
 
 观测-表征失配关注变量是否进入。
 
-状态失配关注在表征已经存在后，如何推断状态。
+状态失配关注在固定表征已经存在后，信念形成与更新是否忠于证据。
 
 ```text
-Observation-representation mismatch: Is the decisive variable in Z?
-State mismatch: Given Z, which latent state are we in?
+Observation-representation mismatch: Is the feasibly obtainable decisive variable in Z?
+State mismatch: Given fixed Z≤t, does b_hat_t match the evidence-warranted belief b*t?
 ```
 
 ---
@@ -327,32 +329,28 @@ State mismatch: Given Z, which latent state are we in?
 
 ### 7.1 定义
 
-状态失配发生在正确策略、解释或评价依赖某个潜在状态，而该状态不能从当前表征中识别时。
+状态失配发生在正确策略、解释或评价依赖潜在状态，而系统从固定当前表征形成或更新的信念，以决策相关方式偏离证据所支持的信念时。
 
-系统可能已经有相关变量在上下文里，却仍不知道自己处于哪个体制。同一组观测特征可能支持多个隐藏状态，而这些状态要求不同最优行动。
+系统可能已经有相关变量在上下文里，却无依据地塌缩、误排、遗忘或陈旧化状态信念。同一组观测特征可以合理支持多个隐藏状态；这种不确定性本身不是失败，错误处理它才是。
 
 ### 7.2 形式特征
 
-令 `H` 是潜在状态空间。正确行动依赖 `h in H`。
+令 `H` 是潜在状态空间，`b*t(h)=P(h_t=h|Z≤t)` 是证据所支持的信念，`b_hat_t=B_theta(Z≤t)` 是系统实际信念。
 
 当：
 
 ```text
-P(h | Z) is ambiguous, unstable, or misranked
+argmax_a E_(h~b_hat_t) U(a | h)
+  !=
+argmax_a E_(h~b*t) U(a | h)
 ```
 
-且对于合理状态 `h1` 和 `h2`：
-
-```text
-argmax_a U(a | h1) != argmax_a U(a | h2)
-```
-
-就存在状态失配。
+就存在状态失配。若 `b_hat_t=b*t`，系统按该信念采取最优、风险有界、分支或条件化行动，则真实状态仍不可知也不构成失配。
 
 ### 7.3 诊断问题
 
 ```text
-Given the available representation, do we know which latent state or regime the task is in?
+Given fixed Z≤t, does b_hat_t match the evidence-warranted belief b*t closely enough to preserve action ranking?
 ```
 
 ### 7.4 典型症状
@@ -567,7 +565,7 @@ tool-generated candidates
 
 聚合失配发生在局部合理、局部正确或局部有价值组件无法组合成全局有价值 artifact 时。
 
-这是自回归平庸的精确结构位置。问题不是每个局部步骤都坏，而是局部价值没有组合式忠于全局价值。
+这是一种机制无关的局部—全局失败。问题不是每个局部步骤都坏，而是部署中的局部代理与提交规则没有组合式忠于全局价值。自回归分解可以精确表示任意联合分布，因此不是该失配的结构病因。
 
 ### 10.2 形式特征
 
@@ -713,8 +711,8 @@ scope and non-goal declaration
 
 | 如果失败在于... | 主要诊断为... | 问... | 修复方式... |
 |---|---|---|---|
-| 决定性事实、变量、schema 元素、日志、值或测量缺失或被压缩掉。 | 观测-表征 | 变量进入 Z 了吗？ | 修通道或表征。 |
-| 同一表征支持多个隐藏体制，且正确行动不同。 | 状态 | 我们处于哪个状态？ | 追踪、判别、分支、澄清。 |
+| 一个可行取得的决定性事实、变量、schema 元素、日志、值或测量缺失或被压缩掉。 | 观测-表征 | 可行变量进入 Z 了吗？ | 修通道或表征。 |
+| 固定同一表征后，信念被无依据塌缩、误排、遗忘或未更新。 | 状态 | 信念忠于证据吗？ | 校准、更新、保留假设、分支。 |
 | 模型有能力但在错误条件激活。 | 拟合边界 | 正确能力被路由了吗？ | 治理触发边界。 |
 | 正确结构很少作为候选出现。 | 支持 | 结构可达吗？ | 搜索控制空间；扩展候选。 |
 | 好的局部片段组合后失败。 | 聚合 | parts 能组合吗？ | 治理依赖和不变量。 |
@@ -724,7 +722,7 @@ scope and non-goal declaration
 
 ```text
 If the answer could not possibly be right because needed information was absent, start with observation-representation.
-If the answer could be right in one hidden regime but wrong in another, start with state.
+If the system belief is not warranted by the fixed available evidence, start with state; uncertainty alone is not failure.
 If the needed operation is known but not invoked, start with fitting-boundary.
 If the needed structure is never proposed, start with support.
 If the pieces are good but the whole is bad, start with aggregation.
@@ -744,13 +742,13 @@ taxonomy 的完备性主张是相对的，不是绝对的。
 对被建模为：
 
 ```text
-S_world -> O -> Z -> C -> K -> Y -> U_hat
+S_world -> O -> Z -> b -> C -> K -> Y -> U_hat
 ```
 
 且存在真实效用 `U` 的 LLM 系统，任何价值保存失败必须至少涉及以下之一：
 
-1. `S_world` 中价值相关区分未保存到 `Z`。
-2. 价值相关潜在状态无法从 `Z` 识别。
+1. 一个可行取得的价值相关区分未保存到 `Z`。
+2. 系统维护的信念 `b` 偏离 `Z` 的证据所支持的信念。
 3. 价值相关能力未在真实领域内激活，或在真实领域外激活。
 4. 价值相关结构在候选生成过程中不可达或不成为活候选。
 5. 候选 parts 之间的价值相关关系未被聚合保存。
@@ -785,7 +783,7 @@ taxonomy 不要求每个失败只能贴一个标签。它是一个分解基。
 
 ```text
 它适用于单次前向过程：
-S_world -> O -> Z -> C -> K -> Y -> U_hat
+S_world -> O -> Z -> b -> C -> K -> Y -> U_hat
 ```
 
 跨轮反馈、振荡、重试回路、状态累积和提交动力学都属于运行时现象。它们在已部署系统中非常重要，但应由 SGAR 及相关运行时对象治理，而不是被视为本 taxonomy 中额外的 primitive 站点。
@@ -802,15 +800,15 @@ Each mismatch can be varied while holding the others approximately fixed, and ea
 
 ### 14.1 观测-表征最小对
 
-两个系统使用同一模型、prompt、搜索流程、目标和聚合方式。一个收到包含决定性列和样本值的 schema，另一个收到省略这些内容的压缩 schema。
+两个系统使用同一模型、信念更新器、搜索流程、目标和聚合方式。一个收到包含可通过授权通道取得的决定性列和样本值的 schema，另一个收到省略这些内容的压缩 schema。
 
 若只有前者能完成任务，失败不是状态、支持、聚合、路由或目标，而是变量进入。
 
 ### 14.2 状态最小对
 
-两个系统收到同样变量，但一个收到状态消歧信号，另一个没有。正确行动随状态变化。
+两个系统固定相同的 `phi`、`psi`、`Z≤t` 与目标。一个使用证据校准的 `B_theta` 维护 `b*t`；另一个信念更新器误排、陈旧或过早塌缩，并因此选择不同动作。
 
-如果歧义本身导致失败，失配就是状态。
+如果只修复信念形成或更新即可恢复，失配就是状态。歧义本身不是失败。
 
 ### 14.3 拟合边界最小对
 
@@ -1500,13 +1498,13 @@ Compound failures can be decomposed into interactions among these stations.
 ### 32.1 观测-表征失配
 
 ```text
-A failure in which task-decisive variables in S_world are lost, aliased, compressed, omitted, or made operationally inaccessible before entering Z.
+A failure in which task-decisive variables feasibly obtainable under the declared channel constraints are lost, aliased, compressed, omitted, or made operationally inaccessible before entering Z.
 ```
 
 ### 32.2 状态失配
 
 ```text
-A failure in which the correct policy depends on a latent state that is not identifiable under the available representation.
+A failure in which the maintained belief over latent state diverges from the belief warranted by the fixed available representation, changing the action ranking.
 ```
 
 ### 32.3 拟合边界失配
@@ -1541,8 +1539,8 @@ A failure in which the accessible objective U_hat ranks candidates differently f
 
 ```text
 Station: S_world -> O -> Z
-Question: Did decisive variables enter Z?
-Failure: Variable absent, aliased, compressed, inaccessible.
+Question: Did feasibly obtainable decisive variables enter Z?
+Failure: Feasible variable absent, aliased, compressed, inaccessible.
 Audit evidence: Supplying variable changes answer; system cannot cite variable.
 Control delta: Add observation channel or representation field.
 GKO: Required Variable / Channel Rule.
@@ -1553,13 +1551,13 @@ SGAR state: Variable observed and committed.
 ### A.2 状态卡片
 
 ```text
-Station: Z -> latent state
-Question: Which state are we in?
-Failure: Ambiguous or misranked latent regime.
-Audit evidence: Alternative state explains defect; small discriminator flips action.
-Control delta: Add state hypothesis and discriminator.
+Station: Z≤t -> B_theta -> b_hat_t
+Question: Is the maintained belief faithful to the evidence?
+Failure: Unsupported collapse, misranking, staleness, forgetting, or failed belief update.
+Audit evidence: With Z fixed, a calibrated belief update changes the defective action.
+Control delta: Calibrate belief update or preserve warranted hypotheses.
 GKO: State Hypothesis / Branch Policy.
-Regression guard: Ambiguous case requires branch or clarification.
+Regression guard: A case with warranted uncertainty must not collapse beyond the evidence.
 SGAR state: State committed, rejected, or held open.
 ```
 

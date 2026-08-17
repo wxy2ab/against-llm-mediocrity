@@ -237,7 +237,7 @@ When these conditions hold, SGAR reduces uncertainty caused by mis-positioning, 
 
 ### State mismatch
 
-State mismatch asks: given the current observation channel, which latent state are we in? SGAR is not a seventh primitive mismatch. It is a governance regime for representing, updating, validating, and recovering task state.
+State mismatch asks: at fixed accessible representation, does the system form, update, and use the evidence-warranted state belief while preserving the correct action ranking? SGAR is not a seventh primitive mismatch. It is a governance regime for representing, updating, validating, and recovering committed task state. Continued uncertainty is not state mismatch when belief and action are correct.
 
 ### Observation-representation mismatch
 

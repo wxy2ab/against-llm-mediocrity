@@ -13,6 +13,7 @@ A few notes up front:
 - The core content was originally handwritten; the Markdown structure was organized with AI assistance.
 - This document was first written in Chinese; the English version is translated from that source.
 - What follows is the discovery path, not only the compressed final theoretical form.
+- Historical labels such as “autoregressive mediocrity” are therefore retained to record what was believed at the time; they are not current mechanism definitions. The current theory defines aggregation mismatch as divergence between a deployed local proxy and global completion value, uses “autoregressive gravity” only as an empirical support-side nickname, and restricts state mismatch to belief-formation or update error at fixed representation.
 - Some of the large-scale sampling experiments mentioned here relied on rented AWS machines that no longer exist. Many of those results are therefore hard to reproduce exactly; smaller principle-level reproductions are more realistic now.
 
 ---
@@ -132,13 +133,15 @@ I initially tried similar break-and-recombine strategies there as well, but afte
 
 That forced me to rethink the real nature of story-generation failure.
 
-Eventually I realized the central issue was not merely "missing fragments." It was this:
+Eventually I realized the central issue was not merely “missing fragments.” At the time, I interpreted it this way:
 
 - autoregressive prediction optimizes local `next-token` continuation;
 - story generation demands cross-section, cross-character, cross-rhythm, cross-theme global quality;
 - when local optima do not add up to a global optimum, the problem is no longer only that valuable structures are low-support, but that locally good pieces fail to compose into global value.
 
 This was what I first called a "multi-objective coordination problem." Later it was reorganized into the more precise category of **aggregation mismatch**.
+
+Under the current formalization, the causal attribution in the first bullet needs correction. Autoregressive chain factorization can represent any joint distribution exactly, and its conditionals can encode global constraints. What the experiments and engineering repairs actually localize is divergence between global completion value and deployed local proxies, finite search, unexternalized future constraints, or irreversible commitment. The paragraph is retained as discovery history, not as a current claim that autoregression is intrinsically local.
 
 This also led to an important methodological revision:
 
@@ -161,7 +164,7 @@ The first two to stabilize were:
 1. **Aggregation mismatch**: local optimization does not guarantee global value.
 2. **Support mismatch**: without scarce high-value structure, the system remains trapped in a high-support basin.
 
-Both came directly out of long confrontation with autoregressive gravity.
+Both came directly out of long confrontation with what I then called autoregressive gravity. In the current terminology, that label survives only as an empirical support-side nickname: it describes probability-mass concentration for a trained model and decoder, not an architectural necessity.
 
 ### Second Group: State and Specification
 
@@ -174,22 +177,22 @@ At that point I started to notice that many failures were not about generation a
 
 That forced out two more categories:
 
-3. **State mismatch**: the correct answer depends on a hidden, changing, or only partially knowable state, as in financial markets.
+3. **State mismatch**: at a fixed accessible representation, the system's formed or updated state belief diverges from the belief warranted by the evidence and therefore selects the wrong action—for example, carrying a stale market-regime belief after the evidence changes.
 4. **Specification mismatch**: the system's accessible objective diverges from the real one, as in planning tasks where budget or the governing objective was never actually made explicit.
 
 At that stage, the original "four mismatches" already existed, and I still placed them under the larger theme of autoregressive mediocrity.
 
 ---
 
-## From Autoregressive Mediocrity to LLM Mediocrity
+## From Autoregressive Mediocrity to LLM Mediocrity—and Then to Mechanism Separation
 
 A later revision mattered a great deal:
 
 not every mismatch should be blamed directly on autoregression itself.
 
-Some failures are tightly tied to autoregressive local continuation, especially aggregation mismatch. But others arise from broader system issues such as proxy objectives, hidden state, insufficient observation, or the wrong capability-trigger boundary.
+The first correction at the time was that some failures appeared tightly tied to local commitment in stepwise continuation, especially aggregation mismatch, while others arose from broader system issues such as proxy objectives, state belief, insufficient observation, or the wrong capability-trigger boundary.
 
-That is why I later expanded "autoregressive mediocrity" into the wider frame of **LLM mediocrity**.
+That is why I later expanded “autoregressive mediocrity” into the wider frame of **LLM mediocrity**. The current theory takes a further step and retires the mixed mechanism label entirely. Aggregation mismatch is mechanism-independent local-proxy/global-value divergence; concentration of probability mass belongs to support mismatch; and autoregression is only one implementation in which either phenomenon may appear.
 
 That change matters because the framework is no longer only about "why autoregression fails." It is about **where an LLM system structurally loses task value.**
 
@@ -242,7 +245,7 @@ If the path above is compressed into a simpler evolution chain, it looks roughly
 | Large-scale quant sampling | 100k-scale sampling still trapped in a local basin | Support mismatch / autoregressive gravity |
 | Extracting experience from samples | LLM summaries stay soft; code-based recombination plus validation works better | Scarce high-value structure must be constructed explicitly |
 | Story-generation reproduction | Locally good fragments do not automatically become a globally good work | Aggregation mismatch |
-| Finance and open-ended task design | Hidden state and underspecified objectives often decide success | State mismatch, specification mismatch |
+| Finance and open-ended task design | State-evidence updates and underspecified objectives often decide success | State-belief update mismatch, specification mismatch |
 | Everyday hard problem solving | The model reaches `no-go` too early after shallow search | Fitting-boundary mismatch |
 | Reflection on human perception and model input | Decisive variables are heavily compressed before reaching the model | Observation-representation mismatch |
 

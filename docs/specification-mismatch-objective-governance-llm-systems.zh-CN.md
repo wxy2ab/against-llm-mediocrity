@@ -108,8 +108,8 @@ S_world
 
 | 管线站点 | 原始失配 | 核心问题 |
 |---|---|---|
-| 世界到观测 / 表征 | 观测-表征失配 | 决定性变量是否进入操作表征？ |
-| 表征到潜在情境 | 状态失配 | 我们处于哪个隐藏状态或体制？ |
+| 世界到观测 / 表征 | 观测-表征失配 | 可行通道本可提供的决定性信息是否进入操作表征？ |
+| 表征到状态信念 | 状态失配 | 固定表征下的信念是否符合证据并支持正确行动排序？ |
 | 表征到能力激活 | 拟合边界失配 | 正确能力是否在正确领域触发？ |
 | 候选上的策略和搜索 | 支持失配 | 高价值结构在搜索流程下是否可达？ |
 | 局部部分到全局产物 | 聚合失配 | 局部好 parts 能否组合成全局价值？ |
@@ -288,7 +288,7 @@ Task: recommend the best database migration plan.
 状态失配问：
 
 ```text
-Which latent situation are we in?
+At fixed representation, is the maintained belief warranted by the evidence?
 ```
 
 规格失配问：
@@ -297,7 +297,7 @@ Which latent situation are we in?
 What should count as success in this situation?
 ```
 
-如果系统无法判断测试失败来自真实 bug 还是 flaky infrastructure，那是状态失配。
+如果日志已经进入表征，但系统无依据地塌缩、误排或忘记“真实 bug / flaky infrastructure”的证据信念，那是状态失配。若任何可行证据都不能区分二者，而系统正确保留后验并选择风险有界行动，则不是失配；若本可取得的日志缺失，则是观测-表征失配。
 
 如果它知道环境 flaky，却把 “make all tests pass” 当唯一目标，忽略 reproducibility 和 root-cause isolation，那是规格失配。
 
