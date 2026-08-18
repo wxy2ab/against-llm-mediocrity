@@ -39,7 +39,7 @@ This verification and write-back mechanism can be developed into an independent 
 
 [Read "Audit Engineering: From Generation–Verification Asymmetry to General Agent Governance"](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/audit-engineering.md)
 
-For long-horizon agents, these control objects also need a hard-state layer. The **[State-Governed Agent Regime (SGAR)](/glossary#sgar)** treats plans, tool calls, observations, verification results, human answers, audit findings, and rollback decisions as state transitions rather than loose chat history. The point is not to make the LLM less capable; it is to stop asking the same context that acted to also be the sole authority on whether the task advanced.
+For long-horizon agents, these control objects also need a hard-state layer. The **[State-Governed Agent Regime (SGAR)](/glossary#sgar)** preserves global goals, constraints, dependencies, and accepted facts, then renders a minimally sufficient projection for the current LLM solve. Stages connect through public protocols while private reasoning and implementation remain decoupled; plans, tool calls, observations, verification results, human answers, audit findings, and rollback decisions enter state through governed transitions. This avoids asking one context to carry the entire long-horizon problem or to serve as the sole authority on whether the task advanced.
 
 [Read "State-Governed Agent Regime"](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime.md)
 

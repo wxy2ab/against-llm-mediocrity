@@ -29,7 +29,7 @@
 - **受治理执行对象（GExO）**：一类需要被显式跟踪的任务、计划、行动或工作流执行对象。
 - **受治理升级对象（GEsO）**：一条存下来的规则，规定什么时候该问人、问什么、问谁。
 - **审计工程**：把审计当成独立的一层，用来定位失败并把修复回写进控制对象，而不是当成事后的打分器。
-- **状态治理智能体范式（SGAR）**：一种 agent 设计，把长程执行搬到外部硬状态层，让计划、行动、验证、升级都成为受治理的状态转移。
+- **状态治理智能体范式（SGAR）**：一种面向 LLM 的状态治理与依赖分解方法，从全局权威状态生成小而明确的局部求解面，通过公共协议组合阶段，并只提交经过验证的状态增量。
 - **治理式人机协作**：围绕控制变量组织协作（AI 推进可搜索的部分，人治理价值、偏好与责任），而不是围绕任务分工。
 
 术语说明：为避免 `GEO` 同时表示执行对象与升级对象，本站后续统一使用 `GExO` 表示受治理执行对象，`GEsO` 表示受治理升级对象。
@@ -87,7 +87,7 @@ LLM 已经很擅长写代码、写邮件、做总结、解释概念、起草方�
 
 ### 状态治理智能体范式（SGAR）
 
-把长程 agent 的运行基础从上下文叙事转移到外部硬状态：LLM 负责理解、提案、探索和执行；硬状态层负责定位、约束、验证、提交、恢复和审计。这样，计划、行动、验证、升级和审计发现都进入受治理状态转移，而不是只停留在聊天记录里。
+把长程 agent 的运行基础从上下文叙事转移到外部硬状态：系统保存全局目标、约束、依赖与既有决策，向每次 LLM 调用渲染最小充分的局部求解面；阶段之间通过 contract、evidence、decision 和 residual 等公共协议组合，私有推理与实现细节保持解耦；只有经过验证的公共增量才能提交为进展。
 
 ---
 
@@ -160,7 +160,7 @@ against-llm-mediocrity/
 - [面向受治理 LLM 系统的审计工程](./docs/audit-engineering-failure-localization-control-space-writeback.zh-CN.md)：失败定位、控制空间写回与回归治理的配套技术报告。
 - [Oracle、Audit Agent 与 SGAR：从硬反馈到引擎路由的统一框架](./docs/oracle-classification-audit-agent-sgar-engine-routing.zh-CN.md)：把 oracle 分类、audit、SGAR 与 No-Go 统一到同一引擎路由判断链中的工作稿。
 - Agent 不是更长的 Chat：[English](./docs/agent-is-not-a-longer-chat.md) · [中文](./docs/agent-is-not-a-longer-chat.zh-CN.md)：面向普通从业者解释为什么持续委托需要显式任务状态、证据、Gate、提交和按风险分层的审计，而不只是更长的模型循环。
-- [面向受治理 LLM 系统的状态治理智能体范式](./docs/state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)：硬状态权威、转移契约与运行时治理的新工作稿。
+- [面向受治理 LLM 系统的状态治理智能体范式](./docs/state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)：全局条件下的局部求解、公共协议、硬状态权威与验证提交的工作稿。
 - [聚合失配：从单次推理到 Agent 轨迹的多尺度局部最优坍缩](./docs/aggregation-mismatch-across-scales-from-single-call-reasoning-to-agent-trajectories.zh-CN.md)：把单次推理中的语义前缀锁定与 Agent 轨迹中的因果路径锁定放进同一控制框架，并说明持久化 Plan / Candidate 何时真正有系统价值。
 - 从固定流程到受治理委托：[English](./docs/from-fixed-workflows-to-governed-delegation.md) · [中文](./docs/from-fixed-workflows-to-governed-delegation.zh-CN.md)：从预定义执行路径走向受能力、权限、证据、Gate 与提交规则约束的运行时决策，是连接传统软件与受治理自适应系统的软件设计桥梁。
 - [LLM 系统中的观测-表征失配与通道治理](./docs/observation-representation-mismatch-channel-governance-llm-systems.zh-CN.md)：变量进入、表征上限与前治理修复的配套技术报告。

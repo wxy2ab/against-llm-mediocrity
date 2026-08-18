@@ -136,7 +136,7 @@ This bilingual article explains the authority boundary between Chat, Bot, and Ag
 ### State-Governed Agent Regime for Governed LLM Systems
 Tag: runtime governance working draft
 
-This working draft defines SGAR as the runtime layer where progress is admitted only through verified hard-state transitions. It covers context demotion, state surfaces, transition contracts, verifier stratification, runtime loops, memory writes, completion governance, multi-agent permissions, rollback, revocation, and state-rendered context.
+This working draft defines SGAR as an LLM-oriented state-governance and cognitive-decomposition layer. It renders minimally sufficient local solving surfaces from globally authoritative state, composes stages through public contracts, evidence, decisions, and residuals, and admits progress only through verified hard-state transitions. It also distinguishes residual routing as feedback for choosing the next problem rather than as a state authority.
 
 [Read the SGAR governed-systems draft](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime-for-governed-llm-systems.md)
 

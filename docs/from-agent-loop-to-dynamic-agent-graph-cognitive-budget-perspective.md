@@ -123,7 +123,9 @@ We can abstract a Workflow into the following contract:
 Workflow = {
   target:        the problem direction or residual to handle,
   input:         accepted inputs and prerequisite dependencies,
+  public_contract: externally visible input, output, evidence, decision, and residual schemas,
   context:       visible context, hidden context, and context that must be reacquired,
+  private_state: scratchpads, search traces, and implementation details not exposed downstream,
   action_space:  allowed tools, actions, and side-effect boundaries,
   state:         hypotheses, evidence, candidates, and progress that must persist,
   budget:        minimum budget, maximum budget, and resource types,
@@ -147,12 +149,14 @@ Different Workflows crystallize different cognitive axes:
 | Workflow | Protected cognitive direction | Typical local artifact |
 |---|---|---|
 | Research | external evidence acquisition and source validation | evidence, provenance, uncertainty |
-| Candidate Search / SGAR | candidate exploration, boundary pushing, and controlled iteration | candidate, state transition, gate result |
+| Candidate Search / Governed Iteration | candidate exploration, boundary pushing, and controlled iteration | candidate, state transition, gate result |
 | Audit | counterexample search, conflict discovery, and defect localization | finding, evidence, severity, corrective target |
 | Recovery | closed-loop repair around a specific residual | patch, retest result, remaining residual |
 | Fan-out | controlled diversification of hypotheses, options, or subproblems | independent branches, candidate set |
 | Fan-in | conflict resolution, aggregation, and global consistency | merged result, conflict ledger, global residual |
 | Human Gate | clarification of specification, value judgment, authorization, and risk boundaries | decision, constraint, approval / rejection |
+
+SGAR should not appear in this table as a Workflow alongside Research, Audit, or Recovery. SGAR is the runtime regime that governs how these Workflows read authoritative state, commit public deltas, and pass acceptance. Candidate search is only one possible local solving direction within that regime.
 
 Workflow is not a role label. It is an institutionalized direction of cognitive investment. If it lacks independent state, distinct strategy, an explicit Oracle, and an exit contract, it is likely just a prompt template, not a real control node worthy of Graph membership.
 
@@ -281,6 +285,8 @@ choose W*
 
 Graph preserves the grounds, dependencies, and consequences of those choices, allowing the system to answer: why budget was invested in that direction, what evidence it produced, which residuals were closed, which remain open, and what state the next routing decision should inherit.
 
+Residual routing is a feedback mechanism here, not the first principle of SGAR or Graph. It reads committed state, selects the next cognitive investment, and shapes the public protocol of the next Workflow; it cannot by itself decide what has become true for the system. The state-governance relation still holds if routing comes from fixed rules, a human, or another controller, provided local solving remains constrained by globally authoritative state and results are committed only after verification.
+
 The entire evolution can be compressed into three sentences:
 
 > **Route chooses where intelligence is invested.**
@@ -294,6 +300,21 @@ The entire evolution can be compressed into three sentences:
 Connecting multiple Workflows does not automatically produce a globally optimal result. Each Workflow may optimize only its own local Oracle: Research found reliable evidence, Audit found a real defect, Recovery fixed a local error, and several candidates individually passed their local checks, yet the final artifact may still contain conflicts, miss global constraints, or damage other already-passed parts.
 
 So the value of Graph is not only budget distribution. It also maintains the **boundary between local success and global success**.
+
+“Global” here does not mean copying all code, history, and private branch state into every Workflow. The outer state preserves overall goals, non-goals, system invariants, cross-stage dependencies, frozen decisions, current evidence, unresolved variables, authority, and lifecycle constraints. Each Workflow receives only the minimally sufficient projection needed for its current judgment.
+
+Local units should not couple through complete private trajectories either. A public handoff across Workflows should converge to:
+
+```text
+contract delta
+accepted evidence
+committed decision
+remaining residual
+```
+
+If a private assumption or implementation fact affects downstream correctness, it must be promoted into public evidence or a protocol clause. Otherwise the downstream Workflow cannot verify it or survive replacement of the upstream implementation.
+
+In a staged implementation, this yields “serialize stage commitments; parallelize stage solving.” Stages with real dependencies advance through acceptance barriers. Within one stage, problems that share the same state snapshot and public protocol but are mutually independent may form a small parallel DAG. Fan-in converts candidates into a committable public delta rather than concatenating private reasoning.
 
 Fan-in should not be understood as simple summarization. Real Fan-in must:
 
@@ -479,3 +500,5 @@ The shape of the graph is only the runtime trace left by these investment decisi
 > **Where should attention go? How long should it continue? On what grounds may it stop?**
 
 Once these three questions are jointly constrained by external state, budget envelopes, Oracles, and residual routing, the Agent ceases to be merely a Loop that keeps taking the next action, and becomes a dynamic system capable of governing long-term cognitive investment.
+
+Placed back inside SGAR, the relationship should remain clear. SGAR generates globally conditioned local solving surfaces from authoritative state and commits only verified public deltas back into that state. Dynamic Graph, stage acceptance, and residual routing implement feedback, dependency convergence, and budget allocation. The former defines how local solves may compose into durable progress; the latter decides what should actually be solved next.

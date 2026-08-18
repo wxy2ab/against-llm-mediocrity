@@ -159,6 +159,12 @@ When a trusted mechanical or external verifier exists, it should dominate fluent
 
 LLMs often have strong local capabilities: compression, paraphrase, candidate generation, explanation, decomposition, surface rendering, and edge-case enumeration. The object model should preserve these strengths while governing the places where local quality does not compose into global task value.
 
+### 2.8 Couple Through Public Protocols; Decouple Private Solving
+
+Governed execution units should compose through explicit public protocols. The public surface carries objective and scope, input/output schemas, dependency versions, invariants, authority, evidence requirements, decisions, failure semantics, and open residuals. Prompts, scratchpads, search traces, candidate organization, and internal implementation remain private solving state by default.
+
+A downstream object must not depend on unpublished upstream private state. If private information is necessary for downstream correctness, acceptance, or recovery, it must first be promoted into a public contract, evidence object, decision, or residual with provenance, scope, and version. This makes local results composable, replaceable, and verifiable without exposing the complete internal process.
+
 ---
 
 ## 3. Architectural Layers
@@ -455,6 +461,14 @@ artifact_request
   "objective": "what this execution object is intended to accomplish",
   "inputs": ["object.id or artifact reference"],
   "outputs_expected": ["expected artifacts or state changes"],
+  "public_contract_ref": "gko or collaboration_contract object id",
+  "handoff_schema": {
+    "contract_delta_refs": ["object.id"],
+    "evidence_refs": ["evidence.id"],
+    "decision_refs": ["object.id"],
+    "residual_refs": ["object.id"]
+  },
+  "private_state_policy": "what remains local and what must be promoted before handoff",
   "success_condition": "condition under which execution counts as successful",
   "failure_condition": "condition under which execution counts as failed",
   "assigned_actor": "human | model | tool | system | hybrid",
@@ -472,6 +486,8 @@ artifact_request
 }
 ```
 
+`inputs`, `outputs_expected`, `public_contract_ref`, and `handoff_schema` form the public composition surface of a GExO. `private_state_policy` does not require disclosure of complete model reasoning. It declares which internal artifacts must not become implicit cross-stage dependencies and which information must be promoted into public objects before handoff.
+
 ### 7.3 GExO Example: Text-to-SQL Candidate Repair
 
 ```json
@@ -484,6 +500,14 @@ artifact_request
   "objective": "Repair a SQL candidate that executes successfully but returns an empty result set unexpectedly.",
   "inputs": ["artifact.sql_candidate.014", "finding.text2sql.empty_result.014"],
   "outputs_expected": ["artifact.sql_candidate.repaired", "evidence.execution_result"],
+  "public_contract_ref": "gexo.text2sql.repair.empty_result_query.001",
+  "handoff_schema": {
+    "contract_delta_refs": [],
+    "evidence_refs": ["evidence.execution_result"],
+    "decision_refs": ["state.sql_candidate.014.status"],
+    "residual_refs": []
+  },
+  "private_state_policy": "Promote any semantic assumption required by the verifier; keep scratchpad and candidate-search trace private.",
   "success_condition": "The repaired SQL executes and the audit confirms that empty-result risk has been addressed semantically, not merely by removing constraints.",
   "failure_condition": "The repaired SQL either fails execution, returns empty results without justification, or violates the question semantics.",
   "assigned_actor": "hybrid",
@@ -1503,8 +1527,12 @@ Renders selected governed objects into prompts, tool instructions, validators, o
   "operation": "render_control_context",
   "input": {
     "object_refs": ["object.id"],
+    "required_global_state_refs": ["state.id or invariant.id"],
+    "public_contract_refs": ["gko.id or gexo.id"],
+    "include_open_residuals": true,
     "render_target": "prompt | tool_config | verifier_config | human_review | execution_plan",
-    "compression_budget": "token or structural budget"
+    "compression_budget": "token or structural budget",
+    "private_state_policy": "exclude by default | include promoted public objects only"
   },
   "output": {
     "rendered_context": "string or structured payload",
@@ -1606,6 +1634,9 @@ Additional invariants:
 Critical progress requires committed state transition.
 Context narrative alone cannot update hard state.
 Transition contracts define precondition, observation, verifier, commit condition, and rollback condition.
+Context renders preserve decision-relevant global conditions while excluding unnecessary private state.
+Cross-stage dependencies are carried by public contracts, accepted evidence, committed decisions, or open residuals.
+Residual routing selects the next solving surface but cannot itself commit state.
 ```
 
 ---
@@ -1900,6 +1931,9 @@ A system conforms to the Full SGAR Profile if it additionally satisfies the foll
 [ ] Context narrative alone cannot commit state.
 [ ] Rollback or dispute paths exist for committed state.
 [ ] GExOs track long-horizon tasks, actions, handoffs, and success conditions.
+[ ] Context renders preserve minimally sufficient global state and record material omissions.
+[ ] Cross-stage dependencies do not rely on unpromoted private reasoning or implementation state.
+[ ] Public handoffs distinguish accepted evidence, committed decisions, contract deltas, and open residuals.
 ```
 
 ---

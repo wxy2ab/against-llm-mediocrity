@@ -312,11 +312,11 @@ If you arrived here from another page, it usually makes sense to jump straight t
 <a id="sgar"></a>
 ### State-Governed Agent Regime (SGAR)
 
-**One-line definition**: a runtime regime that organizes long-horizon plans, actions, verification, escalation, and audit findings as governed hard-state transitions.
+**One-line definition**: a regime that renders minimally sufficient local solving surfaces from globally authoritative state, composes stages through public protocols, and commits only verified public deltas as long-horizon progress.
 
-**Full explanation**: SGAR starts from one core judgment: context is not state. If task progress exists only inside chat history, then plans, tool calls, verification results, human answers, and rollback conditions have no authoritative carrier. SGAR moves those objects into an external hard-state layer so the agent advances on recognized, verifiable, recoverable state rather than on a self-narrated sense of progress.
+**Full explanation**: SGAR starts from two linked judgments: context is not state, and each LLM solve must balance global conditions against local scale. The system stores goals, constraints, dependencies, prior decisions, and accepted facts in external hard state, then renders only a minimally sufficient projection for the current problem. Stages exchange contracts, evidence, decisions, and residuals rather than depending on one another's complete private reasoning and implementation traces. Residual routing decides what to solve next, while verification and commitment still decide whether state advanced.
 
-**Why it matters**: it provides the runtime governance foundation for long-horizon agents. Without SGAR, complex agent failures often appear as drift, skipped steps, false completion, and poor recoverability. With SGAR, completion must be supported by transitions and evidence.
+**Why it matters**: it governs both state authority and problem shape. Without SGAR, a complex agent may face oversized mixed problems, produce local optima detached from global constraints, and leak private assumptions into later stages. With SGAR, local solving is globally conditioned, cross-stage dependencies have public semantics, and completion is supported by transitions and evidence.
 
 **Source chain**:
 
