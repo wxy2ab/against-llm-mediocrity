@@ -344,6 +344,50 @@ A very practical reverse criterion is:
 
 We should be especially wary of "role-shaped Workflows": they change only the identity phrasing in the system prompt, but do not change the budget envelope, state structure, behavior permissions, or acceptance conditions. Such nodes create the surface complexity of a Graph without forming a real cognitive investment contract.
 
+### Worked example: adversarial claim / anti-claim dual-evidence audit
+
+For a high-impact claim that cannot be decided directly by a mechanical verifier, one exemplary direction to promote into the Graph is to split audit into two evidence paths: one independently verifies the claim, while the other actively searches for the anti-claim. "Dual" here does not mean asking two Agents to vote on the same material. It means assigning different evidence obligations to the two branches.
+
+```text
+Builder: submit the claim, scope conditions, and evidence obligations
+                              |
+                           fan-out
+                  +-----------+-----------+
+                  |                       |
+        Claim Verification          Anti-claim Audit
+        independently seek           actively seek counterevidence,
+        supporting evidence          counterexamples, conflicts,
+        and inspect provenance        boundary failures, and
+        and reasoning chains          alternative explanations
+                  |                       |
+                  +-----------+-----------+
+                            fan-in
+                              |
+Adjudication: supported / qualified / rejected / unresolved
+                              |
+                scoped patch / reject / escalate
+                              |
+                     global acceptance
+```
+
+The anti-claim branch is the structurally asymmetric part. Ordinary claim verification still follows the direction of generation and can inherit the Builder's framing and confirmation bias. Anti-claim audit instead commits protected budget explicitly to counterevidence, failure boundaries, and alternative mechanisms. In a free Loop, this direction usually lies in the low-support tail of the base policy: it delays delivery, may invalidate existing work, and often incurs several steps of cost before producing visible progress. It is therefore the first direction to be canceled once a usable answer appears. An adversarial subgraph prevents that budget from being redirected into expanding or defending the original claim by providing activation guarantees, a minimum budget, independent state, and external acceptance authority. In this sense, it is a targeted support-mismatch repair operator, not merely "one more reviewer Agent."
+
+But independence must exist at the evidence-path level, not merely at the process, role-name, or call-count level. If the Builder, claim verifier, and anti-claim auditor share the same retrieved materials, the same mistaken specification, or the same missing decisive variable, then the three nodes may be only three samples from one blind spot. Changing search direction can reduce trajectory correlation, but it cannot manufacture a missing observation or repair a shared corpus prior or faulty specification. Where needed, independence should be established through different retrieval queries, independent source acquisition, controlled masking of the Builder's reasoning trace, different verification tools, and calibrated human or external authorities. Switching models is only one possible measure and does not by itself establish independence.
+
+The branch therefore should not be described as "always beneficial when token budget is high." A more testable proposition is:
+
+> **For a high-impact claim outside mechanical-verifier coverage, with measurable headroom and an active mismatch, if the claim and anti-claim branches have auditable evidence independence and findings can trigger only bounded repair or escalation, then a conditionally activated dual-evidence audit has reason to achieve higher true-defect discovery and better conclusion calibration than an equal-budget free Loop. Its effect size and crossover point still require experimental measurement.**
+
+This formulation also supplies five activation boundaries:
+
+1. **A mismatch remains active.** On simple tasks with high support, easy composition, and stable state, additional audit may provide only orchestration tax.
+2. **There is measurable headroom below the ceiling.** If the baseline is already near the Oracle ceiling, the experiment cannot distinguish "no room to improve" from "the mechanism is ineffective."
+3. **Evidence and decisive priors are sufficiently decorrelated.** Process independence with epistemically identical inputs only creates pseudo-diversity.
+4. **Finding authority is bounded.** Audit should primarily localize residuals and submit a scoped patch, rejection, or escalation. If a false positive directly triggers a full rewrite, already-correct regions are re-exposed to sampling risk.
+5. **Mechanical verifiers leave a coverage gap.** Claims decidable by type checking, tests, constraint solvers, or deterministic rules should go to those Oracles before high-token model-based adversarial review.
+
+This case also clarifies the relationship between a static DAG and a dynamic Graph. Claim / anti-claim forms a reusable local DAG, but whether it is instantiated, how much budget it receives, and whether a returned finding leads to patch, rejection, or Human Gate should be decided dynamically from the current residual, risk, headroom, and verifier coverage. It meets a conditional admission criterion--"a delayed-payoff direction requires activation guarantees, budget commitment, and independent acceptance"--rather than the criterion for an always-on default component.
+
 ---
 
 ## 10. How to Validate Structural Value with Equal-Budget Experiments
@@ -385,6 +429,17 @@ If Group B outperforms Group A, we still need to decompose where the gain comes 
 - compare fixed Graph against residual-driven dynamic Graph.
 
 Such experiments answer whether the true gain comes from direction protection, state accumulation, strategy switching, or independent acceptance, rather than from simply increasing the number of calls.
+
+### A dedicated control for dual-evidence audit
+
+For the claim / anti-claim case above, four groups can be compared under the same total tokens, retrieval count, tool permissions, and final Oracle:
+
+- **Group A:** free Loop, deciding for itself whether and how to audit;
+- **Group B:** a single claim-verification Workflow responsible only for checking supporting evidence;
+- **Group C:** claim-verification and anti-claim-audit branches followed by a shared fan-in adjudication;
+- **Group D:** the same topology as Group C, but with both branches sharing retrieval results or an evidence pool, as the "process independence without evidence independence" control.
+
+In addition to global acceptance, the experiment should measure true-defect recall, false-positive rate, correct calibration when a conclusion is downgraded from `supported` to `qualified / unresolved`, source independence, valid findings per unit budget, repair regression rate, and orchestration tax on easy tasks. If C outperforms A/B only in strata with high risk, measurable headroom, and insufficient mechanical-verifier coverage, while D's advantage disappears or shrinks materially, the result supports the narrow proposition that reverse-search budget and evidence decorrelation have structural value. If C wins only because it receives more total resources, false positives cause rewrite regressions, or C is indistinguishable from D under shared blind spots, then the subgraph's core claim has not been established.
 
 Interpretation must be strict:
 
