@@ -1,6 +1,6 @@
 # 面向受治理 LLM 系统的状态治理智能体范式
 
-**硬状态权威、转移契约与运行时治理**  
+**全局条件下的局部求解、公共协议与硬状态权威**
 **工作稿 v0.1**  
 
 ---
@@ -75,6 +75,10 @@ SGAR 不是新的提示模式，也不是第七类原始失配。它是 LLM 系�
 核心论点很简单：长程 LLM 系统需要模型之外的状态权威。没有硬状态权威，agent 容易出现虚假完成、状态漂移、状态振荡、记忆污染、表演性行动、不可恢复的中间失败和上下文级进展幻觉。
 
 有了显式状态记录、转移契约、验证器分层、回滚规则、可重放性和缺陷账本，LLM 系统才能把局部模型能力转化为持久、可审计、可恢复的进展。
+
+SGAR 同时处理一组由 LLM 认知特性产生的相反要求：决策必须具备足够的全局条件，单次求解又必须保持局部规模；局部阶段必须能够组合，彼此却不应依赖对方的全部私有推理与实现细节。它因此从全局权威状态渲染最小充分的局部求解面，让阶段通过公共协议交换契约、证据、决策和残差，并只把经过验证的公共增量提交回全局状态。
+
+残差测量与路由、阶段验收、阶段内部 DAG、重试和回滚都是实现这种平衡的重要反馈机制，但都不是 SGAR 的定义本身。SGAR 更基础的要求是：**全局条件约束局部求解，公共语义连接私有实现，证据通过受治理转移推进状态。**
 
 ### 与 Diagnostic–Mechanism Bridge 的关系
 
@@ -215,6 +219,88 @@ Only verified transitions update authoritative state.
 ```
 
 模型可以提议 `A_t`，帮助解释 `O_t`，建议 `S_candidate`，解释 `V_t`。但除非转移契约被满足，系统状态不改变。
+
+### 3.1 SGAR 平衡的三个要求
+
+SGAR 不只回答“什么状态改变可以被承认”，还要塑造每一次 LLM 求解时面对的问题形状。它平衡三个要求：
+
+1. **决策必须具备全局条件。** 当前求解必须知道总体目标、非目标、关键约束、系统不变量、跨阶段依赖、已冻结决策、权威边界和完成标准。否则局部结果即使内部合理，也可能只是脱离系统的局部最优。
+2. **求解必须保持局部规模。** 每次只让 LLM 解决一个足够小、边界清楚、可以独立验收的问题，避免上下文膨胀、注意力稀释和多目标干扰。
+3. **局部之间只通过公共协议连接。** 阶段间传递的是 `contract`、`evidence`、`decision`、`residual` 及其版本与权威语义，而不是上一阶段的全部私有推理、scratchpad、搜索轨迹和实现细节。
+
+可以把它压缩为：
+
+> **全局可见，局部求解；公共耦合，私有解耦；证据推进，残差续接。**
+
+这里的“全局可见”不等于把整个代码库、全部历史和所有硬状态塞进 prompt。真正需要进入当前求解面的是经过压缩、与决策相关且具有权威来源的全局状态投影。全局状态属于系统；LLM 接收的是足以支持当前决策的投影。
+
+### 3.2 最小充分状态投影
+
+设当前权威状态为 `S_i`，当前阶段获得的求解面为：
+
+\[
+P_i = \Pi_i(S_i)
+= \Pi_i(G, C_{\le i}^{active}, E_{<i}^{accepted}, R_{<i}^{open}, A_i, L_i)
+\]
+
+其中：
+
+- `G`：稳定的全局目标、非目标、约束与依赖；
+- `C`：阶段之间当前有效的公共协议；
+- `E`：已经验收并提交的事实和证据；
+- `R`：仍未关闭的残差、不确定性和义务；
+- `A_i`：当前阶段的 authority、允许动作与副作用边界；
+- `L_i`：失败语义、版本、撤销条件和生命周期约束。
+
+当前阶段的私有设计与实现可以写成：
+
+\[
+X_i^* = \arg\max_{X_i} Q(X_i \mid P_i)
+= \arg\max_{X_i} Q(X_i \mid G,C_{\le i},E_{<i},R_{<i},A_i,L_i)
+\]
+
+这里的 `X_i` 可以包含私有分解、候选搜索、局部实现和临时推理。SGAR 不要求预先决定未来的 `X_{i+1}, X_{i+2}`；它要求未来求解发生时，能够读取正确版本的 `G、C、E、R、A、L`。因此，SGAR 的全局结构更接近一个依赖与认知收敛框架，而不是一张预先穷尽未来实现细节的执行图。
+
+“最小充分”同时包含两个约束：投影必须足够完整，以免隐藏会改变行动排序的全局条件；也必须足够紧凑，以免无关历史和私有细节稀释当前问题。投影函数 `\Pi_i` 本身因此也是受治理对象：它需要作用域、版本、遗漏说明和审计路径。
+
+### 3.3 公共协议与私有求解
+
+阶段之间的公共协议至少应声明：
+
+```text
+objective and scope
+inputs and preconditions
+outputs and state-delta schema
+global invariants and dependency versions
+authority and allowed side effects
+evidence and verifier requirements
+failure semantics and rollback policy
+open residuals and unresolved variables
+lifecycle, revocation, and compatibility rules
+```
+
+阶段内部可以自由选择 prompt、模型、工具、搜索策略、候选表示和实现结构。这些属于私有求解状态，默认不成为下游依赖。若某个私有假设、推理结果或实现事实对下游正确性、验收或复现是必要的，它必须被提升为带来源和作用域的公共证据、决策或契约条款，而不能继续隐藏在私有轨迹中。
+
+因此，私有解耦并不意味着不可审计。它意味着下游不依赖上游完整内部过程；系统依靠充分的公共语义、证据和验证结果组合阶段。
+
+### 3.4 阶段、并行与残差反馈
+
+在 staged SGAR 中，具有真实先后依赖的阶段通过验收屏障串行推进；每个阶段内部，在同一权威状态快照和公共协议下可以用小型 DAG 并行处理彼此独立的问题。更精确地说：
+
+> **依赖提交必须可串行化，独立求解可以并行化。**
+
+阶段验收把局部候选提升为全局事实，并输出公共 handoff：
+
+```text
+accepted contract delta
+accepted evidence
+committed decision
+remaining residual
+```
+
+残差路由读取提交后的状态和仍开放的残差，决定下一阶段实际面对的问题，并据此完善下一阶段协议。它是维持闭环的反馈机制，而不是 SGAR 的状态权威来源，也不是 SGAR 的本质定义。即使路由由固定规则、人类或其他控制器完成，只要局部求解仍由全局权威状态约束、结果仍经验证提交，系统仍可处于 SGAR 之中。
+
+尚不具备决策条件的细节不应被猜测性冻结。它们应成为带类型的占位符或未解决变量，至少记录：缺失信息、负责方、允许的临时假设、解析触发器、截止阶段，以及未解析时的失败语义。占位符的作用是延迟不成熟决策，而不是掩盖欠规格。
 
 ---
 
@@ -1194,6 +1280,8 @@ The user approved a local step, and the agent treats it as approval of the entir
 
 SGAR 要求共享硬状态和角色特定权限。
 
+共享不意味着每个 agent 读取全部状态。每个 agent 应获得由同一权威状态渲染的最小充分投影，并通过公共的 `contract / evidence / decision / residual` handoff 协作。一个 agent 的私有上下文、scratchpad 或实现轨迹不得静默成为另一个 agent 的前置条件；必要信息必须先被提升为可检查的公共对象。
+
 多 agent 状态模型应说明：
 
 ```text
@@ -1445,6 +1533,10 @@ active GKOs
 blocking issues
 available actions
 completion criteria
+relevant global invariants and dependency versions
+active public contracts
+authority and failure semantics
+open residuals and typed unresolved variables
 ```
 
 它应避免：
@@ -1459,6 +1551,16 @@ overconfident completion statements
 ```
 
 因此，SGAR 不消除表征问题。它使这些问题显性且可治理。
+
+一个合格的状态投影应同时满足：
+
+```text
+sufficiency: 保留会改变当前行动排序的全局条件
+minimality: 排除无关历史与非必要私有实现细节
+authority: 区分已提交事实、候选、假设和撤销对象
+version binding: 绑定依赖、契约、证据与目标的有效版本
+omission visibility: 记录被压缩或省略的对象以及重新获取路径
+```
 
 ---
 
@@ -1551,6 +1653,15 @@ unrecoverable process drift
 4. A context renderer that reads from committed state.
 ```
 
+对于包含多个阶段或 agent 的认知分解型 SGAR，还至少需要：
+
+```text
+5. A versioned public contract for each local solving unit.
+6. A minimally sufficient state projection with omission records.
+7. A public handoff carrying accepted evidence, decisions, contract deltas, and residuals.
+8. A registry for open residuals and typed unresolved variables.
+```
+
 最小循环是：
 
 ```text
@@ -1603,7 +1714,19 @@ log transition
 
 任何没有撤销路径的持久受治理对象，都可能在证据变化下变成过时约束。因此，长程 SGAR 系统需要针对非单调控制知识的撤销或取代转移。
 
-这些命题不是经验性能主张，而是关于权威、状态和转移有效性的结构主张。
+### 命题 6：全局条件下的局部求解
+
+如果一个会改变局部行动排序的全局目标、约束或依赖没有进入当前可访问投影，则局部求解无法系统性地产生相对于该条件的最优结果。因此，局部求解质量受状态投影充分性约束。
+
+### 命题 7：公共协议组合
+
+如果下游正确性依赖上游未公开的私有推理或实现细节，则阶段组合无法仅通过已提交状态被验证、恢复或替换。因此，跨阶段依赖必须被提升为公共契约、证据、决策或残差。
+
+### 命题 8：残差路由的派生地位
+
+残差路由决定下一份求解预算投向哪里，但不决定什么对系统而言为真。它是基于已提交状态的反馈策略；状态权威仍来自满足转移契约的验证与提交。
+
+这些命题不是经验性能主张，而是关于权威、状态投影、组合边界和转移有效性的结构主张。
 
 ---
 
@@ -1761,6 +1884,26 @@ SGAR 核心设计原则是：
 
 Prompt 应从已提交状态渲染，而不是允许上下文叙事定义状态。
 
+### 原则 11：全局条件，局部求解
+
+每个局部问题都应读取足以保持正确行动排序的全局状态投影，同时把单次求解限制在可独立验收的最小规模。
+
+### 原则 12：公共耦合，私有解耦
+
+阶段通过契约、证据、决策和残差组合，不通过彼此完整的私有推理或实现轨迹组合。
+
+### 原则 13：验证提升
+
+私有候选只有经过适当 Oracle 或 verifier 验收，才能被提升为公共事实或状态增量。
+
+### 原则 14：残差反馈
+
+残差用于选择和塑造下一问题，但不能替代状态权威、转移契约或验收。
+
+### 原则 15：依赖串行，独立并行
+
+具有硬依赖的提交必须可串行化；共享同一状态快照、在公共协议下相互独立的求解可以并行。
+
 ---
 
 ## 34. 标准 Schema
@@ -1858,6 +2001,8 @@ S + A → O → V → S'
 
 这个简单契约有广泛后果。它区分提案与行动、观测与声称、验证与信心、完成与宣告、记忆与推断、状态与摘要。它给知识治理提供运行时权威表面。它给审计工程提供持久写回路径。它给长程 agent 提供恢复、重放、回滚、撤销和协调能力。
 
+但可靠的长期推进不仅取决于状态是否真实，也取决于每次 LLM 求解面对什么问题。SGAR 因此还从全局权威状态生成最小充分的局部求解面：保留目标、约束、依赖、证据、authority 与开放 residual，隔离无关历史和私有实现细节；局部阶段通过公共协议组合，私有候选只有经验证后才被提升为公共事实。残差路由负责续接问题，不能替代状态权威。
+
 SGAR 并非每次 LLM 交互都需要。对许多低风险、一次性、纯文本任务，它是不必要的。但当 LLM 系统必须跨时间行动、修改产物、记住偏好、协调 agent、使用工具、提交修复或声称完成时，硬状态治理就成为中心。
 
 核心规则是：
@@ -1872,7 +2017,7 @@ The model may narrate progress, but only the state transition commits it.
 
 | 术语 | 定义 |
 |---|---|
-| SGAR | 通过已验证硬状态转移定义进展的运行时体制。 |
+| SGAR | 从全局权威状态生成局部求解面、通过公共协议组合阶段，并以已验证硬状态转移定义进展的运行体制。 |
 | Hard state | 外部、权威、可检查，并用于未来执行的状态。 |
 | Context state | 状态的叙事或 prompt 级表征，默认无权威。 |
 | Claimed state | 模型或用户在验证前声称的状态。 |
@@ -1885,6 +2030,10 @@ The model may narrate progress, but only the state transition commits it.
 | Rollback transition | 撤销、补偿或取代先前状态变化的转移。 |
 | Revocation transition | 削弱或移除非单调受治理对象的转移。 |
 | Context demotion | 上下文可以提出或总结状态，但不能授权状态的原则。 |
+| State projection | 从权威状态渲染给当前求解单元的最小充分、版本绑定的状态表面。 |
+| Public protocol | 跨阶段公开的目标、输入输出、依赖、证据、决策、失败和 residual 语义。 |
+| Private solving state | 阶段内部的 scratchpad、搜索轨迹、候选组织和实现细节，默认不成为下游依赖。 |
+| Residual | 验收后仍未关闭的问题、差距、不确定性或义务；用于续接求解，不具有提交权威。 |
 
 ## 附录 B：最小 Checklist
 
@@ -1899,6 +2048,10 @@ The model may narrate progress, but only the state transition commits it.
 6. Can the transition be replayed or inspected?
 7. Is rollback or supersession possible if later evidence contradicts it?
 8. Are open issues and limitations recorded?
+9. Did the solving context include every global condition that could change the action ranking?
+10. Does the public handoff contain the contract, accepted evidence, committed decision, and remaining residual?
+11. Does any downstream step depend on unpromoted private reasoning or implementation state?
+12. Is residual routing being used only to choose the next problem, rather than to authorize state?
 ```
 
 如果这些问题无法回答，系统可能拥有有用的进展叙事，但还没有受治理进展。

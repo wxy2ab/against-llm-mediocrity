@@ -22,7 +22,7 @@ The paper then introduces a mechanism for compound failure. Mismatches do not me
 
 This structural view unifies three system-level interventions.
 
-**Knowledge Governance** externalizes and revises task-specific control knowledge as governed objects. **Audit Engineering** converts failure signals into localized control deltas and regression guards. **State-Governed Agent Regime (SGAR)** provides hard-state authority for long-horizon systems, ensuring that plans, observations, verifications, corrections, and revocations become committed state transitions rather than loose context narrative.
+**Knowledge Governance** externalizes and revises task-specific control knowledge as governed objects. **Audit Engineering** converts failure signals into localized control deltas and regression guards. **State-Governed Agent Regime (SGAR)** renders bounded local solving surfaces from globally authoritative state, composes them through public protocols, and ensures that plans, observations, verifications, corrections, and revocations become committed state transitions rather than loose context narrative.
 
 Together, these mechanisms implement a broader principle: preserve locally aligned model capabilities, but transform high-mismatch task components into lower-mismatch control objects that can be audited, revised, revoked, and reused.
 
@@ -696,6 +696,8 @@ Audit Engineering therefore turns failures into durable system knowledge. It is 
 Knowledge Governance governs control knowledge. Audit Engineering governs failure write-back. **State-Governed Agent Regime** governs state authority.
 
 Long-horizon LLM systems cannot rely on context narrative as the source of truth. A context window can describe progress, summarize plans, simulate memory, or claim completion. But description is not commitment. A system has made progress only when a valid transition has occurred in hard state.
+
+SGAR also governs the cognitive decomposition of long-horizon work. Globally authoritative state preserves goals, constraints, dependencies, accepted evidence, and open residuals; each LLM invocation receives only the minimally sufficient projection required for the current problem. Stages compose through public contracts, evidence, decisions, and residuals, while private reasoning and implementation details do not become downstream dependencies by default. Residual routing selects the next problem as feedback over committed state; it is not itself a state authority.
 
 The basic transition contract is:
 

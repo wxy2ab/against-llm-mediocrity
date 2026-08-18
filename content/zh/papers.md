@@ -115,7 +115,7 @@ Tag: 面向从业者的 Agent 架构文章
 ### 面向受治理 LLM 系统的状态治理智能体范式
 Tag: 运行时治理工作稿
 
-这份工作稿把 SGAR 定义为运行时层：进展只有通过已验证硬状态转移才被准入。它覆盖上下文降权、状态表面、转移契约、验证器分层、运行时循环、记忆写入、完成治理、多 agent 权限、回滚、撤销和从状态渲染上下文。
+这份工作稿把 SGAR 定义为面向 LLM 的状态治理与认知分解层：系统从全局权威状态生成最小充分的局部求解面，通过公共 contract、evidence、decision 和 residual 组合阶段，并只通过已验证硬状态转移准入进展。它同时说明残差路由是选择下一问题的反馈机制，而不是状态权威本身。
 
 [阅读 SGAR 受治理系统工作稿](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)
 

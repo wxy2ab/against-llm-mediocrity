@@ -42,7 +42,7 @@ heroPoints:
 - **[GKO（Governed Knowledge Object）](/zh/glossary#gko)**：保存任务特定控制知识（已验证主张、条件、优先级、生命周期、撤销规则）。
 - **[GEsO（Governed Escalation Object）](/zh/glossary#geso)**：保存"何时升级、升级给谁、问什么、等待期间能做什么"。
 - **[MSHQ（Minimal Sufficient Human Query）](/zh/glossary#mshq)**：GEsO 在一次交互中的实例化，只问恢复自治所需最小变量。
-- **[SGAR（State-Governed Agent Regime）](/zh/glossary#sgar)**：把 plan / action / observation / verification / 人类回答 / 审计发现提交到外部硬状态层，让长程 agent 在被承认的状态里推进。
+- **[SGAR（State-Governed Agent Regime）](/zh/glossary#sgar)**：从全局权威状态生成局部求解面，通过公共协议组合阶段，并把经过验证的 plan / action / observation / decision / residual 提交到外部硬状态层。
 
 四者一起把治理从"流程感"转成"对象与协议"。
 
@@ -52,7 +52,7 @@ heroPoints:
 
 [阅读《Audit Engineering：从生成—验证不对称到通用 Agent 治理》](/docs/audit-engineering-failure-localization-control-space-writeback.zh-CN.md)
 
-对于长程 agent，这些控制对象还需要一个硬状态层。**[状态治理智能体范式（SGAR）](/zh/glossary#sgar)** 把计划、工具调用、观测、验证结果、人类回答、审计发现和回滚决定都组织成状态转移，而不是松散的聊天历史。这样做不是为了削弱 LLM，而是避免让执行动作的那个上下文，又独自裁决任务是否已经推进。
+对于长程 agent，这些控制对象还需要一个硬状态层。**[状态治理智能体范式（SGAR）](/zh/glossary#sgar)** 保存全局目标、约束、依赖与已验收事实，只向当前 LLM 求解渲染最小充分投影；阶段之间通过公共协议连接，私有推理与实现保持解耦；计划、工具调用、观测、验证结果、人类回答、审计发现和回滚决定则通过受治理转移提交。这样做既避免同一上下文独自裁决进展，也避免每次调用同时承受整个长程任务。
 
 [阅读《状态治理智能体范式（SGAR）》](/docs/state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)
 

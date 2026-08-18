@@ -159,6 +159,12 @@ Only committed state records authorize state.
 
 LLM 往往有很强的局部能力：压缩、改写、候选生成、解释、分解、表面渲染和边缘案例枚举。对象模型应保存这些优势，同时治理局部质量无法组合成全局任务价值的地方。
 
+### 2.8 公共协议耦合，私有求解解耦
+
+受治理执行单元应通过显式公共协议组合。公共表面承载目标与作用域、输入输出 schema、依赖版本、不变量、authority、证据要求、决策、失败语义和开放 residual；prompt、scratchpad、搜索轨迹、候选组织和内部实现默认属于私有求解状态。
+
+下游对象不得依赖上游未公开的私有状态。若某项私有信息对下游正确性、验收或恢复是必要的，它必须先被提升为带来源、作用域和版本的公共契约、证据、决策或 residual。这样可以在不暴露完整内部过程的前提下，使局部结果可组合、可替换、可验证。
+
 ---
 
 ## 3. 架构层
@@ -424,6 +430,14 @@ artifact_request
   "objective": "what this execution object is intended to accomplish",
   "inputs": ["object.id or artifact reference"],
   "outputs_expected": ["expected artifacts or state changes"],
+  "public_contract_ref": "gko or collaboration_contract object id",
+  "handoff_schema": {
+    "contract_delta_refs": ["object.id"],
+    "evidence_refs": ["evidence.id"],
+    "decision_refs": ["object.id"],
+    "residual_refs": ["object.id"]
+  },
+  "private_state_policy": "what remains local and what must be promoted before handoff",
   "success_condition": "condition under which execution counts as successful",
   "failure_condition": "condition under which execution counts as failed",
   "assigned_actor": "human | model | tool | system | hybrid",
@@ -441,9 +455,11 @@ artifact_request
 }
 ```
 
+`inputs`、`outputs_expected`、`public_contract_ref` 和 `handoff_schema` 构成 GExO 的公共组合表面。`private_state_policy` 不要求公开模型的完整内部推理；它声明哪些内部产物不得成为隐式跨阶段依赖，以及哪些信息必须在 handoff 前提升为公共对象。
+
 ### 7.3 GExO 示例：Text-to-SQL 候选修复
 
-该示例把“SQL 可执行但意外返回空结果”的修复建模为一个 subtask。它限制可用动作，禁止无语义依据地删除全部过滤条件，并要求执行验证器和语义审计通过后才能提交状态。
+该示例把“SQL 可执行但意外返回空结果”的修复建模为一个 subtask。它限制可用动作，禁止无语义依据地删除全部过滤条件，并要求执行验证器和语义审计通过后才能提交状态。其公共 handoff 发布修复后的候选、执行证据、提交决策与仍开放的 residual；scratchpad 和候选搜索轨迹保持私有，除非其中的语义假设是验证所必需的。
 
 ---
 
@@ -1238,8 +1254,12 @@ hard object with valid mechanical evidence
   "operation": "render_control_context",
   "input": {
     "object_refs": ["object.id"],
+    "required_global_state_refs": ["state.id or invariant.id"],
+    "public_contract_refs": ["gko.id or gexo.id"],
+    "include_open_residuals": true,
     "render_target": "prompt | tool_config | verifier_config | human_review | execution_plan",
-    "compression_budget": "token or structural budget"
+    "compression_budget": "token or structural budget",
+    "private_state_policy": "exclude by default | include promoted public objects only"
   },
   "output": {
     "rendered_context": "string or structured payload",
@@ -1341,6 +1361,9 @@ Rollback records
 Critical progress requires committed state transition.
 Context narrative alone cannot update hard state.
 Transition contracts define precondition, observation, verifier, commit condition, and rollback condition.
+Context renders preserve decision-relevant global conditions while excluding unnecessary private state.
+Cross-stage dependencies are carried by public contracts, accepted evidence, committed decisions, or open residuals.
+Residual routing selects the next solving surface but cannot itself commit state.
 ```
 
 ---
@@ -1637,6 +1660,9 @@ Which deltas were applied without rollback plans?
 [ ] Context narrative alone cannot commit state.
 [ ] Rollback or dispute paths exist for committed state.
 [ ] GExOs track long-horizon tasks, actions, handoffs, and success conditions.
+[ ] Context renders preserve minimally sufficient global state and record material omissions.
+[ ] Cross-stage dependencies do not rely on unpromoted private reasoning or implementation state.
+[ ] Public handoffs distinguish accepted evidence, committed decisions, contract deltas, and open residuals.
 ```
 
 ---

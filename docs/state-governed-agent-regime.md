@@ -1,6 +1,6 @@
 # State-Governed Agent Regime
 
-## A Working Draft on Hard-State Governance for Agents
+## A Working Draft on Global Conditions, Local Solving, and Hard-State Governance
 
 **Status:** Working draft  
 **Abbreviation:** SGAR  
@@ -24,6 +24,10 @@ SGAR does not claim to create metaphysically true causality. Its value is more o
 The core claim of SGAR is:
 
 > Hard state establishes the operational scene; the scene gives action task meaning; action obtains causal position through state transition; the agent gains governable long-horizon behavior through the state-action-result chain.
+
+This state claim also implies an LLM-oriented principle of dependency decomposition. Local decisions must read global conditions such as overall goals, constraints, dependencies, and prior decisions, while each solve remains small in scale. Local stages compose through public `contract / evidence / decision / residual` protocols rather than through one another's complete private reasoning and implementation traces. SGAR can therefore be summarized as: **global visibility, local solving; public coupling, private decoupling; evidence advances, residuals continue.** Global visibility here means a minimally sufficient authoritative-state projection, not the entire history placed into the prompt.
+
+Residual routing, stage acceptance, and intra-stage DAGs are feedback and execution mechanisms for implementing this balance. They do not define SGAR by themselves. The foundation remains: shape local solving surfaces from authoritative state and commit only verified public deltas back into global state.
 
 Without hard state, an agent can still produce agent-like behavior: it may plan, call tools, revise drafts, run loops, and explain its progress. But if the authority for "where we are," "what is true," "what has been completed," and "what may happen next" lives only inside the LLM's current context, the system remains a sophisticated LLM application rather than a reliable long-horizon action system.
 
@@ -277,10 +281,14 @@ SGAR can be evaluated through metrics such as:
 5. **Negative results matter.** Failed paths, inconclusive tests, and revoked assumptions should be first-class state objects.
 6. **Humans update state, not just chat.** Human judgments should become governed variables, approvals, constraints, or revocation rules.
 7. **Hard state must remain revisable.** The point is governed change, not immutability.
+8. **Global conditions constrain local solving.** The current problem should read a global state projection sufficient to preserve the correct action ranking while remaining independently verifiable in local scale.
+9. **Public coupling, private decoupling.** Cross-stage dependencies must become public contracts, evidence, decisions, or residuals rather than remain hidden in private reasoning or implementation details.
+10. **Private candidates require verified promotion.** Only results accepted by the appropriate Oracle or verifier may become public facts or state deltas.
+11. **Residual is feedback, not authority.** Residuals decide what to solve next but cannot replace transition contracts, verification, and commitment.
 
 ## Conclusion
 
-SGAR is the state governance layer of an agent. It lets the LLM stop floating inside a self-maintained narrative and act from a recognized operational scene.
+SGAR is the state-governance and cognitive-decomposition layer of an agent. It lets the LLM stop floating inside a self-maintained narrative and instead face problems with global conditions, local scale, and public boundaries inside a recognized operational scene.
 
 The compact thesis is:
 

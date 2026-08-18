@@ -1,6 +1,6 @@
 # State-Governed Agent Regime for Governed LLM Systems
 
-**Hard-State Authority, Transition Contracts, and Runtime Governance**  
+**Globally Conditioned Local Solving, Public Protocols, and Hard-State Authority**
 **Working Draft v0.1**  
 
 ---
@@ -75,6 +75,10 @@ The six primitive mismatches diagnose where value is lost in the world-to-output
 The central thesis is simple: long-horizon LLM systems require state authority outside the model. Without hard-state authority, agents are vulnerable to false completion, state drift, state oscillation, memory contamination, performative action, unrecoverable intermediate failure, and context-level progress illusion.
 
 With explicit state records, transition contracts, verifier stratification, rollback rules, replayability, and defect ledgers, an LLM system can convert local model competence into durable, auditable, recoverable progress.
+
+SGAR also addresses a pair of opposing requirements created by the cognitive properties of LLMs: decisions need sufficient global conditions, while each individual solve must remain local in scale; local stages must compose, while avoiding dependence on one another's complete private reasoning and implementation details. SGAR therefore renders a minimally sufficient local solving surface from globally authoritative state, lets stages exchange contracts, evidence, decisions, and residuals through public protocols, and commits only verified public deltas back into global state.
+
+Residual measurement and routing, stage acceptance, intra-stage DAGs, retries, and rollback are important feedback mechanisms for implementing this balance, but none of them defines SGAR by itself. The more basic requirement is: **global conditions constrain local solving, public semantics connect private implementations, and evidence advances state through governed transitions.**
 
 ### Relationship to the Diagnostic–Mechanism Bridge
 
@@ -215,6 +219,88 @@ Only verified transitions update authoritative state.
 ```
 
 The model may propose `A_t`. It may help interpret `O_t`. It may suggest `S_candidate`. It may explain `V_t`. But unless the transition contract is satisfied, the system state does not change.
+
+### 3.1 The Three Requirements SGAR Balances
+
+SGAR answers not only "which state change may be recognized?" but also "what problem shape should each LLM invocation receive?" It balances three requirements:
+
+1. **Decisions require global conditions.** The current solve must know the overall goals and non-goals, critical constraints, system invariants, cross-stage dependencies, frozen decisions, authority boundaries, and completion criteria. Otherwise a locally coherent result may be merely a system-detached local optimum.
+2. **Solving must remain local in scale.** Each LLM invocation should address a sufficiently small, clearly bounded, independently verifiable problem, avoiding context growth, attention dilution, and multi-objective interference.
+3. **Local units connect only through public protocols.** Stages pass `contract`, `evidence`, `decision`, and `residual`, together with their version and authority semantics, rather than the previous stage's complete private reasoning, scratchpad, search trace, or implementation details.
+
+This can be compressed into:
+
+> **Global visibility, local solving; public coupling, private decoupling; evidence advances, residuals continue.**
+
+"Global visibility" does not mean placing the entire codebase, all history, and all hard state into the prompt. What should enter the current solving surface is a compressed, decision-relevant projection of global state with authoritative provenance. Global state belongs to the system; the LLM receives the projection sufficient for the current decision.
+
+### 3.2 Minimally Sufficient State Projection
+
+Let the current authoritative state be `S_i`, and let the current stage receive the solving surface:
+
+\[
+P_i = \Pi_i(S_i)
+= \Pi_i(G, C_{\le i}^{active}, E_{<i}^{accepted}, R_{<i}^{open}, A_i, L_i)
+\]
+
+where:
+
+- `G`: stable global goals, non-goals, constraints, and dependencies;
+- `C`: currently active public protocols between stages;
+- `E`: facts and evidence already accepted and committed;
+- `R`: residuals, uncertainties, and obligations that remain open;
+- `A_i`: authority, admissible actions, and side-effect boundaries for the current stage;
+- `L_i`: failure semantics, versions, revocation conditions, and lifecycle constraints.
+
+The private design and implementation of the current stage can be written as:
+
+\[
+X_i^* = \arg\max_{X_i} Q(X_i \mid P_i)
+= \arg\max_{X_i} Q(X_i \mid G,C_{\le i},E_{<i},R_{<i},A_i,L_i)
+\]
+
+Here `X_i` may include private decomposition, candidate search, local implementation, and temporary reasoning. SGAR does not require future `X_{i+1}, X_{i+2}` to be decided in advance. It requires that when those future solves occur, they can read the correct versions of `G, C, E, R, A, L`. The global structure of SGAR is therefore closer to a dependency and cognitive-convergence framework than to an execution graph that pre-enumerates future implementation details.
+
+"Minimally sufficient" imposes two constraints at once. The projection must be complete enough not to hide a global condition that changes the action ranking, and compact enough not to dilute the current problem with irrelevant history or private details. The projection function `\Pi_i` is therefore itself a governed object: it needs scope, version, omission notes, and an audit path.
+
+### 3.3 Public Protocols and Private Solving
+
+A public protocol between stages should declare at least:
+
+```text
+objective and scope
+inputs and preconditions
+outputs and state-delta schema
+global invariants and dependency versions
+authority and allowed side effects
+evidence and verifier requirements
+failure semantics and rollback policy
+open residuals and unresolved variables
+lifecycle, revocation, and compatibility rules
+```
+
+Inside a stage, the solver may freely choose prompts, models, tools, search strategies, candidate representations, and implementation structures. These belong to private solving state and do not become downstream dependencies by default. If a private assumption, inference, or implementation fact is necessary for downstream correctness, acceptance, or replay, it must be promoted into public evidence, a decision, or a contract clause with provenance and scope. It cannot remain hidden inside a private trajectory.
+
+Private decoupling therefore does not mean freedom from audit. It means downstream stages do not depend on the complete upstream process; stages compose through sufficient public semantics, evidence, and verifier results.
+
+### 3.4 Stages, Parallelism, and Residual Feedback
+
+In staged SGAR, stages with real precedence dependencies advance serially through acceptance barriers. Within a stage, a small DAG may process independent problems in parallel against the same authoritative state snapshot and public protocol. More precisely:
+
+> **Dependent commits must be serializable; independent solving may be parallel.**
+
+Stage acceptance promotes local candidates into global facts and emits a public handoff:
+
+```text
+accepted contract delta
+accepted evidence
+committed decision
+remaining residual
+```
+
+Residual routing reads the committed state and remaining open residuals, chooses the problem the next stage should actually face, and refines the next-stage protocol accordingly. It is a feedback mechanism that keeps the loop closed, not the source of state authority and not the essential definition of SGAR. A system may still operate under SGAR if routing is performed by fixed rules, a human, or another controller, as long as local solving is constrained by globally authoritative state and results are committed only after verification.
+
+Details that do not yet have adequate decision conditions should not be frozen by guesswork. They should become typed placeholders or unresolved variables that record at least the missing information, responsible authority, admissible temporary assumptions, resolution trigger, deadline stage, and failure semantics if unresolved. A placeholder delays an immature decision; it must not conceal underspecification.
 
 ---
 
@@ -1265,6 +1351,8 @@ Multi-agent LLM systems amplify state-authority problems. Multiple agents may ma
 
 SGAR requires shared hard state and role-specific permissions.
 
+Shared state does not mean every agent reads all state. Each agent should receive a minimally sufficient projection rendered from the same authoritative state and collaborate through public `contract / evidence / decision / residual` handoffs. One agent's private context, scratchpad, or implementation trace must not silently become another agent's precondition; necessary information must first be promoted into an inspectable public object.
+
 A multi-agent state model should specify:
 
 ```text
@@ -1516,6 +1604,10 @@ active GKOs
 blocking issues
 available actions
 completion criteria
+relevant global invariants and dependency versions
+active public contracts
+authority and failure semantics
+open residuals and typed unresolved variables
 ```
 
 It should avoid:
@@ -1530,6 +1622,16 @@ overconfident completion statements
 ```
 
 Thus SGAR does not eliminate representation problems. It makes them explicit and governable.
+
+A valid state projection should satisfy all of the following:
+
+```text
+sufficiency: preserve global conditions that would change the current action ranking
+minimality: exclude irrelevant history and unnecessary private implementation details
+authority: distinguish committed facts, candidates, hypotheses, and revoked objects
+version binding: bind dependencies, contracts, evidence, and goals to valid versions
+omission visibility: record omitted objects and how to retrieve them
+```
 
 ---
 
@@ -1622,6 +1724,15 @@ A minimal implementation does not require a large platform. It requires four thi
 4. A context renderer that reads from committed state.
 ```
 
+For a cognitively decomposed SGAR with multiple stages or agents, the minimum additionally includes:
+
+```text
+5. A versioned public contract for each local solving unit.
+6. A minimally sufficient state projection with omission records.
+7. A public handoff carrying accepted evidence, decisions, contract deltas, and residuals.
+8. A registry for open residuals and typed unresolved variables.
+```
+
 The minimal loop is:
 
 ```text
@@ -1674,7 +1785,19 @@ If task completion is represented only as generated text, then false completion 
 
 Any persistent governed object without a revocation path can become a stale constraint under changing evidence. Therefore, long-running SGAR systems require revocation or supersession transitions for non-monotonic control knowledge.
 
-These propositions are not empirical performance claims. They are structural claims about authority, state, and transition validity.
+### Proposition 6: Globally Conditioned Local Solving
+
+If a global goal, constraint, or dependency that would change the local action ranking is absent from the accessible projection, the local solve cannot systematically optimize relative to that condition. Local solving quality is therefore bounded by projection sufficiency.
+
+### Proposition 7: Public-Protocol Composition
+
+If downstream correctness depends on an upstream private inference or implementation detail that was never published, the composition cannot be verified, recovered, or replaced from committed state alone. Cross-stage dependencies must therefore be promoted into public contracts, evidence, decisions, or residuals.
+
+### Proposition 8: The Derived Status of Residual Routing
+
+Residual routing decides where the next solving budget should go, but it does not decide what is true for the system. It is a feedback policy over committed state; state authority still comes from verification and commitment under transition contracts.
+
+These propositions are not empirical performance claims. They are structural claims about authority, state projection, composition boundaries, and transition validity.
 
 ---
 
@@ -1832,6 +1955,26 @@ Use only as much state governance as the task's risk and duration justify.
 
 Prompts should be rendered from committed state, rather than allowing context narrative to define state.
 
+### Principle 11: Global Conditions, Local Solving
+
+Each local problem should read a global state projection sufficient to preserve the correct action ranking while keeping the individual solve at the smallest independently verifiable scale.
+
+### Principle 12: Public Coupling, Private Decoupling
+
+Stages compose through contracts, evidence, decisions, and residuals, not through one another's complete private reasoning or implementation traces.
+
+### Principle 13: Verified Promotion
+
+Private candidates become public facts or state deltas only after acceptance by the appropriate Oracle or verifier.
+
+### Principle 14: Residual Feedback
+
+Residuals select and shape the next problem, but cannot replace state authority, transition contracts, or acceptance.
+
+### Principle 15: Serialize Dependencies, Parallelize Independence
+
+Hard-dependent commits must be serializable; solves that share a state snapshot and are independent under the public protocol may run in parallel.
+
 ---
 
 ## 34. Standard Schemas
@@ -1929,6 +2072,8 @@ S + A → O → V → S'
 
 This simple contract has broad consequences. It separates proposals from actions, observations from claims, verification from confidence, completion from declaration, memory from inference, and state from summary. It gives Knowledge Governance a runtime authority surface. It gives Audit Engineering a durable write-back path. It gives long-horizon agents the ability to recover, replay, rollback, revoke, and coordinate.
 
+Reliable long-horizon progress, however, depends not only on whether state is real but also on what problem each LLM solve receives. SGAR therefore renders minimally sufficient local solving surfaces from globally authoritative state: it preserves goals, constraints, dependencies, evidence, authority, and open residuals while excluding irrelevant history and private implementation details. Local stages compose through public protocols, and private candidates become public facts only after verification. Residual routing continues the problem; it does not replace state authority.
+
 SGAR is not necessary for every LLM interaction. It is unnecessary for many low-risk, one-shot, purely textual tasks. But when an LLM system must act over time, modify artifacts, remember preferences, coordinate agents, use tools, commit repairs, or claim completion, hard-state governance becomes central.
 
 The central rule is:
@@ -1943,7 +2088,7 @@ The model may narrate progress, but only the state transition commits it.
 
 | Term | Definition |
 |---|---|
-| SGAR | Runtime regime where progress is defined by verified hard-state transitions. |
+| SGAR | Runtime regime that renders local solving surfaces from globally authoritative state, composes stages through public protocols, and defines progress through verified hard-state transitions. |
 | Hard state | External, authoritative, inspectable state used for future execution. |
 | Context state | Narrative or prompt-level representation of state, non-authoritative by default. |
 | Claimed state | State asserted by a model or user before verification. |
@@ -1956,6 +2101,10 @@ The model may narrate progress, but only the state transition commits it.
 | Rollback transition | Transition that reverts, compensates, or supersedes a prior state change. |
 | Revocation transition | Transition that weakens or removes a non-monotonic governed object. |
 | Context demotion | Principle that context may propose or summarize state but cannot authorize it. |
+| State projection | Minimally sufficient, version-bound state surface rendered from authoritative state for the current solving unit. |
+| Public protocol | Cross-stage semantics for objectives, inputs, outputs, dependencies, evidence, decisions, failure, and residuals. |
+| Private solving state | Stage-internal scratchpads, search traces, candidate organization, and implementation details that do not become downstream dependencies by default. |
+| Residual | A problem, gap, uncertainty, or obligation still open after acceptance; it continues solving but carries no commitment authority. |
 
 ## Appendix B: Minimal Checklist
 
@@ -1970,6 +2119,10 @@ Before allowing an LLM agent to mark a state-changing step complete, ask:
 6. Can the transition be replayed or inspected?
 7. Is rollback or supersession possible if later evidence contradicts it?
 8. Are open issues and limitations recorded?
+9. Did the solving context include every global condition that could change the action ranking?
+10. Does the public handoff contain the contract, accepted evidence, committed decision, and remaining residual?
+11. Does any downstream step depend on unpromoted private reasoning or implementation state?
+12. Is residual routing being used only to choose the next problem, rather than to authorize state?
 ```
 
 If these questions cannot be answered, the system may have a useful narrative of progress, but it does not yet have governed progress.

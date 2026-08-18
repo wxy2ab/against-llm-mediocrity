@@ -123,7 +123,9 @@ Loop 的上下文由先前输出构成。首个假设一旦被写入，就会不
 Workflow = {
   target:        要处理的问题方向或 residual，
   input:         可接受的输入与前置依赖，
+  public_contract: 对外承诺的输入、输出、证据、决策与 residual schema，
   context:       可见、不可见和必须重新获取的上下文，
+  private_state: 不向下游暴露的 scratchpad、搜索轨迹与实现细节，
   action_space:  允许使用的工具、动作与副作用边界，
   state:         必须持久保存的假设、证据、候选与进度，
   budget:        最低预算、最大预算及资源类型，
@@ -147,12 +149,14 @@ Route 回答“下一份智能预算投向哪里”；Workflow 回答“这份�
 | Workflow | 被保护的认知方向 | 典型局部产物 |
 |---|---|---|
 | Research | 外部证据获取与来源核验 | evidence、provenance、uncertainty |
-| Candidate Search / SGAR | 候选探索、边界推进与受控迭代 | candidate、state transition、gate result |
+| Candidate Search / Governed Iteration | 候选探索、边界推进与受控迭代 | candidate、state transition、gate result |
 | Audit | 反例搜索、冲突发现与缺陷定位 | finding、evidence、severity、corrective target |
 | Recovery | 围绕特定 residual 的闭环修复 | patch、retest result、remaining residual |
 | Fan-out | 假设、方案或子问题的受控分化 | independent branches、candidate set |
 | Fan-in | 冲突消解、聚合与全局一致性 | merged result、conflict ledger、global residual |
 | Human Gate | 规格、价值判断、授权与风险边界澄清 | decision、constraint、approval / rejection |
+
+SGAR 不应在这张表里被当作与 Research、Audit 或 Recovery 并列的 Workflow。SGAR 是治理这些 Workflow 如何读取权威状态、如何提交公共增量以及如何被验收的运行体制；候选搜索只是其中一种可能的局部求解方向。
 
 Workflow 不是角色名称，而是一条被制度化的认知投资方向。若它没有独立状态、不同策略、明确 oracle 和退出合同，就很可能只是一个 prompt 模板，而不是值得进入 Graph 的控制节点。
 
@@ -281,6 +285,8 @@ workflow
 
 Graph 则保存这些选择的依据、依赖和后果，使系统能够回答：预算为何投入该方向、产生了什么证据、哪些 residual 被关闭、哪些仍未关闭，以及下一次路由应继承哪些状态。
 
+残差路由在这里是反馈机制，而不是 SGAR 或 Graph 的第一原理。它读取已提交状态，选择下一份认知预算投向，并塑造下一 Workflow 的公共协议；它不能独自决定什么已经成为系统事实。即使路由来自固定规则、人类或其他控制器，只要局部求解仍受全局权威状态约束、结果仍经验证提交，状态治理关系依然成立。
+
 整个演化可以浓缩为三句话：
 
 > **Route 选择把智能投入到哪里。**  
@@ -294,6 +300,21 @@ Graph 则保存这些选择的依据、依赖和后果，使系统能够回答�
 把多个 Workflow 连接起来，并不自动得到全局最优结果。每个 Workflow 都可能只优化自己的局部 oracle：Research 找到了可靠证据，Audit 找到了真实缺陷，Recovery 修复了局部错误，多个候选也分别通过了各自检查，但最终产物仍可能相互冲突、遗漏全局约束或破坏其他已通过部分。
 
 因此，Graph 的价值不仅是分发预算，还包括维护**局部成功与全局成功之间的边界**。
+
+这里的“全局”不是把全部代码、历史和所有分支私有状态复制给每个 Workflow。外层状态保存总体目标、非目标、系统不变量、跨阶段依赖、已冻结决策、当前证据、未解决变量、authority 和生命周期约束；每个 Workflow 只接收足以支持当前判断的最小充分投影。
+
+局部之间也不应通过完整私有轨迹耦合。跨 Workflow 的公共 handoff 应收敛为：
+
+```text
+contract delta
+accepted evidence
+committed decision
+remaining residual
+```
+
+如果某项私有假设或实现事实会影响下游正确性，它必须被提升为公共证据或协议条款。否则下游既无法验证它，也无法在替换上游实现后继续工作。
+
+在阶段化实现中，这形成“阶段提交串行化、阶段求解可并行化”的结构：有真实依赖的阶段通过验收屏障推进；同一阶段内部，在相同状态快照和公共协议下相互独立的问题可以组成小型 DAG 并行求解。Fan-in 负责把候选收敛成可提交的公共增量，而不是拼接私有推理。
 
 Fan-in 不应被理解为简单摘要。真正的 Fan-in 需要：
 
@@ -532,3 +553,5 @@ Agent Loop 为什么会长成动态 Agent Graph？
 > **注意力该往哪里去？应当持续多久？凭什么停止？**
 
 当这三个问题获得了外部状态、预算包络、oracle 和 residual 路由的共同约束，Agent 才从一个会不断采取下一步行动的 Loop，转变为一个能够治理长期认知投入的动态系统。
+
+若把这一结构放回 SGAR，关系应当保持清楚：SGAR 的核心是从全局权威状态生成有全局条件的局部求解面，并只把经过验证的公共增量提交回状态；动态 Graph、阶段验收和残差路由负责实现反馈、依赖收敛与预算配置。前者定义什么样的局部求解可以组合为长期进展，后者决定下一次实际求解什么。
