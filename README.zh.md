@@ -156,6 +156,7 @@ against-llm-mediocrity/
 - [LLM 系统中价值保存的结构理论](./docs/structural-theory-value-preservation-llm-systems.zh-CN.md)：新的结构理论工作稿。
 - [LLM 系统中的六类原始失配](./docs/six-primitive-mismatches-pipeline-derived-taxonomy-llm-systems.zh-CN.md)：从价值保存管线推导六类原始失配的总览工作稿。
 - [六类原始失配的工程来源](./docs/engineering-origins-of-six-primitive-mismatches.zh-CN.md)：记录六类失配如何从量化采样、故事生成、金融任务与日常工程挫败中一步步长出来。
+- 潜在结构-表层实现失配：[English](./docs/candidate-seventh-mismatch-latent-structure-surface-realization.md) · [中文](./docs/candidate-seventh-mismatch-latent-structure-surface-realization.zh-CN.md)：一份候选现象工作稿，讨论某些任务如何要求完整潜在结构持续控制生成，同时只以稀疏、时序化的表层痕迹进入成品。
 - [受治理 LLM 对象模型与接口规范](./docs/governed-llm-object-model-interface-specification.zh-CN.md)：价值保存结构理论的配套实现规范。
 - [面向受治理 LLM 系统的审计工程](./docs/audit-engineering-failure-localization-control-space-writeback.zh-CN.md)：失败定位、控制空间写回与回归治理的配套技术报告。
 - [Oracle、Audit Agent 与 SGAR：从硬反馈到引擎路由的统一框架](./docs/oracle-classification-audit-agent-sgar-engine-routing.zh-CN.md)：把 oracle 分类、audit、SGAR 与 No-Go 统一到同一引擎路由判断链中的工作稿。

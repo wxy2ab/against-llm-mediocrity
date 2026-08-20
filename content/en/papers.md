@@ -84,6 +84,13 @@ This working draft starts from the discovery path rather than the final definiti
 
 [Read the engineering-origins draft](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/engineering-origins-of-six-primitive-mismatches.md)
 
+### Latent-Structure-Surface-Realization Mismatch
+Tag: candidate phenomenon working draft
+
+This bilingual working draft freezes a candidate seventh phenomenon observed first in long-form fiction writing: some high-value generation tasks require a complete latent structure to maintain strong causal control while remaining only sparsely and temporally realized on the surface. The paper does not expand the six-mismatch taxonomy; instead it defines the candidate phenomenon, marks its boundary with aggregation, state, support, specification, and fitting-boundary mismatch, and lays out the minimal-pair experiments needed to decide whether it is an aggregation subtype, a composite phenomenon, an independent mechanism axis, or a genuinely new primitive station.
+
+[Read the candidate phenomenon draft: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/candidate-seventh-mismatch-latent-structure-surface-realization.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/candidate-seventh-mismatch-latent-structure-surface-realization.zh-CN.md)
+
 ### Formal Mechanism Layer for Governed LLM Systems
 Tag: intervention-localization working draft
 
