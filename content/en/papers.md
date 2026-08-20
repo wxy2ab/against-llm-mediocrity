@@ -84,12 +84,12 @@ This working draft starts from the discovery path rather than the final definiti
 
 [Read the engineering-origins draft](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/engineering-origins-of-six-primitive-mismatches.md)
 
-### Latent-Structure-Surface-Realization Mismatch
-Tag: candidate phenomenon working draft
+### Latent-Conditioned Aggregation Mismatch
+Tag: advanced aggregation subtype
 
-This bilingual working draft freezes a candidate seventh phenomenon observed first in long-form fiction writing: some high-value generation tasks require a complete latent structure to maintain strong causal control while remaining only sparsely and temporally realized on the surface. The paper does not expand the six-mismatch taxonomy; instead it defines the candidate phenomenon, marks its boundary with aggregation, state, support, specification, and fitting-boundary mismatch, and lays out the minimal-pair experiments needed to decide whether it is an aggregation subtype, a composite phenomenon, an independent mechanism axis, or a genuinely new primitive station.
+This bilingual working draft tightens the earlier candidate-phenomenon framing and places the result back inside aggregation mismatch. Its claim is that some high-value tasks require multiple surface choices to be jointly constrained by one complete latent structure that stays explicit to the control system while remaining only partially realized in delivery. The paper formalizes this as a cross-layer aggregation problem, distinguishes it from ordinary surface-level global dependence, and uses stories, teaching hints, MSHQs, and pragmatics as the primary validation domains.
 
-[Read the candidate phenomenon draft: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/candidate-seventh-mismatch-latent-structure-surface-realization.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/candidate-seventh-mismatch-latent-structure-surface-realization.zh-CN.md)
+[Read the advanced aggregation draft: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/latent-conditioned-aggregation-mismatch.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/latent-conditioned-aggregation-mismatch.zh-CN.md)
 
 ### Formal Mechanism Layer for Governed LLM Systems
 Tag: intervention-localization working draft
