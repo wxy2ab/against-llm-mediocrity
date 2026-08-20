@@ -84,12 +84,12 @@ Tag: 发现脉络工作稿
 
 [阅读六类原始失配的工程来源](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/engineering-origins-of-six-primitive-mismatches.zh-CN.md)
 
-### 潜在结构-表层实现失配
-Tag: 候选现象工作稿
+### 潜在结构条件聚合失配
+Tag: 聚合失配高级子型
 
-这份双语工作稿冻结一个首先在长篇故事写作中暴露出来的候选第七类现象：有些高价值生成任务要求一套完整潜在结构持续保持强因果控制，但它在成品中只能以稀疏、分布式和时序化的表层痕迹出现。本文不扩张现有六类原始失配 taxonomy，而是先给出候选定义，标定它与聚合、状态、支持、规格、拟合边界失配的边界，并设计最小对实验，用来判断它究竟是聚合子型、复合现象、独立机制轴，还是新的原始失配站点。
+这份双语工作稿把先前的“候选现象”收紧并放回聚合失配内部。它的核心主张是：有些高价值任务要求多个表层选择共同受一个完整潜在结构约束，这个结构对控制系统必须显式完整，但对最终交付只能部分显化。本文把它形式化为跨表征层的聚合问题，区分它与普通表层全局依赖，并把故事、教学提示、MSHQ 与语用表达作为优先验证场景。
 
-[阅读候选现象工作稿：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/candidate-seventh-mismatch-latent-structure-surface-realization.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/candidate-seventh-mismatch-latent-structure-surface-realization.zh-CN.md)
+[阅读高级聚合子型工作稿：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/latent-conditioned-aggregation-mismatch.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/latent-conditioned-aggregation-mismatch.zh-CN.md)
 
 ### 受治理 LLM 对象模型与接口规范
 Tag: 实现规范工作稿
