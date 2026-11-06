@@ -62,6 +62,14 @@ Tag: ask humans only where humans must govern
 
 ## Current Working Manuscripts
 
+:::takeaway
+### New working draft: Attention Governance
+
+This bilingual working draft generalizes evidence organization, four-view audit, and controlled commit from long-document review into an inference-time control scheme for complex tasks. It separates conditional hard-constraint guarantees from soft semantic judgment and states clearly that the reference prototype validates protocol behavior, not end-to-end model quality.
+
+[Open the topic page](/attention-governance) · [Read the English draft](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/attention-governance.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/attention-governance.zh-CN.md)
+:::
+
 :::paper-docs
 ### A Structural Theory of Value Preservation in LLM Systems
 Tag: structural theory working draft
