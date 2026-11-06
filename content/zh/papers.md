@@ -62,6 +62,14 @@ Tag: 只在人该管的地方问人
 
 ## 当前工作稿
 
+:::takeaway
+### 新工作稿：注意力治理
+
+这份双语工作稿把长文稿审阅中的证据组织、四视图审计和受控提交，泛化为面向一般复杂任务的推理时控制方案。它区分条件性硬约束保证与软目标语义判断，并明确参考原型验证的是协议行为，不是端到端模型质量。
+
+[打开专题页](/zh/attention-governance) · [阅读中文全文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/attention-governance.zh-CN.md) · [English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/attention-governance.md)
+:::
+
 :::paper-docs
 ### LLM 系统中价值保存的结构理论
 Tag: 结构理论工作稿

@@ -124,6 +124,7 @@ against-llm-mediocrity/
 | 案例 | [/zh/case-study](https://wxy2ab.github.io/against-llm-mediocrity/zh/case-study) | 想看真实系统的人 |
 | 机制 | [/zh/framework](https://wxy2ab.github.io/against-llm-mediocrity/zh/framework) | 想看理论定义的人 |
 | 治理 | [/zh/engineering](https://wxy2ab.github.io/against-llm-mediocrity/zh/engineering) | 想把理论用于工程的人 |
+| 注意力 | [/zh/attention-governance](https://wxy2ab.github.io/against-llm-mediocrity/zh/attention-governance) | 想在不更新模型参数的情况下治理证据、工作集与提交的人 |
 | 协作 | [/zh/collaboration](https://wxy2ab.github.io/against-llm-mediocrity/zh/collaboration) | 想用 AI agent 推进任务的人 |
 | 学习 | [/zh/learning](https://wxy2ab.github.io/against-llm-mediocrity/zh/learning) | 想重新理解「人该学什么」的人 |
 | 工作稿 | [/zh/papers](https://wxy2ab.github.io/against-llm-mediocrity/zh/papers) | 想看工作稿与研究议程的人 |
@@ -153,6 +154,7 @@ against-llm-mediocrity/
 
 这些都是工作稿，每篇提供中英双语。链接后的一句话说明它讲什么、值不值得读。
 
+- 注意力治理：[English](./docs/attention-governance.md) · [中文](./docs/attention-governance.zh-CN.md)：把长文稿审阅中的证据组织、四视图审计和受控提交，泛化为面向一般复杂任务的推理时控制方案，并明确条件性保证与实证边界。
 - [LLM 系统中价值保存的结构理论](./docs/structural-theory-value-preservation-llm-systems.zh-CN.md)：新的结构理论工作稿。
 - [LLM 系统中的六类原始失配](./docs/six-primitive-mismatches-pipeline-derived-taxonomy-llm-systems.zh-CN.md)：从价值保存管线推导六类原始失配的总览工作稿。
 - [六类原始失配的工程来源](./docs/engineering-origins-of-six-primitive-mismatches.zh-CN.md)：记录六类失配如何从量化采样、故事生成、金融任务与日常工程挫败中一步步长出来。

@@ -69,6 +69,7 @@ Executable, composable playbooks for Codex and other coding agents:
 
 The core framework: how structural failures arise and how governance turns them into verifiable, reusable fixes.
 
+- Attention governance: [English](docs/attention-governance.md) · [中文](docs/attention-governance.zh-CN.md) — Generalizes evidence organization, four-view audit, and controlled commit from long-document review into an inference-time control scheme for complex tasks, with explicit conditional guarantees and empirical boundaries.
 - Structural theory of value preservation: [English](docs/structural-theory-value-preservation-llm-systems.md) · [中文](docs/structural-theory-value-preservation-llm-systems.zh-CN.md) — Start here for the overall theory of when value survives a pipeline and when it does not.
 - Six primitive mismatches pipeline-derived taxonomy: [English](docs/six-primitive-mismatches-pipeline-derived-taxonomy-llm-systems.md) · [中文](docs/six-primitive-mismatches-pipeline-derived-taxonomy-llm-systems.zh-CN.md) — The diagnostic taxonomy that names the six structural reasons a task breaks down.
 - Engineering origins of the six primitive mismatches: [English](docs/engineering-origins-of-six-primitive-mismatches.md) · [中文](docs/engineering-origins-of-six-primitive-mismatches.zh-CN.md) — A practice-first account of how the six mismatches emerged from failed sampling, story generation, finance, and repeated engineering friction.
