@@ -55,7 +55,7 @@ Therefore the two layers do not correspond one-to-one:
 
 ### 1.3 It Is Not a Mutually Exclusive Label Set
 
-The mechanism layer should be represented as a **mismatch profile**, not as a forced single-label classification.
+The mechanism layer should be represented as a **mechanism mismatch profile**, not as a forced single-label classification.
 
 Real systems often exhibit compound mismatches. For example, a wrong evaluation standard may push a router into conservative audit mode; conservative routing may narrow candidate search; the final symptom may look like "the model did not find the strategy." At the surface this looks like search failure, but the root cause includes specification, routing, and search.
 
@@ -74,9 +74,9 @@ The goal of diagnosis is not to find a unique label. It is to identify:
 
 Represent the task environment as a partially observable decision process:
 
-\[
+```math
 \mathcal{E}=(\mathcal{S},\mathcal{A},\mathcal{T},R^*,\Omega,\mathcal{O},\gamma).
-\]
+```
 
 where:
 
@@ -85,29 +85,29 @@ where:
 | $\mathcal{S}$ | the true state space, including world state, user intent, task background, and interaction state |
 | $\mathcal{A}$ | theoretically available actions, including text output, tool calls, retrieval, code execution, asking the user, and so on |
 | $\mathcal{T}(s'\mid s,a)$ | true state transition: how the environment changes after an action |
-| $R^*(s,a,s')$ | true task reward, the success criterion humans ultimately care about |
+| $`R^*(s,a,s')`$ | true task reward, the success criterion humans ultimately care about |
 | $\Omega$ | the observation space available to the system |
 | $\mathcal{O}(o\mid s)$ | the observation function: how true state maps to text, images, files, logs, or tool returns |
 | $\gamma$ | discount factor or long-horizon weight for delayed returns |
 
 For finite-horizon tasks, the true objective is not local likelihood for a single token, but expected value over the whole trajectory:
 
-\[
+```math
 \tau^*=\arg\max_{\tau=(s_0,a_0,\ldots,s_H)}
 \mathbb{E}\left[\sum_{t=0}^{H-1}\gamma^t R^*(s_t,a_t,s_{t+1})\right].
-\]
+```
 
 A one-shot text task is a degenerate case of this expression: the main action is generating an output sequence $y$, and the objective reduces to:
 
-\[
+```math
 y^*=\arg\max_y V^*(y\mid x).
-\]
+```
 
 ### 2.2 The Approximation Actually Used by an LLM System
 
 A deployed LLM system does not directly possess the true environment. It relies on a set of approximate components:
 
-\[
+```math
 \mathcal{M}_\theta=
 \left(
 B_\theta,
@@ -118,29 +118,29 @@ r_\theta,
 D,
 \mathcal{A}_{\mathrm{sys}}
 \right).
-\]
+```
 
 | Component | Meaning |
 |---|---|
 | $B_\theta$ | belief / state estimator: how the system forms internal task state from observation history |
-| $\hat{\mathcal{T}}_\theta$ | world model: how the system predicts action consequences |
-| $\hat{R}_\theta$ | internal value judgment or proxy objective |
+| $`\hat{\mathcal{T}}_\theta`$ | world model: how the system predicts action consequences |
+| $`\hat{R}_\theta`$ | internal value judgment or proxy objective |
 | $\pi_\theta$ | learned policy and token prior: which candidates are easier to generate |
 | $r_\theta$ | capability / mode router: when to activate which knowledge, skill, role, or audit pattern |
 | $D$ | decoding, planning, search, verification, and execution algorithm |
-| $\mathcal{A}_{\mathrm{sys}}$ | the actions and interfaces the system can actually call |
+| $`\mathcal{A}_{\mathrm{sys}}`$ | the actions and interfaces the system can actually call |
 
-The system is also shaped by external specifications and evaluators. Let $R_{\mathrm{proxy}}$ denote the proxy reward in training or product workflows, and $R_{\mathrm{eval}}$ denote the evaluation rule used at deployment. A failure can be understood as a causal mismatch between what the true task requires and one or more of these approximate components.
+The system is also shaped by external specifications and evaluators. Let $R_{\mathrm{proxy}}$ denote the proxy reward in training or product workflows, and $`R_{\mathrm{eval}}`$ denote the evaluation rule used at deployment. A failure can be understood as a causal mismatch between what the true task requires and one or more of these approximate components.
 
 ### 2.3 Mechanism Mismatch Profile
 
 Let the eight components of severity be:
 
-\[
+```math
 \mathbf{m}=
 (m_{\mathrm{spec}},m_{\mathrm{obs}},m_{\mathrm{belief}},m_{\mathrm{dyn}},
 m_{\mathrm{act}},m_{\mathrm{support}},m_{\mathrm{route}},m_{\mathrm{search}}).
-\]
+```
 
 This vector is not a score that must be estimated precisely in one pass. It is a diagnostic record. In practice, each component can be approximated by observing performance changes before and after interventions. If changing only one component substantially improves the result, that component is more likely to be a causal bottleneck.
 
@@ -152,21 +152,21 @@ This vector is not a score that must be estimated precisely in one pass. It is a
 
 #### Definition
 
-The true task reward $R^*$, training proxy reward $R_{\mathrm{proxy}}$, model-internal value $\hat{R}_\theta$, and evaluation rule $R_{\mathrm{eval}}$ are inconsistent:
+The true task reward $`R^*`$, training proxy reward $R_{\mathrm{proxy}}$, model-internal value $`\hat{R}_\theta`$, and evaluation rule $`R_{\mathrm{eval}}`$ are inconsistent:
 
-\[
+```math
 \arg\max_y R_{\mathrm{proxy}}(y)
 \ne
 \arg\max_y R^*(y),
-\]
+```
 
 or the evaluator selects a candidate that is not optimal under the user's true objective:
 
-\[
+```math
 \arg\max_y R_{\mathrm{eval}}(y)
 \ne
 \arg\max_y R^*(y).
-\]
+```
 
 #### Core Question
 
@@ -204,15 +204,15 @@ Information required for choosing the correct action does not enter the system's
 
 If two states $s_1,s_2$ are indistinguishable under the current observation mechanism:
 
-\[
+```math
 \mathcal{O}(\cdot\mid s_1)=\mathcal{O}(\cdot\mid s_2),
-\]
+```
 
 but their optimal actions differ:
 
-\[
+```math
 a^*(s_1)\ne a^*(s_2),
-\]
+```
 
 then the system cannot solve the task reliably from the current observations alone.
 
@@ -248,13 +248,13 @@ Add context, retrieve sources, upload files, connect a database, or ask the mini
 
 #### Definition
 
-Necessary information exists in the observation history, but the system does not parse, bind, compress, preserve, or retrieve it correctly. Let the ideal belief state be $B^*$. Then:
+Necessary information exists in the observation history, but the system does not parse, bind, compress, preserve, or retrieve it correctly. Let the ideal belief state be $`B^*`$. Then:
 
-\[
+```math
 B_\theta(s_t\mid o_{\le t})
 \ne
 B^*(s_t\mid o_{\le t}).
-\]
+```
 
 "Belief" here does not require the model to output an explicit probability distribution. It refers to all internal task state that affects later decisions.
 
@@ -293,11 +293,11 @@ If state representation is correct but the system still predicts action conseque
 
 The system's prediction of action consequences differs from the true state transition:
 
-\[
+```math
 \hat{\mathcal{T}}_\theta(s_{t+1}\mid s_t,a_t)
 \ne
 \mathcal{T}(s_{t+1}\mid s_t,a_t).
-\]
+```
 
 #### Core Question
 
@@ -333,9 +333,9 @@ If tools exist but predictions are wrong, it is a world-model problem. If there 
 
 The action required to complete the task is not in the system's actually available action space:
 
-\[
+```math
 a^*\notin\mathcal{A}_{\mathrm{sys}}.
-\]
+```
 
 An action that nominally exists but cannot be called because of permissions, schema, latency, reliability, or process constraints also counts as an insufficient effective action space.
 
@@ -373,15 +373,15 @@ Action / interface mismatch does not mean "more tools are always better." Tools 
 
 The correct knowledge, operator, reasoning pattern, or candidate structure has too little probability under the effective support of the model policy:
 
-\[
+```math
 \pi_\theta(y^*\mid o)\approx 0,
-\]
+```
 
 or under realistic budget $B$, the correct candidate is nearly unreachable:
 
-\[
-y^*\notin \operatorname{EffectiveSupport}_B(\pi_\theta).
-\]
+```math
+y^*\notin \mathop{\mathrm{EffectiveSupport}}\nolimits_B(\pi_\theta).
+```
 
 #### Core Question
 
@@ -417,19 +417,19 @@ Observation mismatch means "this task lacks information." Capability support mis
 
 The model has learned a capability, strategy, audit structure, or behavior pattern $X$, but the region where it actually triggers $X$, $M_X$, does not match the true region where $X$ applies, $T_X$:
 
-\[
+```math
 M_X\ne T_X.
-\]
+```
 
 The two directions are:
 
-\[
+```math
 M_X\setminus T_X \quad \text{(over-triggering)},
-\]
+```
 
-\[
+```math
 T_X\setminus M_X \quad \text{(under-triggering)}.
-\]
+```
 
 #### Core Question
 
@@ -467,11 +467,11 @@ Capability support mismatch means the correct capability is basically outside ef
 
 The true objective, observations, belief state, world model, action space, capability support, and capability routing are all close enough to correct, but the current search and execution algorithm $D$ does not find or preserve the good candidate:
 
-\[
-y^*\in \operatorname{EffectiveSupport}_B(\pi_\theta),
+```math
+y^*\in \mathop{\mathrm{EffectiveSupport}}\nolimits_B(\pi_\theta),
 \qquad
 D(\pi_\theta,B)\ne y^*.
-\]
+```
 
 #### Core Question
 
@@ -480,7 +480,7 @@ The correct path is reachable, but was not found, selected, preserved, or execut
 #### Common Symptoms
 
 - Greedy decoding is locked in by early tokens.
-- A single answer is mediocre, but best-of-$N$ contains a high-quality answer.
+- A single answer is mediocre, but best-of-$`N`$ contains a high-quality answer.
 - Local steps look reasonable, but global structure collapses through path dependence.
 - After a wrong initial plan, later steps rationalize it.
 - The candidate was generated, but the ranker, verifier, or executor chose the wrong one.
@@ -492,7 +492,7 @@ Do not add data, change the specification, or add capability. Only add sampling,
 
 #### Typical Interventions
 
-- Best-of-$N$, self-consistency, and beam search.
+- Best-of-$`N`$, self-consistency, and beam search.
 - Plan-then-execute, generate-then-rank, and backtracking.
 - Tree search, MCTS, and constrained combinatorial search.
 - Independent critics / verifiers and multi-model cross-review.
@@ -509,10 +509,10 @@ Expanding search only helps when the correct candidate is already in effective s
 
 | Layer | Mechanism mismatch | Formal object | Core diagnostic | Preferred intervention |
 |---:|---|---|---|---|
-| 1 | Specification / reward | $R^*,R_{\mathrm{proxy}},\hat R_\theta,R_{\mathrm{eval}}$ | Is the system optimizing the wrong objective? | change objective, rubric, reward, acceptance standard |
+| 1 | Specification / reward | $`R^*,R_{\mathrm{proxy}},\hat R_\theta,R_{\mathrm{eval}}`$ | Is the system optimizing the wrong objective? | change objective, rubric, reward, acceptance standard |
 | 2 | Observation availability | $\Omega,\mathcal O$ | Did decision-relevant information enter the system? | retrieval, data access, file upload, clarification |
 | 3 | Belief / representation | $B_\theta$ | Did available information become the right task state? | state extraction, structured representation, external memory |
-| 4 | Dynamics / world model | $\hat{\mathcal T}_\theta$ | Did the system mispredict action consequences? | real execution, tests, backtests, feedback calibration |
+| 4 | Dynamics / world model | $`\hat{\mathcal T}_\theta`$ | Did the system mispredict action consequences? | real execution, tests, backtests, feedback calibration |
 | 5 | Action / interface | $\mathcal A_{\mathrm{sys}}$ | Is the correct action callable? | tools, APIs, permissions, interaction workflow |
 | 6 | Policy prior / capability support | $\pi_\theta$ | Is the correct solution in effective support? | examples, training, RAG, expert model, program |
 | 7 | Fitting boundary / capability routing | $r_\theta,M_X,T_X$ | Is the capability triggered in the right situation? | routing, mode control, boundary training, role separation |

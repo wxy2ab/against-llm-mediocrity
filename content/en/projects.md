@@ -4,13 +4,13 @@ lang: en
 path: /projects
 title: Open-Source Projects
 navTitle: Projects
-kicker: Implementing GKO principles
+kicker: Turning Knowledge Governance principles into tools
 summary: "The first published project is sgar: an embedded coding agent that combines long-range code editing, automated repair, state governance, staged execution, audit verification, and persistent traces. Future projects will keep turning Knowledge Governance into reusable software objects."
 order: 8
 heroPoints:
   - "sgar: a state-governed coding agent for long-range code editing, automated repair, and governed operations."
-  - Audit Engineering and State-Governed Agent Regime implemented as CLI, runtime, traces, and verification records.
-  - Future tools will cover GKO lifecycle, escalation protocols, and task-control workbenches.
+  - Audit Engineering and the State-Governed Agent Regime (SGAR) implemented as a CLI, runtime, traces, and verification records.
+  - Future tools will cover the Governed Knowledge Object (GKO) lifecycle, escalation protocols, and task-control workbenches.
   - Benchmarks for detecting when output-space search plateaus.
 ---
 
@@ -33,7 +33,7 @@ Current entry points include `pip install sgar`, `sgar --help`, `sgar init`, `sg
 
 The directions below are follow-on implementations derived from the current manuscripts. They are not additional theoretical claims; they are ways to test whether governed knowledge, hard-state transitions, escalation protocols, and mismatch diagnostics can become useful software objects.
 
-Each one picks up the same empirical question the manuscripts raise: **if Knowledge Governance is more than an explanatory framework, it must become software objects that can be stored, inspected, weakened, and revoked.** `sgar` has already made hard state, staged progression, verification, and traces into runnable objects. Future projects continue the pattern, turning control spaces, layered routing, continuity audit, pairwise judgment, and plateau detection into observable governance processes. None aims to build a monolithic agent first; each isolates the smallest testable component.
+Each one picks up the same empirical question the manuscripts raise: **if Knowledge Governance is more than an explanatory framework, it must become software objects that can be stored, inspected, weakened, and revoked.** `sgar` has already made hard state, staged execution, verification, and traces into runnable objects. Future projects continue the pattern, turning control spaces, layered routing, continuity audit, pairwise judgment, and plateau detection into observable governance processes. None aims to build a monolithic agent first; each isolates the smallest testable component.
 
 ::::cards
 ### GKO Registry
@@ -67,4 +67,4 @@ Core objects include diagnostic questions, mismatch evidence, recommended interv
 - Do stored GKOs improve later outputs without becoming stale or over-general?
 - Do GEsOs reduce unnecessary interruptions while preserving hard governance boundaries?
 - Can users see why the system asked a human, used a tool, or revoked a rule?
-- Do mismatch diagnostics predict which intervention works, rather than merely explaining failure after the fact?
+- Do mismatch diagnostics reliably predict which kind of intervention works best, rather than merely explaining failure after the fact?

@@ -1,6 +1,6 @@
 # 面向受治理 LLM 系统的状态治理智能体范式
 
-**全局条件下的局部求解、公共协议与硬状态权威**
+**全局条件下的局部求解、公共协议与硬状态权威**  
 **工作稿 v0.1**  
 
 ---
@@ -238,10 +238,10 @@ SGAR 不只回答“什么状态改变可以被承认”，还要塑造每一次
 
 设当前权威状态为 `S_i`，当前阶段获得的求解面为：
 
-\[
+```math
 P_i = \Pi_i(S_i)
-= \Pi_i(G, C_{\le i}^{active}, E_{<i}^{accepted}, R_{<i}^{open}, A_i, L_i)
-\]
+= \Pi_i(G, C_{\le i}^{active}, E_{< i}^{accepted}, R_{< i}^{open}, A_i, L_i)
+```
 
 其中：
 
@@ -254,10 +254,10 @@ P_i = \Pi_i(S_i)
 
 当前阶段的私有设计与实现可以写成：
 
-\[
+```math
 X_i^* = \arg\max_{X_i} Q(X_i \mid P_i)
-= \arg\max_{X_i} Q(X_i \mid G,C_{\le i},E_{<i},R_{<i},A_i,L_i)
-\]
+= \arg\max_{X_i} Q(X_i \mid G,C_{\le i},E_{< i},R_{< i},A_i,L_i)
+```
 
 这里的 `X_i` 可以包含私有分解、候选搜索、局部实现和临时推理。SGAR 不要求预先决定未来的 `X_{i+1}, X_{i+2}`；它要求未来求解发生时，能够读取正确版本的 `G、C、E、R、A、L`。因此，SGAR 的全局结构更接近一个依赖与认知收敛框架，而不是一张预先穷尽未来实现细节的执行图。
 
@@ -976,6 +976,12 @@ Candidate Artifact
 
 虚假完成发生在 agent 未满足完成标准就声明任务完成时。
 
+模式：
+
+```text
+model says done → user trusts done → hidden defect remains
+```
+
 SGAR 修复：
 
 ```text
@@ -985,6 +991,14 @@ completion requires explicit completion transition and verifier acceptance
 ### 14.2 状态漂移
 
 状态漂移发生在系统内部叙事逐渐偏离外部现实。
+
+模式：
+
+```text
+summary says file has property P
+actual file lacks P
+future actions rely on P
+```
 
 SGAR 修复：
 
@@ -996,6 +1010,12 @@ state summaries are projections from committed records, not authority sources
 
 状态振荡发生在系统反复改变假设或计划，却没有提交稳定状态。
 
+模式：
+
+```text
+assumption A → assumption B → assumption A → no durable resolution
+```
+
 SGAR 修复：
 
 ```text
@@ -1005,6 +1025,12 @@ state hypotheses require status: proposed / supported / rejected / committed / r
 ### 14.4 表演性行动
 
 表演性行动发生在 agent 生成类似行动的文本，却没有影响环境。
+
+模式：
+
+```text
+"I will update the file" or "I have updated the file" without write/readback
+```
 
 SGAR 修复：
 
@@ -1016,6 +1042,12 @@ state-changing actions require tool effects and observation records
 
 记忆污染发生在未验证声称进入持久记忆时。
 
+模式：
+
+```text
+model infers user preference → stores as fact → future behavior adapts incorrectly
+```
+
 SGAR 修复：
 
 ```text
@@ -1025,6 +1057,14 @@ memory writes require source, confidence, scope, and revocation trigger
 ### 14.6 不可恢复的中间失败
 
 长流程改变多个产物却缺少回滚或重放记录时，就会出现不可恢复的中间失败。
+
+模式：
+
+```text
+agent modifies files A, B, C
+failure appears later
+system cannot identify responsible transition
+```
 
 SGAR 修复：
 
@@ -1036,6 +1076,13 @@ every state-changing action has transition ID, evidence, delta, and rollback pol
 
 上下文变得越来越详细连贯，但外部任务没有推进时，就会出现上下文级进展幻觉。
 
+模式：
+
+```text
+long plans, summaries, rationales, and refinements create an impression of progress
+but no committed state transition occurs
+```
+
 SGAR 修复：
 
 ```text
@@ -1045,6 +1092,12 @@ progress metrics count committed transitions, not narrative length
 ### 14.8 角色混淆
 
 模型同时充当规划者、执行者、验证者和状态权威，且缺少分离时，就会出现角色混淆。
+
+模式：
+
+```text
+same model proposes action, claims execution, verifies success, and records completion
+```
 
 SGAR 修复：
 
@@ -1056,7 +1109,7 @@ separate proposal, execution, verification, and commitment roles where risk requ
 
 ## 15. 权威分离
 
-SGAR 受益于分离四类角色：
+SGAR 受益于分离五类角色：
 
 | 角色 | 功能 |
 |---|---|

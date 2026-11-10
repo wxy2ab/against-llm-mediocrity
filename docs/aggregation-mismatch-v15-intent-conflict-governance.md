@@ -41,7 +41,7 @@ and the frozen Pilot Gate text differs from the implemented gate.
 | Conflict Intent Rebase | **24/24** final; **24/24** recovery |
 | Conflict Exact Rebase | **24/24** final; **24/24** recovery |
 | V15-A1 | **+1.0**; 95% CI **[1.0, 1.0]** |
-| Exact sign-flip | \(2/2^{24}=1.1921\times10^{-7}\) |
+| Exact sign-flip | $2/2^{24}=1.1921\times10^{-7}$ |
 | Machine claim state | **`passed`** |
 | Evidence-sharing state | **`share_with_caveats`** |
 | Formal tokens | **1,633,317** |
@@ -52,14 +52,14 @@ and the frozen Pilot Gate text differs from the implemented gate.
 
 ### 1.1 Conflict safety and conflict recovery are separate decisions
 
-For sealed operation \(Q_0\), current authoritative state \(S_1\), lock set
-\(L\), and invariant set \(I\), safe commit requires:
+For sealed operation $Q_0$, current authoritative state $S_1$, lock set
+$L$, and invariant set $I$, safe commit requires:
 
-\[
-\operatorname{pre}(Q_0,S_1)
-\land \operatorname{lock\_ok}(Q_0,L)
-\land \operatorname{verify}(\operatorname{apply}(Q_0,S_1),I).
-\]
+```math
+\mathop{\mathrm{pre}}\nolimits(Q_0,S_1)
+\land \mathop{\mathrm{lock\_ok}}\nolimits(Q_0,L)
+\land \mathop{\mathrm{verify}}\nolimits(\mathop{\mathrm{apply}}\nolimits(Q_0,S_1),I).
+```
 
 If `lock_ok` is false, rejection is correct. It does not determine whether the
 episode should terminate. A separate governor chooses among:
@@ -90,7 +90,7 @@ representation. It cannot by itself show that Intent is superior to Exact.
 
 - DeepSeek-V4-Flash, Chinese prompts, temperature 0, `thinking=False`;
 - maximum 32k tokens and one shared 300-second semantic-episode budget;
-- 24 formal tasks: eight each at \(N\in\{96,144,216\}\);
+- 24 formal tasks: eight each at $`N\in\{96,144,216\}`$;
 - four conditions per task: Compatible Intent, Conflict Intent Naive, Conflict
   Intent Rebase, and Conflict Exact Rebase;
 - payload seal before drift, lock-aware atomic apply, global verification,
@@ -130,10 +130,10 @@ tests pass.
 All 72 conflict first attempts are rejected rather than partially applied.
 Intent-Rebase minus Intent-Naive is:
 
-\[
+```math
 \Delta_{A1}=1.0,\qquad 95\%\ CI=[1.0,1.0],\qquad
 p_{\mathrm{exact}}=1.1921\times10^{-7}.
-\]
+```
 
 ![V15 Rebase–Naive effect](./assets/aggregation-mismatch-experiment/v15-rebase-naive-effect.png)
 

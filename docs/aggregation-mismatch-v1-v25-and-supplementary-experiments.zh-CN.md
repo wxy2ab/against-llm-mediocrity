@@ -62,7 +62,7 @@ English version: [Aggregation Mismatch V1–V25 and Supplementary Experiments](.
 | V21 | 权威质量审计轮 36 个正式输出 | 因工程/数据问题，high Ladder 未达到 reader-ready；token 比约 `1.45×` | 只是否定当时实现的 operational 结果，不是对 Ladder 理论的因果反证 |
 | V22 | 权威 r6：30 个输出、15 个盲态配对 | overall `+5.86 [0.61, 10.30]`；high `+9.74 [6.32, 13.67]`、`9–0–0`；low `+0.03` | 强单评者证据支持 high-load 条件启用；不是双编辑确认，也不是 always-on 默认 |
 | V23 | r1 与 V23R/V23S 后续，每轮基于 15 个配对任务 | 缺陷 r1 为负；V23R 信号弱；V23S-R8 在单模型编辑评分下 high `+4.74 [1.78, 7.96]`、low `+9.97 [4.30, 15.48]`，high token `3.83×` | Stage 有选择性修复正信号，但 R8 为 `code_dirty`、成本高、未完成预注册双人类终点 |
-| V24 | 24 个确认缺陷任务、72 个输出 | Oracle `24/24`；Infer `18/24`；Fixed `0/24`；V24-1 通过 | 稳定缺陷 witness 已给定时，Stage 具备编辑能力；不等于自然策略的成品质量优势 |
+| V24 | 24 个确认缺陷任务、72 个输出 | Oracle `24/24`；Infer `18/24`；Fixed `0/24`；V24-1 通过 | 可信 defect witness 已给定时，Stage 具备编辑能力；不等于自然策略的成品质量优势 |
 | V25 | r1 30 输出/15 对；定向 regression、clean 6-output pilot 与 27 个 multi-realization episodes | r1 high Stage−Fixed `+0.69 [0, 1.62]`、`1–0–8`，正式 inconclusive；regression 让此前 4 个 failed treatment 全部产生修改；clean pilot 通过，但 9 个 high 中 6 个跨 Stage realization 不一致 | 没有冻结平均优势或等价结论。r1 含 failed treatment、假 re-audit 路径和 dirty code；后续只验证工程门与 treatment 方差，不验证成品质量等价 |
 
 写作与 Stage 证据另见 [V20–V25：长文本写作、Ladder 与 Stage Repair](./aggregation-mismatch-v20-v25-writing-and-stage-repair.zh-CN.md)。

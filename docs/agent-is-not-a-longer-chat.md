@@ -346,7 +346,7 @@ where:
 * $M$ is the LLM proposing an action;
 * $E$ is the execution environment;
 * $O_t$ is an observation obtained from a tool or sensor;
-* $V$ is verification or audit, and $D_t$ is its decision;
+* $V$ is verification or audit, and $`D_t`$ is its decision;
 * Commit decides whether the result can enter authoritative state.
 
 The key restriction is:
@@ -621,7 +621,7 @@ This is the Agent's core authoritative state.
 
 #### 4. Session-information mechanism
 
-Maintains the temporary context and working set for the current run.
+Maintains the temporary context, working set, and short-term interaction records for the current run.
 
 Session data can be compressed, discarded, or reconstructed. It should not be the only source of task facts.
 

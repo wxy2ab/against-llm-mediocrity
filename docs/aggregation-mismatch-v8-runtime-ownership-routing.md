@@ -23,9 +23,9 @@ semantic episodes** and **64 offline deterministic-compiler cases**:
 
 | Claim | Main estimate | 95% CI | Holm/raw p | Verdict |
 |---|---:|---|---:|---|
-| **V8-A1** GATED−STATIC | +59.4 pp | [40.6, 75.0] pp | Holm \(1.53\times10^{-5}\) | **Passed**; cost guardrail failed |
+| **V8-A1** GATED−STATIC | +59.4 pp | [40.6, 75.0] pp | Holm $1.53\times10^{-5}$ | **Passed**; cost guardrail failed |
 | **V8-A2** VERIFIED−GATED | +6.25 pp | [0, 15.6] pp | Holm 1.0 | **Not adjudicated: ceiling** |
-| **V8-B1** ID−INDEX | +31.25 pp | [20.3, 42.2] pp | Holm \(4.58\times10^{-5}\) | **Passed** |
+| **V8-B1** ID−INDEX | +31.25 pp | [20.3, 42.2] pp | Holm $4.58\times10^{-5}$ | **Passed** |
 | **V8-B2** density interaction | +3.125 pp | [0, 9.375] pp | Holm 1.0 | **Failed preregistered gate** |
 | **V8-B3** deterministic compile | 64/64 exact on both paths | — | — | **Passed adoption gate** |
 
@@ -43,16 +43,16 @@ The strongest supported conclusion is:
 
 Agent success can be diagnostically separated into:
 
-\[
+```math
 P(S)
 =
 P(P)
 \times P(D\mid P)
 \times P(C\mid P,D),
-\]
+```
 
-where \(P\) is plan or intermediate-construction correctness, \(D\) is delivery
-correctness, and \(C\) is safe commitment. This is not an independence assumption.
+where $P$ is plan or intermediate-construction correctness, $`D`$ is delivery
+correctness, and $`C`$ is safe commitment. This is not an independence assumption.
 It separates failure responsibilities:
 
 - planning can fail because dependencies and completed state are not maintained;
@@ -65,22 +65,22 @@ delivery can leave model sampling entirely.
 
 ### 1.2 A readiness ledger changes the computation
 
-For a DAG node \(v\), local execution is directly valid only when all parents are
+For a DAG node $v$, local execution is directly valid only when all parents are
 resolved:
 
-\[
+```math
 x_v=f_v(x_{\mathrm{pa}(v)}).
-\]
+```
 
 A one-shot response makes the model maintain dependency order, completed values,
 coverage, arithmetic, and final serialization at once. A runtime-owned ledger
 turns that into governed transitions:
 
-\[
+```math
 (L_t,R_t)\rightarrow\Delta_t\rightarrow L_{t+1},
-\]
+```
 
-where \(L_t\) is completed hard state and \(R_t\) is the ready set. A correct gate
+where $L_t$ is completed hard state and $`R_t`$ is the ready set. A correct gate
 can prevent not-ready submissions by construction. Theory predicts reduced model
 responsibility; it does not predict a particular model's +59.4-point gain. That is
 the empirical A1 result.
@@ -101,14 +101,14 @@ is useless, and it is not evidence that a repair loop recovered two cases.
 
 ### 1.4 Semantic IDs remove a deterministic mapping from the model
 
-Let \(\pi\) be the current physical arrangement and \(u\) a stable semantic ID.
+Let $\pi$ be the current physical arrangement and $`u`$ a stable semantic ID.
 A physical-index interface requires the model to compute and serialize
 
-\[
+```math
 \mathrm{index}=\pi^{-1}(u).
-\]
+```
 
-A semantic-ID interface lets the model submit \(u\), while the runtime resolves the
+A semantic-ID interface lets the model submit $`u`$, while the runtime resolves the
 current address against authoritative state. This removes one deterministic and
 fragile mapping from the model-authored commitment surface.
 
@@ -118,13 +118,13 @@ configuration.
 
 ### 1.5 A verified plan should be compiled when possible
 
-Given authoritative state \(s\), a verified plan \(p\), a correct compiler
-\(C(s,p)\), an atomic executor \(E\), and a verifier \(V\) that covers the protected
+Given authoritative state $s$, a verified plan $`p`$, a correct compiler
+$C(s,p)$, an atomic executor $E$, and a verifier $V$ that covers the protected
 invariants:
 
-\[
+```math
 V(E(s,C(s,p)))=1.
-\]
+```
 
 Resampling tool arguments or a full object adds no task information in this
 setting. It adds a new stochastic serialization and contract-failure surface.
@@ -133,16 +133,16 @@ does not formally prove every compiler or every production workload correct.
 
 ### 1.6 Patch versus Rewrite remains conditional
 
-Patch commitment usually grows with edit count \(k\), address cost, and schema
-overhead; Full Rewrite commitment usually grows with object size \(N\). Actual
+Patch commitment usually grows with edit count $k$, address cost, and schema
+overhead; Full Rewrite commitment usually grows with object size $N$. Actual
 success also depends on plan quality, address stability, tool contracts, verifier
 coverage, model policy, and budget:
 
-\[
+```math
 \text{route}
 =g(k/N,\text{address stability},\text{plan confidence},
 \text{compiler availability},\text{verifier coverage},\text{budget}).
-\]
+```
 
 Theory does not supply a deployment threshold. V8-B2 tests one density interaction
 and fails its preregistered gate.
@@ -166,8 +166,8 @@ and fails its preregistered gate.
 
 ### 2.2 V8-A: runtime scaffold
 
-Thirty-two new DAGs span \(N\in\{8,16\}\) and frontier
-\(\in\{2,8\}\). All conditions share graph, truth, budget, renderer, and global
+Thirty-two new DAGs span $`N\in\{8,16\}`$ and frontier
+$`\in\{2,8\}`$. All conditions share graph, truth, budget, renderer, and global
 verifier.
 
 | Condition | Runtime owns | Model owns |
@@ -182,7 +182,7 @@ local-verifier condition relative to GATED.
 
 ### 2.3 V8-B: semantic address routing
 
-Thirty-two new base hosts span \(N\in\{96,384\}\) and stable/relocated address
+Thirty-two new base hosts span $`N\in\{96,384\}`$ and stable/relocated address
 regimes. Each base produces a sparse and dense variant, for 64 variants.
 
 | Condition | Model submits | Runtime owns |
@@ -287,7 +287,7 @@ failure.”
 ![V8-B ID versus Full by density](./assets/aggregation-mismatch-experiment/v8-b-id-full-density.png)
 
 The +3.125-point interaction has one positive base and 31 zero-difference bases. It
-does not satisfy the +20-point, CI-exclusion, or Holm-\(p\) gates. Near-ceiling
+does not satisfy the +20-point, CI-exclusion, or Holm-$`p`$ gates. Near-ceiling
 performance also means the study does not prove that no crossover exists.
 
 ### 4.4 Deterministic compilation
@@ -367,14 +367,14 @@ read authoritative state
 The runtime scaffold trades cost for reliability. A production router should
 optimize:
 
-\[
+```math
 \text{utility}
 =
 \text{value of exact success}
 -\lambda_t\text{tokens}
 -\lambda_l\text{latency}
 -\lambda_r\text{commit risk}.
-\]
+```
 
 Low-coupling, cheap, reversible tasks may stay on a lightweight path. High-coupling
 or high-consequence transitions should enter governed readiness and ledger paths.
@@ -418,7 +418,7 @@ The highest-value next studies are:
 
 Artifact-v9 completed the planned ready × ledger and receipt follow-up with 192
 semantic episodes. Its effort-matched scaffold arms reach 0/24, 0/24, 0/24, and
-1/24 under a harder \(N=24/48\) strict-order contract, so the ready and ledger
+1/24 under a harder $N=24/48$ strict-order contract, so the ready and ledger
 main effects are **not adjudicated because of floor**. In frozen-error recovery,
 GENERIC, LOCATED, and CAUSAL reach 26/32, 30/32, and 30/32; both +12.5-point
 contrasts fail their preregistered gates. All 77 order failures nevertheless

@@ -374,18 +374,46 @@ function renderPaperDocs(block: string): string {
     ];
   };
 
+  // Card links. A card's link group is an explicit `Link:` line and/or the
+  // run of link-only lines that closes the body. The first link becomes the
+  // title link; every other one is kept in a secondary row under the title,
+  // so nothing an author writes on a link line is dropped.
+  const markdownLink = /\[([^\]]+)\]\(([^)]+)\)/g;
+
+  const parseLinks = (value: string) =>
+    Array.from(value.matchAll(markdownLink), (match) => ({ markdown: match[0], href: match[2].trim() }));
+
+  // Nothing but links, optionally as a list item, separated by " / ", " · "
+  // or similar punctuation.
+  const isLinkLine = (line: string) =>
+    parseLinks(line).length > 0 &&
+    !line
+      .replace(/^\s*[-*+]\s+/, "")
+      .replace(markdownLink, "")
+      .replace(/[\s/／·•|｜、]/g, "");
+
+  const splitTrailingLinks = (body: string) => {
+    const lines = body.split("\n");
+    let start = lines.length;
+    while (start > 0 && (!lines[start - 1].trim() || isLinkLine(lines[start - 1]))) start -= 1;
+    return {
+      body: lines.slice(0, start).join("\n").trim(),
+      links: parseLinks(lines.slice(start).join("\n")),
+    };
+  };
+
+  const renderLink = (markdown: string) => marked.parseInline(markdown) as string;
+
   const docs = chunks.map((chunk) => {
     const [rawTitle = "", ...rawBodyLines] = chunk.split("\n");
     const rawBody = rawBodyLines.join("\n").trim();
     const linkMatch = rawBody.match(/(?:^|\n)(?:Link|链接|阅读)[：:]\s*(.+)(?:\n|$)/i);
-    const trailingLinkMatch = rawBody.match(/(?:^|\n)(\[[^\]]+\]\([^)]+\))(?:\s*\/\s*\[[^\]]+\]\([^)]+\))*\s*$/);
-    const titleLink = (linkMatch?.[1] ?? trailingLinkMatch?.[1])?.trim();
-    const titleLinkParts = titleLink?.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+    const trailing = splitTrailingLinks(linkMatch ? rawBody.replace(linkMatch[0], "\n").trim() : rawBody);
+    const [titleLink, ...moreLinks] = [...(linkMatch ? parseLinks(linkMatch[1]) : []), ...trailing.links];
     const title = marked.parseInline(rawTitle.trim()) as string;
     const titleText = stripMarkdown(rawTitle.trim());
-    const linkedTitle = titleLinkParts ? `<a href="${titleLinkParts[2]}">${title}</a>` : title;
-    const bodyWithoutExplicitLink = linkMatch ? rawBody.replace(linkMatch[0], "\n").trim() : rawBody;
-    const bodyWithoutLink = trailingLinkMatch ? bodyWithoutExplicitLink.replace(trailingLinkMatch[0], "\n").trim() : bodyWithoutExplicitLink;
+    const linkedTitle = titleLink ? `<a href="${titleLink.href}">${title}</a>` : title;
+    const bodyWithoutLink = trailing.body;
     const fieldMatches = Array.from(
       bodyWithoutLink.matchAll(/^([^：:\n]+)[：:][ \t]*(?:\r?\n)?([\s\S]*?)(?=^[^：:\n]+[：:][ \t]*(?:\r?\n)?|\s*$)/gm),
     );
@@ -409,12 +437,29 @@ function renderPaperDocs(block: string): string {
 </section>`;
     });
 
+    const fieldsHtml = fields.join("\n");
+
+    // A link written inside the prose survives only if a field renders it, and
+    // the generated template flattens prose to plain text. Move any link that
+    // would be lost that way into the secondary row as well.
+    const linked = new Set([titleLink, ...moreLinks].map((link) => link?.href));
+    const proseLinks = parseLinks(bodyWithoutLink).filter((link) => {
+      if (linked.has(link.href)) return false;
+      linked.add(link.href);
+      const href = renderLink(link.markdown).match(/href="[^"]*"/)?.[0];
+      return !href || !fieldsHtml.includes(href);
+    });
+    const secondaryLinks = [...moreLinks, ...proseLinks].map((link) => `<li>${renderLink(link.markdown)}</li>`);
+    const linkRow = secondaryLinks.length
+      ? `\n<ul class="paper-doc-links" aria-label="${zh ? "相关链接" : "Related links"}">\n${secondaryLinks.join("\n")}\n</ul>`
+      : "";
+
     return `<article class="paper-doc">
 <header class="paper-doc-header">
-<h3>${linkedTitle}</h3>
+<h3>${linkedTitle}</h3>${linkRow}
 </header>
 <div class="paper-doc-fields">
-${fields.join("\n")}
+${fieldsHtml}
 </div>
 </article>`;
   });

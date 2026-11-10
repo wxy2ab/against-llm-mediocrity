@@ -64,17 +64,17 @@
 
 设目标由一组条款构成：
 
-\[
+```math
 G=\{g_1,g_2,\ldots,g_n\}
-\]
+```
 
-当前系统状态为 \(s_t\)，则可观测残差可以表示为：
+当前系统状态为 $s_t$，则可观测残差可以表示为：
 
-\[
+```math
 R(s_t)=\{g_i\mid O_i(s_t)\neq PASS\}
-\]
+```
 
-其中 \(O_i\) 是用于验证目标条款 \(g_i\) 的 Oracle。
+其中 $O_i$ 是用于验证目标条款 $g_i$ 的 Oracle。
 
 生产系统不宜只使用简单的 `PASS/FAIL`，而应至少区分：
 
@@ -92,17 +92,17 @@ R(s_t)=\{g_i\mid O_i(s_t)\neq PASS\}
 
 模型为什么留下了这些残差，通常属于潜在机制：
 
-\[
+```math
 Z_{\text{residual}}
-\]
+```
 
 我们能够看到的 thinking、output、自我解释，都只是潜在机制的下游表现：
 
-\[
+```math
 Z_{\text{residual}}
 \rightarrow
 \{\text{thinking},\text{output},\text{self-report}\}
-\]
+```
 
 不同内部过程可能产生相同的可见轨迹。因此，仅凭模型自述：
 
@@ -123,15 +123,15 @@ LLM 的自我总结仍然有价值，但其正确定位是：
 
 真正稳定可测的是：对同一个机器残差施加不同干预以后，系统表现如何变化。
 
-设残差事件为 \(e\)，冻结状态为 \(s_e\)，修复算子为 \(a\)：
+设残差事件为 $e$，冻结状态为 $s_e$，修复算子为 $a$：
 
-\[
+```math
 s_e\xrightarrow{a}s_{e,a}
-\]
+```
 
 执行修复后，重新运行原始 Oracle 和父级 closure guards，可以得到：
 
-\[
+```math
 Y(e,a)=
 \left(
 O_{\text{source}},
@@ -140,19 +140,19 @@ O_{\text{goal-valid}},
 C(a),
 E(a)
 \right)
-\]
+```
 
 其中：
 
-- \(O_{\text{source}}\)：形成原始残差的 Oracle 是否通过；
-- \(O_{\text{goal-valid}}\)：完整目标约束是否通过；
-- \(\Delta\mathbf R\)：各层、各目标维度的残差变化；
-- \(C(a)\)：token、时间、工具调用和人工成本；
-- \(E(a)\)：新增的验证证据。
+- $O_{\text{source}}$：形成原始残差的 Oracle 是否通过；
+- $O_{\text{goal-valid}}$：完整目标约束是否通过；
+- $\Delta\mathbf R$：各层、各目标维度的残差变化；
+- $C(a)$：token、时间、工具调用和人工成本；
+- $E(a)$：新增的验证证据。
 
-在预算 \(B\) 下，残差事件的修复响应可以定义为：
+在预算 $B$ 下，残差事件的修复响应可以定义为：
 
-\[
+```math
 \Sigma_B(e)
 =
 \left\{
@@ -160,7 +160,7 @@ Y(e,a)
 \mid
 a\in\mathcal A_R,\ C(a)\leq B
 \right\}
-\]
+```
 
 这就是该残差的**修复响应面**或 **repairability profile**。
 
@@ -174,7 +174,7 @@ a\in\mathcal A_R,\ C(a)\leq B
 
 LLM 单轮任务通常只关注一个输出与目标答案之间的距离。Agent 则包含多个 step、状态转移、阶段 artifact 和长期目标，其残差至少分布在三个正交维度上：
 
-\[
+```math
 \text{残差}
 =
 \text{残差载体}
@@ -182,7 +182,7 @@ LLM 单轮任务通常只关注一个输出与目标答案之间的距离。Agen
 \text{评价视野}
 \times
 \text{目标维度}
-\]
+```
 
 ## 1. 残差载体
 
@@ -195,14 +195,14 @@ LLM 单轮任务通常只关注一个输出与目标答案之间的距离。Agen
 
 状态转移残差尤其重要。一个 action 即使生成了正确文本，如果没有造成预期状态变化，仍然不是有效的 Agent action：
 
-\[
+```math
 R_t^{\text{transition}}
 =
 d\left(
 s_{t+1},
 T^*(s_t,a_t)
 \right)
-\]
+```
 
 例如文件已经生成但没有写入任务状态，测试已经通过但 stage 没有完成验证，工具调用返回失败但 Agent 仍然继续使用旧结果，都属于状态转移残差。
 
@@ -233,9 +233,9 @@ T^*(s_t,a_t)
 
 当前 artifact 对最终目标可达性、成功概率和后续修复成本造成了什么影响。
 
-设从 artifact \(a_t\) 出发，在剩余预算 \(B\) 内可以采用的后续策略为 \(\Pi_B\)：
+设从 artifact $a_t$ 出发，在剩余预算 $B$ 内可以采用的后续策略为 $\Pi_B$：
 
-\[
+```math
 V_t(a_t;B)
 =
 \max_{\pi\in\Pi_B}
@@ -244,15 +244,15 @@ G(\text{final outcome})
 \mid
 a_t,\pi
 ]
-\]
+```
 
 则阶段 artifact 的全局残差可以表示为：
 
-\[
+```math
 R_t^{\text{global}}(B)
 =
 V_t^*(B)-V_t(a_t;B)
-\]
+```
 
 这意味着，阶段 artifact 的全局质量不是一个固定属性，而取决于：
 
@@ -273,11 +273,11 @@ V_t^*(B)-V_t(a_t;B)
 
 系统当前显式优化、验证的目标契约，与人类真正目标之间还有多少差距。
 
-设真实目标为 \(G^*\)，系统当前可执行契约为 \(\hat G\)：
+设真实目标为 $`G^*`$，系统当前可执行契约为 $\hat G$：
 
-\[
+```math
 R_{\text{spec}}=G^*\setminus\hat G
-\]
+```
 
 Text2SQL 中“当前结果和 gold 一致”可能已经写入 evaluator，但“必须通用、不得 overfit、不得依赖 case 身份、不得把 SQL 语义写进代码”最初可能只是模糊要求。此时 evaluator 可以判定成功，而真实目标仍然失败。
 
@@ -285,7 +285,7 @@ Text2SQL 中“当前结果和 gold 一致”可能已经写入 evaluator，但�
 
 同一个 residual 还可能同时位于不同目标维度：
 
-\[
+```math
 \mathbf R=
 \left(
 R_{\text{correctness}},
@@ -295,7 +295,7 @@ R_{\text{regression}},
 R_{\text{cost}},
 R_{\text{evidence}}
 \right)
-\]
+```
 
 一个修复可能降低当前正确性残差，却增加通用性和架构残差。因此，Agent 残差不能被压缩成单一分数。
 
@@ -321,23 +321,23 @@ R_{\text{evidence}}
 
 Text2SQL 中的 overfit patch 通常表现为：
 
-\[
+```math
 R_{\text{case}}\downarrow
-\]
+```
 
 同时：
 
-\[
+```math
 R_{\text{generality}}\uparrow
-\]
+```
 
-\[
+```math
 R_{\text{architecture}}\uparrow
-\]
+```
 
-\[
+```math
 R_{\text{regression-risk}}\uparrow
-\]
+```
 
 ## 4. 残差延迟
 
@@ -402,13 +402,13 @@ LLM 不负责宣布：
 
 这里需要特别区分：
 
-\[
+```math
 \text{observed layer}
 \neq
 \text{candidate origin layer}
 \neq
 \text{repair locus}
-\]
+```
 
 例如：
 
@@ -458,7 +458,7 @@ Text2SQL 的 gold execution 对当前 case 正确性是强 Oracle，但对以下
 
 因此，一个 Oracle 还应描述：
 
-\[
+```math
 O(r)=
 (
 \text{fidelity},
@@ -467,7 +467,7 @@ O(r)=
 \text{cost},
 \text{gameability}
 )
-\]
+```
 
 即可靠度、反馈带宽、目标覆盖、调用成本和可投机性。
 
@@ -541,13 +541,13 @@ Semantic IR
 
 在当前任务表达、状态表示、动作空间、模型和预算下，现有 Oracle 足以驱动残差闭合。
 
-\[
+```math
 r\in R_O
 \iff
 \exists \pi,\ C(\pi)\leq B,
 \quad
-P(\operatorname{close}(r)\mid O,\pi)\geq\theta
-\]
+P(\mathop{\mathrm{close}}\nolimits(r)\mid O,\pi)\geq\theta
+```
 
 此时不需要改变问题结构，可以直接：
 
@@ -563,20 +563,20 @@ P(\operatorname{close}(r)\mid O,\pi)\geq\theta
 
 设当前 regime 为：
 
-\[
+```math
 \Gamma=
 (
 G,S,\Omega,A,M,O,H
 )
-\]
+```
 
 分别表示目标、状态、观测、动作空间、模型、Oracle 和 Harness。
 
-Mismatch 路由的作用不是继续在 \(\Gamma\) 中重复搜索，而是执行结构转换：
+Mismatch 路由的作用不是继续在 $\Gamma$ 中重复搜索，而是执行结构转换：
 
-\[
+```math
 \Gamma\xrightarrow{\phi_m}\Gamma'
-\]
+```
 
 使原本难以处理的 residual 在新 regime 中重新变得可观察、可定位和可验证。
 
@@ -590,16 +590,16 @@ Mismatch 路由的作用不是继续在 \(\Gamma\) 中重复搜索，而是执�
 
 现实中的 residual 通常不是纯 Oracle 或纯 mismatch，而是复合结构：
 
-\[
+```math
 R=
 R_O
 \oplus
 R_M
 \oplus
 I(R_O,R_M)
-\]
+```
 
-其中 \(I\) 表示不同残差之间的交互。
+其中 $I$ 表示不同残差之间的交互。
 
 例如一个代码 step 可能同时包含：
 
@@ -647,7 +647,7 @@ Mismatch residual 可以被操作性定义为：
 |---|---|---|---|
 | 规格失配 | 目标、约束和优先级不明确 | 建立目标契约、边界和反例 | contract checks、负例、优先级检查 |
 | 状态失配 | 观测不等于真实动态状态 | 状态刷新、硬状态、回放、状态机 | state invariant、transition check |
-| 观测—表征失配 | 关键信息没有进入有效表示 | 增加观测通道、结构化转导、降噪 | evidence checks、字段完整性 |
+| 观测-表征失配 | 关键信息没有进入有效表示 | 增加观测通道、结构化转导、降噪 | evidence checks、字段完整性 |
 | 支持失配 | 有效候选处于极低概率区域 | 扩大候选、变异重组、模型升级 | candidate verifier、候选覆盖 |
 | 聚合失配 | 局部正确不能组合成全局正确 | 分解、计划、候选比较、局部 patch | intermediate invariants、全局一致性 |
 | 拟合边界失配 | 修复当前区域损害邻域能力 | 隔离、路由、适用域、回归保护 | regression、canary、routing guards |
@@ -658,13 +658,13 @@ Mismatch 路由的共同目标可以概括为：
 
 即把一个难以直接处理的结构性 residual 转化成若干更明确的 Oracle-addressable residual：
 
-\[
+```math
 R_M
 \xrightarrow{\text{mismatch transformation}}
 \{r_1^O,r_2^O,\ldots,r_k^O\}
 \xrightarrow{\text{oracle-guided repair}}
 0
-\]
+```
 
 例如一个模糊的“SQL 语义错误”经过规格路由后，可以被拆成：
 
@@ -777,29 +777,29 @@ if current_case_matches_special_pattern:
 
 定义：
 
-\[
+```math
 \mathcal P_{\text{result}}
 =
 \{
 P:
 O_{\text{source}}(P)=PASS
 \}
-\]
+```
 
 但真正满足目标的修复集合小得多：
 
-\[
+```math
 \mathcal P_{\text{goal-valid}}
 =
 \{
 P\in\mathcal P_{\text{result}}:
 G(P)=1
 \}
-\]
+```
 
 还可以进一步区分：
 
-\[
+```math
 \mathcal P_{\text{result}}
 \supseteq
 \mathcal P_{\text{stage}}
@@ -809,7 +809,7 @@ G(P)=1
 \mathcal P_{\text{goal-valid}}
 \supseteq
 \mathcal P_{\text{certified}}
-\]
+```
 
 分别表示：
 
@@ -827,25 +827,25 @@ G(P)=1
 
 定义：
 
-\[
+```math
 C_{\text{hit}}^*
 =
 \min_{P:O_{\text{source}}(P)=PASS} C(P)
-\]
+```
 
-\[
+```math
 C_{\text{valid}}^*
 =
-\min_{P:\operatorname{Accept}(P)=1} C(P)
-\]
+\min_{P:\mathop{\mathrm{Accept}}\nolimits(P)=1} C(P)
+```
 
 二者之差：
 
-\[
+```math
 H_{\text{goal}}
 =
 C_{\text{valid}}^*-C_{\text{hit}}^*
-\]
+```
 
 反映了从“让当前结果正确”到“找到目标有效修复”之间的真实难度。
 
@@ -855,7 +855,7 @@ C_{\text{valid}}^*-C_{\text{hit}}^*
 
 Text2SQL 的真实目标通常是一个合取结构：
 
-\[
+```math
 G=
 G_{\text{correct}}
 \land
@@ -868,17 +868,17 @@ G_{\text{architecture}}
 G_{\text{regression-safe}}
 \land
 G_{\text{evidence}}
-\]
+```
 
 这些目标不能被简单写成：
 
-\[
+```math
 Reward
 =
 100\times\text{current case pass}
 -
 5\times\text{overfit risk}
-\]
+```
 
 因为强局部奖励会覆盖抽象、较弱的长期约束。
 
@@ -889,8 +889,8 @@ Reward
 
 修复接受条件可以表示为：
 
-\[
-\operatorname{Accept}(P)
+```math
+\mathop{\mathrm{Accept}}\nolimits(P)
 =
 O_{\text{source}}
 \land
@@ -905,7 +905,7 @@ O_{\text{anti-overfit}}
 O_{\text{architecture}}
 \land
 O_{\text{evidence}}
-\]
+```
 
 因此修复叶节点至少应分成：
 
@@ -935,13 +935,13 @@ O_{\text{evidence}}
 
 每一次 review 都在收紧合法修复空间：
 
-\[
+```math
 \mathcal P_{t+1}
 =
 \mathcal P_t\setminus\mathcal B_t
-\]
+```
 
-其中 \(\mathcal B_t\) 是本轮发现的一类非法修复区域。
+其中 $\mathcal B_t$ 是本轮发现的一类非法修复区域。
 
 这一过程可以理解为：
 
@@ -967,13 +967,13 @@ Gold 只定义了：
 
 # 十六、修复产物应当携带证据
 
-一个可靠修复不应只是 patch \(p\)，而应是：
+一个可靠修复不应只是 patch $p$，而应是：
 
-\[
+```math
 (p,E)
-\]
+```
 
-其中 \(E\) 是验证证据包，例如：
+其中 $E$ 是验证证据包，例如：
 
 ```text
 当前 case 通过
@@ -999,7 +999,7 @@ schema/table/column 重命名通过
 
 普通修复搜索可能只优化：
 
-\[
+```math
 P^*
 =
 \arg\min_P C(P)
@@ -1007,38 +1007,38 @@ P^*
 \text{s.t.}
 \quad
 O_{\text{source}}(P)=PASS
-\]
+```
 
 真正需要的是：
 
-\[
+```math
 P_{\text{valid}}^*
 =
 \arg\min_P
 \left[
 C(P)+\lambda D(P)+\mu D_{\text{repair}}(P)
 \right]
-\]
+```
 
 满足：
 
-\[
-\operatorname{Accept}(P)=1
-\]
+```math
+\mathop{\mathrm{Accept}}\nolimits(P)=1
+```
 
 其中：
 
-- \(C(P)\)：token、时间、工具和人工成本；
-- \(D(P)\)：对已有正确结构的修改规模；
-- \(D_{\text{repair}}(P)\)：修复引入的未来修复债务。
+- $C(P)$：token、时间、工具和人工成本；
+- $D(P)$：对已有正确结构的修改规模；
+- $D_{\text{repair}}(P)$：修复引入的未来修复债务。
 
 阶段 artifact 的修复债务可以表示为：
 
-\[
+```math
 D_t^{\text{repair}}
 =
 C_t^*(a_t)-C_t^*(a_t^{\text{ideal}})
-\]
+```
 
 即当前 artifact 相比理想 artifact，使下游达到目标所需的最低成本增加了多少。
 
@@ -1094,9 +1094,9 @@ MCTS 可以作为后续算法，但不能替代以下基础设施：
 
 如果有效修复在模型支持中概率为零：
 
-\[
+```math
 P(a^*\mid s)=0
-\]
+```
 
 那么增加预算也无法生成它。
 
@@ -1198,40 +1198,40 @@ Gold 应当对实验系统可见，而不是直接暴露给修复模型。否则
 
 在已知结果场景中，可以进行昂贵修复搜索，得到：
 
-\[
+```math
 (s_t,a_t,\Delta\mathbf R,C_t,E_t,\text{success})
-\]
+```
 
 由此学习：
 
 ### Repair policy
 
-\[
+```math
 \pi_R(a\mid r,s,G,O,B)
-\]
+```
 
 给定残差、状态、目标、Oracle 和预算，优先尝试哪个修复算子。
 
 ### Repair value
 
-\[
+```math
 Q_R(s,a)
 =
 P(
 \text{在预算内目标有效关闭}
 \mid s,a
 )
-\]
+```
 
 ### Residual value
 
-\[
+```math
 V_R(s)
 =
 P(
 \text{从当前状态仍可在预算内修复}
 )
-\]
+```
 
 生产阶段不再枚举所有路径，而是利用离线形成的修复先验：
 
@@ -1357,19 +1357,19 @@ Agent 中至少要区分三种完成状态。
 
 ## Outcome Repair@B
 
-预算 \(B\) 内，原始 Oracle 通过的概率：
+预算 $B$ 内，原始 Oracle 通过的概率：
 
-\[
+```math
 P(O_{\text{source}}=PASS)
-\]
+```
 
 ## Goal-Valid Repair@B
 
-预算 \(B\) 内，通过全部硬目标约束的概率：
+预算 $B$ 内，通过全部硬目标约束的概率：
 
-\[
-P(\operatorname{Accept}(P)=1)
-\]
+```math
+P(\mathop{\mathrm{Accept}}\nolimits(P)=1)
+```
 
 ## Certified Repair@B
 
@@ -1377,45 +1377,45 @@ P(\operatorname{Accept}(P)=1)
 
 ## Shortcut Gap
 
-\[
-\operatorname{ShortcutGap}(B)
+```math
+\mathop{\mathrm{ShortcutGap}}\nolimits(B)
 =
-\operatorname{OutcomeRepair@B}
+\mathop{\mathrm{OutcomeRepair@B}}\nolimits
 -
-\operatorname{GoalValidRepair@B}
-\]
+\mathop{\mathrm{GoalValidRepair@B}}\nolimits
+```
 
 它测量系统有多少“修复成功”实际上只是投机、overfit 或残差转移。
 
 ## Selection Gap
 
-\[
-\operatorname{SelectionGap}(B)
+```math
+\mathop{\mathrm{SelectionGap}}\nolimits(B)
 =
-\operatorname{OracleBestRepair@B}
+\mathop{\mathrm{OracleBestRepair@B}}\nolimits
 -
-\operatorname{SelectedRepair@B}
-\]
+\mathop{\mathrm{SelectedRepair@B}}\nolimits
+```
 
 如果候选集合中已经有有效修复，但系统没有选中，问题主要位于 verifier、ranking 或 routing，而不是 proposal。
 
 ## Minimum Valid Repair Cost
 
-\[
+```math
 C_{\text{valid}}^*
 =
-\min_{P:\operatorname{Accept}(P)=1}C(P)
-\]
+\min_{P:\mathop{\mathrm{Accept}}\nolimits(P)=1}C(P)
+```
 
 ## Residual Transfer Rate
 
-\[
+```math
 P(
 R_i\downarrow
 \land
 \exists j\neq i,\ R_j\uparrow
 )
-\]
+```
 
 ## Repair Debt
 
@@ -1427,9 +1427,9 @@ R_i\downarrow
 
 ## Residual Closure per Cost
 
-\[
+```math
 \frac{\Delta \mathbf R_{\text{goal-valid}}}{C}
-\]
+```
 
 ## No-Progress / Oscillation Rate
 
@@ -1593,7 +1593,7 @@ Step 通过后重新计算 Stage 和 Task residual，可以显著减少局部修
 
 残差测量、残差路由和残差修复可以被统一成一个递归控制结构：
 
-\[
+```math
 \boxed{
 \text{机器事实建立 residual}
 \rightarrow
@@ -1615,7 +1615,7 @@ Step 通过后重新计算 Stage 和 Task residual，可以显著减少局部修
 \rightarrow
 \text{关闭、回滚、重路由或升级}
 }
-\]
+```
 
 其中：
 

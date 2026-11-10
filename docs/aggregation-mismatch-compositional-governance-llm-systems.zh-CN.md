@@ -355,23 +355,23 @@ Different global utility.
 
 自回归生成是实现序列联合分布的一种方式：
 
-\[
-p_\theta(Y\mid x)=\prod_{k=1}^{n}p_\theta(t_k\mid t_{<k},x).
-\]
+```math
+p_\theta(Y\mid x)=\prod_{k=1}^{n}p_\theta(t_k\mid t_{< k},x).
+```
 
 这是精确的链式法则，不对可表示的全局依赖施加局部性限制。精确条件分布可以把全局校验、长程绑定与未来约束编码进每个条件项。因此，不能从“自回归”直接推出“局部最可能选择稀释全局价值”。
 
 真正需要比较的是部署时局部代理与全局补全价值。对位置 $k$ 的候选决策 $d$，令
 
-\[
-Q_k^\star(d)=\sup_{Y_{>k}}U(Y_{<k},d,Y_{>k};S_{\mathrm{world}}).
-\]
+```math
+Q_k^\star(d)=\sup_{Y_{>k}}U(Y_{< k},d,Y_{>k};S_{\mathrm{world}}).
+```
 
 若局部得分、解码器或有限搜索使用的 $q_k(d)$ 满足
 
-\[
+```math
 \arg\max_d q_k(d)\ne\arg\max_d Q_k^\star(d),
-\]
+```
 
 并且早期提交缩小了后续可达集合，才出现聚合失配。条件近似误差、贪心或截断解码、搜索不足、未来约束未外部化与不可逆提交都可能造成这一差异。扩散生成、MCTS 选点、人类分段写作或任何逐步组装过程也可能发生同一种失配；精确条件、自洽搜索或充分外部化状态下的自回归生成则可以不发生。
 
@@ -401,7 +401,7 @@ nonlocal reference binding
 global optimization
 ```
 
-现有受控结果也支持这一定位，而不支持把分解方式当成病因。V2 中，同一类模型的直接闭环构造为 `2/45`，而对给定无效候选的审计为 `176/180`；V4 中，在不改变自回归架构的情况下，外部化完整答案 bits 把周期构造从 `13/54` 提升到 `53/54`。这些比较分别受 candidate-conditioned auditing 与 ceiling 等限制，但共同表明：恢复来自可用全局信息、搜索负担与构造—验证分工的改变，而不是“变得不自回归”。详见[生成—验证不对称证据](./aggregation-mismatch-generation-verification-asymmetry-evidence.zh-CN.md)与 [Artifact-v4 理论差距](./aggregation-mismatch-v4-claims-theory-gap.zh-CN.md)。
+现有受控结果也支持这一定位，而不支持把分解方式当成病因。V2 中，同一类模型的直接周期构造为 `2/45`，而对给定无效候选的审计为 `176/180`；V4 中，在不改变自回归架构的情况下，外部化完整答案 bits 把周期构造从 `13/54` 提升到 `53/54`。这些比较分别受 candidate-conditioned auditing 与 ceiling 等限制，但共同表明：恢复来自可用全局信息、搜索负担与构造—验证分工的改变，而不是“变得不自回归”。详见[生成—验证不对称证据](./aggregation-mismatch-generation-verification-asymmetry-evidence.zh-CN.md)与 [Artifact-v4 理论差距](./aggregation-mismatch-v4-claims-theory-gap.zh-CN.md)。
 
 因此，“自回归平庸”不再作为聚合失配的子类或机制名使用。若当前模型与解码器的概率质量经验性地把生成拉回常见、流畅但低价值的区域，可非正式称为“自回归引力”，但该现象主要由支持失配描述。
 
@@ -1446,7 +1446,7 @@ semantic diff
 
 ## 15. 研究综合与论证组合
 
-研究综合对 LLM 来说局部很容易：模型能摘要论文、抽取 claims、比较 themes、写流畅 transitions。难点是保存 evidence 与 conclusion 的关系。
+研究综合对 LLM 来说往往显得局部很容易：模型能摘要论文、抽取 claims、比较 themes、写流畅 transitions。难点是保存 evidence 与 conclusion 的关系。
 
 ### 15.1 证据聚合失败
 

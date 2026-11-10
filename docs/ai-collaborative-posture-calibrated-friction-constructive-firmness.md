@@ -155,7 +155,7 @@ What calibrated friction protects is not AI authority, but the following boundar
 - **Learning boundary:** AI does not outsource away capabilities the human needs to build.
 - **Organizational boundary:** AI does not make team review, authorization, and responsibility disappear into private automation.
 
-### 3.2 Six Kinds of Friction
+### 3.2 Seven Kinds of Friction
 
 | Friction type | Trigger condition | AI action | Purpose |
 |---|---|---|---|
@@ -198,7 +198,7 @@ In one line: constructive firmness is not AI being hard on the user. It is AI be
 
 ### 3.5 Beneficial Disobedience: From Obeying Instructions to Maintaining Collaborative Boundaries
 
-The user's question about whether AI should be "firm" connects to a broader research direction: **beneficial** or **intelligent disobedience**. This line of work asks when autonomous systems should avoid mechanical obedience and instead refuse, delay, restructure, or escalate when safety, legality, task goals, team coordination, or factual constraints are threatened. Mirsky's work on artificial intelligent disobedience places the issue under "AI teammate agency," arguing that collaborative AI should not remain rigidly obedient under all circumstances.[19]
+The user's question about whether AI should be "firm" connects to a broader research direction: **beneficial** or **intelligent disobedience**. This line of work asks when autonomous systems should avoid mechanical obedience and instead refuse, delay, restructure, or escalate when safety, legality, task goals, team coordination, or factual constraints are threatened. Mirsky's work on artificial intelligent disobedience places the issue under "AI teammate agency," arguing that collaborative AI should not remain rigidly obedient under all circumstances, but should be capable of context-sensitive autonomous contribution.[19]
 
 This paper does not argue for designing AI as an arbitrary disobedient subject. More precisely, AI needs three limited forms of non-obedience:
 
@@ -644,7 +644,7 @@ If the Skeptic role becomes the default stance, collaboration turns into quarrel
 
 ### 11.4 Paternalistic Manipulation
 
-"I am hiding, nudging, or manufacturing error for your own good" is not calibrated friction. It is manipulation. AI's friction must protect autonomy, not replace autonomy.
+"I am hiding, nudging, manufacturing error, or forcing you down a particular path for your own good" is not calibrated friction. It is manipulation. AI's friction must protect autonomy, not replace autonomy.
 
 ### 11.5 Alarm Fatigue
 
@@ -839,13 +839,11 @@ This paper can serve as the AI-side dual of `cognitive-discipline-for-ai.md` and
 
 ## 17. Directions for the Next Draft
 
-The next version can continue in six directions.
+The next version can continue in seven directions.
 
 First, turn this into an **AI posture policy**: make Executor / Analyst / Skeptic / Gatekeeper / Coach / Boundary keeper routable system policies.
 
 Second, turn it into a **constructive firmness policy**: decompose constructive firmness into pause, point out, require, return, and declare the defeater, then define trigger and revocation conditions for each action.
-
-Seventh, turn it into a **concession-quality evaluation**: convert the concession protocol of 6.7 into annotatable evaluation dimensions (name the argument, state the magnitude, keep the residual, concede and sharpen), build an evaluation set from real multi-turn rebuttal conversations, and measure whether a defeated model collapses, stonewalls, or updates with quality.
 
 Third, turn it into an **engineering collaboration protocol**: write oracle maps, minimum experiments, SGAR gates, rollback checklists, and independent-first into the default behavior of engineering agents.
 
@@ -854,6 +852,8 @@ Fourth, turn it into an **emotion and relationship safety protocol**: define val
 Fifth, turn it into a **product friction component library**: commit first, layered disclosure, counterexample cards, cooling confirmation, generative gaps, and sandbox failure.
 
 Sixth, turn it into an **evaluation metric stack**: shift from satisfaction metrics toward appropriate reliance, error detection, downstream action, skill retention, relationship repair, and autonomy preservation.
+
+Seventh, turn it into a **concession-quality evaluation**: convert the concession protocol of 6.7 into annotatable evaluation dimensions (name the argument, state the magnitude, keep the residual, concede and sharpen), build an evaluation set from real multi-turn rebuttal conversations, and measure whether a defeated model collapses, stonewalls, or updates with quality.
 
 ---
 

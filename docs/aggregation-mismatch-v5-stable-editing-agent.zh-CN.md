@@ -25,7 +25,7 @@ Artifact-v5 检验早期文本接口实验中观察到的 Patch 优势，能否�
 | 推断计划，端到端 | 2/96（2.1%） | 0/96（0%） | +2.1 pp，95% CI [0, +6.25] | **V5-C1 未通过** |
 | Oracle 计划，仅交付 | 46/48（95.8%） | 26/48（54.2%） | **+41.7 pp，95% CI [+27.1, +56.25]** | **V5-C2 通过** |
 
-Oracle 对比中有 21 个正向实例对、1 个反向实例对和 26 个持平实例，exact sign-flip 为 \(p=1.10\times10^{-5}\)。Infer-plan 效应没有达到预注册的 +10 个百分点最小实际效应，区间包含 0，sign-flip 为 \(p=1\)。
+Oracle 对比中有 21 个正向实例对、1 个反向实例对和 26 个持平实例，exact sign-flip 为 $p=1.10\times10^{-5}$。Infer-plan 效应没有达到预注册的 +10 个百分点最小实际效应，区间包含 0，sign-flip 为 $p=1$。
 
 正确结论是：
 
@@ -50,21 +50,21 @@ Artifact-v5 因此拆分两个问题：
 
 对应的估计量是：
 
-\[
+```math
 \Delta_I =
 P(\text{final exact success}\mid I\text{-}P\text{-}A)
 -
 P(\text{final exact success}\mid I\text{-}R\text{-}A)
-\]
+```
 
 以及
 
-\[
+```math
 \Delta_O =
 P(\text{final exact success}\mid O\text{-}P\text{-}A)
 -
 P(\text{final exact success}\mid O\text{-}R\text{-}A).
-\]
+```
 
 事前冻结的互斥裁决层级是：
 
@@ -95,9 +95,9 @@ Infer 条件在每个 repeat 中只生成一次计划，再把同一个计划分
 
 | 项目 | 数值 |
 |---|---:|
-| 对象长度 \(N\) | 96、384 |
-| Edit 数 \(k\) | 1、10、20 |
-| \(N\times k\) cells | 6 |
+| 对象长度 $`N`$ | 96、384 |
+| Edit 数 $`k`$ | 1、10、20 |
+| $N\times k$ cells | 6 |
 | 每 cell 实例数 | 8 |
 | 正式实例 | 48 |
 | Infer repeats | 2 |
@@ -132,7 +132,7 @@ V5-C1 和 V5-C2 都必须同时满足三个门槛：
 
 1. 平均差至少 +10 个百分点；
 2. 95% 区间排除 0；
-3. sign-flip \(p<0.05\)。
+3. sign-flip $p<0.05$。
 
 ---
 
@@ -142,9 +142,9 @@ V5-C1 和 V5-C2 都必须同时满足三个门槛：
 
 I-P-A 为 2/96；I-R-A 为 0/96。实例级差为：
 
-\[
+```math
 \Delta_I=+0.0208,\qquad 95\%\ \mathrm{CI}=[0,0.0625],\qquad p=1.
-\]
+```
 
 48 个配对实例中，只有 1 个有利于 Patch，47 个持平。V5-C1 没有通过任何实际效应或统计门槛。
 
@@ -154,11 +154,11 @@ I-P-A 为 2/96；I-R-A 为 0/96。实例级差为：
 
 O-P-A 为 46/48；O-R-A 为 26/48。配对结果为：
 
-\[
+```math
 \Delta_O=+0.4167,\qquad
 95\%\ \mathrm{CI}=[0.2708,0.5625],\qquad
 p=1.0967\times10^{-5}.
-\]
+```
 
 它通过预注册的最小实际效应、区间和 sign-flip 三个门槛。
 
@@ -177,7 +177,7 @@ p=1.0967\times10^{-5}.
 
 每个 cell 有 8 个 oracle 实例；payload ratio 是设计期 canonical 值。
 
-| \(N\) | \(k\) | Canonical payload ratio | Patch | Rewrite | 差值 |
+| $`N`$ | $`k`$ | Canonical payload ratio | Patch | Rewrite | 差值 |
 |---:|---:|---:|---:|---:|---:|
 | 96 | 1 | 0.179 | 8/8 | 4/8 | +50.0 pp |
 | 96 | 10 | 0.938 | 8/8 | 8/8 | 0 |
@@ -206,13 +206,13 @@ V5-C4 是**未裁决**，不是已证伪：
 
 Patch 的条件性理论假设正确 edit plan 已经存在。把 Agent 成功简化为：
 
-\[
+```math
 P(\text{success})
 \approx
 P(\text{plan correct})
 \times
 P(\text{delivery succeeds}\mid\text{plan correct}).
-\]
+```
 
 Artifact-v5 直接支持第二项存在巨大差异：
 
@@ -329,7 +329,7 @@ Endpoint 日志足以支持当前交付裁决，但不足以做完整过程机�
 ### 可以安全引用
 
 - 288/288 coverage；
-- condition、instance、\(N\)、\(k\) 与 repeat 数；
+- condition、instance、$`N`$、$`k`$ 与 repeat 数；
 - final success；
 - failure class；
 - native-event count（506）；

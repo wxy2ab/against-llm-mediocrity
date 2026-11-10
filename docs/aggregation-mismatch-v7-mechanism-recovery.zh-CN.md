@@ -22,8 +22,8 @@ DeepSeek-V4-Flash 模型调用和 48 个离线 deterministic-compiler 案例，�
 
 | 比较 | 严格成功 | 配对差与 95% CI | 裁决 |
 |---|---:|---:|---|
-| TOPO vs PRESENT | 20/48 vs 15/48 | +10.4 pp [2.1, 20.8] | **未通过**：低于 +15 pp；Holm \(p=0.125\) |
-| LOCATED vs MASKED | 13/48 vs 6/48 | +14.6 pp [−2.1, 31.2] | **未通过**：CI 跨 0；Holm \(p=0.143\) |
+| TOPO vs PRESENT | 20/48 vs 15/48 | +10.4 pp [2.1, 20.8] | **未通过**：低于 +15 pp；Holm $p=0.125$ |
+| LOCATED vs MASKED | 13/48 vs 6/48 | +14.6 pp [−2.1, 31.2] | **未通过**：CI 跨 0；Holm $p=0.143$ |
 | Deterministic compiler | 48/48 | exact rate = 1.0；不变量违规 0 | **通过 adoption gate** |
 | Rewrite vs LOCATED | 26/48 vs 13/48 | +27.1 pp [6.2, 47.9] | **报告性对照**：无方向性通过门 |
 
@@ -47,7 +47,7 @@ TOPO 与 LOCATED 都有正向点估计，但没有通过预注册确认门。Rew
 
 Agent episode 可以拆成三个失败层：
 
-\[
+```math
 P(\text{system success})
 =
 P(\text{plan correct})
@@ -55,7 +55,7 @@ P(\text{plan correct})
 P(\text{delivery correct}\mid\text{plan correct})
 \times
 P(\text{commit safe}\mid\text{plan correct},\text{delivery correct}).
-\]
+```
 
 这个分解是诊断分层，不是独立性假设。Artifact-v5 表明 Patch 工具不会修复错误 plan；
 artifact-v6 表明 stage-aware routing 能帮助 plan error，但两个模型 re-emission
@@ -64,11 +64,11 @@ delivery 与 commit。
 
 ### 1.2 拓扑顺序是结构性预测，不是模型表现定理
 
-对 DAG 节点 \(v\)，所有前驱就绪后，显式执行器可以计算：
+对 DAG 节点 $v$，所有前驱就绪后，显式执行器可以计算：
 
-\[
+```math
 x_v=f_v(x_{\mathrm{pa}(v)}).
-\]
+```
 
 拓扑 scheduler 不需要读取未决前驱。逆拓扑展示则要求延迟提交、额外状态，或者先在
 其他位置完成求解。
@@ -82,11 +82,11 @@ x_v=f_v(x_{\mathrm{pa}(v)}).
 LOCATED receipt 包含 MASKED receipt 的全部可用信息，并增加 field path、address 与
 current hash。对可以忽略额外字段的最优策略：
 
-\[
+```math
 V^*(I_{\text{located}})\ge V^*(I_{\text{masked}}).
-\]
+```
 
-这个信息单调性结论不意味着每个固定 prompt 策略 \(P_\theta\) 都会提升。部署模型可能
+这个信息单调性结论不意味着每个固定 prompt 策略 $P_\theta$ 都会提升。部署模型可能
 忽略、误读或受额外细节干扰。因此 B1 未过门不与信息理论冲突；它只说明部署收益没有
 被确认。
 
@@ -94,18 +94,18 @@ V^*(I_{\text{located}})\ge V^*(I_{\text{masked}}).
 
 令：
 
-- \(s\) 为带版本/hash 的权威状态；
-- \(p\) 为已经验证正确且绑定到 \(s\) 的 plan；
-- \(C(s,p)\) 把 plan 编译成原生工具参数；
-- \(E\) 为确定性执行器；
-- \(V\) 为全局验证器。
+- $s$ 为带版本/hash 的权威状态；
+- $p$ 为已经验证正确且绑定到 $s$ 的 plan；
+- $C(s,p)$ 把 plan 编译成原生工具参数；
+- $E$ 为确定性执行器；
+- $V$ 为全局验证器。
 
 如果 compiler 正确实现 plan 语义、状态仍匹配、执行是原子的，而且 verifier 对所保护
 不变量可靠，那么：
 
-\[
+```math
 V(E(s,C(s,p)))=1.
-\]
+```
 
 此时再调用一次模型不会增加任务信息，只会增加随机序列化和工具契约失败面。V7-B2
 验证的是当前 compiler 实现在 48 个冻结案例上是否通过采用门；它不是所有 compiler
@@ -118,11 +118,11 @@ Patch 缩小模型提交面并保留未修改区域，但依赖稳定地址、ol
 
 正确工程对象因而是条件 router：
 
-\[
+```math
 \text{route}
 =g(\text{plan confidence},\text{edit density},\text{address stability},
 \text{compiler availability},\text{verifier coverage}).
-\]
+```
 
 V7 的 Rewrite−Located 只说明 Rewrite 是当前单次 recovery contract 下更好的模型
 fallback；它不推翻 artifact-v3 和 v5 已建立的条件性 Patch 优势。
@@ -151,8 +151,8 @@ fallback；它不推翻 artifact-v3 和 v5 已建立的条件性 Patch 优势。
 
 48 个新 DAG 实例覆盖：
 
-- \(N\in\{8,16\}\)；
-- frontier \(\in\{2,8\}\)；
+- $`N\in\{8,16\}`$；
+- frontier $`\in\{2,8\}`$；
 - 四个 cell，每个 12 个实例。
 
 两个条件共享 graph、truth、信息、indexed JSON schema、parser 与 renderer：
@@ -169,8 +169,8 @@ rendered object 和预算全部严格通过。
 
 48 个新稀疏修复实例覆盖：
 
-- \(N\in\{96,384\}\)；
-- \(k\in\{1,10,20\}\)；
+- $`N\in\{96,384\}`$；
+- $`k\in\{1,10,20\}`$；
 - 六个 cell，每个 8 个实例；
 - 四种注入 delivery failure，每种 12 个实例。
 
@@ -214,9 +214,9 @@ V7-B 使用原生 tool/executor 字段。不能跨 240 行直接聚合该字段�
 
 配对复算同样与机器汇总一致：
 
-- A1：正 5、负 0、平 43；raw \(p=0.0625\)，Holm \(p=0.125\)；
-- B1：正 12、负 5、平 31；raw/Holm \(p=0.143463\)；
-- Rewrite−Located：正 22、负 9、平 17；raw \(p=0.029449\)，不属于 A1/B1
+- A1：正 5、负 0、平 43；raw $p=0.0625$，Holm $p=0.125$；
+- B1：正 12、负 5、平 31；raw/Holm $p=0.143463$；
+- Rewrite−Located：正 22、负 9、平 17；raw $p=0.029449$，不属于 A1/B1
   确认性方向门；
 - 所有区间均使用 10,000 次配对 instance bootstrap。
 

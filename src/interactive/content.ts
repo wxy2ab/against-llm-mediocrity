@@ -123,7 +123,7 @@ const zh: LabContent = {
       pipeline: "价值流水线",
       sampling: "采样剧场",
       mismatch: "六类失配",
-      regimes: "三种区制",
+      regimes: "三个区间",
       governance: "治理转化",
     },
     switchLabel: "English",
@@ -142,9 +142,9 @@ const zh: LabContent = {
     "你的环境关闭了动画或不支持 WebGL，下面以静态示意图呈现同样的原理。",
   pipeline: {
     eyebrow: "01 / 价值流水线",
-    title: "价值是一件易碎的载荷，<br>必须穿过七个站点而不掉出去",
+    title: "价值是一件易碎的载荷，<br>必须穿过六个站点而不掉出去",
     copy:
-      "LLM 系统不直接作用于世界，而是经过一连串转换工作：S_world → O → Z → C → K → Y → 评价。高价值系统必须让任务相关的价值结构穿过这条管线并被保存。恰好有六处可能掉出去——就是六类原始失配。",
+      "LLM 系统不直接作用于世界，而是靠一连串转换来工作：S_world → O → Z → C → K → Y → 评价。高价值系统必须让任务相关的价值结构完整地穿过这条管线。价值恰好有六处可能掉出去，这就是六类原始失配。",
     nodes: [
       { sym: "S_world", name: "世界状态" },
       { sym: "O", name: "观测" },
@@ -161,7 +161,7 @@ const zh: LabContent = {
     ideal: "理想载荷",
     real: "实际载荷",
     loss: "价值损失",
-    aha: "价值不是在终点产生的——它要活着穿过一条线，而恰好有六处会掉出去。",
+    aha: "价值不是在终点产生的——它要活着穿过一整条管线，而恰好有六处会掉出去。",
   },
   sampling: {
     eyebrow: "02 / 采样剧场",
@@ -282,10 +282,10 @@ const zh: LabContent = {
     },
   },
   regimes: {
-    eyebrow: "04 / 三种对齐区制",
+    eyebrow: "04 / 三个对齐区间",
     title: "不是三个模型，<br>是“易”与“好”的三种关系",
     copy:
-      "同一套 p_θ 与 U 的关系，可以处在三种配置里。训练在它们之间移动你——但不保证抹平所有结构性失配。",
+      "p_θ 与 U 之间的关系，可以处在三种配置里。训练能让你在这三种配置之间移动，但不保证抹平所有结构性失配。",
     boundary: "对齐边界 · 流畅不再预测价值",
     items: {
       mediocre: {
@@ -307,7 +307,7 @@ const zh: LabContent = {
         tag: "概率与价值同向",
         desc:
           "模型擅长处理此类问题，给出的答案往往就是你期待和需要的。",
-        insight: "橙被正坐在 mint 峰上——自回归生成本身成为优势。",
+        insight: "橙色质量正好落在 mint 峰上——自回归生成本身成为优势。",
       },
     },
   },
@@ -391,7 +391,7 @@ const en: LabContent = {
     "Your environment disabled animation or lacks WebGL — the same principles are shown below as static diagrams.",
   pipeline: {
     eyebrow: "01 / VALUE PIPELINE",
-    title: "Value is a fragile payload that<br>must survive seven stations intact",
+    title: "Value is a fragile payload that<br>must survive six stations intact",
     copy:
       "An LLM system never acts on the world directly; it works through a chain of transformations: S_world → O → Z → C → K → Y → evaluation. A high-value system must carry the task-relevant value structure through this pipeline and preserve it. There are exactly six places it can fall out — the six primitive mismatches.",
     nodes: [
@@ -534,7 +534,7 @@ const en: LabContent = {
     eyebrow: "04 / THREE ALIGNMENT REGIMES",
     title: "Not three models —<br>three relationships between easy and good",
     copy:
-      "The same p_θ–U relationship can sit in three configurations. Training moves you between them — but it does not guarantee flattening every structural mismatch.",
+      "The relationship between p_θ and U can sit in three configurations. Training moves you between them, but it does not guarantee that every structural mismatch gets flattened.",
     boundary: "Alignment boundary · fluency stops predicting value",
     items: {
       mediocre: {
@@ -556,7 +556,7 @@ const en: LabContent = {
         tag: "probability and value rise together",
         desc:
           "High-value output is no longer a low-probability tail event but an easy-to-reach region. When task structure, representation and success criteria fit the model, each natural next step pushes the whole toward a better result.",
-        insight: "The orange duvet sits right on the mint peak — autoregression itself becomes an advantage.",
+        insight: "The orange mass sits right on the mint peak — autoregression itself becomes an advantage.",
       },
     },
   },

@@ -311,7 +311,7 @@ S_world
 
 ## 6. 审计发现
 
-**审计发现** 是审计工程的原子对象。它记录局部失败，并把失败连接到证据、任务对象、机制归因、修复和回归治理。
+**审计发现** 是审计工程的原子对象。它记录局部失败，并把失败连接到证据、任务特定控制对象、机制归因、修复和回归治理。
 
 最小 Audit Finding schema：
 
@@ -387,7 +387,7 @@ What guard will check whether the change works?
 }
 ```
 
-控制增量重要，因为它防止审计沦为一次性评论。系统只有在发现变成某个治理对象上的变化时才真正改善。硬审计修的是对象，而不是抽象机制名。
+控制增量重要，因为它防止审计沦为一次性评论。系统只有在发现变成某个治理对象上的变化时才真正改善。机制归因可以指导这种改变，但硬审计修的是对象，而不是抽象机制名。
 
 ---
 
@@ -436,7 +436,7 @@ function AUDIT_ENGINEERING_LOOP(task, artifact, control_state):
     return updated_control_state, guards, ledger_update
 ```
 
-该循环可以自动化、由人类介入，或混合执行。关键性质是：被接受的失败会被写回。
+该循环可以自动化、由人类介入，或混合执行。关键性质是：被接受的失败会通过受治理的任务对象被写回，而不是停留为抽象评论。
 
 ---
 
@@ -695,6 +695,8 @@ then the guard does not protect against that defect.
 
 ### 11.3 护栏类型
 
+不同任务需要不同护栏：
+
 | 护栏类型 | 示例 |
 |---|---|
 | Unit guard | 某个转换必须保存变量。 |
@@ -915,7 +917,7 @@ fine-grained verifier score
 }
 ```
 
-branch 在聚合前应独立工作。aggregator 应返回 consensus core、context-sensitive findings，以及 unsupported/conflicted regions，而不是只做多数投票。
+branch 在聚合前应独立工作。aggregator 应返回 consensus core、context-sensitive findings，以及 unsupported/conflicted regions，而不是只做多数投票，因为共享的模型先验、来源依赖和聚合损失可能制造虚假共识。
 
 治理上的区分是：
 
@@ -932,6 +934,8 @@ externally calibrated aggregation can buy confidence
 ---
 
 ## 14. 审计模式
+
+本节定义可复用的审计模式。
 
 ### 14.1 最小对审计
 

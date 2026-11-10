@@ -11,7 +11,7 @@ Specification mismatch occurs when the objective that an LLM system can access, 
 
 The system may satisfy the prompt while disappointing the user, pass a rubric while failing the real task, optimize a benchmark metric while violating semantic intent, produce a defensible answer while missing the decision criterion, or comply with a local instruction while damaging the global objective.
 
-This paper develops specification mismatch as the sixth primitive mismatch in the structural theory of value preservation in LLM systems. In the world-to-output pipeline, specification mismatch occupies the evaluation station: the relation between the accessible proxy objective \(\tilde{U}\) and the true task utility \(U\).
+This paper develops specification mismatch as the sixth primitive mismatch in the structural theory of value preservation in LLM systems. In the world-to-output pipeline, specification mismatch occupies the evaluation station: the relation between the accessible proxy objective $\tilde{U}$ and the true task utility $U$.
 
 The central question is not whether the system has enough facts, enough reasoning, enough probability mass, or enough local coherence. The central question is: **what exactly is the system being optimized, selected, audited, rewarded, or revised toward, and does that criterion preserve the task value that matters?**
 
@@ -133,11 +133,11 @@ That is why specification mismatch is one of the most dangerous primitive mismat
 
 ## 2. Core Definition
 
-Let \(Y\) be a candidate output, artifact, plan, query, patch, answer, or action sequence.
+Let $Y$ be a candidate output, artifact, plan, query, patch, answer, or action sequence.
 
-Let \(U(Y, S)\) be the true task utility of \(Y\) in world state \(S\). This is the value that actually matters to the user, domain, environment, institution, benchmark semantics, or downstream consequence.
+Let $U(Y, S)$ be the true task utility of $Y$ in world state $S$. This is the value that actually matters to the user, domain, environment, institution, benchmark semantics, or downstream consequence.
 
-Let \(\tilde{U}(Y, Z)\) be the accessible evaluation function used by the LLM system. This may be a prompt instruction, rubric, reward model, preference model, benchmark metric, verifier, self-critique, human label, unit test, execution result, ranking rule, policy constraint, or informal acceptance condition.
+Let $\tilde{U}(Y, Z)$ be the accessible evaluation function used by the LLM system. This may be a prompt instruction, rubric, reward model, preference model, benchmark metric, verifier, self-critique, human label, unit test, execution result, ranking rule, policy constraint, or informal acceptance condition.
 
 **Specification mismatch** occurs when:
 
@@ -145,7 +145,7 @@ Let \(\tilde{U}(Y, Z)\) be the accessible evaluation function used by the LLM sy
 rank_U(Y1, Y2) ≠ rank_Ũ(Y1, Y2)
 ```
 
-for task-relevant candidate pairs \(Y_1, Y_2\), or when optimizing \(\tilde{U}\) systematically fails to improve \(U\).
+for task-relevant candidate pairs $Y_1, Y_2$, or when optimizing $\tilde{U}$ systematically fails to improve $U$.
 
 Equivalently:
 
@@ -651,7 +651,7 @@ transition-committed specification updates
 
 ## 7. Formal Model
 
-A minimal formalization separates four objects:
+A minimal formalization separates five objects:
 
 ```text
 S: world state
@@ -749,7 +749,7 @@ Let `R_i` be a repair operator for another station. Its value depends on the obj
 Effect(R_i) = Effect(R_i | Ũ faithful to U)
 ```
 
-When \(\tilde{U}\) is badly misaligned:
+When $\tilde{U}$ is badly misaligned:
 
 ```text
 ∂U / ∂R_i may be zero or negative
@@ -1909,7 +1909,7 @@ This self-audit is important. Objective Governance does not assume the true util
 
 ## 29. Conclusion
 
-Specification mismatch is the failure of objective preservation. It occurs when the system's accessible criterion \(\tilde{U}\) diverges from the true task utility \(U\). The result is not necessarily incoherence or hallucination. The result may be a polished, compliant, well-structured artifact that optimizes the wrong target.
+Specification mismatch is the failure of objective preservation. It occurs when the system's accessible criterion $\tilde{U}$ diverges from the true task utility $U$. The result is not necessarily incoherence or hallucination. The result may be a polished, compliant, well-structured artifact that optimizes the wrong target.
 
 This mismatch is primitive because it occupies the evaluation station in the world-to-output pipeline. It cannot be reduced to missing information, state ambiguity, capability misrouting, low support, or compositional failure. A system may solve all of those and still select the wrong artifact if its objective is wrong.
 
@@ -1926,8 +1926,8 @@ Without Objective Governance, the system may become increasingly capable at opti
 | Term | Definition |
 |---|---|
 | Specification mismatch | Divergence between accessible proxy objective and true task utility. |
-| True utility \(U\) | The value that actually matters in the task context. |
-| Proxy objective \(\tilde{U}\) | The operational criterion used by the system to generate, rank, revise, or accept. |
+| True utility $U$ | The value that actually matters in the task context. |
+| Proxy objective $\tilde{U}$ | The operational criterion used by the system to generate, rank, revise, or accept. |
 | Objective Governance | Management of objectives as scoped, revisable, auditable governed objects. |
 | Objective Object | A structured representation of a success condition, rubric, proxy, or verifier contract. |
 | Proxy-risk audit | Analysis of how a proxy can be satisfied while true utility fails. |

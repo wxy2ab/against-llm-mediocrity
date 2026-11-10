@@ -55,7 +55,7 @@ Audit Engineering，中文可称为**审计工程**，是一种面向 LLM 与 Ag
 
 - **独立瓶颈**：系统可能已有足够好的提示、上下文和任务边界，却没有稳定的失败定位与回写机制。
 - **独立对象**：它治理 Audit Contract、Audit Finding、Defect Ledger、Repair Routing、Acceptance Gate、Regression Test 和 Audit Memory。
-- **独立操作**：它要求把每个问题映射回需求、上下文、控制空间、数据、工具、评价器或渲染器，而不只是"让模型批评一下"。
+- **独立操作**：它要求把每个问题映射回需求、上下文、控制空间、数据、工具、评价器、渲染器或人类边界，而不只是"让模型批评一下"。
 - **通用循环**：故事、金融研究、代码审查、战略方案、法律备忘录、产品 PRD 和复杂文档都可以使用"候选—审计—定位—回写—再生成—回归审计"。
 
 更简洁地说：
@@ -265,7 +265,7 @@ Weak Brief -> Candidate v0
 | Evaluator Delta | 审计标准本身错误或过弱 |
 | Tool/Data Delta | 需要外部工具、实时数据、计算或检索 |
 | Renderer Delta | 控制状态正确，但最终表达发生损失 |
-| Human-Governed Delta | 必须由人决定价值判断、风险偏好或商业边界 |
+| Human-Governed Delta | 必须由人决定价值判断、风险偏好、授权或商业边界 |
 
 ### 6.6 局部修复
 
@@ -488,7 +488,7 @@ open -> patched -> regression_passed -> accepted_risk -> revoked
 
 1. 生成候选方案；
 2. 由独立 Auditor 审计真实目标与候选的偏差；
-3. 由 Repair Router 把偏差路由到 prompt、context、control space、工具或验收标准；
+3. 由 Repair Router 把偏差路由到 prompt、context、control space、工具、验收标准或人类边界；
 4. 基于新控制状态生成局部修订；
 5. 由 Regression Auditor 检查旧问题是否复发；
 6. 保留历史轨迹，直到没有高价值控制增量。
@@ -497,7 +497,7 @@ open -> patched -> regression_passed -> accepted_risk -> revoked
 
 ## 11. 最小可用架构
 
-一个最小系统包含五个角色：
+一个最小系统包含七个角色：
 
 | 角色 | 职责 |
 | --- | --- |
@@ -691,7 +691,7 @@ E. D + independent evidence or model diversity
 - 明确标准下的信息抽取；
 - 一次性轻量改写；
 - 局部润色；
-- 已经处于LLM卓越区间的任务。
+- 已经处于 LLM 卓越区间的任务。
 
 治理应选择性地作用于失配边界，而不是治理每个 Token。
 

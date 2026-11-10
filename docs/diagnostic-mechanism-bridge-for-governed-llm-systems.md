@@ -273,7 +273,7 @@ The eight mechanism axes are intervention-localization axes. They identify which
 
 The eight axes are not eight new primitive value mismatches. They are derived repair coordinates used after a value-preservation mismatch has been diagnosed and turned into task-specific governed objects.
 
-## 5.1 Primitive Mismatch as Engineering Entry
+### 5.1 Primitive Mismatch as Engineering Entry
 
 Each primitive mismatch asks a distinct engineering-entry question and suggests a characteristic family of governed task objects.
 
@@ -564,7 +564,7 @@ Examples:
 
 Minimal intervention probes are not benchmark experiments in the usual empirical sense. They are causal repair-localization probes. Their purpose is to determine which mechanism axis is responsible for the observed failure once the task object and intervention operator are already clear.
 
-## 9.3 Operationalization Gate
+### 9.3 Operationalization Gate
 
 A mechanism axis should be treated as a direct repair target only when all of the following hold:
 

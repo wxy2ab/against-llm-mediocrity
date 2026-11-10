@@ -56,7 +56,7 @@ mechanism_axis ∈ eight mechanism axes | unknown | not_operationalized
 repair_layer  ∈ agent | training | hybrid
 ```
 
-本文定义这两层之间的桥接关系。它引入一个六乘八的交叉映射矩阵、一个机制画像对象、一条修复层选择规则，以及一个从审计到训练的反馈闭环。它还澄清机制层与审计工程、受治理对象模型以及状态治理智能体范式（SGAR）之间的关系。结果是一个统一的诊断与修复架构：原始失配解释价值失败；机制画像定位修复；审计发现产出控制增量；受治理对象存储修复知识；SGAR 把已验证变化提交进硬状态；反复出现的学习组件失败则可被提升为训练课程。
+本文定义这两层之间的桥接关系。它引入一个六乘八的交叉映射矩阵、一个机制画像对象、一道可操作化门槛、一条修复层选择规则，以及一个从审计到训练的反馈闭环。它还澄清机制层与审计工程、受治理对象模型以及状态治理智能体范式（SGAR）之间的关系。结果是一个统一的诊断与修复架构：原始失配解释价值失败；任务特定控制对象暴露被直接修复的对象；机制画像定位组件归因；审计发现产出控制增量；受治理对象存储修复知识；SGAR 把已验证变化提交进硬状态；反复出现且已操作化的学习组件失败则可被提升为训练课程。
 
 修正后的中心句是：
 
@@ -97,7 +97,7 @@ M_θ = (R̂_θ, Ω_sys, B_θ, T̂_θ, A_sys, π_θ, r_θ, D)
 
 第二，一次失败可能只有一种原始失配诊断，却有多个机制成因。反过来，一个单一机制缺陷也可能表现为若干种原始失配症状。
 
-第三，机制层是推理时治理与训练时改进之间缺失的桥梁。Agent 层修复处理局部、可逆、任务特定的失败。训练层修复处理反复出现、跨任务、可摊销的学习组件失败。
+第三，机制层是推理时治理与训练时改进之间缺失的桥梁，但前提是任务失败已经通过受治理控制对象被操作化。Agent 层修复处理局部、可逆、任务特定的失败。训练层修复处理反复出现、跨任务、可摊销的学习组件失败。
 
 第四，这座桥应通过 `mismatch_type`、`control_object_ref`、`control_object_type`、`mechanism_axis`、`operationalization_status`、`repair_layer` 和 `mechanism_profile` 字段在对象模型中被形式化。
 
@@ -143,7 +143,7 @@ M_θ = (R̂_θ, Ω_sys, B_θ, T̂_θ, A_sys, π_θ, r_θ, D)
 机制干预切法问的是：
 
 ```text
-系统的哪个组件应该被修复？
+任务对象存在之后，哪个组件级机制解释或放大了这次失败？
 ```
 
 这种切法会得到八条机制轴：
@@ -159,7 +159,7 @@ M_θ = (R̂_θ, Ω_sys, B_θ, T̂_θ, A_sys, π_θ, r_θ, D)
 8. Search / execution
 ```
 
-这些是 **修复定位轴**。它们分类的是需要被改变的组件。
+这些是 **修复定位轴**。它们分类的是失败背后的组件级解剖结构，而不是工程师直接编辑的第一个对象。
 
 例如，同一个 Text-to-SQL 失败，可能需要改变观测通道、schema 表征、SQL 能力支持、决定是否调用 join-path search 的路由器、执行引导的搜索过程，或评价 rubric。单靠原始失配本身，并不能决定这些组件里哪一个才是真正的修复目标。
 
@@ -237,7 +237,7 @@ primitive mismatch diagnosis
 
 ## 4. 六类原始失配
 
-六类原始失配是价值保存诊断轴。它们来自世界到输出管线中结构上不同的站点。
+六类原始失配是价值保存诊断轴。它们来自世界到输出管线中结构上不同的站点。它们不只是解释性标签。在工程实践中，它们是构造受治理任务对象时最先使用的、以任务为锚的入口。
 
 | 原始失配 | 价值保存问题 | 典型诊断信号 |
 |---|---|---|
@@ -254,7 +254,7 @@ primitive mismatch diagnosis
 
 ## 5. 八条机制轴
 
-八条机制轴是干预定位轴。它们识别一个近似 LLM 系统中应改变哪个组件。
+八条机制轴是干预定位轴。它们识别的是：一旦失败已经通过任务特定对象被操作化，近似 LLM 系统中的哪个组件被牵涉。
 
 | 机制轴 | 组件 | 核心问题 | 典型修复层 |
 |---|---|---|---|
@@ -545,7 +545,7 @@ Audit Finding
 | Capability routing | 增加一条路由规则、触发边界、模式切换或角色分离。 |
 | Search / execution | 增加分支、回溯、候选排序、验证器调用，或执行引导搜索。 |
 
-最小干预探针不是通常意义上的 benchmark 实验。它们是因果性的修复定位探针。其目的是确定：哪个修复目标要为观察到的失败负责。
+最小干预探针不是通常意义上的 benchmark 实验。它们是因果性的修复定位探针。其目的是在任务对象和干预算子都已明确之后，确定哪条机制轴要为观察到的失败负责。
 
 ### 9.1 探针结果
 
@@ -1086,7 +1086,7 @@ SGAR transition
 Agent-layer audit finds a failure
   → primitive mismatch diagnosis
   → mechanism profile
-  → repair target is classified as system or learning component
+  → mechanism axis is classified as system or learning component
   → system component: repair at agent layer
   → learning component: patch at agent layer if needed
   → recurrent learning-component defect enters defect ledger
@@ -1174,25 +1174,25 @@ Text-to-SQL 中的一个支持失配，可能对应若干种机制画像。
 ```text
 Profile A:
   mismatch_type = support
-  repair_target = capability_support
+  mechanism_axis = capability_support
   repair_layer = training or hybrid
   interpretation = the model lacks support for a rare SQL pattern
 
 Profile B:
   mismatch_type = support
-  repair_target = capability_routing
+  mechanism_axis = capability_routing
   repair_layer = agent or training
   interpretation = the model has schema-audit capability but does not activate it
 
 Profile C:
   mismatch_type = support
-  repair_target = search_execution
+  mechanism_axis = search_execution
   repair_layer = agent
   interpretation = the correct join path could be found through controlled search but direct generation prunes it
 
 Profile D:
   mismatch_type = support
-  repair_target = observation_availability
+  mechanism_axis = observation_availability
   repair_layer = agent
   interpretation = the relevant schema/value evidence was unavailable
 ```
@@ -1305,7 +1305,7 @@ primitive symptoms:
 
 ```text
 Six: What kind of value failure occurred?
-Eight: Which component should be repaired?
+Eight: Which component-level mechanism is implicated?
 ```
 
 把两者压成同一套分类，只会让二者都变得不那么有用。
@@ -1489,7 +1489,21 @@ compound
 unknown
 ```
 
-### A.2 Mechanism Axis Enum
+### A.2 Task Object Type Enum
+
+```text
+sql_dag
+claim_evidence_map
+state_table
+router_rule
+rubric
+schema_view
+value_binding_table
+dependency_graph
+other
+```
+
+### A.3 Mechanism Axis Enum
 
 ```text
 specification_reward
@@ -1501,9 +1515,19 @@ capability_support
 capability_routing
 search_execution
 unknown
+not_operationalized
 ```
 
-### A.3 Repair Layer Enum
+### A.4 Operationalization Status Enum
+
+```text
+direct
+derived
+partial
+not_operationalized
+```
+
+### A.5 Repair Layer Enum
 
 ```text
 agent
@@ -1512,7 +1536,7 @@ hybrid
 unknown
 ```
 
-### A.4 Mechanism Role Enum
+### A.6 Mechanism Role Enum
 
 ```text
 primary
@@ -1521,7 +1545,7 @@ downstream
 unknown
 ```
 
-### A.5 Control Delta Type Enum
+### A.7 Control Delta Type Enum
 
 ```text
 SpecificationDelta
@@ -1637,9 +1661,12 @@ SearchExecutionDelta
   "audit_finding": {
     "id": "finding.example",
     "mismatch_type": "support",
-    "repair_target": "capability_routing",
+    "control_object_ref": "router_rule.schema_audit_trigger",
+    "control_object_type": "router_rule",
+    "mechanism_axis": "capability_routing",
+    "operationalization_status": "direct",
     "repair_layer": "hybrid",
-    "repair_target_role": "primary",
+    "mechanism_role": "primary",
     "mechanism_profile": "mechanism_profile.example",
     "control_delta": "control_delta.example",
     "regression_guard": "regression_guard.example"
@@ -1655,7 +1682,9 @@ SearchExecutionDelta
   },
   "control_delta": {
     "id": "control_delta.example",
-    "target_mechanism": "capability_routing",
+    "target_object_ref": "router_rule.schema_audit_trigger",
+    "target_object_type": "router_rule",
+    "mechanism_axis": "capability_routing",
     "target_layer": "hybrid",
     "delta_type": "CapabilityRoutingDelta",
     "change": "Activate schema-audit mode when lexical overlap is high but join path is uncertain."

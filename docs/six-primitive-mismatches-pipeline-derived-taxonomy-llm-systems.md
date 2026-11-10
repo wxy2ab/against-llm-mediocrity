@@ -45,7 +45,7 @@ These correspond to six primitive mismatches:
 
 The document advances two structural claims. First, the taxonomy is relatively complete under the pipeline abstraction: any task-value failure in an LLM system modeled as this pipeline must occur at one or more of these stations or through their interactions.
 
-Second, the six mismatches are operationally independent: each can be perturbed while holding the others fixed, and each requires a distinct class of repair.
+Second, the six mismatches are operationally independent: each can be perturbed while holding the others approximately fixed, and each requires a distinct class of repair.
 
 The document also explains how primitive mismatches combine into compound failures. The strongest compound failures are not merely additive. They are often super-additive because repair operators are coupled across pipeline stations.
 
@@ -227,6 +227,8 @@ For example, if a decisive variable is missing from the representation, support 
 
 The failure must admit a minimal pair: a pair of systems or task instances that differ primarily at that station while other stations are held fixed, and where the perturbation changes task value.
 
+This criterion makes independence operational. The taxonomy is not merely semantic; it is tied to possible counterfactual interventions.
+
 ### 5.4 Irreducibility / Atomicity Criterion
 
 A proposed refinement does not count as a new primitive mismatch merely because it is descriptively useful.
@@ -246,8 +248,6 @@ A new primitive mismatch requires both:
 
 This is why the count stops at six. Each station may have many subtypes, but a subtype becomes primitive only if it creates a new intervention-distinguishable station rather than a finer description of the same one.
 
-This criterion makes independence operational. The taxonomy is not merely semantic; it is tied to possible counterfactual interventions.
-
 ---
 
 ## 6. Primitive Mismatch 1: Observation-Representation Mismatch
@@ -266,7 +266,7 @@ Let:
 Z = psi(phi(S_world))
 ```
 
-Let `V*` be a set of task-critical variables. Observation-representation mismatch exists when there are two world states `S1` and `S2` such that:
+Let `V*` be a set of task-critical variables. If there are two world states `S1` and `S2` such that:
 
 ```text
 U*(S1) != U*(S2)
@@ -278,7 +278,7 @@ but:
 psi(phi(S1)) ~= psi(phi(S2))
 ```
 
-from the perspective of the system's policy, evaluator, or control procedure, the current `Z` has decision-relevant aliasing. Observation-representation mismatch exists only if the feasible channel set also contains some `(phi', psi')` that can expose the distinction in `Z'` at an allowed cost. If no feasible channel can distinguish `S1` and `S2`, this is irreducible partial observability; the system should act on the correct belief state rather than be diagnosed with a missing-variable failure.
+from the perspective of the system's policy, evaluator, or control procedure, then the current `Z` has decision-relevant aliasing. Observation-representation mismatch exists only if the feasible channel set also contains some `(phi', psi')` that can expose the distinction in `Z'` at an allowed cost. If no feasible channel can distinguish `S1` and `S2`, this is irreducible partial observability; the system should act on the correct belief state rather than be diagnosed with a missing-variable failure.
 
 ### 6.3 Diagnostic Question
 
@@ -1734,7 +1734,7 @@ local-to-global aggregation
 objective specification
 ```
 
-The taxonomy is relatively complete under this abstraction because these are the primitive places where task value can be lost. It is operationally independent because each station can fail while the others are held fixed and each requires a distinct repair target.
+The taxonomy is relatively complete under this abstraction because these are the primitive places where task value can be lost. It is operationally independent because each station can fail while the others are held approximately fixed and each requires a distinct repair target.
 
 The practical value of the taxonomy is not classification for its own sake. Its value is repair routing. A failure diagnosed as observation-representation mismatch should not be repaired by more sampling. A failure diagnosed as support mismatch should not be repaired merely by polishing the rubric. A failure diagnosed as specification mismatch should not be repaired by local fluency improvements. Each mismatch points to a different control delta, GKO family, regression guard, and hard-state commitment.
 

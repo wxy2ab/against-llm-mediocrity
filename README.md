@@ -30,7 +30,7 @@ Here is the vocabulary the site builds on, with a one-line definition for each:
 - **Governed Escalation Object (GEsO)** — A stored rule for when to ask a human, what to ask, and whom to ask.
 - **Audit engineering** — Treating auditing as an independent layer that localizes failures and writes fixes back into control objects, rather than as a post-hoc scorer.
 - **State-Governed Agent Regime (SGAR)** — An LLM-oriented state-governance and dependency-decomposition method that renders small local solving surfaces from globally authoritative state, composes stages through public protocols, and commits only verified state deltas.
-- **Governed human-machine collaboration** — Organizing collaboration around control variables (AI advances the searchable parts; humans govern value, preference, and responsibility) instead of around task splits.
+- **Governed human-AI collaboration** — Organizing collaboration around control variables (AI advances the searchable parts; humans govern value, preference, and responsibility) instead of around task splits.
 
 Terminology note: the site now uses `GExO` for `Governed Execution Object` and `GEsO` for `Governed Escalation Object`, to avoid overloading `GEO`.
 

@@ -17,7 +17,7 @@ ID sets and canonicalize their serialization, but it **does not confirm** the
 preregistered claim that this contract improves strict end-to-end success by at
 least 20 percentage points: SEMANTIC-SET scores 30/32 versus 28/32 for STRICT-LIST,
 a paired difference of **+6.25 points** with a 95% CI of **[−6.25, +18.75] points**
-and exact sign-flip \(p=0.625\).
+and exact sign-flip $p=0.625$.
 
 ## Technical summary
 
@@ -44,7 +44,7 @@ V10 therefore separates:
 | SEMANTIC-SET success | **30/32 (93.75%)** |
 | Paired difference | **+0.0625** |
 | 95% cluster-bootstrap CI | **[−0.0625, 0.1875]** |
-| Exact sign-flip \(p\) | **0.625** |
+| Exact sign-flip $p$ | **0.625** |
 | Preregistered minimum effect | **+0.20** |
 | Claim state | **`failed_pre_registered_gate`** |
 
@@ -59,34 +59,34 @@ exactly zero.
 Suppose a ready layer has no internal dependencies and its task meaning is the
 mapping
 
-\[
+```math
 M=\{node\_id\mapsto value\}.
-\]
+```
 
-For any permutation \(\pi\),
+For any permutation $\pi$,
 
-\[
-\operatorname{Semantics}(\pi(M))=\operatorname{Semantics}(M).
-\]
+```math
+\mathop{\mathrm{Semantics}}\nolimits(\pi(M))=\mathop{\mathrm{Semantics}}\nolimits(M).
+```
 
 If an interface nevertheless accepts only one list order, it introduces a
 representation constraint that is stricter than the task semantics:
 
-\[
+```math
 \text{semantic validity}
 \not\Rightarrow
 \text{strict serialization validity}.
-\]
+```
 
 A sound canonicalizer can remove this extra failure surface:
 
-\[
+```math
 \text{validate ID set, uniqueness, cardinality, and value domain}
 \rightarrow
 \text{sort by authoritative runtime order}
 \rightarrow
 \text{compile and execute}.
-\]
+```
 
 This is a conditional theorem about the interface. It applies only when order is
 not part of the domain meaning.
@@ -110,7 +110,7 @@ benefit depends on the base rate of **order-only false rejects**.
 
 1. **V9 retrospective audit — motivation only.** Recompute the semantic content of
    77 historical order failures. It is descriptive and does not enter the V10
-   confidence interval or \(p\)-value.
+   confidence interval or $p$-value.
 2. **Offline canonicalizer adoption gate.** Test valid and adversarial sets for
    acceptance, rejection, idempotence, and non-mutation.
 3. **Paired confirmatory study.** Run 32 new frozen DAG instances once under each
@@ -119,7 +119,7 @@ benefit depends on the base rate of **order-only false rejects**.
 ### 2.2 Paired contracts
 
 Both arms use the same DeepSeek-V4-Flash configuration, Chinese prompts,
-`thinking=False`, \(N\in\{16,24\}\), frozen DAGs, ready-set and completed-ledger
+`thinking=False`, $`N\in\{16,24\}`$, frozen DAGs, ready-set and completed-ledger
 exposure, tool schema, output cardinality, 300-second budget, and global verifier.
 Only the acceptance contract changes:
 
@@ -130,7 +130,7 @@ Only the acceptance contract changes:
 
 The primary endpoint is budgeted strict success. The preregistered claim requires a
 paired improvement of at least +0.20, a CI lower bound above zero, and exact
-sign-flip \(p<0.05\), subject to data-quality and floor/ceiling gates.
+sign-flip $p<0.05$, subject to data-quality and floor/ceiling gates.
 
 ## 3. Data and results
 
@@ -216,7 +216,7 @@ does not establish a cost reduction.
 
 Theory says canonicalization removes **avoidable order-only rejection**. It does
 not say that order-only rejection is frequent in every workload. V9 shows a hard
-matrix where it is frequent; V10 uses an easier \(N=16/24\) matrix in which the
+matrix where it is frequent; V10 uses an easier $N=16/24$ matrix in which the
 STRICT arm has no terminal order failures. The studies are complementary, not
 contradictory:
 
@@ -258,7 +258,7 @@ These are engineering transfer hypotheses, not domains validated by V10.
 
 - One DeepSeek configuration, Chinese prompts, synthetic GF(2) DAGs, and 32 paired
   instances.
-- \(N=16/24\) is easier than the v9 \(N=24/48\) protocol.
+- $N=16/24$ is easier than the v9 $N=24/48$ protocol.
 - The 3.125-point paired resolution and confidence interval do not support a
   zero-effect claim.
 - A decisive follow-up should overlap the non-floor difficulty range of v8/v9,

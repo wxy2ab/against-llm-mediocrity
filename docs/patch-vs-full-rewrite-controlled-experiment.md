@@ -15,7 +15,7 @@ This experiment isolates one interface question:
 
 > For sparse one-bit repair, with instance, candidate, corruption, model configuration, and budget matched, is it more reliable to have the model submit a strict patch for deterministic execution than to require the model to emit the complete repaired object?
 
-Across 160 new holdout instances, four lengths \(N\in\{96,145,240,384\}\), three repeats per condition, and a 300-second budget:
+Across 160 new holdout instances, four lengths $`N\in\{96,145,240,384\}`$, three repeats per condition, and a 300-second budget:
 
 | DeepSeek-V4-Flash | Patch | Full rewrite | Patch − rewrite |
 |---|---:|---:|---:|
@@ -56,7 +56,7 @@ necessary, remove physical address resolution from the model before deciding
 between Patch and Rewrite. Do not hard-code a density crossover from current data.**
 
 Artifact-v9 does not rerun Patch versus Rewrite. It adds a contract boundary:
-effort-matched ready/ledger arms all hit a strict ordered-submission floor, and
+all four effort-matched ready/ledger arms hit a strict ordered-submission floor, and
 located/causal recovery receipts show positive point estimates without passing
 their confirmatory gates. The Patch/Rewrite verdict is unchanged. The additional
 engineering lesson is to separate semantic edit-set correctness from serialization
@@ -98,7 +98,7 @@ All six conditions share rules, candidate, and truth. Paired conditions change o
 | ID | Condition | Information supplied | Required submission | Question answered |
 |---|---|---|---|---|
 | I-P | infer patch | Rules + one-error candidate | Strict one-edit patch JSON | End-to-end patch repair |
-| I-R | infer full rewrite | Same as I-P | Complete repaired \(N\)-bit sequence | End-to-end full rewrite |
+| I-R | infer full rewrite | Same as I-P | Complete repaired $N$-bit sequence | End-to-end full rewrite |
 | O-P | oracle-plan patch | Candidate + authoritative edit plan | Strict patch JSON | Patch delivery with known plan |
 | O-R | oracle-plan full rewrite | Same edit plan as O-P | Complete repaired sequence | Full delivery with known plan |
 | I-PR | patch then rewrite | Same as I-P/I-R | Patch + complete repaired sequence | Within-response delivery decomposition |
@@ -106,12 +106,12 @@ All six conditions share rules, candidate, and truth. Paired conditions change o
 
 The primary estimand is:
 
-\[
+```math
 \Delta =
 P(\mathrm{system\_exact\_success}\mid I\text{-}P)
 -
 P(\mathrm{system\_exact\_success}\mid I\text{-}R).
-\]
+```
 
 Output length and serialization cost are part of the interface treatment, not confounders to remove. The study asks whether reducing the final commitment surface to a patch improves system-level delivery.
 
@@ -122,7 +122,7 @@ Output length and serialization cost are part of the interface treatment, not co
 ### 3.1 Instances and Configuration
 
 - 160 new confirmatory holdouts, absent from v1/v2;
-- \(N\in\{96,145,240,384\}\), 40 instances per length;
+- $`N\in\{96,145,240,384\}`$, 40 instances per length;
 - 3 repeats per condition;
 - Chinese prompts;
 - temperature=0, top_p=1, max_tokens=64000;
@@ -182,16 +182,16 @@ Timeout, max-token, format-invalid, returned-wrong, empty-visible, and transport
 
 The sign-flip test used 100,000 Monte Carlo draws and observed no equally or more extreme random flip. It must therefore be reported as:
 
-\[
+```math
 p<10^{-5}
 \quad\text{(Monte Carlo resolution)}.
-\]
+```
 
-It is not an exact \(p=0\).
+It is not an exact $p=0$.
 
 ### 4.1 Results by Length
 
-| \(N\) | I-P patch | I-R full rewrite | Run-level difference |
+| $N$ | I-P patch | I-R full rewrite | Run-level difference |
 |---:|---:|---:|---:|
 | 96 | 104/120 (86.7%) | 92/120 (76.7%) | +10.0 pp |
 | 145 | 85/120 (70.8%) | 27/120 (22.5%) | +48.3 pp |
@@ -200,9 +200,9 @@ It is not an exact \(p=0\).
 
 Three boundaries matter:
 
-1. all four frozen lengths define the effect; \(N=145\) cannot be selected alone;
+1. all four frozen lengths define the effect; $N=145$ cannot be selected alone;
 2. the patch advantage is not monotonic in length;
-3. patch does not eliminate scale difficulty—its own success is only 9.2% at \(N=384\).
+3. patch does not eliminate scale difficulty—its own success is only 9.2% at $`N=384`$.
 
 The correct interpretation is that patch reduces delivery burden without removing the combined difficulty of plan inference, global computation, and finite budget.
 
@@ -242,7 +242,7 @@ O-P and O-R receive exactly the same authoritative edit plan and differ only in 
 | Strict success | 240/240 (100%) | 142/240 (59.2%) | **+40.8 pp** |
 | Instance-level bootstrap 95% CI | | | **[+31.3, +50.4] pp** |
 
-O-P is 60/60 at every length. O-R falls from 58/60 at \(N=96\) to 7/60 at \(N=384\).
+O-P is 60/60 at every length. O-R falls from 58/60 at $N=96$ to 7/60 at $`N=384`$.
 
 Because position, old value, and new value are already supplied, the difference cannot be attributed to error localization. It directly shows:
 
@@ -252,9 +252,9 @@ Because position, old value, and new value are already supplied, the difference 
 
 COPY succeeds at 30/30 for every length:
 
-\[
+```math
 120/120=100\%.
-\]
+```
 
 Strings of length 96–384 are therefore not intrinsically impossible to emit. O-R is more specifically difficult at:
 
@@ -288,7 +288,7 @@ Forty instances were fixed before confirmatory results were inspected. Both I-P 
 |---|---:|---:|---:|
 | Strict success | 83/120 (69.2%) | 52/120 (43.3%) | **+25.8 pp** |
 | Instance-level bootstrap 95% CI | | | **[+15.0, +37.5] pp** |
-| Sign-flip | | | \(p=4.0\times10^{-5}\) |
+| Sign-flip | | | $p=4.0\times10^{-5}$ |
 
 A descriptive same-cohort comparison for the 40 preallocated instances is:
 
@@ -325,7 +325,7 @@ This is not a single-call survival curve, and 300-second and 900-second outcomes
 - the effect is pure “semantic ability” rather than budgeted delivery behavior;
 - one-bit GF(2) repair transfers directly to code, databases, configuration, or documents;
 - patch removes the need for global verification;
-- plan inference and delivery are fully separated in the primary I-P/I-R comparison.
+- plan inference and delivery are fully separated in the primary I-P/I-R comparison;
 - artifact-v5 proves end-to-end Agent-level Patch superiority;
 - the edit-density crossover has been identified.
 
@@ -353,16 +353,16 @@ two-arm zero floor and observed per-run payload telemetry was not retained.
 
 ## 9. Relation to the Theoretical Derivation
 
-For complete-object length \(N\) and a patch touching \(k\) positions:
+For complete-object length $N$ and a patch touching $k$ positions:
 
-\[
+```math
 L_{\text{rewrite}}=Nc_r,
-\]
+```
 
-\[
+```math
 L_{\text{patch}}
 =c_0+k(c_p+\lceil\log_2N\rceil).
-\]
+```
 
 With sparse change, a correct executor, and delivery reliability that declines monotonically with commitment surface, patch delivery dominance follows conditionally.
 
@@ -382,7 +382,7 @@ The experiment does not locate the edit-density crossover in real tasks or prove
 ### 9.1 Why Artifact-v4 Does Not Reproduce the Patch Advantage
 
 The completed artifact-v4 compares a five-bit candidate at
-\(N\in\{24,32,48\}\):
+$`N\in\{24,32,48\}`$:
 
 | Condition | Strict success | Contrast |
 |---|---:|---:|
@@ -392,7 +392,7 @@ The completed artifact-v4 compares a five-bit candidate at
 This near-zero result neither overturns v3 nor belongs in a pooled estimate with
 v3. Artifact-v4 uses five edits and shorter objects, making patch addresses and
 values relatively more expensive, while both conditions are timeout-floor
-censored. Artifact-v3 uses one-bit sparse repair and long \(N=96\)–384 objects.
+censored. Artifact-v3 uses one-bit sparse repair and long $N=96$–384 objects.
 
 Together, the studies support a more precise engineering conclusion:
 
@@ -410,13 +410,13 @@ simultaneously shows why an Agent needs a plan-verification gate.
 
 The system implication is multiplicative:
 
-\[
+```math
 P(\text{end-to-end success})
 \approx
 P(\text{plan correct})
 \times
 P(\text{delivery succeeds}\mid\text{plan correct}).
-\]
+```
 
 A stronger editor changes the second term. It does not automatically improve the
 first.
@@ -544,8 +544,8 @@ not.
 | Question | Why it matters | Recommended comparison |
 |---|---|---|
 | Cross-configuration replication | Determines whether the claim can move beyond one deployment configuration | I-P / I-R / O-P / O-R on a low-cost, version-fixed second model |
-| Edit-density crossover | Determines when routing should switch from patch to regional or full rewrite | \(k/N\) gradient × patch / region rewrite / full rewrite |
-| Regional coupling | The same \(k\) may have different difficulty under different dependency density | Dispersed edits vs. edits inside one dependency subgraph |
+| Edit-density crossover | Determines when routing should switch from patch to regional or full rewrite | $k/N$ gradient × patch / region rewrite / full rewrite |
+| Regional coupling | The same $k$ may have different difficulty under different dependency density | Dispersed edits vs. edits inside one dependency subgraph |
 | Real-domain transfer | Determines the engineering external validity of GF(2) | Code, JSON/configuration, database migration, structured documents |
 | Verifier / executor reliability | Determines whether interface advantage becomes commit safety | Correct plan × executor failure × verifier false acceptance |
 | Budget and commitment surface | Distinguishes a budget shift from a more stable interface law | Independently allocated budget × output length × visible/reasoning tokens |
@@ -607,9 +607,9 @@ This extends the routing rule: prefer runtime-resolved IDs, and treat Patch's V1
 evidence as a cost advantage rather than an additional reliability theorem.
 
 Artifact-v12 deliberately moves the same delivery question outside the V11
-ceiling by using larger \(N=96/144\) configurations. Under a correct frozen
+ceiling by using larger $N=96/144$ configurations. Under a correct frozen
 plan, Sparse Patch scores 24/24 and Sparse Full Rewrite 17/24:
-\(\Delta=+0.2917\), 95% CI [0.125, 0.4583], Holm \(p=0.03125\). All seven
+$\Delta=+0.2917$, 95% CI [0.125, 0.4583], Holm $p=0.03125$. All seven
 discordant tasks are Patch success / Full timeout under the 300-second endpoint.
 This is new confirmatory reliability evidence for sparse budgeted delivery, but
 not proof of unlimited-budget semantic superiority. Regional Rewrite is 24/24

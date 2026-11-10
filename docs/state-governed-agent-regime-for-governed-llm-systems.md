@@ -1,6 +1,6 @@
 # State-Governed Agent Regime for Governed LLM Systems
 
-**Globally Conditioned Local Solving, Public Protocols, and Hard-State Authority**
+**Globally Conditioned Local Solving, Public Protocols, and Hard-State Authority**  
 **Working Draft v0.1**  
 
 ---
@@ -238,10 +238,10 @@ This can be compressed into:
 
 Let the current authoritative state be `S_i`, and let the current stage receive the solving surface:
 
-\[
+```math
 P_i = \Pi_i(S_i)
-= \Pi_i(G, C_{\le i}^{active}, E_{<i}^{accepted}, R_{<i}^{open}, A_i, L_i)
-\]
+= \Pi_i(G, C_{\le i}^{active}, E_{< i}^{accepted}, R_{< i}^{open}, A_i, L_i)
+```
 
 where:
 
@@ -254,10 +254,10 @@ where:
 
 The private design and implementation of the current stage can be written as:
 
-\[
+```math
 X_i^* = \arg\max_{X_i} Q(X_i \mid P_i)
-= \arg\max_{X_i} Q(X_i \mid G,C_{\le i},E_{<i},R_{<i},A_i,L_i)
-\]
+= \arg\max_{X_i} Q(X_i \mid G,C_{\le i},E_{< i},R_{< i},A_i,L_i)
+```
 
 Here `X_i` may include private decomposition, candidate search, local implementation, and temporary reasoning. SGAR does not require future `X_{i+1}, X_{i+2}` to be decided in advance. It requires that when those future solves occur, they can read the correct versions of `G, C, E, R, A, L`. The global structure of SGAR is therefore closer to a dependency and cognitive-convergence framework than to an execution graph that pre-enumerates future implementation details.
 
@@ -1127,7 +1127,7 @@ separate proposal, execution, verification, and commitment roles where risk requ
 
 ## 15. Authority Separation
 
-SGAR benefits from separating four roles:
+SGAR benefits from separating five roles:
 
 | Role | Function |
 |---|---|

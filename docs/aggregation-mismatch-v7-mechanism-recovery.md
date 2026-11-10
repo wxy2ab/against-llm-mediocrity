@@ -24,8 +24,8 @@ DeepSeek-V4-Flash model calls and 48 offline deterministic-compiler cases to ask
 
 | Comparison | Strict success | Paired difference and 95% CI | Verdict |
 |---|---:|---:|---|
-| TOPO vs PRESENT | 20/48 vs 15/48 | +10.4 pp [2.1, 20.8] | **Failed gate:** below +15 pp; Holm \(p=0.125\) |
-| LOCATED vs MASKED | 13/48 vs 6/48 | +14.6 pp [−2.1, 31.2] | **Failed gate:** CI crosses zero; Holm \(p=0.143\) |
+| TOPO vs PRESENT | 20/48 vs 15/48 | +10.4 pp [2.1, 20.8] | **Failed gate:** below +15 pp; Holm $p=0.125$ |
+| LOCATED vs MASKED | 13/48 vs 6/48 | +14.6 pp [−2.1, 31.2] | **Failed gate:** CI crosses zero; Holm $p=0.143$ |
 | Deterministic compiler | 48/48 | exact rate = 1.0; zero invariant violations | **Passed adoption gate** |
 | Rewrite vs LOCATED | 26/48 vs 13/48 | +27.1 pp [6.2, 47.9] | **Reported contrast:** no directional pass gate |
 
@@ -55,7 +55,7 @@ instance-bootstrap 95% intervals over 48 paired instances.
 
 An agent episode can be separated into three failure layers:
 
-\[
+```math
 P(\text{system success})
 =
 P(\text{plan correct})
@@ -63,7 +63,7 @@ P(\text{plan correct})
 P(\text{delivery correct}\mid\text{plan correct})
 \times
 P(\text{commit safe}\mid\text{plan correct},\text{delivery correct}).
-\]
+```
 
 This factorization is a diagnostic decomposition, not an independence assumption.
 Artifact-v5 showed that a Patch tool does not repair an incorrect plan. Artifact-v6
@@ -73,11 +73,11 @@ correct and studies delivery and commit behavior.
 
 ### 1.2 Topological order is a structural prediction, not a model-performance theorem
 
-For a DAG node \(v\), an explicit executor can compute
+For a DAG node $v$, an explicit executor can compute
 
-\[
+```math
 x_v=f_v(x_{\mathrm{pa}(v)})
-\]
+```
 
 once every predecessor is available. A topological scheduler never needs to read an
 unresolved predecessor. Reverse-topological presentation requires delayed
@@ -95,12 +95,12 @@ A LOCATED receipt contains all usable information in a MASKED receipt plus field
 paths, addresses, and current hashes. For an optimal policy that can ignore extra
 fields:
 
-\[
+```math
 V^*(I_{\text{located}})\ge V^*(I_{\text{masked}}).
-\]
+```
 
 This information-monotonicity result does not imply that every fixed prompted policy
-\(P_\theta\) must perform better. A deployed model may ignore, misread, or be
+$P_\theta$ must perform better. A deployed model may ignore, misread, or be
 distracted by additional detail. B1's failed gate is therefore not a contradiction
 of information theory; it says the deployment benefit was not confirmed.
 
@@ -108,18 +108,18 @@ of information theory; it says the deployment benefit was not confirmed.
 
 Let:
 
-- \(s\) be authoritative state with a version/hash;
-- \(p\) be a verified plan bound to \(s\);
-- \(C(s,p)\) compile the plan into native tool arguments;
-- \(E\) be a deterministic executor;
-- \(V\) be a global verifier.
+- $s$ be authoritative state with a version/hash;
+- $p$ be a verified plan bound to $s$;
+- $C(s,p)$ compile the plan into native tool arguments;
+- $E$ be a deterministic executor;
+- $V$ be a global verifier.
 
 If the compiler implements the plan semantics correctly, state still matches,
 execution is atomic, and the verifier is sound for the protected invariants, then:
 
-\[
+```math
 V(E(s,C(s,p)))=1.
-\]
+```
 
 Under these conditions, another model call adds no task information. It adds a
 stochastic serialization and tool-contract failure surface. V7-B2 validates the
@@ -135,11 +135,11 @@ collateral-change risk.
 
 The correct engineering object is therefore a conditional router:
 
-\[
+```math
 \text{route}
 =g(\text{plan confidence},\text{edit density},\text{address stability},
 \text{compiler availability},\text{verifier coverage}).
-\]
+```
 
 V7's Rewrite−Located result says that Rewrite was the better model fallback under
 this one-shot recovery contract. It does not overturn the conditional Patch
@@ -170,8 +170,8 @@ day-level drift.
 
 The 48 new DAG instances span:
 
-- \(N\in\{8,16\}\);
-- frontier \(\in\{2,8\}\);
+- $`N\in\{8,16\}`$;
+- frontier $`\in\{2,8\}`$;
 - four cells with 12 instances each.
 
 Both conditions share graph, truth, information, indexed JSON schema, parser, and
@@ -190,8 +190,8 @@ completion within budget.
 
 The 48 new sparse-repair instances span:
 
-- \(N\in\{96,384\}\);
-- \(k\in\{1,10,20\}\);
+- $`N\in\{96,384\}`$;
+- $`k\in\{1,10,20\}`$;
 - six cells with eight instances each;
 - four injected delivery failures with 12 instances each.
 
@@ -238,9 +238,9 @@ rate."
 
 Paired recomputation also matches the machine summary:
 
-- A1: 5 positive, 0 negative, 43 ties; raw \(p=0.0625\), Holm \(p=0.125\);
-- B1: 12 positive, 5 negative, 31 ties; raw/Holm \(p=0.143463\);
-- Rewrite−Located: 22 positive, 9 negative, 17 ties; raw \(p=0.029449\), outside
+- A1: 5 positive, 0 negative, 43 ties; raw $p=0.0625$, Holm $p=0.125$;
+- B1: 12 positive, 5 negative, 31 ties; raw/Holm $p=0.143463$;
+- Rewrite−Located: 22 positive, 9 negative, 17 ties; raw $p=0.029449$, outside
   the confirmatory A1/B1 directional gate;
 - all intervals use 10,000 paired instance bootstraps.
 

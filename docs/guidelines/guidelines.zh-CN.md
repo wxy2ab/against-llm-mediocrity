@@ -104,7 +104,7 @@ English: [Agent Guidelines Usage and Reference Router](./guidelines.md)
 
 **依据**
 
-- [观测—表征失配与通道治理](../observation-representation-mismatch-channel-governance-llm-systems.zh-CN.md)
+- [观测-表征失配与通道治理](../observation-representation-mismatch-channel-governance-llm-systems.zh-CN.md)
 - [状态失配与状态治理](../state-mismatch-state-governance-llm-systems.zh-CN.md)
 - [治理式人机协作](../governed-human-ai-collaboration.zh-CN.md)
 
@@ -121,7 +121,7 @@ English: [Agent Guidelines Usage and Reference Router](./guidelines.md)
 
 1. [任务接入与指南路由](./task-intake-and-guideline-routing.zh-CN.md)
 2. [代码库侦察与影响分析](./codebase-reconnaissance-and-impact-analysis.zh-CN.md)
-3. 涉及多文件、状态和依赖时叠加
+3. 涉及多文件、状态或依赖时叠加
    [Agent 五旋钮操作规范](./agent-five-knob-operating-guidelines.zh-CN.md)
 
 **执行边界**
@@ -135,7 +135,7 @@ English: [Agent Guidelines Usage and Reference Router](./guidelines.md)
 
 - [受治理 LLM 对象模型与接口规范](../governed-llm-object-model-interface-specification.zh-CN.md)
 - [状态治理智能体范式](../state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)
-- [观测—表征失配与通道治理](../observation-representation-mismatch-channel-governance-llm-systems.zh-CN.md)
+- [观测-表征失配与通道治理](../observation-representation-mismatch-channel-governance-llm-systems.zh-CN.md)
 
 ### 4.3 故障诊断、根因分析，但未要求修复
 
@@ -164,7 +164,7 @@ English: [Agent Guidelines Usage and Reference Router](./guidelines.md)
 **依据**
 
 - [六类原始失配](../six-primitive-mismatches-pipeline-derived-taxonomy-llm-systems.zh-CN.md)
-- [诊断—机制桥接](../diagnostic-mechanism-bridge-for-governed-llm-systems.zh-CN.md)
+- [诊断-机制桥接](../diagnostic-mechanism-bridge-for-governed-llm-systems.zh-CN.md)
 - [审计工程](../audit-engineering-failure-localization-control-space-writeback.zh-CN.md)
 - [Oracle、Audit Agent 与 SGAR 路由](../oracle-classification-audit-agent-sgar-engine-routing.zh-CN.md)
 
@@ -327,7 +327,7 @@ English: [Agent Guidelines Usage and Reference Router](./guidelines.md)
 
 **依据**
 
-- [诊断—机制桥接](../diagnostic-mechanism-bridge-for-governed-llm-systems.zh-CN.md)
+- [诊断-机制桥接](../diagnostic-mechanism-bridge-for-governed-llm-systems.zh-CN.md)
 - [状态治理智能体范式](../state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)
 - [聚合失配：可推导命题与 Agent 工程](../aggregation-mismatch-theoretical-claims-agent-engineering.zh-CN.md)
 - [V1–V12、V14–V17：Agent 工程经验](../aggregation-mismatch-agent-engineering-lessons-v1-v12-v14-v17.zh-CN.md)
@@ -418,7 +418,7 @@ English: [Agent Guidelines Usage and Reference Router](./guidelines.md)
 | 行为依赖隐藏或动态状态 | [状态失配与状态治理](../state-mismatch-state-governance-llm-systems.zh-CN.md) | observation、state authority、router |
 | 优化代理目标却伤害真实结果 | [规格失配与目标治理](../specification-mismatch-objective-governance-llm-systems.zh-CN.md) | specification、verifier、human gate |
 | 能力在错误场景触发或没有触发 | [拟合边界失配与能力路由](../fitting-boundary-mismatch-capability-routing-llm-systems.zh-CN.md) | router、derived features、holdout |
-| 关键变量未进入可操作表征 | [观测—表征失配与通道治理](../observation-representation-mismatch-channel-governance-llm-systems.zh-CN.md) | sensor、retrieval、representation |
+| 关键变量未进入可操作表征 | [观测-表征失配与通道治理](../observation-representation-mismatch-channel-governance-llm-systems.zh-CN.md) | sensor、retrieval、representation |
 
 ## 6. 可直接复制的场景 Prompt
 

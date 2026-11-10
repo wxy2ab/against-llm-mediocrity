@@ -94,13 +94,13 @@ Escalation is mandatory when the next step requires human-governed authority or 
 
 For non-mandatory cases, escalate when the expected cost of unsupported autonomy exceeds the cost of interruption:
 
-\[
-\operatorname{Escalate}
+```math
+\mathop{\mathrm{Escalate}}\nolimits
 \quad \text{if} \quad
 P(\text{material error}) \times C(\text{error})
 >
 C(\text{interruption}) + C(\text{delay}).
-\]
+```
 
 Reversibility, evidence quality, and available autonomous recovery should influence both sides.
 

@@ -638,7 +638,7 @@ Evaluate across multiple rubrics and task families. A reward repair that only fi
 
 ## 5. Agent-Layer Governance vs Training-Layer Repair
 
-The same mechanism failure may have two repair routes:
+The same mechanism failure may have three repair routes:
 
 | Repair route | Properties | Typical tools |
 |---|---|---|

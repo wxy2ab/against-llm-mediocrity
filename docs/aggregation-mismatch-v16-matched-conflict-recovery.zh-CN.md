@@ -30,7 +30,7 @@
 | Conflict Rebase Once 终态成功 | **24/24** |
 | 冲突臂首次 commit | **0/72** |
 | V16-A1 Rebase−Generic | **+1.0**；95% CI **[1.0, 1.0]** |
-| Exact sign-flip | \(2/2^{24}=1.1921\times10^{-7}\) |
+| Exact sign-flip | $2/2^{24}=1.1921\times10^{-7}$ |
 | 最小效应门 | +0.25；**通过** |
 | 机器 claim state | **`passed`** |
 | 证据分享状态 | **`share_with_caveats`** |
@@ -42,15 +42,15 @@
 
 冲突回执只证明封存操作不能针对当前权威状态提交，它本身不是状态迁移。
 
-对状态 \(S\)、锁集合 \(L\)、操作 \(Q\) 和不变量集合 \(I\)：
+对状态 $S$、锁集合 $L$、操作 $Q$ 和不变量集合 $I$：
 
-\[
-\operatorname{commit}(Q,S)
+```math
+\mathop{\mathrm{commit}}\nolimits(Q,S)
 \Rightarrow
-\operatorname{pre}(Q,S)
-\land \operatorname{lock\_ok}(Q,L)
-\land \operatorname{verify}(\operatorname{apply}(Q,S),I).
-\]
+\mathop{\mathrm{pre}}\nolimits(Q,S)
+\land \mathop{\mathrm{lock\_ok}}\nolimits(Q,L)
+\land \mathop{\mathrm{verify}}\nolimits(\mathop{\mathrm{apply}}\nolimits(Q,S),I).
+```
 
 如果 `lock_ok` 仍为假，更大的 prompt 或额外一次 provider turn 不能让 commit
 变得有效。只有 runtime 改变权威状态或权限，并重新验证 precondition 后，恢复尝试
@@ -74,14 +74,14 @@
 
 - DeepSeek-V4-Flash；中文；temperature 0；`thinking=False`；
 - 单一共享 300 秒 semantic-episode 预算；max tokens 32k；
-- 24 个任务：\(N\in\{96,144,216\}\) 各 8 个；
+- 24 个任务：$`N\in\{96,144,216\}`$ 各 8 个；
 - 每个任务四条件：
   - **Compatible Intent：** 首次提交；
-  - **Generic Retry：** 锁拒绝后，在锁定 \(S_1\) 上只给 receipt + goal plan；
-  - **Reread Only：** 锁拒绝后，在锁定 \(S_1\) 上给 receipt + 完整旧仓库；
-  - **Rebase Once：** 锁拒绝后，runtime 解锁至 \(S_2\)，给 receipt + target slice；
+  - **Generic Retry：** 锁拒绝后，在锁定 $S_1$ 上只给 receipt + goal plan；
+  - **Reread Only：** 锁拒绝后，在锁定 $S_1$ 上给 receipt + 完整旧仓库；
+  - **Rebase Once：** 锁拒绝后，runtime 解锁至 $S_2$，给 receipt + target slice；
 - 三个 conflict 臂都恰好获得一个第二 provider turn；
-- 原子 apply/rollback、global verification、append-only events 与 task-paired 统计。
+- 原子 apply/rollback、global verification、append-only events 与 exact task-paired 统计。
 
 实验匹配了调用机会，但没有匹配恢复权限与执行态：只有 Rebase 得到程序化 unlock。
 
@@ -113,14 +113,14 @@ Pilot 实测 3/3、0/3、0/3、3/3，Formal 按可执行 gate 继续。重新计
 | Conflict Reread Only | 0/24 | 24/24，仍锁定 | 0/24 |
 | Conflict Rebase Once | 0/24 | 24/24，已解锁 | 24/24 |
 
-\[
+```math
 \Delta_{A1}
 = P(\text{Rebase success})-P(\text{Generic success})
 =1.0.
-\]
+```
 
 95% bootstrap CI 为 [1.0, 1.0]，exact two-sided sign-flip
-\(p=1.1921\times10^{-7}\)。预注册机器主检验通过。
+$p=1.1921\times10^{-7}$。预注册机器主检验通过。
 
 ![V16 Rebase 减 Generic 效应](./assets/aggregation-mismatch-experiment/v16-rebase-generic-effect.png)
 
@@ -156,7 +156,7 @@ Reread 消耗更多上下文，但没有改变锁定状态：
 ### 尚未拆开的因果差距
 
 Rebase 同时改变 authority、可执行状态和 target-state 信息。下一组关键因子实验应让
-所有臂拥有相同 unlock、相同 \(S_2\)，再随机 receipt-only、旧状态、target slice 与
+所有臂拥有相同 unlock、相同 $S_2$，再随机 receipt-only、旧状态、target slice 与
 结构化 rebase plan。
 
 ## 6. 工程意义
@@ -180,7 +180,7 @@ Rebase 同时改变 authority、可执行状态和 target-state 信息。下一�
 
 ## 8. 下一组实验
 
-使用新冻结 schema，让所有臂具有相同 unlock 权限、相同 \(S_2\)、相同 provider turn
+使用新冻结 schema，让所有臂具有相同 unlock 权限、相同 $S_2$、相同 provider turn
 数和预算，只随机 recovery information package；再用第二模型和至少一个真实
 Git/配置流程复现。
 

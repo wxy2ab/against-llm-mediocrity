@@ -21,7 +21,7 @@ limitations, and engineering rules must remain aligned across both versions.
 On larger production-shaped synthetic JSON configurations, semantic ID retains
 a large simple advantage over model-authored index under both low and high
 layout drift, but high drift does not further enlarge that advantage:
-\((ID-Index)_{high}-(ID-Index)_{low}=-0.0417\), so V12-A1 fails. In sparse
+$`(ID-Index)_{high}-(ID-Index)_{low}=-0.0417`$, so V12-A1 fails. In sparse
 verified-plan delivery, semantic Patch scores 24/24 and Full Rewrite 17/24,
 giving a **+0.2917** budgeted strict-success advantage that passes V12-B1.
 
@@ -39,11 +39,11 @@ giving a **+0.2917** budgeted strict-success advantage that passes V12-B1.
 | Low-drift ID / Index | 24/24 / **6/24** |
 | High-drift ID / Index | 24/24 / **7/24** |
 | V12-A1 interaction | **−0.0417**, 95% CI **[−0.25, 0.1667]** |
-| V12-A1 raw / Holm \(p\) | 1 / 1 |
+| V12-A1 raw / Holm $p$ | 1 / 1 |
 | V12-A1 state | **`failed_pre_registered_gate`** |
 | Sparse Patch / Region / Full | 24/24 / 24/24 / **17/24** |
 | V12-B1 Patch−Full | **+0.2917**, 95% CI **[0.125, 0.4583]** |
-| V12-B1 raw / Holm \(p\) | 0.015625 / **0.03125** |
+| V12-B1 raw / Holm $p$ | 0.015625 / **0.03125** |
 | V12-B1 state | **`passed`** |
 | Dense Patch / Region / Full | 24/24 / **8/24** / 18/24 |
 | Formal token usage | **4,915,111** |
@@ -52,18 +52,18 @@ giving a **+0.2917** budgeted strict-success advantage that passes V12-B1.
 
 ### 1.1 Semantic identity and drift dose are different claims
 
-For a configuration \(C\) and a permutation \(\pi(C)\), a stable entity ID is
+For a configuration $C$ and a permutation $\pi(C)$, a stable entity ID is
 invariant:
 
-\[
+```math
 id_{\pi(C)}(s)=id_C(s).
-\]
+```
 
 A physical array index is generally not:
 
-\[
+```math
 index_{\pi(C)}(s)\ne index_C(s).
-\]
+```
 
 This establishes a structural reason to let the model name semantic targets and
 let the runtime resolve current addresses. It does not imply a monotone
@@ -72,14 +72,14 @@ larger observed ID advantage.
 
 V12-A1 therefore tests a stronger empirical claim:
 
-\[
+```math
 \Delta_{A1}
 =
 (ID-Index)_{high}
 -
 (ID-Index)_{low}
 \ge 0.15.
-\]
+```
 
 An ID simple effect can be large at both drift levels while this interaction is
 zero or negative. Treating the simple effect as proof of drift dose would answer
@@ -87,13 +87,13 @@ the wrong estimand.
 
 ### 1.2 Delivery scale changes the model-owned commitment surface
 
-Given a correct plan with \(k\) edits in an object of size \(N\):
+Given a correct plan with $k$ edits in an object of size $N$:
 
 - **Patch** asks the model to submit the minimum semantic change set;
 - **Regional Rewrite** asks it to regenerate one affected region;
 - **Full Rewrite** asks it to regenerate the whole configuration.
 
-When \(k\ll N\), the model-owned content and latency exposure of Patch can be
+When $k\ll N$, the model-owned content and latency exposure of Patch can be
 much smaller. This is conditional, not universal: dense edits, weak patch
 semantics, invalid plans, or an unreliable executor can erase the advantage.
 
@@ -101,14 +101,14 @@ semantics, invalid plans, or an unreliable executor can erase the advantage.
 
 The primary outcome is exact, verified commit within 300 seconds:
 
-\[
+```math
 strict\_success
 =
 semantic\ correctness
 \land invariant\ preservation
 \land commit
 \land wall\_time\le300s.
-\]
+```
 
 V12-B1 can identify a delivery advantage under this endpoint. It cannot prove
 that Full Rewrite would remain semantically worse under unlimited time.
@@ -139,9 +139,9 @@ Twenty-four task clusters each enter four conditions:
 | High | Semantic ID | ID and value change | current ID→index resolution |
 | High | Physical Index | current index and value change | validation |
 
-The 24 tasks span \(N\in\{48,72,96\}\). Low drift moves targets minimally; high
+The 24 tasks span $`N\in\{48,72,96\}`$. Low drift moves targets minimally; high
 drift is frozen to Kendall inversion in [0.40, 0.60] and target displacement of
-at least \(N/4\). The plan does not expose `baseline_index`.
+at least $N/4$. The plan does not expose `baseline_index`.
 
 ### 2.3 Module B: Density × Delivery Scale
 
@@ -149,10 +149,10 @@ Another 24 clusters each enter six conditions:
 
 | Density | Patch | Regional Rewrite | Full Rewrite |
 |---|---:|---:|---:|
-| Sparse, \(k/N=1/24\) | primary | exploratory | primary |
-| Dense, \(k/N=1/3\) | exploratory | exploratory | exploratory |
+| Sparse, $`k/N=1/24`$ | primary | exploratory | primary |
+| Dense, $`k/N=1/3`$ | exploratory | exploratory | exploratory |
 
-The tasks span \(N\in\{96,144\}\). The preregistered B1 contrast is Sparse
+The tasks span $`N\in\{96,144\}`$. The preregistered B1 contrast is Sparse
 Patch−Full. Regional Rewrite and all dense contrasts are secondary.
 
 ## 3. Data integrity
@@ -184,13 +184,13 @@ pass 24/24.
 The two exploratory simple effects are +0.75 and +0.7083. The preregistered
 interaction is:
 
-\[
+```math
 \Delta_{A1}=0.7083-0.75=-0.0417,
 \qquad
 95\%\ CI=[-0.25,0.1667].
-\]
+```
 
-The raw and Holm-adjusted \(p\)-values are both 1. V12-A1 is
+The raw and Holm-adjusted $p$-values are both 1. V12-A1 is
 `failed_pre_registered_gate`.
 
 The correct interpretation is narrow: this protocol does not show that high
@@ -203,13 +203,13 @@ ID−Index simple effects, but those effects are not the primary drift-dose clai
 
 Sparse Patch and Region both score 24/24; Sparse Full scores 17/24:
 
-\[
+```math
 \Delta_{B1}=1.0-0.7083=+0.2917,
 \qquad
 95\%\ CI=[0.125,0.4583].
-\]
+```
 
-The raw exact sign-flip \(p=0.015625\), Holm-adjusted \(p=0.03125\), and the
+The raw exact sign-flip $p=0.015625$, Holm-adjusted $p=0.03125$, and the
 effect exceeds the preregistered +0.15 threshold. All seven discordant tasks are
 Patch success / Full timeout within the 300-second endpoint.
 

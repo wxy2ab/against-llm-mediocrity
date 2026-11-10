@@ -750,9 +750,6 @@ suppressor evidence
 priority / arbitration rules
 scope limits
 revocation triggers
-```
-
-With these tools in place, we can summarize the core argument.
 regression guards
 state dependencies
 ```
@@ -836,6 +833,8 @@ Suppress generic risk-caution mode when the task asks for operator construction.
 Activate execution verification before declaring code repair complete.
 Require state enumeration when the same observation supports multiple policies.
 ```
+
+These deltas are most effective when encoded as formal governed objects.
 
 ---
 
@@ -940,6 +939,8 @@ If state enumeration is skipped, the guard should fail on observations compatibl
 ```
 
 Boundary guards should include negative controls. Otherwise, a system can “fix” under-triggering by activating the capability everywhere, which merely converts under-triggering into over-triggering.
+
+In long-horizon systems, these guards and routing decisions must also persist as committed state.
 
 ---
 
@@ -1558,7 +1559,6 @@ routing overhead exceeds expected gain
 ```
 
 Every routing rule and theoretical claim should also carry conditions for its own revision.
-```
 
 ---
 
@@ -1594,7 +1594,6 @@ more precise routing rule supersedes the old rule
 ```
 
 The following checklist summarizes the practical steps for diagnosing and repairing fitting-boundary mismatch.
-```
 
 ---
 
@@ -1632,7 +1631,6 @@ revocation triggers
 ```
 
 With these tools in place, we can summarize the core argument.
-```
 
 ---
 

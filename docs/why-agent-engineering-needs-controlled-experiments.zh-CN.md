@@ -2,9 +2,9 @@
 
 ## 从 Benchmark 进步走向可累积的 Runtime 机制科学
 
-**状态：** Working Draft v0.1
-**日期：** 2026-08-12
-**配套版本：** [English version](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/why-agent-engineering-needs-controlled-experiments.md)
+**状态：** Working Draft v0.1  
+**日期：** 2026-08-12  
+**配套版本：** [English version](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/why-agent-engineering-needs-controlled-experiments.md)  
 **相关框架：** [Agent Harness Framework](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-harness-framework.zh-CN.md) · [六类原始失配](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/six-primitive-mismatches-pipeline-derived-taxonomy-llm-systems.zh-CN.md)
 
 ---
@@ -27,26 +27,26 @@ Agent 工程正在从 Prompt 技巧转向完整运行时系统的设计：模型
 
 设 Agent 系统的期望价值为：
 
-\[
+```math
 J(\theta,H,E,D,b,V),
-\]
+```
 
 其中：
 
-- \(\theta\)：模型与推理策略；
-- \(H\)：运行时 Harness；
-- \(E\)：环境与工具表面；
-- \(D\)：任务分布；
-- \(b\)：token、时间、调用、金钱和风险预算；
-- \(V\)：评价器或 Oracle。
+- $\theta$：模型与推理策略；
+- $H$：运行时 Harness；
+- $E$：环境与工具表面；
+- $D$：任务分布；
+- $b$：token、时间、调用、金钱和风险预算；
+- $V$：评价器或 Oracle。
 
 大多数公开比较一次改变多个变量。新 Agent 可能同时使用更强模型、更长上下文、不同系统 Prompt、新工具、更大重试预算、不同截断规则、更宽松的验证器和更新后的任务集。此时观察到的：
 
-\[
+```math
 J(\theta_2,H_2,E_2,D_2,b_2,V_2)
 -
 J(\theta_1,H_1,E_1,D_1,b_1,V_1)
-\]
+```
 
 是有效的产品比较，却不是已经识别的机制效应。
 
@@ -148,21 +148,21 @@ Agent 可以声称任务完成，而数据库、代码仓库、日历或支付�
 
 Agent 研究中常见的隐含先验可以写成**训练吸收假设**：
 
-\[
+```math
 H_{\mathrm{absorb}}:
 \forall g,\;\exists \theta'\text{ sufficiently capable such that }
 J(\theta',h_0;D,b)\approx J(\theta,g;D,b).
-\]
+```
 
-其中 \(g\) 是治理或 Harness 机制，\(h_0\) 是最小运行时。这个假设认为：足够强的未来模型最终能在最小运行时中复制今天较弱模型从 \(g\) 获得的收益。如果它普遍成立，Runtime 实验大多只有寿命很短的产品价值。
+其中 $g$ 是治理或 Harness 机制，$`h_0`$ 是最小运行时。这个假设认为：足够强的未来模型最终能在最小运行时中复制今天较弱模型从 $g$ 获得的收益。如果它普遍成立，Runtime 实验大多只有寿命很短的产品价值。
 
 另一种立场是**结构持续假设**：
 
-\[
+```math
 H_{\mathrm{persist}}:
 \forall \theta\text{ with bounded resources},\;
 \exists D_i\text{ that exhibits mismatch }M_i.
-\]
+```
 
 对于任意有限模型、有限上下文和有限推理预算，开放任务空间中都存在某个区域，使六类失配之一重新出现。更强模型可以降低失配频率、严重程度，或者把失配边界推得更远，却不会消灭产生失配的结构维度。
 
@@ -230,7 +230,7 @@ H_{\mathrm{persist}}:
 
 ### 5.3 拟合边界失配：在边界网格上测量路由校准
 
-**问题。** 能力失败是因为能力不存在，还是因为能力在错误体制下被激活或压制？
+**问题。** 能力失败是因为能力不存在，还是因为能力在错误区间下被激活或压制？
 
 **设计。** 建立边界网格：明确域内、明确域外和渐进式近边界样本。比较无门控激活、学习路由器、证据条件化路由和类型化弃权/升级。固定底层 specialist，使实验研究路由而不是重新训练能力。
 
@@ -238,7 +238,7 @@ H_{\mathrm{persist}}:
 
 **证伪。** 如果 specialist 在目标域内本身就没有能力，路由干预不能获得功劳。Router 实验之前必须先做 Oracle capability test。
 
-**诊断边界。** 拟合边界失配要求能力在 Oracle route 下能够在目标体制内成功。如果正确路由已经选中，高价值候选却仍很少出现，剩余瓶颈是支持而不是路由。
+**诊断边界。** 拟合边界失配要求能力在 Oracle route 下能够在目标区间内成功。如果正确路由已经选中，高价值候选却仍很少出现，剩余瓶颈是支持而不是路由。
 
 **迁移。** 在新任务族和新模型上重复。科学对象是触发证据、能力边界与错误成本之间的关系，而不是一个永久阈值。
 
@@ -246,7 +246,7 @@ H_{\mathrm{persist}}:
 
 **问题。** 高价值结构没有出现，是因为模型无法表达，还是因为已部署搜索流程很少到达、保留或识别它？
 
-**设计。** 在 token 和调用预算匹配下，比较直接生成、独立 best-of-\(N\)、批评后重生成，以及改变分解、表示、约束、候选拓扑或确定性算子的控制空间干预。加入 Oracle candidate 条件，检验正确候选一旦出现，验证器是否能够识别。
+**设计。** 在 token 和调用预算匹配下，比较直接生成、独立 best-of-$`N`$、批评后重生成，以及改变分解、表示、约束、候选拓扑或确定性算子的控制空间干预。加入 Oracle candidate 条件，检验正确候选一旦出现，验证器是否能够识别。
 
 **测量。** 至少出现一个有效高价值结构的概率、首次覆盖时间、结构多样性、剪枝后的保留率、验证器 recall、找到的最佳效用和每 token 边际价值。
 
@@ -292,15 +292,15 @@ H_{\mathrm{persist}}:
 
 ### 6.1 先定义估计对象，再运行系统
 
-设治理干预 \(g\) 相对基线 \(h_0\) 的效应为：
+设治理干预 $g$ 相对基线 $`h_0`$ 的效应为：
 
-\[
+```math
 \Delta_g(\theta,D,b)
 =
 \mathbb{E}[J\mid \theta,g,D,b]
 -
 \mathbb{E}[J\mid \theta,h_0,D,b].
-\]
+```
 
 然后明确 claim ceiling：实验估计的是产品级总效应、机制中介效应、交互项、边界阈值，还是迁移效应？它们不能互相替代。
 
@@ -356,9 +356,9 @@ Treatment 必须改变其声称的中介变量：更多观测应提高决定性�
 
 不应要求：
 
-\[
+```math
 \Delta_g(\theta_1,D,b)=\Delta_g(\theta_2,D,b).
-\]
+```
 
 可累积的主张是：干预、前提、中介变量和证伪条件仍然可定义、可复验。每代模型都需要重新校准，而不是重新发明问题。
 

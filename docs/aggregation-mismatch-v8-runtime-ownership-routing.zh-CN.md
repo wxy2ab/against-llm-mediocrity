@@ -22,9 +22,9 @@ deterministic compiler cases** 检验两个 Agent 工程问题：
 
 | Claim | 主估计 | 95% CI | Holm/raw p | 裁决 |
 |---|---:|---|---:|---|
-| **V8-A1** GATED−STATIC | +59.4 pp | [40.6, 75.0] pp | Holm \(1.53\times10^{-5}\) | **通过**；成本 guardrail 失败 |
+| **V8-A1** GATED−STATIC | +59.4 pp | [40.6, 75.0] pp | Holm $1.53\times10^{-5}$ | **通过**；成本 guardrail 失败 |
 | **V8-A2** VERIFIED−GATED | +6.25 pp | [0, 15.6] pp | Holm 1.0 | **未裁决：ceiling** |
-| **V8-B1** ID−INDEX | +31.25 pp | [20.3, 42.2] pp | Holm \(4.58\times10^{-5}\) | **通过** |
+| **V8-B1** ID−INDEX | +31.25 pp | [20.3, 42.2] pp | Holm $4.58\times10^{-5}$ | **通过** |
 | **V8-B2** density interaction | +3.125 pp | [0, 9.375] pp | Holm 1.0 | **未通过预注册门** |
 | **V8-B3** deterministic compile | 双路径 64/64 exact | — | — | **通过采用门** |
 
@@ -40,15 +40,15 @@ deterministic compiler cases** 检验两个 Agent 工程问题：
 
 Agent 成功可以按诊断层分解为：
 
-\[
+```math
 P(S)
 =
 P(P)
 \times P(D\mid P)
 \times P(C\mid P,D),
-\]
+```
 
-其中 \(P\) 是计划或中间构造正确，\(D\) 是交付正确，\(C\) 是提交安全。这不是独立性
+其中 $P$ 是计划或中间构造正确，$`D`$ 是交付正确，$`C`$ 是提交安全。这不是独立性
 假设，而是分离失败责任：
 
 - planning 可能因为依赖与完成状态没有被维护而失败；
@@ -60,20 +60,20 @@ Artifact-v8A 干预第一层的 runtime 支架。Artifact-v8B 固定正确 seman
 
 ### 1.2 Readiness ledger 改变了计算结构
 
-对 DAG 节点 \(v\)，只有全部前驱已解析时，局部执行才直接合法：
+对 DAG 节点 $v$，只有全部前驱已解析时，局部执行才直接合法：
 
-\[
+```math
 x_v=f_v(x_{\mathrm{pa}(v)}).
-\]
+```
 
 一次性响应让模型同时维护依赖顺序、已完成值、覆盖、算术和最终序列化。runtime-owned
 ledger 把任务改写为受治理状态转移：
 
-\[
+```math
 (L_t,R_t)\rightarrow\Delta_t\rightarrow L_{t+1},
-\]
+```
 
-其中 \(L_t\) 是已完成硬状态，\(R_t\) 是 ready set。正确 gate 可以在结构上阻止
+其中 $L_t$ 是已完成硬状态，$`R_t`$ 是 ready set。正确 gate 可以在结构上阻止
 not-ready 提交。理论预测模型责任减少，但不能预测固定模型恰好提升 59.4 个百分点；
 这是 A1 的经验结果。
 
@@ -92,14 +92,14 @@ case”的证据。
 
 ### 1.4 Semantic ID 从模型侧移除一个确定映射
 
-令 \(\pi\) 为当前物理排列，\(u\) 为稳定 semantic ID。物理 index 接口要求模型计算
+令 $\pi$ 为当前物理排列，$`u`$ 为稳定 semantic ID。物理 index 接口要求模型计算
 并序列化：
 
-\[
+```math
 \mathrm{index}=\pi^{-1}(u).
-\]
+```
 
-semantic-ID 接口只让模型提交 \(u\)，由 runtime 在权威状态上解析当前地址。这样从
+semantic-ID 接口只让模型提交 $`u`$，由 runtime 在权威状态上解析当前地址。这样从
 模型承诺面中移除了一个确定但脆弱的映射。
 
 结构论证只给出方向，不给出普遍成功率定律。V8-B1 是当前对象族和模型配置下的确认性
@@ -107,12 +107,12 @@ semantic-ID 接口只让模型提交 \(u\)，由 runtime 在权威状态上解�
 
 ### 1.5 正确 plan 应在可能时确定性编译
 
-给定权威状态 \(s\)、已验证 plan \(p\)、正确编译器 \(C(s,p)\)、原子执行器 \(E\)
-和覆盖受保护不变量的 verifier \(V\)：
+给定权威状态 $s$、已验证 plan $`p`$、正确编译器 $C(s,p)$、原子执行器 $E$
+和覆盖受保护不变量的 verifier $V$：
 
-\[
+```math
 V(E(s,C(s,p)))=1.
-\]
+```
 
 在这种设定下，重新采样工具参数或完整对象不会增加任务信息，只会增加新的随机序列化
 与工具契约失败面。B3 检验当前 compiler 实现是否通过采用门，不是对所有 compiler
@@ -120,15 +120,15 @@ V(E(s,C(s,p)))=1.
 
 ### 1.6 Patch 与 Rewrite 仍是条件关系
 
-Patch 的承诺面通常随 edit 数 \(k\)、地址成本与 schema 开销增长；Full Rewrite 的
-承诺面通常随对象长度 \(N\) 增长。实际成功还取决于 plan 质量、地址稳定性、工具合同、
+Patch 的承诺面通常随 edit 数 $k$、地址成本与 schema 开销增长；Full Rewrite 的
+承诺面通常随对象长度 $N$ 增长。实际成功还取决于 plan 质量、地址稳定性、工具合同、
 verifier 覆盖、模型策略与预算：
 
-\[
+```math
 \text{route}
 =g(k/N,\text{address stability},\text{plan confidence},
 \text{compiler availability},\text{verifier coverage},\text{budget}).
-\]
+```
 
 理论不能给出部署阈值。V8-B2 检验一个 density interaction，并未通过预注册门。
 
@@ -151,7 +151,7 @@ verifier 覆盖、模型策略与预算：
 
 ### 2.2 V8-A：runtime scaffold
 
-32 个全新 DAG 覆盖 \(N\in\{8,16\}\) 与 frontier \(\in\{2,8\}\)。全部条件共享
+32 个全新 DAG 覆盖 $`N\in\{8,16\}`$ 与 frontier $`\in\{2,8\}`$。全部条件共享
 graph、truth、预算、renderer 和 global verifier。
 
 | 条件 | Runtime 持有 | 模型持有 |
@@ -165,7 +165,7 @@ A1 识别的是 **readiness + ledger + staged interaction package**，不是纯 
 
 ### 2.3 V8-B：semantic address routing
 
-32 个新 base host 覆盖 \(N\in\{96,384\}\) 与 stable/relocated 地址状态。每个 base
+32 个新 base host 覆盖 $`N\in\{96,384\}`$ 与 stable/relocated 地址状态。每个 base
 产生 sparse 和 dense 两个 variant，共 64 variants。
 
 | 条件 | 模型提交 | Runtime 持有 |
@@ -265,7 +265,7 @@ stable 与 relocated 使用不同 base host，而不是同 host 内地址干预�
 ![V8-B ID 与 Full 的密度分层](./assets/aggregation-mismatch-experiment/v8-b-id-full-density.png)
 
 +3.125 pp interaction 只有 1 个正向 base，31 个零差。它没有满足 +20 pp、CI 排零和
-Holm-\(p\) 门。两臂接近 ceiling，也不能据此证明 crossover 不存在。
+Holm-$`p`$ 门。两臂接近 ceiling，也不能据此证明 crossover 不存在。
 
 ### 4.4 Deterministic compilation
 
@@ -338,14 +338,14 @@ read authoritative state
 
 runtime scaffold 用成本换可靠性。生产 router 应优化：
 
-\[
+```math
 \text{utility}
 =
 \text{exact success value}
 -\lambda_t\text{tokens}
 -\lambda_l\text{latency}
 -\lambda_r\text{commit risk}.
-\]
+```
 
 低耦合、低成本、可逆任务可以保留轻量路径。高耦合或高后果状态转移应进入受治理
 readiness 与 ledger path。
@@ -386,7 +386,7 @@ readiness 与 ledger path。
 ### Artifact-v9 后续证据
 
 Artifact-v9 已用 192 个 semantic episodes 完成计划中的 ready × ledger 与 receipt
-后续实验。更难的 \(N=24/48\) strict-order 合同下，effort-matched scaffold 四臂为
+后续实验。更难的 $N=24/48$ strict-order 合同下，effort-matched scaffold 四臂为
 0/24、0/24、0/24、1/24，所以 ready 与 ledger 主效应因 floor **未裁决**。冻结错误
 修复中，GENERIC、LOCATED、CAUSAL 为 26/32、30/32、30/32；两个 +12.5 个百分点
 对比都没有通过预注册门。77 个 order failure 的 ready-ID 集合其实全部正确，只有

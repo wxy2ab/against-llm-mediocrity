@@ -96,13 +96,13 @@ LLM 已经很擅长写代码、写邮件、做总结、解释概念、起草方�
 ```text
 against-llm-mediocrity/
 ├── content/
-│   ├── en/                    # 英文站点正文（VitePress 路由 /en/*）
-│   └── zh/                    # 中文站点正文（VitePress 路由 /zh/*）
+│   ├── en/                    # 英文站点正文（站点路由 /*）
+│   └── zh/                    # 中文站点正文（站点路由 /zh/*）
 ├── docs/
 │   ├── *.md                   # 英文工作稿
 │   └── *.zh-CN.md             # 中文工作稿（论文与实践稿）
 ├── public/                    # 静态资源
-├── src/                       # 站点源码与 VitePress 自定义
+├── src/                       # 站点源码（Vite）
 ├── scripts/                   # 构建与同步脚本
 ├── .github/                   # Pages 部署工作流
 ├── package.json
@@ -132,10 +132,10 @@ against-llm-mediocrity/
 
 ### 案例详情
 
-- [Story Insight V4](/zh/case-study-v4)：把故事拆成 `LogicSpace`（逻辑空间），把生成、改写、攻击、修复、回归治理构成完整闭环。
-- [Story Insight V6](/zh/case-study-v6)：在高阈值下把失败路由到元空间、逻辑空间、文本、连续性、评价契约，并识别平台期。
-- [Stock Rec V3](/zh/case-study-stock-rec-v3)：在金融策略生产中让 LLM 仅参与发现，不赋予生产权；所有影响策略的对象都必须经过 shadow、promotion、active 生命周期。
-- [FW-Insight V3](/zh/case-study-fwinsight-v3)：从大量已生成因子框架样本中提取能改变下一轮再生的硬经验。
+- [Story Insight V4](https://wxy2ab.github.io/against-llm-mediocrity/zh/case-study-v4)：把故事拆成 `LogicSpace`（逻辑空间），把生成、改写、攻击、修复、回归治理构成完整闭环。
+- [Story Insight V6](https://wxy2ab.github.io/against-llm-mediocrity/zh/case-study-v6)：在高阈值下把失败路由到元空间、逻辑空间、文本、连续性、评价契约，并识别平台期。
+- [Stock Rec V3](https://wxy2ab.github.io/against-llm-mediocrity/zh/case-study-stock-rec-v3)：在金融策略生产中让 LLM 仅参与发现，不赋予生产权；所有影响策略的对象都必须经过 shadow、promotion、active 生命周期。
+- [FW-Insight V3](https://wxy2ab.github.io/against-llm-mediocrity/zh/case-study-fwinsight-v3)：从大量已生成因子框架样本中提取能改变下一轮再生的硬经验。
 
 ### Agent 操作指南
 
@@ -164,11 +164,13 @@ against-llm-mediocrity/
 - [Oracle、Audit Agent 与 SGAR：从硬反馈到引擎路由的统一框架](./docs/oracle-classification-audit-agent-sgar-engine-routing.zh-CN.md)：把 oracle 分类、audit、SGAR 与 No-Go 统一到同一引擎路由判断链中的工作稿。
 - Agent 不是更长的 Chat：[English](./docs/agent-is-not-a-longer-chat.md) · [中文](./docs/agent-is-not-a-longer-chat.zh-CN.md)：面向普通从业者解释为什么持续委托需要显式任务状态、证据、Gate、提交和按风险分层的审计，而不只是更长的模型循环。
 - [面向受治理 LLM 系统的状态治理智能体范式](./docs/state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)：全局条件下的局部求解、公共协议、硬状态权威与验证提交的工作稿。
+- Agent Harness Framework：[English](./docs/agent-harness-framework.md) · [中文](./docs/agent-harness-framework.zh-CN.md)：运行时科学工作稿，把模型条件能力前沿、运行时 Bridge 与 Action-Space Optimization 拆成可量化的组成部分。
 - [聚合失配：从单次推理到 Agent 轨迹的多尺度局部最优坍缩](./docs/aggregation-mismatch-across-scales-from-single-call-reasoning-to-agent-trajectories.zh-CN.md)：把单次推理中的语义前缀锁定与 Agent 轨迹中的因果路径锁定放进同一控制框架，并说明持久化 Plan / Candidate 何时真正有系统价值。
 - 从固定流程到受治理委托：[English](./docs/from-fixed-workflows-to-governed-delegation.md) · [中文](./docs/from-fixed-workflows-to-governed-delegation.zh-CN.md)：从预定义执行路径走向受能力、权限、证据、Gate 与提交规则约束的运行时决策，是连接传统软件与受治理自适应系统的软件设计桥梁。
 - [LLM 系统中的观测-表征失配与通道治理](./docs/observation-representation-mismatch-channel-governance-llm-systems.zh-CN.md)：变量进入、表征上限与前治理修复的配套技术报告。
 - [LLM 系统中的状态失配与状态治理](./docs/state-mismatch-state-governance-llm-systems.zh-CN.md)：潜在状态、状态判别与状态条件化控制的配套技术报告。
 - [LLM 系统中的拟合边界失配与能力路由](./docs/fitting-boundary-mismatch-capability-routing-llm-systems.zh-CN.md)：能力领域、触发边界与路由治理的配套技术报告。
+- 拟合边界失配案例：为什么模型会“救掉进水里的鱼”：[English](./docs/fitting-boundary-mismatch-fish-in-water-case.md) · [中文](./docs/fitting-boundary-mismatch-fish-in-water-case.zh-CN.md)：一个定性案例、若干竞争解释，以及针对“显式框架压制派生世界状态”的可证伪配对设计。
 - [LLM 系统中的支持失配与控制空间搜索](./docs/support-mismatch-control-space-search-llm-systems.zh-CN.md)：可达性、候选支持与搜索治理的配套技术报告。
 - [LLM 系统中的聚合失配与组合治理](./docs/aggregation-mismatch-compositional-governance-llm-systems.zh-CN.md)：局部价值、全局失败与组合关系治理的配套技术报告。
 - [聚合失配与生成—验证不对称：受控实验证据](./docs/aggregation-mismatch-generation-verification-asymmetry-evidence.zh-CN.md)：用边界拓扑、候选审计、长度与排除性对照说明局部规则能力为何不自动组成全局构造能力。
@@ -179,7 +181,7 @@ against-llm-mediocrity/
 - 聚合失配 artifact-v9 最小 scaffold 与 verifier receipt：[English](./docs/aggregation-mismatch-v9-minimal-scaffold-recovery.md) · [中文](./docs/aggregation-mismatch-v9-minimal-scaffold-recovery.zh-CN.md)：汇总 192 个 effort-matched episodes；ready/ledger 主效应因 strict-order floor 未裁决，located/causal receipt 正点估计未通过确认门。
 - 聚合失配 artifact-v10 语义合同与 runtime canonicalization：[English](./docs/aggregation-mismatch-v10-semantic-contract-canonicalization.md) · [中文](./docs/aggregation-mismatch-v10-semantic-contract-canonicalization.zh-CN.md)：汇总 64 个正式 episodes 与 1,024 个离线案例；semantic-set canonicalization 通过实现门，但预注册 ≥20 个百分点端到端增益未通过，从而把可靠接口设计与未确认的性能承诺分开。
 - 聚合失配 artifact-v11 地址漂移与配置交付：[English](./docs/aggregation-mismatch-v11-config-delivery-transfer.md) · [中文](./docs/aggregation-mismatch-v11-config-delivery-transfer.zh-CN.md)：汇总 256 个正式 episodes 与 1,024 个离线案例；较大受测配置中 relocation 使 semantic-ID 相对模型提交 index 提高 21.875 个百分点；Patch–Rewrite 可靠性受 ceiling 限制，但 Patch 成本明显更低。
-- 聚合失配 artifact-v12 漂移剂量与交付尺度路由：[English](./docs/aggregation-mismatch-v12-scale-routing-transfer.md) · [中文](./docs/aggregation-mismatch-v12-scale-routing-transfer.zh-CN.md)：汇总 240 个正式 episodes 与 768 个离线案例；漂移剂量交互未过，稀疏 verified-plan Patch 相对 Full Rewrite 提高 29.17 个百分点；Regional 仍为探索性。
+- 聚合失配 artifact-v12 漂移剂量与交付尺度路由：[English](./docs/aggregation-mismatch-v12-scale-routing-transfer.md) · [中文](./docs/aggregation-mismatch-v12-scale-routing-transfer.zh-CN.md)：汇总 240 个正式 episodes 与 768 个离线案例；漂移剂量交互未过，稀疏 verified-plan Patch 相对 Full Rewrite 提高 300 秒预算内严格成功率 29.17 个百分点；Regional 仍为探索性。
 - 聚合失配 artifact-v13 状态漂移与 Intent rebase（归档）：[English](./docs/aggregation-mismatch-v13-state-drift-intent-rebase.md) · [中文](./docs/aggregation-mismatch-v13-state-drift-intent-rebase.zh-CN.md)：96 个正式 episodes 与 768 个离线案例的 method-development artifact；四臂均为 24/24，A1 未裁决，不进入 V1–V12 + V14–V17 证据合成。
 - 聚合失配 artifact-v14 Post-Compile Drift 与 Exact Recovery：[English](./docs/aggregation-mismatch-v14-post-compile-drift-recovery.md) · [中文](./docs/aggregation-mismatch-v14-post-compile-drift-recovery.zh-CN.md)：96 个正式 episodes 与 768 个离线案例；compatible Exact 24/24 安全 stale 并恢复，+19.3% token-cost interaction 为正但未达预注册 +20% 门。
 - 聚合失配 artifact-v15 Intent 冲突治理：[English](./docs/aggregation-mismatch-v15-intent-conflict-governance.md) · [中文](./docs/aggregation-mismatch-v15-intent-conflict-governance.zh-CN.md)：96 个正式 episodes 与 768 个离线案例；冲突首提交 0/72，受治理 Intent/Exact Rebase 恢复 48/48，Naive 0/24。机器主检验通过，但冻结 Pilot Gate 与可执行门不一致，需带限制分享。
@@ -199,7 +201,9 @@ against-llm-mediocrity/
 - 面向受治理 LLM 系统的机制驱动训练：[English](./docs/mechanism-driven-training-for-governed-llm-systems.md) · [中文](./docs/mechanism-driven-training-for-governed-llm-systems.zh-CN.md)：把反复出现的学习组件失败提升为可摊销的训练信号。
 - [Human-Assist Operational Mismatches](./docs/human-assist-operational-mismatches.zh-CN.md)：协作层失配与升级协议。
 - [治理式人机协作](./docs/governed-human-ai-collaboration.zh-CN.md)：从聊天式使用到变量治理。
+- Codex 协作操作手册：[English](./docs/codex-collaboration-operating-playbook.md) · [中文](./docs/codex-collaboration-operating-playbook.zh-CN.md)：对抗审查、可执行计划、冻结评测、受治理执行、最小升级、handoff 与交付闭环的可复用模式。
 - [AI 的认知纪律](./docs/cognitive-discipline-for-ai.zh-CN.md)：AI 使用侧的认知框架。
+- AI 的协作姿态：校准摩擦与建设性强硬：[English](./docs/ai-collaborative-posture-calibrated-friction-constructive-firmness.md) · [中文](./docs/ai-collaborative-posture-calibrated-friction-constructive-firmness.zh-CN.md)：AI 应如何以校准摩擦提出异议，而不是默认附和。
 - [模型最高价格](./docs/maximum-price-of-llms.zh-CN.md)：LLM 定价与商品化的数学。
 - Agent 工程为什么必须重视受控实验：[English](./docs/why-agent-engineering-needs-controlled-experiments.md) · [中文](./docs/why-agent-engineering-needs-controlled-experiments.zh-CN.md)：综述 Harness 与系统评价的前沿证据，批判其因果归因局限，并提出由六类失配组织的受控实验纲领。
 
@@ -218,7 +222,7 @@ against-llm-mediocrity/
 
 ## 5. 本地开发
 
-仓库使用 [VitePress](https://vitepress.dev/) 构建双语站点。
+仓库使用 [Vite](https://vite.dev/) 构建双语站点。
 
 ```bash
 # 安装依赖

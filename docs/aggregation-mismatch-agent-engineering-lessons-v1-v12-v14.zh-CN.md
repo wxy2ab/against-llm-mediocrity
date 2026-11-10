@@ -72,13 +72,13 @@ Observe authoritative state
 
 ## 2. Agent 成功必须按层分解
 
-\[
+```math
 P(S)=
 P(\text{state adequate})
 \times P(\text{plan correct}\mid state)
 \times P(\text{delivery correct}\mid plan)
 \times P(\text{safe commit}\mid delivery).
-\]
+```
 
 这不是独立性假设，而是诊断分层：
 
@@ -107,7 +107,7 @@ Runtime 至少持有：
 
 这些对象不能只存在对话文本中。V4 的外部正确 bits、V6/V8 的 scheduler/scaffold、
 V11/V12 的 semantic-ID，以及 V14 的 seal-before-drift 都说明硬状态所有权是 runtime
-责任。代价也必须测量：V8 scaffold 中位 token 约增加 7.04×。
+责任。代价也必须测量：V8 scaffold 中位 token 约增至 7.04×。
 
 ## 4. 原则二：模型输出 Semantic Plan
 
@@ -170,7 +170,7 @@ OOD schema、并发、crash/replay 和 verifier false-accept 测试。正确 pla
 ```
 
 由 runtime 根据最新状态解析 path/index/span。V8 ID−INDEX +0.3125；V11 的
-relocation interaction +0.21875，但集中于 \(N=48\)；V12 没有确认 drift-dose
+relocation interaction +0.21875，但集中于 $N=48$；V12 没有确认 drift-dose
 单调增加。工程处方来自地址不变性和实验支持，不需要先预测漂移剂量。
 
 ## 7. 原则五：依赖调度由 Runtime 执行
@@ -213,12 +213,12 @@ generic reject
 
 稀疏 Patch 的条件性承诺面：
 
-\[
+```math
 L_{\mathrm{rewrite}}\approx Nc_r,\qquad
 L_{\mathrm{patch}}\approx c_0+k(c_p+\log N).
-\]
+```
 
-当 plan 正确、\(k\ll N\)、地址稳定、executor 可靠时，Patch 通常更小；高密度、结构
+当 plan 正确、$`k\ll N`$、地址稳定、executor 可靠时，Patch 通常更小；高密度、结构
 重构、错误 plan 或脆弱工具会消除优势。
 
 | 条件 | 首选 |
@@ -275,14 +275,14 @@ V11 1,024、V12/V14 各 768 是实现采用证据，不是生产总体保证。
 
 Router 应优化：
 
-\[
+```math
 U=
 V_sP(\text{exact success})
 -C_t(tokens)
 -C_l(latency)
 -C_r(risk)
 -C_h(human).
-\]
+```
 
 必须同时记录 exact endpoint、budget、token、provider turns、transport attempts、
 payload bytes、stage latency、rollback、tail latency 和 success-per-cost。
@@ -339,8 +339,8 @@ turns 零重建错配，并明确记录 96/96 seal-before-drift。
 
 - V8 scaffold 科学效应通过，但成本高；
 - V11 Patch/Rewrite reliability ceiling，但成本可用于路由；
-- V12 A1 simple effect 大而 interaction 未过；
-- V12 B1 通过，但差异来自预算内 timeout；
+- V12-A1 simple effect 大而 interaction 未过；
+- V12-B1 通过，但差异来自预算内 timeout；
 - V14 方向和精确检验都强，但未达到预注册最小效应。
 
 一个布尔 `experiment_passed` 不能同时控制论文措辞和生产策略。

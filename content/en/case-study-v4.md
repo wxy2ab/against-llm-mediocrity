@@ -45,7 +45,7 @@ A theme cannot live only in narration. It must appear through choices, costs, fa
 
 ### Rhythm and Reader Understanding
 
-When readers know information, when they are misdirected, and when they are rewarded determines whether the story is compelling. Dense or premature information release weakens the experience.
+Whether the story is compelling depends on when readers learn information, when they are misdirected, and when they are rewarded. Releasing information too densely or too early weakens the experience.
 :::
 
 The difficulty is that local writing ability is genuinely useful, but good local sentences do not automatically compose into a good story. Ordinary output-space search can easily produce something fluent, complete, and story-like while missing the structure that creates value.
@@ -54,7 +54,7 @@ The difficulty is that local writing ability is genuinely useful, but good local
 
 If you directly ask a model to write a xianxia short story, it can usually produce readable prose: failure at the opening, obsession in the protagonist, sacrifice in the middle, insight near the ending. But those elements may only be a familiar narrative template.
 
-Mediocrity does not always look bad. It often looks *almost right*. Each element seems plausible, but the elements lack necessity:
+Mediocrity does not always look bad. It often looks *almost right*. Each element seems plausible, but the relations between the elements lack necessity:
 
 - Qingling sacrifices, but the psychological path to that choice may be underbuilt.
 - Lingxu changes, but the trigger for that change may not be visible enough.
@@ -120,7 +120,7 @@ It also separates generation, evaluation, and revision. The generator renders th
 
 ## Why the Evaluator Is Not Just a Score
 
-Story Insight V4 evaluates story quality across 10 dimensions. The point is not a single score. Each dimension maps to control objects that can be revised.
+Story Insight V4 evaluates story quality across 10 dimensions in parallel. The point is not a single score. Each dimension maps to control objects that can be revised. Five of the ten are shown below.
 
 ::::cards
 ### consistency
@@ -144,7 +144,7 @@ Checks foreshadowing, metaphor, turns, and negative space. It maps mainly to con
 Checks whether character, event, and conflict form an organic whole. It maps mainly to character space, event graph, and conflict architecture.
 ::::
 
-This mapping matters. If a dimension fails, the system does not merely say "the story is not good enough." It knows which control object should be revised. The evaluator is therefore a router inside the governance loop.
+This mapping matters. If a dimension fails, the system does not merely say "the story is not good enough." It knows which control object should be revised. The evaluator is therefore not an endpoint. It is a router inside the governance loop.
 
 ## A Real Run
 
@@ -157,7 +157,7 @@ The genre was `xianxia`, the structure was `linear`, and the length was `short`.
 
 ### Qualification Profile
 
-The default required threshold was 6.0, and the excellent threshold was 8.0. For this genre, character, theme, artistry, and cohesion had to reach excellent.
+The default required threshold was 6.0, and the excellent threshold was 8.0. For this genre, four dimensions had to reach excellent: character, theme, artistry, and cohesion.
 
 ### Run Result
 
@@ -165,18 +165,18 @@ The system ran 9 iterations and reached an average score of 8.88. All 10 dimensi
 
 ### Final Status
 
-Despite passing all scoring dimensions, the final status remained not qualified. This is not merely a failure. It is the important lesson: passing scores do not mean governance is complete.
+Although every scoring dimension passed, the final status remained not qualified. This is not simply a failure. It is the important lesson: passing scores do not mean governance is complete.
 :::
 
 This run is especially useful for explaining the core claim of this project. A system can produce a high-scoring story and still be blocked by a higher-level acceptance process. The problem is not sentence fluency; it is that deeper checks — defect attack, continuity audit, and the qualification profile — can expose structural flaws hidden behind locally strong scores.
 
 ## What Remained After Scores Passed
 
-The reported issues were not "bad writing." They were specific structural gaps:
+The reported issues were not "bad writing." They were specific structural gaps, for example:
 
 - Qingling uses an opening move from Qingyun sword technique, but the character ability setup does not sufficiently explain how she learned it.
 - The source of her knowledge about the soul-condensing herb is not explicit enough, weakening the causal support for her risky path.
-- The "sword sheath" image appears as a central symbol, but later return and deepening can be stronger.
+- The "sword sheath" image appears as a central symbol, but its later return and deepening could be stronger.
 - Lingxu's attitude change toward Qingling needs more psychological grounding.
 - The demonic cultivators work as external pressure, but their symbolic relation to the core theme is comparatively thin.
 - If the ending states the character's insight too directly, it weakens the aftertaste of the open ending.
@@ -185,7 +185,7 @@ These are not reliably solved by asking for another polished draft. They point t
 
 ## Mapping Back to the Framework
 
-Story Insight V4 maps directly onto this site's framework, where each failure mode is named as a *mismatch* between local quality and global value. The flaws above line up with these mismatch types:
+Story Insight V4 maps directly onto this site's framework, where each failure mode is named as a *mismatch* between local quality and global value. The flaws above line up with five of the six mismatch types:
 
 ::::cards
 ### Aggregation Mismatch
@@ -194,7 +194,7 @@ Strong local scenes do not automatically compose into global narrative value. A 
 
 ### State Mismatch
 
-Character state, ability, relationships, memory, and motivation must persist across scenes. The system needs continuity ledgers and logic-space snapshots to prevent earlier commitments from being overwritten.
+Character state, ability, relationships, memory, and motivation must persist across scenes. The system needs continuity ledgers and logic-space snapshots to prevent earlier commitments from being inadvertently overwritten later.
 
 ### Support Mismatch
 
@@ -206,7 +206,7 @@ A generic "good story" score is not the same as the qualification profile for a 
 
 ### Fitting-Boundary Mismatch
 
-The system can over-bind to a polished scene, a symbolic image, or an early revision path. Defect attacks and control-space diagnosis force local successes to prove that they still serve the character arc, theme, and ending.
+The system can over-bind to a polished scene, a symbolic image, or an early revision path. Defect attacks and control-space diagnosis force local successes to prove that they still serve the character arc, theme, and ending, rather than becoming a new inertia of their own.
 ::::
 
 ## Conclusion

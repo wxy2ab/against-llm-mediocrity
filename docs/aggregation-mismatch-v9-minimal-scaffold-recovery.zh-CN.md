@@ -26,7 +26,7 @@ Artifact-v9 用 **192 个 DeepSeek-V4-Flash semantic episodes** 收窄 artifact-
 2. 从同一冻结错误 proposal 开始，generic、located、causal 三种 verifier receipt
    是否改变一次完整 layer 修复？
 
-| Claim | 配对估计 | 95% CI | Holm \(p\) | 预注册裁决 |
+| Claim | 配对估计 | 95% CI | Holm $p$ | 预注册裁决 |
 |---|---:|---|---:|---|
 | **V9-A1** ready 主效应 | +0.0208 | [0, 0.0625] | 1.0 | **floor，未裁决** |
 | **V9-A2** ledger 主效应 | +0.0208 | [0, 0.0625] | 1.0 | **floor，未裁决** |
@@ -52,38 +52,38 @@ one-shot static construction 提高 59.4 个百分点。但这个比较不能识
 
 V9-A 用 2×2 设计暴露两个可见字段：
 
-\[
+```math
 Y_i(r,l),\qquad r\in\{0,1\},\ l\in\{0,1\},
-\]
+```
 
-其中 \(r\) 表示是否显示 ready set，\(l\) 表示是否显示规范化 completed ledger。
+其中 $r$ 表示是否显示 ready set，$`l`$ 表示是否显示规范化 completed ledger。
 四个条件都保留分层交互与工具历史。
 
 ready 主效应：
 
-\[
+```math
 \Delta_{A1}
 =
-\operatorname{mean}_i
+\mathop{\mathrm{mean}}\nolimits_i
 \frac{
 [Y_i(1,0)-Y_i(0,0)]
 +
 [Y_i(1,1)-Y_i(0,1)]
 }{2}.
-\]
+```
 
 ledger 主效应：
 
-\[
+```math
 \Delta_{A2}
 =
-\operatorname{mean}_i
+\mathop{\mathrm{mean}}\nolimits_i
 \frac{
 [Y_i(0,1)-Y_i(0,0)]
 +
 [Y_i(1,1)-Y_i(1,0)]
 }{2}.
-\]
+```
 
 只有通过这两个 gate，才能支持字段级独立贡献。共同 floor 会阻止这种识别。
 
@@ -127,7 +127,7 @@ receipt specificity，但仍然只识别当前一次修复协议。
 
 ### 2.2 V9-A 矩阵
 
-24 个新 DAG 覆盖 \(N\in\{24,48\}\) × frontier \(\in\{4,12\}\) 四个 cell，
+24 个新 DAG 覆盖 $`N\in\{24,48\}`$ × frontier $`\in\{4,12\}`$ 四个 cell，
 每格 6 个实例。每个实例运行：
 
 | 条件 | 显式 ready set | 显式规范化 ledger | Staged turns |
@@ -142,7 +142,7 @@ receipt specificity，但仍然只识别当前一次修复协议。
 
 ### 2.3 V9-B 矩阵
 
-32 个冻结 repair cases 覆盖 layer width \(\{8,32\}\) 与 single-error /
+32 个冻结 repair cases 覆盖 layer width $`\{8,32\}`$ 与 single-error /
 quarter-layer-error，四格各 8 个。每个 case 在相同输出合同下各运行 GENERIC、
 LOCATED、CAUSAL 一次。
 
@@ -190,7 +190,7 @@ verifier 与 commit-end 事件；A 的暴露标志与四条件完全匹配；每
 | READY-LEDGER | 1/24 | 2.50 | 3,158.5 | 8.73s | order 23；success 1 |
 
 95 个失败中，77 个终止于 `order`，18 个终止于 `readiness`；没有 timeout 或
-transport 失败。唯一成功位于 \(N=48,\ frontier=4\)，所以没有任何 \(N\) 或
+transport 失败。唯一成功位于 $`N=48,\ frontier=4`$，所以没有任何 $N$ 或
 frontier cell 能识别字段差异。
 
 77 个 order failure 的 `readiness_ok=true`：提交的 node-ID **集合就是正确的下一
@@ -199,7 +199,7 @@ ready layer**，只有排列不等于冻结顺序。Gate 在检查 GF(2) 值之�
 
 当前证据只支持：
 
-> 在 V9 的 \(N=24/48\) 矩阵与 strict full-layer ordered-submission 合同下，
+> 在 V9 的 $N=24/48$ 矩阵与 strict full-layer ordered-submission 合同下，
 > 无法识别 ready set 和 ledger 的独立效应。
 
 它不支持“ready set 没用”“ledger 没用”或“V8 被推翻”。
@@ -216,7 +216,7 @@ ready layer**，只有排列不等于冻结顺序。Gate 在检查 GF(2) 值之�
 
 配对不一致：
 
-| 对比 | 正 / 负 / 零 | 估计 | 95% CI | Holm \(p\) |
+| 对比 | 正 / 负 / 零 | 估计 | 95% CI | Holm $p$ |
 |---|---:|---:|---|---:|
 | CAUSAL−GENERIC | 6 / 2 / 24 | +0.125 | [−0.0313, 0.2813] | 0.875 |
 | LOCATED−GENERIC | 5 / 1 / 26 | +0.125 | [0, 0.2813] | 0.875 |
@@ -262,7 +262,7 @@ scaffold 的证据。
 
 ### 未通过预注册门
 
-- causal receipt 相对 generic 至少提高 0.15，且区间与修正检验通过；
+- causal receipt 相对 generic 至少提高 0.15，且区间为正、修正后 $p<0.05$；
 - located receipt 相对 generic 至少提高 0.10，并满足同样统计条件。
 
 ### 未建立
@@ -342,7 +342,7 @@ failed IDs 可能足以复算修复。此时 causal witness 只是重组已有�
 1. 单 DeepSeek 配置、中文 prompt、thinking disabled；
 2. 每个实例每条件只有一次正式运行；
 3. 合成 GF(2) DAG，不是真实仓库或工作流；
-4. V9 使用 \(N=24/48\)，V8 使用 \(N=8/16\)，不能形成 field-only 跨研究对照；
+4. V9 使用 $N=24/48$，V8 使用 $N=8/16$，不能形成 field-only 跨研究对照；
 5. strict layer 内顺序可能拒绝语义等价集合；
 6. GENERIC 已达到 26/32，headroom 有限；
 7. 公共 B prompt 可能使 causal 内容冗余；
@@ -350,7 +350,7 @@ failed IDs 可能足以复算修复。此时 causal witness 只是重组已有�
 
 最高价值后续：
 
-- 在 \(N=8/16/24\) 的重叠、非 floor 区间复跑 ready×ledger；
+- 在 $N=8/16/24$ 的重叠、非 floor 区间复跑 ready×ledger；
 - 接受 ID set，由 runtime canonicalize 顺序；
 - 用更难 width 或更大样本降低 generic 基线；
 - 预注册 LOCATED 对 CAUSAL 的非劣效性与 token 成本门；

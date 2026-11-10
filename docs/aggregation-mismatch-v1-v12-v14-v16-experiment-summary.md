@@ -84,7 +84,7 @@ while syndrome-supplied E is 50/50. V2 uses 1,596 confirmatory results and 540
 contemporaneous C+B follow-ups to address V1's length floor, run accounting, and
 contemporaneous-control problems.
 
-Across 15 matched instances at \(N\in\{32,48,68\}\):
+Across 15 matched instances at $`N\in\{32,48,68\}`$:
 
 | Contrast | DeepSeek | MiniMax |
 |---|---:|---:|
@@ -141,7 +141,7 @@ improve dramatically.”
 ## 6. V11–V12: Address drift and delivery scale
 
 V11's relocation×(ID−INDEX) interaction is +0.21875 and passes; all seven
-differences come from \(N=48\) relocated-index precondition failures.
+differences come from $N=48$ relocated-index precondition failures.
 Patch/Rewrite reliability is ceiling-limited at 32/32 in all four arms, while
 Patch uses substantially fewer tokens, wall time, and response bytes.
 
@@ -162,13 +162,13 @@ Compatible Exact returns `STALE_OLD_VALUE` on all 24 first attempts and then
 completes 24/24 located recoveries. Compatible Intent commits 24/24 on the first
 attempt, and all four arms finish 24/24. The primary is:
 
-\[
+```math
 \Delta_{A1}=0.176459,\quad
 95\%\ CI=[0.168331,0.184575],\quad
 p_{\mathrm{exact}}=1.1921\times10^{-7}.
-\]
+```
 
-Because \(0.176459<\log(1.20)=0.182322\), V14-A1 is
+Because $0.176459<\log(1.20)=0.182322$, V14-A1 is
 `failed_pre_registered_gate`. The mechanism and safety semantics hold; the
 frozen +20% cost commitment does not.
 
@@ -182,11 +182,11 @@ conflict-arm first commits are safely rejected. Compatible Intent succeeds
 24/24 on the first attempt; Intent-Naive terminates 0/24; Intent-Rebase and
 Exact-Rebase each recover 24/24.
 
-\[
+```math
 \Delta_{\text{Intent Rebase−Naive}}=1.0,\quad
 95\%\ CI=[1.0,1.0],\quad
 p_{\mathrm{exact}}=1.1921\times10^{-7}.
-\]
+```
 
 The machine claim state is `passed`, but the evidence-sharing state is
 `share_with_caveats`: Naive is structurally forbidden to recover, and the
@@ -203,11 +203,11 @@ cases. Its 1,752 events reconstruct all endpoints. All three conflict arms
 receive a second provider turn: Generic and Reread remain locked and finish
 0/24, while runtime Unlock + Rebase finishes 24/24.
 
-\[
+```math
 \Delta_{\text{Rebase−Generic}}=1.0,\quad
 95\%\ CI=[1.0,1.0],\quad
 p_{\mathrm{exact}}=1.1921\times10^{-7}.
-\]
+```
 
 The machine claim passes. The artifact supports “retry without an authoritative
 state transition is not recovery.” It does not isolate information: Rebase
@@ -274,7 +274,7 @@ responsibility-allocation problem, not an unlimited-prompt problem.
 
 ## 13. Rules for cross-version use
 
-- Do not pool run counts, success rates, or \(p\)-values across artifacts.
+- Do not pool run counts, success rates, or $p$-values across artifacts.
 - Do not promote secondary or exploratory analyses to primary claims.
 - Do not rewrite floor/ceiling as failure, equivalence, or ineffectiveness.
 - Do not rewrite a failed minimum-effect gate as a zero effect.

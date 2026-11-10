@@ -11,7 +11,7 @@ This is a working framework for using AI well — not a guide to extracting more
 
 The central worry is that AI is most persuasive precisely where it is least reliable: it produces fluent, supportive, confident output that can amplify what you already want to believe. Each section below names one way that failure shows up and gives concrete practices for keeping your own judgment intact while using AI.
 
-The twelve sections move from the core proposition to specific traps — personhood effects, fluency mistaken for truth, premise-following, hallucinated arguments, the illusion of abstraction — then to tests that keep AI honest, and finally to privacy and a definition of real AI capability.
+The twelve sections move from the core proposition to specific traps — personhood effects, fluency mistaken for truth, premise-following, hallucinated arguments, the illusion of abstraction — then to tests that keep AI honest (reality feedback, what learning must now do, hidden default frames, the limits of simulated expertise), and finally to privacy and a definition of real AI capability.
 
 ## Contents
 

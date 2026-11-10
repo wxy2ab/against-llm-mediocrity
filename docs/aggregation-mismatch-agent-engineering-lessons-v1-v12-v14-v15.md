@@ -93,13 +93,13 @@ their current boundaries.
 
 ## 2. Decompose agent success by layer
 
-\[
+```math
 P(S)=
 P(\text{state adequate})
 \times P(\text{plan correct}\mid state)
 \times P(\text{delivery correct}\mid plan)
 \times P(\text{safe commit}\mid delivery).
-\]
+```
 
 This is a diagnostic decomposition, not an independence assumption:
 
@@ -197,7 +197,7 @@ Prefer:
 ```
 
 Runtime resolves path/index/span from current state. V8 ID−INDEX is +0.3125;
-V11 relocation interaction is +0.21875 but concentrated at \(N=48\); V12 does
+V11 relocation interaction is +0.21875 but concentrated at $N=48$; V12 does
 not establish monotone drift dose. The prescription follows address invariance
 plus experimental support; it does not require predicting drift magnitude.
 
@@ -244,12 +244,12 @@ risk reduction justifies token and latency cost.
 
 For sparse Patch:
 
-\[
+```math
 L_{\mathrm{rewrite}}\approx Nc_r,\qquad
 L_{\mathrm{patch}}\approx c_0+k(c_p+\log N).
-\]
+```
 
-When the plan is correct, \(k\ll N\), addresses are stable, and the executor is
+When the plan is correct, $`k\ll N`$, addresses are stable, and the executor is
 reliable, Patch usually owns a smaller commitment surface. Dense edits,
 structural refactors, invalid plans, or brittle tools can erase the advantage.
 
@@ -310,14 +310,14 @@ implementation-adoption evidence, not population guarantees.
 
 Router utility:
 
-\[
+```math
 U=
 V_sP(\text{exact success})
 -C_t(tokens)
 -C_l(latency)
 -C_r(risk)
 -C_h(human).
-\]
+```
 
 Record exact endpoint, budget, tokens, provider turns, transport attempts,
 payload bytes, stage latency, rollback, tail latency, and success per cost.
@@ -359,7 +359,8 @@ Invariants:
 V9–V12 reconstruct episodes. V14 reconstructs 96 episodes from 1,416 events and
 120 provider turns with zero mismatch, explicitly recording seal-before-drift
 in all 96. V15 reconstructs 96 episodes from 1,594 events and 144 provider
-turns, keeping first rejection and recovery under one run key.
+turns with zero mismatch, keeping first rejection and recovery under one run
+key.
 
 ## 14. Principle twelve: Separate scientific gates from product defaults
 

@@ -5,21 +5,27 @@ path: /case-study
 title: Case Studies
 navTitle: Cases
 kicker: See how structural ceilings surface in real systems
-summary: "This page is not here to show that a system is impressive. It shows what teams do when a problem can no longer be fixed by polishing outputs: rewrite the bottleneck into control objects, validation loops, hard state, and governance moves."
+summary: "This page is not here to show that a system is impressive. It shows what a system does when a problem can no longer be fixed by polishing outputs: it rewrites the structural bottleneck into control objects, validation loops, hard state, and governance moves."
 order: 3
 heroPoints:
-  - The case library answers an engineering question: which failures cannot be solved by "try again" and require task redesign.
-  - Each case answers the same questions: where the structural bottleneck sits, which intermediate objects become explicit, and how evaluation and revision close the loop.
+  - "The case library answers an engineering question: which failures cannot be solved by \"try again\" and require task redesign."
+  - "Each case answers the same questions: where the structural bottleneck sits, which intermediate objects become explicit, and how evaluation and revision close the loop."
   - V4 is the control-space case, V6 is the layered-governance case, Stock Rec V3 is the financial production-authority case, and FW-Insight V3 is the hard-experience regeneration case.
 ---
 
-## How To Read the Cases
+## How to Read the Cases
 
 If the home page asks which problems have already reached structural ceilings, and "Why It Matters" explains why those failures should not be misread as prompt problems, then this page answers the next question: **what does a real system do once it admits the ceiling and rewrites the problem into something governable?**
 
-The purpose of a case study is not to show that a particular system is impressive. It is to test this site's framework inside a real task. A useful case must explain why the raw task cannot be solved by fluent output alone, which intermediate objects the system creates, how evaluators detect failure, how revision routing decides which layer to change, and what limits remain.
+The purpose of a case study is not to show that a particular system is impressive. It is to test this site's framework inside a real task. A useful case must explain:
 
-The case page is therefore an index, not a pile of top-level navigation entries. The top navigation keeps a single "Cases" entry, and each concrete case lives on its own detail page. That structure will hold up as future cases expand into writing, research, code, investment, collaboration, or learning tasks.
+- why the raw task cannot be solved by fluent output alone;
+- which intermediate objects the system creates;
+- how evaluators detect failure;
+- how revision routing decides which layer to change;
+- which governance limits the final result exposes.
+
+The case page is therefore an index, not a pile of top-level navigation entries. The top navigation keeps a single "Cases" entry, and each concrete case lives on its own detail page. With this structure, even as future cases expand into writing, research, code, investment, collaboration, or learning tasks, readers first see a clear classification and then decide which system to open.
 
 ## Current Cases
 
@@ -41,7 +47,7 @@ V6 shows the next governance problem after control-space design: under a high th
 ### Stock Rec V3: Financial Producer Governance
 Tag: Finance / state mismatch
 
-Stock Rec V3 shows a high state mismatch in a financial strategy system. Factor, base-score, excitation, and holding-processing producers evolve continuously. The LLM may only emit candidates, hints, or explanations, and any new content must pass through shadow, promotion, and active lifecycle stages before it can affect the strategy.
+Stock Rec V3 shows high state mismatch in a financial strategy system. Factor, base-score, excitation, and holding-processing producers evolve continuously. The LLM may only emit candidates, hints, or explanations, and any new content must pass through shadow, promotion, and active lifecycle stages before it can affect the strategy.
 
 [Read the Stock Rec V3 case](/case-study-stock-rec-v3)
 
@@ -76,11 +82,11 @@ FW-Insight V3 solves the hard-experience problem. Once many factor-framework sam
 
 ### Why They Are Not Top-Level Peers
 
-If every case enters the top navigation, the reader path fragments as the library grows. Cases should form an extensible library, not multiple peer pages inside the main argument chain.
+If every case enters the top navigation, the reader path fragments as the library grows. Cases should form an extensible library, not a row of peer pages beside "Home," "Why It Matters," "Mechanism," and "Governance" in the main argument chain. Those pages build the framework for judgment. The cases show that, once those judgments enter a real system, they directly change object design, evaluation routing, state commits, and production authority.
 
-### Why Mechanism Comes Next
+### Why Read Mechanism After the Cases
 
-After the cases, the "Mechanism" page abstracts these engineering observations into three alignment regimes, six mismatches, and control-space governance.
+After the cases, the "Mechanism" page abstracts these engineering observations into more stable explanatory axes: three alignment regimes, six primitive mismatches, and control-space governance. Those axes explain why some tasks keep stalling at the same kind of plateau, why repeated sampling and multi-agent discussion do not automatically cross the bottleneck, and what intervention each primitive mismatch requires.
 ::::
 
 ## What Future Cases Should Add

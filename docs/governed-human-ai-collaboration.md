@@ -12,6 +12,8 @@
 
 This working paper proposes a practical model for dividing labor between AI and humans. Rather than splitting tasks into "AI work" and "human work," it governs the individual variables inside a task that require human judgment, letting AI advance everything else.
 
+The sections below define the core proposition, explain when governance is and is not needed, set out a workflow for routing and escalation, and give templates and worked examples.
+
 Several governance objects recur throughout. They are spelled out on first use and then referred to by acronym:
 
 - **GKO** — Governed Knowledge Object: a durable fact, rule, or boundary the agent should know or obey.
@@ -49,6 +51,14 @@ The collaboration unit is not the whole task. It is the **control variable**. Fo
 ## 2. When Governance Is and Is Not Needed
 
 Governed collaboration is useful for high-mismatch, high-risk, preference-heavy, cross-role, or reusable work. It should not burden tasks that already sit in a positive probability-value alignment regime.
+
+| Positive-alignment task | AI should do | Human boundary |
+|---|---|---|
+| Context compression | summarize, classify, extract decision variables | confirm whether stakes were omitted |
+| Semantic decompression | expand notes or outlines into prose | ensure upstream structure is correct |
+| Register transfer | adapt tone and audience | intervene when legal, relational, or reputational boundaries are tacit |
+| Structured transformation | create tables, checklists, JSON, SOPs | confirm the format reflects the real workflow |
+| Candidate generation | propose titles, risks, edge cases, queries | select, rank, and validate |
 
 The design rule is:
 

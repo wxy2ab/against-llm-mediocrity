@@ -24,7 +24,7 @@ all 24 Exact payloads are safely rejected as stale and then recover within the
 same budget through one located repair; all 24 Intent runs commit on their first
 attempt. The paired log-token interaction for Exact recovery is 0.1765
 (geometric cost ratio about 1.193), directionally stable but just below the
-preregistered \(\log(1.20)=0.1823\) threshold. V14-A1 is therefore
+preregistered $\log(1.20)=0.1823$ threshold. V14-A1 is therefore
 `failed_pre_registered_gate`.
 
 ## Technical summary
@@ -44,8 +44,8 @@ preregistered \(\log(1.20)=0.1823\) threshold. V14-A1 is therefore
 | Compatible Intent first-attempt commit | 24/24 |
 | Final success in all four arms | 24/24 each |
 | V14-A1 | **0.176459**; 95% CI **[0.168331, 0.184575]** |
-| Exact sign-flip | \(2/2^{24}=1.1921\times10^{-7}\) |
-| Minimum effect | \(\log(1.20)=0.182322\) |
+| Exact sign-flip | $2/2^{24}=1.1921\times10^{-7}$ |
+| Minimum effect | $\log(1.20)=0.182322$ |
 | Claim state | **`failed_pre_registered_gate`** |
 | Formal tokens | **1,571,142** |
 | Unsafe / over-budget success | 0 / 0 |
@@ -57,18 +57,18 @@ preregistered \(\log(1.20)=0.1823\) threshold. V14-A1 is therefore
 
 The frozen sequence is:
 
-\[
+```math
 S_0
 \rightarrow Q_0
 \rightarrow Seal(Q_0)
 \rightarrow D
 \rightarrow S_1
 \rightarrow Execute(Q_0,S_1).
-\]
+```
 
-The initial provider turn can see only \(S_0\). The harness injects drift only
-after tool arguments \(Q_0\) have been captured, validated, and sealed. If the
-model first sees \(S_1\), the experiment measures regeneration against the new
+The initial provider turn can see only $S_0$. The harness injects drift only
+after tool arguments $Q_0$ have been captured, validated, and sealed. If the
+model first sees $S_1$, the experiment measures regeneration against the new
 state rather than staleness of an already compiled payload.
 
 ### 1.2 Intent and Exact have different temporal semantics
@@ -94,23 +94,23 @@ The four arms are:
 
 The paired task statistic is:
 
-\[
+```math
 d_i=
 [\log T_{CE,i}-\log T_{CI,i}]
 -
 [\log T_{DE,i}-\log T_{DI,i}],
 \qquad
 \Delta_{A1}=\frac{1}{24}\sum_i d_i.
-\]
+```
 
-Passing requires more than \(\Delta>0\):
+Passing requires more than $\Delta>0$:
 
-\[
+```math
 \Delta\ge\log(1.20),
-\]
+```
 
 with a bootstrap lower confidence bound above zero, exact two-sided sign-flip
-\(p<0.05\), final success of at least 0.75 in every arm, and all safety and
+$p<0.05$, final success of at least 0.75 in every arm, and all safety and
 data-quality gates passing. The minimum-effect threshold is an engineering
 commitment and cannot be lowered after observing the result.
 
@@ -118,7 +118,7 @@ commitment and cannot be lowered after observing the result.
 
 - DeepSeek-V4-Flash; Chinese prompts; `thinking=False`; temperature 0; top_p 1;
 - maximum 32k tokens and a shared 300-second semantic-episode budget;
-- 24 formal tasks, with eight each at \(N\in\{96,144,216\}\);
+- 24 formal tasks, with eight each at $`N\in\{96,144,216\}`$;
 - every task enters DI, DE, CI, and CE;
 - the initial provider output is sealed before compatible or disjoint drift;
 - only CE may use one `RECOVER-EXACT-LOCATED` after a typed stale receipt;
@@ -142,9 +142,9 @@ false rejects, input mutations, and payload mutations are all zero. For all 96
 formal endpoints, `input_tokens + output_tokens = total_tokens`.
 
 The initial analyzer mistakenly used one million Monte Carlo sign flips at
-\(n=24\), although the frozen design required an exact test. Because all 24
+$n=24$, although the frozen design required an exact test. Because all 24
 paired differences have the same sign, the exact two-sided value is available
-in closed form as \(2/2^{24}=1.1921\times10^{-7}\). The implementation and
+in closed form as $2/2^{24}=1.1921\times10^{-7}$. The implementation and
 derived artifacts are corrected. The effect, confidence interval,
 minimum-effect verdict, and final claim state are unchanged.
 
@@ -170,20 +170,20 @@ not a terminal failure.
 
 ![V14 paired token-cost interaction](./assets/aggregation-mismatch-experiment/v14-token-interaction.png)
 
-\[
+```math
 \Delta_{A1}=0.176459,
 \qquad
 \exp(\Delta)=1.19299,
 \qquad
 95\%\ CI=[0.168331,0.184575].
-\]
+```
 
 All 24 task interactions are positive and the exact
-\(p=1.1921\times10^{-7}\). However:
+$p=1.1921\times10^{-7}$. However:
 
-\[
+```math
 0.176459 < \log(1.20)=0.182322.
-\]
+```
 
 The confirmatory verdict is therefore `failed_pre_registered_gate`. It is
 accurate to report a stable positive cost interaction with a point estimate of
@@ -191,7 +191,7 @@ about +19.3% under this protocol. It is not accurate to say that the result
 passes the at-least-20% cost gate, nor to rewrite a failed gate as a zero or
 negative effect.
 
-The exploratory geometric cost ratios by \(N\) are 1.210, 1.186, and 1.183
+The exploratory geometric cost ratios by $N$ are 1.210, 1.186, and 1.183
 (eight tasks each). This stratification was not preregistered as a primary
 claim and does not establish a monotone scaling law.
 
@@ -260,7 +260,8 @@ second provider turn creates the recovery increment.
    hash, pre-state hash, and a seal event. “The model answered” is not an
    adequate definition of a compiled operation.
 2. **Revalidate authoritative state at execution.** Check old value, version,
-   lock, and target identity immediately before atomic apply.
+   lock, and target identity immediately before atomic apply; do not rely on
+   the prompt-time snapshot.
 3. **Represent stale as a typed receipt.** Return failed target, observed value,
    current version, and permitted recovery actions instead of generic retry.
 4. **Keep recovery inside the original semantic episode.** Share run key,
@@ -280,7 +281,7 @@ second provider turn creates the recovery increment.
   global diff audits.
 - **Configuration systems:** use stable entity IDs, old-value/version
   preconditions, and atomic batches; let the runtime interpret monotone Intents
-  such as “maintain at least \(k\) replicas.”
+  such as “maintain at least $k$ replicas.”
 - **Database migration:** revalidate schema version and locks between seal and
   execution; recompile the migration on conflict.
 - **Spreadsheets and financial models:** resolve current coordinates from row

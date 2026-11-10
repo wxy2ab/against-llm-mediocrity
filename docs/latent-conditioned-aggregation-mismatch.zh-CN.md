@@ -75,7 +75,7 @@ y_i <-> y_j
 - 维护全局约束；
 - 保持长程一致性；
 - 审计局部选择是否共同组成高价值整体；
-- 通过全文审计、Stage Repair、受控投影和有界修复把 residual 回写进控制层。
+- 通过全文审计、Stage Repair、受治理投影和有界修复把 residual 回写进控制层。
 
 因此，更稳妥的定位不是“新的第七站点”，而是：
 
@@ -124,18 +124,18 @@ y_i <-> y_j
 
 普通聚合失配可以写成：
 
-\[
+```math
 Y = A(y_1,\ldots,y_n)
-\]
+```
 
 问题在于局部合理的 `y_i` 经组合后未能保持全局价值。
 
 潜在结构条件聚合则更准确地写成：
 
-\[
+```math
 y_i = R_i(H, D_i, C_i), \qquad
 Y = A(y_1,\ldots,y_n)
-\]
+```
 
 其中：
 
@@ -147,21 +147,21 @@ Y = A(y_1,\ldots,y_n)
 
 因此，真实价值不只要求：
 
-\[
-\operatorname{Consistent}(y_1,\ldots,y_n)
-\]
+```math
+\mathop{\mathrm{Consistent}}\nolimits(y_1,\ldots,y_n)
+```
 
 还要求：
 
-\[
-\operatorname{Faithful}(Y,H)
-\]
+```math
+\mathop{\mathrm{Faithful}}\nolimits(Y,H)
+```
 
 同时又要求：
 
-\[
-\operatorname{ExplicitLeakage}(H,Y)
-\]
+```math
+\mathop{\mathrm{ExplicitLeakage}}\nolimits(H,Y)
+```
 
 不能过高。
 
@@ -355,8 +355,8 @@ explicit to the authoring or control system
 
 ### 8.4 双侧审计
 
-**控制侧审计：**检查 `Y` 是否真实受 `H` 约束。  
-**接收侧审计：**检查 `Y` 是否泄漏过度、是否过弱、是否让目标接收者形成正确推断。
+**控制侧审计：** 检查 `Y` 是否真实受 `H` 约束。  
+**接收侧审计：** 检查 `Y` 是否泄漏过度、是否过弱、是否让目标接收者形成正确推断。
 
 ### 8.5 有界修复
 

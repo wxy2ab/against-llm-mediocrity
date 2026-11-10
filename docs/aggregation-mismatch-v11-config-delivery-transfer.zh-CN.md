@@ -19,7 +19,7 @@
 
 在 production-shaped 合成 JSON 配置中，relocation 使 runtime 解析的 semantic ID
 相对模型提交的 physical index 获得 **21.875 个百分点**的严格成功优势。该效应通过
-预注册 V11-A1 门，但 7 个差异全部发生在 \(N=48\)；\(N=24\) 的四个单元全部 ceiling。
+预注册 V11-A1 门，但 7 个差异全部发生在 $N=48$；$`N=24`$ 的四个单元全部 ceiling。
 V11-B 的 Patch 与 Full Rewrite 四个单元又全部成功，因此可靠性未裁决；不过 Patch
 在 token、延迟和响应字节上明显更便宜。
 
@@ -36,7 +36,7 @@ V11-B 的 Patch 与 Full Rewrite 四个单元又全部成功，因此可靠性�
 | Stable-ID / Stable-Index | 32/32 / 32/32 |
 | Relocated-ID / Relocated-Index | 32/32 / **25/32** |
 | V11-A1 interaction | **+0.21875**，95% CI **[0.09375, 0.375]** |
-| V11-A1 exact / Holm \(p\) | 0.015625 / **0.03125** |
+| V11-A1 exact / Holm $p$ | 0.015625 / **0.03125** |
 | V11-A1 state | **`passed`** |
 | Sparse Patch / Rewrite | 32/32 / 32/32 |
 | Dense Patch / Rewrite | 32/32 / 32/32 |
@@ -47,46 +47,46 @@ V11-B 的 Patch 与 Full Rewrite 四个单元又全部成功，因此可靠性�
 
 ### 1.1 Semantic identity 对 relocation 不变
 
-设 \(C\) 是包含 stable ID 的配置，\(\pi(C)\) 只重排 service 数组、不改变对象语义。
-对 service \(s\)：
+设 $C$ 是包含 stable ID 的配置，$`\pi(C)`$ 只重排 service 数组、不改变对象语义。
+对 service $s$：
 
-\[
-\operatorname{id}_{\pi(C)}(s)=\operatorname{id}_{C}(s),
-\]
+```math
+\mathop{\mathrm{id}}\nolimits_{\pi(C)}(s)=\mathop{\mathrm{id}}\nolimits_{C}(s),
+```
 
 而通常：
 
-\[
-\operatorname{index}_{\pi(C)}(s)\ne\operatorname{index}_{C}(s).
-\]
+```math
+\mathop{\mathrm{index}}\nolimits_{\pi(C)}(s)\ne\mathop{\mathrm{index}}\nolimits_{C}(s).
+```
 
 Semantic-ID 工具合同只要求模型识别目标，再由 runtime 对权威状态解析当前地址。
 Physical-index 合同则要求模型多做一次重绑定：
 
-\[
+```math
 \text{语义目标}
 \rightarrow
 \text{当前物理 index}
 \rightarrow
 \text{工具 payload}.
-\]
+```
 
 理论保证的是表示不变性和更小的模型责任面。它**不能**决定特定模型的失败频率、
 效应如何随规模变化或成功率会提高多少。V11-A 检验的是这一经验转化。
 
 ### 1.2 Patch 只有条件性的承诺面优势
 
-对象长度为 \(N\)、改动数为 \(k\) 时，可用一个粗略交付模型表示：
+对象长度为 $N$、改动数为 $k$ 时，可用一个粗略交付模型表示：
 
-\[
+```math
 L_{\text{rewrite}}\approx N c_r,
 \qquad
 L_{\text{patch}}\approx c_0+k(c_p+\log N).
-\]
+```
 
-当 plan 正确、\(k\ll N\)、地址稳定且 executor 可靠时，Patch 通常要求模型正确提交
+当 plan 正确、$`k\ll N`$、地址稳定且 executor 可靠时，Patch 通常要求模型正确提交
 更少内容。但这不是无条件可靠性定理：短 Rewrite 可以进入 ceiling；Patch 自身有地址
-和 schema 开销；dense edits 会削弱 \(k\ll N\)；错误 plan 在任何接口下仍然错误。
+和 schema 开销；dense edits 会削弱 $`k\ll N`$；错误 plan 在任何接口下仍然错误。
 
 ### 1.3 Governed execution 改变安全后果
 
@@ -130,13 +130,13 @@ V11 隔离的是正确 plan 之后的 delivery，不测 planning、retrieval 或
 
 Primary interaction：
 
-\[
+```math
 \Delta_{A1}
 =
 (ID-INDEX)_{\text{relocated}}
 -
 (ID-INDEX)_{\text{stable}}.
-\]
+```
 
 冻结门要求方向为正、观察效应至少 +0.15、区间与随机化检验支持，并通过数据、事件、
 truth isolation 与 offline executor 门。
@@ -169,25 +169,25 @@ false reject 与重建状态 mismatch 全部为 0。
 
 | 规模 | Stable-ID | Stable-Index | Relocated-ID | Relocated-Index |
 |---|---:|---:|---:|---:|
-| \(N=24\) | 16/16 | 16/16 | 16/16 | 16/16 |
-| \(N=48\) | 16/16 | 16/16 | 16/16 | **9/16** |
+| $`N=24`$ | 16/16 | 16/16 | 16/16 | 16/16 |
+| $N=48$ | 16/16 | 16/16 | 16/16 | **9/16** |
 | Overall | 32/32 | 32/32 | 32/32 | **25/32** |
 
 配对 interaction：
 
-\[
+```math
 \Delta_{A1}=0.21875,
 \qquad
 95\%\ CI=[0.09375,0.375].
-\]
+```
 
 7 个 task 支持 ID，0 个支持 Index，25 个 tie。原始 exact sign-flip
-\(p=0.015625\)，Holm 后 \(p=0.03125\)，因此 V11-A1 通过。
+$p=0.015625$，Holm 后 $p=0.03125$，因此 V11-A1 通过。
 
 措辞必须精确：观察效应超过预注册 +0.15，且 CI 下界超过 0；但下界 0.09375
 **没有**超过 +0.15。因此不能说“以 95% 置信度证明总体效应至少为 15 个百分点”。
 
-7 次失败全部是 \(N=48\) Relocated-Index precondition failure。失败 batch 的 35 个
+7 次失败全部是 $N=48$ Relocated-Index precondition failure。失败 batch 的 35 个
 edit operation 中，24 个 current index 正确，11 个错误；错误不能用“全部复制
 relocation 前 index”解释。Precondition 和原子性在 commit 前拒绝每个错误 batch，
 没有观察到 partial 或 collateral mutation。
@@ -197,7 +197,7 @@ relocation 前 index”解释。Precondition 和原子性在 commit 前拒绝每
 ![V11 density-by-delivery 严格成功率](./assets/aggregation-mismatch-experiment/v11-b-density-delivery-success.png)
 
 Sparse Patch、Sparse Rewrite、Dense Patch、Dense Rewrite 全部为 32/32。
-Sparse Patch−Rewrite 的观察差为 0，CI [0,0]，raw/Holm \(p=1\)。按冻结规则，
+Sparse Patch−Rewrite 的观察差为 0，CI [0,0]，raw/Holm $p=1$。按冻结规则，
 裁决是 `not_adjudicated_floor_or_ceiling`，不是等价，也不是 Patch 在更难矩阵中没有
 可靠性优势的证据。
 
@@ -285,8 +285,8 @@ Sparse Patch−Rewrite 的观察差为 0，CI [0,0]，raw/Holm \(p=1\)。按冻�
 ## 7. 局限与下一步
 
 - 单 DeepSeek 配置、中文 prompt、合成 JSON、正确 verified plan、每模块 32 个 task
-  cluster，且只有 \(N=24/48\)。
-- A 效应存在异质性，全部集中于 \(N=48\)。
+  cluster，且只有 $N=24/48$。
+- A 效应存在异质性，全部集中于 $N=48$。
 - B 矩阵过易，不能估计可靠性差或 density crossover。
 - Offline mutation coverage 受已编码不变量限制。
 

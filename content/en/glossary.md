@@ -5,7 +5,7 @@ path: /glossary
 title: Glossary
 navTitle: Glossary
 kicker: A linkable map of the core terms used across the site
-summary: This page gathers the core concepts used across Against LLM Mediocrity, explains what each one means, why it matters, and where it comes from.
+summary: This page gathers the core concepts used across Against LLM Mediocrity and explains what each one means, why it matters, and where it comes from.
 order: 99
 showInNav: false
 ---
@@ -32,7 +32,7 @@ If you arrived here from another page, it usually makes sense to jump straight t
 
 **Full explanation**: LLM mediocrity does not mean the model is useless. It means that on this class of tasks, more sampling, polishing, or elaboration mainly makes the answer smoother, fuller, and more plausible without reaching the structure that actually decides success. The model is not failing because it can do nothing; it is failing because default generation is pulled toward high-probability, familiar, locally improvable patterns while true value depends on hidden state, global structure, rare solutions, real specifications, or external verification.
 
-**Why it matters**: the term gives a name to a common but vague experience: "the answer keeps getting better on the surface, but it is still wrong." Once a task is recognized as LLM mediocrity, the next move is no longer endless prompt refinement but task redesign.
+**Why it matters**: the term gives a name to a common but vague experience: "the answer keeps getting better on the surface, but it is still wrong." Once a task is recognized as sitting in the LLM mediocrity regime, the next move is no longer endless prompt refinement but task redesign.
 
 **Source chain**:
 
@@ -62,11 +62,11 @@ If you arrived here from another page, it usually makes sense to jump straight t
 <a id="llm-excellence"></a>
 ### LLM Excellence
 
-**One-line definition**: the regime where the model's natural continuation direction reliably tracks task value, so autoregression becomes an advantage rather than a liability.
+**One-line definition**: the regime where the model's natural continuation direction reliably tracks task value, so autoregression becomes an advantage rather than a liability. The papers and most other pages of this site call the same regime **positive probability-value alignment**.
 
-**Full explanation**: in the LLM excellence regime, the model does not need to be forcibly dragged away from its default path, because the default path is already near the high-value region. Context compression, semantic expansion, structured transformation, format transfer, and many common rendering tasks often live here. The key point is not merely that "the model is strong." It is that task structure, representation, and success criteria are aligned with the model's learned continuation bias.
+**Full explanation**: in the LLM excellence regime, the model does not need to be forcibly dragged away from its default path, because the default path is already near the high-value region. Context compression, semantic expansion, structured transformation, format transfer, register transfer, common query construction, and many common rendering tasks often live here. The key point is not merely that "the model is strong." It is that task structure, representation, and success criteria are aligned with the model's learned continuation bias.
 
-**Why it matters**: it prevents over-governing tasks that already fit the model well. When a task already sits in LLM excellence, direct generation plus light validation is often enough.
+**Why it matters**: it prevents over-governing tasks that already fit the model well. When a task already sits in the LLM excellence regime, direct generation plus light validation is often enough.
 
 **Source chain**:
 
@@ -85,7 +85,7 @@ If you arrived here from another page, it usually makes sense to jump straight t
 
 **One-line definition**: a diagnostic taxonomy derived from the value-preservation pipeline, naming the structural stations where task value can fall out of the system.
 
-**Full explanation**: the six primitive mismatches are not surface labels for failure. They answer a stricter question: why does ordinary output-space search plateau? Each mismatch corresponds to a different structural break in the value-preservation chain, so each one implies a different repair target. Their value lies not in naming but in forcing diagnosis to imply intervention rather than sending every failure back to the same "try more versions" loop.
+**Full explanation**: the six primitive mismatches are not surface labels for failure. They answer a stricter question: why does ordinary output-space search plateau? Each mismatch corresponds to a different structural break in the value-preservation chain, so each one implies a different repair target. Their value lies not in naming but in forcing each diagnosis to imply a different intervention rather than sending every failure back to the same "try more versions" loop.
 
 **Why it matters**: without this layer, many failures collapse into the vague phrase "the model is not strong enough yet." With it, search, validation, state governance, objective governance, channel repair, and compositional governance become clearly separable engineering moves.
 
@@ -100,9 +100,9 @@ If you arrived here from another page, it usually makes sense to jump straight t
 <a id="aggregation-mismatch"></a>
 ### Aggregation Mismatch
 
-**One-line definition**: a deployed local proxy, finite search procedure, or irreversible commitment fails to recover global completion value.
+**One-line definition**: a deployed local proxy, finite search procedure, or irreversible commitment fails to reliably recover global completion value.
 
-**Full explanation**: aggregation mismatch occurs when a deployed local score or decoding rule diverges from the best global completion value attainable after that local decision, while early commitment shrinks the reachable future set. Stories lose setup-payoff structure, code breaks cross-module invariants, and proposals miss the governing tradeoff. Autoregressive chain factorization can encode global dependencies exactly and is neither necessary nor sufficient for the mismatch; “autoregressive mediocrity” is no longer used as its mechanism name. Task nonlocal coupling is only a pressure dose; severity must be measured by ranking error or regret of the deployed proxy relative to global completion value.
+**Full explanation**: aggregation mismatch occurs when a deployed local score or decoding rule diverges from the best global completion value attainable after that local decision, while early commitment shrinks the reachable future set. Stories lose setup-payoff structure, code breaks cross-module invariants, and proposals miss the governing tradeoff. Autoregressive chain factorization can encode global dependencies exactly and is neither necessary nor sufficient for the mismatch; “autoregressive mediocrity” is no longer used as its mechanism name. A task's nonlocal coupling is only a pressure dose; severity must be measured by ranking error or regret of the deployed proxy relative to global completion value.
 
 **Why it matters**: it reframes the problem from "which paragraph is weak?" to "which global relationship was never represented or governed?" The usual repair is not finer polish but dependency graphs, global invariants, compositional validators, and structured control objects.
 
@@ -117,7 +117,7 @@ If you arrived here from another page, it usually makes sense to jump straight t
 <a id="support-mismatch"></a>
 ### Support Mismatch
 
-**One-line definition**: high-value structure sits in a low-probability, low-support, or currently unreachable region of search.
+**One-line definition**: high-value structure sits in a region that is low-probability, low-support, or unreachable under the current search budget.
 
 **Full explanation**: support mismatch does not mean the answer does not exist. It means direct sampling almost never reaches it. The system may occasionally recognize the right structure without reliably generating it. Valuable solutions may depend on low-salience evidence, rare frames, non-obvious candidates, or intermediate structure search that default continuation rarely visits. The empirical tendency of a current model and decoder to fall back to common, fluent, low-value regions may be nicknamed “autoregressive gravity”; it is not a structural theorem about autoregressive architectures.
 
@@ -134,9 +134,9 @@ If you arrived here from another page, it usually makes sense to jump straight t
 <a id="state-mismatch"></a>
 ### State Mismatch
 
-**One-line definition**: at fixed accessible representation, the system's formed or updated state belief diverges from the evidence-warranted belief and changes action ranking.
+**One-line definition**: at a fixed accessible representation, the system's formed or updated state belief diverges from the evidence-warranted belief and changes action ranking.
 
-**Full explanation**: user mood, market regime, deployment status, legal jurisdiction, authority boundary, and time window can all change the optimal action. Their being hard to know does not by itself create mismatch. State mismatch occurs when the belief component incorrectly collapses hypotheses, misranks probabilities, omits or forgets evidence, or carries stale state forward under the same evidence and thereby chooses the wrong action. If the system correctly maintains a broad posterior and uses an optimal, conservative, or branching belief-conditioned policy, there is no state mismatch. A diffuse posterior or ranking reversal across states measures task ambiguity; severity is the system's decision regret relative to the belief-optimal baseline.
+**Full explanation**: user mood, market regime, deployment status, legal jurisdiction, authority boundary, and time window can all change the optimal action. Their being hard to know does not by itself create mismatch. State mismatch occurs when, under the same evidence, the belief component incorrectly collapses hypotheses, misranks probabilities, omits or forgets evidence, or carries stale state forward, and thereby chooses the wrong action. If the system correctly maintains a broad posterior and uses an optimal, conservative, or branching belief-conditioned policy, there is no state mismatch. A diffuse posterior or ranking reversal across states measures task ambiguity; severity is the system's decision regret relative to the belief-optimal baseline.
 
 **Why it matters**: it localizes repair to belief formation, updating, memory, conditional policy, and state authority. If improvement requires new measurements, tool feedback, or richer representation, the upstream diagnosis is observation-representation mismatch instead.
 
@@ -153,7 +153,7 @@ If you arrived here from another page, it usually makes sense to jump straight t
 
 **One-line definition**: the accessible proxy objective diverges from the task's real success criterion.
 
-**Full explanation**: specification mismatch is the regime of succeeding at the wrong target. The output may satisfy the prompt, rubric, style requirement, or benchmark while failing the real value function. What the user needs is something executable, verifiable, authorizable, and consequence-bearing; what the system optimizes may be only what looks complete or professional.
+**Full explanation**: specification mismatch occurs when the system succeeds at the wrong target. The output may satisfy the prompt, rubric, style requirement, or benchmark while failing the real value function. What the user needs is something executable, verifiable, authorizable, and consequence-bearing; what the system optimizes may be only what looks complete or professional.
 
 **Why it matters**: it forces the real objective to be externalized rather than guessed. Counterexamples, acceptance criteria, stakeholder ordering, rejection examples, and objective governance all originate here.
 
@@ -187,7 +187,7 @@ If you arrived here from another page, it usually makes sense to jump straight t
 
 **One-line definition**: decision-relevant information that a feasible intervention could have acquired or preserved never enters the model's operational representation.
 
-**Full explanation**: the model may reason very well over what it sees, but if a key variable available through a feasible channel was dropped, compressed, aliased, or hidden before it entered representation, a longer reasoning chain only works over the wrong coordinates. Missing logs, unconnected available sensors or tools, and raw signals overwritten by summaries are examples. If no feasible measurement or representation can remove the uncertainty, the remaining gap is an irreducible information constraint of the task rather than system mismatch.
+**Full explanation**: the model may reason very well over what it sees, but if a key variable available through a feasible channel was dropped, compressed, aliased, or hidden before it entered representation, a longer reasoning chain only works over the wrong coordinates. Missing logs, available sensors or tools left unconnected, and raw signals overwritten by summaries are examples. If no feasible measurement or representation can remove the uncertainty, the remaining gap is an irreducible information constraint of the task rather than system mismatch.
 
 **Why it matters**: it corrects the common mistake of treating the problem as insufficient reasoning when the real repair is channel repair. Measurement, raw evidence access, tool integration, environment querying, and representation redesign often matter more than more thinking.
 
@@ -259,7 +259,7 @@ If you arrived here from another page, it usually makes sense to jump straight t
 
 **One-line definition**: an object that stores when the system should ask a human, what it should ask, whom it should ask, and what it can still do while waiting.
 
-**Full explanation**: a GEsO governs the asking itself. It is not an ad hoc interruption. It objectifies the trigger condition, minimal question, default path, human role, risk level, reversible work while waiting, and revocation conditions. This prevents the system from reacting to uncertainty with either blind action or by handing the whole task back to the human.
+**Full explanation**: a GEsO governs the asking itself. It is not an ad hoc interruption. It objectifies the trigger condition, minimal question, default path, human role, risk level, reversible work while waiting, and revocation conditions. This prevents the system from reacting to uncertainty either by acting blindly or by handing the whole task back to the human.
 
 **Why it matters**: it turns human intervention from a one-off interruption into a reusable, auditable, evolvable protocol. For long-horizon agents, GEsOs are tools for restoring autonomy rather than abandoning it.
 
@@ -299,7 +299,7 @@ If you arrived here from another page, it usually makes sense to jump straight t
 
 **Full explanation**: audit engineering does not treat audit as a score applied after generation. It treats failure localization, counterexample construction, evidence capture, repair routing, control deltas, and regression verification as an independent system. Generators produce candidates; audit answers "why did this fail, what should change, and how do we stop it from recurring?" In this way each failure can become actionable repair rather than commentary.
 
-**Why it matters**: without audit engineering, failure becomes only emotional memory for the next prompt. With it, failure becomes a replayable, writable, verifiable control increment.
+**Why it matters**: without audit engineering, failure becomes only emotional memory for the next prompt. With it, failure becomes a replayable, writable, verifiable control delta.
 
 **Source chain**:
 

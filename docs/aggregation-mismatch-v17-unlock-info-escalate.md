@@ -32,11 +32,11 @@ The most defensible result is not “recovery information never matters.”
 
 1. **For the tested absolute, idempotent semantic goal plan, a receipt plus the
    complete goal plan was sufficient after the runtime moved every Module A arm
-   to the same unlocked \(S_2\).** All four information arms achieved 24/24.
+   to the same unlocked $`S_2`$.** All four information arms achieved 24/24.
    TARGET-SLICE minus RECEIPT was zero and missed the preregistered +0.25
    superiority gate. This ceiling does not prove equivalence and does not
    generalize to relative, non-monotone, CAS, or cross-object operations that
-   require current \(S_2\).
+   require current $`S_2`$.
 2. **A live hard lock is not repaired by repeating a write.** Force Intent and
    Generic Retry produced 0/24 commits each, while the resolvable unlocked
    positive control produced 24/24 commits.
@@ -59,18 +59,18 @@ typed escalation instead of enlarging the prompt or continuing to write.**
 
 ### 1.1 A hard feasibility boundary precedes language reasoning
 
-Let committing action \(a\) require a lock predicate \(U(S)=1\), where one
-means the target is writable in authoritative state \(S\). If the runtime
-remains at \(S_1\) and \(U(S_1)=0\), then:
+Let committing action $a$ require a lock predicate $U(S)=1$, where one
+means the target is writable in authoritative state $S$. If the runtime
+remains at $S_1$ and $U(S_1)=0$, then:
 
-\[
-\operatorname{Commit}(a,S_1)=0.
-\]
+```math
+\mathop{\mathrm{Commit}}\nolimits(a,S_1)=0.
+```
 
 More tokens, a reread of the old state, or a restatement of intent cannot alter
 that runtime predicate. Recovery requires at least one of:
 
-- an authoritative transition to a writable \(S_2\);
+- an authoritative transition to a writable $`S_2`$;
 - a higher-level conflict decision;
 - a valid wait, reject, or escalate terminal outcome instead of commit.
 
@@ -81,17 +81,17 @@ intelligence.
 
 The verified goal plan contains stable `service_id` values, fields, predicates,
 and absolute thresholds. For this idempotent operation with a predetermined
-target value, a candidate minimum recovery input is:
+target value, provided that $`S_2`$ preserves the same semantic IDs and the
+runtime reseals the payload, a candidate minimum recovery input is:
 
-\[
-I_{\min}=\{\text{typed receipt},\ \text{unlock declaration},\
-\text{verified goal plan}\}.
-\]
+```math
+I_{\min}=\{\text{typed receipt},\ \text{unlock declaration},\ \text{verified goal plan}\}.
+```
 
-The full old \(S_1\), a target-state slice, or a rebase plan with observed
+The full old $S_1$, a target-state slice, or a rebase plan with observed
 values can be redundant here. The minimum changes for relative updates,
 non-monotone transformations, compare-and-swap, cross-object constraints, or
-target selection that must be recomputed from \(S_2\). V17 tests only the first
+target selection that must be recomputed from $`S_2`$. V17 tests only the first
 operation class.
 
 ### 1.3 Success needs multiple valid terminal states
@@ -99,10 +99,10 @@ operation class.
 Commit is not the only correct result under an unresolvable conflict. A governed
 system should distinguish at least:
 
-\[
+```math
 \texttt{committed},\quad \texttt{rejected},\quad \texttt{waiting},\quad
 \texttt{escalated},\quad \texttt{rolled\_back}.
-\]
+```
 
 Module B's `escalate_success` is therefore a safe-terminal-compliance metric,
 not a synonym for task completion.
@@ -116,43 +116,43 @@ not a synonym for task completion.
 | Model | DeepSeek-v4-flash |
 | Language / temperature | Chinese / 0 |
 | Budget | 300 seconds per episode; at most 32k tokens per turn |
-| Formal clusters | 24 shared tasks; \(N\in\{96,144,216\}\), eight per size |
+| Formal clusters | 24 shared tasks; $`N\in\{96,144,216\}`$, eight per size |
 | Conditions | 2 modules × 4 arms = 8 |
 | Scale | 192 formal; 24 pilot; 1,536 offline mutations |
 | Calls | Every formal episode has two provider turns |
 | Statistics | task-cluster paired bootstrap, exact two-sided sign-flip, Holm over two primaries |
 | Safety gates | locked first commit=0, unsafe=0, event reconstruction, offline FA/FR=0 |
 
-The initial turn receives only \(S_0\) and a verified goal plan. The runtime
+The initial turn receives only $S_0$ and a verified goal plan. The runtime
 seals the payload and then injects `LOCKED_CONFLICT`; the first commit must be
 rejected in every arm. The second turn receives its assigned recovery policy.
 
 ### 2.2 Module A: same unlock, different second-turn information
 
-The runtime moves all four arms to the same unlocked \(S_2\). Tools, turn
+The runtime moves all four arms to the same unlocked $`S_2`$. Tools, turn
 count, goal plan, executor, and acceptance rule are held constant.
 
 | Condition | Additional second-turn content |
 |---|---|
 | `A-UNLOCK-RECEIPT` | typed receipt |
-| `A-UNLOCK-OLDSTATE` | receipt + full old \(S_1\) |
-| `A-UNLOCK-TARGET-SLICE` | receipt + target slice from \(S_2\) |
+| `A-UNLOCK-OLDSTATE` | receipt + full old $S_1$ |
+| `A-UNLOCK-TARGET-SLICE` | receipt + target slice from $`S_2`$ |
 | `A-UNLOCK-REBASE-PLAN` | receipt + structured rebase plan with observed value |
 
 Primary V17-A1 is
 
-\[
+```math
 \Delta_{A1}=P(\text{TARGET-SLICE final success})-
 P(\text{RECEIPT final success}),
-\]
+```
 
-with a preregistered gate of \(\Delta\ge0.25\), bootstrap lower bound \(>0\),
-and Holm-adjusted \(p<0.05\).
+with a preregistered gate of $\Delta\ge0.25$, bootstrap lower bound $>0$,
+and Holm-adjusted $p<0.05$.
 
 ### 2.3 Module B: the lock remains, but the valid handling path changes
 
 `B-FORCE-INTENT`, `B-GENERIC-RETRY`, and `B-ESCALATE` remain in locked
-\(S_1\). `B-RESOLVABLE-REBASE` is an unlocked positive control.
+$S_1$. `B-RESOLVABLE-REBASE` is an unlocked positive control.
 
 | Condition | Valid terminal outcome |
 |---|---|
@@ -163,10 +163,10 @@ and Holm-adjusted \(p<0.05\).
 
 Primary V17-B1 is
 
-\[
+```math
 \Delta_{B1}=P(\text{ESCALATE escalate\_success})-
 P(\text{FORCE final\_success}).
-\]
+```
 
 This is a preregistered **governance-terminal contrast with different
 endpoints**.
@@ -199,7 +199,7 @@ endpoints**.
 | A-UNLOCK-REBASE-PLAN | 24/24 | 17,668.5 |
 
 V17-A1 was **0.0**, paired bootstrap CI **[0.0, 0.0]**, sign-flip and
-Holm-adjusted \(p=1.0\), so it was `failed_pre_registered_gate`.
+Holm-adjusted $p=1.0$, so it was `failed_pre_registered_gate`.
 
 The interval must be interpreted correctly. It is an empirical bootstrap over
 24 all-zero paired differences, not a population equivalence bound. No
@@ -229,8 +229,8 @@ a post hoc mechanism audit, not another preregistered primary.
 | B-RESOLVABLE-REBASE | 24/24 | 0/24 | 24/24 |
 
 V17-B1 was **+1.0**, paired bootstrap CI **[1.0, 1.0]**, exact two-sided
-sign-flip \(p=1.192\times10^{-7}\), Holm-adjusted
-\(p=2.384\times10^{-7}\), and `passed`. The resolvable positive control also
+sign-flip $p=1.192\times10^{-7}$, Holm-adjusted
+$p=2.384\times10^{-7}$, and `passed`. The resolvable positive control also
 reached 24/24.
 
 The result confirms that the typed escalation tool, its schema, locked-state
@@ -243,7 +243,7 @@ Escalate targets a valid escalation.
 ### 4.1 Directly supported
 
 - In the frozen absolute semantic-plan task, receipt plus goal plan reached
-  24/24 after the same unlock; extra \(S_1\), \(S_2\) slice, or rebase-plan
+  24/24 after the same unlock; extra $S_1$, $`S_2`$ slice, or rebase-plan
   information produced no observed success gain.
 - Force and Generic Retry cannot commit through a live hard lock; another call
   does not change the feasibility set.
@@ -265,6 +265,8 @@ Escalate targets a valid escalation.
   Escalate arm exposes only the typed escalation tool;
 - transfer to real Git, databases, network partitions, multiple writers, or
   other models;
+- that the V17-A1 `[0, 0]` interval is a confidence bound for a zero population
+  effect;
 - a pure model-capability effect in V17-B1—the runtime lock and endpoint/tool
   contract structurally determine much of the contrast.
 
@@ -273,7 +275,7 @@ Escalate targets a valid escalation.
 | Theoretical claim | V17 evidence | Remaining gap |
 |---|---|---|
 | Retry cannot cross an unchanged hard constraint | Force/Generic: 0/48 commits | Real locks, leases, processes |
-| An absolute idempotent plan can use less state after unlock | Four arms 24/24; identical arguments | Non-ceiling tasks that require \(S_2\) |
+| An absolute idempotent plan can use less state after unlock | Four arms 24/24; identical arguments | Non-ceiling tasks that require $`S_2`$ |
 | Minimal sufficient context can beat state dumping | OLDSTATE tokens +74.9%; same success | Preregistered cost gate, latency/quality Pareto, second model |
 | Escalate instead of forcing an infeasible write | Escalate 24/24; commit 0 | Free multi-tool choice and downstream resolution |
 | Success needs a multi-terminal state machine | commit/escalate recorded separately | wait, queue, rollback, human-resolution evaluation |
@@ -334,7 +336,7 @@ A prompt cannot grant itself write authority.
 
 ## 8. Next experiments
 
-1. Re-run Module A on operations that **must inspect \(S_2\)**: relative
+1. Re-run Module A on operations that **must inspect $`S_2`$**: relative
    increments, non-monotone updates, CAS, and cross-object invariants, while
    calibrating the baseline below ceiling.
 2. Preregister equivalence/non-inferiority or a joint cost–success gate instead

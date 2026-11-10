@@ -38,7 +38,7 @@ Use this guide when:
 
 Use a lightweight path for a self-contained file with an obvious local verifier.
 
-Reconnaissance is read-only. Do not “clean up while exploring.”
+Reconnaissance is read-only by default. Do not “clean up while exploring.”
 
 ## 3. Establish Repository State
 

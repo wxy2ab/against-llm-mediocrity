@@ -131,8 +131,8 @@ a polished summary is not evidence that the requested outcome was achieved.
 
 ### Governed Commit and Handoff
 
-Commit only verified state transitions. Report the outcome, scope, evidence, residual
-risks, artifacts, and a next action only when one genuinely remains.
+Commit only verified state transitions. At handoff, report the outcome, scope, evidence,
+residual risks, and artifacts; name a next action only when one genuinely remains.
 ::::
 
 ## Compose Guides Without Loading Everything
@@ -142,9 +142,9 @@ risks, artifacts, and a next action only when one genuinely remains.
 | “Explain why this test flakes.” | Routing + Reconnaissance + Diagnosis |
 | “Fix this deterministic parser failure.” | Routing + Reconnaissance + Bounded Repair |
 | “Add an authenticated API endpoint.” | Routing + Reconnaissance + Feature/Refactor/Migration |
-| “Move persisted schema v2 to v3.” | Routing + Reconnaissance + Feature/Refactor/Migration |
+| “Move a persisted schema from v2 to v3.” | Routing + Reconnaissance + Feature/Refactor/Migration |
 | “Review this PR; do not edit.” | Routing + Reconnaissance + Diagnosis in read-only mode |
-| “Improve an agent that emits stale indexes.” | Routing + Reconnaissance + Agent Improvement + the relevant implementation guide |
+| “Improve an agent that repeatedly emits stale indexes.” | Routing + Reconnaissance + Agent Improvement + the relevant implementation guide |
 
 The key rule is minimal sufficient composition: one primary guide, then only the overlays
 that change how the task must be executed or judged.

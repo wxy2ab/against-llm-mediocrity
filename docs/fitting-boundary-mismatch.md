@@ -34,26 +34,26 @@ Suppose X is a capability, strategy, audit structure, or behavior pattern that t
 
 Define:
 
-- $T_X$: the real-world task region in which X should be used;
-- $M_X$: the task region in which the model actually activates X.
+- $`T_X`$: the real-world task region in which X should be used;
+- $`M_X`$: the task region in which the model actually activates X.
 
 The ontology of the fifth mismatch is:
 
-\[
+```math
 M_X \ne T_X
-\]
+```
 
 The two directions are:
 
-\[
+```math
 \text{overfitting side} = M_X \setminus T_X
-\]
+```
 
 That is, the model wrongly absorbs situations that do not belong to X into X.
 
-\[
+```math
 \text{underfitting side} = T_X \setminus M_X
-\]
+```
 
 That is, situations that truly belong to X do not trigger X.
 
@@ -278,9 +278,9 @@ training-time shaping of capabilities and their implicit boundaries
 
 The overfitting side corresponds to:
 
-\[
+```math
 M_X \setminus T_X
-\]
+```
 
 The model treats cases that should not belong to X as X. Typical signs include:
 
@@ -296,9 +296,9 @@ This side mainly increases false positives.
 
 The underfitting side corresponds to:
 
-\[
+```math
 T_X \setminus M_X
-\]
+```
 
 The model already has, or approximately has, capability X, but does not activate it in cases that truly belong to X. Typical signs include:
 
@@ -989,7 +989,7 @@ This turns "the model said something that sounds right" into "the model proposed
 Fitting-boundary mismatch can be measured through the following experiments:
 
 1. **Capability-routing confusion matrix:** separately measure true positive, false positive, false negative, and true negative.
-2. **Trigger-domain overlap:** approximate the intersection and union of $M_X$ and $T_X$, rather than only measuring average task score.
+2. **Trigger-domain overlap:** approximate the intersection and union of $`M_X`$ and $`T_X`$, rather than only measuring average task score.
 3. **Precision/recall curves:** change refusal, adoption, exploration, or tool-call thresholds, and measure the tradeoff between over-triggering and missed triggering.
 4. **Neighborhood perturbation tests:** keep the task core fixed while changing metrics, states, roles, audit protocols, or feedback sources, and observe whether capability routing is stable.
 5. **Capability under-triggering rate:** assuming the model is known to be able to do X, measure how often it fails to invoke X in true X situations.

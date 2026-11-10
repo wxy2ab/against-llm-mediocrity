@@ -20,7 +20,7 @@
 的严格 TOCTOU 时序下，Exact payload 24/24 被安全地判为 stale，并在同一预算内经一次
 located recovery 全部完成；Intent 24/24 一次提交。Exact recovery 的配对
 log-token interaction 为 0.1765（几何成本比约 1.193），方向稳定但略低于预注册
-\(\log(1.20)=0.1823\)，因此 V14-A1 为 `failed_pre_registered_gate`。
+$\log(1.20)=0.1823$，因此 V14-A1 为 `failed_pre_registered_gate`。
 
 ## 技术摘要
 
@@ -39,8 +39,8 @@ log-token interaction 为 0.1765（几何成本比约 1.193），方向稳定但
 | Compatible Intent first-attempt commit | 24/24 |
 | 四臂 final success | 各 24/24 |
 | V14-A1 | **0.176459**；95% CI **[0.168331, 0.184575]** |
-| Exact sign-flip | \(2/2^{24}=1.1921\times10^{-7}\) |
-| Minimum effect | \(\log(1.20)=0.182322\) |
+| Exact sign-flip | $2/2^{24}=1.1921\times10^{-7}$ |
+| Minimum effect | $\log(1.20)=0.182322$ |
 | Claim state | **`failed_pre_registered_gate`** |
 | Formal tokens | **1,571,142** |
 | Unsafe / over-budget success | 0 / 0 |
@@ -52,17 +52,17 @@ log-token interaction 为 0.1765（几何成本比约 1.193），方向稳定但
 
 冻结时序为：
 
-\[
+```math
 S_0
 \rightarrow Q_0
 \rightarrow Seal(Q_0)
 \rightarrow D
 \rightarrow S_1
 \rightarrow Execute(Q_0,S_1).
-\]
+```
 
-模型初始 provider turn 只能看到 \(S_0\)。只有当工具参数 \(Q_0\) 已被捕获、校验并
-封存后，harness 才注入 drift。若模型先看到 \(S_1\)，实验测到的只是“针对新状态重新
+模型初始 provider turn 只能看到 $S_0$。只有当工具参数 $Q_0$ 已被捕获、校验并
+封存后，harness 才注入 drift。若模型先看到 $S_1$，实验测到的只是“针对新状态重新
 生成”，而不是已编译 payload 的陈旧性。
 
 ### 1.2 Intent 与 Exact 拥有不同的时间语义
@@ -86,22 +86,22 @@ S_0
 
 任务级配对统计量：
 
-\[
+```math
 d_i=
 [\log T_{CE,i}-\log T_{CI,i}]
 -
 [\log T_{DE,i}-\log T_{DI,i}],
 \qquad
 \Delta_{A1}=\frac{1}{24}\sum_i d_i.
-\]
+```
 
-通过门不仅要求 \(\Delta>0\)，还要求：
+通过门不仅要求 $\Delta>0$，还要求：
 
-\[
+```math
 \Delta\ge\log(1.20),
-\]
+```
 
-且 bootstrap CI 下界大于 0、exact two-sided sign-flip \(p<0.05\)、四臂最终成功率
+且 bootstrap CI 下界大于 0、exact two-sided sign-flip $p<0.05$、四臂最终成功率
 至少 0.75、安全与数据质量 gate 全部通过。最小效应门是工程承诺，不得在看到结果后
 下调。
 
@@ -109,7 +109,7 @@ d_i=
 
 - DeepSeek-V4-Flash；中文；`thinking=False`；temperature 0；top_p 1；
 - 最大 32k tokens；每个 semantic episode 共享 300 秒预算；
-- 24 个正式任务，\(N\in\{96,144,216\}\)，每档 8 个；
+- 24 个正式任务，$`N\in\{96,144,216\}`$，每档 8 个；
 - 每个任务进入 DI、DE、CI、CE 四臂；
 - Initial provider output 先 seal，再注入 compatible 或 disjoint drift；
 - 只有 CE 在 typed stale 后允许一次 `RECOVER-EXACT-LOCATED`；
@@ -129,9 +129,9 @@ duplicate key 均为 0。每个 run 的 event index 连续，终态唯一，96/9
 input mutation 与 payload mutation 均为 0。96 个 formal endpoint 的
 `input_tokens + output_tokens = total_tokens` 全部成立。
 
-初版 analyzer 在 \(n=24\) 时误用了 1,000,000 次 Monte Carlo sign-flip，而冻结方案
+初版 analyzer 在 $n=24$ 时误用了 1,000,000 次 Monte Carlo sign-flip，而冻结方案
 要求 exact test。由于 24/24 配对差值同号，精确双侧值可闭式计算为
-\(2/2^{24}=1.1921\times10^{-7}\)。实现与派生产物已修复；effect、CI、
+$2/2^{24}=1.1921\times10^{-7}$。实现与派生产物已修复；effect、CI、
 minimum-effect 判断和最终 claim state 均未改变。
 
 ## 4. 数据与结果
@@ -155,25 +155,25 @@ CE 的 24 个第一次提交全部返回 `STALE_OLD_VALUE`，权威状态没有�
 
 ![V14 配对 token 成本交互](./assets/aggregation-mismatch-experiment/v14-token-interaction.png)
 
-\[
+```math
 \Delta_{A1}=0.176459,
 \qquad
 \exp(\Delta)=1.19299,
 \qquad
 95\%\ CI=[0.168331,0.184575].
-\]
+```
 
-24/24 task interaction 为正，exact \(p=1.1921\times10^{-7}\)。但是：
+24/24 task interaction 为正，exact $p=1.1921\times10^{-7}$。但是：
 
-\[
+```math
 0.176459 < \log(1.20)=0.182322.
-\]
+```
 
 因此确认性裁决是 `failed_pre_registered_gate`。可以说“本协议中存在稳定的正成本
 交互，点估计约 +19.3%”，不能说“通过了至少 +20% 的成本门”，也不能把 failed gate
 写成零效应或反向效应。
 
-按 \(N\) 的探索性几何成本比为 1.210、1.186、1.183（各 8 个任务）。该分层没有
+按 $N$ 的探索性几何成本比为 1.210、1.186、1.183（各 8 个任务）。该分层没有
 预注册为 primary，不能写成随规模单调下降的定律。
 
 ### 4.3 成本

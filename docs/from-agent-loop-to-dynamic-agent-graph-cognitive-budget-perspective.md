@@ -289,8 +289,8 @@ Residual routing is a feedback mechanism here, not the first principle of SGAR o
 
 The entire evolution can be compressed into three sentences:
 
-> **Route chooses where intelligence is invested.**
-> **Workflow guarantees what kind of sustained investment that direction receives.**
+> **Route chooses where intelligence is invested.**  
+> **Workflow guarantees what kind of sustained investment that direction receives.**  
 > **Graph records and organizes the dependency relations among those investments.**
 
 ---
@@ -540,8 +540,8 @@ Because a single free Loop is good at making the next-step judgment from local s
 
 To make up for that gap, engineering systems gradually form three layers:
 
-> **Route decides where the next slice of intelligence budget goes.**
-> **Workflow turns that investment into a contract with boundaries, state, and acceptance conditions.**
+> **Route decides where the next slice of intelligence budget goes.**  
+> **Workflow turns that investment into a contract with boundaries, state, and acceptance conditions.**  
 > **Graph records and organizes the dependencies, conflicts, rollback, and aggregation across many such investments.**
 
 So a description closer to the essence than "an Agent Graph framework" is:

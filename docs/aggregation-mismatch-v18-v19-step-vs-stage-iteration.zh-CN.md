@@ -53,11 +53,11 @@ plan -> materialize all indexed layers -> global residual -> full replan -> reru
 ```
 
 如果后层约束依赖前层决定，早期局部 residual 可能既不完整，也不能判断一个局部修复
-是否会破坏后续约束。此时更频繁的反馈会带来两个风险：
+是否会破坏后续约束。此时更频繁的反馈会带来三个风险：
 
-1. **信息不完整时消耗稀缺调用。**早期 revision 可能修的是局部症状，而不是全局根因。
-2. **修复作用域不足。**只改剩余 plan 或很少 rollback，难以清除已物化的错误前缀。
-3. **全局机会成本。**预算在前几个 step 用尽后，模型失去基于完整 residual 重构整图的
+1. **信息不完整时消耗稀缺调用。** 早期 revision 可能修的是局部症状，而不是全局根因。
+2. **修复作用域不足。** 只改剩余 plan 或很少 rollback，难以清除已物化的错误前缀。
+3. **全局机会成本。** 预算在前几个 step 用尽后，模型失去基于完整 residual 重构整图的
    机会。
 
 反过来，如果每一步具有充分局部验收、依赖弱、回滚便宜且错误不会跨步传播，STEP
@@ -72,7 +72,7 @@ plan -> materialize all indexed layers -> global residual -> full replan -> reru
 | 模型 | `SimpleDeepSeekClientChat` / `deepseek-v4-flash` |
 | 推理配置 | 中文；temperature=0；`thinking=False`；每 turn 最多 32k tokens |
 | 任务 | 合成有向无环 GF(2) DAG；step 为 topological layer |
-| 规模 | (N\in\{16,24\})，frontier \(\in\{2,4\}\)；每 cell 12 个正式实例 |
+| 规模 | $`N\in\{16,24\}`$，frontier $`\in\{2,4\}`$；每 cell 12 个正式实例 |
 | Formal | 48 个共享实例 × 3 臂 = 144 episodes / artifact |
 | Pilot | 12 个独立实例 × 3 臂 = 36 episodes / artifact |
 | 初始条件 | 每个实例三臂共享同一个冻结错误计划 (P_0) |
@@ -138,9 +138,9 @@ Holm 后 (p<0.05)：
 
 | Claim / contrast | Δ | 95% CI | Holm p | 冻结状态 |
 |---|---:|---|---:|---|
-| V18-1 STEP−STAGE | −0.625 | [−0.750, −0.479] | (3.73\times10^{-9}) | `failed_pre_registered_gate` |
+| V18-1 STEP−STAGE | −0.625 | [−0.750, −0.479] | $3.73\times10^{-9}$ | `failed_pre_registered_gate` |
 | V18-2 STEP−NO | 0.000 | [0, 0] | 1.0 | `failed_pre_registered_gate` |
-| V19-1 STEP−STAGE | −0.583 | [−0.729, −0.438] | (1.49\times10^{-8}) | `failed_pre_registered_gate` |
+| V19-1 STEP−STAGE | −0.583 | [−0.729, −0.438] | $1.49\times10^{-8}$ | `failed_pre_registered_gate` |
 | V19-2 STEP−NO | +0.104 | [+0.021, +0.188] | 0.0625 | `failed_pre_registered_gate` |
 | V18 secondary STAGE−NO | +0.625 | [+0.479, +0.750] | 未纳入 primary Holm | secondary |
 | V19 secondary STAGE−NO | +0.688 | [+0.563, +0.813] | 未纳入 primary Holm | secondary |
@@ -157,7 +157,7 @@ V19-2 的经验 CI 下界大于 0，但它既未达到预注册 (+0.15) 最小�
 | V19 STEP | 6.67 / 8 | 5/48 | `verifier_fail` 43/48 |
 | V19 STAGE | 3.69 / 8 | 33/48 | `budget_exhausted` 15/48 |
 
-将 call 上限从 3 类修订扩到 8 个 provider turns 后，STEP 从 0% 恢复到 10.4%，说明
+将 call 上限从 3 次修订扩到 8 个 provider turns 后，STEP 从 0% 恢复到 10.4%，说明
 预算确实解释了一部分 V18 floor；但 STAGE 仍以更少平均调用取得更高成功率，剩余差异
 不能只归因于“STEP 次数太少”。
 
@@ -182,7 +182,7 @@ V19-2 的经验 CI 下界大于 0，但它既未达到预注册 (+0.15) 最小�
 
 ### 4.3 证据等级
 
-本报告适合标为 **`share_with_caveats`**：方向大、配对区间远离 0、两种预算口径同向、
+本报告适合标为 **`share_with_caveats`**：配对效应大、区间远离 0、两种预算口径同向、
 覆盖与安全门完整；但关键方向不是预注册目标，任务和模型单一，V19 也没有消除所有执行
 不对称。它足以指导受控 Agent 设计和下一轮实验，不足以作为跨域默认定律。
 
@@ -247,15 +247,15 @@ escalation_budget
 
 ## 6. 可能的应用
 
-- **代码 Agent：**按文件或模块物化候选改动，运行完整测试/静态检查后再 replan；编译失败、
+- **代码 Agent：** 按文件或模块物化候选改动，运行完整测试/静态检查后再 replan；编译失败、
   权限错误等 fatal gate 仍即时停止。
-- **研究 Agent：**先完成来源表、claim-evidence map 和冲突账本，再根据全局缺口重排研究
+- **研究 Agent：** 先完成来源表、claim-evidence map 和冲突账本，再根据全局缺口重排研究
   计划，而不是每读一条材料就重写大纲。
-- **数据/分析流水线：**完成可审计中间表和全局不变量检查后再修复 pipeline；避免局部
+- **数据/分析流水线：** 完成可审计中间表和全局不变量检查后再修复 pipeline；避免局部
   行数或 schema 修正掩盖跨表约束。
-- **多 Skill Workflow：**执行完整的已验证 workflow stage，记录每个 Skill receipt，
+- **多 Skill Workflow：** 执行完整的已验证 workflow stage，记录每个 Skill receipt，
   再在 stage boundary 依据全局 residual 调整后续编排。
-- **配置与迁移：**先生成并验证完整目标态、依赖和 drift ledger，再决定 patch、regional
+- **配置与迁移：** 先生成并验证完整目标态、依赖和 drift ledger，再决定 patch、regional
   rewrite 或 full replan。
 
 这些都是由当前机制推导出的工程候选，不是 V18/V19 已经直接验证过的生产场景。
@@ -296,21 +296,21 @@ Stage 实验建立了修复能力，但 V25 对 Stage 相对 Fixed 的平均质�
 
 ### 7.2 仍需完成的后续验证
 
-1. **Hybrid primary：**预注册 `STEP_GATE + STAGE_REPLAN` 对纯 STEP 与纯 STAGE，区分
+1. **Hybrid primary：** 预注册 `STEP_GATE + STAGE_REPLAN` 对纯 STEP 与纯 STAGE，区分
    局部安全 gate 和语义修订。
-2. **完全预算对齐：**同时限制 provider turns、token、wall-clock、layer applies、full
+2. **完全预算对齐：** 同时限制 provider turns、token、wall-clock、layer applies、full
    passes 和 verifier cost，报告 reliability–cost Pareto。
-3. **耦合强度梯度：**系统改变 dependency density、error locality 与 rollback cost，找出
+3. **耦合强度梯度：** 系统改变 dependency density、error locality 与 rollback cost，找出
    Step/Stage crossover，而不是继续争论绝对赢家。
-4. **独立任务与模型：**用新的 seed family、至少第二个模型和真实代码/配置任务复现。
-5. **机制消融：**分别移除 global residual、ledger reset、full rewrite scope 和 rollback，
+4. **独立任务与模型：** 用新的 seed family、至少第二个模型和真实代码/配置任务复现。
+5. **机制消融：** 分别移除 global residual、ledger reset、full rewrite scope 和 rollback，
    判断 Stage 收益到底来自哪一项。
 
 ## 8. 最终结论
 
 V18/V19 最重要的结果不是“预注册 claim 成立”，而是预注册方向被稳定地反转了：在这类
 全局依赖任务中，局部、高频、早期的 plan revision 没有胜过整程后的全局 replan；即使
-统一到 8 次 provider-turn 预算，Stage 仍从 10.4% 拉开到 68.8%。
+统一到 8 次 provider-turn 预算，成功率仍是 Step 10.4% 对 Stage 68.8%。
 
 因此，当前可采用的工程原则是：
 

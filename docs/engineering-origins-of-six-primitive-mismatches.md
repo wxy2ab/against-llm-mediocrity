@@ -22,7 +22,7 @@ A few notes up front:
 
 This repository is not hostile to AI-written documentation. In fact, many documents here were produced after long back-and-forth discussion with AI and then reorganized by AI into cleaner drafts. That makes sense for two reasons:
 
-1. The project itself argues that work should be divided by comparative strength. LLMs should handle the parts they are good at; humans should focus on the parts they are not.
+1. The project itself argues that work should be divided by comparative strength. LLMs should handle the parts they are good at; humans should focus on the parts they are not. Now that we are in the AI era, deliberately giving up AI assistance would not be reasonable.
 2. My own knowledge and ability are limited. Much of the information expansion, clarification, and even parts of the thinking process benefited directly from repeated conversation with AI.
 
 But this document is different. It records **how the six primitive mismatches were first forced out of concrete practice**. The crucial part is not only the final definition. It is the path: what looked wrong at the time, why it felt wrong, and how the question kept changing after each failure.
@@ -52,7 +52,7 @@ randomly combine initial ideas
 
 Results from multiple rounds could then be recombined into new initial ideas and iterated again.
 
-My intuition at the time was straightforward: even if the initial idea combinations are limited, enough repeated sampling should keep generating new detail; those details could then recombine and iterate again, and eventually the process should exhaust the low-probability but high-value combinations in a given task region.
+My intuition at the time was straightforward: even if the initial idea combinations are limited, enough repeated sampling should keep generating new detail; those details could then recombine and iterate again, and in theory the process should eventually find the low-probability but high-value combinations in a given task region.
 
 ---
 
@@ -146,7 +146,7 @@ Under the current formalization, the causal attribution in the first bullet need
 This also led to an important methodological revision:
 
 - for some tasks, **breaking original semantics is not necessary**;
-- but **constructing a control space is still necessary**, because it converts a global optimization problem into a set of locally governable tasks;
+- but **constructing a control space is usually still necessary**, because it converts a global optimization problem into a set of locally governable tasks;
 - and multi-round revision is also necessary, because many global constraints can only be checked after a full version exists.
 
 That approach later worked extremely well in story generation, to the point that under human evaluation it could simulate almost any master-like style. That was when I became convinced that some failures are not "the model cannot write," but rather **local generative strength does not automatically compose into global task value**.

@@ -72,7 +72,7 @@
 
 > 形式化机制层是一个派生出来的组件分析层，而不是默认的一线工程入口。
 
-本文形式化定义这八条轴，将机制画像定义为治理对象，给出用于因果定位的最小干预探针，把原始失配映射到机制来源，并展示机制级诊断如何与任务特定控制对象、审计工程、控制增量、回归护栏、缺陷台账以及 SGAR 的硬状态转移相集成。
+本文形式化定义这八条轴，将机制画像定义为治理对象，给出用于因果定位的最小干预探针，把原始失配映射到机制来源，并展示机制级诊断如何与任务特定控制对象、审计工程、控制增量、回归护栏、缺陷账本以及 SGAR 的硬状态转移相集成。
 
 ---
 
@@ -380,7 +380,7 @@ R*: 真实任务效用
 
 | 机制轴 | 学习侧组件 | 运行时侧组件 |
 |---|---|---|
-| `specification_reward` | `\hat{R}_\theta` | rubric、evaluator、verifier、验收标准 |
+| `specification_reward` | `\hat{R}_\theta`、学得的奖励代理 | rubric、evaluator、verifier、验收标准 |
 | `belief_representation` | `B_\theta` | 状态表、schema、memory object、GKO |
 | `dynamics_world_model` | `\hat{\mathcal{T}}_\theta` | 执行反馈、simulator、verifier |
 | `capability_support` | `\pi_\theta` | 示例、RAG、专门算子、工具 |
@@ -1918,7 +1918,7 @@ recognizable candidate quality.
 
 ### 15.5 更多工具不是默认修法
 
-工具有帮助，是因为它们能以可验证方式扩展有效动作或观测空间。它们也可能带来伤害，当：
+工具在能以可验证方式扩展有效动作或观测空间时有帮助。它们也可能带来伤害，当：
 
 ```text
 tool selection is misrouted;
@@ -1991,16 +1991,19 @@ revocation trigger.
 5. Assign causal roles.
    primary cause, secondary cause, necessary condition, amplifier, downstream symptom, not distinguished.
 
-6. Produce Control Delta.
-   Modify the component that mechanism diagnosis identifies.
+6. Construct or revise the task-specific control object.
+   Turn the lesion into something auditable and directly modifiable.
 
-7. Add Regression Guard.
+7. Produce Control Delta.
+   Modify the governed object first; record mechanism attribution alongside it.
+
+8. Add Regression Guard.
    Ensure representative recurrence of the defect fails.
 
-8. Commit through SGAR.
+9. Commit through SGAR.
    Only verified repair becomes hard state.
 
-9. Record in Defect Ledger.
+10. Record in Defect Ledger.
    Store failure family, mechanism profile, deltas, guards, and revocation rules.
 ```
 
@@ -2016,7 +2019,7 @@ revocation trigger.
 
 这一层也解释了为什么很多常见修法会失败。更大模型不能修复缺失观测、错误目标、不可用动作或未提交状态。更大搜索在系统搜索错误空间时没有帮助。更多工具在工具结果未被表示、路由、验证或提交时同样无效。更好的 prompt 也无法修复缺失的动作接口或错误的世界模型。
 
-机制层把诊断转化为“系统手术”的问题：
+机制层把诊断转化为“系统解剖”的问题：
 
 ```text
 What exactly must be changed so that the same failure family does not recur?
@@ -2176,5 +2179,5 @@ Search / Execution
 | SearchExecutionDelta | 对采样、分支搜索、验证、排序、检查点或执行流程的修复。 |
 | GKO（受治理知识对象 / Governed Knowledge Object） | 把控制知识外化后得到的对象，具有作用域、有证据、可撤销。 |
 | GEsO（受治理升级对象 / Governed Escalation Object） | 记录失败应在何时、以何种方式升级给人类或更高权威处理的治理对象。 |
-| SGAR（状态治理智能体范式 / State-Governed Agent Regime） | 区分叙述性上下文与硬状态权威、只提交经过验证的状态转移的机制。 |
+| SGAR（状态治理智能体范式 / State-Governed Agent Regime） | 区分叙述性上下文与硬状态权威、只提交经过验证的状态转移的范式。 |
 | SGAR commitment | 使修复、动作或状态更新成为权威的硬状态转移。 |
