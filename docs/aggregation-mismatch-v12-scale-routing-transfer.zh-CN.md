@@ -18,7 +18,7 @@
 
 在更大的 production-shaped 合成 JSON 配置上，semantic ID 在低漂移与高漂移下都相对
 model-authored index 保持大的简单优势，但高漂移没有进一步扩大该优势：
-\((ID-Index)_{high}-(ID-Index)_{low}=-0.0417\)，因此 V12-A1 未通过。稀疏
+$`(ID-Index)_{high}-(ID-Index)_{low}=-0.0417`$，因此 V12-A1 未通过。稀疏
 verified-plan 交付中，semantic Patch 为 24/24，Full Rewrite 为 17/24，预算内严格
 成功率优势为 **+0.2917**，V12-B1 通过。
 
@@ -36,11 +36,11 @@ verified-plan 交付中，semantic Patch 为 24/24，Full Rewrite 为 17/24，�
 | Low-drift ID / Index | 24/24 / **6/24** |
 | High-drift ID / Index | 24/24 / **7/24** |
 | V12-A1 interaction | **−0.0417**，95% CI **[−0.25, 0.1667]** |
-| V12-A1 raw / Holm \(p\) | 1 / 1 |
+| V12-A1 raw / Holm $p$ | 1 / 1 |
 | V12-A1 state | **`failed_pre_registered_gate`** |
 | Sparse Patch / Region / Full | 24/24 / 24/24 / **17/24** |
 | V12-B1 Patch−Full | **+0.2917**，95% CI **[0.125, 0.4583]** |
-| V12-B1 raw / Holm \(p\) | 0.015625 / **0.03125** |
+| V12-B1 raw / Holm $p$ | 0.015625 / **0.03125** |
 | V12-B1 state | **`passed`** |
 | Dense Patch / Region / Full | 24/24 / **8/24** / 18/24 |
 | Formal token usage | **4,915,111** |
@@ -49,58 +49,58 @@ verified-plan 交付中，semantic Patch 为 24/24，Full Rewrite 为 17/24，�
 
 ### 1.1 语义身份不变性与漂移剂量是两个不同主张
 
-对配置 \(C\) 及其排列 \(\pi(C)\)，稳定实体 ID 保持不变：
+对配置 $C$ 及其排列 $\pi(C)$，稳定实体 ID 保持不变：
 
-\[
+```math
 id_{\pi(C)}(s)=id_C(s).
-\]
+```
 
 物理数组下标通常不保持不变：
 
-\[
+```math
 index_{\pi(C)}(s)\ne index_C(s).
-\]
+```
 
 这给出了一个结构性理由：让模型提交语义目标，由 runtime 解析当前地址。但它不推出
 一个单调性能定律，即每次 layout drift 增大都必然带来更大的 ID 观测优势。
 
 因此 V12-A1 检验的是更强的经验主张：
 
-\[
+```math
 \Delta_{A1}
 =
 (ID-Index)_{high}
 -
 (ID-Index)_{low}
 \ge 0.15.
-\]
+```
 
 ID 的简单效应可以在两个漂移档都很大，而交互仍为零或负。把简单效应当作漂移剂量
 的证明，会回答错误的 estimand。
 
 ### 1.2 交付尺度改变模型拥有的承诺面
 
-给定一个正确计划，其中对象规模为 \(N\)、编辑数为 \(k\)：
+给定一个正确计划，其中对象规模为 $N$、编辑数为 $k$：
 
 - **Patch** 要求模型只提交最小语义变更集；
 - **Regional Rewrite** 要求模型重写一个受影响区域；
 - **Full Rewrite** 要求模型重新生成完整配置。
 
-当 \(k\ll N\) 时，Patch 的模型生成内容与时延暴露通常更小。这是条件性优势，而非
+当 $k\ll N$ 时，Patch 的模型生成内容与时延暴露通常更小。这是条件性优势，而非
 普遍定理：密集编辑、Patch 语义不足、错误计划或不可靠 executor 都可能抹去收益。
 
 ### 1.3 Endpoint 是预算内交付
 
 Primary outcome 是在 300 秒内完成精确、经验证的 commit：
 
-\[
+```math
 strict\_success
 =
 semantic\ correctness
 \land invariant\ preservation
 \land commit
 \land wall\_time\le300s.
-\]
+```
 
 V12-B1 可以识别该 endpoint 下的交付优势，不能证明在无限时间下 Full Rewrite 的
 语义正确率仍然更低。
@@ -130,8 +130,8 @@ V12 隔离的是正确计划之后的寻址与交付，不检验计划推断、�
 | High | Semantic ID | ID 与值变化 | 当前 ID→index 解析 |
 | High | Physical Index | 当前 index 与值变化 | 校验 |
 
-24 个任务覆盖 \(N\in\{48,72,96\}\)。Low drift 只做最小目标移动；High drift 冻结为
-Kendall inversion [0.40, 0.60]，目标 displacement 至少 \(N/4\)。计划不暴露
+24 个任务覆盖 $`N\in\{48,72,96\}`$。Low drift 只做最小目标移动；High drift 冻结为
+Kendall inversion [0.40, 0.60]，目标 displacement 至少 $N/4$。计划不暴露
 `baseline_index`。
 
 ### 2.3 Module B：密度 × 交付尺度
@@ -140,10 +140,10 @@ Kendall inversion [0.40, 0.60]，目标 displacement 至少 \(N/4\)。计划不�
 
 | 密度 | Patch | Regional Rewrite | Full Rewrite |
 |---|---:|---:|---:|
-| Sparse，\(k/N=1/24\) | primary | exploratory | primary |
-| Dense，\(k/N=1/3\) | exploratory | exploratory | exploratory |
+| Sparse，$`k/N=1/24`$ | primary | exploratory | primary |
+| Dense，$`k/N=1/3`$ | exploratory | exploratory | exploratory |
 
-任务覆盖 \(N\in\{96,144\}\)。预注册的 B1 对比为 Sparse Patch−Full。Regional
+任务覆盖 $`N\in\{96,144\}`$。预注册的 B1 对比为 Sparse Patch−Full。Regional
 Rewrite 与所有 dense 对比均为 secondary。
 
 ## 3. 数据完整性
@@ -172,13 +172,13 @@ Freeze、executor-contract 与 agent-suite 测试合计 24/24 通过。
 
 两个 exploratory simple effect 分别为 +0.75 与 +0.7083。预注册交互为：
 
-\[
+```math
 \Delta_{A1}=0.7083-0.75=-0.0417,
 \qquad
 95\%\ CI=[-0.25,0.1667].
-\]
+```
 
-raw 与 Holm-adjusted \(p\) 均为 1。V12-A1 为
+raw 与 Holm-adjusted $p$ 均为 1。V12-A1 为
 `failed_pre_registered_gate`。
 
 正确解释必须保持收窄：该协议没有表明高漂移会进一步放大 ID 优势。它不抹去观测到
@@ -190,13 +190,13 @@ raw 与 Holm-adjusted \(p\) 均为 1。V12-A1 为
 
 Sparse Patch 与 Region 都是 24/24，Sparse Full 为 17/24：
 
-\[
+```math
 \Delta_{B1}=1.0-0.7083=+0.2917,
 \qquad
 95\%\ CI=[0.125,0.4583].
-\]
+```
 
-raw exact sign-flip \(p=0.015625\)，Holm-adjusted \(p=0.03125\)，效应超过预注册
+raw exact sign-flip $p=0.015625$，Holm-adjusted $p=0.03125$，效应超过预注册
 +0.15 门槛。七个配对差异全部是 Patch 成功、Full 在 300 秒 endpoint 内超时。
 
 证据支持预算内严格交付，不支持无限预算下的语义优越性。失败请求或其 transport

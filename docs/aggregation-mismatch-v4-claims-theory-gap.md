@@ -28,8 +28,8 @@ produces four main verdicts:
    changes the operation and output, so this is not a pure verification effect.
 4. **More budget yields only partial, length-dependent recovery.** No-anchor
    construction succeeds at 24.1%/37.0%/46.3% under independent
-   300/900/1800-second calls. At 1800 seconds, \(N=24\) reaches 94.4%, while
-   \(N=32,48\) remain at 27.8%/16.7%.
+   300/900/1800-second calls. At 1800 seconds, $`N=24`$ reaches 94.4%, while
+   $`N=32,48`$ remain at 27.8%/16.7%.
 
 Natural- and reverse-order conditions are both near ceiling, leaving the order
 effect unidentified. MiniMax was not run in artifact-v4, so every new verdict is
@@ -71,7 +71,7 @@ Run scale:
 | A0 @1800s | 18 × 3 | 54 |
 | **Total** | | **756** |
 
-Lengths are \(N\in\{24,32,48\}\), with six instances per length. The three budget
+Lengths are $`N\in\{24,32,48\}`$, with six instances per length. The three budget
 points are independently preallocated calls, not a single-call survival curve.
 
 ### 1.1 Condition Families
@@ -161,13 +161,13 @@ shows that every record is interpreted under the correct scoring semantics.
 
 ### 3.3 Independent Budgets
 
-| Budget | All N | \(N=24\) | \(N=32\) | \(N=48\) |
+| Budget | All N | $`N=24`$ | $N=32$ | $N=48$ |
 |---:|---:|---:|---:|---:|
 | 300s | 13/54 | 9/18 | 3/18 | 1/18 |
 | 900s | 20/54 | 12/18 | 6/18 | 2/18 |
 | 1800s | 25/54 | 17/18 | 5/18 | 3/18 |
 
-The \(N=32\) point is lower at 1800 than at 900 seconds because these are
+The $N=32$ point is lower at 1800 than at 900 seconds because these are
 independent stochastic calls. Per-instance monotonicity is not required.
 
 ---
@@ -203,14 +203,14 @@ independent stochastic calls. Per-instance monotonicity is not required.
 
 ### 5.1 Sufficient Boundary State
 
-Partition variables into \(C\) and \(R\):
+Partition variables into $C$ and $R$:
 
-\[
+```math
 H_Cx_C+H_Rx_R=c.
-\]
+```
 
-Given correct \(x_C\), if \(H_R\) has full column rank and the system is
-consistent, \(x_R\) is uniquely determined. That is an algebraic fact.
+Given correct $x_C$, if $H_R$ has full column rank and the system is
+consistent, $x_R$ is uniquely determined. That is an algebraic fact.
 
 The experiment confirms that enough answer information helps. It does not confirm
 that structural positions help more. A3 is not worse than A2, so the observed
@@ -220,11 +220,11 @@ will obtain more benefit from one state representation.
 
 ### 5.2 Candidate and Residual
 
-Given a candidate \(y\), verification becomes:
+Given a candidate $y$, verification becomes:
 
-\[
+```math
 r=Hy\oplus c.
-\]
+```
 
 This proves that a candidate replaces solution search with residual computation.
 It does not prove that a candidate helps the model emit a corrected full object.
@@ -235,17 +235,17 @@ candidate plus audit nearly saturates.
 
 For sparse edits:
 
-\[
+```math
 L_{\text{patch}}
 =c_0+k(c_p+\lceil\log_2N\rceil)
-\]
+```
 
-can be smaller than \(L_{\text{rewrite}}=Nc_r\). With a correct plan, reliable
+can be smaller than $L_{\text{rewrite}}=Nc_r$. With a correct plan, reliable
 executor, and delivery risk that increases with commitment surface, patch delivery
 dominance follows conditionally.
 
-Artifact-v3 matches this prediction for one-bit sparse repair at \(N=96\)–384.
-Artifact-v4 is near zero for five-bit repair at \(N=24\)–48. These results do not
+Artifact-v3 matches this prediction for one-bit sparse repair at $`N=96`$–384.
+Artifact-v4 is near zero for five-bit repair at $`N=24`$–48. These results do not
 conflict; together they constrain the crossover. Edit density, object length,
 address overhead, coupling, and timeout floor all affect the best interface.
 
@@ -336,7 +336,7 @@ raw success fields directly.
 For V5, the original merged formal JSONL and full event payload were not retained
 across a branch switch. The 288-row endpoint table was reconstructed from complete
 `run.log` completion records aligned to frozen specs. Final success, failure
-class, condition, instance, \(N\), \(k\), and paired endpoint effects are
+class, condition, instance, $`N`$, $`k`$, and paired endpoint effects are
 citable; exact repair-call totals, latency/token use, actual per-run payload
 ratios, and event-level arm exclusivity are not.
 

@@ -87,13 +87,13 @@ Observe authoritative state
 
 ## 2. Agent 成功必须按层分解
 
-\[
+```math
 P(S)=
 P(\text{state adequate})
 \times P(\text{plan correct}\mid state)
 \times P(\text{delivery correct}\mid plan)
 \times P(\text{safe commit}\mid delivery).
-\]
+```
 
 这不是独立性假设，而是诊断分层：
 
@@ -185,7 +185,7 @@ OOD schema、并发、crash/replay 和 verifier false-accept 测试。正确 pla
 ```
 
 由 runtime 根据最新状态解析 path/index/span。V8 ID−INDEX +0.3125；V11 的
-relocation interaction +0.21875，但集中于 \(N=48\)；V12 没有确认 drift-dose
+relocation interaction +0.21875，但集中于 $N=48$；V12 没有确认 drift-dose
 单调增加。工程处方来自地址不变性和实验支持，不需要先预测漂移剂量。
 
 ## 7. 原则五：依赖调度由 Runtime 执行
@@ -228,12 +228,12 @@ generic reject
 
 稀疏 Patch 的条件性承诺面：
 
-\[
+```math
 L_{\mathrm{rewrite}}\approx Nc_r,\qquad
 L_{\mathrm{patch}}\approx c_0+k(c_p+\log N).
-\]
+```
 
-当 plan 正确、\(k\ll N\)、地址稳定、executor 可靠时，Patch 通常更小；高密度、结构
+当 plan 正确、$`k\ll N`$、地址稳定、executor 可靠时，Patch 通常更小；高密度、结构
 重构、错误 plan 或脆弱工具会消除优势。
 
 | 条件 | 首选 |
@@ -290,14 +290,14 @@ V11 1,024、V12/V14/V15 各 768 是实现采用证据，不是生产总体保证
 
 Router 应优化：
 
-\[
+```math
 U=
 V_sP(\text{exact success})
 -C_t(tokens)
 -C_l(latency)
 -C_r(risk)
 -C_h(human).
-\]
+```
 
 必须同时记录 exact endpoint、budget、token、provider turns、transport attempts、
 payload bytes、stage latency、rollback、tail latency 和 success-per-cost。
@@ -412,9 +412,9 @@ AND preconditions_revalidated
 ```
 
 V16 识别的是 runtime 政策包，不是纯信息效应：只有 Rebase 得到恢复权限、解锁
-\(S_2\) 和 target slice。不能据此省略有效状态迁移后的必要上下文。
+$S_2$ 和 target slice。不能据此省略有效状态迁移后的必要上下文。
 
-V17 固定 unlock 和权威 \(S_2\)。对于 verified absolute-value plan，RECEIPT、
+V17 固定 unlock 和权威 $S_2$。对于 verified absolute-value plan，RECEIPT、
 OLDSTATE、TARGET-SLICE、REBASE-PLAN 均为 24/24，并在每个 task 发出相同
 operations；OLDSTATE 的中位 token 比 RECEIPT 高 74.9%。这支持**本操作类型的最小
 充分上下文梯度**，不支持总体等价：

@@ -11,7 +11,7 @@
 
 系统可能满足 prompt 却让用户失望，通过 rubric 却失败于真实任务，优化 benchmark metric 却违反语义意图，给出可辩护答案却错过决策标准，或遵循局部指令却损害全局目标。
 
-本文把规格失配展开为 LLM 系统价值保存结构理论中的第六类原始失配。在世界到输出的管线中，规格失配位于评价站点：可访问代理目标 \(\tilde{U}\) 与真实任务效用 \(U\) 之间的关系。
+本文把规格失配展开为 LLM 系统价值保存结构理论中的第六类原始失配。在世界到输出的管线中，规格失配位于评价站点：可访问代理目标 $\tilde{U}$ 与真实任务效用 $U$ 之间的关系。
 
 中心问题不是系统是否有足够事实、推理、概率质量或局部一致性，而是：**系统究竟在朝什么标准优化、选择、审计、奖励或修订，而这个标准是否保存真正重要的任务价值？**
 
@@ -133,19 +133,19 @@ S_world
 
 ## 2. 核心定义
 
-令 \(Y\) 是候选输出、artifact、plan、query、patch、answer 或 action sequence。
+令 $Y$ 是候选输出、artifact、plan、query、patch、answer 或 action sequence。
 
-令 \(U(Y, S)\) 是世界状态 \(S\) 中 \(Y\) 的真实任务效用。这是用户、领域、环境、机构、benchmark 语义或下游后果真正关心的价值。
+令 $U(Y, S)$ 是世界状态 $S$ 中 $Y$ 的真实任务效用。这是用户、领域、环境、机构、benchmark 语义或下游后果真正关心的价值。
 
-令 \(\tilde{U}(Y, Z)\) 是 LLM 系统使用的可访问评价函数。它可以是 prompt 指令、rubric、reward model、preference model、benchmark metric、verifier、self-critique、human label、unit test、execution result、ranking rule、policy constraint 或非正式验收条件。
+令 $\tilde{U}(Y, Z)$ 是 LLM 系统使用的可访问评价函数。它可以是 prompt 指令、rubric、reward model、preference model、benchmark metric、verifier、self-critique、human label、unit test、execution result、ranking rule、policy constraint 或非正式验收条件。
 
-**规格失配** 发生在任务相关候选对 \(Y_1, Y_2\) 上：
+**规格失配** 发生在任务相关候选对 $Y_1, Y_2$ 上：
 
 ```text
 rank_U(Y1, Y2) ≠ rank_Ũ(Y1, Y2)
 ```
 
-或优化 \(\tilde{U}\) 系统性地无法改进 \(U\)。
+或优化 $\tilde{U}$ 系统性地无法改进 $U$。
 
 等价地说：
 
@@ -730,7 +730,7 @@ Better audit → more efficient enforcement of the wrong rubric.
 Effect(R_i) = Effect(R_i | Ũ faithful to U)
 ```
 
-当 \(\tilde{U}\) 严重偏离时：
+当 $\tilde{U}$ 严重偏离时：
 
 ```text
 ∂U / ∂R_i may be zero or negative
@@ -1878,7 +1878,7 @@ SGAR:
 
 ## 29. 结论
 
-规格失配是目标保存失败。它发生在系统可访问标准 \(\tilde{U}\) 偏离真实任务效用 \(U\) 时。其结果不一定是 incoherence 或 hallucination，也可能是一个 polished、compliant、well-structured，却优化错误目标的 artifact。
+规格失配是目标保存失败。它发生在系统可访问标准 $\tilde{U}$ 偏离真实任务效用 $U$ 时。其结果不一定是 incoherence 或 hallucination，也可能是一个 polished、compliant、well-structured，却优化错误目标的 artifact。
 
 这种失配是原始的，因为它位于世界到输出管线的评价站点。它不能还原为缺信息、状态歧义、能力误路由、低支持或组合失败。系统可能解决所有这些问题，但如果目标错，仍会选择错误 artifact。
 
@@ -1895,8 +1895,8 @@ SGAR:
 | 术语 | 定义 |
 |---|---|
 | 规格失配 | 可访问代理目标与真实任务效用之间的偏离。 |
-| 真实效用 \(U\) | 任务语境中真正重要的价值。 |
-| 代理目标 \(\tilde{U}\) | 系统用于生成、排序、修订或接受的操作标准。 |
+| 真实效用 $U$ | 任务语境中真正重要的价值。 |
+| 代理目标 $\tilde{U}$ | 系统用于生成、排序、修订或接受的操作标准。 |
 | 目标治理 | 把目标作为有作用域、可修订、可审计受治理对象来管理。 |
 | Objective Object | 成功条件、rubric、proxy 或 verifier contract 的结构化表示。 |
 | 代理风险审计 | 分析代理如何被满足而真实效用失败。 |

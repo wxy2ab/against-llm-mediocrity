@@ -109,13 +109,13 @@ their current boundaries.
 
 ## 2. Decompose agent success by layer
 
-\[
+```math
 P(S)=
 P(\text{state adequate})
 \times P(\text{plan correct}\mid state)
 \times P(\text{delivery correct}\mid plan)
 \times P(\text{safe commit}\mid delivery).
-\]
+```
 
 This is a diagnostic decomposition, not an independence assumption:
 
@@ -213,7 +213,7 @@ Prefer:
 ```
 
 Runtime resolves path/index/span from current state. V8 ID−INDEX is +0.3125;
-V11 relocation interaction is +0.21875 but concentrated at \(N=48\); V12 does
+V11 relocation interaction is +0.21875 but concentrated at $N=48$; V12 does
 not establish monotone drift dose. The prescription follows address invariance
 plus experimental support; it does not require predicting drift magnitude.
 
@@ -260,12 +260,12 @@ risk reduction justifies token and latency cost.
 
 For sparse Patch:
 
-\[
+```math
 L_{\mathrm{rewrite}}\approx Nc_r,\qquad
 L_{\mathrm{patch}}\approx c_0+k(c_p+\log N).
-\]
+```
 
-When the plan is correct, \(k\ll N\), addresses are stable, and the executor is
+When the plan is correct, $`k\ll N`$, addresses are stable, and the executor is
 reliable, Patch usually owns a smaller commitment surface. Dense edits,
 structural refactors, invalid plans, or brittle tools can erase the advantage.
 
@@ -326,14 +326,14 @@ implementation-adoption evidence, not population guarantees.
 
 Router utility:
 
-\[
+```math
 U=
 V_sP(\text{exact success})
 -C_t(tokens)
 -C_l(latency)
 -C_r(risk)
 -C_h(human).
-\]
+```
 
 Record exact endpoint, budget, tokens, provider turns, transport attempts,
 payload bytes, stage latency, rollback, tail latency, and success per cost.
@@ -461,10 +461,10 @@ otherwise
 ```
 
 V16 identifies this runtime policy bundle, not a pure information effect:
-Rebase alone receives recovery authority, unlocked \(S_2\), and the target
+Rebase alone receives recovery authority, unlocked $S_2$, and the target
 slice. Do not infer that current context is unnecessary after a valid transition.
 
-V17 holds the unlock and authoritative \(S_2\) fixed. For its verified
+V17 holds the unlock and authoritative $S_2$ fixed. For its verified
 absolute-value plan, RECEIPT, OLDSTATE, TARGET-SLICE, and REBASE-PLAN all reach
 24/24 and emit identical operations; OLDSTATE consumes 74.9% more median
 tokens than RECEIPT. This supports a **minimum-sufficient-context ladder for

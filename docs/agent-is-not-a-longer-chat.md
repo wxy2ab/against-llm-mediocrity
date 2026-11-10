@@ -346,7 +346,7 @@ where:
 * $M$ is the LLM proposing an action;
 * $E$ is the execution environment;
 * $O_t$ is an observation obtained from a tool or sensor;
-* $V$ is verification or audit, and $D_t$ is its decision;
+* $V$ is verification or audit, and $`D_t`$ is its decision;
 * Commit decides whether the result can enter authoritative state.
 
 The key restriction is:

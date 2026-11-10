@@ -50,17 +50,17 @@ live in water. It may instead be that:
 
 Under these defaults:
 
-\[
+```math
 \text{fish enters suitable water}
 \Rightarrow
 \text{no new rescue need}
-\]
+```
 
-\[
+```math
 \text{banknote enters water}
 \Rightarrow
 \text{risk of loss, drift, or damage}
-\]
+```
 
 The reasonable default answer is therefore:
 
@@ -80,17 +80,17 @@ that a model always choose property.
 
 The wording creates a familiar value conflict:
 
-\[
+```math
 \text{living object}
 \quad\text{vs.}\quad
 \text{property object}
-\]
+```
 
 “Rescue,” “fish,” and “100 yuan” can activate a frequent ethical template:
 
-\[
+```math
 \text{life} > \text{property}
-\]
+```
 
 If the model classifies the task at this surface level, “rescue the fish” is a natural
 continuation.
@@ -99,43 +99,43 @@ continuation.
 
 Before ranking interventions, the decision-maker must ask:
 
-\[
+```math
 \text{Which object needs intervention in its current state?}
-\]
+```
 
 Rescue priority is meaningful only when an action can reduce an actual harm. A more
 complete decision variable is:
 
-\[
-\operatorname{Priority}(o,e,a)
+```math
+\mathop{\mathrm{Priority}}\nolimits(o,e,a)
 =
-\operatorname{Need}(o,e)
+\mathop{\mathrm{Need}}\nolimits(o,e)
 \times
-\operatorname{AvoidableLoss}(o,e)
+\mathop{\mathrm{AvoidableLoss}}\nolimits(o,e)
 \times
-\operatorname{ActionEfficacy}(a,o,e)
-\]
+\mathop{\mathrm{ActionEfficacy}}\nolimits(a,o,e)
+```
 
 where:
 
-- \(o\) is the object;
-- \(e\) is the environment and current state;
-- \(a\) is the available action;
-- \(\operatorname{Need}\) indicates whether a real intervention need exists;
-- \(\operatorname{AvoidableLoss}\) is the harm likely to occur without action that action
+- $o$ is the object;
+- $e$ is the environment and current state;
+- $a$ is the available action;
+- $\mathop{\mathrm{Need}}\nolimits$ indicates whether a real intervention need exists;
+- $\mathop{\mathrm{AvoidableLoss}}\nolimits$ is the harm likely to occur without action that action
   could prevent;
-- \(\operatorname{ActionEfficacy}\) is the extent to which the action can reduce that
+- $\mathop{\mathrm{ActionEfficacy}}\nolimits$ is the extent to which the action can reduce that
   harm.
 
 Under the default conditions:
 
-\[
-\operatorname{Need}(\text{fish},\text{suitable water}) \approx 0
-\]
+```math
+\mathop{\mathrm{Need}}\nolimits(\text{fish},\text{suitable water}) \approx 0
+```
 
-\[
-\operatorname{Need}(\text{banknote},\text{in water}) > 0
-\]
+```math
+\mathop{\mathrm{Need}}\nolimits(\text{banknote},\text{in water}) > 0
+```
 
 There is therefore no need to begin by comparing the moral value of a fish's life with
 the monetary value of the banknote. Value ranking becomes primary only when both
@@ -145,27 +145,27 @@ objects have real intervention needs.
 
 Some models may have learned a high-frequency proxy rule:
 
-\[
+```math
 \text{rescue wording}
 +
 \text{living object}
 \Rightarrow
 \text{prioritize the living object}
-\]
+```
 
 The resulting approximate decision boundary is:
 
-\[
+```math
 \text{object category}
 +
 \text{question frame}
 \longrightarrow
 \text{action choice}
-\]
+```
 
 The task actually requires:
 
-\[
+```math
 \text{object properties}
 +
 \text{environment properties}
@@ -175,7 +175,7 @@ The task actually requires:
 \text{harm the action can change}
 \longrightarrow
 \text{action choice}
-\]
+```
 
 The error is not that “life first” is always a bad norm. The error occurs before the
 norm is applied: the model has not first decided whether the fish is in a state that
@@ -201,13 +201,13 @@ The explicit, easy-to-detect features in this case include:
 
 The decisive feature requires composition:
 
-\[
+```math
 \text{fish}
 +
 \text{suitable water}
 \Rightarrow
 \text{no newly created danger}
-\]
+```
 
 No single keyword states this conclusion. The model must combine object knowledge,
 environment knowledge, and the object-environment relation to derive the feature “does
@@ -215,13 +215,13 @@ not need rescue.”
 
 The mismatch can be represented as:
 
-\[
+```math
 w_{\text{rescue frame}}
 +
 w_{\text{living category}}
 >
 w_{\text{actual danger state}}
-\]
+```
 
 In the stronger failure, “whether intervention is actually needed” is not reliably
 constructed as a separate decision variable at all. The wording of the problem then
@@ -264,11 +264,11 @@ The most important pattern is not total ignorance. It is the combination:
 
 This is a knowledge-action separation:
 
-\[
+```math
 \text{relevant fact is accessible}
 \not\Rightarrow
 \text{relevant fact governs the decision}
-\]
+```
 
 Models may revise their answer when asked:
 
@@ -381,17 +381,17 @@ error.
 
 Adding many examples that say “a fish in water does not need rescue” may teach:
 
-\[
+```math
 \text{fish}+\text{water}
 \Rightarrow
 \text{do not rescue the fish}
-\]
+```
 
 That is not the same as learning:
 
-\[
+```math
 \text{before acting, verify that the targeted problem exists}
-\]
+```
 
 A local patch can fail as soon as the object, environment, or wording changes.
 
@@ -445,13 +445,13 @@ A useful generalization set should vary:
 
 The abstract template is:
 
-\[
+```math
 \begin{aligned}
 &o_1 \text{ is in a normal state in environment } e,\\
 &o_2 \text{ suffers avoidable harm in } e,\\
 &\text{the wording induces a category or value frame that favors } o_1.
 \end{aligned}
-\]
+```
 
 New cases must specify environmental conditions carefully. “A submarine falls into
 water,” for example, is structurally analogous only if the submarine is operating

@@ -13,7 +13,7 @@
 Artifact-v10 验证了 runtime 可以安全接收语义合法、顺序任意的 ID 集合，并将其确定性
 规范化；但它**没有确认**“该合同使严格端到端成功率至少提高 20 个百分点”这一预注册
 claim：SEMANTIC-SET 为 30/32，STRICT-LIST 为 28/32，配对差 **+6.25 个百分点**，
-95% CI 为 **[−6.25, +18.75] 个百分点**，精确 sign-flip \(p=0.625\)。
+95% CI 为 **[−6.25, +18.75] 个百分点**，精确 sign-flip $p=0.625$。
 
 ## 技术摘要
 
@@ -38,7 +38,7 @@ V10 因此拆开：
 | SEMANTIC-SET success | **30/32 (93.75%)** |
 | 配对差 | **+0.0625** |
 | 95% cluster-bootstrap CI | **[−0.0625, 0.1875]** |
-| 精确 sign-flip \(p\) | **0.625** |
+| 精确 sign-flip $p$ | **0.625** |
 | 预注册最小效应 | **+0.20** |
 | Claim state | **`failed_pre_registered_gate`** |
 
@@ -51,33 +51,33 @@ V10 因此拆开：
 
 设一个 ready layer 内部没有依赖，其任务语义是映射
 
-\[
+```math
 M=\{node\_id\mapsto value\}.
-\]
+```
 
-对任意排列 \(\pi\)，
+对任意排列 $\pi$，
 
-\[
-\operatorname{Semantics}(\pi(M))=\operatorname{Semantics}(M).
-\]
+```math
+\mathop{\mathrm{Semantics}}\nolimits(\pi(M))=\mathop{\mathrm{Semantics}}\nolimits(M).
+```
 
 如果接口仍只接受一种列表顺序，就引入了比任务语义更严格的表示约束：
 
-\[
+```math
 \text{semantic validity}
 \not\Rightarrow
 \text{strict serialization validity}.
-\]
+```
 
 可靠 canonicalizer 可以移除这一额外失败面：
 
-\[
+```math
 \text{验证 ID 集合、唯一性、基数和值域}
 \rightarrow
 \text{按 runtime 权威顺序排序}
 \rightarrow
 \text{编译并执行}.
-\]
+```
 
 这是关于接口的条件性定理，只在顺序不属于领域语义时成立。
 
@@ -97,7 +97,7 @@ M=\{node\_id\mapsto value\}.
 ### 2.1 三层证据
 
 1. **V9 retrospective audit——只作动机。** 重新计算 77 个历史 order failure 的语义
-   内容；它是描述性证据，不进入 V10 的置信区间或 \(p\) 值。
+   内容；它是描述性证据，不进入 V10 的置信区间或 $p$ 值。
 2. **Offline canonicalizer adoption gate。** 用合法与对抗集合检验接受、拒绝、幂等和
    输入不变性。
 3. **配对确认实验。** 32 个全新冻结 DAG 实例分别运行两种 acceptance contract，
@@ -106,14 +106,14 @@ M=\{node\_id\mapsto value\}.
 ### 2.2 配对合同
 
 两臂共享 DeepSeek-V4-Flash 配置、中文 prompt、`thinking=False`、
-\(N\in\{16,24\}\)、冻结 DAG、ready set 与 completed ledger 暴露、工具 schema、
+$`N\in\{16,24\}`$、冻结 DAG、ready set 与 completed ledger 暴露、工具 schema、
 输出基数、300 秒预算和 global verifier。唯一变化是 acceptance contract：
 
 - **A-STRICT-LIST：** 提交数组必须连同顺序精确等于 `current_ready_node_ids`；
 - **A-SEMANTIC-SET：** ID 集合与 value 必须语义合法，runtime 规范化合法排列。
 
 Primary endpoint 是预算内 strict success。预注册 claim 要求配对提升至少 +0.20、
-CI 下界高于 0、精确 sign-flip \(p<0.05\)，并通过数据质量及 floor/ceiling 门。
+CI 下界高于 0、精确 sign-flip $p<0.05$，并通过数据质量及 floor/ceiling 门。
 
 ## 3. 数据与结果
 
@@ -188,7 +188,7 @@ Primary 效应较小，是因为本轮较易矩阵上的 STRICT 已能复述 req
 
 理论说明 canonicalization 能移除**可避免的 order-only rejection**；它没有说明该错误在
 每种 workload 中都很常见。V9 展示了此类错误高发的困难矩阵；V10 使用较易的
-\(N=16/24\) 矩阵，STRICT 臂没有终态 order failure。两项研究互补，并不矛盾：
+$N=16/24$ 矩阵，STRICT 臂没有终态 order failure。两项研究互补，并不矛盾：
 
 ```text
 V9：在严格、困难的合同中，order-only failure 可以主导。
@@ -224,7 +224,7 @@ V10：semantic-set 机制有效；但 strict 基线已能跟随 requested order 
 ## 7. 局限与下一步
 
 - 单一 DeepSeek 配置、中文 prompt、合成 GF(2) DAG、32 个配对实例；
-- \(N=16/24\) 比 v9 的 \(N=24/48\) 协议更容易；
+- $N=16/24$ 比 v9 的 $N=24/48$ 协议更容易；
 - 3.125 个百分点的配对分辨率与当前 CI 不支持“零效应”结论；
 - 决定性 follow-up 应覆盖 v8/v9 的非 floor 重叠难度区间，预先测量 order-only
   failure 基线，并增加第二模型与真实 unordered code/config task。

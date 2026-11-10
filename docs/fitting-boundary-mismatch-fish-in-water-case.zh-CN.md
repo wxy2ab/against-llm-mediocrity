@@ -45,17 +45,17 @@ English version:
 
 在这些默认条件下：
 
-\[
+```math
 \text{小鱼进入适生水体}
 \Rightarrow
 \text{未新增救援需求}
-\]
+```
 
-\[
+```math
 \text{纸币进入水体}
 \Rightarrow
 \text{存在漂走、遗失或受损风险}
-\]
+```
 
 因此，默认答案是：
 
@@ -73,17 +73,17 @@ English version:
 
 题目在语言表面构造了一个熟悉的价值冲突：
 
-\[
+```math
 \text{生命对象}
 \quad\text{vs.}\quad
 \text{财物对象}
-\]
+```
 
 “救哪个”“小鱼”“100元”共同激活了高频伦理模板：
 
-\[
+```math
 \text{生命} > \text{财物}
-\]
+```
 
 如果模型直接在这个表面问题上做分类，答案自然倾向于“救小鱼”。
 
@@ -91,40 +91,40 @@ English version:
 
 行动决策之前，首先应判断：
 
-\[
+```math
 \text{谁在当前状态下需要干预？}
-\]
+```
 
 只有存在可被行动降低的损害，救援优先级才有意义。一个更完整的决策变量可以写成：
 
-\[
-\operatorname{Priority}(o,e,a)
+```math
+\mathop{\mathrm{Priority}}\nolimits(o,e,a)
 =
-\operatorname{Need}(o,e)
+\mathop{\mathrm{Need}}\nolimits(o,e)
 \times
-\operatorname{AvoidableLoss}(o,e)
+\mathop{\mathrm{AvoidableLoss}}\nolimits(o,e)
 \times
-\operatorname{ActionEfficacy}(a,o,e)
-\]
+\mathop{\mathrm{ActionEfficacy}}\nolimits(a,o,e)
+```
 
 其中：
 
-- \(o\) 是对象；
-- \(e\) 是环境与当前状态；
-- \(a\) 是可采取的行动；
-- \(\operatorname{Need}\) 表示对象是否产生了真实干预需求；
-- \(\operatorname{AvoidableLoss}\) 表示若不行动，可能发生且可以避免的损失；
-- \(\operatorname{ActionEfficacy}\) 表示当前行动能否有效降低该损失。
+- $o$ 是对象；
+- $e$ 是环境与当前状态；
+- $a$ 是可采取的行动；
+- $\mathop{\mathrm{Need}}\nolimits$ 表示对象是否产生了真实干预需求；
+- $\mathop{\mathrm{AvoidableLoss}}\nolimits$ 表示若不行动，可能发生且可以避免的损失；
+- $\mathop{\mathrm{ActionEfficacy}}\nolimits$ 表示当前行动能否有效降低该损失。
 
 在默认条件下：
 
-\[
-\operatorname{Need}(\text{鱼},\text{适生水体}) \approx 0
-\]
+```math
+\mathop{\mathrm{Need}}\nolimits(\text{鱼},\text{适生水体}) \approx 0
+```
 
-\[
-\operatorname{Need}(\text{纸币},\text{水中}) > 0
-\]
+```math
+\mathop{\mathrm{Need}}\nolimits(\text{纸币},\text{水中}) > 0
+```
 
 所以不需要先比较“鱼的生命价值”和“100元的经济价值”。价值排序只有在两个对象都
 存在真实救援需求时，才是主导问题。
@@ -133,27 +133,27 @@ English version:
 
 部分模型可能从训练数据中学习到如下高频代理规则：
 
-\[
+```math
 \text{救援措辞}
 +
 \text{生命对象}
 \Rightarrow
 \text{优先选择生命对象}
-\]
+```
 
 对应的近似决策边界是：
 
-\[
+```math
 \text{对象类别}
 +
 \text{问题框架}
 \longrightarrow
 \text{行动选择}
-\]
+```
 
 而任务真正需要的决策边界是：
 
-\[
+```math
 \text{对象属性}
 +
 \text{环境属性}
@@ -163,14 +163,14 @@ English version:
 \text{行动可改变的损害}
 \longrightarrow
 \text{行动选择}
-\]
+```
 
 错误不在于“生命优先”这一规范必然错误，而在于模型在调用规范之前，没有先完成
 适用性判断：
 
-\[
+```math
 \text{鱼当前是否处于需要救援的状态？}
-\]
+```
 
 换句话说，模型可能把训练分布中的高频代理特征当成了任务所需的因果特征。
 
@@ -190,39 +190,39 @@ English version:
 
 真正重要但需要组合推导的特征是：
 
-\[
+```math
 \text{鱼}
 +
 \text{适生水体}
 \Rightarrow
 \text{当前没有新增危险}
-\]
+```
 
 这个状态没有以单个关键词直接出现。模型必须组合对象知识、环境知识和对象—环境关系，
 才能构造出“无需救援”这一派生特征。
 
 潜在失配可以表示为：
 
-\[
+```math
 w_{\text{救援框架}}
 +
 w_{\text{生命类别}}
 >
 w_{\text{实际危险状态}}
-\]
+```
 
 更严重的情况是，“实际是否需要救援”根本没有在最终决策中被稳定构造成独立变量。
 于是：
 
-\[
+```math
 \text{问题怎样表达}
-\]
+```
 
 比：
 
-\[
+```math
 \text{现实中发生了什么}
-\]
+```
 
 更能决定模型输出。
 
@@ -261,11 +261,11 @@ w_{\text{实际危险状态}}
 
 这形成了一种知识—决策解耦：
 
-\[
+```math
 \text{相关事实可访问}
 \not\Rightarrow
 \text{相关事实主导决策}
-\]
+```
 
 如果用户继续追问：
 
@@ -373,17 +373,17 @@ w_{\text{实际危险状态}}
 
 加入大量同义题可能只让模型学到局部补丁：
 
-\[
+```math
 \text{鱼}+\text{水}
 \Rightarrow
 \text{不要救鱼}
-\]
+```
 
 这不等于模型掌握了可泛化原则：
 
-\[
+```math
 \text{执行动作前，先验证该动作对应的问题是否真实存在}
-\]
+```
 
 局部补丁容易在对象、环境或措辞改变后失效。
 
@@ -435,13 +435,13 @@ requested_action
 
 抽象模板为：
 
-\[
+```math
 \begin{aligned}
 &o_1 \text{ 在 } e \text{ 中处于正常状态},\\
 &o_2 \text{ 在 } e \text{ 中产生可避免损害},\\
 &\text{问题却通过类别或价值框架诱导优先选择 } o_1.
 \end{aligned}
-\]
+```
 
 构造新题时必须明确环境条件，避免把歧义误当成模型错误。例如，“潜水艇落水”只有在
 明确潜水艇正常、无人遇险且另一对象确实受损时，才与本案例同构。

@@ -72,7 +72,7 @@ plan -> materialize all indexed layers -> global residual -> full replan -> reru
 | 模型 | `SimpleDeepSeekClientChat` / `deepseek-v4-flash` |
 | 推理配置 | 中文；temperature=0；`thinking=False`；每 turn 最多 32k tokens |
 | 任务 | 合成有向无环 GF(2) DAG；step 为 topological layer |
-| 规模 | (N\in\{16,24\})，frontier \(\in\{2,4\}\)；每 cell 12 个正式实例 |
+| 规模 | $`N\in\{16,24\}`$，frontier $`\in\{2,4\}`$；每 cell 12 个正式实例 |
 | Formal | 48 个共享实例 × 3 臂 = 144 episodes / artifact |
 | Pilot | 12 个独立实例 × 3 臂 = 36 episodes / artifact |
 | 初始条件 | 每个实例三臂共享同一个冻结错误计划 (P_0) |
@@ -138,9 +138,9 @@ Holm 后 (p<0.05)：
 
 | Claim / contrast | Δ | 95% CI | Holm p | 冻结状态 |
 |---|---:|---|---:|---|
-| V18-1 STEP−STAGE | −0.625 | [−0.750, −0.479] | (3.73\times10^{-9}) | `failed_pre_registered_gate` |
+| V18-1 STEP−STAGE | −0.625 | [−0.750, −0.479] | $3.73\times10^{-9}$ | `failed_pre_registered_gate` |
 | V18-2 STEP−NO | 0.000 | [0, 0] | 1.0 | `failed_pre_registered_gate` |
-| V19-1 STEP−STAGE | −0.583 | [−0.729, −0.438] | (1.49\times10^{-8}) | `failed_pre_registered_gate` |
+| V19-1 STEP−STAGE | −0.583 | [−0.729, −0.438] | $1.49\times10^{-8}$ | `failed_pre_registered_gate` |
 | V19-2 STEP−NO | +0.104 | [+0.021, +0.188] | 0.0625 | `failed_pre_registered_gate` |
 | V18 secondary STAGE−NO | +0.625 | [+0.479, +0.750] | 未纳入 primary Holm | secondary |
 | V19 secondary STAGE−NO | +0.688 | [+0.563, +0.813] | 未纳入 primary Holm | secondary |

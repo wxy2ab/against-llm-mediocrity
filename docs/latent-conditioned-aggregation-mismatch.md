@@ -124,18 +124,18 @@ So it is still global dependence, except:
 
 Ordinary aggregation mismatch can be written as:
 
-\[
+```math
 Y = A(y_1,\ldots,y_n)
-\]
+```
 
 The problem is that locally plausible `y_i` fail to preserve global value after composition.
 
 Latent-conditioned aggregation is more accurately written as:
 
-\[
+```math
 y_i = R_i(H, D_i, C_i), \qquad
 Y = A(y_1,\ldots,y_n)
-\]
+```
 
 Where:
 
@@ -147,21 +147,21 @@ Where:
 
 So real task value does not only require:
 
-\[
-\operatorname{Consistent}(y_1,\ldots,y_n)
-\]
+```math
+\mathop{\mathrm{Consistent}}\nolimits(y_1,\ldots,y_n)
+```
 
 It also requires:
 
-\[
-\operatorname{Faithful}(Y,H)
-\]
+```math
+\mathop{\mathrm{Faithful}}\nolimits(Y,H)
+```
 
 while ensuring that:
 
-\[
-\operatorname{ExplicitLeakage}(H,Y)
-\]
+```math
+\mathop{\mathrm{ExplicitLeakage}}\nolimits(H,Y)
+```
 
 does not become too high.
 

@@ -28,9 +28,9 @@ V13 继续作为方法开发 artifact 归档，不进入证据合成。V17 承�
 V17 的最稳妥结论不是“恢复信息没有用”，而是：
 
 1. **对本实验的绝对值、幂等 semantic goal plan，只要 runtime 已解除锁并把执行态迁移
-   到同一 \(S_2\)，receipt + 完整 goal plan 已足够。** 四个信息臂都为 24/24；
+   到同一 $`S_2`$，receipt + 完整 goal plan 已足够。** 四个信息臂都为 24/24；
    TARGET-SLICE−RECEIPT 的观察差为 0，未通过预注册 +0.25 优势门。该天花板结果不构成
-   等价性证明，也不能推广到相对编辑、非单调变换或必须读取 \(S_2\) 才能重算的任务。
+   等价性证明，也不能推广到相对编辑、非单调变换或必须读取 $`S_2`$ 才能重算的任务。
 2. **有效硬锁未解除时，重复同一写入不会成为恢复。** Force Intent 与 Generic Retry
    都是 0/24 commit；程序化 unlock 的阳性对照为 24/24 commit。
 3. **不可解除冲突需要合法的非 commit 终态。** Typed Escalate 为 24/24 合法升级且
@@ -48,17 +48,17 @@ V17 的最稳妥结论不是“恢复信息没有用”，而是：
 
 ### 1.1 硬可行性边界先于语言推理
 
-设写入动作 \(a\) 的提交条件包含锁谓词 \(U(S)=1\)，其中 1 表示目标在权威状态 \(S\)
-中可写。若 runtime 保持 \(S=S_1\) 且 \(U(S_1)=0\)，则无论模型重复多少次同一动作：
+设写入动作 $a$ 的提交条件包含锁谓词 $U(S)=1$，其中 1 表示目标在权威状态 $S$
+中可写。若 runtime 保持 $S=S_1$ 且 $U(S_1)=0$，则无论模型重复多少次同一动作：
 
-\[
-\operatorname{Commit}(a,S_1)=0.
-\]
+```math
+\mathop{\mathrm{Commit}}\nolimits(a,S_1)=0.
+```
 
 增加 token、重读旧状态或重新表达 Intent 都不能改变 runtime 的硬谓词。真正的恢复至少
 需要以下之一：
 
-- 权威状态迁移到可写的 \(S_2\)；
+- 权威状态迁移到可写的 $`S_2`$；
 - 冲突由上级治理裁决；
 - 当前任务合法终止为 wait / reject / escalate，而不是 commit。
 
@@ -67,25 +67,25 @@ V17 的最稳妥结论不是“恢复信息没有用”，而是：
 ### 1.2 信息需求取决于操作语义
 
 本实验的 verified goal plan 已给出稳定 `service_id`、字段、谓词和绝对 threshold。
-对这种幂等、目标值已确定的操作，只要 \(S_2\) 保留相同 semantic IDs 且 runtime
+对这种幂等、目标值已确定的操作，只要 $`S_2`$ 保留相同 semantic IDs 且 runtime
 重新封存 payload，最小恢复输入可写为：
 
-\[
+```math
 I_{\min}=\{\text{typed receipt},\ \text{unlock declaration},\ \text{verified goal plan}\}.
-\]
+```
 
-完整旧 \(S_1\)、目标 slice 或带 observed value 的 rebase plan 可能是冗余信息。反之，
-若操作是相对增量、非单调变换、compare-and-swap、跨对象约束或需要基于 \(S_2\) 重新选
-目标，则 \(I_{\min}\) 会改变。V17 只检验前一种任务。
+完整旧 $S_1$、目标 slice 或带 observed value 的 rebase plan 可能是冗余信息。反之，
+若操作是相对增量、非单调变换、compare-and-swap、跨对象约束或需要基于 $`S_2`$ 重新选
+目标，则 $I_{\min}$ 会改变。V17 只检验前一种任务。
 
 ### 1.3 “成功”必须包含多个合法终态
 
 不可解除冲突下，commit 不是唯一正确答案。治理系统至少应区分：
 
-\[
+```math
 \texttt{committed},\quad \texttt{rejected},\quad \texttt{waiting},\quad
 \texttt{escalated},\quad \texttt{rolled\_back}.
-\]
+```
 
 因此 Module B 的 `escalate_success` 是安全终态合规指标，不是任务完成率的同义词。
 
@@ -98,42 +98,42 @@ I_{\min}=\{\text{typed receipt},\ \text{unlock declaration},\ \text{verified goa
 | 模型 | DeepSeek-v4-flash |
 | 语言 / temperature | 中文 / 0 |
 | 预算 | 每 episode 300 秒；每 turn 最多 32k tokens |
-| Formal | 24 个共享 task clusters；\(N\in\{96,144,216\}\)，每档 8 个 |
+| Formal | 24 个共享 task clusters；$`N\in\{96,144,216\}`$，每档 8 个 |
 | 条件 | 2 modules × 4 arms = 8 |
 | 规模 | Formal 192；Pilot 24；Offline mutations 1,536 |
 | 调用次数 | 所有 formal episode 均为 2 provider turns |
 | 统计 | task-cluster 配对 bootstrap、exact two-sided sign-flip、双 primary Holm |
 | 安全门 | 首次 locked commit=0、unsafe=0、事件可重建、offline FA/FR=0 |
 
-初始 turn 只看到 \(S_0\) 与 verified goal plan。payload 先封存，runtime 随后注入
+初始 turn 只看到 $S_0$ 与 verified goal plan。payload 先封存，runtime 随后注入
 `LOCKED_CONFLICT`；所有臂首次提交都必须被拒绝。第二 turn 才执行各自恢复政策。
 
 ### 2.2 Module A：同一 unlock，只改变第二 turn 信息
 
-四臂均由 runtime 程序化迁移到同一个已解锁 \(S_2\)，且工具、调用次数、goal plan、
+四臂均由 runtime 程序化迁移到同一个已解锁 $`S_2`$，且工具、调用次数、goal plan、
 执行器和验收条件相同：
 
 | Condition | 第二 turn 额外可见内容 |
 |---|---|
 | `A-UNLOCK-RECEIPT` | typed receipt |
-| `A-UNLOCK-OLDSTATE` | receipt + 完整旧 \(S_1\) |
-| `A-UNLOCK-TARGET-SLICE` | receipt + \(S_2\) 目标 slice |
+| `A-UNLOCK-OLDSTATE` | receipt + 完整旧 $S_1$ |
+| `A-UNLOCK-TARGET-SLICE` | receipt + $`S_2`$ 目标 slice |
 | `A-UNLOCK-REBASE-PLAN` | receipt + 带 observed value 的结构化 rebase plan |
 
 Primary V17-A1：
 
-\[
+```math
 \Delta_{A1}=
 P(\text{TARGET-SLICE final success})-
 P(\text{RECEIPT final success}).
-\]
+```
 
-预注册门为 \(\Delta\ge 0.25\)、bootstrap CI 下界 \(>0\)、Holm 后 \(p<0.05\)。
+预注册门为 $\Delta\ge 0.25$、bootstrap CI 下界 $>0$、Holm 后 $p<0.05$。
 
 ### 2.3 Module B：锁永不解除，改变合法处理路径
 
-`B-FORCE-INTENT`、`B-GENERIC-RETRY` 与 `B-ESCALATE` 始终停留在锁定 \(S_1\)；
-`B-RESOLVABLE-REBASE` 是 unlock 到 \(S_2\) 的阳性对照。
+`B-FORCE-INTENT`、`B-GENERIC-RETRY` 与 `B-ESCALATE` 始终停留在锁定 $S_1$；
+`B-RESOLVABLE-REBASE` 是 unlock 到 $`S_2`$ 的阳性对照。
 
 | Condition | 合法终态 |
 |---|---|
@@ -144,11 +144,11 @@ P(\text{RECEIPT final success}).
 
 Primary V17-B1：
 
-\[
+```math
 \Delta_{B1}=
 P(\text{ESCALATE escalate\_success})-
 P(\text{FORCE final\_success}).
-\]
+```
 
 这是预注册的**治理终态对比**，两侧 endpoint 不同。
 
@@ -180,7 +180,7 @@ P(\text{FORCE final\_success}).
 | A-UNLOCK-REBASE-PLAN | 24/24 | 17,668.5 |
 
 V17-A1 为 **0.0**，paired bootstrap CI **[0.0, 0.0]**，sign-flip 与 Holm
-\(p=1.0\)，未达到 +0.25 门，状态为 **`failed_pre_registered_gate`**。
+$p=1.0$，未达到 +0.25 门，状态为 **`failed_pre_registered_gate`**。
 
 必须正确解读这个区间：它是对当前 24 个全零配对差的经验 bootstrap，不是总体等价界。
 实验没有预注册 non-inferiority/equivalence margin，因此不能声称四种信息在总体上等价。
@@ -206,7 +206,7 @@ V17-A1 为 **0.0**，paired bootstrap CI **[0.0, 0.0]**，sign-flip 与 Holm
 | B-RESOLVABLE-REBASE | 24/24 | 0/24 | 24/24 |
 
 V17-B1 为 **+1.0**，paired bootstrap CI **[1.0, 1.0]**，exact two-sided
-sign-flip \(p=1.192\times10^{-7}\)，Holm \(p=2.384\times10^{-7}\)，状态为
+sign-flip $p=1.192\times10^{-7}$，Holm $p=2.384\times10^{-7}$，状态为
 **`passed`**。阳性对照 `B-RESOLVABLE-REBASE` 也达到 24/24。
 
 这一结果确认 typed escalation 工具、schema、锁定态 non-commit 与路由合同在当前系统
@@ -218,7 +218,7 @@ Escalate 的目标是合法升级，两者的业务语义不同。
 ### 4.1 直接支持
 
 - 在冻结的绝对值 semantic-plan 任务中，同一 unlock 后 receipt + goal plan 已达到
-  24/24；额外 \(S_1\)、\(S_2\) slice 或 rebase plan 没有观察到成功增益。
+  24/24；额外 $S_1$、$`S_2`$ slice 或 rebase plan 没有观察到成功增益。
 - 对仍生效的 hard lock，Force 与 Generic Retry 都不能 commit；额外调用不改变可行域。
 - typed escalation 可作为不可解除冲突的安全终态，并保持 commit=0。
 - 完整旧状态可显著增加 token，而不一定增加有效决策信息。
@@ -241,7 +241,7 @@ Escalate 的目标是合法升级，两者的业务语义不同。
 | 理论命题 | V17 证据 | 剩余距离 |
 |---|---|---|
 | 未解除硬约束时重试不能恢复 | 强实现验证：Force/Generic 0/48 commit | 真实锁、租约、跨进程复现 |
-| 绝对幂等 plan 在 unlock 后可少依赖状态 | 当前任务 4 臂均 24/24，arguments 完全一致 | 构造需要 \(S_2\) 的任务，避免天花板 |
+| 绝对幂等 plan 在 unlock 后可少依赖状态 | 当前任务 4 臂均 24/24，arguments 完全一致 | 构造需要 $`S_2`$ 的任务，避免天花板 |
 | 最小充分上下文优于完整状态倾倒 | OLDSTATE token +74.9%，成功相同 | 预注册成本门、延迟/质量 Pareto、第二模型 |
 | 不可行时应升级而非强写 | Escalate 24/24、commit 0 | 多动作自由选择、升级质量与下游解决率 |
 | 成功应采用多终态状态机 | commit/escalate endpoint 已分开记录 | wait/queue/rollback/human resolution 的统一评估 |
@@ -314,7 +314,7 @@ ROLLED_BACK
 
 ## 8. 下一步
 
-1. 用**必须读取 \(S_2\)** 的任务重做 Module A：相对增量、非单调更新、CAS、
+1. 用**必须读取 $`S_2`$** 的任务重做 Module A：相对增量、非单调更新、CAS、
    跨对象守恒约束；把 baseline 调到非 ceiling。
 2. 将 A 的假设改为预注册 non-inferiority/equivalence 或成本—成功联合门，避免用
    superiority failure 代替等价性。

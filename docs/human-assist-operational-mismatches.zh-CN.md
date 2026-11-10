@@ -92,13 +92,13 @@
 
 非强制情形下，当无支持自治的预期损失高于打断和延迟成本时升级：
 
-\[
-\operatorname{Escalate}
+```math
+\mathop{\mathrm{Escalate}}\nolimits
 \quad \text{if} \quad
 P(\text{实质错误}) \times C(\text{错误})
 >
 C(\text{打断}) + C(\text{延迟}).
-\]
+```
 
 可逆性、证据质量和可用的自主修复路径都会改变门槛。
 

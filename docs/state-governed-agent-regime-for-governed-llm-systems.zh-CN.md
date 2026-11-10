@@ -238,10 +238,10 @@ SGAR 不只回答“什么状态改变可以被承认”，还要塑造每一次
 
 设当前权威状态为 `S_i`，当前阶段获得的求解面为：
 
-\[
+```math
 P_i = \Pi_i(S_i)
-= \Pi_i(G, C_{\le i}^{active}, E_{<i}^{accepted}, R_{<i}^{open}, A_i, L_i)
-\]
+= \Pi_i(G, C_{\le i}^{active}, E_{< i}^{accepted}, R_{< i}^{open}, A_i, L_i)
+```
 
 其中：
 
@@ -254,10 +254,10 @@ P_i = \Pi_i(S_i)
 
 当前阶段的私有设计与实现可以写成：
 
-\[
+```math
 X_i^* = \arg\max_{X_i} Q(X_i \mid P_i)
-= \arg\max_{X_i} Q(X_i \mid G,C_{\le i},E_{<i},R_{<i},A_i,L_i)
-\]
+= \arg\max_{X_i} Q(X_i \mid G,C_{\le i},E_{< i},R_{< i},A_i,L_i)
+```
 
 这里的 `X_i` 可以包含私有分解、候选搜索、局部实现和临时推理。SGAR 不要求预先决定未来的 `X_{i+1}, X_{i+2}`；它要求未来求解发生时，能够读取正确版本的 `G、C、E、R、A、L`。因此，SGAR 的全局结构更接近一个依赖与认知收敛框架，而不是一张预先穷尽未来实现细节的执行图。
 

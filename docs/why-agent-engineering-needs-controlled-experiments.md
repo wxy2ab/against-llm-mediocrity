@@ -27,26 +27,26 @@ Controlled experiments should therefore become the central method of agent engin
 
 Let the expected value of an agent system be
 
-\[
+```math
 J(\theta,H,E,D,b,V),
-\]
+```
 
 where:
 
-- \(\theta\) is the model and inference policy;
-- \(H\) is the runtime harness;
-- \(E\) is the environment and tool surface;
-- \(D\) is the task distribution;
-- \(b\) is the token, time, call, money, and risk budget;
-- \(V\) is the evaluator or oracle.
+- $\theta$ is the model and inference policy;
+- $H$ is the runtime harness;
+- $E$ is the environment and tool surface;
+- $D$ is the task distribution;
+- $b$ is the token, time, call, money, and risk budget;
+- $V$ is the evaluator or oracle.
 
 Most public comparisons change several arguments at once. A new agent release may use a stronger model, a longer context window, a different system prompt, new tools, a larger retry budget, altered truncation rules, a more permissive verifier, and a refreshed task set. The observed difference
 
-\[
+```math
 J(\theta_2,H_2,E_2,D_2,b_2,V_2)
 -
 J(\theta_1,H_1,E_1,D_1,b_1,V_1)
-\]
+```
 
 is a valid product comparison. It is not an identified mechanism effect.
 
@@ -146,21 +146,21 @@ Several of the most relevant studies are recent preprints, and much of the contr
 
 A common implicit prior in agent research is the **training-absorption hypothesis**:
 
-\[
+```math
 H_{\mathrm{absorb}}:
 \forall g,\;\exists \theta'\text{ sufficiently capable such that }
 J(\theta',h_0;D,b)\approx J(\theta,g;D,b).
-\]
+```
 
-Here, \(g\) is a governance or harness mechanism and \(h_0\) is a minimal runtime. The hypothesis says that a sufficiently capable future model can reproduce, inside the minimal runtime, the benefit that today's weaker model receives from \(g\). If this were generally true, most runtime experiments would have only short-lived product value.
+Here, $g$ is a governance or harness mechanism and $`h_0`$ is a minimal runtime. The hypothesis says that a sufficiently capable future model can reproduce, inside the minimal runtime, the benefit that today's weaker model receives from $g$. If this were generally true, most runtime experiments would have only short-lived product value.
 
 The alternative is a **structural-persistence hypothesis**:
 
-\[
+```math
 H_{\mathrm{persist}}:
 \forall \theta\text{ with bounded resources},\;
 \exists D_i\text{ that exhibits mismatch }M_i.
-\]
+```
 
 For every finite model, finite context, and finite inference budget, an open task space contains regions where one of six structural mismatches reappears. A stronger model may reduce the frequency, severity, or reachable boundary of the mismatch. It does not remove the dimension along which the mismatch is generated.
 
@@ -244,7 +244,7 @@ A general measurement rule is to **manipulate and report task-side structural do
 
 **Question.** Is the high-value structure absent because the model cannot express it, or because the deployed search process rarely reaches, retains, or recognizes it?
 
-**Design.** Under a matched token and call budget, compare direct generation, independent best-of-\(N\), critique-and-regenerate, and control-space interventions that change decomposition, representation, constraints, candidate topology, or deterministic operators. Include an oracle-supplied candidate condition to test whether the verifier can recognize the target once present.
+**Design.** Under a matched token and call budget, compare direct generation, independent best-of-$`N`$, critique-and-regenerate, and control-space interventions that change decomposition, representation, constraints, candidate topology, or deterministic operators. Include an oracle-supplied candidate condition to test whether the verifier can recognize the target once present.
 
 **Measurements.** Probability that any valid high-value structure appears, time-to-first-coverage, structural diversity, retention through pruning, verifier recall, best-found utility, and marginal value per token.
 
@@ -290,15 +290,15 @@ A credible agent experiment should publish enough information to reconstruct the
 
 ### 6.1 Define the estimand before running the system
 
-For a governance intervention \(g\) against baseline \(h_0\), define
+For a governance intervention $g$ against baseline $`h_0`$, define
 
-\[
+```math
 \Delta_g(\theta,D,b)
 =
 \mathbb{E}[J\mid \theta,g,D,b]
 -
 \mathbb{E}[J\mid \theta,h_0,D,b].
-\]
+```
 
 Then state the claim ceiling. Is the experiment estimating a product-level total effect, a mechanism-mediated effect, an interaction, a boundary threshold, or a transport effect? These are not interchangeable.
 
@@ -354,9 +354,9 @@ The transport claim should be layered:
 
 It is unreasonable to demand
 
-\[
+```math
 \Delta_g(\theta_1,D,b)=\Delta_g(\theta_2,D,b).
-\]
+```
 
 The cumulative claim is that the intervention, preconditions, mediator, and falsifier remain definable and retestable. Each model generation requires recalibration, not reinvention of the question.
 

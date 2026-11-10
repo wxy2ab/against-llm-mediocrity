@@ -28,7 +28,7 @@ questions from artifact-v8:
 2. Starting from the same frozen erroneous proposal, does a generic, located, or
    causal verifier receipt change one-turn full-layer recovery?
 
-| Claim | Paired estimate | 95% CI | Holm \(p\) | Preregistered verdict |
+| Claim | Paired estimate | 95% CI | Holm $p$ | Preregistered verdict |
 |---|---:|---|---:|---|
 | **V9-A1** ready main effect | +0.0208 | [0, 0.0625] | 1.0 | **Not adjudicated: floor** |
 | **V9-A2** ledger main effect | +0.0208 | [0, 0.0625] | 1.0 | **Not adjudicated: floor** |
@@ -57,38 +57,38 @@ gain, and staged effort was not matched.
 
 V9-A exposes two visible fields in a 2×2 design:
 
-\[
+```math
 Y_i(r,l),\qquad r\in\{0,1\},\ l\in\{0,1\},
-\]
+```
 
-where \(r\) indicates a visible ready set and \(l\) a normalized completed ledger.
+where $r$ indicates a visible ready set and $`l`$ a normalized completed ledger.
 All four conditions keep staged layer interaction and tool history.
 
 The ready-set main effect is
 
-\[
+```math
 \Delta_{A1}
 =
-\operatorname{mean}_i
+\mathop{\mathrm{mean}}\nolimits_i
 \frac{
 [Y_i(1,0)-Y_i(0,0)]
 +
 [Y_i(1,1)-Y_i(0,1)]
 }{2},
-\]
+```
 
 and the ledger main effect is
 
-\[
+```math
 \Delta_{A2}
 =
-\operatorname{mean}_i
+\mathop{\mathrm{mean}}\nolimits_i
 \frac{
 [Y_i(0,1)-Y_i(0,0)]
 +
 [Y_i(1,1)-Y_i(1,0)]
 }{2}.
-\]
+```
 
 Passing these gates would support independent field-level contributions. A common
 floor prevents that identification.
@@ -135,8 +135,8 @@ identifies one fixed repair protocol.
 
 ### 2.2 V9-A matrix
 
-Twenty-four new DAGs cover four cells: \(N\in\{24,48\}\) by frontier
-\(\in\{4,12\}\), six instances per cell. Each instance runs:
+Twenty-four new DAGs cover four cells: $`N\in\{24,48\}`$ by frontier
+$`\in\{4,12\}`$, six instances per cell. Each instance runs:
 
 | Condition | Visible ready set | Visible normalized ledger | Staged turns |
 |---|---:|---:|---:|
@@ -151,7 +151,7 @@ completion within budget.
 
 ### 2.3 V9-B matrix
 
-Thirty-two frozen repair cases cross layer width \(\{8,32\}\) with a single-error
+Thirty-two frozen repair cases cross layer width $`\{8,32\}`$ with a single-error
 or quarter-layer-error regime, eight cases per cell. Each case runs GENERIC,
 LOCATED, and CAUSAL once, with the same output contract.
 
@@ -200,7 +200,7 @@ exactly; every B episode has one provider turn and one native tool call.
 
 Across the 95 failures, 77 terminate at `order` and 18 at `readiness`; none
 terminate because of timeout or transport. The single success occurs at
-\(N=48,\ frontier=4\), so no \(N\) or frontier cell supplies an identifiable
+$`N=48,\ frontier=4`$, so no $N$ or frontier cell supplies an identifiable
 field comparison.
 
 All 77 order failures have `readiness_ok=true`: the submitted node-ID **set is the
@@ -211,7 +211,7 @@ acceptance contract, not universal inability to find the ready set.
 
 The evidence supports only:
 
-> Under the v9 \(N=24/48\) matrix and strict full-layer ordered-submission
+> Under the v9 $N=24/48$ matrix and strict full-layer ordered-submission
 > contract, independent ready-set and ledger effects cannot be identified.
 
 It does not support “ready sets do not work,” “ledgers do not work,” or “v8 was
@@ -229,7 +229,7 @@ overturned.”
 
 Paired discordance:
 
-| Contrast | Positive / negative / zero | Estimate | 95% CI | Holm \(p\) |
+| Contrast | Positive / negative / zero | Estimate | 95% CI | Holm $p$ |
 |---|---:|---:|---|---:|
 | CAUSAL−GENERIC | 6 / 2 / 24 | +0.125 | [−0.0313, 0.2813] | 0.875 |
 | LOCATED−GENERIC | 5 / 1 / 26 | +0.125 | [0, 0.2813] | 0.875 |
@@ -282,7 +282,7 @@ by default.
 ### Failed preregistered gates
 
 - a causal receipt improves exact recovery over generic rejection by at least
-  0.15 with a positive interval and corrected \(p<0.05\);
+  0.15 with a positive interval and corrected $p<0.05$;
 - a located receipt improves recovery by at least 0.10 under the same statistical
   requirements.
 
@@ -370,7 +370,7 @@ directional estimate from silently becoming a default policy.
 1. One DeepSeek configuration, Chinese prompts, thinking disabled.
 2. One formal run per condition and instance.
 3. Synthetic GF(2) DAGs, not real repositories or workflows.
-4. V9 uses \(N=24/48\), while V8 used \(N=8/16\); the versions do not form a
+4. V9 uses $N=24/48$, while V8 used $N=8/16$; the versions do not form a
    field-only cross-study contrast.
 5. Strict within-layer order may reject semantically equivalent sets.
 6. Generic receipt recovery is already 26/32, limiting headroom.
@@ -379,7 +379,7 @@ directional estimate from silently becoming a default policy.
 
 Highest-value follow-ups:
 
-- rerun ready×ledger in an overlapping non-floor range such as \(N=8/16/24\);
+- rerun ready×ledger in an overlapping non-floor range such as $N=8/16/24$;
 - accept ID sets and let the runtime canonicalize order;
 - lower the generic-receipt baseline through harder widths or larger samples;
 - preregister LOCATED-versus-CAUSAL noninferiority plus a token-cost gate;

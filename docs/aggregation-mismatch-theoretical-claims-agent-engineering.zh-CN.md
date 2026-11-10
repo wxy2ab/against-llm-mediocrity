@@ -101,29 +101,29 @@ order effect。v7 的 requested topological order 与 localized receipt 都有�
 
 令：
 
-- \(x\in\Sigma^N\) 为当前权威对象；
-- \(y^\star\in\Sigma^N\) 为目标对象；
-- \(\Delta=\{i:x_i\neq y^\star_i\}\) 为真实修改集合；
-- \(k=|\Delta|\)，\(\rho=k/N\) 为 edit density；
-- \(p\) 为模型提交的 patch 或操作计划；
-- \(E(x,p)\) 为确定性执行器应用 patch 后的对象；
-- \(I(y)\) 为对象必须满足的全局不变量；
-- \(V(y)\in\mathbb N\) 为违例数量或其他良基排序上的违例度量；
-- \(H y=c\) 为 GF(2) 实验中的线性约束系统；
-- \(G=(U,D)\) 为一般任务的依赖图；
-- \(q(m)\) 为在正确计划已经确定时，模型正确提交 \(m\) 个脆弱承诺的概率。
+- $x\in\Sigma^N$ 为当前权威对象；
+- $y^\star\in\Sigma^N$ 为目标对象；
+- $`\Delta=\{i:x_i\neq y^\star_i\}`$ 为真实修改集合；
+- $k=|\Delta|$，$`\rho=k/N`$ 为 edit density；
+- $p$ 为模型提交的 patch 或操作计划；
+- $E(x,p)$ 为确定性执行器应用 patch 后的对象；
+- $I(y)$ 为对象必须满足的全局不变量；
+- $V(y)\in\mathbb N$ 为违例数量或其他良基排序上的违例度量；
+- $H y=c$ 为 GF(2) 实验中的线性约束系统；
+- $G=(U,D)$ 为一般任务的依赖图；
+- $q(m)$ 为在正确计划已经确定时，模型正确提交 $m$ 个脆弱承诺的概率。
 
 “脆弱承诺”不一定等于 token。它指模型必须自行决定且一旦错误就会使严格结果失败的字段、位置、引用、参数或序列元素。
 
 端到端成功可以粗略拆成：
 
-\[
+```math
 P(\text{success})
 =P(\text{plan correct})
 \cdot P(\text{delivery correct}\mid\text{plan correct})
 \cdot P(\text{execution and commit correct}
 \mid\text{plan correct, delivery correct}).
-\]
+```
 
 理论最容易约束后两项。第一项通常依赖模型、上下文、任务分布和搜索过程，因此必须测量。
 
@@ -133,51 +133,51 @@ P(\text{success})
 
 ### 3.1 描述长度
 
-如果完整重写每个位置平均需要 \(c_r\) 个编码单位，那么：
+如果完整重写每个位置平均需要 $c_r$ 个编码单位，那么：
 
-\[
+```math
 L_{\text{rewrite}}=Nc_r.
-\]
+```
 
-如果 patch 有固定开销 \(c_0\)，每项需要位置地址、操作符和值，平均负担为
-\(c_p+\lceil\log_2 N\rceil\)，那么：
+如果 patch 有固定开销 $c_0$，每项需要位置地址、操作符和值，平均负担为
+$c_p+\lceil\log_2 N\rceil$，那么：
 
-\[
+```math
 L_{\text{patch}}
 =c_0+k(c_p+\lceil\log_2 N\rceil).
-\]
+```
 
 因此，当
 
-\[
+```math
 k<
 \frac{Nc_r-c_0}
 {c_p+\lceil\log_2 N\rceil}
-\]
+```
 
 时，patch 的序列化长度严格小于完整重写。
 
-从信息量看，若目标只允许在距离当前对象恰好 \(k\) 的位置变化，则可能目标数为：
+从信息量看，若目标只允许在距离当前对象恰好 $k$ 的位置变化，则可能目标数为：
 
-\[
+```math
 \binom Nk (|\Sigma|-1)^k.
-\]
+```
 
 标识其中任一目标至少需要：
 
-\[
+```math
 \log_2\binom Nk+k\log_2(|\Sigma|-1)
-\]
+```
 
-比特。任意完整对象则需要 \(N\log_2|\Sigma|\) 比特。前者在 \(k\ll N\) 时显著更小；当 \(k\) 接近 \(N\) 时，地址和操作开销可能让 patch 失去优势。
+比特。任意完整对象则需要 $N\log_2|\Sigma|$ 比特。前者在 $k\ll N$ 时显著更小；当 $k$ 接近 $N$ 时，地址和操作开销可能让 patch 失去优势。
 
 ### 3.2 未修改区域不变量
 
 标准 patch executor 满足：
 
-\[
+```math
 \forall i\notin\Delta_p,\quad E(x,p)_i=x_i.
-\]
+```
 
 也就是说，只要 patch 的写集合正确，未修改区域不会被模型重新生成，因而不会出现“修一个位置、意外改坏其他位置”的交付回归。完整重写没有这个结构保证。
 
@@ -187,20 +187,20 @@ k<
 
 1. patch 与 rewrite 使用同一个正确 edit plan；
 2. executor 正确；
-3. \(q(m)\) 随脆弱承诺数 \(m\) 单调不增；
-4. \(m_{\text{patch}}<m_{\text{rewrite}}\)；
+3. $q(m)$ 随脆弱承诺数 $m$ 单调不增；
+4. $`m_{\text{patch}}<m_{\text{rewrite}}`$；
 
 则：
 
-\[
+```math
 q(m_{\text{patch}})\ge q(m_{\text{rewrite}}).
-\]
+```
 
-如果每一步在任意正确前缀下的条件正确率至多为 \(1-\epsilon\)，则完整严格交付概率至多为：
+如果每一步在任意正确前缀下的条件正确率至多为 $1-\epsilon$，则完整严格交付概率至多为：
 
-\[
+```math
 (1-\epsilon)^m.
-\]
+```
 
 这个式子说明为什么微小的单步风险会随提交面累积。但它不是所有 LLM 的固定误差模型，也不能替代真实成功率测量。
 
@@ -208,7 +208,7 @@ q(m_{\text{patch}})\ge q(m_{\text{rewrite}}).
 
 - 模型默认提交 `edit[]`、AST operation、JSON Patch、SQL migration 或工具参数，而不是重新提交整个对象。
 - executor 根据权威基线应用操作；模型生成的“修复后全文”不应自动覆盖权威对象。
-- 路由器必须看 \(\rho=k/N\)、地址开销、区域耦合和 plan confidence，不能把 patch 写成永远优先。
+- 路由器必须看 $`\rho=k/N`$、地址开销、区域耦合和 plan confidence，不能把 patch 写成永远优先。
 - 中等密度可重写受影响的函数、子树、段落或表分区；高密度或目标结构整体变化时再完整重写。
 - 分别统计 `plan_correct` 与 `delivery_correct_given_plan`，避免把搜索失败和交付失败混成一个指标。
 
@@ -232,8 +232,8 @@ Artifact-v5 进一步加入了原生编辑 Agent 对照：
 | 给定同一权威 plan，300 秒 | 46/48（95.8%） | 26/48（54.2%） | +41.7 pp，95% CI [27.1, 56.3] | 已建立交付优势 |
 
 Oracle 配对比较有 21 个正实例、1 个负实例和 26 个 ties，精确 sign-flip
-\(p=1.10\times10^{-5}\)；infer 比较只有 1 个正实例和 47 个 ties，精确
-\(p=1\)。V5 因而识别出 plan-inference bottleneck：稳定 patch 工具可以减少
+$p=1.10\times10^{-5}$；infer 比较只有 1 个正实例和 47 个 ties，精确
+$p=1$。V5 因而识别出 plan-inference bottleneck：稳定 patch 工具可以减少
 交付错误，却不能把错误的推断计划变正确。
 
 这些数据仍不能把 patch 优势外推为所有模型、所有任务和所有修改密度的普遍定律。
@@ -248,25 +248,25 @@ V5 也没有识别 density crossover：6 个 infer cell 中有 5 个共同为零
 
 对线性约束：
 
-\[
+```math
 Hy=c,
-\]
+```
 
-给定候选 \(y\) 后，只需计算：
+给定候选 $y$ 后，只需计算：
 
-\[
+```math
 r=Hy\oplus c.
-\]
+```
 
-其中 \(r_i=1\) 表示第 \(i\) 条约束失败。稀疏矩阵下，完整 residual 的计算量为：
+其中 $r_i=1$ 表示第 $i$ 条约束失败。稀疏矩阵下，完整 residual 的计算量为：
 
-\[
-O(\operatorname{nnz}(H)).
-\]
+```math
+O(\mathop{\mathrm{nnz}}\nolimits(H)).
+```
 
 每条 residual 只读取对应约束邻域，因此可以分块或并行计算。
 
-从零生成则必须找到某个 \(y\) 使 \(Hy=c\)。在线性系统中，这仍然是多项式时间问题，不能把实验夸大成复杂性类别分离；但它确实比“给定 \(y\) 后计算 \(Hy\oplus c\)”多了承担一个求解和构造职责。
+从零生成则必须找到某个 $y$ 使 $Hy=c$。在线性系统中，这仍然是多项式时间问题，不能把实验夸大成复杂性类别分离；但它确实比“给定 $y$ 后计算 $Hy\oplus c$”多了承担一个求解和构造职责。
 
 ### 4.1 可以推出的结论
 
@@ -303,27 +303,27 @@ Audit 对 rewrite 同时改变操作与输出，仍不能解释为纯 verificati
 
 ## 5. 命题三：充分边界状态可以切开循环依赖
 
-把变量分成已外部化的边界集合 \(C\) 与剩余集合 \(R\)：
+把变量分成已外部化的边界集合 $`C`$ 与剩余集合 $`R`$：
 
-\[
+```math
 H_Cx_C+H_Rx_R=c.
-\]
+```
 
-给定 \(x_C\) 后：
+给定 $x_C$ 后：
 
-\[
+```math
 H_Rx_R=c-H_Cx_C.
-\]
+```
 
-若 \(H_R\) 满列秩且系统一致，则 \(x_R\) 唯一确定。因此，满足该秩条件的边界值是完整构造的充分状态。
+若 $H_R$ 满列秩且系统一致，则 $x_R$ 唯一确定。因此，满足该秩条件的边界值是完整构造的充分状态。
 
 对递推系统也可以写成：
 
-\[
+```math
 x=Fz+g,
-\]
+```
 
-其中 \(z\) 是闭环边界状态。给定正确 \(z\) 后，其余对象可按自然顺序确定性展开；闭环条件只需最终检查。
+其中 $z$ 是闭环边界状态。给定正确 $z$ 后，其余对象可按自然顺序确定性展开；闭环条件只需最终检查。
 
 ### 5.1 能证明到哪里
 
@@ -335,7 +335,7 @@ x=Fz+g,
 
 不能仅靠一般理论证明：
 
-- 某个实验中选择的前 \(b\) 位就是信息论最小 cut-set；
+- 某个实验中选择的前 $b$ 位就是信息论最小 cut-set；
 - 等数量的结构性 anchor 一定比随机位置答案更能帮助 LLM；
 - LLM 能正确求出紧凑边界状态，却只是无法交付完整对象。
 
@@ -362,13 +362,13 @@ ablation 选择状态表示，不能把 cut-set 标签硬编码为质量保证�
 
 ## 6. 命题四：依赖顺序决定在线构造所需的活跃状态
 
-令依赖图 \(G=(U,D)\) 中的边 \(u\rightarrow v\) 表示生成 \(v\) 前需要 \(u\)。
+令依赖图 $G=(U,D)$ 中的边 $u\rightarrow v$ 表示生成 $v$ 前需要 $u$。
 
-如果输出顺序 \(\pi\) 是拓扑序，那么每个节点提交时，其全部前驱都已经可用。系统可以在线执行：
+如果输出顺序 $\pi$ 是拓扑序，那么每个节点提交时，其全部前驱都已经可用。系统可以在线执行：
 
-\[
+```math
 \text{read predecessors}\rightarrow\text{compute node}\rightarrow\text{commit node}.
-\]
+```
 
 如果输出顺序不是拓扑序，系统至少需要采用一种额外机制：
 
@@ -378,13 +378,13 @@ ablation 选择状态表示，不能把 cut-set 标签硬编码为质量保证�
 - 做符号推导或全局求解；
 - 重新排序内部执行与最终序列化。
 
-对顺序 \(\pi\) 的任一切口，可定义跨越已输出/未输出部分的活跃依赖前沿 \(F_t\)。令：
+对顺序 $\pi$ 的任一切口，可定义跨越已输出/未输出部分的活跃依赖前沿 $F_t$。令：
 
-\[
+```math
 w(\pi)=\max_t |F_t|.
-\]
+```
 
-若这些前沿携带 \(b\) 个相互独立的二元状态，任何精确在线过程都至少要区分 \(2^b\) 种可能，因此需要至少 \(b\) bit 的内部状态。这个结论来自信息可区分性，不依赖 LLM。
+若这些前沿携带 $b$ 个相互独立的二元状态，任何精确在线过程都至少要区分 $2^b$ 种可能，因此需要至少 $b$ bit 的内部状态。这个结论来自信息可区分性，不依赖 LLM。
 
 ### 6.1 理论与经验的边界
 
@@ -411,32 +411,32 @@ LLM 收益幅度；后续需要提高依赖前沿或长度后重测。
 
 ## 7. 命题五：验证器闸门可以保证单调修复
 
-设 \(V(y)\in\mathbb N\) 是违例数量。修复循环只在下式成立时接受新状态：
+设 $V(y)\in\mathbb N$ 是违例数量。修复循环只在下式成立时接受新状态：
 
-\[
-V(y_{t+1})<V(y_t).
-\]
+```math
+V(y_{t+1})< V(y_t).
+```
 
-因为自然数不存在无限严格下降链，所以最多接受 \(V(y_0)\) 次修复后循环必然停止。
+因为自然数不存在无限严格下降链，所以最多接受 $V(y_0)$ 次修复后循环必然停止。
 
 更一般地，可以使用有限字典序或其他良基排序：
 
-\[
+```math
 V(y)=
 (\text{critical violations},
 \text{hard violations},
 \text{soft loss}).
-\]
+```
 
 只要接受规则构成严格良基下降，就不会接受循环或回退步骤。
 
 ### 7.1 这条定理没有保证什么
 
-- 不保证一定到达 \(V=0\)；
+- 不保证一定到达 $V=0$；
 - 不保证到达全局最优；
 - 不保证 verifier 覆盖了真实效用；
 - 不保证模型总能找到一个下降 patch；
-- 不保证单指标下降不会损害未进入 \(V\) 的价值。
+- 不保证单指标下降不会损害未进入 $V$ 的价值。
 
 因此，修复循环还需要：
 
@@ -457,21 +457,19 @@ V(y)=
 
 ## 8. 命题六：确定性执行器与可靠验证器形成提交安全包络
 
-设初始已提交状态 \(s_0\) 满足不变量 \(I(s_0)\)。每次提交满足：
+设初始已提交状态 $s_0$ 满足不变量 $I(s_0)$。每次提交满足：
 
-1. 模型只能提出动作 \(a_t\)，不能直接覆盖权威状态；
-2. 确定性执行器产生候选 \(s'=E(s_t,a_t)\)；
+1. 模型只能提出动作 $a_t$，不能直接覆盖权威状态；
+2. 确定性执行器产生候选 $s'=E(s_t,a_t)$；
 3. 验证器具有接受可靠性：
-   \[
-   \operatorname{Accept}(s')\Rightarrow I(s');
-   \]
-4. 只有 `Accept` 才能令 \(s_{t+1}=s'\)，否则 \(s_{t+1}=s_t\)。
+   $$\mathop{\mathrm{Accept}}\nolimits(s')\Rightarrow I(s');$$
+4. 只有 `Accept` 才能令 $s_{t+1}=s'$，否则 $s_{t+1}=s_t$。
 
 由数学归纳法可得：
 
-\[
+```math
 \forall t,\quad I(s_t).
-\]
+```
 
 这是一条系统级安全结论。它不要求模型永远正确，只要求错误提案不能绕过 executor 和 commit gate。
 
@@ -498,13 +496,13 @@ V(y)=
 
 ### 8.3 推论：编译 verified plan，而不是重新采样 delivery
 
-令 \(p\) 为已经验证且绑定到权威状态 \(s\) 的 plan，\(C(s,p)\) 为保持 plan 语义的
+令 $p$ 为已经验证且绑定到权威状态 $s$ 的 plan，$`C(s,p)`$ 为保持 plan 语义的
 确定性 compiler。如果状态 hash 仍匹配、执行是原子的，而且全局 verifier 对保护项
 可靠，那么运行时不需要新的模型采样就能生成并检查 delivery：
 
-\[
-\operatorname{Accept}(E(s,C(s,p)))\Rightarrow I(E(s,C(s,p))).
-\]
+```math
+\mathop{\mathrm{Accept}}\nolimits(E(s,C(s,p)))\Rightarrow I(E(s,C(s,p))).
+```
 
 在这一条件下，新模型调用不会改善 plan 信息。只有 compiler 不可用、plan 不完整，
 或需要模型在语义不同的 fallback 之间选择时，才有必要再次调用模型。
@@ -523,20 +521,20 @@ relocation 是原因。
 
 ## 9. 命题七：局部修改具有可计算的失效传播锥
 
-设第 \(j\) 条约束只依赖变量集合 \(N(j)\)。patch 修改集合为 \(\Delta_p\)。需要重新检查的、可能受影响的约束集合为：
+设第 $j$ 条约束只依赖变量集合 $N(j)$。patch 修改集合为 $\Delta_p$。需要重新检查的、可能受影响的约束集合为：
 
-\[
+```math
 A(\Delta_p)
 =\{j:N(j)\cap\Delta_p\neq\varnothing\}.
-\]
+```
 
-如果修改前所有约束有效，则 \(j\notin A(\Delta_p)\) 的约束读取值完全未变，因此仍然有效。
+如果修改前所有约束有效，则 $j\notin A(\Delta_p)$ 的约束读取值完全未变，因此仍然有效。
 
-若每个变量最多参与 \(d\) 条约束，则：
+若每个变量最多参与 $d$ 条约束，则：
 
-\[
+```math
 |A(\Delta_p)|\le k d.
-\]
+```
 
 这给出增量验证的上界。局部 patch 不必每次都重新执行所有局部检查，但在以下情况仍需要全局验证：
 
@@ -558,26 +556,26 @@ A(\Delta_p)
 
 ## 10. 命题八：无冲突 patch 可以安全并行
 
-对 patch \(p_i,p_j\)，令 \(R_i,W_i\) 分别为读集合和写集合，并假定这些集合完整覆盖前置条件、地址重映射与副作用。若：
+对 patch $p_i,p_j$，令 $R_i,W_i$ 分别为读集合和写集合，并假定这些集合完整覆盖前置条件、地址重映射与副作用。若：
 
-\[
+```math
 W_i\cap W_j=\varnothing,
-\]
+```
 
-\[
+```math
 W_i\cap R_j=\varnothing,
-\]
+```
 
-\[
+```math
 W_j\cap R_i=\varnothing,
-\]
+```
 
 且没有未声明副作用，则二者无读写冲突，并满足：
 
-\[
+```math
 E(E(x,p_i),p_j)
 =E(E(x,p_j),p_i).
-\]
+```
 
 即两个 patch 可交换，可以并行产生并以任意顺序应用。
 
@@ -607,11 +605,11 @@ edge = read/write conflict or shared invariant
 
 令状态转移为：
 
-\[
+```math
 s_{t+1}=T(s_t,a_t),
-\]
+```
 
-其中 \(T\) 确定，且每个动作带唯一 `idempotency_key`。
+其中 $`T`$ 确定，且每个动作带唯一 `idempotency_key`。
 
 如果：
 
@@ -650,23 +648,23 @@ s_{t+1}=T(s_t,a_t),
 
 ## 12. 命题十：结构化输出只能保证它约束到的层
 
-如果使用 grammar-constrained decoding、类型化 tool call 或严格 schema，并且 decoder/validator 实现正确，则可以保证输出属于语法语言 \(L_{\text{schema}}\)：
+如果使用 grammar-constrained decoding、类型化 tool call 或严格 schema，并且 decoder/validator 实现正确，则可以保证输出属于语法语言 $L_{\text{schema}}$：
 
-\[
+```math
 y\in L_{\text{schema}}.
-\]
+```
 
 但语法合法不蕴含：
 
-\[
+```math
 I(y)=\text{true},
-\]
+```
 
 更不蕴含：
 
-\[
+```math
 U(y)\text{ is high}.
-\]
+```
 
 例如，合法 JSON 仍可能包含错误文件路径、无效修改位置、不支持的事实或危险参数。
 
@@ -695,8 +693,8 @@ tool calling 解决的是接口语法与可解析性，不是完整语义正确�
 | P0：候选审计优势 | T + S + E | 给定候选可计算 residual；v4 audit−rewrite 组合差异巨大 | 操作、候选信息和输出各自贡献；跨配置复现 | candidate→verifier→failure witness→repair，而非 candidate→全文重写 |
 | P0：预算恢复 | E | v4 的独立 300/900/1800 秒为 0.241/0.370/0.463 | 托管服务机制、更多长度/配置；不是 survival curve | 把预算作为路由变量，不硬编码“多等必恢复” |
 | P0：自然顺序优于逆序 | T + S；E 未裁决 | 拓扑序消除未决前驱；逆序需要额外状态或延迟承诺 | v4 受 ceiling 限制；需更高 dependency frontier | dependency-aware scheduler；执行与展示分离 |
-| P1：edit-density crossover | T + E | patch 与 rewrite 存在由地址/载荷开销决定的条件阈值 | V5 扫描了 6 个 \(N,k\) cell，但 infer-plan floor 与缺失的实际 payload telemetry 使阈值仍未识别 | patch / region rewrite / full rewrite 三路路由 |
-| P1：verifier–patch loop | T + E | 严格良基下降保证终止和不接受回退 | 能否到 \(V=0\)、需要多少轮、是否代理过拟合 | sandbox、rollback、stall escalation |
+| P1：edit-density crossover | T + E | patch 与 rewrite 存在由地址/载荷开销决定的条件阈值 | V5 扫描了 6 个 $N,k$ cell，但 infer-plan floor 与缺失的实际 payload telemetry 使阈值仍未识别 | patch / region rewrite / full rewrite 三路路由 |
+| P1：verifier–patch loop | T + E | 严格良基下降保证终止和不接受回退 | 能否到 $V=0$、需要多少轮、是否代理过拟合 | sandbox、rollback、stall escalation |
 | P1：模型规模或 reasoning budget | E | 无法从接口理论推出 | 不同模型、推理模式和预算的效应 | 只做可配置路由与测量 |
 | P2：真实领域迁移 | E | 只能在每个领域内部证明 executor / verifier 的局部性质 | XOR 结论能否迁移到代码、文档、数据库 | 先用硬约束领域，逐域建立 verifier contract |
 | P2：结构化输出 | T + E | 受约束 decoder 可保证语法/schema | 语义正确率、可用性与成本 | typed actions + semantic verifier |
@@ -710,7 +708,7 @@ tool calling 解决的是接口语法与可解析性，不是完整语义正确�
 
 ### 14.1 局部失效传播锥
 
-**理论核：** 修改只会使依赖相交的约束失效；有界依赖下增量验证规模至多随 \(kd\) 增长。  
+**理论核：** 修改只会使依赖相交的约束失效；有界依赖下增量验证规模至多随 $kd$ 增长。  
 **要测：** 真实代码、配置和文档依赖图能否被准确抽取；漏边率是多少。  
 **工程价值：** 大幅降低每轮 patch 的测试与审计成本。
 
@@ -800,15 +798,15 @@ flowchart LR
 
 具体阈值不应由理论拍脑袋设定。可以最小化：
 
-\[
+```math
 J(a)=
 \lambda_f P(\text{failure}\mid a)
 +\lambda_t T(a)
 +\lambda_c C(a)
 +\lambda_r R(a),
-\]
+```
 
-其中 \(a\) 是 patch、局部重写、完整重写或升级；\(T\) 为时间，\(C\) 为调用成本，\(R\) 为回归风险。
+其中 $a$ 是 patch、局部重写、完整重写或升级；$`T`$ 为时间，$`C`$ 为调用成本，$`R`$ 为回归风险。
 
 ---
 
@@ -937,7 +935,7 @@ order-only false reject 时承诺大幅部署收益。
 
 Artifact-v11 又在 production-shaped 合成 JSON 上加入同 host relocation 配对。
 Relocation × (semantic ID−physical index) interaction 为 +21.875 个百分点并通过
-预注册门，但 7 个差异全部发生在 \(N=48\)，\(N=24\) 全部 ceiling。这为理论上的
+预注册门，但 7 个差异全部发生在 $N=48$，$`N=24`$ 全部 ceiling。这为理论上的
 不变性规则提供了直接经验支持——模型命名语义对象，runtime 解析当前物理地址——同时
 表明实际收益取决于规模和 workload。V11-B 的 Patch/Rewrite 四个单元均为 32/32，
 不能建立 Patch 可靠性优势；但 Patch 的描述性成本明显更低，因此可靠性路由和成本路由
@@ -957,11 +955,11 @@ Exact 契约。正式 96/96、pilot 12/12、offline 768/768，false accept/rejec
 四臂均为 24/24，预注册交互为 0.0，因 ceiling 规则 **未裁决**。
 V13 作为方法开发 artifact 归档，不进入 V1–V12 + V14–V17 证据合成。
 
-Artifact-v14 将时序修正为真正的 post-compile drift：provider 只见 \(S_0\)，runtime
-封存 payload 后才注入 \(S_1\)。Compatible Exact 24/24 被判 stale 并恢复；
+Artifact-v14 将时序修正为真正的 post-compile drift：provider 只见 $S_0$，runtime
+封存 payload 后才注入 $S_1$。Compatible Exact 24/24 被判 stale 并恢复；
 Compatible Intent 24/24 一次 commit；unsafe commit=0。配对 log-token interaction
 为 0.176459（约 +19.3%），CI [0.168331, 0.184575]，exact
-\(p=1.1921\times10^{-7}\)，但未达到预注册 \(\log(1.20)\) 最小效应。工程含义：
+$p=1.1921\times10^{-7}$，但未达到预注册 $\log(1.20)$ 最小效应。工程含义：
 将 payload seal、执行时状态重验、typed stale recovery 与 governed commit 作为安全
 substrate；保留 Intent 和 Exact+recovery 双路径。成本门未过不等于两者等价、恢复
 无开销或 Intent 普遍优越。
@@ -976,13 +974,13 @@ governor 选择 wait、rebase once、replan、escalate 或 stop；不能据此�
 通用冲突能力。
 
 Artifact-v16 匹配三个 conflict 臂的第二 provider turn。Generic Retry 与 Reread
-Only 仍停在锁定 \(S_1\)，均为 0/24；runtime Unlock + Rebase 进入 \(S_2\)，为
+Only 仍停在锁定 $S_1$，均为 0/24；runtime Unlock + Rebase 进入 $`S_2`$，为
 24/24。这在经验上支持可由程序语义推出的规则：如果权威状态或权限未改变、precondition
 未重验，额外一次模型调用不构成有效恢复。它没有识别纯信息效应，因为只有 Rebase
-得到 unlock、\(S_2\) 和 target slice。冻结 manifest 还残留陈旧 Pilot `stop_if`，
+得到 unlock、$`S_2`$ 和 target slice。冻结 manifest 还残留陈旧 Pilot `stop_if`，
 因此机器主检验为 `passed`，整体证据分享为 `share_with_caveats`。
 
-Artifact-v17 固定 unlock authority 与权威 \(S_2\)，只改变恢复信息。Module A 四臂
+Artifact-v17 固定 unlock authority 与权威 $`S_2`$，只改变恢复信息。Module A 四臂
 均为 24/24，并发出完全相同的绝对 operations，因此预注册 target-slice superiority
 claim 在 ceiling 下未通过；这不等于总体等价。完整旧态比 receipt-only 多 74.9%
 中位 token。不可解除锁下 typed Escalate 为 24/24 合法 non-commit 终态，而

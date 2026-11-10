@@ -35,44 +35,44 @@
 
 设一个任务的最终产物由一串顺序决策组成：
 
-\[
+```math
 z=(d_1,d_2,\ldots,d_T)
-\]
+```
 
-系统在第 \(t\) 步只能根据当前前缀选择下一个局部决策：
+系统在第 $t$ 步只能根据当前前缀选择下一个局部决策：
 
-\[
-d_t \sim \pi(d_t\mid d_{<t},x)
-\]
+```math
+d_t \sim \pi(d_t\mid d_{< t},x)
+```
 
 但任务价值评价的是完整聚合结果：
 
-\[
+```math
 V(z)=V(d_1,d_2,\ldots,d_T)
-\]
+```
 
 令局部决策器当前使用的代理评分为：
 
-\[
-q_t(d\mid d_{<t},x)
-\]
+```math
+q_t(d\mid d_{< t},x)
+```
 
 而某个局部决策在最佳后续补全下能够达到的真实全局价值为：
 
-\[
+```math
 Q_t^*(d)
 =
 \sup_{d_{t+1:T}}
-V(d_{<t},d,d_{t+1:T})
-\]
+V(d_{< t},d,d_{t+1:T})
+```
 
 当局部排序与全局 value-to-go 排序不一致时：
 
-\[
+```math
 \arg\max_d q_t(d)
 \neq
 \arg\max_d Q_t^*(d)
-\]
+```
 
 就出现了聚合失配。
 
@@ -82,25 +82,25 @@ V(d_{<t},d,d_{t+1:T})
 
 聚合失配必须相对于被部署系统测量。令 `μ_eval` 是跨系统固定的评估历史分布，在预先固定的评估决策集 `C_eval(h_t)` 上定义
 
-\[
+```math
 \hat d_t=\arg\max_{d\in C_{\mathrm{eval}}(h_t)}q_t(d\mid h_t),
 \qquad
 d_t^\star=\arg\max_{d\in C_{\mathrm{eval}}(h_t)}Q_t^\star(h_t,d).
-\]
+```
 
 则可报告 argmax 不一致率
 
-\[
+```math
 e_{\mathrm{agg}}=\Pr_{h_t\sim\mu_{\mathrm{eval}}}[\hat d_t\ne d_t^\star]
-\]
+```
 
 以及全局补全价值后悔
 
-\[
-\operatorname{Reg}_{\mathrm{agg}}=
+```math
+\mathop{\mathrm{Reg}}\nolimits_{\mathrm{agg}}=
 \mathbb E_{h_t\sim\mu_{\mathrm{eval}}}
 \left[Q_t^\star(h_t,d_t^\star)-Q_t^\star(h_t,\hat d_t)\right].
-\]
+```
 
 `μ_eval`、`C_eval` 与 tie-breaking 都应在比较前固定。`C_eval` 若只包含两套系统都已获得的候选，主要隔离排序与提交质量；若使用完整可行集，则量中还会包含支持与搜索不足，必须明确标注。若另用系统自己的 `μ_Π`，测得的是 on-policy 聚合负担，应单独报告。GF(2) 一类任务可以具有很低的任务局部可分解性，但在完整约束被外部化后呈现接近零的系统聚合后悔。
 
@@ -123,35 +123,35 @@ e_{\mathrm{agg}}=\Pr_{h_t\sim\mu_{\mathrm{eval}}}[\hat d_t\ne d_t^\star]
 
 对一次 LLM 调用，输出为：
 
-\[
+```math
 y=(y_1,y_2,\ldots,y_T)
-\]
+```
 
 模型逐 token 生成：
 
-\[
-y_t\sim p_\theta(y_t\mid x,y_{<t})
-\]
+```math
+y_t\sim p_\theta(y_t\mid x,y_{< t})
+```
 
 但任务评价的是完整序列：
 
-\[
+```math
 J(y_1,\ldots,y_T)
-\]
+```
 
 这里不能把自回归条件概率本身当成局部性假设。链式法则
 
-\[
-p_\theta(y\mid x)=\prod_t p_\theta(y_t\mid x,y_{<t})
-\]
+```math
+p_\theta(y\mid x)=\prod_t p_\theta(y_t\mid x,y_{< t})
+```
 
 可以精确表示任意联合分布，条件项也可以编码全局约束。单次推理级聚合失配比较的是部署中的局部代理 $q_t$ 与全局补全价值：
 
-\[
-Q_t^\star(d)=\sup_{y_{>t}}J(y_{<t},d,y_{>t}),
+```math
+Q_t^\star(d)=\sup_{y_{>t}}J(y_{< t},d,y_{>t}),
 \qquad
 \arg\max_d q_t(d)\ne\arg\max_d Q_t^\star(d).
-\]
+```
 
 $q_t$ 可以包含近似条件概率、贪心或截断解码得分、有限搜索启发式与当前控制状态。只有在这种排序偏离与前缀锁定同时存在时，当前局部选择才构成聚合失配。
 
@@ -203,11 +203,11 @@ Reasoning 的价值不只是“输出更多 token”，而是在最终回答生�
 
 Plan 的作用是把完整任务价值压缩成后续局部 token 可以持续引用的控制结构：
 
-\[
+```math
 \text{Global Value}
 \rightarrow
 \text{Local Generation Constraints}
-\]
+```
 
 对故事、方案、代码、分析等聚合任务，优秀产物往往取决于多个跨段落、跨模块、跨阶段结构的共同成立。先建立这些结构，可以减少生成过程中被局部语言概率带偏。
 
@@ -293,11 +293,11 @@ Generate multiple complete candidates
 
 Patch 的结构优势在于：
 
-\[
+```math
 \text{保留已验证结构}
 +
 \text{只重新搜索失配局部}
-\]
+```
 
 因此对于稀疏修改任务，应优先：
 
@@ -347,33 +347,33 @@ Abstain 本质上是为搜索空间加入一个合法的 null action，避免系
 
 Agent 的完整产物不是单段文本，而是一条与环境交互的轨迹：
 
-\[
+```math
 \tau=(s_0,a_0,o_1,s_1,a_1,o_2,\ldots,s_T)
-\]
+```
 
 其中：
 
-- \(s_t\)：外部状态；
-- \(a_t\)：Agent 当前动作；
-- \(o_{t+1}\)：工具或环境反馈；
-- \(U(\tau)\)：完整任务轨迹的最终价值。
+- $s_t$：外部状态；
+- $a_t$：Agent 当前动作；
+- $o_{t+1}$：工具或环境反馈；
+- $U(\tau)$：完整任务轨迹的最终价值。
 
-Agent 在第 \(t\) 步必须依据当前历史选择一个 action：
+Agent 在第 $t$ 步必须依据当前历史选择一个 action：
 
-\[
+```math
 a_t\sim\pi(a_t\mid h_t)
-\]
+```
 
 但真正最优的当前动作取决于其后全部可能状态转移与未来动作：
 
-\[
+```math
 Q^*(h_t,a)
 =
 \sup_{\pi_{t+1:T}}
 \mathbb E[U(\tau)\mid h_t,a]
-\]
+```
 
-现实 Agent 无法精确求得 \(Q^*\)，通常只能依赖当前可见代理量：
+现实 Agent 无法精确求得 $`Q^*`$，通常只能依赖当前可见代理量：
 
 - 这一步是否完成；
 - 当前测试是否通过；
@@ -383,11 +383,11 @@ Q^*(h_t,a)
 
 于是可能出现：
 
-\[
+```math
 \arg\max_a \hat q_{\text{local}}(a\mid h_t)
 \neq
 \arg\max_a Q^*(h_t,a)
-\]
+```
 
 这就是 **Agent 轨迹级聚合失配**。
 
@@ -411,19 +411,19 @@ Q^*(h_t,a)
 
 可以定义当前历史下的最高可达价值：
 
-\[
+```math
 V_{\text{reachable}}(h_t)
 =
 \sup_{\tau\in\mathcal R(h_t)}U(\tau)
-\]
+```
 
 某个局部上合理的动作，可能大幅缩小未来可达集合：
 
-\[
+```math
 V_{\text{reachable}}(h_{t+1})
 \ll
 V_{\text{reachable}}(h_t)
-\]
+```
 
 Agent 级对抗聚合失配的核心，因此不仅是提高当前动作质量，还包括：
 
@@ -934,11 +934,11 @@ D1：Artifact + Patch
 
 最重要的比较不是“短回答 vs 多阶段 Agent”，而是：
 
-\[
+```math
 \text{外部结构}
 \quad vs \quad
 \text{等预算 native reasoning}
-\]
+```
 
 只有前者仍然提高任务价值，才能证明结构增益，而不是单纯更多计算。
 
@@ -986,7 +986,7 @@ Agent 对抗轨迹级聚合失配的目标不应只看当前 action 是否成功
 
 > 当前动作之后，高价值终局是否仍然可达。
 
-虽然真实 \(V_{\text{reachable}}\) 很难直接观测，但可以用以下代理量测量：
+虽然真实 $V_{\text{reachable}}$ 很难直接观测，但可以用以下代理量测量：
 
 - 是否破坏关键不变量；
 - 是否关闭其他候选路径；

@@ -65,7 +65,7 @@ V1 在三个部署配置上观察到周期闭合 B 0/50，而给定 syndrome 的
 1,596 条确认性结果和 540 条同期 C+B follow-up 修复了 V1 的长度 floor、运行数和同期
 对照问题。
 
-在 15 个 \(N\in\{32,48,68\}\) 匹配实例上：
+在 15 个 $`N\in\{32,48,68\}`$ 匹配实例上：
 
 | 对比 | DeepSeek | MiniMax |
 |---|---:|---:|
@@ -114,7 +114,7 @@ V10 将这个诊断改为 semantic-set + runtime canonicalization。离线实现
 ## 6. V11–V12：地址漂移与交付尺度
 
 V11 的 relocation×(ID−INDEX) interaction 为 +0.21875 并通过；7 个差异全部来自
-\(N=48\) relocated-index precondition failure。Patch/Rewrite 四臂均 32/32，
+$N=48$ relocated-index precondition failure。Patch/Rewrite 四臂均 32/32，
 可靠性 ceiling，但 Patch 的 tokens、wall time 和 response bytes 明显更低。
 
 V12 的 high−low drift-dose interaction 为 −0.0417，未通过；ID 在 low/high 都为
@@ -130,13 +130,13 @@ formal raw events 1,416 条，endpoint rebuild mismatch=0。
 Compatible Exact 24/24 首次返回 `STALE_OLD_VALUE`，随后 24/24 located recovery；
 Compatible Intent 24/24 一次 commit，四臂最终均为 24/24。Primary：
 
-\[
+```math
 \Delta_{A1}=0.176459,\quad
 95\%\ CI=[0.168331,0.184575],\quad
 p_{\mathrm{exact}}=1.1921\times10^{-7}.
-\]
+```
 
-因为 \(0.176459<\log(1.20)=0.182322\)，V14-A1 为
+因为 $0.176459<\log(1.20)=0.182322$，V14-A1 为
 `failed_pre_registered_gate`。机制与安全语义成立，冻结的 +20% 成本承诺未通过。
 
 详见 [V14 双语报告](./aggregation-mismatch-v14-post-compile-drift-recovery.zh-CN.md)。
@@ -187,7 +187,7 @@ prompt。
 
 ## 11. 跨版本使用规则
 
-- 不把不同 artifact 的 run 数、成功率或 \(p\) 值合并；
+- 不把不同 artifact 的 run 数、成功率或 $p$ 值合并；
 - 不把 secondary/exploratory 升格为 primary；
 - 不把 floor/ceiling 写成失败、等价或无效；
 - 不把 failed minimum-effect gate 写成零效应；

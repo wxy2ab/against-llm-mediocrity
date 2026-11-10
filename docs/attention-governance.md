@@ -74,17 +74,17 @@ Attention governance owns only the segment concerned with information presentati
 
 ### 2.1 Conditional renormalization
 
-In standard attention, the weight of one query on token \(j\) can be sketched as [1]:
+In standard attention, the weight of one query on token $j$ can be sketched as [1]:
 
-\[
+```math
 \alpha_j=\frac{e^{z_j}}{\sum_{k} e^{z_k}}.
-\]
+```
 
-If only a set \(R\) is retained, and the logits \(z_j\) of retained items are assumed unchanged, the new weights are:
+If only a set $R$ is retained, and the logits $z_j$ of retained items are assumed unchanged, the new weights are:
 
-\[
+```math
 \alpha'_j=\frac{\alpha_j}{\sum_{k\in R}\alpha_k},\qquad j\in R.
-\]
+```
 
 Under this very limited condition, retained items do receive higher normalized weight. But the derivation cannot be extrapolated directly to real truncation:
 
@@ -110,13 +110,13 @@ These studies provide evidence for position sensitivity, distraction, context re
 
 ### 2.3 A necessary condition: the evidence packet must not collapse different correct answers into one input
 
-Let the manuscript state be \(S\), the audit question \(q\), and the evidence compiler output:
+Let the manuscript state be $S$, the audit question $q$, and the evidence compiler output:
 
-\[
+```math
 E=g(S,q).
-\]
+```
 
-If two manuscripts \(S_1,S_2\) are compressed into exactly the same evidence packet \(E\), but their correct judgments differ, then no system that sees only \(E\) can be correct on both. This is not a model-capability problem; it is an information-condition problem.
+If two manuscripts $S_1,S_2$ are compressed into exactly the same evidence packet $E$, but their correct judgments differ, then no system that sees only $E$ can be correct on both. This is not a model-capability problem; it is an information-condition problem.
 
 Several implementation requirements follow directly:
 
@@ -159,11 +159,11 @@ For prose, pacing, and emotional judgment, preserve complete narrative passages.
 
 Write the overall requirement as:
 
-\[
+```math
 \Phi(S)=\bigwedge_{a\in A}\phi_a(S_{V_a}),
-\]
+```
 
-where \(\phi_a\) is one requirement and \(V_a\) is the full set of variables or spans needed to judge it. The formula is not an instruction to chop the task mechanically. It forces two questions: **which material does each requirement depend on, and which requirements share the same variables?**
+where $\phi_a$ is one requirement and $`V_a`$ is the full set of variables or spans needed to judge it. The formula is not an instruction to chop the task mechanically. It forces two questions: **which material does each requirement depend on, and which requirements share the same variables?**
 
 For example:
 
@@ -177,29 +177,29 @@ The scope of an interface audit should therefore be determined by dependency, no
 
 A common decomposition error is to promote a conditional conclusion into an unconditional fact. Two branches produce:
 
-\[
+```math
 A\Rightarrow P,\qquad \neg A\Rightarrow Q.
-\]
+```
 
-At merge time, \(P\) and \(Q\) cannot both be inserted into the global fact set. The correct move is to preserve each conclusion's premise, scope of application, and open obligations. **Preserve interface conditions when decomposing; check scope when merging.**
+At merge time, $P$ and $Q$ cannot both be inserted into the global fact set. The correct move is to preserve each conclusion's premise, scope of application, and open obligations. **Preserve interface conditions when decomposing; check scope when merging.**
 
 ### 3.3 Principle three: a conditional non-regression guarantee for registered hard constraints
 
 Let:
 
-- \(H_{\text{pass}}\): the set of hard constraints that already hold before modification;
-- \(W\): the set of positions this modification is allowed to touch.
+- $`H_{\text{pass}}`$: the set of hard constraints that already hold before modification;
+- $W$: the set of positions this modification is allowed to touch.
 
 Suppose all of the following hold:
 
 1. The dependency scope of every hard constraint is completely recorded.
-2. The candidate modifies only positions in \(W\).
-3. Every already-satisfied constraint that depends on \(W\) passes again on the candidate state.
+2. The candidate modifies only positions in $W$.
+3. Every already-satisfied constraint that depends on $W$ passes again on the candidate state.
 4. The committed state is exactly the candidate that was validated.
 
-Then every constraint in \(H_{\text{pass}}\) still holds after commit.
+Then every constraint in $`H_{\text{pass}}`$ still holds after commit.
 
-The reason is direct: constraints that depend on \(W\) have been revalidated; constraints that do not depend on \(W\) have all their inputs unchanged. The argument relies on engineering assumptions: constraint checking is deterministic or at least repeatable, dependency records are complete, the modification does not exceed its scope, and commit does not substitute a different candidate.
+The reason is direct: constraints that depend on $W$ have been revalidated; constraints that do not depend on $W$ have all their inputs unchanged. The argument relies on engineering assumptions: constraint checking is deterministic or at least repeatable, dependency records are complete, the modification does not exceed its scope, and commit does not substitute a different candidate.
 
 The scope of the guarantee must be stated clearly:
 
@@ -246,9 +246,9 @@ Module, mechanism, operating condition, and interface are four useful ways of lo
 
 One operational view-value metric is:
 
-\[
+```math
 \mathrm{IV}_v=\frac{\text{new confirmed defects found by view }v}{\text{incremental cost of view }v},
-\]
+```
 
 where duplicate defects count once and false positives plus review cost enter the denominator. The metric is imperfect, but it is closer to an engineering judgment than "we have four views."
 
@@ -263,11 +263,11 @@ A simple counterexample is enough:
 - Any two mechanisms together consume 8 and pass.
 - All three together consume 12 and violate the constraint.
 
-A \(K\times K\) pairwise interaction matrix can be retained, but it is not enough. The system must also check joint conditions involving three or more parties and global aggregate constraints.
+A $`K\times K`$ pairwise interaction matrix can be retained, but it is not enough. The system must also check joint conditions involving three or more parties and global aggregate constraints.
 
 ### 4.4 Organize dependencies with a constraint hypergraph
 
-Treat paragraphs, scenes, variables, or states as nodes, and each requirement \(\phi_a\) as a hyperedge over its dependency set \(V_a\). The result is a **constraint hypergraph**:
+Treat paragraphs, scenes, variables, or states as nodes, and each requirement $\phi_a$ as a hyperedge over its dependency set $`V_a`$. The result is a **constraint hypergraph**:
 
 - A binary interface is a hyperedge of size 2.
 - A three-way resource constraint is a hyperedge of size 3.
@@ -357,7 +357,7 @@ The audit stage permits three outcomes:
 
 This is the easiest step to get wrong. Distinguish three sets:
 
-- **Write set \(W\):** the positions this round is actually allowed to modify.
+- **Write set $W$:** the positions this round is actually allowed to modify.
 - **Read scope:** the material needed to understand and repair the problem.
 - **Revalidation scope:** constraints and spans that may be affected by this modification.
 
@@ -417,9 +417,9 @@ Verification cannot be replaced by thinking again. Without external feedback, re
 
 Each check outputs:
 
-\[
+```math
 \mathrm{PASS},\quad \mathrm{FAIL},\quad \mathrm{UNKNOWN}.
-\]
+```
 
 `UNKNOWN` does not count as a pass. An unimplemented semantic check must explicitly return `UNKNOWN`; a default pass would hide a capability gap.
 
@@ -454,19 +454,19 @@ Unfinished work and correct escalation must be preserved, not hidden behind a fi
 
 Write the information that must remain valid for a correct judgment at a given step as:
 
-\[
+```math
 \Omega_t=\langle g_t,E_t,s_t,A_t,C_t,O_t,\epsilon_t\rangle,
-\]
+```
 
 where:
 
-- \(g_t\): current goal;
-- \(E_t\): necessary evidence;
-- \(s_t\): current state;
-- \(A_t\): active assumptions and their scopes;
-- \(C_t\): relevant constraints;
-- \(O_t\): open obligations;
-- \(\epsilon_t\): acceptance conditions.
+- $g_t$: current goal;
+- $E_t$: necessary evidence;
+- $s_t$: current state;
+- $A_t$: active assumptions and their scopes;
+- $C_t$: relevant constraints;
+- $O_t$: open obligations;
+- $\epsilon_t$: acceptance conditions.
 
 This is an explicit engineering representation, not a direct measurement of the model's internal attention capacity. Its purpose is to let the system check whether the information needed at this step is present, which assumptions are still valid, which obligations remain open, and whether the next move should acquire evidence, switch branches, change method, or commit.
 
@@ -557,7 +557,7 @@ Open-ended tasks require particular caution when freezing conditions. Turning a 
 
 Slicing reduces the size of a single context. Total cost also includes indexing, extraction, repeated loading, adjudication, review, and failed retries. The cost ledger should therefore cover:
 
-\[
+```math
 C_{\text{total}}
 =
 C_{\text{index}}
@@ -567,9 +567,9 @@ C_{\text{index}}
 +C_{\text{verify}}
 +C_{\text{retry}}
 +C_{\text{coord}}.
-\]
+```
 
-Here \(C_{\text{coord}}\) includes coordination, human adjudication, and runtime overhead. Also record end-to-end time, call count, tokens, and cost, rather than only the length of a single context.
+Here $`C_{\text{coord}}`$ includes coordination, human adjudication, and runtime overhead. Also record end-to-end time, call count, tokens, and cost, rather than only the length of a single context.
 
 ### 7.2 Three scheduling rules
 
@@ -583,7 +583,7 @@ Third, **when evidence is missing, acquire evidence first**. Asking the same inc
 
 An engineering decision rule can be written as:
 
-\[
+```math
 \mathrm{NV}
 =
 \mathbb{E}[\Delta L]
@@ -593,9 +593,9 @@ C_{\text{extra}}
 C_{\text{coord}}
 -
 \mathbb{E}[L_{\text{new}}],
-\]
+```
 
-where \(\Delta L\) is the expected reduction in loss from errors, \(C_{\text{extra}}\) is additional computation, \(C_{\text{coord}}\) is coordination cost, and \(L_{\text{new}}\) is the loss from new errors introduced by governance itself.
+where $\Delta L$ is the expected reduction in loss from errors, $`C_{\text{extra}}`$ is additional computation, $`C_{\text{coord}}`$ is coordination cost, and $`L_{\text{new}}`$ is the loss from new errors introduced by governance itself.
 
 This is a decision criterion, not a precise benefit estimator for the model to fill in by intuition. Actual judgment should come from the task set, historical errors, and development-set calibration. It corresponds to metareasoning: deciding not only how to solve the problem but what computation is worth performing next. Russell and Wefald treat search steps themselves as decisions, selected by their expected value in improving the final decision [11].
 

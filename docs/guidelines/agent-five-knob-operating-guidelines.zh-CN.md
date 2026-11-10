@@ -498,14 +498,14 @@ V5/V6 因过程事件不足而限制了机制分析；V9–V12 已能从事件�
 
 “单步预算够不够”不足以决定策略。Router 至少应优化：
 
-\[
+```math
 U =
 V_sP(\text{exact success})
 - C_t(\text{tokens})
 - C_l(\text{latency})
 - C_r(\text{commit risk})
 - C_h(\text{human escalation}).
-\]
+```
 
 每个可选机制应分别记录科学证据、实现正确性、成本与外部效度，不能用一个
 `experiment_passed` 同时控制论文措辞和生产默认：

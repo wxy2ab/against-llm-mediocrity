@@ -124,18 +124,18 @@ y_i <-> y_j
 
 普通聚合失配可以写成：
 
-\[
+```math
 Y = A(y_1,\ldots,y_n)
-\]
+```
 
 问题在于局部合理的 `y_i` 经组合后未能保持全局价值。
 
 潜在结构条件聚合则更准确地写成：
 
-\[
+```math
 y_i = R_i(H, D_i, C_i), \qquad
 Y = A(y_1,\ldots,y_n)
-\]
+```
 
 其中：
 
@@ -147,21 +147,21 @@ Y = A(y_1,\ldots,y_n)
 
 因此，真实价值不只要求：
 
-\[
-\operatorname{Consistent}(y_1,\ldots,y_n)
-\]
+```math
+\mathop{\mathrm{Consistent}}\nolimits(y_1,\ldots,y_n)
+```
 
 还要求：
 
-\[
-\operatorname{Faithful}(Y,H)
-\]
+```math
+\mathop{\mathrm{Faithful}}\nolimits(Y,H)
+```
 
 同时又要求：
 
-\[
-\operatorname{ExplicitLeakage}(H,Y)
-\]
+```math
+\mathop{\mathrm{ExplicitLeakage}}\nolimits(H,Y)
+```
 
 不能过高。
 

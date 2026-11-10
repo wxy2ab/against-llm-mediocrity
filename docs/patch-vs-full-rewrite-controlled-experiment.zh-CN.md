@@ -15,7 +15,7 @@
 
 > 对稀疏单点修复，在实例、候选、错误位置、模型配置和预算匹配的条件下，让模型提交严格 patch 并由确定性执行器应用，是否比要求模型重新输出完整修复对象更可靠？
 
-在 160 个全新 holdout 实例、四档长度 \(N\in\{96,145,240,384\}\)、每个条件三次重复和 300 秒预算下：
+在 160 个全新 holdout 实例、四档长度 $`N\in\{96,145,240,384\}`$、每个条件三次重复和 300 秒预算下：
 
 | DeepSeek-V4-Flash | Patch | 完整重写 | Patch − rewrite |
 |---|---:|---:|---:|
@@ -90,7 +90,7 @@ artifact-v3 的核心贡献，是用配对条件把 **plan inference** 与 **rep
 | ID | 条件 | 模型获得的信息 | 必须提交的结果 | 回答的问题 |
 |---|---|---|---|---|
 | I-P | infer patch | 规则 + 单错候选 | 严格单项 patch JSON | 端到端 patch 修复 |
-| I-R | infer full rewrite | 与 I-P 相同 | 完整 \(N\)-bit 修复序列 | 端到端完整重写 |
+| I-R | infer full rewrite | 与 I-P 相同 | 完整 $N$-bit 修复序列 | 端到端完整重写 |
 | O-P | oracle-plan patch | 候选 + 权威 edit plan | 严格 patch JSON | 已知计划后的 patch 交付 |
 | O-R | oracle-plan full rewrite | 与 O-P 相同的 edit plan | 完整修复序列 | 已知计划后的完整交付 |
 | I-PR | patch then rewrite | 与 I-P/I-R 相同 | patch + 完整修复序列 | 同次回答内的交付分解 |
@@ -98,12 +98,12 @@ artifact-v3 的核心贡献，是用配对条件把 **plan inference** 与 **rep
 
 主比较是：
 
-\[
+```math
 \Delta =
 P(\mathrm{system\_exact\_success}\mid I\text{-}P)
 -
 P(\mathrm{system\_exact\_success}\mid I\text{-}R).
-\]
+```
 
 输出长度与序列化成本是接口处理的一部分，不是需要消除的混淆。研究问题本来就是：**把最终提交面缩小为 patch 是否改善系统级交付。**
 
@@ -114,7 +114,7 @@ P(\mathrm{system\_exact\_success}\mid I\text{-}R).
 ### 3.1 实例与配置
 
 - 160 个全新正式 holdout，未进入 v1/v2；
-- \(N\in\{96,145,240,384\}\)，每档 40 个实例；
+- $`N\in\{96,145,240,384\}`$，每档 40 个实例；
 - 每个条件 3 次重复；
 - 中文提示；
 - temperature=0，top_p=1，max_tokens=64000；
@@ -174,16 +174,16 @@ timeout、max-token、format-invalid、returned-wrong、empty-visible 和 transp
 
 sign-flip 使用 100,000 次 Monte Carlo，未观察到同等或更极端的随机翻转，因此报告为：
 
-\[
+```math
 p<10^{-5}
 \quad\text{（Monte Carlo 分辨率）}.
-\]
+```
 
-不能写成精确的 \(p=0\)。
+不能写成精确的 $p=0$。
 
 ### 4.1 长度分层
 
-| \(N\) | I-P patch | I-R full rewrite | Run-level 差 |
+| $N$ | I-P patch | I-R full rewrite | Run-level 差 |
 |---:|---:|---:|---:|
 | 96 | 104/120（86.7%） | 92/120（76.7%） | +10.0 pp |
 | 145 | 85/120（70.8%） | 27/120（22.5%） | +48.3 pp |
@@ -192,9 +192,9 @@ p<10^{-5}
 
 三个边界非常重要：
 
-1. 四档长度都由冻结设计共同定义，不能只挑差异最大的 \(N=145\)；
+1. 四档长度都由冻结设计共同定义，不能只挑差异最大的 $N=145$；
 2. patch 的优势不是随长度单调增加；
-3. patch 没有消除规模困难，\(N=384\) 时自身也只有 9.2%。
+3. patch 没有消除规模困难，$`N=384`$ 时自身也只有 9.2%。
 
 更准确的解释是：patch 降低了交付负担，但没有消除 plan inference、全局计算与有限预算共同造成的困难。
 
@@ -234,7 +234,7 @@ O-P 与 O-R 获得完全相同的权威 edit plan，只改变最终交付物：
 | 严格成功 | 240/240（100%） | 142/240（59.2%） | **+40.8 pp** |
 | 实例级 bootstrap 95% CI | | | **[+31.3, +50.4] pp** |
 
-O-P 四档均为 60/60。O-R 从 \(N=96\) 的 58/60 下降到 \(N=384\) 的 7/60。
+O-P 四档均为 60/60。O-R 从 $N=96$ 的 58/60 下降到 $`N=384`$ 的 7/60。
 
 因为位置、旧值和新值已经外部化，这个差距不能归因于错误定位。它直接表明：
 
@@ -244,9 +244,9 @@ O-P 四档均为 60/60。O-R 从 \(N=96\) 的 58/60 下降到 \(N=384\) 的 7/60
 
 COPY 在四档长度均为 30/30，总计：
 
-\[
+```math
 120/120=100\%.
-\]
+```
 
 因此，长度 96–384 的字符串并非无法原样输出。O-R 的困难更具体地发生在：
 
@@ -280,7 +280,7 @@ I-PR 共 120 条：
 |---|---:|---:|---:|
 | 严格成功 | 83/120（69.2%） | 52/120（43.3%） | **+25.8 pp** |
 | 实例级 bootstrap 95% CI | | | **[+15.0, +37.5] pp** |
-| sign-flip | | | \(p=4.0\times10^{-5}\) |
+| sign-flip | | | $p=4.0\times10^{-5}$ |
 
 对同一批 40 个预分配实例进行描述性对照：
 
@@ -343,16 +343,16 @@ payload telemetry 未保留。
 
 ## 9. 与理论推导的关系
 
-若完整对象长度为 \(N\)，patch 修改 \(k\) 个位置，则典型提交长度为：
+若完整对象长度为 $N$，patch 修改 $k$ 个位置，则典型提交长度为：
 
-\[
+```math
 L_{\text{rewrite}}=Nc_r,
-\]
+```
 
-\[
+```math
 L_{\text{patch}}
 =c_0+k(c_p+\lceil\log_2N\rceil).
-\]
+```
 
 当修改稀疏、executor 正确且交付可靠性随提交面单调下降时，可以条件性推出 patch 的交付优势。
 
@@ -371,7 +371,7 @@ artifact-v3 对这条理论链提供了两层经验支持：
 
 ### 9.1 Artifact-v4 为什么没有复现 Patch 优势
 
-完成后的 artifact-v4 在 \(N\in\{24,32,48\}\) 上比较 five-bit candidate：
+完成后的 artifact-v4 在 $`N\in\{24,32,48\}`$ 上比较 five-bit candidate：
 
 | 条件 | strict success | 对比 |
 |---|---:|---:|
@@ -380,7 +380,7 @@ artifact-v3 对这条理论链提供了两层经验支持：
 
 这个零附近结果不推翻 v3，也不能与 v3 合并。v4 使用 5 个 edits、更短对象，
 patch 地址和值的开销相对更高，而且两个条件都受 timeout floor 压制；v3 则是
-单点稀疏修复和 \(N=96\)–384 的长对象。
+单点稀疏修复和 $N=96$–384 的长对象。
 
 两组实验共同支持更精确的工程结论：
 
@@ -396,13 +396,13 @@ O-P−O-R 为 +40.8 个百分点，v5 的 O-P-A−O-R-A 为 +41.7 个百分点�
 
 系统含义是乘法式的：
 
-\[
+```math
 P(\text{end-to-end success})
 \approx
 P(\text{plan correct})
 \times
 P(\text{delivery succeeds}\mid\text{plan correct}).
-\]
+```
 
 更强的 editor 改善第二项，不会自动改善第一项。
 
@@ -527,8 +527,8 @@ payload telemetry 不可用。
 | 问题 | 为什么重要 | 推荐比较 |
 |---|---|---|
 | 跨配置复现 | 决定 claim 能否从单配置升级 | 低成本固定版本模型上的 I-P / I-R / O-P / O-R |
-| Edit-density crossover | 决定何时应从 patch 切换到区域或完整重写 | \(k/N\) 梯度 × patch / region rewrite / full rewrite |
-| 区域耦合 | 相同 \(k\) 可能因依赖密度不同而难度不同 | 分散 edits vs. 同一依赖子图内 edits |
+| Edit-density crossover | 决定何时应从 patch 切换到区域或完整重写 | $k/N$ 梯度 × patch / region rewrite / full rewrite |
+| 区域耦合 | 相同 $k$ 可能因依赖密度不同而难度不同 | 分散 edits vs. 同一依赖子图内 edits |
 | 真实领域迁移 | 决定 GF(2) 是否具有工程外部效度 | 代码、JSON/config、数据库 migration、结构化文档 |
 | Verifier / executor 可靠性 | 决定接口优势能否变成提交安全性 | 正确 plan × executor failure × verifier false accept |
 | 预算与提交面 | 决定优势是预算位移还是更稳定的接口规律 | 独立预分配预算 × 输出长度 × visible/reasoning tokens |
@@ -585,9 +585,9 @@ Patch 少用 33–43% tokens、69–84% wall time 和 83–96% response bytes。
 收紧路由规则：优先 runtime-resolved ID，并把 V11 的 Patch 证据解释为成本优势，
 而不是新的可靠性定理。
 
-Artifact-v12 通过更大的 \(N=96/144\) 配置，让同一交付问题离开 V11 ceiling。
+Artifact-v12 通过更大的 $N=96/144$ 配置，让同一交付问题离开 V11 ceiling。
 给定正确冻结计划，Sparse Patch 为 24/24，Sparse Full Rewrite 为 17/24：
-\(\Delta=+0.2917\)，95% CI [0.125, 0.4583]，Holm \(p=0.03125\)。七个配对差异
+$\Delta=+0.2917$，95% CI [0.125, 0.4583]，Holm $p=0.03125$。七个配对差异
 全部是 Patch 成功、Full 在 300 秒 endpoint 超时。这为稀疏预算内交付增加了新的
 确认性可靠性证据，但不证明无限预算下的语义优越性。Regional Rewrite 在 sparse
 为 24/24，在 dense 仅为 8/24；这些对比属于 exploratory，不能建立通用中间尺度

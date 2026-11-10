@@ -73,7 +73,7 @@ V1 在三个部署配置上观察到周期闭合 B 0/50，而给定 syndrome 的
 1,596 条确认性结果和 540 条同期 C+B follow-up 修复了 V1 的长度 floor、运行数和同期
 对照问题。
 
-在 15 个 \(N\in\{32,48,68\}\) 匹配实例上：
+在 15 个 $`N\in\{32,48,68\}`$ 匹配实例上：
 
 | 对比 | DeepSeek | MiniMax |
 |---|---:|---:|
@@ -122,7 +122,7 @@ V10 将这个诊断改为 semantic-set + runtime canonicalization。离线实现
 ## 6. V11–V12：地址漂移与交付尺度
 
 V11 的 relocation×(ID−INDEX) interaction 为 +0.21875 并通过；7 个差异全部来自
-\(N=48\) relocated-index precondition failure。Patch/Rewrite 四臂均 32/32，
+$N=48$ relocated-index precondition failure。Patch/Rewrite 四臂均 32/32，
 可靠性 ceiling，但 Patch 的 tokens、wall time 和 response bytes 明显更低。
 
 V12 的 high−low drift-dose interaction 为 −0.0417，未通过；ID 在 low/high 都为
@@ -138,13 +138,13 @@ formal raw events 1,416 条，endpoint rebuild mismatch=0。
 Compatible Exact 24/24 首次返回 `STALE_OLD_VALUE`，随后 24/24 located recovery；
 Compatible Intent 24/24 一次 commit，四臂最终均为 24/24。Primary：
 
-\[
+```math
 \Delta_{A1}=0.176459,\quad
 95\%\ CI=[0.168331,0.184575],\quad
 p_{\mathrm{exact}}=1.1921\times10^{-7}.
-\]
+```
 
-因为 \(0.176459<\log(1.20)=0.182322\)，V14-A1 为
+因为 $0.176459<\log(1.20)=0.182322$，V14-A1 为
 `failed_pre_registered_gate`。机制与安全语义成立，冻结的 +20% 成本承诺未通过。
 
 详见 [V14 双语报告](./aggregation-mismatch-v14-post-compile-drift-recovery.zh-CN.md)。
@@ -156,11 +156,11 @@ V15 完成 96/96 formal episodes、12/12 pilot cases 与 768/768 offline cases�
 Compatible Intent 首提交 24/24；Intent-Naive 最终 0/24；Intent-Rebase 与
 Exact-Rebase 均恢复 24/24。
 
-\[
+```math
 \Delta_{\text{Intent Rebase−Naive}}=1.0,\quad
 95\%\ CI=[1.0,1.0],\quad
 p_{\mathrm{exact}}=1.1921\times10^{-7}.
-\]
+```
 
 机器 claim state 为 `passed`，但分享状态是 `share_with_caveats`：Naive 被结构性
 禁止 recovery，且冻结 Pilot Gate 要求每臂达到 2/3，而实现只把该门用于非 Naive 臂。
@@ -174,11 +174,11 @@ V16 完成 96/96 formal episodes、12/12 pilot cases 与 768/768 offline cases�
 1,752 条 event 可重建所有 endpoint。三个 conflict 臂都有第二 provider turn：
 Generic/Reread 仍锁定并均为 0/24，runtime Unlock + Rebase 为 24/24。
 
-\[
+```math
 \Delta_{\text{Rebase−Generic}}=1.0,\quad
 95\%\ CI=[1.0,1.0],\quad
 p_{\mathrm{exact}}=1.1921\times10^{-7}.
-\]
+```
 
 机器 claim 通过。Artifact 支持“没有权威状态迁移的重试不是恢复”。它没有识别纯信息
 效应：Rebase 同时改变 recovery authority、执行态与 target slice。冻结 manifest
@@ -236,7 +236,7 @@ prompt。
 
 ## 13. 跨版本使用规则
 
-- 不把不同 artifact 的 run 数、成功率或 \(p\) 值合并；
+- 不把不同 artifact 的 run 数、成功率或 $p$ 值合并；
 - 不把 secondary/exploratory 升格为 primary；
 - 不把 floor/ceiling 写成失败、等价或无效；
 - 不把 failed minimum-effect gate 写成零效应；

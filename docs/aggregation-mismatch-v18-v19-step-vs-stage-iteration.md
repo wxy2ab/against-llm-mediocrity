@@ -86,7 +86,7 @@ regime.
 | Model | `SimpleDeepSeekClientChat` / `deepseek-v4-flash` |
 | Inference | Chinese; temperature=0; `thinking=False`; at most 32k tokens per turn |
 | Task | Synthetic directed acyclic GF(2) graph; a step is a topological layer |
-| Grid | (N\in\{16,24\}), frontier \(\in\{2,4\}\); 12 formal instances per cell |
+| Grid | $`N\in\{16,24\}`$, frontier $`\in\{2,4\}`$; 12 formal instances per cell |
 | Formal | 48 shared instances × three arms = 144 episodes per artifact |
 | Pilot | 12 independent instances × three arms = 36 episodes per artifact |
 | Initial condition | The three arms share one frozen erroneous plan (P_0) per instance |
@@ -160,9 +160,9 @@ sample.
 
 | Claim / contrast | Delta | 95% CI | Holm p | Frozen state |
 |---|---:|---|---:|---|
-| V18-1 STEP−STAGE | −0.625 | [−0.750, −0.479] | (3.73\times10^{-9}) | `failed_pre_registered_gate` |
+| V18-1 STEP−STAGE | −0.625 | [−0.750, −0.479] | $3.73\times10^{-9}$ | `failed_pre_registered_gate` |
 | V18-2 STEP−NO | 0.000 | [0, 0] | 1.0 | `failed_pre_registered_gate` |
-| V19-1 STEP−STAGE | −0.583 | [−0.729, −0.438] | (1.49\times10^{-8}) | `failed_pre_registered_gate` |
+| V19-1 STEP−STAGE | −0.583 | [−0.729, −0.438] | $1.49\times10^{-8}$ | `failed_pre_registered_gate` |
 | V19-2 STEP−NO | +0.104 | [+0.021, +0.188] | 0.0625 | `failed_pre_registered_gate` |
 | V18 secondary STAGE−NO | +0.625 | [+0.479, +0.750] | Outside primary Holm family | secondary |
 | V19 secondary STAGE−NO | +0.688 | [+0.563, +0.813] | Outside primary Holm family | secondary |

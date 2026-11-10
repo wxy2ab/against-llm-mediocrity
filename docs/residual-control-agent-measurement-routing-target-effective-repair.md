@@ -64,17 +64,17 @@ A task residual is the part of the current state, artifact, or result that still
 
 Let the goal consist of clauses:
 
-\[
+```math
 G=\{g_1,g_2,\ldots,g_n\}
-\]
+```
 
-Given current state \(s_t\), the observable residual is:
+Given current state $s_t$, the observable residual is:
 
-\[
+```math
 R(s_t)=\{g_i\mid O_i(s_t)\neq PASS\}
-\]
+```
 
-where \(O_i\) is the Oracle that verifies goal clause \(g_i\).
+where $O_i$ is the Oracle that verifies goal clause $g_i$.
 
 Production systems should not rely only on `PASS/FAIL`. At minimum they should distinguish:
 
@@ -92,17 +92,17 @@ This layer of residual can be established by tests, execution results, file stat
 
 Why the model left those residuals is usually a latent mechanism:
 
-\[
+```math
 Z_{\text{residual}}
-\]
+```
 
 What we can observe - thinking, output, self-report - are only downstream manifestations:
 
-\[
+```math
 Z_{\text{residual}}
 \rightarrow
 \{\text{thinking},\text{output},\text{self-report}\}
-\]
+```
 
 Different internal processes can produce the same visible trajectory. So from a self-explanation like:
 
@@ -123,15 +123,15 @@ It cannot be the final authority on whether a residual exists or whether it has 
 
 What is most stably measurable is how the system changes when different interventions are applied to the same machine-grounded residual.
 
-Let residual event \(e\) occur at frozen state \(s_e\), and let \(a\) be a repair operator:
+Let residual event $e$ occur at frozen state $s_e$, and let $a$ be a repair operator:
 
-\[
+```math
 s_e\xrightarrow{a}s_{e,a}
-\]
+```
 
 After executing the repair and rerunning the original Oracle plus parent closure guards, we obtain:
 
-\[
+```math
 Y(e,a)=
 \left(
 O_{\text{source}},
@@ -140,19 +140,19 @@ O_{\text{goal-valid}},
 C(a),
 E(a)
 \right)
-\]
+```
 
 where:
 
-- \(O_{\text{source}}\): whether the Oracle that defined the original residual now passes;
-- \(O_{\text{goal-valid}}\): whether the full goal constraints now pass;
-- \(\Delta\mathbf R\): residual change across layers and goal dimensions;
-- \(C(a)\): token, time, tool, and human cost;
-- \(E(a)\): newly acquired validation evidence.
+- $O_{\text{source}}$: whether the Oracle that defined the original residual now passes;
+- $O_{\text{goal-valid}}$: whether the full goal constraints now pass;
+- $\Delta\mathbf R$: residual change across layers and goal dimensions;
+- $C(a)$: token, time, tool, and human cost;
+- $E(a)$: newly acquired validation evidence.
 
-Under budget \(B\), define the repair response set of a residual event as:
+Under budget $B$, define the repair response set of a residual event as:
 
-\[
+```math
 \Sigma_B(e)
 =
 \left\{
@@ -160,7 +160,7 @@ Y(e,a)
 \mid
 a\in\mathcal A_R,\ C(a)\leq B
 \right\}
-\]
+```
 
 This is the residual's **repair response surface** or **repairability profile**.
 
@@ -174,7 +174,7 @@ It does not claim to recover the model's one true internal mechanism. It answers
 
 Single-turn LLM tasks usually focus on the distance between one output and one target answer. Agents have many steps, state transitions, stage artifacts, and long-horizon goals. Their residuals live at least across three orthogonal dimensions:
 
-\[
+```math
 \text{Residual}
 =
 \text{carrier}
@@ -182,7 +182,7 @@ Single-turn LLM tasks usually focus on the distance between one output and one t
 \text{evaluation horizon}
 \times
 \text{goal dimension}
-\]
+```
 
 ## 3.1 Residual carriers
 
@@ -195,14 +195,14 @@ Single-turn LLM tasks usually focus on the distance between one output and one t
 
 State-transition residuals are especially important. An action may produce the right text but still fail as an agent action if it does not create the intended state change:
 
-\[
+```math
 R_t^{\text{transition}}
 =
 d\left(
 s_{t+1},
 T^*(s_t,a_t)
 \right)
-\]
+```
 
 Examples include:
 
@@ -237,9 +237,9 @@ The final result may be correct, while the stage artifact is still deficient.
 
 What effect the current artifact has on final reachability, success probability, and future repair cost.
 
-Let \(\Pi_B\) be the available downstream policies under remaining budget \(B\). For artifact \(a_t\):
+Let $\Pi_B$ be the available downstream policies under remaining budget $B$. For artifact $a_t$:
 
-\[
+```math
 V_t(a_t;B)
 =
 \max_{\pi\in\Pi_B}
@@ -248,15 +248,15 @@ G(\text{final outcome})
 \mid
 a_t,\pi
 ]
-\]
+```
 
 Then the global residual of the stage artifact is:
 
-\[
+```math
 R_t^{\text{global}}(B)
 =
 V_t^*(B)-V_t(a_t;B)
-\]
+```
 
 So global artifact quality is not fixed. It depends on:
 
@@ -277,11 +277,11 @@ What still separates the full trajectory from the final delegated objective, inc
 
 The difference between what the system explicitly optimizes and verifies and what humans actually want.
 
-Let the true goal be \(G^*\), and the currently executable contract be \(\hat G\):
+Let the true goal be $`G^*`$, and the currently executable contract be $\hat G$:
 
-\[
+```math
 R_{\text{spec}}=G^*\setminus\hat G
-\]
+```
 
 In Text2SQL, "current result matches gold" may be part of the evaluator, while "must generalize, must not overfit, must not rely on case identity, must not encode SQL semantics into code" may initially exist only as vague expectations. Then the evaluator may say success while the true goal still fails.
 
@@ -289,7 +289,7 @@ In Text2SQL, "current result matches gold" may be part of the evaluator, while "
 
 The same residual can sit simultaneously in different goal dimensions:
 
-\[
+```math
 \mathbf R=
 \left(
 R_{\text{correctness}},
@@ -299,7 +299,7 @@ R_{\text{regression}},
 R_{\text{cost}},
 R_{\text{evidence}}
 \right)
-\]
+```
 
 A repair may reduce present correctness residual while increasing generality or architecture residual. So agent residuals cannot be compressed into a single score.
 
@@ -325,23 +325,23 @@ One goal dimension improves while another worsens.
 
 An overfit Text2SQL patch often looks like:
 
-\[
+```math
 R_{\text{case}}\downarrow
-\]
+```
 
 while:
 
-\[
+```math
 R_{\text{generality}}\uparrow
-\]
+```
 
-\[
+```math
 R_{\text{architecture}}\uparrow
-\]
+```
 
-\[
+```math
 R_{\text{regression-risk}}\uparrow
-\]
+```
 
 ## 4.4 Residual delay
 
@@ -406,13 +406,13 @@ A residual record should contain at least:
 
 Three fields must be kept separate:
 
-\[
+```math
 \text{observed layer}
 \neq
 \text{candidate origin layer}
 \neq
 \text{repair locus}
-\]
+```
 
 For example:
 
@@ -462,7 +462,7 @@ In Text2SQL, gold execution is a strong Oracle for current-case correctness, but
 
 So an Oracle should also be described by:
 
-\[
+```math
 O(r)=
 (
 \text{fidelity},
@@ -471,7 +471,7 @@ O(r)=
 \text{cost},
 \text{gameability}
 )
-\]
+```
 
 That is: reliability, feedback bandwidth, goal coverage, invocation cost, and ease of gaming.
 
@@ -545,13 +545,13 @@ But for production routing, residuals can be separated into two operational stat
 
 Under the current task expression, state representation, action space, model, and budget, the available Oracle is sufficient to drive residual closure.
 
-\[
+```math
 r\in R_O
 \iff
 \exists \pi,\ C(\pi)\leq B,
 \quad
-P(\operatorname{close}(r)\mid O,\pi)\geq\theta
-\]
+P(\mathop{\mathrm{close}}\nolimits(r)\mid O,\pi)\geq\theta
+```
 
 Then the system need not change the problem structure. It can directly do:
 
@@ -567,20 +567,20 @@ In the current regime, even with an Oracle, the ordinary repair loop cannot stab
 
 Let the current regime be:
 
-\[
+```math
 \Gamma=
 (
 G,S,\Omega,A,M,O,H
 )
-\]
+```
 
 representing goal, state, observation, action space, model, Oracle, and Harness.
 
-Mismatch routing does not keep searching inside \(\Gamma\). It performs a structural transformation:
+Mismatch routing does not keep searching inside $\Gamma$. It performs a structural transformation:
 
-\[
+```math
 \Gamma\xrightarrow{\phi_m}\Gamma'
-\]
+```
 
 so that the residual becomes observable, localizable, and verifiable again in the new regime.
 
@@ -594,16 +594,16 @@ Therefore:
 
 In practice, residuals are rarely pure Oracle or pure mismatch structures. They are composite:
 
-\[
+```math
 R=
 R_O
 \oplus
 R_M
 \oplus
 I(R_O,R_M)
-\]
+```
 
-where \(I\) is interaction between residual components.
+where $I$ is interaction between residual components.
 
 For example, a code step may contain at once:
 
@@ -662,13 +662,13 @@ The common objective of mismatch routing is:
 
 That is, transform a hard structural residual into several clearer Oracle-addressable residuals:
 
-\[
+```math
 R_M
 \xrightarrow{\text{mismatch transformation}}
 \{r_1^O,r_2^O,\ldots,r_k^O\}
 \xrightarrow{\text{oracle-guided repair}}
 0
-\]
+```
 
 For example, a vague "SQL semantic error" may, after specification routing, be decomposed into:
 
@@ -781,29 +781,29 @@ All of these can close the present result residual.
 
 Define:
 
-\[
+```math
 \mathcal P_{\text{result}}
 =
 \{
 P:
 O_{\text{source}}(P)=PASS
 \}
-\]
+```
 
 But the set of repairs that really satisfy the full goal is much smaller:
 
-\[
+```math
 \mathcal P_{\text{goal-valid}}
 =
 \{
 P\in\mathcal P_{\text{result}}:
 G(P)=1
 \}
-\]
+```
 
 We may further distinguish:
 
-\[
+```math
 \mathcal P_{\text{result}}
 \supseteq
 \mathcal P_{\text{stage}}
@@ -813,7 +813,7 @@ We may further distinguish:
 \mathcal P_{\text{goal-valid}}
 \supseteq
 \mathcal P_{\text{certified}}
-\]
+```
 
 meaning:
 
@@ -831,25 +831,25 @@ Search systems most easily find the first path that makes the current Oracle pas
 
 Define:
 
-\[
+```math
 C_{\text{hit}}^*
 =
 \min_{P:O_{\text{source}}(P)=PASS} C(P)
-\]
+```
 
-\[
+```math
 C_{\text{valid}}^*
 =
-\min_{P:\operatorname{Accept}(P)=1} C(P)
-\]
+\min_{P:\mathop{\mathrm{Accept}}\nolimits(P)=1} C(P)
+```
 
 Their difference:
 
-\[
+```math
 H_{\text{goal}}
 =
 C_{\text{valid}}^*-C_{\text{hit}}^*
-\]
+```
 
 captures the real hardness gap between "make the current output pass" and "find a target-effective repair."
 
@@ -859,7 +859,7 @@ captures the real hardness gap between "make the current output pass" and "find 
 
 The true Text2SQL objective is usually conjunctive:
 
-\[
+```math
 G=
 G_{\text{correct}}
 \land
@@ -872,17 +872,17 @@ G_{\text{architecture}}
 G_{\text{regression-safe}}
 \land
 G_{\text{evidence}}
-\]
+```
 
 It should not be compressed into:
 
-\[
+```math
 Reward
 =
 100\times\text{current case pass}
 -
 5\times\text{overfit risk}
-\]
+```
 
 because a strong local reward can overwhelm weaker, more abstract long-term constraints.
 
@@ -893,8 +893,8 @@ A more reasonable procedure is:
 
 Define repair acceptance as:
 
-\[
-\operatorname{Accept}(P)
+```math
+\mathop{\mathrm{Accept}}\nolimits(P)
 =
 O_{\text{source}}
 \land
@@ -909,7 +909,7 @@ O_{\text{anti-overfit}}
 O_{\text{architecture}}
 \land
 O_{\text{evidence}}
-\]
+```
 
 So at the leaf level, repairs should at least be separated into:
 
@@ -939,13 +939,13 @@ Do not add branches that only work on the current sample
 
 Every review round shrinks the legal repair space:
 
-\[
+```math
 \mathcal P_{t+1}
 =
 \mathcal P_t\setminus\mathcal B_t
-\]
+```
 
-where \(\mathcal B_t\) is the newly discovered illegal region.
+where $\mathcal B_t$ is the newly discovered illegal region.
 
 This process can be understood as:
 
@@ -971,13 +971,13 @@ A single gold instance cannot uniquely identify the correct mechanism. Repeated 
 
 # 16. Repair Artifacts Should Carry Evidence
 
-A reliable repair should not be just a patch \(p\), but:
+A reliable repair should not be just a patch $p$, but:
 
-\[
+```math
 (p,E)
-\]
+```
 
-where \(E\) is an evidence bundle such as:
+where $E$ is an evidence bundle such as:
 
 ```text
 current case passes
@@ -1002,7 +1002,7 @@ Evidence does not prove universal generalization over all unknown distributions,
 
 Ordinary repair search may optimize only:
 
-\[
+```math
 P^*
 =
 \arg\min_P C(P)
@@ -1010,38 +1010,38 @@ P^*
 \text{s.t.}
 \quad
 O_{\text{source}}(P)=PASS
-\]
+```
 
 What we actually need is:
 
-\[
+```math
 P_{\text{valid}}^*
 =
 \arg\min_P
 \left[
 C(P)+\lambda D(P)+\mu D_{\text{repair}}(P)
 \right]
-\]
+```
 
 subject to:
 
-\[
-\operatorname{Accept}(P)=1
-\]
+```math
+\mathop{\mathrm{Accept}}\nolimits(P)=1
+```
 
 where:
 
-- \(C(P)\): token, time, tool, and human cost;
-- \(D(P)\): modification size imposed on already-correct structure;
-- \(D_{\text{repair}}(P)\): future repair debt introduced by the repair.
+- $C(P)$: token, time, tool, and human cost;
+- $D(P)$: modification size imposed on already-correct structure;
+- $D_{\text{repair}}(P)$: future repair debt introduced by the repair.
 
 Repair debt of a stage artifact can be written as:
 
-\[
+```math
 D_t^{\text{repair}}
 =
 C_t^*(a_t)-C_t^*(a_t^{\text{ideal}})
-\]
+```
 
 that is, how much additional minimum downstream cost the current artifact imposes relative to the ideal artifact.
 
@@ -1097,9 +1097,9 @@ Search success probability can approach 1 with growing budget only if:
 
 If the needed repair has zero probability under the model support:
 
-\[
+```math
 P(a^*\mid s)=0
-\]
+```
 
 then more budget will not generate it.
 
@@ -1201,40 +1201,40 @@ This is closer to belief-space search than to answer-tree search.
 
 In known-result settings, we can run expensive repair search and collect:
 
-\[
+```math
 (s_t,a_t,\Delta\mathbf R,C_t,E_t,\text{success})
-\]
+```
 
 From that we can learn:
 
 ### Repair policy
 
-\[
+```math
 \pi_R(a\mid r,s,G,O,B)
-\]
+```
 
 Given residual, state, goal, Oracle, and budget, which repair operator should be tried first?
 
 ### Repair value
 
-\[
+```math
 Q_R(s,a)
 =
 P(
 \text{goal-valid closure within budget}
 \mid s,a
 )
-\]
+```
 
 ### Residual value
 
-\[
+```math
 V_R(s)
 =
 P(
 \text{repair remains possible within budget from this state}
 )
-\]
+```
 
 In production, we no longer enumerate every path. We use these offline priors:
 
@@ -1360,65 +1360,65 @@ Therefore:
 
 ## Outcome Repair@B
 
-Probability that the source Oracle passes under budget \(B\):
+Probability that the source Oracle passes under budget $B$:
 
-\[
+```math
 P(O_{\text{source}}=PASS)
-\]
+```
 
 ## Goal-Valid Repair@B
 
-Probability that all hard goal constraints pass under budget \(B\):
+Probability that all hard goal constraints pass under budget $B$:
 
-\[
-P(\operatorname{Accept}(P)=1)
-\]
+```math
+P(\mathop{\mathrm{Accept}}\nolimits(P)=1)
+```
 
 ## Certified Repair@B
 
-Probability that, under budget \(B\), the repair is not only target-valid but carries enough evidence for safe closure.
+Probability that, under budget $B$, the repair is not only target-valid but carries enough evidence for safe closure.
 
 ## Shortcut Gap
 
-\[
-\operatorname{ShortcutGap}(B)
+```math
+\mathop{\mathrm{ShortcutGap}}\nolimits(B)
 =
-\operatorname{OutcomeRepair@B}
+\mathop{\mathrm{OutcomeRepair@B}}\nolimits
 -
-\operatorname{GoalValidRepair@B}
-\]
+\mathop{\mathrm{GoalValidRepair@B}}\nolimits
+```
 
 This measures how much apparent repair success is actually gaming, overfit, or residual transfer.
 
 ## Selection Gap
 
-\[
-\operatorname{SelectionGap}(B)
+```math
+\mathop{\mathrm{SelectionGap}}\nolimits(B)
 =
-\operatorname{OracleBestRepair@B}
+\mathop{\mathrm{OracleBestRepair@B}}\nolimits
 -
-\operatorname{SelectedRepair@B}
-\]
+\mathop{\mathrm{SelectedRepair@B}}\nolimits
+```
 
 If the candidate set already contains an effective repair but the system fails to choose it, the main problem lies in verification, ranking, or routing rather than proposal.
 
 ## Minimum Valid Repair Cost
 
-\[
+```math
 C_{\text{valid}}^*
 =
-\min_{P:\operatorname{Accept}(P)=1}C(P)
-\]
+\min_{P:\mathop{\mathrm{Accept}}\nolimits(P)=1}C(P)
+```
 
 ## Residual Transfer Rate
 
-\[
+```math
 P(
 R_i\downarrow
 \land
 \exists j\neq i,\ R_j\uparrow
 )
-\]
+```
 
 ## Repair Debt
 
@@ -1430,9 +1430,9 @@ How many formerly hard residuals become covered by sufficient search or closure 
 
 ## Residual Closure per Cost
 
-\[
+```math
 \frac{\Delta \mathbf R_{\text{goal-valid}}}{C}
-\]
+```
 
 ## No-Progress / Oscillation Rate
 
@@ -1596,7 +1596,7 @@ Under the same token, time, and tool budget, residual-profile-based routing outp
 
 Residual measurement, residual routing, and residual repair can be unified into one recursive control structure:
 
-\[
+```math
 \boxed{
 \text{machine facts establish residual}
 \rightarrow
@@ -1618,7 +1618,7 @@ Residual measurement, residual routing, and residual repair can be unified into 
 \rightarrow
 \text{close, rollback, reroute, or escalate}
 }
-\]
+```
 
 In this unified view:
 

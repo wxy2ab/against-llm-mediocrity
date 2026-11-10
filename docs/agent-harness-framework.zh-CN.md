@@ -65,11 +65,11 @@ Agent Harness = Bridge × Action-Space Optimization
 
 长程 Agent 的主流形式化已经从“一个更长的模型调用”转向：
 
-\[
+```math
 \mathrm{Agent}=\pi_\theta\oplus H
-\]
+```
 
-其中，\(\pi_\theta\) 是基础模型策略，\(H\) 是围绕模型闭合 action–observation–memory loop 的 Harness。现有综述通常把 Harness 分为：
+其中，$`\pi_\theta`$ 是基础模型策略，$`H`$ 是围绕模型闭合 action–observation–memory loop 的 Harness。现有综述通常把 Harness 分为：
 
 - Loops and Workflows；
 - Context and Memory；
@@ -149,9 +149,9 @@ Agent B：68%
 
 Agent Harness 关注的不是“运行了多少轮”，而是每一轮是否改变了：
 
-\[
+```math
 (I_t,\;S_t,\;\mathcal A_t,\;\pi_t)
-\]
+```
 
 即信息、权威状态、动作空间或模型策略中的至少一项。
 
@@ -176,57 +176,57 @@ Agent Harness 关注的不是“运行了多少轮”，而是每一轮是否改
 
 设：
 
-- \(D\)：任务分布；
-- \(X\)：固定的外部能力基座，包括环境、工具、可访问数据、Oracle 和执行器；
-- \(b\)：预算，包括 tokens、wall-clock、工具调用、金钱和风险预算；
-- \(\pi_\theta\)：基础模型策略；
-- \(\mathcal B\)：Bridge；
-- \(\Omega\)：Action-Space Optimizer；
-- \(J(D;\theta,X,\mathcal B,\Omega,b)\)：系统在任务分布上的期望效用。
+- $D$：任务分布；
+- $X$：固定的外部能力基座，包括环境、工具、可访问数据、Oracle 和执行器；
+- $b$：预算，包括 tokens、wall-clock、工具调用、金钱和风险预算；
+- $`\pi_\theta`$：基础模型策略；
+- $\mathcal B$：Bridge；
+- $\Omega$：Action-Space Optimizer；
+- $J(D;\theta,X,\mathcal B,\Omega,b)$：系统在任务分布上的期望效用。
 
 Agent Harness 的最小核心记为：
 
-\[
+```math
 \mathcal H=(\mathcal B,\Omega)
-\]
+```
 
-在固定 \(D,X,b\) 时，部署系统可写为：
+在固定 $D,X,b$ 时，部署系统可写为：
 
-\[
+```math
 \mathcal A_{\theta,\mathcal H}
 =\pi_\theta\oplus\mathcal B\oplus\Omega
-\]
+```
 
 ### 4.2 轨迹状态
 
 为避免把上下文叙事误认为世界状态，区分：
 
-- \(s_t\)：真实或潜在环境状态；
-- \(o_t\)：环境暴露给系统的观测；
-- \(g_t\)：系统当前承认的 governed hard state；
-- \(c_t\)：实际呈现给模型的上下文；
-- \(u_t\)：由 ASO 选择的 model-facing operator；
-- \(a_t\)：模型在该 operator 下提交的具体 proposal；
-- \(f_t\)：失败证据、Audit Finding 或尚未解决的义务。
+- $s_t$：真实或潜在环境状态；
+- $o_t$：环境暴露给系统的观测；
+- $g_t$：系统当前承认的 governed hard state；
+- $c_t$：实际呈现给模型的上下文；
+- $u_t$：由 ASO 选择的 model-facing operator；
+- $a_t$：模型在该 operator 下提交的具体 proposal；
+- $f_t$：失败证据、Audit Finding 或尚未解决的义务。
 
 Action-Space Optimizer 先选择当前模型应当面对哪一种操作：
 
-\[
+```math
 u_t=\Omega(g_t,f_t,b_t)
-\]
+```
 
 模型再在给定状态和 operator 下生成具体动作参数：
 
-\[
+```math
 a_t\sim\pi_\theta\big(a\mid\phi(g_t,o_{\le t},u_t)\big)
-\]
+```
 
 Bridge 负责把 proposal 接入环境，并返回观测、验证结果、状态提交和新的控制信号：
 
-\[
+```math
 (o_{t+1},v_{t+1},g_{t+1},f_{t+1})
 =\mathcal B(g_t,a_t,X)
-\]
+```
 
 这形成一个两层决策结构：
 
@@ -250,35 +250,35 @@ Agent Harness Framework 同时使用两种残差：
 
 ### 5.1 系统能力残差：模型与 Harness 的分解
 
-在固定 \(D,X,b\) 和允许的 Harness 设计集合 \(\mathfrak H\) 下，定义模型条件能力前沿：
+在固定 $D,X,b$ 和允许的 Harness 设计集合 $\mathfrak H$ 下，定义模型条件能力前沿：
 
-\[
+```math
 C_\theta(D,X,b,\mathfrak H)
 =
 \sup_{\mathcal H\in\mathfrak H}
 J(D;\theta,X,\mathcal H,b)
-\]
+```
 
 它表示：在给定模型和外部能力基座下，允许选择最佳 Harness 时能够达到的系统前沿。
 
 再定义该外部能力基座上的理想系统前沿：
 
-\[
+```math
 C^*(D,X,b,\mathfrak H)
 =
 \sup_{\pi,\mathcal H\in\mathfrak H}
 J(D;\pi,X,\mathcal H,b)
-\]
+```
 
-对于一个具体系统 \((\theta,\mathcal H)\)，总残差恒等分解为：
+对于一个具体系统 $(\theta,\mathcal H)$，总残差恒等分解为：
 
-\[
+```math
 C^*-J(\theta,\mathcal H)
 =
 \underbrace{C^*-C_\theta}_{\text{模型条件能力缺口}}
 +
 \underbrace{C_\theta-J(\theta,\mathcal H)}_{\text{Harness 能力兑现缺口}}
-\]
+```
 
 该分解的意义不是声称两个量已经可直接观测，而是建立一个清晰的归因目标：
 
@@ -287,23 +287,23 @@ C^*-J(\theta,\mathcal H)
 
 ### 5.2 经验前沿与下界
 
-真实的 \(C_\theta\) 通常不可知。实验只能在已测试 Harness 集合 \(\mathfrak H_{test}\) 上形成经验前沿：
+真实的 $C_\theta$ 通常不可知。实验只能在已测试 Harness 集合 $\mathfrak H_{test}$ 上形成经验前沿：
 
-\[
+```math
 \widehat C_\theta
 =
 \max_{\mathcal H\in\mathfrak H_{test}}
 \widehat J(\theta,\mathcal H)
-\]
+```
 
 于是：
 
-\[
+```math
 \widehat G_H(\theta,\mathcal H)
 =
 \widehat C_\theta-
 \widehat J(\theta,\mathcal H)
-\]
+```
 
 是当前已测试空间内的经验 Harness gap。在忽略估计误差时，它只是对真实能力兑现缺口的下界；新的 Harness 可能继续提高经验前沿。
 
@@ -311,43 +311,43 @@ C^*-J(\theta,\mathcal H)
 
 可定义：
 
-\[
+```math
 L_H(\theta)
 =
 \max_{\mathcal H}\,J(\theta,\mathcal H)
 -J(\theta,\mathcal H_0)
-\]
+```
 
 表示固定模型下，Harness 相对基线能够兑现多少额外能力。
 
 对于固定 Harness：
 
-\[
+```math
 L_M(\mathcal H)
 =
 \max_\theta J(\theta,\mathcal H)
 -
 \min_\theta J(\theta,\mathcal H)
-\]
+```
 
 表示模型变化带来的能力差异。
 
-模型与 Harness 可能存在强交互。以基线模型 \(\theta_0\) 和基线 Harness \(\mathcal H_0\) 为例：
+模型与 Harness 可能存在强交互。以基线模型 $\theta_0$ 和基线 Harness $\mathcal H_0$ 为例：
 
-\[
+```math
 I_{M\times H}
 =
 J(\theta_1,\mathcal H_1)
 -J(\theta_1,\mathcal H_0)
 -J(\theta_0,\mathcal H_1)
 +J(\theta_0,\mathcal H_0)
-\]
+```
 
-若 \(I_{M\times H}\neq0\)，则“这个 Harness 提升多少”不是模型无关的常数。某个 Harness 可能帮助弱模型更多，也可能只有强模型才能利用。
+若 $I_{M\times H}\neq0$，则“这个 Harness 提升多少”不是模型无关的常数。某个 Harness 可能帮助弱模型更多，也可能只有强模型才能利用。
 
 ### 5.4 执行任务残差
 
-在单次运行内部，定义 \(r_t\) 为当前未解决任务残差。它不一定是单一标量，可以是：
+在单次运行内部，定义 $r_t$ 为当前未解决任务残差。它不一定是单一标量，可以是：
 
 - 未通过的可执行约束集合；
 - 未满足的规格和接口义务；
@@ -357,15 +357,15 @@ J(\theta_1,\mathcal H_1)
 
 若存在标量化，可写为：
 
-\[
+```math
 \Delta r_t=r_t-r_{t+1}
-\]
+```
 
 若不存在统一标量，则使用偏序：
 
-\[
+```math
 r_{t+1}\prec r_t
-\]
+```
 
 表示新的 governed state 在受保护约束不回归的条件下严格减少了未解决义务。
 
@@ -390,9 +390,9 @@ Bridge 决定这一残差下降是否有证据、是否可以提交；ASO 决定
 
 正向 Bridge 的最小链条是：
 
-\[
+```math
 g_t+A_t\rightarrow o_{t+1}\rightarrow v_{t+1}\rightarrow g_{t+1}
-\]
+```
 
 它回答：
 
@@ -431,7 +431,7 @@ wrong answer
 
 Audit Engineering 构成这一方向的核心机制：
 
-\[
+```math
 \text{failure}
 \rightarrow
 \text{evidence}
@@ -441,7 +441,7 @@ Audit Engineering 构成这一方向的核心机制：
 \text{control delta}
 \rightarrow
 \text{regression obligation}
-\]
+```
 
 审计如果只有评论而没有 control delta，就没有形成 Bridge；如果没有写回硬状态或控制对象，下一轮仍可能重复同一失败。
 
@@ -483,19 +483,19 @@ Audit Engineering 构成这一方向的核心机制：
 
 传统 Policy Optimization 改变：
 
-\[
+```math
 \pi_\theta(a\mid s)
 \rightarrow
 \pi_{\theta'}(a\mid s)
-\]
+```
 
 Action-Space Optimization 改变：
 
-\[
+```math
 \mathcal A_t
 \rightarrow
 \widetilde{\mathcal A}_t
-\]
+```
 
 即不先改模型参数，而是改变模型当前被要求完成什么样的操作。
 
@@ -540,7 +540,7 @@ Action-Space Optimization 改变：
 
 因此，更合理的目标是最大化长期的、经过验证的残差下降：
 
-\[
+```math
 u_t^*
 =
 \arg\max_{u\in\mathcal U_t}
@@ -549,11 +549,11 @@ u_t^*
 -\lambda C_{t:T}(u)
 -\mu Risk_{t:T}(u)
 \Big]
-\]
+```
 
 在有合适残差度量时，也可写为：
 
-\[
+```math
 u_t^*
 =
 \arg\max_u
@@ -562,7 +562,7 @@ u_t^*
 -\lambda C(u)
 -\mu Risk(u)
 \Big]
-\]
+```
 
 ### 7.4 ASO 的七个基本维度
 
@@ -609,11 +609,11 @@ u_t^*
 
 因此必须区分：
 
-\[
+```math
 \text{structural advantage}
 \neq
 \text{model-realized advantage}
-\]
+```
 
 ASO 的任务不是制定“永远 patch”或“永远 audit”的教条，而是识别不同模型、长度、耦合、候选质量、编辑密度和预算下的 operation-interface crossover。
 
@@ -678,13 +678,13 @@ Bridge 和 ASO 不是同一问题的两个名字。
 
 ### 8.3 交互项不能被忽略
 
-设 \(B_0,B_1\) 为弱/强 Bridge，\(O_0,O_1\) 为弱/强 ASO，则交互项为：
+设 $B_0,B_1$ 为弱/强 Bridge，$`O_0,O_1`$ 为弱/强 ASO，则交互项为：
 
-\[
+```math
 I_{B\times O}
 =
 J(B_1,O_1)-J(B_1,O_0)-J(B_0,O_1)+J(B_0,O_0)
-\]
+```
 
 若交互项很大，只报告“Bridge 提升多少”或“ASO 提升多少”会产生误导。Agent Harness 的量化必须显式建模交互，而不是默认组件作用可简单相加。
 
@@ -696,32 +696,32 @@ J(B_1,O_1)-J(B_1,O_0)-J(B_0,O_1)+J(B_0,O_0)
 
 设一次 Agent 迭代的结构状态为：
 
-\[
+```math
 Z_t=(I_t,g_t,\mathcal A_t,\pi_t)
-\]
+```
 
 其中：
 
-- \(I_t\)：可用信息、证据和观测；
-- \(g_t\)：权威硬状态；
-- \(\mathcal A_t\)：当前 model-facing action space；
-- \(\pi_t\)：模型策略。
+- $I_t$：可用信息、证据和观测；
+- $g_t$：权威硬状态；
+- $\mathcal A_t$：当前 model-facing action space；
+- $\pi_t$：模型策略。
 
 如果：
 
-\[
+```math
 I_{t+1}=I_t,\quad
  g_{t+1}=g_t,\quad
 \mathcal A_{t+1}=\mathcal A_t,\quad
 \pi_{t+1}=\pi_t
-\]
+```
 
 那么新一轮基本仍然是：
 
-\[
+```math
 y_{t+1}\sim
 p_{\pi_t}(y\mid I_t,g_t,\mathcal A_t)
-\]
+```
 
 即同一条件分布下的再次采样。
 
@@ -729,7 +729,7 @@ p_{\pi_t}(y\mid I_t,g_t,\mathcal A_t)
 
 可定义：
 
-\[
+```math
 \chi_t
 =
 \mathbf 1[
@@ -737,12 +737,12 @@ p_{\pi_t}(y\mid I_t,g_t,\mathcal A_t)
 \vee\Delta g_t\neq0
 \vee\Delta\mathcal A_t\neq0
 \vee\Delta\pi_t\neq0]
-\]
+```
 
-- \(\chi_t=0\)：重复采样轮；
-- \(\chi_t=1\)：至少有一个结构变量发生变化。
+- $\chi_t=0$：重复采样轮；
+- $\chi_t=1$：至少有一个结构变量发生变化。
 
-这不意味着 \(\chi_t=1\) 的迭代一定有效，也不意味着 \(\chi_t=0\) 完全没有 best-of-N 收益。它只说明：没有结构变化时，系统没有获得新的问题求解机制。
+这不意味着 $\chi_t=1$ 的迭代一定有效，也不意味着 $\chi_t=0$ 完全没有 best-of-N 收益。它只说明：没有结构变化时，系统没有获得新的问题求解机制。
 
 ### 9.3 四类变化分别由谁负责
 
@@ -795,7 +795,7 @@ ASO：改变 action space A
 
 端到端成功可因式分解为：
 
-\[
+```math
 P(\text{success})
 =
 P(\text{plan correct})
@@ -805,7 +805,7 @@ P(\text{delivery correct}\mid\text{plan correct})
 P(\text{execution correct}\mid\cdots)
 \cdot
 P(\text{verification and commit correct}\mid\cdots)
-\]
+```
 
 如果不拆这四层：
 
@@ -818,34 +818,34 @@ P(\text{verification and commit correct}\mid\cdots)
 
 ### 10.4 二因子实验与 Shapley 归因
 
-对 Bridge 和 ASO 做 \(2\times2\) 实验，记：
+对 Bridge 和 ASO 做 $2\times2$ 实验，记：
 
-\[
+```math
 J_{00}=J(B_0,O_0),\;
 J_{10}=J(B_1,O_0),\;
 J_{01}=J(B_0,O_1),\;
 J_{11}=J(B_1,O_1)
-\]
+```
 
 则平均顺序无关的 Shapley 归因为：
 
-\[
+```math
 \phi_B
 =
 \frac12[(J_{10}-J_{00})+(J_{11}-J_{01})]
-\]
+```
 
-\[
+```math
 \phi_O
 =
 \frac12[(J_{01}-J_{00})+(J_{11}-J_{10})]
-\]
+```
 
 并满足：
 
-\[
+```math
 \phi_B+\phi_O=J_{11}-J_{00}
-\]
+```
 
 这比在一个固定基线下只报告单次 ablation 更稳健，因为它平均了不同组件加入顺序。
 
@@ -853,13 +853,13 @@ J_{11}=J(B_1,O_1)
 
 更完整的设计是：
 
-\[
+```math
 M\times B\times O
-\]
+```
 
 可写为：
 
-\[
+```math
 Y_{ijk}
 =
 \mu+\alpha_i+\beta_j+\gamma_k
@@ -868,7 +868,7 @@ Y_{ijk}
 +(\beta\gamma)_{jk}
 +(\alpha\beta\gamma)_{ijk}
 +\epsilon
-\]
+```
 
 它能够回答：
 
@@ -1036,7 +1036,7 @@ Agent Harness Framework
 | SGAR | hard-state authority | 什么状态被系统承认？ | 正向 Bridge 和状态提交层 |
 | Knowledge Governance | governed task knowledge | 任务知识如何外部化、验证、更新和撤销？ | 为 Bridge 和 ASO 提供控制对象 |
 | Mismatch Theory | value loss diagnosis | 价值在哪一个结构站点丢失？ | 为 Harness 路由提供诊断，不是 Harness 的同层组件 |
-| Agentic RL | internalized policy optimization | 如何改变模型策略？ | 改变 \(\pi\)，与 inference-time ASO 区分，但可互相内化 |
+| Agentic RL | internalized policy optimization | 如何改变模型策略？ | 改变 $\pi$，与 inference-time ASO 区分，但可互相内化 |
 
 ### 13.1 Harness component 与运行时函数的映射
 
@@ -1244,15 +1244,15 @@ Bridge 和 ASO 是当前提出的最小功能核心，不主张它们已经穷�
 
 ### 命题 1：模型条件前沿分解（T）
 
-在固定 \(D,X,b,\mathfrak H\) 下：
+在固定 $D,X,b,\mathfrak H$ 下：
 
-\[
+```math
 C^*-J=(C^*-C_\theta)+(C_\theta-J)
-\]
+```
 
 是定义上的恒等分解。
 
-**不代表：** \(C_\theta\) 已经可观测，或模型与 Harness 的内部贡献天然可加。
+**不代表：** $C_\theta$ 已经可观测，或模型与 Harness 的内部贡献天然可加。
 
 ### 命题 2：经验前沿只给出 Harness gap 的下界（T）
 
@@ -1357,7 +1357,7 @@ Agent Harness Framework 的主要贡献，不是再增加一组 Agent 组件，�
 
 其核心框架可以压缩为：
 
-\[
+```math
 \boxed{
 \text{Agent System}
 =
@@ -1369,11 +1369,11 @@ Agent Harness Framework 的主要贡献，不是再增加一组 Agent 组件，�
 \oplus
 \text{Action-Space Optimization}
 }
-\]
+```
 
 在固定 Capability Substrate 后：
 
-\[
+```math
 \boxed{
 \text{Observed Residual}
 =
@@ -1381,17 +1381,17 @@ Agent Harness Framework 的主要贡献，不是再增加一组 Agent 组件，�
 +
 \text{Harness Realization Gap}
 }
-\]
+```
 
 而在单次运行内部：
 
-\[
+```math
 \boxed{
 \text{ASO chooses the next problem form;}
 \quad
 \text{Bridge decides whether the result becomes progress.}
 }
-\]
+```
 
 当前围绕聚合失配进行的 operation-interface 实验，已经证明 action space 可以成为一个独立、可操纵、可量化的 Agent 工程对象。这只是第一步。若状态治理、审计、验证、恢复、上下文、工具接口、编排、预算和安全边界都能按照同样方法获得独立效应、交互效应和迁移规律，Agent Engineering 将不再主要依赖“优秀工程师的经验配方”。
 
@@ -1413,24 +1413,24 @@ Agent Harness Framework 的主要贡献，不是再增加一组 Agent 组件，�
 
 | 符号 | 含义 |
 |---|---|
-| \(D\) | 任务分布 |
-| \(X\) | 外部能力基座：环境、工具、数据、Oracle、执行器 |
-| \(b\) | tokens、时间、工具调用、金钱和风险预算 |
-| \(\pi_\theta\) | 基础模型策略 |
-| \(\mathcal B\) | Bridge |
-| \(\Omega\) | Action-Space Optimizer |
-| \(\mathcal H\) | Agent Harness，\((\mathcal B,\Omega)\) |
-| \(s_t\) | 潜在真实环境状态 |
-| \(o_t\) | 环境观测 |
-| \(g_t\) | governed hard state |
-| \(c_t\) | 发送给模型的上下文 |
-| \(u_t\) | model-facing operator |
-| \(a_t\) | 模型提交的 proposal |
-| \(f_t\) | failure evidence / audit finding / unresolved obligation |
-| \(r_t\) | 当前任务残差 |
-| \(J\) | 系统期望效用 |
-| \(C_\theta\) | 模型条件能力前沿 |
-| \(C^*\) | 给定外部能力基座上的理想系统前沿 |
+| $D$ | 任务分布 |
+| $X$ | 外部能力基座：环境、工具、数据、Oracle、执行器 |
+| $b$ | tokens、时间、工具调用、金钱和风险预算 |
+| $`\pi_\theta`$ | 基础模型策略 |
+| $\mathcal B$ | Bridge |
+| $\Omega$ | Action-Space Optimizer |
+| $\mathcal H$ | Agent Harness，$`(\mathcal B,\Omega)`$ |
+| $s_t$ | 潜在真实环境状态 |
+| $o_t$ | 环境观测 |
+| $g_t$ | governed hard state |
+| $c_t$ | 发送给模型的上下文 |
+| $u_t$ | model-facing operator |
+| $a_t$ | 模型提交的 proposal |
+| $f_t$ | failure evidence / audit finding / unresolved obligation |
+| $r_t$ | 当前任务残差 |
+| $J$ | 系统期望效用 |
+| $C_\theta$ | 模型条件能力前沿 |
+| $`C^*`$ | 给定外部能力基座上的理想系统前沿 |
 
 ---
 
@@ -1438,14 +1438,14 @@ Agent Harness Framework 的主要贡献，不是再增加一组 Agent 组件，�
 
 | Model | Bridge | ASO | 用途 |
 |---|---|---|---|
-| \(M_0\) | \(B_0\) | \(O_0\) | 全基线 |
-| \(M_0\) | \(B_1\) | \(O_0\) | 弱模型上的 Bridge 主效应 |
-| \(M_0\) | \(B_0\) | \(O_1\) | 弱模型上的 ASO 主效应 |
-| \(M_0\) | \(B_1\) | \(O_1\) | 弱模型上的组合效应 |
-| \(M_1\) | \(B_0\) | \(O_0\) | 模型提升基线 |
-| \(M_1\) | \(B_1\) | \(O_0\) | 强模型上的 Bridge 主效应 |
-| \(M_1\) | \(B_0\) | \(O_1\) | 强模型上的 ASO 主效应 |
-| \(M_1\) | \(B_1\) | \(O_1\) | 完整系统和三阶交互 |
+| $M_0$ | $B_0$ | $O_0$ | 全基线 |
+| $M_0$ | $B_1$ | $O_0$ | 弱模型上的 Bridge 主效应 |
+| $M_0$ | $B_0$ | $O_1$ | 弱模型上的 ASO 主效应 |
+| $M_0$ | $B_1$ | $O_1$ | 弱模型上的组合效应 |
+| $M_1$ | $B_0$ | $O_0$ | 模型提升基线 |
+| $M_1$ | $B_1$ | $O_0$ | 强模型上的 Bridge 主效应 |
+| $M_1$ | $B_0$ | $O_1$ | 强模型上的 ASO 主效应 |
+| $M_1$ | $B_1$ | $O_1$ | 完整系统和三阶交互 |
 
 对每个格子应至少报告：
 

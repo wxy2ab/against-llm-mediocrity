@@ -32,7 +32,7 @@ target-state information, and model replanning.
 | Conflict Rebase Once final success | **24/24** |
 | Conflict first-attempt commit | **0/72** |
 | V16-A1 Rebase−Generic | **+1.0**; 95% CI **[1.0, 1.0]** |
-| Exact sign-flip | \(2/2^{24}=1.1921\times10^{-7}\) |
+| Exact sign-flip | $2/2^{24}=1.1921\times10^{-7}$ |
 | Minimum-effect gate | +0.25; **passed** |
 | Machine claim state | **`passed`** |
 | Evidence-sharing state | **`share_with_caveats`** |
@@ -45,15 +45,15 @@ target-state information, and model replanning.
 A conflict receipt is evidence that the sealed operation cannot commit against
 the current authoritative state. It is not itself a state transition.
 
-For state \(S\), lock set \(L\), operation \(Q\), and invariant set \(I\):
+For state $S$, lock set $L$, operation $Q$, and invariant set $I$:
 
-\[
-\operatorname{commit}(Q,S)
+```math
+\mathop{\mathrm{commit}}\nolimits(Q,S)
 \Rightarrow
-\operatorname{pre}(Q,S)
-\land \operatorname{lock\_ok}(Q,L)
-\land \operatorname{verify}(\operatorname{apply}(Q,S),I).
-\]
+\mathop{\mathrm{pre}}\nolimits(Q,S)
+\land \mathop{\mathrm{lock\_ok}}\nolimits(Q,L)
+\land \mathop{\mathrm{verify}}\nolimits(\mathop{\mathrm{apply}}\nolimits(Q,S),I).
+```
 
 If `lock_ok` remains false, a larger prompt or another provider turn cannot
 make commit valid. A recovery attempt becomes meaningful only after the runtime
@@ -80,12 +80,12 @@ rebase plan.
 
 - DeepSeek-V4-Flash; Chinese; temperature 0; `thinking=False`;
 - one shared 300-second semantic-episode budget; maximum 32k tokens;
-- 24 tasks: eight each at \(N\in\{96,144,216\}\);
+- 24 tasks: eight each at $`N\in\{96,144,216\}`$;
 - four conditions per task:
   - **Compatible Intent:** first-attempt commit;
-  - **Generic Retry:** lock rejection, then receipt + goal plan while still in locked \(S_1\);
-  - **Reread Only:** lock rejection, then receipt + full old repository while still in locked \(S_1\);
-  - **Rebase Once:** lock rejection, runtime unlock to \(S_2\), then receipt + target-state slice;
+  - **Generic Retry:** lock rejection, then receipt + goal plan while still in locked $S_1$;
+  - **Reread Only:** lock rejection, then receipt + full old repository while still in locked $S_1$;
+  - **Rebase Once:** lock rejection, runtime unlock to $S_2$, then receipt + target-state slice;
 - all three conflict arms receive exactly one second provider turn;
 - atomic apply/rollback, global verification, append-only events, and exact
   task-paired statistics.
@@ -124,14 +124,14 @@ preregistration-conformance wording is not.
 | Conflict Reread Only | 0/24 | 24/24, still locked | 0/24 |
 | Conflict Rebase Once | 0/24 | 24/24, unlocked | 24/24 |
 
-\[
+```math
 \Delta_{A1}
 = P(\text{Rebase success})-P(\text{Generic success})
 =1.0.
-\]
+```
 
 The 95% bootstrap interval is [1.0, 1.0], and the exact two-sided sign-flip
-\(p=1.1921\times10^{-7}\). The preregistered machine primary passes.
+$p=1.1921\times10^{-7}$. The preregistered machine primary passes.
 
 ![V16 Rebase minus Generic effect](./assets/aggregation-mismatch-experiment/v16-rebase-generic-effect.png)
 
@@ -173,7 +173,7 @@ after a valid state transition.
 ### Remaining causal gap
 
 Rebase changes three factors together: authority, executable state, and visible
-target-state information. A decisive factorial must hold unlock and \(S_2\)
+target-state information. A decisive factorial must hold unlock and $S_2$
 constant while randomizing receipt-only, old-state, target-slice, and structured
 rebase-plan information.
 
@@ -207,7 +207,7 @@ rebase-plan information.
 
 ## 8. Next experiment
 
-Use a new frozen schema with identical unlock authority, identical \(S_2\),
+Use a new frozen schema with identical unlock authority, identical $S_2$,
 identical provider-turn count, and identical budget across all arms. Randomize
 only the recovery information package. Replicate on a second model and at least
 one real Git/configuration workflow.

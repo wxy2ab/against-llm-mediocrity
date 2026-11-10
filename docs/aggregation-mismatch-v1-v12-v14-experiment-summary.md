@@ -73,7 +73,7 @@ while syndrome-supplied E is 50/50. V2 uses 1,596 confirmatory results and 540
 contemporaneous C+B follow-ups to address V1's length floor, run accounting, and
 contemporaneous-control problems.
 
-Across 15 matched instances at \(N\in\{32,48,68\}\):
+Across 15 matched instances at $`N\in\{32,48,68\}`$:
 
 | Contrast | DeepSeek | MiniMax |
 |---|---:|---:|
@@ -130,7 +130,7 @@ improve dramatically.”
 ## 6. V11–V12: Address drift and delivery scale
 
 V11's relocation×(ID−INDEX) interaction is +0.21875 and passes; all seven
-differences come from \(N=48\) relocated-index precondition failures.
+differences come from $N=48$ relocated-index precondition failures.
 Patch/Rewrite reliability is ceiling-limited at 32/32 in all four arms, while
 Patch uses substantially fewer tokens, wall time, and response bytes.
 
@@ -151,13 +151,13 @@ Compatible Exact returns `STALE_OLD_VALUE` on all 24 first attempts and then
 completes 24/24 located recoveries. Compatible Intent commits 24/24 on the first
 attempt, and all four arms finish 24/24. The primary is:
 
-\[
+```math
 \Delta_{A1}=0.176459,\quad
 95\%\ CI=[0.168331,0.184575],\quad
 p_{\mathrm{exact}}=1.1921\times10^{-7}.
-\]
+```
 
-Because \(0.176459<\log(1.20)=0.182322\), V14-A1 is
+Because $0.176459<\log(1.20)=0.182322$, V14-A1 is
 `failed_pre_registered_gate`. The mechanism and safety semantics hold; the
 frozen +20% cost commitment does not.
 
@@ -213,7 +213,7 @@ responsibility-allocation problem, not an unlimited-prompt problem.
 
 ## 11. Rules for cross-version use
 
-- Do not pool run counts, success rates, or \(p\)-values across artifacts.
+- Do not pool run counts, success rates, or $p$-values across artifacts.
 - Do not promote secondary or exploratory analyses to primary claims.
 - Do not rewrite floor/ceiling as failure, equivalence, or ineffectiveness.
 - Do not rewrite a failed minimum-effect gate as a zero effect.

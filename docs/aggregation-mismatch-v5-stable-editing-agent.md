@@ -25,7 +25,7 @@ The 288-arm confirmatory matrix produces a split verdict:
 | Inferred plan, end to end | 2/96 (2.1%) | 0/96 (0%) | +2.1 pp, 95% CI [0, +6.25] | **V5-C1 failed** |
 | Oracle plan, delivery only | 46/48 (95.8%) | 26/48 (54.2%) | **+41.7 pp, 95% CI [+27.1, +56.25]** | **V5-C2 passed** |
 
-The oracle comparison has 21 positive instance pairs, one negative pair, and 26 ties. Its exact sign-flip value is \(p=1.10\times10^{-5}\). The inferred-plan effect does not meet the preregistered +10-point minimum effect, its interval includes zero, and its sign-flip value is \(p=1\).
+The oracle comparison has 21 positive instance pairs, one negative pair, and 26 ties. Its exact sign-flip value is $p=1.10\times10^{-5}$. The inferred-plan effect does not meet the preregistered +10-point minimum effect, its interval includes zero, and its sign-flip value is $p=1$.
 
 The correct conclusion is:
 
@@ -50,21 +50,21 @@ Artifact-v5 therefore separates two questions:
 
 These correspond to:
 
-\[
+```math
 \Delta_I =
 P(\text{final exact success}\mid I\text{-}P\text{-}A)
 -
 P(\text{final exact success}\mid I\text{-}R\text{-}A)
-\]
+```
 
 and
 
-\[
+```math
 \Delta_O =
 P(\text{final exact success}\mid O\text{-}P\text{-}A)
 -
 P(\text{final exact success}\mid O\text{-}R\text{-}A).
-\]
+```
 
 The mutually exclusive verdict hierarchy was frozen in advance:
 
@@ -95,9 +95,9 @@ The infer conditions generate a plan once per repeat and fork that same plan to 
 
 | Item | Value |
 |---|---:|
-| Object lengths \(N\) | 96, 384 |
-| Edit counts \(k\) | 1, 10, 20 |
-| \(N\times k\) cells | 6 |
+| Object lengths $`N`$ | 96, 384 |
+| Edit counts $`k`$ | 1, 10, 20 |
+| $N\times k$ cells | 6 |
 | Instances per cell | 8 |
 | Formal instances | 48 |
 | Infer repeats | 2 |
@@ -132,7 +132,7 @@ Both V5-C1 and V5-C2 must satisfy all three gates:
 
 1. mean difference at least +10 percentage points;
 2. 95% interval excludes zero;
-3. sign-flip \(p<0.05\).
+3. sign-flip $p<0.05$.
 
 ---
 
@@ -142,9 +142,9 @@ Both V5-C1 and V5-C2 must satisfy all three gates:
 
 I-P-A succeeds on 2/96 runs; I-R-A succeeds on 0/96. The instance-level difference is:
 
-\[
+```math
 \Delta_I=+0.0208,\qquad 95\%\ \mathrm{CI}=[0,0.0625],\qquad p=1.
-\]
+```
 
 Only one of the 48 paired instances favors Patch; 47 are ties. The effect fails every practical or statistical requirement for V5-C1.
 
@@ -154,11 +154,11 @@ This is not evidence that the write interfaces are equivalent. It is a floor-lim
 
 O-P-A succeeds on 46/48 runs; O-R-A succeeds on 26/48. The paired result is:
 
-\[
+```math
 \Delta_O=+0.4167,\qquad
 95\%\ \mathrm{CI}=[0.2708,0.5625],\qquad
 p=1.0967\times10^{-5}.
-\]
+```
 
 This passes the preregistered minimum-effect, interval, and sign-flip gates.
 
@@ -177,7 +177,7 @@ With the plan fixed, Rewrite loses both through invalid full-object submission a
 
 Each cell contains eight oracle instances. The payload ratio is the design-time canonical value.
 
-| \(N\) | \(k\) | Canonical payload ratio | Patch | Rewrite | Difference |
+| $`N`$ | $`k`$ | Canonical payload ratio | Patch | Rewrite | Difference |
 |---:|---:|---:|---:|---:|---:|
 | 96 | 1 | 0.179 | 8/8 | 4/8 | +50.0 pp |
 | 96 | 10 | 0.938 | 8/8 | 8/8 | 0 |
@@ -206,13 +206,13 @@ V5-C4 is **not adjudicated**, rather than falsified:
 
 The conditional Patch argument assumes that a correct edit plan already exists. A simplified Agent success decomposition is:
 
-\[
+```math
 P(\text{success})
 \approx
 P(\text{plan correct})
 \times
 P(\text{delivery succeeds}\mid\text{plan correct}).
-\]
+```
 
 Artifact-v5 directly supports a large difference in the second factor:
 
@@ -329,7 +329,7 @@ The original formal `merged_runs.jsonl` and full tool-event payloads were lost a
 ### Safe to cite
 
 - 288/288 coverage;
-- condition, instance, \(N\), \(k\), and repeat counts;
+- condition, instance, $`N`$, $`k`$, and repeat counts;
 - final success;
 - failure class;
 - native-event count (506);

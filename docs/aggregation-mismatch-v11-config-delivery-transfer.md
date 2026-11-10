@@ -21,8 +21,8 @@ limitations, and engineering rules must remain aligned across both versions.
 On production-shaped synthetic JSON configurations, relocation increases the
 strict-success advantage of runtime-resolved semantic IDs over model-authored
 physical indices by **21.875 percentage points**. The effect passes the
-preregistered V11-A1 gate, but all seven differences occur at \(N=48\); all four
-\(N=24\) cells are at ceiling. Patch and Full Rewrite are both perfectly reliable
+preregistered V11-A1 gate, but all seven differences occur at $N=48$; all four
+$`N=24`$ cells are at ceiling. Patch and Full Rewrite are both perfectly reliable
 in all four V11-B cells, so reliability is not adjudicated, although Patch is
 substantially cheaper in tokens, latency, and response bytes.
 
@@ -39,7 +39,7 @@ substantially cheaper in tokens, latency, and response bytes.
 | Stable-ID / Stable-Index | 32/32 / 32/32 |
 | Relocated-ID / Relocated-Index | 32/32 / **25/32** |
 | V11-A1 interaction | **+0.21875**, 95% CI **[0.09375, 0.375]** |
-| V11-A1 exact / Holm \(p\) | 0.015625 / **0.03125** |
+| V11-A1 exact / Holm $p$ | 0.015625 / **0.03125** |
 | V11-A1 state | **`passed`** |
 | Sparse Patch / Rewrite | 32/32 / 32/32 |
 | Dense Patch / Rewrite | 32/32 / 32/32 |
@@ -50,31 +50,31 @@ substantially cheaper in tokens, latency, and response bytes.
 
 ### 1.1 Semantic identity is invariant under relocation
 
-Let \(C\) be a configuration containing objects with stable IDs and let
-\(\pi(C)\) reorder its service array without changing object semantics. For a
-service \(s\),
+Let $C$ be a configuration containing objects with stable IDs and let
+$`\pi(C)`$ reorder its service array without changing object semantics. For a
+service $s$,
 
-\[
-\operatorname{id}_{\pi(C)}(s)=\operatorname{id}_{C}(s),
-\]
+```math
+\mathop{\mathrm{id}}\nolimits_{\pi(C)}(s)=\mathop{\mathrm{id}}\nolimits_{C}(s),
+```
 
 while generally
 
-\[
-\operatorname{index}_{\pi(C)}(s)\ne\operatorname{index}_{C}(s).
-\]
+```math
+\mathop{\mathrm{index}}\nolimits_{\pi(C)}(s)\ne\mathop{\mathrm{index}}\nolimits_{C}(s).
+```
 
 A semantic-ID tool contract asks the model to identify the target and lets the
 runtime resolve its current address against authoritative state. A physical-index
 contract makes the model perform an extra re-binding:
 
-\[
+```math
 \text{semantic target}
 \rightarrow
 \text{current physical index}
 \rightarrow
 \text{tool payload}.
-\]
+```
 
 The theory guarantees representational invariance and a smaller model-owned
 responsibility surface. It does **not** determine how often a particular model
@@ -83,18 +83,18 @@ that empirical translation.
 
 ### 1.2 Patch has a conditional commitment-surface advantage
 
-For object length \(N\) and \(k\) edits, a rough delivery model is
+For object length $N$ and $k$ edits, a rough delivery model is
 
-\[
+```math
 L_{\text{rewrite}}\approx N c_r,
 \qquad
 L_{\text{patch}}\approx c_0+k(c_p+\log N).
-\]
+```
 
 Patch usually commits less model-generated content when the plan is correct,
-\(k\ll N\), addressing is stable, and the executor is reliable. It is not an
+$`k\ll N`$, addressing is stable, and the executor is reliable. It is not an
 unconditional reliability theorem: short rewrites can reach ceiling, Patch has
-address and schema overhead, dense edits weaken the \(k\ll N\) assumption, and a
+address and schema overhead, dense edits weaken the $`k\ll N`$ assumption, and a
 bad plan stays bad under either interface.
 
 ### 1.3 Governed execution changes the safety outcome
@@ -143,13 +143,13 @@ Thirty-two tasks each enter four conditions:
 
 The primary interaction is
 
-\[
+```math
 \Delta_{A1}
 =
 (ID-INDEX)_{\text{relocated}}
 -
 (ID-INDEX)_{\text{stable}}.
-\]
+```
 
 The frozen gate requires a positive effect, an observed effect of at least +0.15,
 support from the interval and randomization test, and passage of data, event,
@@ -187,27 +187,27 @@ safety is 100%.
 
 | Size | Stable-ID | Stable-Index | Relocated-ID | Relocated-Index |
 |---|---:|---:|---:|---:|
-| \(N=24\) | 16/16 | 16/16 | 16/16 | 16/16 |
-| \(N=48\) | 16/16 | 16/16 | 16/16 | **9/16** |
+| $`N=24`$ | 16/16 | 16/16 | 16/16 | 16/16 |
+| $N=48$ | 16/16 | 16/16 | 16/16 | **9/16** |
 | Overall | 32/32 | 32/32 | 32/32 | **25/32** |
 
 The paired interaction is
 
-\[
+```math
 \Delta_{A1}=0.21875,
 \qquad
 95\%\ CI=[0.09375,0.375].
-\]
+```
 
 Seven tasks favor ID, none favor Index, and 25 tie. The raw exact sign-flip
-\(p=0.015625\); Holm-adjusted \(p=0.03125\). V11-A1 therefore passes.
+$p=0.015625$; Holm-adjusted $p=0.03125$. V11-A1 therefore passes.
 
 The wording must remain precise. The observed effect exceeds the preregistered
 +0.15 threshold, and the CI lower bound exceeds zero. The lower bound,
 0.09375, does **not** exceed +0.15; the study therefore does not establish with
 95% confidence that the population effect is at least 15 points.
 
-All seven failures are \(N=48\) Relocated-Index precondition failures. Across 35
+All seven failures are $N=48$ Relocated-Index precondition failures. Across 35
 submitted edit operations in those failed batches, 24 current indices are
 correct and 11 are wrong. Errors are not explained by simply copying every
 pre-relocation index. Preconditions and atomicity reject each faulty batch before
@@ -219,7 +219,7 @@ commit; no partial or collateral mutation is observed.
 
 Sparse Patch, Sparse Rewrite, Dense Patch, and Dense Rewrite all score 32/32.
 The observed Sparse Patch−Rewrite difference is zero with CI [0,0] and
-raw/Holm \(p=1\). Under the frozen rule, this is
+raw/Holm $p=1$. Under the frozen rule, this is
 `not_adjudicated_floor_or_ceiling`, not equivalence and not evidence that Patch
 has no reliability advantage outside this easy matrix.
 
@@ -312,8 +312,8 @@ These are transfer hypotheses, not domains validated by V11.
 ## 7. Limitations and next tests
 
 - One DeepSeek configuration, Chinese prompts, synthetic JSON, correct verified
-  plans, 32 task clusters per module, and only \(N=24/48\).
-- The A effect is heterogeneous and entirely concentrated at \(N=48\).
+  plans, 32 task clusters per module, and only $N=24/48$.
+- The A effect is heterogeneous and entirely concentrated at $N=48$.
 - The B matrix is too easy to estimate reliability or a density crossover.
 - Offline mutation coverage is bounded by the encoded invariants.
 

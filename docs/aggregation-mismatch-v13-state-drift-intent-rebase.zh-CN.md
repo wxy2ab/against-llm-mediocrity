@@ -20,7 +20,7 @@
 
 在冻结 DeepSeek repository-shaped 协议中，四臂 Disjoint/Compatible × Intent/Exact
 均 **24/24**。预注册交互
-\((INTENT-EXACT)_{\mathrm{compatible}}-(INTENT-EXACT)_{\mathrm{disjoint}}\) 为
+$`(INTENT-EXACT)_{\mathrm{compatible}}-(INTENT-EXACT)_{\mathrm{disjoint}}`$ 为
 **0.0**，但四臂同处 ceiling（≥0.90），故 V13-A1 为
 **`not_adjudicated_floor_or_ceiling`**。Ceiling 不等于等价，也不否定 Intent rebase
 方向。
@@ -37,7 +37,7 @@
 | V13 tests | **21/21 passed** |
 | 四臂成功率 | 各 **24/24** |
 | V13-A1 interaction | **0.0**，95% CI **[0.0, 0.0]** |
-| V13-A1 sign-flip \(p\) | 1.0 (`no_nonzero_pairs`) |
+| V13-A1 sign-flip $p$ | 1.0 (`no_nonzero_pairs`) |
 | V13-A1 state | **`not_adjudicated_floor_or_ceiling`** |
 | Formal tokens | **967,252** |
 | Over-budget success | **0** |
@@ -47,23 +47,23 @@
 计划冻结后权威状态可能漂移。runtime 解释的 Intent（`at_least`/`at_most`）应对
 **兼容目标字段**变化更耐 rebase；**无关字段**变化下 Intent 与 Exact 应更接近。
 
-\[
+```math
 \Delta_{A1}
 =
 (P_{\text{INTENT}}-P_{\text{EXACT}})_{\text{compatible}}
 -
 (P_{\text{INTENT}}-P_{\text{EXACT}})_{\text{disjoint}}
-\]
+```
 
-通过门：\(\Delta\ge +0.15\)；task-cluster bootstrap 95% CI 下界 \(>0\)；exact 双侧
-sign-flip \(p<0.05\)；四臂不同时处于 floor（≤0.10）或 ceiling（≥0.90）；
+通过门：$`\Delta\ge +0.15`$；task-cluster bootstrap 95% CI 下界 $>0$；exact 双侧
+sign-flip $p<0.05$；四臂不同时处于 floor（≤0.10）或 ceiling（≥0.90）；
 data/event/offline gates 通过。单一 primary，无 Holm。
 
 ## 2. 实验
 
 - DeepSeek-v4-flash；thinking=False；T=0；top_p=1；max_tokens=32k；zh；300s；单轮；
   无 repair；单次 native tool call
-- 24 clusters；\(N\in\{72,96,144\}\)×8；\(k=N/12\)
+- 24 clusters；$`N\in\{72,96,144\}`$×8；$`k=N/12`$
 - Intent 仅 `apply_intent_operations`；Exact 仅 `apply_exact_patch`
 - Bootstrap seed=20260813；10,000 次
 
@@ -76,9 +76,9 @@ formal missing/extra/dup=0；endpoint↔event 重建 ok；arm matching ok；21 t
 
 ![状态漂移×操作契约](./assets/aggregation-mismatch-experiment/v13-a-drift-contract-success.png)
 
-\[
+```math
 \Delta_{A1}=(1.0-1.0)_{\text{compatible}}-(1.0-1.0)_{\text{disjoint}}=0.0
-\]
+```
 
 state=`not_adjudicated_floor_or_ceiling`（reason=`ceiling`）。
 

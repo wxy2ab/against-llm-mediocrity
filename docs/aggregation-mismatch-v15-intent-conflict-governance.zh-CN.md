@@ -37,7 +37,7 @@
 | Conflict Intent Rebase | 最终 **24/24**；recovery **24/24** |
 | Conflict Exact Rebase | 最终 **24/24**；recovery **24/24** |
 | V15-A1 | **+1.0**；95% CI **[1.0, 1.0]** |
-| Exact sign-flip | \(2/2^{24}=1.1921\times10^{-7}\) |
+| Exact sign-flip | $2/2^{24}=1.1921\times10^{-7}$ |
 | 机器 claim state | **`passed`** |
 | 证据分享状态 | **`share_with_caveats`** |
 | Formal tokens | **1,633,317** |
@@ -48,14 +48,14 @@
 
 ### 1.1 冲突安全与冲突恢复是两个决策
 
-对 sealed operation \(Q_0\)、当前权威状态 \(S_1\)、锁集合 \(L\) 和不变量 \(I\)，
+对 sealed operation $Q_0$、当前权威状态 $S_1$、锁集合 $L$ 和不变量 $I$，
 安全提交要求：
 
-\[
-\operatorname{pre}(Q_0,S_1)
-\land \operatorname{lock\_ok}(Q_0,L)
-\land \operatorname{verify}(\operatorname{apply}(Q_0,S_1),I).
-\]
+```math
+\mathop{\mathrm{pre}}\nolimits(Q_0,S_1)
+\land \mathop{\mathrm{lock\_ok}}\nolimits(Q_0,L)
+\land \mathop{\mathrm{verify}}\nolimits(\mathop{\mathrm{apply}}\nolimits(Q_0,S_1),I).
+```
 
 `lock_ok` 为假时，拒绝是正确行为；但它并不决定整个 episode 必须终止。独立
 governor 应在以下动作中选择：
@@ -84,7 +84,7 @@ Intent 优于 Exact。
 
 - DeepSeek-V4-Flash；中文 prompt；temperature 0；`thinking=False`；
 - 最大 32k tokens；一个共享 300 秒 semantic-episode 预算；
-- 24 个正式任务，\(N\in\{96,144,216\}\) 各 8 个；
+- 24 个正式任务，$`N\in\{96,144,216\}`$ 各 8 个；
 - 每任务四条件：Compatible Intent、Conflict Intent Naive、Conflict Intent
   Rebase、Conflict Exact Rebase；
 - payload seal 后注入 drift；lock-aware atomic apply、global verification、
@@ -120,10 +120,10 @@ Git merge 或任意多 writer 语义。
 
 72 次冲突首提交全部被拒绝，没有局部写入。Intent-Rebase−Intent-Naive 为：
 
-\[
+```math
 \Delta_{A1}=1.0,\qquad 95\%\ CI=[1.0,1.0],\qquad
 p_{\mathrm{exact}}=1.1921\times10^{-7}.
-\]
+```
 
 ![V15 Rebase−Naive 效应](./assets/aggregation-mismatch-experiment/v15-rebase-naive-effect.png)
 

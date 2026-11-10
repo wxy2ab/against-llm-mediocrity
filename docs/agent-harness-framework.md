@@ -65,11 +65,11 @@ More fully:
 
 The mainstream formalization of long-range agents has moved away from "a longer model call":
 
-\[
+```math
 \mathrm{Agent}=\pi_\theta\oplus H
-\]
+```
 
-Among them, \(\pi_\theta\) is the basic model strategy, and \(H\) is the Harness that closes the action–observation–memory loop around the model. Existing reviews usually divide Harness into:
+Among them, $`\pi_\theta`$ is the basic model strategy, and $`H`$ is the Harness that closes the action–observation–memory loop around the model. Existing reviews usually divide Harness into:
 
 - Loops and Workflows; 
 - Context and Memory; 
@@ -149,9 +149,9 @@ But if the new round does not add information, does not change the hard state, d
 
 Agent Harness is not concerned with "how many rounds have been run", but whether it has changed in each round:
 
-\[
+```math
 (I_t,\;S_t,\;\mathcal A_t,\;\pi_t)
-\]
+```
 
 That is, at least one of information, authoritative state, action space, or model strategy.
 
@@ -176,57 +176,57 @@ Therefore, Agent Harness should first be treated as a multidimensional runtime p
 
 Let:
 
-- \(D\): task distribution;
-- \(X\): Fixed external capability base, including environment, tools, accessible data, Oracle and executors;
-- \(b\): Budget, including tokens, wall-clock, tool calls, money and risk budget;
-- \(\pi_\theta\): basic model strategy;
-- \(\mathcal B\): Bridge;
-- \(\Omega\): Action-Space Optimizer;
-- \(J(D;\theta,X,\mathcal B,\Omega,b)\): The expected utility of the system on task distribution.
+- $D$: task distribution;
+- $X$: Fixed external capability base, including environment, tools, accessible data, Oracle and executors;
+- $b$: Budget, including tokens, wall-clock, tool calls, money and risk budget;
+- $`\pi_\theta`$: basic model strategy;
+- $\mathcal B$: Bridge;
+- $\Omega$: Action-Space Optimizer;
+- $J(D;\theta,X,\mathcal B,\Omega,b)$: The expected utility of the system on task distribution.
 
 The minimum core of Agent Harness is recorded as:
 
-\[
+```math
 \mathcal H=(\mathcal B,\Omega)
-\]
+```
 
-When fixing \(D,X,b\), the deployment system can be written as:
+When fixing $D,X,b$, the deployment system can be written as:
 
-\[
+```math
 \mathcal A_{\theta,\mathcal H}
 =\pi_\theta\oplus\mathcal B\oplus\Omega
-\]
+```
 
 ### 4.2 Trajectory state
 
 To avoid mistaking contextual narratives for world states, distinguish:
 
-- \(s_t\): real or potential environmental state;
-- \(o_t\): The observation that the environment exposes to the system;
-- \(g_t\): governed hard state currently recognized by the system;
-- \(c_t\): the context actually presented to the model;
-- \(u_t\): model-facing operator selected by ASO;
-- \(a_t\): The specific proposal submitted by the model under this operator;
-- \(f_t\): Failure evidence, Audit Finding or unresolved obligation.
+- $s_t$: real or potential environmental state;
+- $o_t$: The observation that the environment exposes to the system;
+- $g_t$: governed hard state currently recognized by the system;
+- $c_t$: the context actually presented to the model;
+- $u_t$: model-facing operator selected by ASO;
+- $a_t$: The specific proposal submitted by the model under this operator;
+- $f_t$: Failure evidence, Audit Finding or unresolved obligation.
 
 Action-Space Optimizer first selects which operation the current model should face:
 
-\[
+```math
 u_t=\Omega(g_t,f_t,b_t)
-\]
+```
 
 The model then generates specific action parameters given the state and operator:
 
-\[
+```math
 a_t\sim\pi_\theta\big(a\mid\phi(g_t,o_{\le t},u_t)\big)
-\]
+```
 
 Bridge is responsible for connecting the proposal to the environment and returning observations, verification results, state commits and new control signals:
 
-\[
+```math
 (o_{t+1},v_{t+1},g_{t+1},f_{t+1})
 =\mathcal B(g_t,a_t,X)
-\]
+```
 
 This forms a two-tier decision-making structure:
 
@@ -250,35 +250,35 @@ The two answer respectively "Where is the system not strong enough" and "Does th
 
 ### 5.1 System capability residuals: Decomposition of model and Harness
 
-Define the model-conditioned capability frontier under fixed \(D,X,b\) and the set of allowed Harness designs \(\mathfrak H\):
+Define the model-conditioned capability frontier under fixed $D,X,b$ and the set of allowed Harness designs $\mathfrak H$:
 
-\[
+```math
 C_\theta(D,X,b,\mathfrak H)
 =
 \sup_{\mathcal H\in\mathfrak H}
 J(D;\theta,X,\mathcal H,b)
-\]
+```
 
 It represents: the system frontier that can be achieved when the optimal Harness is selected under a given model and external capability base.
 
 Next, define the ideal system frontier on this external capability base:
 
-\[
+```math
 C^*(D,X,b,\mathfrak H)
 =
 \sup_{\pi,\mathcal H\in\mathfrak H}
 J(D;\pi,X,\mathcal H,b)
-\]
+```
 
-For a specific system \((\theta,\mathcal H)\), the total residual identity decomposition is:
+For a specific system $(\theta,\mathcal H)$, the total residual identity decomposition is:
 
-\[
+```math
 C^*-J(\theta,\mathcal H)
 =
 \underbrace{C^*-C_\theta}_{\text{Model conditional capability gap}}
 +
 \underbrace{C_\theta-J(\theta,\mathcal H)}_{\text{Harness capability fulfillment gap}}
-\]
+```
 
 The point of this decomposition is not to claim that two quantities are directly observable, but to establish a clear attribution goal:
 
@@ -287,23 +287,23 @@ The point of this decomposition is not to claim that two quantities are directly
 
 ### 5.2 Empirical frontier and lower bound
 
-The true \(C_\theta\) is usually unknowable. Experiments can only form empirical frontiers on the tested Harness set \(\mathfrak H_{test}\):
+The true $C_\theta$ is usually unknowable. Experiments can only form empirical frontiers on the tested Harness set $\mathfrak H_{test}$:
 
-\[
+```math
 \widehat C_\theta
 =
 \max_{\mathcal H\in\mathfrak H_{test}}
 \widehat J(\theta,\mathcal H)
-\]
+```
 
 then:
 
-\[
+```math
 \widehat G_H(\theta,\mathcal H)
 =
 \widehat C_\theta-
 \widehat J(\theta,\mathcal H)
-\]
+```
 
 is the current empirical Harness gap in the tested space. When ignoring estimation error, it is only a lower bound on the true capability realization gap; new Harness may continue to improve the empirical frontier.
 
@@ -311,43 +311,43 @@ is the current empirical Harness gap in the tested space. When ignoring estimati
 
 Definable:
 
-\[
+```math
 L_H(\theta)
 =
 \max_{\mathcal H}\,J(\theta,\mathcal H)
 -J(\theta,\mathcal H_0)
-\]
+```
 
 Indicates how much additional capability the Harness can achieve relative to the baseline under a fixed model.
 
 For fixed Harness:
 
-\[
+```math
 L_M(\mathcal H)
 =
 \max_\theta J(\theta,\mathcal H)
 -
 \min_\theta J(\theta,\mathcal H)
-\]
+```
 
 Indicates the difference in capabilities caused by model changes.
 
-There may be strong interactions between the model and Harness. Take the baseline model \(\theta_0\) and baseline Harness \(\mathcal H_0\) as examples:
+There may be strong interactions between the model and Harness. Take the baseline model $\theta_0$ and baseline Harness $\mathcal H_0$ as examples:
 
-\[
+```math
 I_{M\times H}
 =
 J(\theta_1,\mathcal H_1)
 -J(\theta_1,\mathcal H_0)
 -J(\theta_0,\mathcal H_1)
 +J(\theta_0,\mathcal H_0)
-\]
+```
 
-If \(I_{M\times H}\neq0\), then "how much this Harness improves things" is not a model-independent constant. A given Harness may help weak models more, or it may only be exploitable by strong models.
+If $I_{M\times H}\neq0$, then "how much this Harness improves things" is not a model-independent constant. A given Harness may help weak models more, or it may only be exploitable by strong models.
 
 ### 5.4 Execution task residuals
 
-Within a single run, define \(r_t\) as the current unresolved task residual. It does not have to be a single scalar, it can be:
+Within a single run, define $r_t$ as the current unresolved task residual. It does not have to be a single scalar, it can be:
 
 - The set of executable constraints that failed;
 - unmet specifications and interface obligations;
@@ -357,15 +357,15 @@ Within a single run, define \(r_t\) as the current unresolved task residual. It 
 
 If there is scalarization, it can be written as:
 
-\[
+```math
 \Delta r_t=r_t-r_{t+1}
-\]
+```
 
 If a uniform scalar does not exist, use partial ordering:
 
-\[
+```math
 r_{t+1}\prec r_t
-\]
+```
 
 Represents a new governed state that strictly reduces outstanding obligations, provided that protected constraints do not regress.
 
@@ -390,9 +390,9 @@ reverse: environmental failure -> evidence and localization -> control delta -> 
 
 The minimum chain of forward Bridge is:
 
-\[
+```math
 g_t+A_t\rightarrow o_{t+1}\rightarrow v_{t+1}\rightarrow g_{t+1}
-\]
+```
 
 It answers:
 
@@ -431,7 +431,7 @@ Reverse Bridge needs to convert failures into:
 
 Audit Engineering forms the core mechanism of this direction:
 
-\[
+```math
 \text{failure}
 \rightarrow
 \text{evidence}
@@ -441,7 +441,7 @@ Audit Engineering forms the core mechanism of this direction:
 \text{control delta}
 \rightarrow
 \text{regression obligation}
-\]
+```
 
 If the audit only has comments but no control delta, no Bridge is formed; if no hard state or control object is written back, the same failure may still be repeated in the next round.
 
@@ -483,19 +483,19 @@ It is not traditional Policy Optimization.
 
 Traditional Policy Optimization changes:
 
-\[
+```math
 \pi_\theta(a\mid s)
 \rightarrow
 \pi_{\theta'}(a\mid s)
-\]
+```
 
 Action-Space Optimization changes:
 
-\[
+```math
 \mathcal A_t
 \rightarrow
 \widetilde{\mathcal A}_t
-\]
+```
 
 That is, instead of changing the model parameters first, change what operations the model is currently required to complete.
 
@@ -540,7 +540,7 @@ Many high-value actions do not immediately yield the final correct answer. For e
 
 Therefore, a more reasonable goal is to maximize the long-term, proven residual reduction:
 
-\[
+```math
 u_t^*
 =
 \arg\max_{u\in\mathcal U_t}
@@ -549,11 +549,11 @@ u_t^*
 -\lambda C_{t:T}(u)
 -\mu Risk_{t:T}(u)
 \Big]
-\]
+```
 
 When there is a suitable residual measure, it can also be written as:
 
-\[
+```math
 u_t^*
 =
 \arg\max_u
@@ -562,7 +562,7 @@ u_t^*
 -\lambda C(u)
 -\mu Risk(u)
 \Big]
-\]
+```
 
 ### 7.4 Seven basic dimensions of ASO
 
@@ -609,11 +609,11 @@ But these facts do not automatically imply that:
 
 Therefore it is necessary to distinguish:
 
-\[
+```math
 \text{structural advantage}
 \neq
 \text{model-realized advantage}
-\]
+```
 
 The task of ASO is not to formulate a dogma of "always patch" or "always audit" but to identify operation-interface crossovers under different models, lengths, couplings, candidate qualities, edit densities, and budgets.
 
@@ -678,13 +678,13 @@ It continuously produces valuable momentary results but fails to generate sustai
 
 ### 8.3 Interaction terms cannot be ignored
 
-Assume \(B_0,B_1\) is a weak/strong Bridge, \(O_0,O_1\) is a weak/strong ASO, then the interaction term is:
+Assume $B_0,B_1$ is a weak/strong Bridge, $`O_0,O_1`$ is a weak/strong ASO, then the interaction term is:
 
-\[
+```math
 I_{B\times O}
 =
 J(B_1,O_1)-J(B_1,O_0)-J(B_0,O_1)+J(B_0,O_0)
-\]
+```
 
 If the interaction term is large, just reporting "how much Bridge improves" or "how much ASO improves" can be misleading. Quantification of Agent Harness must explicitly model interactions, rather than assuming by default that component effects are simply additive.
 
@@ -696,32 +696,32 @@ If the interaction term is large, just reporting "how much Bridge improves" or "
 
 Suppose the structural state of an Agent iteration is:
 
-\[
+```math
 Z_t=(I_t,g_t,\mathcal A_t,\pi_t)
-\]
+```
 
 where:
 
-- \(I_t\): available information, evidence and observations;
-- \(g_t\): authoritative hard state;
-- \(\mathcal A_t\): current model-facing action space;
-- \(\pi_t\): model strategy.
+- $I_t$: available information, evidence and observations;
+- $g_t$: authoritative hard state;
+- $\mathcal A_t$: current model-facing action space;
+- $\pi_t$: model strategy.
 
 if:
 
-\[
+```math
 I_{t+1}=I_t,\quad
  g_{t+1}=g_t,\quad
 \mathcal A_{t+1}=\mathcal A_t,\quad
 \pi_{t+1}=\pi_t
-\]
+```
 
 Then the new round is basically still:
 
-\[
+```math
 y_{t+1}\sim
 p_{\pi_t}(y\mid I_t,g_t,\mathcal A_t)
-\]
+```
 
 That is, resampling under the same conditional distribution.
 
@@ -729,7 +729,7 @@ That is, resampling under the same conditional distribution.
 
 Definable:
 
-\[
+```math
 \chi_t
 =
 \mathbf 1[
@@ -737,12 +737,12 @@ Definable:
 \vee\Delta g_t\neq0
 \vee\Delta\mathcal A_t\neq0
 \vee\Delta\pi_t\neq0]
-\]
+```
 
-- \(\chi_t=0\): A repeated-sampling round;
-- \(\chi_t=1\): At least one structure variable has changed.
+- $\chi_t=0$: A repeated-sampling round;
+- $\chi_t=1$: At least one structure variable has changed.
 
-This does not mean that the iteration of \(\chi_t=1\) is necessarily valid, nor does it mean that \(\chi_t=0\) has no best-of-N gain at all. It only shows that without structural changes, the system does not acquire a new problem-solving mechanism.
+This does not mean that the iteration of $\chi_t=1$ is necessarily valid, nor does it mean that $\chi_t=0$ has no best-of-N gain at all. It only shows that without structural changes, the system does not acquire a new problem-solving mechanism.
 
 ### 9.3 Who is responsible for the four types of changes?
 
@@ -795,7 +795,7 @@ Only when the operator, Bridge mechanism, or state rules under study are the onl
 
 End-to-end success can be factored into:
 
-\[
+```math
 P(\text{success})
 =
 P(\text{plan correct})
@@ -805,7 +805,7 @@ P(\text{delivery correct}\mid\text{plan correct})
 P(\text{execution correct}\mid\cdots)
 \cdot
 P(\text{verification and commit correct}\mid\cdots)
-\]
+```
 
 If you do not separate these four layers:
 
@@ -818,34 +818,34 @@ will be confused as "Agent failed".
 
 ### 10.4 Two-factor experiment and Shapley attribution
 
-Do \(2\times2\) experiments on Bridge and ASO, and denote:
+Do $2\times2$ experiments on Bridge and ASO, and denote:
 
-\[
+```math
 J_{00}=J(B_0,O_0),\;
 J_{10}=J(B_1,O_0),\;
 J_{01}=J(B_0,O_1),\;
 J_{11}=J(B_1,O_1)
-\]
+```
 
 Then the mean order-independent Shapley attribution is:
 
-\[
+```math
 \phi_B
 =
 \frac12[(J_{10}-J_{00})+(J_{11}-J_{01})]
-\]
+```
 
-\[
+```math
 \phi_O
 =
 \frac12[(J_{01}-J_{00})+(J_{11}-J_{10})]
-\]
+```
 
 and satisfy:
 
-\[
+```math
 \phi_B+\phi_O=J_{11}-J_{00}
-\]
+```
 
 This is more robust than reporting only a single ablation under a fixed baseline because it averages out the order in which different components are added.
 
@@ -853,13 +853,13 @@ This is more robust than reporting only a single ablation under a fixed baseline
 
 A more complete design is:
 
-\[
+```math
 M\times B\times O
-\]
+```
 
 can be written as:
 
-\[
+```math
 Y_{ijk}
 =
 \mu+\alpha_i+\beta_j+\gamma_k
@@ -868,7 +868,7 @@ Y_{ijk}
 +(\beta\gamma)_{jk}
 +(\alpha\beta\gamma)_{ijk}
 +\epsilon
-\]
+```
 
 It can answer:
 
@@ -1036,7 +1036,7 @@ It is the first step in the system, not the end.
 | SGAR | hard-state authority | What states are recognized by the system? | Forward Bridge and State Commitment Layer |
 | Knowledge Governance | governed task knowledge | How is task knowledge externalized, verified, updated and revoked? | Provides control objects for Bridge and ASO |
 | Mismatch Theory | value loss diagnosis | At which structural site is the value lost? | Provides diagnostics for Harness routing, not a peer component of Harness |
-| Agentic RL | internalized policy optimization | How to change the model policy? | Change \(\pi\), distinguished from inference-time ASO, but can be internalized into each other |
+| Agentic RL | internalized policy optimization | How to change the model policy? | Change $\pi$, distinguished from inference-time ASO, but can be internalized into each other |
 
 ### 13.1 Mapping of Harness component and runtime function
 
@@ -1244,15 +1244,15 @@ This article follows three types of evidence levels:
 
 ### Proposition 1: Model conditional frontier decomposition (T)
 
-Under fixed \(D,X,b,\mathfrak H\):
+Under fixed $D,X,b,\mathfrak H$:
 
-\[
+```math
 C^*-J=(C^*-C_\theta)+(C_\theta-J)
-\]
+```
 
 It is an identity decomposition by definition.
 
-**Does not mean:** \(C_\theta\) is already observable, or the internal contribution of the model and Harness is naturally additive.
+**Does not mean:** $C_\theta$ is already observable, or the internal contribution of the model and Harness is naturally additive.
 
 ### Proposition 2: The empirical frontier only gives the lower bound of the Harness gap (T)
 
@@ -1357,7 +1357,7 @@ Can this effect be reproduced by controlled experiments and predict to new tasks
 
 Its core framework can be compressed into:
 
-\[
+```math
 \boxed{
 \text{Agent System}
 =
@@ -1369,11 +1369,11 @@ Its core framework can be compressed into:
 \oplus
 \text{Action-Space Optimization}
 }
-\]
+```
 
 After fixing the Capability Substrate:
 
-\[
+```math
 \boxed{
 \text{Observed Residual}
 =
@@ -1381,17 +1381,17 @@ After fixing the Capability Substrate:
 +
 \text{Harness Realization Gap}
 }
-\]
+```
 
 And inside a single run:
 
-\[
+```math
 \boxed{
 \text{ASO chooses the next problem form;}
 \quad
 \text{Bridge decides whether the result becomes progress.}
 }
-\]
+```
 
 Current operation-interface experiments around aggregation mismatch have proven that action space can become an independent, controllable, and quantifiable Agent engineering object. This is just the first step. If state governance, auditing, verification, recovery, context, tool interfaces, orchestration, budgeting, and security boundaries can all obtain independent effects, interaction effects, and migration rules in the same way, Agent Engineering will no longer rely primarily on the "empirical recipes of excellent engineers."
 
@@ -1413,24 +1413,24 @@ It will begin to take on the basic form of scientific engineering:
 
 | Symbol | Meaning |
 |---|---|
-| \(D\) | Task distribution |
-| \(X\) | External capability base: environment, tools, data, Oracle, executor |
-| \(b\) | tokens, time, tool calls, money and risk budget |
-| \(\pi_\theta\) | Basic model strategy |
-| \(\mathcal B\) | Bridge |
-| \(\Omega\) | Action-Space Optimizer |
-| \(\mathcal H\) | Agent Harness, \((\mathcal B,\Omega)\) |
-| \(s_t\) | Potential real environment state |
-| \(o_t\) | Environmental Observation |
-| \(g_t\) | governed hard state |
-| \(c_t\) | Context sent to the model |
-| \(u_t\) | model-facing operator |
-| \(a_t\) | Proposal submitted by the model |
-| \(f_t\) | failure evidence / audit finding / unresolved obligation |
-| \(r_t\) | Current task residual |
-| \(J\) | System expected utility |
-| \(C_\theta\) | Model-conditioned capability frontier |
-| \(C^*\) | The ideal system frontier on a given external capability base |
+| $D$ | Task distribution |
+| $X$ | External capability base: environment, tools, data, Oracle, executor |
+| $b$ | tokens, time, tool calls, money and risk budget |
+| $`\pi_\theta`$ | Basic model strategy |
+| $\mathcal B$ | Bridge |
+| $\Omega$ | Action-Space Optimizer |
+| $\mathcal H$ | Agent Harness, $`(\mathcal B,\Omega)`$ |
+| $s_t$ | Potential real environment state |
+| $o_t$ | Environmental Observation |
+| $g_t$ | governed hard state |
+| $c_t$ | Context sent to the model |
+| $u_t$ | model-facing operator |
+| $a_t$ | Proposal submitted by the model |
+| $f_t$ | failure evidence / audit finding / unresolved obligation |
+| $r_t$ | Current task residual |
+| $J$ | System expected utility |
+| $C_\theta$ | Model-conditioned capability frontier |
+| $`C^*`$ | The ideal system frontier on a given external capability base |
 
 ---
 
@@ -1438,14 +1438,14 @@ It will begin to take on the basic form of scientific engineering:
 
 | Model | Bridge | ASO | Usage |
 |---|---|---|---|
-| \(M_0\) | \(B_0\) | \(O_0\) | Full baseline |
-| \(M_0\) | \(B_1\) | \(O_0\) | Bridge main effect on weak model |
-| \(M_0\) | \(B_0\) | \(O_1\) | ASO main effect on weak model |
-| \(M_0\) | \(B_1\) | \(O_1\) | Combination effects on weak models |
-| \(M_1\) | \(B_0\) | \(O_0\) | Model improvement baseline |
-| \(M_1\) | \(B_1\) | \(O_0\) | Bridge main effect on strong model |
-| \(M_1\) | \(B_0\) | \(O_1\) | ASO main effect on strong model |
-| \(M_1\) | \(B_1\) | \(O_1\) | Complete system and third-order interactions |
+| $M_0$ | $B_0$ | $O_0$ | Full baseline |
+| $M_0$ | $B_1$ | $O_0$ | Bridge main effect on weak model |
+| $M_0$ | $B_0$ | $O_1$ | ASO main effect on weak model |
+| $M_0$ | $B_1$ | $O_1$ | Combination effects on weak models |
+| $M_1$ | $B_0$ | $O_0$ | Model improvement baseline |
+| $M_1$ | $B_1$ | $O_0$ | Bridge main effect on strong model |
+| $M_1$ | $B_0$ | $O_1$ | ASO main effect on strong model |
+| $M_1$ | $B_1$ | $O_1$ | Complete system and third-order interactions |
 
 For each cell, report at least:
 

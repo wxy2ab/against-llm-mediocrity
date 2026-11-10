@@ -37,44 +37,44 @@ So strong reasoning models have not eliminated the need for Plan and Candidate i
 
 Suppose the final artifact of a task is composed of a sequence of decisions:
 
-\[
+```math
 z=(d_1,d_2,\ldots,d_T)
-\]
+```
 
-At step \(t\), the system can choose only the next local decision based on the current prefix:
+At step $t$, the system can choose only the next local decision based on the current prefix:
 
-\[
-d_t \sim \pi(d_t\mid d_{<t},x)
-\]
+```math
+d_t \sim \pi(d_t\mid d_{< t},x)
+```
 
 But task value is assigned to the full aggregate result:
 
-\[
+```math
 V(z)=V(d_1,d_2,\ldots,d_T)
-\]
+```
 
-Let the proxy score used by the local decision-maker at step \(t\) be:
+Let the proxy score used by the local decision-maker at step $t$ be:
 
-\[
-q_t(d\mid d_{<t},x)
-\]
+```math
+q_t(d\mid d_{< t},x)
+```
 
 And let the true global value attainable by choosing a local decision and then completing it optimally be:
 
-\[
+```math
 Q_t^*(d)
 =
 \sup_{d_{t+1:T}}
-V(d_{<t},d,d_{t+1:T})
-\]
+V(d_{< t},d,d_{t+1:T})
+```
 
 Aggregation mismatch appears when the local ranking and the true value-to-go ranking disagree:
 
-\[
+```math
 \arg\max_d q_t(d)
 \neq
 \arg\max_d Q_t^*(d)
-\]
+```
 
 ### 1.1 Task Nonlocality Is Not System Mismatch Severity
 
@@ -82,25 +82,25 @@ Let `α_k` denote how well true utility can be approximated by bounded-complexit
 
 Aggregation mismatch must be measured relative to the deployed system. Let `μ_eval` be a common evaluation-history distribution held fixed across systems. On a preregistered evaluation decision set `C_eval(h_t)`, define
 
-\[
+```math
 \hat d_t=\arg\max_{d\in C_{\mathrm{eval}}(h_t)}q_t(d\mid h_t),
 \qquad
 d_t^\star=\arg\max_{d\in C_{\mathrm{eval}}(h_t)}Q_t^\star(h_t,d).
-\]
+```
 
 One may then report argmax disagreement
 
-\[
+```math
 e_{\mathrm{agg}}=\Pr_{h_t\sim\mu_{\mathrm{eval}}}[\hat d_t\ne d_t^\star]
-\]
+```
 
 and global-completion-value regret
 
-\[
-\operatorname{Reg}_{\mathrm{agg}}=
+```math
+\mathop{\mathrm{Reg}}\nolimits_{\mathrm{agg}}=
 \mathbb E_{h_t\sim\mu_{\mathrm{eval}}}
 \left[Q_t^\star(h_t,d_t^\star)-Q_t^\star(h_t,\hat d_t)\right].
-\]
+```
 
 `μ_eval`, `C_eval`, and tie-breaking should all be fixed before comparison. If `C_eval` contains only candidates available to both compared systems, the metric primarily isolates ranking and commitment quality. If it is the full feasible set, the metric also absorbs support and search failure and must be labeled accordingly. Replacing `μ_eval` with each system's own `μ_Π` instead measures on-policy aggregation burden and should be reported separately. A GF(2)-style task can have low task local decomposability while a system with externalized complete constraints has near-zero aggregation regret.
 
@@ -123,35 +123,35 @@ So the essence of aggregation mismatch is not that "the model has no plan." It i
 
 For one LLM call, let the output be:
 
-\[
+```math
 y=(y_1,y_2,\ldots,y_T)
-\]
+```
 
 The model generates token by token:
 
-\[
-y_t\sim p_\theta(y_t\mid x,y_{<t})
-\]
+```math
+y_t\sim p_\theta(y_t\mid x,y_{< t})
+```
 
 But the task is evaluated on the complete sequence:
 
-\[
+```math
 J(y_1,\ldots,y_T)
-\]
+```
 
 Autoregressive conditional probability must not itself be treated as a locality assumption. The chain rule
 
-\[
-p_\theta(y\mid x)=\prod_t p_\theta(y_t\mid x,y_{<t})
-\]
+```math
+p_\theta(y\mid x)=\prod_t p_\theta(y_t\mid x,y_{< t})
+```
 
 can represent any joint distribution exactly, and each conditional may encode global constraints. Single-call aggregation mismatch instead compares a deployed local proxy $q_t$ with global completion value:
 
-\[
-Q_t^\star(d)=\sup_{y_{>t}}J(y_{<t},d,y_{>t}),
+```math
+Q_t^\star(d)=\sup_{y_{>t}}J(y_{< t},d,y_{>t}),
 \qquad
 \arg\max_d q_t(d)\ne\arg\max_d Q_t^\star(d).
-\]
+```
 
 Here $q_t$ may combine approximate conditionals, greedy or truncated decoding scores, finite-search heuristics, and the current control state. Only when this ranking divergence combines with prefix lock-in does the local choice instantiate aggregation mismatch.
 
@@ -203,11 +203,11 @@ Before formal generation, one can construct:
 
 The role of Plan is to compress full task value into a control structure that later local tokens can keep referencing:
 
-\[
+```math
 \text{Global Value}
 \rightarrow
 \text{Local Generation Constraints}
-\]
+```
 
 For aggregation-heavy tasks such as stories, designs, code, and analysis, good artifacts usually depend on multiple cross-paragraph, cross-module, and cross-stage structures holding together at once. Building those structures first reduces the chance that local language probability pulls generation off course.
 
@@ -293,11 +293,11 @@ When a completed artifact already contains a lot of correct structure, a full re
 
 The structural advantage of Patch is:
 
-\[
+```math
 \text{preserve verified structure}
 +
 \text{re-search only the mismatched local region}
-\]
+```
 
 So for sparse-modification tasks, the preferred pattern is:
 
@@ -347,33 +347,33 @@ Abstain is, in effect, a legal null action added to the search space so the inte
 
 The completed artifact of an agent is not a single text output but a trajectory interacting with the environment:
 
-\[
+```math
 \tau=(s_0,a_0,o_1,s_1,a_1,o_2,\ldots,s_T)
-\]
+```
 
 where:
 
-- \(s_t\): external state,
-- \(a_t\): the current agent action,
-- \(o_{t+1}\): tool or environment feedback, and
-- \(U(\tau)\): the final value of the complete task trajectory.
+- $s_t$: external state,
+- $a_t$: the current agent action,
+- $o_{t+1}$: tool or environment feedback, and
+- $U(\tau)$: the final value of the complete task trajectory.
 
-At step \(t\), the agent must choose an action from the current history:
+At step $t$, the agent must choose an action from the current history:
 
-\[
+```math
 a_t\sim\pi(a_t\mid h_t)
-\]
+```
 
 But the truly optimal action depends on all later state transitions and future actions:
 
-\[
+```math
 Q^*(h_t,a)
 =
 \sup_{\pi_{t+1:T}}
 \mathbb E[U(\tau)\mid h_t,a]
-\]
+```
 
-Real agents cannot compute \(Q^*\) exactly, so they usually rely on visible local proxies:
+Real agents cannot compute $`Q^*`$ exactly, so they usually rely on visible local proxies:
 
 - whether this step is complete,
 - whether the current test passes,
@@ -383,11 +383,11 @@ Real agents cannot compute \(Q^*\) exactly, so they usually rely on visible loca
 
 So one may get:
 
-\[
+```math
 \arg\max_a \hat q_{\text{local}}(a\mid h_t)
 \neq
 \arg\max_a Q^*(h_t,a)
-\]
+```
 
 That is **agent-trajectory aggregation mismatch**.
 
@@ -411,19 +411,19 @@ So agent-trajectory aggregation mismatch adds three extra difficulties beyond si
 
 Define the highest reachable value under the current history as:
 
-\[
+```math
 V_{\text{reachable}}(h_t)
 =
 \sup_{\tau\in\mathcal R(h_t)}U(\tau)
-\]
+```
 
 A locally plausible action may drastically shrink the reachable future set:
 
-\[
+```math
 V_{\text{reachable}}(h_{t+1})
 \ll
 V_{\text{reachable}}(h_t)
-\]
+```
 
 So at the agent level, countering aggregation mismatch is not just about improving the quality of the current action. It is also about:
 
@@ -932,11 +932,11 @@ Key metrics include:
 
 The most important comparison is not "short answer vs multi-stage agent." It is:
 
-\[
+```math
 \text{external structure}
 \quad vs \quad
 \text{budget-matched native reasoning}
-\]
+```
 
 Only when the former still improves task value can we claim structural gain rather than merely more compute.
 
@@ -984,7 +984,7 @@ The goal of fighting trajectory-level aggregation mismatch should not be judged 
 
 > After the current action, is a high-value ending still reachable?
 
-The true \(V_{\text{reachable}}\) is hard to observe directly, but one can approximate it using:
+The true $V_{\text{reachable}}$ is hard to observe directly, but one can approximate it using:
 
 - whether key invariants were broken,
 - whether other candidate paths were closed,

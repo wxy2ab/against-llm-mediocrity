@@ -360,23 +360,23 @@ This minimal pair establishes aggregation as a primitive failure station.
 
 Autoregressive generation is one way to implement a sequence joint distribution:
 
-\[
-p_\theta(Y\mid x)=\prod_{k=1}^{n}p_\theta(t_k\mid t_{<k},x).
-\]
+```math
+p_\theta(Y\mid x)=\prod_{k=1}^{n}p_\theta(t_k\mid t_{< k},x).
+```
 
 This is the exact chain rule and imposes no locality restriction on the global dependencies that can be represented. Exact conditionals can encode global checks, long-range bindings, and future constraints. It therefore does not follow from “autoregressive” that a locally likely choice must dilute global value.
 
 The relevant comparison is between the deployed local proxy and global completion value. For a candidate decision $d$ at position $k$, define
 
-\[
-Q_k^\star(d)=\sup_{Y_{>k}}U(Y_{<k},d,Y_{>k};S_{\mathrm{world}}).
-\]
+```math
+Q_k^\star(d)=\sup_{Y_{>k}}U(Y_{< k},d,Y_{>k};S_{\mathrm{world}}).
+```
 
 Aggregation mismatch occurs when the local score, decoder, or finite search uses $q_k(d)$ such that
 
-\[
+```math
 \arg\max_d q_k(d)\ne\arg\max_d Q_k^\star(d),
-\]
+```
 
 and early commitment shrinks the reachable future set. Approximation error in the conditionals, greedy or truncated decoding, insufficient search, unexternalized future constraints, and irreversible commitment can all create this divergence. Diffusion generation, MCTS node selection, human serial writing, or any stepwise assembly process can exhibit the same mismatch; autoregressive generation with exact conditionals, coherent search, or sufficiently externalized state need not.
 

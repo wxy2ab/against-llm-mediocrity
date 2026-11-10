@@ -72,9 +72,9 @@
 
 把任务环境写成一个部分可观测决策过程：
 
-\[
+```math
 \mathcal{E}=(\mathcal{S},\mathcal{A},\mathcal{T},R^*,\Omega,\mathcal{O},\gamma).
-\]
+```
 
 其中：
 
@@ -83,29 +83,29 @@
 | $\mathcal{S}$ | 真实状态空间，包括世界状态、用户真实意图、任务背景与交互状态 |
 | $\mathcal{A}$ | 理论上可采取的动作，包括文本输出、工具调用、检索、代码执行、询问用户等 |
 | $\mathcal{T}(s'\mid s,a)$ | 真实状态转移：采取动作后环境如何变化 |
-| $R^*(s,a,s')$ | 真实任务奖励，即人类最终关心的成功标准 |
+| $`R^*(s,a,s')`$ | 真实任务奖励，即人类最终关心的成功标准 |
 | $\Omega$ | 系统可能接收的观测空间 |
 | $\mathcal{O}(o\mid s)$ | 观测函数：真实状态如何映射为文本、图像、文件、日志或工具返回 |
 | $\gamma$ | 对延迟回报的折扣或长程权重 |
 
 对于有限时域任务，真实目标不是单个 token 的局部似然，而是最大化整条轨迹的期望价值：
 
-\[
+```math
 \tau^*=\arg\max_{\tau=(s_0,a_0,\ldots,s_H)}
 \mathbb{E}\left[\sum_{t=0}^{H-1}\gamma^t R^*(s_t,a_t,s_{t+1})\right].
-\]
+```
 
 纯文本一次性任务可以看作这个表达的退化情形：轨迹的主要动作是生成输出序列 $y$，目标简化为
 
-\[
+```math
 y^*=\arg\max_y V^*(y\mid x).
-\]
+```
 
 ### 2.2 LLM 系统实际使用的近似
 
 部署中的 LLM 系统并不直接拥有真实环境，而是依靠一组近似组件：
 
-\[
+```math
 \mathcal{M}_\theta=
 \left(
 B_\theta,
@@ -116,29 +116,29 @@ r_\theta,
 D,
 \mathcal{A}_{\mathrm{sys}}
 \right).
-\]
+```
 
 | 组件 | 含义 |
 |---|---|
 | $B_\theta$ | 信念 / 状态估计器：如何从观测历史形成内部任务状态 |
-| $\hat{\mathcal{T}}_\theta$ | 世界模型：如何预测行动的后果 |
-| $\hat{R}_\theta$ | 内部价值判断或代理目标 |
+| $`\hat{\mathcal{T}}_\theta`$ | 世界模型：如何预测行动的后果 |
+| $`\hat{R}_\theta`$ | 内部价值判断或代理目标 |
 | $\pi_\theta$ | 学得策略与 token 先验：哪些候选更容易被生成 |
 | $r_\theta$ | 能力 / 模式路由器：何时激活何种知识、技能、角色或审计模式 |
 | $D$ | 解码、规划、搜索、验证与执行算法 |
-| $\mathcal{A}_{\mathrm{sys}}$ | 系统实际上允许调用的动作与接口集合 |
+| $`\mathcal{A}_{\mathrm{sys}}`$ | 系统实际上允许调用的动作与接口集合 |
 
-系统还会受到外部规格与评估器影响。令 $R_{\mathrm{proxy}}$ 表示训练或产品流程中的代理奖励，$R_{\mathrm{eval}}$ 表示部署时使用的评测规则。一次失败可以理解为：真实任务所需对象与上述一个或多个近似组件之间发生了具有因果作用的失配。
+系统还会受到外部规格与评估器影响。令 $R_{\mathrm{proxy}}$ 表示训练或产品流程中的代理奖励，$`R_{\mathrm{eval}}`$ 表示部署时使用的评测规则。一次失败可以理解为：真实任务所需对象与上述一个或多个近似组件之间发生了具有因果作用的失配。
 
 ### 2.3 机制失配画像
 
 令八个分量分别表示八类机制失配的严重度：
 
-\[
+```math
 \mathbf{m}=
 (m_{\mathrm{spec}},m_{\mathrm{obs}},m_{\mathrm{belief}},m_{\mathrm{dyn}},
 m_{\mathrm{act}},m_{\mathrm{support}},m_{\mathrm{route}},m_{\mathrm{search}}).
-\]
+```
 
 这个向量不是要求一次性精确估计的分数，而是一种诊断记录。实际工作中，可以通过干预前后的性能变化来近似每个分量：如果只改变某个组件就显著改善结果，那么该组件更可能是因果瓶颈。
 
@@ -150,21 +150,21 @@ m_{\mathrm{act}},m_{\mathrm{support}},m_{\mathrm{route}},m_{\mathrm{search}}).
 
 #### 定义
 
-真实任务奖励 $R^*$、训练代理奖励 $R_{\mathrm{proxy}}$、模型内部价值 $\hat{R}_\theta$ 与评测规则 $R_{\mathrm{eval}}$ 之间不一致：
+真实任务奖励 $`R^*`$、训练代理奖励 $R_{\mathrm{proxy}}$、模型内部价值 $`\hat{R}_\theta`$ 与评测规则 $`R_{\mathrm{eval}}`$ 之间不一致：
 
-\[
+```math
 \arg\max_y R_{\mathrm{proxy}}(y)
 \ne
 \arg\max_y R^*(y),
-\]
+```
 
 或评估器选择的候选不是用户真实目标下的最优候选：
 
-\[
+```math
 \arg\max_y R_{\mathrm{eval}}(y)
 \ne
 \arg\max_y R^*(y).
-\]
+```
 
 #### 核心问题
 
@@ -202,15 +202,15 @@ m_{\mathrm{act}},m_{\mathrm{support}},m_{\mathrm{route}},m_{\mathrm{search}}).
 
 如果存在两个状态 $s_1,s_2$，它们在当前观测机制下不可区分：
 
-\[
+```math
 \mathcal{O}(\cdot\mid s_1)=\mathcal{O}(\cdot\mid s_2),
-\]
+```
 
 但最优动作不同：
 
-\[
+```math
 a^*(s_1)\ne a^*(s_2),
-\]
+```
 
 那么系统仅凭当前观测无法可靠求解。
 
@@ -246,13 +246,13 @@ a^*(s_1)\ne a^*(s_2),
 
 #### 定义
 
-必要信息已经存在于观测历史中，但系统没有正确解析、绑定、压缩、保持或调用它。令理想信念状态为 $B^*$，则
+必要信息已经存在于观测历史中，但系统没有正确解析、绑定、压缩、保持或调用它。令理想信念状态为 $`B^*`$，则
 
-\[
+```math
 B_\theta(s_t\mid o_{\le t})
 \ne
 B^*(s_t\mid o_{\le t}).
-\]
+```
 
 这里的"信念"不是要求模型显式输出概率分布，而是指所有会影响后续决策的内部任务状态。
 
@@ -291,11 +291,11 @@ B^*(s_t\mid o_{\le t}).
 
 系统对行动后果的预测与真实状态转移不一致：
 
-\[
+```math
 \hat{\mathcal{T}}_\theta(s_{t+1}\mid s_t,a_t)
 \ne
 \mathcal{T}(s_{t+1}\mid s_t,a_t).
-\]
+```
 
 #### 核心问题
 
@@ -331,9 +331,9 @@ B^*(s_t\mid o_{\le t}).
 
 完成任务所需的动作不在系统实际可用动作空间中：
 
-\[
+```math
 a^*\notin\mathcal{A}_{\mathrm{sys}}.
-\]
+```
 
 动作"名义上存在但因权限、schema、延迟、可靠性或流程约束而不可调用"，也属于有效动作空间不足。
 
@@ -371,15 +371,15 @@ a^*\notin\mathcal{A}_{\mathrm{sys}}.
 
 正确知识、算子、推理模式或候选结构在模型策略的有效支持中概率过低：
 
-\[
+```math
 \pi_\theta(y^*\mid o)\approx 0,
-\]
+```
 
 或在现实预算 $B$ 下，正确候选几乎不可达：
 
-\[
-y^*\notin \operatorname{EffectiveSupport}_B(\pi_\theta).
-\]
+```math
+y^*\notin \mathop{\mathrm{EffectiveSupport}}\nolimits_B(\pi_\theta).
+```
 
 #### 核心问题
 
@@ -415,19 +415,19 @@ y^*\notin \operatorname{EffectiveSupport}_B(\pi_\theta).
 
 模型已经学到某种能力、策略、审计结构或行为模式 $X$，但它实际触发 $X$ 的区域 $M_X$ 与真实适用区域 $T_X$ 不一致：
 
-\[
+```math
 M_X\ne T_X.
-\]
+```
 
 两个方向分别是：
 
-\[
+```math
 M_X\setminus T_X \quad \text{（过触发）},
-\]
+```
 
-\[
+```math
 T_X\setminus M_X \quad \text{（欠触发）}.
-\]
+```
 
 #### 核心问题
 
@@ -465,11 +465,11 @@ T_X\setminus M_X \quad \text{（欠触发）}.
 
 真实目标、观测、信念状态、世界模型、动作空间、能力支持与能力路由已经足够接近正确，但当前搜索与执行算法 $D$ 没有找到或保持好候选：
 
-\[
-y^*\in \operatorname{EffectiveSupport}_B(\pi_\theta),
+```math
+y^*\in \mathop{\mathrm{EffectiveSupport}}\nolimits_B(\pi_\theta),
 \qquad
 D(\pi_\theta,B)\ne y^*.
-\]
+```
 
 #### 核心问题
 
@@ -478,7 +478,7 @@ D(\pi_\theta,B)\ne y^*.
 #### 常见表现
 
 - greedy decoding 被早期 token 锁定；
-- 单次回答平庸，但 best-of-$N$ 中存在高质量答案；
+- 单次回答平庸，但 best-of-$`N`$ 中存在高质量答案；
 - 局部步骤合理，整体结构却因路径依赖而崩坏；
 - 初始计划错误后，后续步骤持续为其自洽化；
 - 候选已经生成，但排序器、verifier 或执行器选错；
@@ -490,7 +490,7 @@ D(\pi_\theta,B)\ne y^*.
 
 #### 典型干预
 
-- best-of-$N$、self-consistency 与 beam search；
+- best-of-$`N`$、self-consistency 与 beam search；
 - plan-then-execute、generate-then-rank 与回溯；
 - tree search、MCTS 与受约束组合搜索；
 - 独立 critic / verifier 与多模型交叉评审；
@@ -507,10 +507,10 @@ D(\pi_\theta,B)\ne y^*.
 
 | 层级 | 机制失配 | 形式化对象 | 核心诊断 | 首选干预 |
 |---:|---|---|---|---|
-| 1 | 规格 / 奖励 | $R^*,R_{\mathrm{proxy}},\hat R_\theta,R_{\mathrm{eval}}$ | 是否优化了错误目标？ | 改目标、rubric、reward、验收标准 |
+| 1 | 规格 / 奖励 | $`R^*,R_{\mathrm{proxy}},\hat R_\theta,R_{\mathrm{eval}}`$ | 是否优化了错误目标？ | 改目标、rubric、reward、验收标准 |
 | 2 | 观测可得性 | $\Omega,\mathcal O$ | 决策所需信息是否进入系统？ | 检索、接数据、上传文件、澄清 |
 | 3 | 信念 / 表征 | $B_\theta$ | 已有信息是否形成正确任务状态？ | 状态抽取、结构化表示、外部记忆 |
-| 4 | 动态 / 世界模型 | $\hat{\mathcal T}_\theta$ | 是否误判行动后果？ | 真实执行、测试、回测、反馈校准 |
+| 4 | 动态 / 世界模型 | $`\hat{\mathcal T}_\theta`$ | 是否误判行动后果？ | 真实执行、测试、回测、反馈校准 |
 | 5 | 行动 / 接口 | $\mathcal A_{\mathrm{sys}}$ | 正确动作是否可调用？ | 工具、API、权限、交互工作流 |
 | 6 | 策略先验 / 能力支持 | $\pi_\theta$ | 正确解法是否在有效支持内？ | 范例、训练、RAG、专家模型、程序 |
 | 7 | 拟合边界 / 能力路由 | $r_\theta,M_X,T_X$ | 能力是否在正确场景触发？ | 路由、模式控制、边界训练、角色拆分 |
