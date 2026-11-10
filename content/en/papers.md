@@ -71,6 +71,8 @@ This bilingual working draft generalizes evidence organization, four-view audit,
 :::
 
 :::paper-docs
+Group: Core Theory Layer
+
 ### A Structural Theory of Value Preservation in LLM Systems
 Tag: structural theory working draft
 
@@ -99,6 +101,8 @@ This bilingual working draft tightens the earlier candidate-phenomenon framing a
 
 [Read the advanced aggregation draft: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/latent-conditioned-aggregation-mismatch.md) / [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/latent-conditioned-aggregation-mismatch.zh-CN.md)
 
+Group: Diagnostic-Mechanism Layer
+
 ### Formal Mechanism Layer for Governed LLM Systems
 Tag: intervention-localization working draft
 
@@ -120,6 +124,8 @@ This working draft defines the training-side counterpart to runtime governance. 
 
 [Read the mechanism-driven training draft](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/mechanism-driven-training-for-governed-llm-systems.md)
 
+Group: Governance-Object Layer
+
 ### Governed LLM Object Model and Interface Specification
 Tag: implementation specification
 
@@ -133,6 +139,8 @@ Tag: technical report
 This technical report defines Audit Engineering as the loop that turns failures into durable control improvements. It covers failure localization, Audit Findings, Control Deltas, Regression Guards, Defect Ledgers, verifier authority, mismatch-specific audit patterns, anti-patterns, risk-tiered audit intensity, and audit closure criteria.
 
 [Read the Audit Engineering technical report](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/audit-engineering-failure-localization-control-space-writeback.md)
+
+Group: Runtime Layer
 
 ### Oracle, Audit Agent, and SGAR
 Tag: oracle routing working draft
@@ -223,6 +231,8 @@ Tag: software architecture working draft
 This working draft explains the design shift from enumerating execution paths to governing runtime decisions. It introduces six layers of responsibility, capability mounting, hard and soft gates, authority separation, and a staged path from deterministic workflows to governed adaptive orchestration, while positioning SGAR as the hard-state runtime discipline beneath that architecture.
 
 [Read the governed-delegation draft](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/from-fixed-workflows-to-governed-delegation.md) / [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/from-fixed-workflows-to-governed-delegation.zh-CN.md)
+
+Group: Primitive-Mismatch Reports and Evidence
 
 ### Observation-Representation Mismatch and Channel Governance in LLM Systems
 Tag: channel governance technical report
@@ -392,6 +402,8 @@ This technical report develops specification mismatch as an objective-preservati
 
 [Read the objective governance report](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/specification-mismatch-objective-governance-llm-systems.md)
 
+Group: Human Collaboration Layer
+
 ### Human-Assist Operational Mismatches
 Tag: collaboration supplement
 
@@ -420,6 +432,8 @@ This working draft develops the AI-side dual of cognitive discipline. Instead of
 
 [Read the collaboration posture draft](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/ai-collaborative-posture-calibrated-friction-constructive-firmness.md)
 
+Group: Economics and Pricing
+
 ### The Maximum Price of Models
 Tag: economics and pricing manuscript
 
@@ -430,7 +444,7 @@ This manuscript develops a pricing envelope for LLM products. It argues that lon
 
 ## Legacy Versions
 
-These are earlier drafts kept for reference. Each one is now superseded by a document in the current working manuscripts above, and each card points to its replacement.
+These are earlier drafts kept for reference. Each one is now superseded by a document in the current working manuscripts above, and each entry points to its replacement.
 
 :::paper-docs
 ### A Formal Mechanism Layer for LLM Failure

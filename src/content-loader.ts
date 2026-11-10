@@ -249,19 +249,34 @@ ${nodes.join("\n")}
 </figure>`;
 }
 
-function renderPaperDocs(block: string): string {
-  const chunks = block
-    .trim()
-    .replace(/^###\s+/, "")
-    .split(/\n###\s+/)
-    .filter(Boolean);
+// Papers index. A `:::paper-docs` block is a catalogue of documents:
+//
+//   Group: Core Theory Layer      optional; opens a group of entries
+//
+//   ### Title
+//   Tag: kind of document         optional
+//
+//   Abstract, any Markdown.
+//
+//   [Read it: English](url) / [中文](url)
+//
+// An entry's link group is an explicit `Link:` line and/or the run of
+// link-only lines that closes it. The first link is the title link. Every link
+// is also listed under the title as an edition, labelled by the language its
+// file name declares (`x.md` English, `x.zh-CN.md` Chinese); a link to anything
+// else keeps the text the author gave it. A link whose text is more than a
+// language name opens a new set of editions (a companion report, say); once an
+// entry has more than one set, each is labelled with that text.
+//
+// Entries are numbered through the block. When the block has groups it opens
+// with a contents list that gives each group's range.
+function renderPaperDocs(block: string, lang: Lang, blockIndex: number): string {
+  const zh = lang === "zh";
 
-  const fieldClass = (label: string) => {
-    if (/status|状态/i.test(label)) return " paper-doc-field--status";
-    if (/terms|术语|对象/i.test(label)) return " paper-doc-field--terms";
-    if (/empirical|实证|implementation|实现/i.test(label)) return " paper-doc-field--empirical";
-    return "";
-  };
+  const escapeHtml = (value: string) =>
+    value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+
+  const inline = (value: string) => marked.parseInline(value.trim()) as string;
 
   const stripMarkdown = (value: string) =>
     value
@@ -269,119 +284,25 @@ function renderPaperDocs(block: string): string {
       .replace(/[*_`]/g, "")
       .trim();
 
-  const firstParagraph = (value: string) =>
-    value
-      .split(/\n{2,}/)
-      .map((part) => part.trim())
-      .find((part) => part && !/^\[.+\]\(.+\)/.test(part)) ?? value.trim();
+  type DocLink = { text: string; href: string; lang: Lang | null };
+  type LinkSet = { label: string; links: DocLink[] };
 
-  const extractTerms = (text: string, zh: boolean) => {
-    const terms = [
-      "GKO",
-      "GEO",
-      "GExO",
-      "GEsO",
-      "Audit Finding",
-      "Control Delta",
-      "Regression Guard",
-      "State Record",
-      "Transition Contract",
-      "Verifier Object",
-      "Evidence Object",
-      "Defect Ledger",
-      "SGAR",
-      "Oracle",
-      "No-Go",
-      "MSHQ",
-      "support map",
-      "search warrant",
-      "coverage ledger",
-      "support delta",
-      "dependency graph",
-      "interface contract",
-      "invariant registry",
-      "binding record",
-      "claim-support map",
-      "integration ledger",
-      "composition audit",
-      "scoped objective object",
-    ];
-    const found = terms.filter((term) => new RegExp(term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i").test(text));
-    if (found.length) return found.slice(0, 7);
-    if (/观测|observation/i.test(text)) return zh ? ["观测-表征失配", "通道治理", "变量绑定"] : ["observation-representation mismatch", "channel governance", "variable binding"];
-    if (/状态|state/i.test(text)) return zh ? ["状态假设", "证据绑定", "状态治理"] : ["state hypothesis", "evidence binding", "state governance"];
-    if (/能力|routing|boundary/i.test(text)) return zh ? ["拟合边界", "能力路由", "边界护栏"] : ["fitting boundary", "capability routing", "boundary guard"];
-    if (/目标|objective|specification/i.test(text)) return zh ? ["规格失配", "目标治理", "代理目标"] : ["specification mismatch", "objective governance", "proxy objective"];
-    return zh ? ["文档角色", "治理机制", "验证假设"] : ["document role", "governance mechanism", "validation hypothesis"];
-  };
-
-  const inferStatus = (title: string, tag: string, zh: boolean) => {
-    const source = `${title} ${tag}`;
-    if (/旧版|legacy/i.test(source)) return "legacy";
-    if (/对象模型|interface|implementation specification|实现规范/i.test(source)) return "implementation-backed";
-    if (/价值保存|six primitive|六类原始|structural theory/i.test(source)) return "canonical";
-    if (/price|pricing|价格|实证|empirical/i.test(source)) return "active draft / empirical pending";
-    if (/实践|project|open-source|协作|collaboration/i.test(source)) return "implementation-backed";
-    return zh ? "active draft" : "active draft";
-  };
-
-  const generatedFields = (title: string, tag: string, body: string, zh: boolean) => {
-    const plainSummary = stripMarkdown(firstParagraph(body));
-    const terms = extractTerms(`${title}\n${tag}\n${body}`, zh);
-    const labels = zh
-      ? {
-          positioning: "一句话定位",
-          contribution: "核心贡献",
-          prerequisites: "前置阅读",
-          terms: "引入对象 / 术语",
-          status: "当前状态",
-          empirical: "实证与实现",
-          required: "必读",
-          optional: "可选",
-          cases: "已有案例",
-          pending: "待验证",
-        }
-      : {
-          positioning: "One-line positioning",
-          contribution: "Core contribution",
-          prerequisites: "Prerequisite reading",
-          terms: "Introduced objects / terms",
-          status: "Current status",
-          empirical: "Empirical and implementation",
-          required: "Required",
-          optional: "Optional",
-          cases: "Existing cases",
-          pending: "Pending validation",
-        };
-    const required = zh
-      ? "[价值保存结构理论](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/structural-theory-value-preservation-llm-systems.zh-CN.md), [六类原始失配总图](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/six-primitive-mismatches-pipeline-derived-taxonomy-llm-systems.zh-CN.md)"
-      : "[A Structural Theory of Value Preservation](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/structural-theory-value-preservation-llm-systems.md), [Six Primitive Mismatches](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/six-primitive-mismatches-pipeline-derived-taxonomy-llm-systems.md)";
-    const optional = zh ? "同层或相邻层的机制、对象、运行时文稿。" : "Mechanism, object, or runtime drafts in the same or adjacent layer.";
-    const contribution = zh
-      ? `- 提出 / 整理：${stripMarkdown(tag) || title}。\n- 推进：${plainSummary}`
-      : `- Introduces / organizes: ${stripMarkdown(tag) || title}.\n- Advances: ${plainSummary}`;
-
-    return [
-      [labels.positioning, plainSummary],
-      [labels.contribution, contribution],
-      [labels.prerequisites, `- ${labels.required}: ${required}\n- ${labels.optional}: ${optional}`],
-      [labels.terms, terms.map((term) => `- ${term}`).join("\n")],
-      [labels.status, `- ${inferStatus(title, tag, zh)}`],
-      [
-        labels.empirical,
-        `- ${labels.cases}: Story Insight V6 / Stock Rec V3 / FW-Insight V3\n- ${labels.pending}: ${zh ? "将该文档的机制假设转成可测指标，并与强 baseline 对照。" : "Turn this document's mechanism claims into measurable indicators and compare them with strong baselines."}`,
-      ],
-    ];
-  };
-
-  // Card links. A card's link group is an explicit `Link:` line and/or the
-  // run of link-only lines that closes the body. The first link becomes the
-  // title link; every other one is kept in a secondary row under the title,
-  // so nothing an author writes on a link line is dropped.
   const markdownLink = /\[([^\]]+)\]\(([^)]+)\)/g;
+  const languageName = /^(?:中文|简体中文|English|Chinese)$/i;
+  const languageSuffix = /\s*(?:[:：]\s*(?:中文|简体中文|English|Chinese)|[（(]\s*(?:中文|English|Chinese)\s*[)）])$/i;
 
-  const parseLinks = (value: string) =>
-    Array.from(value.matchAll(markdownLink), (match) => ({ markdown: match[0], href: match[2].trim() }));
+  const docLang = (href: string): Lang | null => {
+    const path = href.split(/[?#]/)[0];
+    if (/\.zh(?:-CN)?\.md$/i.test(path)) return "zh";
+    if (/\.md$/i.test(path)) return "en";
+    return null;
+  };
+
+  const parseLinks = (value: string): DocLink[] =>
+    Array.from(value.matchAll(markdownLink), (match) => {
+      const href = match[2].trim();
+      return { text: match[1].trim(), href, lang: docLang(href) };
+    });
 
   // Nothing but links, optionally as a list item, separated by " / ", " · "
   // or similar punctuation.
@@ -402,70 +323,137 @@ function renderPaperDocs(block: string): string {
     };
   };
 
-  const renderLink = (markdown: string) => marked.parseInline(markdown) as string;
+  // "Read the V1–V25 synthesis: English" names its set "V1–V25 synthesis".
+  const setLabel = (text: string) => {
+    const label = text.replace(languageSuffix, "").replace(/^(?:阅读|Read(?:\s+the)?)\s*/i, "");
+    return label.charAt(0).toUpperCase() + label.slice(1);
+  };
 
-  const docs = chunks.map((chunk) => {
+  const linkSets = (links: DocLink[]): LinkSet[] => {
+    const sets: LinkSet[] = [];
+    for (const link of links) {
+      const opensSet = link.lang !== null && !languageName.test(link.text);
+      if (opensSet || !sets.length) sets.push({ label: opensSet ? setLabel(link.text) : "", links: [] });
+      sets[sets.length - 1].links.push(link);
+    }
+    return sets;
+  };
+
+  // ---- Split the block into groups of entries ------------------------------
+  type Group = { title: string; entries: string[] };
+  const groups: Group[] = [];
+  let entryLines: string[] | null = null;
+
+  const openGroup = (title: string) => {
+    groups.push({ title, entries: [] });
+  };
+  const closeEntry = () => {
+    if (!entryLines) return;
+    if (!groups.length) openGroup("");
+    groups[groups.length - 1].entries.push(entryLines.join("\n"));
+    entryLines = null;
+  };
+
+  for (const line of block.split(/\r?\n/)) {
+    const group = line.match(/^Group[：:]\s*(.+?)\s*$/i);
+    if (group) {
+      closeEntry();
+      openGroup(group[1]);
+    } else if (/^###\s+/.test(line)) {
+      closeEntry();
+      entryLines = [line.replace(/^###\s+/, "")];
+    } else {
+      entryLines?.push(line);
+    }
+  }
+  closeEntry();
+
+  const filled = groups.filter((group) => group.entries.length);
+  const total = filled.reduce((sum, group) => sum + group.entries.length, 0);
+  const grouped = filled.some((group) => group.title);
+  const pad = (value: number) => String(value).padStart(2, "0");
+  const idPrefix = blockIndex === 0 ? "papers" : `papers-${blockIndex + 1}`;
+  const entryTag = grouped ? "h4" : "h3";
+
+  const renderEntry = (chunk: string, number: number) => {
     const [rawTitle = "", ...rawBodyLines] = chunk.split("\n");
     const rawBody = rawBodyLines.join("\n").trim();
     const linkMatch = rawBody.match(/(?:^|\n)(?:Link|链接|阅读)[：:]\s*(.+)(?:\n|$)/i);
     const trailing = splitTrailingLinks(linkMatch ? rawBody.replace(linkMatch[0], "\n").trim() : rawBody);
-    const [titleLink, ...moreLinks] = [...(linkMatch ? parseLinks(linkMatch[1]) : []), ...trailing.links];
-    const title = marked.parseInline(rawTitle.trim()) as string;
-    const titleText = stripMarkdown(rawTitle.trim());
-    const linkedTitle = titleLink ? `<a href="${titleLink.href}">${title}</a>` : title;
-    const bodyWithoutLink = trailing.body;
-    const fieldMatches = Array.from(
-      bodyWithoutLink.matchAll(/^([^：:\n]+)[：:][ \t]*(?:\r?\n)?([\s\S]*?)(?=^[^：:\n]+[：:][ \t]*(?:\r?\n)?|\s*$)/gm),
-    );
-    const templateFieldPattern =
-      /^(一句话定位|核心贡献|前置阅读|引入对象\s*\/\s*术语|当前状态|实证与实现|One-line positioning|Core contribution|Prerequisite reading|Introduced objects\s*\/\s*terms|Current status|Empirical and implementation)$/i;
-    const tagMatch = bodyWithoutLink.match(/^Tag:\s*(.+)$/im);
-    const fallbackBody = tagMatch ? bodyWithoutLink.replace(tagMatch[0], "").trim() : bodyWithoutLink;
-    const zh = /[\u3400-\u9fff]/.test(`${titleText}\n${bodyWithoutLink}`);
-    const templateFields = fieldMatches
-      .map((match) => [match[1].trim(), match[2].trim()] as [string, string])
-      .filter(([label]) => templateFieldPattern.test(label));
-    const fieldEntries = templateFields.length
-      ? templateFields
-      : generatedFields(titleText, tagMatch?.[1].trim() ?? "", fallbackBody, zh);
+    const links = [...(linkMatch ? parseLinks(linkMatch[1]) : []), ...trailing.links];
+    const tagMatch = trailing.body.match(/^Tag[：:]\s*(.+)$/im);
+    const abstract = tagMatch ? trailing.body.replace(tagMatch[0], "").trim() : trailing.body;
 
-    const fields = fieldEntries.map(([label, value]) => {
-      if (!value) return "";
-      return `<section class="paper-doc-field${fieldClass(label)}">
-<h4>${marked.parseInline(label) as string}</h4>
-<div>${marked.parse(value, { async: false }) as string}</div>
-</section>`;
+    const titleText = stripMarkdown(rawTitle);
+    // A range such as "V1–V25" must not break at its dash when the title wraps.
+    const title = inline(rawTitle.replace(/[\w.]+(?:–[\w.]+)+/g, '<span class="paper-entry-range">$&</span>'));
+    const linkedTitle = links.length ? `<a href="${escapeHtml(links[0].href)}">${title}</a>` : title;
+    const kind = tagMatch ? `<span class="paper-entry-kind">${inline(tagMatch[1])}</span>` : "";
+
+    const sets = linkSets(links);
+    const labelled = sets.length > 1;
+    const editions = sets.map((set) => {
+      const context = (labelled && stripMarkdown(set.label)) || titleText;
+      const label = labelled && set.label ? `<span class="paper-entry-linklabel">${inline(set.label)}</span>` : "";
+      const items = set.links.map((link) => {
+        const text = link.lang === "zh" ? "中文" : link.lang === "en" ? "English" : stripMarkdown(link.text);
+        const langAttr = link.lang ? ` hreflang="${link.lang === "zh" ? "zh-CN" : "en"}" lang="${link.lang === "zh" ? "zh-CN" : "en"}"` : "";
+        return `<a href="${escapeHtml(link.href)}"${langAttr} aria-label="${escapeHtml(`${context} · ${text}`)}">${escapeHtml(text)}</a>`;
+      });
+      return `<li>${label}<span class="paper-entry-editions">${items.join("")}</span></li>`;
     });
-
-    const fieldsHtml = fields.join("\n");
-
-    // A link written inside the prose survives only if a field renders it, and
-    // the generated template flattens prose to plain text. Move any link that
-    // would be lost that way into the secondary row as well.
-    const linked = new Set([titleLink, ...moreLinks].map((link) => link?.href));
-    const proseLinks = parseLinks(bodyWithoutLink).filter((link) => {
-      if (linked.has(link.href)) return false;
-      linked.add(link.href);
-      const href = renderLink(link.markdown).match(/href="[^"]*"/)?.[0];
-      return !href || !fieldsHtml.includes(href);
-    });
-    const secondaryLinks = [...moreLinks, ...proseLinks].map((link) => `<li>${renderLink(link.markdown)}</li>`);
-    const linkRow = secondaryLinks.length
-      ? `\n<ul class="paper-doc-links" aria-label="${zh ? "相关链接" : "Related links"}">\n${secondaryLinks.join("\n")}\n</ul>`
+    const editionList = editions.length
+      ? `\n<ul class="paper-entry-links" aria-label="${zh ? "全文链接" : "Full text"}">\n${editions.join("\n")}\n</ul>`
       : "";
 
-    return `<article class="paper-doc">
-<header class="paper-doc-header">
-<h3>${linkedTitle}</h3>${linkRow}
-</header>
-<div class="paper-doc-fields">
-${fieldsHtml}
-</div>
-</article>`;
+    return `<li class="paper-entry">
+<p class="paper-entry-meta"><span class="paper-entry-num">${pad(number)}</span>${kind}</p>
+<${entryTag} class="paper-entry-title">${linkedTitle}</${entryTag}>
+<div class="paper-entry-body">${abstract ? (marked.parse(abstract, { async: false }) as string) : ""}</div>${editionList}
+</li>`;
+  };
+
+  let number = 0;
+  const sections = filled.map((group, index) => {
+    const first = number + 1;
+    const entries = group.entries.map((chunk) => renderEntry(chunk, (number += 1)));
+    const range = first === number ? pad(first) : `${pad(first)}–${pad(number)}`;
+    const id = `${idPrefix}-g${index + 1}`;
+    const title = group.title ? inline(group.title) : "";
+    const head = title
+      ? `\n<header class="paper-group-head">\n<h3 id="${id}-title">${title}</h3>\n<p class="paper-group-range">${range}</p>\n</header>`
+      : "";
+    return {
+      id,
+      title,
+      range,
+      html: `<section class="paper-group${title ? "" : " paper-group--plain"}"${title ? ` id="${id}" aria-labelledby="${id}-title"` : ""}>${head}
+<ol class="paper-list" start="${first}">
+${entries.join("\n")}
+</ol>
+</section>`,
+    };
   });
 
+  const titled = sections.filter((section) => section.title);
+  const contents = grouped
+    ? `<nav class="paper-contents" aria-label="${zh ? "分组索引" : "Index of groups"}">
+<p class="paper-contents-label">${
+        zh ? `索引 · ${total} 篇文稿 · ${titled.length} 组` : `Index · ${total} documents · ${titled.length} groups`
+      }</p>
+<ol>
+${titled
+  .map(
+    (section) =>
+      `<li><a href="#${section.id}" data-toc="${section.id}"><span class="paper-contents-name">${section.title}</span><span class="paper-contents-leader" aria-hidden="true"></span><span class="paper-contents-range">${section.range}</span></a></li>`,
+  )
+  .join("\n")}
+</ol>
+</nav>\n`
+    : "";
+
   return `<div class="paper-docs">
-${docs.join("\n")}
+${contents}${sections.map((section) => section.html).join("\n")}
 </div>`;
 }
 
@@ -494,7 +482,7 @@ function prefixInternalLinks(html: string): string {
   });
 }
 
-function renderMarkdown(markdown: string): string {
+function renderMarkdown(markdown: string, lang: Lang): string {
   // Takeaway fence first (disjoint from cards), then custom maps/cards, then
   // parse, then post-process the parsed HTML (flow diagrams + internal links).
   const withTakeaways = markdown.replace(
@@ -505,9 +493,10 @@ function renderMarkdown(markdown: string): string {
     /^(:{3,})document-map[ \t]*\r?\n([\s\S]*?)^\1[ \t]*\r?$/gm,
     (_match, _fence: string, block: string) => renderDocumentMap(block),
   );
+  let paperBlocks = 0;
   const withPaperDocs = withDocumentMaps.replace(
     /^(:{3,})paper-docs[ \t]*\r?\n([\s\S]*?)^\1[ \t]*\r?$/gm,
-    (_match, _fence: string, block: string) => renderPaperDocs(block),
+    (_match, _fence: string, block: string) => renderPaperDocs(block, lang, paperBlocks++),
   );
   const withCards = withPaperDocs.replace(
     /^(:{3,})cards[ \t]*\r?\n([\s\S]*?)^\1[ \t]*\r?$/gm,
@@ -522,7 +511,7 @@ function loadPages(): Record<Lang, Site> {
     const { frontmatter, body } = parseMarkdownFile(raw);
     return {
       ...frontmatter,
-      html: renderMarkdown(body),
+      html: renderMarkdown(body, frontmatter.lang),
     };
   });
 
