@@ -10,30 +10,30 @@ order: 2.6
 showInNav: false
 heroPoints:
   - "Financial strategy is a canonical state-mismatch domain: market regime, data coverage, position state, and validation windows change the correct action."
-  - "The system's central rule is to never directly trust LLM analysis; the model may only provide candidates, hints, explanations, or observations."
-  - Production impact requires the nightly cycle, shadow observation, champion-challenger promotion, and active activation.
+  - "The system's central rule is to never directly trust LLM analysis; the model may only provide candidates, hints, explanations, or sidecar observations."
+  - Production impact requires the nightly cycle, shadow observation, champion-challenger promotion, and activation into the active state.
 ---
 
-`stock_rec_v3` is a daily stock-strategy system built on one rule: never ask an LLM to pick stocks, and never trust its financial judgment by default. The model may only feed candidates, hints, explanations, and observations into a production process that distrusts it by design. This case study walks through why that design is necessary, how its four producers and nightly lifecycle enforce it, and how the whole system maps back to the site's six-mismatch framework.
+`stock_rec_v3` is a daily stock-strategy system built on one rule: never ask an LLM to pick stocks directly, and do not trust its financial judgment by default. The model may only feed candidates, hints, explanations, and sidecar observations into a production process that distrusts it by design. This case study walks through why that design is necessary, how its four producers and nightly lifecycle enforce it, and how the whole system maps back to the site's six-mismatch framework.
 
 ## Why This Case Is Worth Studying
 
 The current case library already has [Story Insight V4](/case-study-v4) and [Story Insight V6](/case-study-v6), which explain control-space design, layered governance, continuity audit, and plateau detection in narrative generation. But both cases still live in a creative-writing domain.
 
-`stock_rec_v3` adds a different high-mismatch system: a daily financial strategy. Financial systems make LLM state mismatch hard to ignore. The market regime changes, data coverage changes, factor validity changes, position cost and profit-and-loss (PnL) change, and yesterday's governance action can affect today's holding decision. Asking an LLM to directly answer "what should we buy or sell?" is dangerous, because the model can easily produce a plausible market narrative without producing a verifiable, traceable, rollback-capable strategy state.
+The value of `stock_rec_v3` is not that it is "another, more complex system." It adds a high-mismatch sample from a completely different domain: daily financial strategy. Financial systems make LLM state mismatch hard to ignore. The market regime changes, data coverage changes, factor validity changes, position cost and profit-and-loss (PnL) change, and yesterday's governance action can affect today's holding decision. Asking an LLM to directly answer "what should we buy, what should we sell, and why?" is dangerous, because the model can easily produce a plausible market narrative without producing a verifiable, traceable, rollback-capable strategy state.
 
-The core sentence for this case should be:
+The core sentence of this case is:
 
-**do not trust the LLM's financial judgment; only let it participate inside a governed production process.**
+**Do not trust the LLM's financial judgment; only let it participate inside a governed production process.**
 
 ## Why the Task Is High Mismatch
 
-Stock recommendation looks tempting for an LLM. It can read news, explain themes, summarize sentiment, and write analyst-like prose. But those local abilities do not directly become a reliable strategy.
+Stock recommendation looks like a natural fit for an LLM. The model can read news, explain themes, summarize market sentiment, and write analyst-like prose. But those local abilities do not automatically become a reliable strategy.
 
 ::::cards
 ### State Mismatch
 
-The same signal means different things in bull, bear, and range markets. Current positions, costs, realized PnL, conditional actions, and prior governance carryover also change today's correct action.
+The same signal means different things in bull, bear, and range-bound markets. Current positions, costs, realized PnL, conditional actions, and prior governance carryover also change today's correct action.
 
 ### Specification Mismatch
 
@@ -45,8 +45,8 @@ A locally valid factor, rule, or narrative does not imply a valid portfolio. Bas
 
 ### Support Mismatch
 
-Valuable strategy changes are often not default financial prose. They may be low-coverage shadow factors, rule combinations that behave better across regimes, or sidecar enhancements that should not be activated yet.
-:::
+Valuable strategy changes are often not default financial prose. They may be low-coverage shadow factors that still need observation, rule combinations that are more stable across market regimes, or sidecar enhancements that should not be activated yet.
+::::
 
 That is why `stock_rec_v3` is a useful case. It does not present the LLM as a stock-picking model. It puts the LLM inside a production system that distrusts it by design.
 
@@ -65,12 +65,12 @@ Evolves the base-score spec: factor groups, group weights, enabled factors, and 
 
 ### Excitation Producer
 
-Evolves excitation rules: how theme, flow, momentum, risk, and narrative atoms combine. LLM rule hints and wildcard hints emit candidates only; they do not activate rules.
+Evolves excitation rules: how theme, capital-flow, momentum, risk, and narrative atoms combine. LLM rule hints and wildcard hints emit candidates only; they do not activate rules.
 
 ### Holding-Processing Producer
 
 Turns recommendations into position actions: position ledger, holding analysis, PnL, validation feedback, holding governance, and carryover. It answers what to do now instead of trusting a new market story.
-:::
+::::
 
 Together, these producers form the body of the strategy. Each night, the system does not ask the LLM to rewrite its opinion. Instead, it lets the producers emit new inspectable objects, then lets governance decide which of those objects deserve production authority.
 
@@ -117,9 +117,9 @@ The key mechanism in `stock_rec_v3` is lifecycle, not generation.
   </section>
 </div>
 
-This chain has an important meaning: **LLM output has no production authority by default.**
+This chain has one important implication: **LLM output has no production authority by default.**
 
-A factor can be proposed, but it cannot become an active factor directly. An excitation rule can be hinted, but it cannot directly rewrite final `effective_excitement`. A spatiotemporal enhancement can produce a sidecar, but it does not replace the main score by default. Holding governance can carry a prior-day action forward, but only through carryover profiles and holding-side rules. Only active specs can affect production scoring in Phase B.
+A factor can be proposed, but it cannot become an active factor directly. An excitation rule can be hinted, but it cannot directly rewrite the final `effective_excitement`. A spatiotemporal enhancement can produce a sidecar, but it does not replace the main score by default. Holding governance can carry a prior-day action forward, but only through carryover profiles and holding-side rules. Only active specs can affect production scoring in Phase B.
 
 ## Nightly Cycle as Governance Loop
 
@@ -143,7 +143,7 @@ Base score and excitation enter champion-challenger evaluation. Candidates must 
 ### Production Consumption
 
 Phase B loads active specs only. Recommendations then enter the holding loop: position ledger, holding analysis, PnL, validation feedback, holding governance, and execution report.
-:::
+::::
 
 The value of this chain is that it turns "what the model thinks is plausible today" into "which governed objects are allowed to affect the strategy today." That is the difference between a financial production system and an ordinary text task.
 
@@ -159,13 +159,13 @@ But all of those entry points are low-authority roles:
 - The LLM can write a report narrative, but the narrative does not overwrite active specs.
 - If the LLM is unavailable, returns bad JSON, or throws, the system falls back and the nightly cycle continues.
 
-This is the engineering principle for resisting LLM mediocrity: do not forbid generation; constrain the authority of generated artifacts.
+This is one engineering principle for resisting LLM mediocrity: do not forbid generation; constrain the authority of generated artifacts.
 
 ## Only Active Can Affect the Strategy
 
 One core invariant in `stock_rec_v3` is that governance is the sole owner of active spec parameters. New mechanisms may not bypass governance and directly override active specs, base-score weights, excitation rules, or holding actions.
 
-That constraint gives the system attribution:
+That constraint makes the system's behavior attributable:
 
 ::::cards
 ### It Knows What Is Live
@@ -174,7 +174,7 @@ Phase B consumes active base and excitation specs. If no active spec exists, the
 
 ### It Knows Why It Is Live
 
-Promotion leaves champion-challenger evaluation, gate outcomes, blockers, metadata, and governance explanations. Recommendation changes trace to specs, not to prompt prose.
+Every promotion must leave a record: the champion-challenger evaluation, gate outcomes, blockers, metadata, and governance explanations. Recommendation changes can be traced to specific specs, not to prompt prose.
 
 ### It Knows What Is Not Live
 
@@ -183,18 +183,18 @@ Dry runs do not move the active pointer. Observation-only enhancements only reco
 ### It Knows How To Roll Back
 
 When a candidate fails or persistence fails, the system keeps the existing champion or rolls shadow state back. The production path is not permanently polluted by a plausible LLM proposal.
-:::
+::::
 
 This is where the financial case adds the most to the site's argument. In a creative system, failure may mean a weaker story. In a financial system, failure becomes real position state, transaction cost, and risk exposure. Governance authority must be stronger than generation authority.
 
 ## Mapping Back to the Six Mismatches
 
-`stock_rec_v3` makes the primitive mismatch framework more concrete.
+`stock_rec_v3` makes the primitive mismatch framework more concrete. The cards below cover five of the six mismatches.
 
 ::::cards
 ### Aggregation Mismatch
 
-A good single-factor IC, a triggered rule, or a plausible narrative does not imply a good strategy. The system governs aggregation through nonlinear final score, concentration checks, PnL, validation, and holding governance.
+A good single-factor IC, a triggered rule, or a plausible narrative does not imply a good strategy. The system governs aggregation through a nonlinear final score, industry-concentration checks, PnL, validation, and holding governance.
 
 ### Support Mismatch
 
@@ -211,7 +211,7 @@ Natural-language explanation is not a strategy specification. The system grounds
 ### Fitting-Boundary Mismatch
 
 A locally plausible alpha story, filter, benchmark result, or audit path can bind too tightly and crowd out neighboring mechanisms. Shadow states, promotion gates, train/validation splits, and PnL vetoes force local claims to survive adjacent market, metric, and deployment checks before they gain authority.
-:::
+::::
 
 ## Relation to the Story Insight Cases
 
@@ -220,7 +220,7 @@ V4 and V6 show why high-mismatch tasks need control spaces and layered governanc
 Read the three cases this way:
 
 1. **V4**: rewrite final generation into control-space governance.
-2. **V6**: once a control space exists, diagnose the layer and detect plateau or version regression.
+2. **V6**: once a control space exists, diagnose which layer a problem belongs to, and detect plateaus and version regressions.
 3. **Stock Rec V3**: once the task enters financial production, LLMs may emit candidates only; production authority belongs to objects that pass shadow, promotion, and active lifecycle stages.
 
 If V4's keyword is control space and V6's keyword is layered routing, Stock Rec V3's keyword is:
@@ -229,8 +229,8 @@ If V4's keyword is control space and V6's keyword is layered routing, Stock Rec 
 
 ## Conclusion
 
-`stock_rec_v3` should be added as a case, and it should be the case library's third domain sample: a financial strategy system.
+`stock_rec_v3` is worth studying as a case, and it fits the case library as its third kind of sample: a financial strategy system.
 
-Its value is not to show that an LLM can analyze stocks. Its value is the opposite: in a high-state-mismatch, high-error-cost domain, LLM analysis is not trusted by default. The system needs producers, lifecycles, gates, replay, holding feedback, and active-pointer governance.
+Its value is not in showing whether an LLM can analyze stocks. It shows a more mature judgment: in a domain with high state mismatch and high error cost, LLM analysis is not trusted by default. What the system actually needs is producers, lifecycles, gates, replay, holding feedback, and active-pointer governance.
 
 That makes the site's argument more complete. Resisting LLM mediocrity does not mean turning every task into multi-round prompting. It means putting generation inside the right engineering boundary. For financial strategy, the boundary is clear: the LLM may help discover, but it must not own production authority.

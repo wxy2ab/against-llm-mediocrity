@@ -5,7 +5,7 @@ path: /engineering
 title: Governance
 navTitle: Governance
 kicker: Concrete engineering practice based on the mechanism
-summary: The engineering move is not to force the model to solve every hard task in final-answer space. It is to build intermediate control and hard-state objects that make the task easier to generate, verify, reuse, recover, and revoke.
+summary: The engineering move is not to force the model to solve every hard task in final-answer space. It is to first build intermediate control objects and hard-state objects that make the task easier to generate, verify, reuse, recover, and revoke.
 order: 4
 heroPoints:
   - Do not blindly add more final-answer sampling before asking whether the bottleneck is support, search, or validation.
@@ -15,7 +15,7 @@ heroPoints:
 
 ## What Governance Is Actually Doing
 
-Governance is not about making the model behave more strictly, and it is not about writing longer prompts. What it really does is rewrite a hard final-output problem into a workflow that is easier to search, verify, and roll back.
+Governance is not about making the model behave more strictly, and it is not about writing longer prompts. What it really does is take a problem that is hard to solve directly in final-output space and rewrite it as a workflow that is easier to search, verify, and roll back.
 
 Many failed tasks originally look like this:
 
@@ -29,21 +29,38 @@ After governance, the shape is closer to this:
 input -> build a control space -> search in control space -> project back into output space -> validate -> write experience back
 ```
 
-In one line: **do not let the model struggle blindly inside final-answer space when the real move is to create a better intermediate layer.**
+In one line: **do not let the model keep struggling inside final-answer space; first give it an intermediate layer that is easier to search.**
 
 This page follows directly from the mechanism page. When local fluency no longer predicts global value, the question is not "how many more versions should we sample?" but "what must be made explicit before generation?" Governance translates the six mismatches into engineering moves: construct control spaces, add measurement or raw evidence, separate evaluators, preserve experience, govern agent state, and pass any remaining variables to collaboration protocols when needed.
 
-For full engineering examples, return to "Cases." V4 applies this workflow through a narrative logic space, evaluator, and defect attacker. V6 then shows the next layer: once a control space exists, the system must route problems across MetaSpace, LogicSpace, text, continuity, and evaluation contracts.
+For full engineering examples, return to "Cases." Story Insight V4 applies this workflow through a narrative logic space, evaluator, and defect attacker. V6 then shows the next layer: once a control space exists, the system must route problems across MetaSpace, LogicSpace, text, continuity, and evaluation contracts.
 
-This verification and write-back mechanism can be developed into an independent discipline: **[Audit Engineering](/glossary#audit-engineering)**. It treats audit not as post-generation scoring but as a structured process that turns findings into defect evidence, repair routes, control deltas, and regression tests - allowing underspecified user value to become explicit through iteration.
+### From Mechanism to Governance: Four Core Objects
 
-[Read "Audit Engineering: From Generation–Verification Asymmetry to General Agent Governance"](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/audit-engineering.md)
+The mechanism layer diagnoses with mismatches; the governance layer acts through objects. The four objects below stitch diagnosis, action, and human governance into one executable chain. They correspond to the [Governed LLM Object Model and Interface Specification](/docs/governed-llm-object-model-interface-specification.md) and [A Structural Theory of Value Preservation](/docs/structural-theory-value-preservation-llm-systems.md):
 
-For long-horizon agents, these control objects also need a hard-state layer. The **[State-Governed Agent Regime (SGAR)](/glossary#sgar)** preserves global goals, constraints, dependencies, and accepted facts, then renders a minimally sufficient projection for the current LLM solve. Stages connect through public protocols while private reasoning and implementation remain decoupled; plans, tool calls, observations, verification results, human answers, audit findings, and rollback decisions enter state through governed transitions. This avoids asking one context to carry the entire long-horizon problem or to serve as the sole authority on whether the task advanced.
+- **[Governed Knowledge Object (GKO)](/glossary#gko)**: stores task-specific control knowledge (verified claims, conditions, priorities, lifecycle, revocation rules).
+- **[Governed Escalation Object (GEsO)](/glossary#geso)**: stores when to escalate, to whom, what to ask, and what can be done while waiting.
+- **[Minimal Sufficient Human Query (MSHQ)](/glossary#mshq)**: the instantiation of a GEsO in a single interaction; it asks only for the minimal variable needed to restore autonomy.
+- **[State-Governed Agent Regime (SGAR)](/glossary#sgar)**: renders local solving surfaces from globally authoritative state, composes stages through public protocols, and commits verified plans, actions, observations, decisions, and residuals to an external hard-state layer.
 
-[Read "State-Governed Agent Regime"](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime.md)
+Together, the four turn governance from "a sense of process" into "objects and protocols."
 
-If you want to place "Audit Engineering + SGAR + control space" inside a quantifiable runtime frame, continue with the [Agent Harness Framework](/docs/agent-harness-framework.md). It separates Bridge from Action-Space Optimization and makes component main effects, interaction terms, and cross-model transfer part of the explicit experimental target.
+### Going Further: Audit Engineering, SGAR, and the Collaboration Drafts
+
+This verification and write-back mechanism can be developed into an independent discipline: **[Audit Engineering](/glossary#audit-engineering)**. It treats audit not as post-generation scoring but as a structured process that turns findings into defect evidence, repair routes, control deltas, and regression tests — allowing underspecified user value to become explicit through iteration.
+
+[Read "Audit Engineering for Governed LLM Systems"](/docs/audit-engineering-failure-localization-control-space-writeback.md)
+
+For long-horizon agents, these control objects also need a hard-state layer. **[SGAR](/glossary#sgar)** preserves global goals, constraints, dependencies, and accepted facts, then renders a minimally sufficient projection for the current LLM solve. Stages connect through public protocols, while private reasoning and implementation remain decoupled. Plans, tool calls, observations, verification results, human answers, audit findings, and rollback decisions enter state through governed transitions. This avoids asking one context to carry the entire long-horizon problem or to serve as the sole authority on whether the task advanced.
+
+[Read "State-Governed Agent Regime for Governed LLM Systems"](/docs/state-governed-agent-regime-for-governed-llm-systems.md)
+
+If you want to place "Audit Engineering + SGAR + control space" inside a quantifiable, attributable runtime framework, continue with the [Agent Harness Framework](/docs/agent-harness-framework.md). That working draft defines Bridge and Action-Space Optimization separately and makes component main effects, interaction terms, and cross-model transfer explicit experimental targets.
+
+Escalation protocols and human boundaries rest on **[Governed Human-AI Collaboration](/glossary#governed-human-ai-collaboration)** and **Human-Assist Operational Mismatches** (the five operational domains): ask the environment before asking the human; ask with an [MSHQ](/glossary#mshq); store recurring rules in a [GEsO](/glossary#geso); and let long-horizon agents regain autonomy in hard state.
+
+[Read "Governed Human-AI Collaboration"](/docs/governed-human-ai-collaboration.md) · [Read "Human-Assist Operational Mismatches"](/docs/human-assist-operational-mismatches.md)
 
 ## A More Useful Governance Workflow
 
@@ -101,7 +118,7 @@ When a task goes wrong, "the model is not strong enough" is usually too vague to
 ### Support Deficit
 Tag: no good candidates appear
 
-No matter how much you sample, the system never reaches a good region. More search alone will not help. You need external knowledge, examples, tools, retrieval, finetuning, or a stronger model.
+No matter how much you sample, the system never reaches a good region, because it lacks the material, knowledge, or capability to get there. More search alone will not help. You need external knowledge, examples, tools, retrieval, finetuning, or a stronger model.
 
 ### Search Deficit
 Tag: good samples appear, but not reliably
@@ -127,7 +144,7 @@ A control space does not need to resemble the final answer. It is better underst
 Typical control objects include:
 
 - state matrices
-- [hard-state ledgers](/glossary#sgar)
+- [hard-state ledgers](/glossary#sgar) (first-class objects in SGAR)
 - rubrics
 - candidate frames
 - failure-mode lists
@@ -137,10 +154,11 @@ Typical control objects include:
 - role configurations
 - promise-payoff chains
 - transition records
+- governance objects: [Governed Knowledge Objects (GKOs)](/glossary#gko), [Governed Escalation Objects (GEsOs)](/glossary#geso), and [Minimal Sufficient Human Queries (MSHQs)](/glossary#mshq)
 
 A good control space usually has three properties:
 
-- **Lower-dimensional**: easier to search than final prose
+- **Lower-dimensional**: easier to search than the final answer
 - **Composable**: local structures can be recombined rather than regenerated from scratch
 - **Verifiable**: constraints, evidence, and failure boundaries can be checked directly instead of inferred from surface plausibility
 
@@ -168,7 +186,7 @@ Repairs locally instead of reinventing the whole artifact.
 Makes the final selection using a different context, different prompt, and ideally a different evaluation criterion.
 :::
 
-Even when the underlying model is the same, separate contexts can simulate role separation. For verifiable tasks, it is even better to add a dedicated verifier or external tool. In many tasks, **verification is easier than generation**, and once the verifier improves, overall quality rises sharply.
+Even when the underlying model is the same, use separate contexts to simulate role separation. For verifiable tasks, it is even better to add a dedicated verifier or external tool. In many tasks, **verification is easier than generation**, and once the verifier improves, overall quality rises sharply.
 
 ## Do Not Store Only Positive Experience
 
@@ -252,7 +270,7 @@ Usually not a pacing problem, but a lack of earlier promises or a failure to pay
 
 ### Vague Theme
 
-Usually not an abstractness problem, but a failure to make characters pay a cost for the theme through choice.
+Usually not an unimpressive theme, but a failure to make characters pay a cost for the theme through choice.
 ::::
 
 If you push those failures backward, the control space should explicitly include variables such as:
@@ -265,6 +283,29 @@ If you push those failures backward, the control space should explicitly include
 - irreversible choice points
 
 That is far more useful than an instruction such as "make the story deeper," because it turns a vague desire into searchable and verifiable control variables.
+
+## Treat Validation as Engineering: The Audit Engineering View
+
+[Audit Engineering](/docs/audit-engineering-failure-localization-control-space-writeback.md) treats "finding the failure" and "repairing the failure" as two different kinds of engineering work, and requires audit findings to be rewritten as executable control deltas:
+
+- **Defect evidence**: which primitive mismatch dominates? Which counterexample or perturbation was used?
+- **Repair routing**: change a GKO? The rubric? The dependency graph? A hard-state transition?
+- **Regression tests**: the failure mode is recorded as a replayable check instead of staying only in a log.
+- **Control delta**: the audit result changes the shape of the next control space instead of only commenting on the previous answer.
+
+Under SGAR, these control deltas are written into hard state through governed state transitions, so an agent can continue from them even after an interruption.
+
+## Five Operational Domains: When to Escalate to a Human
+
+[Human-Assist Operational Mismatches](/docs/human-assist-operational-mismatches.md) breaks "what AI cannot reliably decide" into five operational domains, each with its own escalation threshold:
+
+1. **Information and evidence**: can the environment, a tool, retrieval, or a test supply the factual state? If so, the agent should not ask a human too early.
+2. **Value and specification**: has the real objective been externalized as a rubric, acceptance criteria, or counterexamples?
+3. **Authority and responsibility**: does an external or irreversible action need approval? Such actions must be escalated.
+4. **Boundary and timing**: does the rule still apply? Has a revocation condition been triggered?
+5. **Coordination and control representation**: does the current task representation, decomposition, workflow, or handoff omit a decisive dependency? The agent should first build a task model, dependency graph, or workflow by itself, and escalate only when the controlling representation or organizational process cannot be inferred or verified.
+
+These five domains map onto the MSHQ, the GEsO, and the hard-state update in [Governed Human-AI Collaboration](/docs/governed-human-ai-collaboration.md). When it escalates, the agent follows the GEsO and asks only an MSHQ instead of handing the whole task back to the human. While waiting, it does reversible preparation: candidate matrices, low-cost experiments, rollback paths. When the answer arrives, the answer is committed to hard state and the agent resumes autonomy.
 
 ## A More Practical Engineering Judgment
 

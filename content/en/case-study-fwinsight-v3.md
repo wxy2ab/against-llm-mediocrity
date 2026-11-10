@@ -10,17 +10,17 @@ order: 2.7
 showInNav: false
 heroPoints:
   - Many factor-framework versions already exist; more sampling remains trapped in the old distribution unless the system finds experiences that change its shape.
-  - "V3 turns 1400+ backtested samples into a statistical laboratory, using φ_c to map each experience onto each sample."
+  - "V3 turns 1400+ backtested samples into a statistical laboratory, using φ_c to map each experience's realization onto each sample."
   - Folding, direction checks, and the maturity filter compress repeated soft knowledge into a small set of regeneration-ready hard experiences.
 ---
 
 ## Overview
 
-FW-Insight V3 (`fwinsight_v3`) is a factor-framework regeneration case. A factor framework here is a generated piece of quantitative-trading logic; "regeneration" means producing the next, improved version of it. The system has already produced many such versions and recorded how each one backtested. The question this case answers is which lessons from that history actually deserve to shape the next version — and how to tell a genuinely useful lesson apart from one that merely sounds good. Throughout, "V2" and "V3" refer to successive generations of the framework's experience layer, and a "claim" is a candidate lesson carried forward from V2.
+FW-Insight V3 (`fwinsight_v3`) is a factor-framework regeneration case. A factor framework here is a generated piece of quantitative-trading logic; "regeneration" means producing the next, improved version of it. The system has already produced many such versions and recorded how each one backtested. The question this case answers is which experiences (lessons drawn from that history) actually deserve to shape the next version — and how to tell a genuinely useful experience apart from one that merely sounds good. Throughout, "V2" and "V3" refer to successive generations of the framework's experience layer, and a "claim" is a candidate experience carried forward from V2 that still has to be tested.
 
 ## Why This Case Is Worth Studying
 
-This case is worth studying because it covers a governance move that the earlier cases do not: **extracting hard experiences from a large population of historical generated samples so future generation can move differently**.
+This case is worth studying because it covers a governance move that the earlier cases do not: **extracting, from a large population of historical generated samples, the hard experiences that can change the distribution of future generation**.
 
 `fwinsight_v3` is not another factor generator, and it does not ask an LLM to simply invent better factor frameworks. It starts from a system that has already generated many framework versions. Sampling more can produce more variants, but most variants still come from the same generation distribution. The valuable question becomes:
 
@@ -30,7 +30,7 @@ That makes it a clean financial-engineering case for state mismatch and support 
 
 ## Why the Task Is High Mismatch
 
-Factor-framework regeneration looks like a code-generation task: give the model examples, metrics, and a few lessons, then ask it to write the next framework. The hard part is not syntax or component assembly.
+Factor-framework regeneration looks like a code-generation task: give the model samples, performance metrics, and a few experiences, then ask it to write the next framework. But the hard part is not syntax or component assembly.
 
 ::::cards
 ### Support Mismatch
@@ -39,16 +39,16 @@ High-value frameworks may sit in low-probability regions of the old sampling dis
 
 ### Specification Mismatch
 
-"Sounds like a good lesson" is not the objective. An experience must show up as a mean shift, variance collapse, thicker right tail, thinner left tail, or direction reversal in the sample distribution.
+"Sounds like a good lesson" is not the objective. An experience must show up as a mean shift, variance contraction, thicker right tail, thinner left tail, or direction reversal in the sample distribution.
 
 ### Aggregation Mismatch
 
-Local successes across many versions do not automatically become regeneration rules. Many claims may be repeated expressions of the same signal and must be folded into independent groups.
+Local successes across many versions do not automatically become regeneration rules. Many claims may be repeated expressions of the same signal and must be folded into independent signal groups.
 
 ### State Mismatch
 
-Experiences have lifecycle state. Claims that were once useful, later decayed, or already refuted cannot be mixed with current live claims when guiding regeneration.
-:::
+Experiences have lifecycle state. Claims that were once useful but later decayed, or that have already been refuted, cannot be mixed with current live claims when guiding regeneration.
+::::
 
 The case is therefore not about whether an LLM can write a factor framework. It is about how the system decides which experiences deserve to guide the next generation step.
 
@@ -69,7 +69,7 @@ The pipeline below shows how a candidate experience moves from raw samples to a 
   </section>
   <section class="process-phase">
     <h3>Realization</h3>
-    <p>Rewrite candidate experiences into AST or structural predicates φ_c and map them to each sample.</p>
+    <p>Rewrite candidate experiences into abstract-syntax-tree (AST) or structural predicates φ_c and map them onto each sample.</p>
   </section>
   <section class="process-phase">
     <h3>Distribution tests</h3>
@@ -87,37 +87,37 @@ The pipeline below shows how a candidate experience moves from raw samples to a 
 
 ## From Soft Knowledge to Hard Experience
 
-`fwinsight_v3` is strict about what counts as experience. A claim can receive a high V2 score and still be downgraded to `SOFT` or `UNCLEAR` if it does not significantly separate the sample distribution. Conversely, a low-scored V2 claim can be promoted if it reliably changes the distribution.
+`fwinsight_v3` is strict about what counts as experience. A claim can receive a high V2 score and still be downgraded to `SOFT` or `UNCLEAR` if it does not significantly separate the sample distribution. Conversely, a claim with a low V2 score can be promoted to penetrating knowledge if it reliably changes the sample distribution.
 
 That strictness produces four key operations:
 
 ::::cards
 ### Cutting
 
-Every experience must split the sample pool into high-realization and low-realization groups. If an experience cannot be detected, it cannot directly guide regeneration.
+Every experience must split the sample pool into high-realization and low-realization groups. An experience whose realization cannot be detected cannot directly guide regeneration.
 
 ### Recombination
 
-Many natural-language claims collapse into a small number of independent signal groups. The system cares about independent experience, not repeated phrasing.
+Many natural-language claims are folded into a small number of independent signal groups. The system cares about independent experience, not about how many times a claim is restated.
 
 ### Direction Correction
 
-If the high-realization group performs worse, the experience is not simply discarded. It becomes `PENETRATING_REVERSED`, which is especially valuable because it exposes a direction the old system may have trusted incorrectly.
+If the high-realization group performs worse, the experience is not simply discarded. It is labeled `PENETRATING_REVERSED`. Such a result is especially valuable because it exposes a direction the old system may have been systematically wrong to trust.
 
 ### Maturity Filtering
 
 Live, decayed, and refuted claims must be separated. Only currently valid experience should constrain the next regeneration step.
-:::
+::::
 
-That is the definition of hard experience here: not experience that is more eloquent, but experience that changes a distribution, exposes directionality, and survives the current-state filter.
+That is the definition of hard experience here: not experience that is more eloquent, but experience that changes the distribution across many samples, exposes directionality, and survives the current-state filter.
 
 ## The Most Valuable Finding
 
-The most important result from the implemented stages is not that V3 found many lessons. It is the opposite: after statistical governance, many plausible lessons shrink into a small number of independent signals.
+The most important result from the implemented stages is not that V3 found many experiences. It is the opposite: after statistical governance, many plausible experiences shrink into a small number of independent signals.
 
-Stage 01 tested V2 claims against 1400+ samples and initially found a batch of `PENETRATING` results. Stage 02 folded repeated claims and showed that the independent strong signals were few: market-state awareness was confirmed, while AdaptiveThresholdManager-related claims were directionally reversed. Stage 03 then added maturity filtering to separate live experiences from historical pollution.
+Stage 01 ran distribution tests on 77 V2 claims against 1400+ samples and at first found a batch of `PENETRATING` results. But once Stage 02 folded repeated claims, only a few truly independent strong signals remained: for example, market-state awareness was confirmed, while AdaptiveThresholdManager-related claims reversed direction. Stage 03 then added the maturity filter to further separate live experiences from historical pollution.
 
-So V3's value is not increasing the number of lessons. It compresses lesson entropy:
+So V3's value is not in increasing the number of experiences. It compresses experience entropy:
 
 ```text
 many generated versions
@@ -130,11 +130,11 @@ many generated versions
 -> a small set of hard experiences
 ```
 
-Only a few of these hard experiences may be enough to push the next factor-framework regeneration cycle away from the old sampling distribution. They are not decorative prompt advice. They become generation constraints, anti-patterns, component-boundary rules, and direction prohibitions.
+It does not take many of these hard experiences: adopting just a few may be enough to push the next factor-framework regeneration cycle away from the old sampling distribution. They are not decorative prompt advice. They become generation constraints, anti-patterns, component-combination boundaries, and direction prohibitions.
 
 ## Boundary: Not the Full Regeneration Loop
 
-This case should keep one boundary clear: `fwinsight_v3` is best described as the hard-experience extraction layer and evidence-specification layer before regeneration, not the full generate-backtest-regenerate loop by itself.
+To describe this case accurately, one boundary has to stay clear: `fwinsight_v3` is best described as the hard-experience extraction layer and evidence-specification layer before regeneration, not the full generate-backtest-regenerate loop by itself.
 
 What it has already established is:
 
@@ -147,7 +147,7 @@ What it has already established is:
 
 So the conclusion should not be "V3 has proven a complete factor-framework regeneration loop." It should be:
 
-**V3 proves the key precondition for regeneration: distilling a small set of hard experiences from the old sampling distribution so the next sampling process can move differently.**
+**V3 demonstrates the most critical step before regeneration: how to distill, from the old sampling distribution, a small set of hard experiences that can change the direction of future sampling.**
 
 ## Mapping to This Site's Framework
 
@@ -156,11 +156,11 @@ So the conclusion should not be "V3 has proven a complete factor-framework regen
 ::::cards
 ### Support: Move Beyond the Old Distribution
 
-Sampling again from the same generator tends to revisit high-probability regions of the old distribution. Hard experience changes the constraints of the next sampling cycle.
+Sampling again from the same generator tends to revisit high-probability regions of the old distribution. Hard experience changes the constraints of the next sampling cycle so generation can reach regions outside the old distribution.
 
 ### Specification: Reject Pretty Explanations
 
-LLM explanations, high V2 utility, and natural-language claims from successful samples are not accepted as truth. A claim upgrades only when it changes the statistical distribution.
+LLM explanations, high V2 utility, and even natural-language claims from successful samples are not accepted as truth. A claim is upgraded only when it changes the statistical distribution.
 
 ### Aggregation: Fold Repeated Experience
 
@@ -173,7 +173,7 @@ Experience is not permanent truth. V3 uses a maturity filter to separate Observe
 ### Fitting Boundary: Do Not Bind to One Explanation
 
 A repeated claim, high utility score, or elegant factor story can overfit the historical sample. V3 requires evidence groups, maturity states, and distribution-change checks before a claim can guide future generation.
-:::
+::::
 
 ## Relation to the Other Cases
 
@@ -184,12 +184,12 @@ This case adds an important new type to the case library.
 3. **Stock Rec V3**: limits LLM authority in financial-strategy production; only objects passing shadow, promotion, and active lifecycle stages can affect production.
 4. **FW-Insight V3**: extracts distribution-changing hard experiences from historical generated samples before factor-framework regeneration.
 
-If Stock Rec V3's keyword is production authority, FW-Insight V3's keyword is:
+If Stock Rec V3's keyword is production-authority governance, FW-Insight V3's keyword is:
 
 **hard experience, not more sampling.**
 
 ## Case Conclusion
 
-`fwinsight_v3` should become a new case. It shows a crucial counterintuitive point: once a system has already generated many versions, asking the LLM to "generate some better ones" is usually not the key move. The key move is to cut, recombine, validate, fold, and direction-correct the old sample distribution until a small set of hard experiences remains.
+`fwinsight_v3` works well as a new case. It shows a crucial, somewhat counterintuitive point: once a system has already generated many versions, asking the LLM to "generate some better ones" is usually not the most important move. The more important move is to cut, recombine, validate, fold, and direction-correct the old sample distribution, and distill from it a small set of hard experiences that can actually guide regeneration.
 
 This case belongs after Stock Rec V3. Stock Rec V3 shows that financial strategy systems must govern production authority. FW-Insight V3 adds that the knowledge inside financial engineering must also be governed: only distribution-penetrating experience deserves to guide the next factor-framework regeneration cycle.

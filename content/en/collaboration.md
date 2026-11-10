@@ -10,7 +10,7 @@ order: 5
 heroPoints:
   - AI should move the task forward until a human-governed variable blocks reliable continuation.
   - The human should answer the minimal sufficient question, not take the whole task back.
-  - Reusable judgments should become governed knowledge or escalation objects.
+  - Reusable judgments should become Governed Knowledge Objects (GKOs) or Governed Escalation Objects (GEsOs).
 ---
 
 ## Collaboration Is Variable Governance
@@ -26,7 +26,7 @@ Good collaboration is neither front-loading a long questionnaire nor letting the
 ```text
 AI: Process → Search → Structure → Simulate → Verify
 Human: Govern → Set values → Authorize → Judge taste → Own responsibility
-System: turn reusable judgments into [GKOs](/glossary#gko) / [GEsOs](/glossary#geso) and hard-state transitions
+System: turn reusable judgments into GKOs / GEsOs and hard-state transitions
 ```
 
 **In one sentence: AI should move the task to the point where only human-governed variables remain; humans should resolve variables that cannot be reliably obtained from environment, feedback, tools, or simulation; the system should commit the resolved variable into hard state rather than leave it as chat history.**
@@ -71,17 +71,17 @@ Tag: build a proving ground
 
 When direct reality feedback is unavailable, the agent can simulate competitors, regulators, impatient users, critics, attackers, failure worlds, or market states to expose fragile assumptions.
 
-### Human-Controlled
+### Human-Governed
 Tag: only then ask the human
 
-When the variable cannot be observed, inferred, validated, or legitimately authorized by AI, the agent should ask the human for a fact, weight, boundary, authorization, validation signal, resource, risk owner, or stopping criterion.
+When the variable cannot be observed, inferred, validated, or legitimately authorized by AI, the agent should ask the human for a fact, weight, boundary, authorization, validation signal, resource, accountable owner, or stopping criterion.
 :::
 
 Before asking, the agent should attempt bounded autonomous recovery: inspect context, query tools and files, run tests, retrieve current sources, simulate scenarios, generate options, and reparameterize the task. Only after that work runs out is escalation justified, and only when the remaining variable is both task-critical and genuinely human-governed.
 
 ## Five Operational Domains
 
-The collaboration supplement consolidates execution blockers into five domains:
+The collaboration supplement, [Human-Assist Operational Mismatches](/docs/human-assist-operational-mismatches.md), consolidates execution blockers into five domains:
 
 ::::cards
 ### Information and Evidence
@@ -103,7 +103,7 @@ The agent does not know when a rule applies, when it expires, whether to wait, w
 ### Coordination and Control Representation
 
 The current decomposition, workflow, handoff, or task model may omit a decisive dependency or responsible role.
-:::
+::::
 
 ## Escalation Gates
 
@@ -128,7 +128,7 @@ What is the smallest human-answerable question whose answer restores autonomous 
 A good Minimal Sufficient Human Query has five properties:
 
 - It names the blocking variable.
-- It offers a small set of options when possible.
+- It offers a small set of options when possible, which lowers the cost of answering.
 - It explains what each answer changes.
 - It states a safe default.
 - It does not hand the entire task back to the human.
@@ -165,7 +165,7 @@ If you do not specify, I will ______ because it is the safest or most reversible
 
 A [Governed Knowledge Object (GKO)](/glossary#gko) governs what the AI should know or obey. A [GEsO](/glossary#geso) governs the asking itself: when the AI should ask a human, what it should ask, whom it should ask, and what to do safely if no answer arrives.
 
-A GEsO should specify:
+A GEsO should specify at least:
 
 - Trigger condition: when must the agent escalate?
 - Minimal question: what exact variable is needed?

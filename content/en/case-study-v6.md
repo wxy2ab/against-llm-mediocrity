@@ -14,7 +14,7 @@ heroPoints:
   - The best version appeared at iteration 2, not the last iteration, so governance must preserve the best state instead of assuming more revision is always better.
 ---
 
-Story Insight V6 is a single annotated run of a layered story-generation system, used here to make one argument concrete: once generation is already governed through a control space, governance is not finished.
+This case study follows a single annotated run of Story Insight V6, a layered story-generation system. It makes one argument concrete: even once generation is governed through a control space, governance is not finished.
 
 The system still has to decide which layer owns a problem, when to keep revising, and when to stop. This page walks through one high-threshold run and maps what it shows back to the six primitive mismatches.
 
@@ -22,7 +22,7 @@ The system still has to decide which layer owns a problem, when to keep revising
 
 [Story Insight V4](/case-study-v4) established the first core point: story generation should not rely on fluent text sampling alone. It needs a control space for characters, events, emotion, theme, rhythm, and reader understanding.
 
-Story Insight V6 addresses the next layer. Even after a system has a control space, governance is not automatically complete. The control space may itself need evaluation and revision; text-level failures should not be misdiagnosed as world-setting failures; continuity problems should not be hidden behind a strong average score; and when a high threshold cannot be reached, the system must decide whether to continue, roll back to the best version, or recognize a plateau.
+Story Insight V6 addresses the next layer. Even after a system has a control space, governance is not automatically complete. The control space may itself need evaluation, revision, and reinterpretation. Text-level failures should not be misdiagnosed as world-setting failures. Continuity problems should not be hidden behind a strong average score. And when a high threshold cannot be reached, the system must decide whether to continue, roll back to the best version, or recognize a plateau.
 
 V6 is therefore not best understood as another story generator. It is a **layered governance case**: the same story task is split across distinct layers — MetaSpace, LogicSpace, section plans, text, ledger, continuity, attack, revision, and pairwise comparison — and each layer carries a different responsibility.
 
@@ -33,7 +33,7 @@ This case used a deliberately high acceptance threshold:
 :::cards
 ### Task Setup
 
-The genre was `xianxia`, the target length was `short`, resolved to roughly 9000 Chinese characters, and complexity was `high`. The run used the `balanced` execution profile with Chinese prompts and Chinese story output.
+The genre was `xianxia`, the target length was `short` (resolved to roughly 9000 Chinese characters), and the complexity was `high`. The run used the `balanced` execution profile with Chinese prompts and Chinese story output.
 
 ### High Threshold
 
@@ -102,7 +102,7 @@ Defines the task's evaluation and governance space: which modules, dynamic dimen
 
 ### LogicSpace
 
-Carries the story structure: characters, conflicts, events, rhythm, themes, and symbols. It answers why the story must happen this way.
+Carries the story structure: how characters, conflicts, events, rhythm, themes, and symbols constrain one another. It answers why the story must happen this way.
 
 ### Text
 
@@ -128,7 +128,7 @@ The run took about 25 minutes and 19 seconds, made 41 LLM calls, and used about 
 
 ### Iteration Trace
 
-Iteration 1 scored 8.84 with about 10018 characters. Iteration 2 scored 9.00 and became the best version. Iteration 3 also scored 9.00 but shortened the text to about 7529 characters. Later work did not exceed the best score.
+Iteration 1 scored 8.84 with a text of about 10018 characters. Iteration 2 scored 9.00 and became the best version. Iteration 3 also scored 9.00 but shortened the text to about 7529 characters. Later work did not exceed the best score.
 
 ### Tool Layers
 
@@ -136,7 +136,7 @@ The run used `metaspace_creator`, `metaspace_critic`, `metaspace_modify`, `logic
 
 ### Routing Result
 
-This run did not trigger `route_was_upgraded`. That matters: the case should not be described as automatic escalation to MetaSpace. Its lesson is that after layered diagnosis, the main bottleneck had shifted toward text realization and plateau detection.
+This run did not trigger `route_was_upgraded`. That matters: the case should not be described as automatic escalation to MetaSpace. The more accurate description is that, after layered diagnosis, the system judged that the main bottleneck had shifted toward text realization and the plateau.
 :::
 
 ## A Plateau Is Not a Failure
@@ -149,18 +149,18 @@ Ordinary multi-round generation often creates a misleading impression: if the mo
 - Improve prose while weakening structural density.
 - Add explanation and setup while loosening rhythm.
 
-This V6 run shows that tension. Iteration 2 was the best version. Iteration 3 kept the same average score but changed length substantially, suggesting a different revision direction. Later work did not cross 9.2, and the run ended in a plateau. That conclusion is more valuable than simply producing another longer draft.
+This V6 run shows that tension. Iteration 2 was the best version. Iteration 3 kept the same 9.00 average but changed length substantially, suggesting a different revision direction. Later work did not cross 9.2, and the run ended in a plateau. That conclusion is more valuable than simply producing another longer draft.
 
 ## What Pairwise Critic Adds
 
-The most important additional path in this run was `pairwise_critic`. It does not just produce another total score. It compares variants and writes routeable insights about why one version carries value better than another.
+The most important additional path in this run was `pairwise_critic`. It does not just produce another total score. It compares variants and writes routable insights about why one version carries value better than another.
 
 Its findings were mostly text-layer findings, but they were not merely style comments:
 
 ::::cards
 ### Genre Atmosphere
 
-The stronger version used details like the purple spirit flower seeming to breathe and demonic qi probing the environment. The weaker version stayed closer to ordinary visual description and lost xianxia texture.
+The stronger version quickly established the otherworldly atmosphere of a xianxia world with details like the purple spirit flower seeming to breathe and demonic qi probing the environment. The weaker version stayed closer to ordinary visual description and lost xianxia texture.
 
 ### Bodily Reaction
 
@@ -172,7 +172,7 @@ The stronger version linked root powder, numbness, a black mark in the sky, and 
 
 ### Symbolic Objects
 
-The token, broken sword, scar, and bloodstain were not decorations. They became pressure devices for the character's past and current choice.
+The token, broken sword, scar, and bloodstain were not decorations. They became pressure devices for the character's past and current choice. The pairwise review checks whether they keep producing meaning.
 
 ### Rhythm Control
 
@@ -183,17 +183,17 @@ This shows that layered governance does not push every issue back into structure
 
 ## What Continuity Audit Found
 
-Across iterations, continuity audit found problems at several layers: character state, world setting, and unresolved goals.
+Across iterations, the continuity audit found problems at several layers: character state, world setting, and unresolved goals.
 
 Representative findings included:
 
-- After Su Chen cut his wrist for blood, the story at one point lacked bodily reaction and wound handling.
-- Xiaoji's recovery from demonic poisoning was not always stated clearly enough.
+- After Su Chen cut his wrist for blood, the story at one point lacked bodily reaction and wound handling, leaving the character's action chain incomplete.
+- The degree of Xiaoji's recovery from demonic poisoning was stated vaguely, so the character's later state was not stable enough.
 - The wooden box opening and knocking by itself created a suspense thread that needed explanation or deliberate preservation as a hook.
 - In some variants, Xiaoji's right-foot gait was described inconsistently.
-- Su Chen used spiritual power during sealing, but the earlier setup of residual spiritual power was not strong enough.
+- Su Chen used spiritual power while sealing the demonic artifact, but the earlier setup of residual spiritual power was not strong enough.
 
-These are not copyediting issues. Continuity checks whether story state persists across scenes, whether abilities have sources, whether objects and clues carry later responsibility, and whether readers can trust the rules of the world to stay fixed.
+These are not copyediting issues. The continuity audit checks whether story state persists across scenes, whether abilities have sources, whether objects and clues carry later responsibility, and whether readers can trust the rules of the world to stay fixed.
 
 ## Mapping Back to the Six Mismatches
 
@@ -202,7 +202,7 @@ Story Insight V6 maps directly onto this site's primitive mismatch framework. Fi
 ::::cards
 ### Aggregation Mismatch
 
-Each revision can improve locally without improving global value. Iteration 2 staying best while later work failed to break through shows that "keep revising" itself needs governance.
+Each revision can improve locally without improving global value. Iteration 2 stayed the best version while later work failed to break through, which shows that "keep revising" itself needs governance.
 
 ### State Mismatch
 

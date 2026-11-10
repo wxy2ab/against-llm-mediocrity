@@ -16,12 +16,12 @@ showInNav: false
 
 如果你是从别的页面点进来的，通常直接跳到对应词条就够了；如果你想先把整体轮廓搭起来，可以按下面四组读：
 
-- [对齐区制](#alignment-regimes)
+- [对齐区间](#alignment-regimes)
 - [六类失配](#primitive-mismatches)
 - [治理对象](#governance-objects)
 - [工程与协作](#engineering-and-collaboration)
 
-## 对齐区制
+## 对齐区间
 
 <a id="alignment-regimes"></a>
 
@@ -30,15 +30,15 @@ showInNav: false
 
 **一句话定义**：LLM 给出的答案在某些时候未必是高价值高质量的，可能是很平庸的答复，而非你期望的答案。
 
-**完整解释**：LLM 平庸不是说模型没用，而是说在这类任务里，继续采样、润色、补充细节，通常只能让答案更顺、更完整、更像那么回事，却碰不到真正决定成败的结构。问题不在于模型完全不会，而在于默认生成路径被高概率、常见、局部可改进的模式牵引，而真实价值取决于隐藏状态、全局关系、稀缺结构、真实规格或外部验证。
+**完整解释**：LLM 平庸不是说模型没用，而是说在这类任务里，继续采样、润色、补充细节，通常只能让答案更顺、更完整、更像那么回事，却碰不到真正决定成败的结构。问题不在于模型完全不会，而在于默认生成路径被高概率、常见、局部可改进的模式牵引，真实价值却取决于隐藏状态、全局关系、稀缺结构、真实规格或外部验证。
 
-**为什么重要**：这个术语把一种常见但说不清的体验钉住了：“答案越来越像样，但还是不对。” 一旦识别出自己处在 LLM 平庸区，下一步就不该只是继续改 prompt，而要开始重写任务形态。
+**为什么重要**：这个术语把一种常见但说不清的体验钉住了：“答案越来越像样，但还是不对。”一旦识别出自己处在 LLM 平庸区，下一步就不该只是继续改 prompt，而要开始重写任务形态。
 
 **出处链路**：
 
-- 首次完整主文：[Knowledge Governance for Large Language Model Systems](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/knowledge-governance-llm-systems-local-alignment.zh-CN.md)
+- 首次完整主文：[大语言模型系统的知识治理](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/knowledge-governance-llm-systems-local-alignment.zh-CN.md)
 - 当前结构主文：[价值保存结构理论](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/structural-theory-value-preservation-llm-systems.zh-CN.md)
-- 站点侧综述：[机制](../framework)
+- 站点综述：[机制](../framework)
 
 **相关术语**：[局部对齐](#local-alignment) · [LLM 卓越](#llm-excellence) · [六类原始失配](#six-primitive-mismatches)
 
@@ -53,26 +53,26 @@ showInNav: false
 
 **出处链路**：
 
-- 首次完整主文：[Knowledge Governance for Large Language Model Systems](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/knowledge-governance-llm-systems-local-alignment.zh-CN.md)
+- 首次完整主文：[大语言模型系统的知识治理](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/knowledge-governance-llm-systems-local-alignment.zh-CN.md)
 - 当前结构主文：[价值保存结构理论](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/structural-theory-value-preservation-llm-systems.zh-CN.md)
-- 站点侧综述：[首页](../) · [机制](../framework)
+- 站点综述：[首页](../) · [机制](../framework)
 
 **相关术语**：[LLM 平庸](#llm-mediocrity) · [LLM 卓越](#llm-excellence) · [知识治理](#knowledge-governance)
 
 <a id="llm-excellence"></a>
 ### LLM 卓越
 
-**一句话定义**：模型擅长处理此类问题，给出的答案往往就是你期待和需要的。
+**一句话定义**：模型擅长处理此类问题，给出的答案往往就是你期待和需要的。论文中也把它写作“正向概率-价值对齐”或“正向对齐”，指的是同一个区间。
 
-**完整解释**：在 LLM 卓越区，模型不需要被强行拉离默认生成轨道，因为默认轨道就已经靠近高价值结果。上下文压缩、语义扩写、结构化改写、格式迁移、语体转换、常见查询构造等任务常落在这一区。这里的重点不是“模型更强”，而是“任务结构、表征方式和成功标准与模型能力已经同向”。
+**完整解释**：在 LLM 卓越区，模型不需要被强行拉离默认生成轨道，因为默认轨道就已经靠近高价值结果。上下文压缩、语义扩写、结构化改写、格式迁移、语体转换、常见查询构造等任务常落在这一区。这里的重点不是“模型更强”，而是“任务结构、表征方式和成功标准与模型习得的续写倾向已经同向”。
 
 **为什么重要**：它提醒我们别把所有任务都治理得过重。已经落在 LLM 卓越区的任务，往往可以直接生成，只做轻量验证就够了。
 
 **出处链路**：
 
-- 理论背景：[Knowledge Governance for Large Language Model Systems](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/knowledge-governance-llm-systems-local-alignment.zh-CN.md)
+- 理论背景：[大语言模型系统的知识治理](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/knowledge-governance-llm-systems-local-alignment.zh-CN.md)
 - 当前结构主文：[价值保存结构理论](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/structural-theory-value-preservation-llm-systems.zh-CN.md)
-- 站点侧综述：[首页](../) · [为什么重要](../science)
+- 站点综述：[首页](../) · [为什么重要](../science)
 
 **相关术语**：[LLM 平庸](#llm-mediocrity) · [局部对齐](#local-alignment)
 
@@ -100,7 +100,7 @@ showInNav: false
 <a id="aggregation-mismatch"></a>
 ### 聚合失配
 
-**一句话定义**：部署局部代理、有限搜索或不可逆提交不能稳定恢复全局补全价值。
+**一句话定义**：部署中的局部代理、有限搜索或不可逆提交不能稳定恢复全局补全价值。
 
 **完整解释**：当部署过程使用的局部得分或解码规则偏离“选择该局部决策后可达到的最佳全局补全价值”，并且早期提交缩小未来可达集合时，就发生聚合失配。故事会失去承诺—回收链，代码会破坏跨模块约束，方案会失去真正的主导取舍。自回归链式分解可以精确编码全局依赖，对失配既非必要也非充分；“自回归平庸”不再作为该机制的名称。任务的非局部耦合度只是压力剂量；严重度应由部署代理相对全局补全价值的排序错误或后悔衡量。
 
@@ -136,7 +136,7 @@ showInNav: false
 
 **一句话定义**：在固定可访问表征下，系统形成或更新的状态信念偏离证据支持的信念，并改变行动排序。
 
-**完整解释**：用户情绪、市场区间、部署环境、法律辖区、权限边界与时间窗口都可能改变最优策略。但这些状态难以直接知道，并不自动构成失配。状态失配发生在信念组件对同一证据错误折叠假设、误排概率、遗漏或遗忘证据、沿用过期状态，进而选错行动时。若系统正确维护一个仍然宽的后验，并采取信念条件下的最优、保守或分支策略，就不存在状态失配。后验弥散与状态间排序翻转只表示任务歧义度；严重度应按系统相对信念最优基准的决策后悔衡量。
+**完整解释**：用户情绪、市场区间、部署环境、法律辖区、权限边界与时间窗口都可能改变最优策略。但这些状态难以直接知道，并不自动构成失配。当信念组件在同一证据下错误折叠假设、误排概率、遗漏或遗忘证据、沿用过期状态，进而选错行动时，就发生状态失配。若系统正确维护一个仍然宽的后验，并采取信念条件下的最优、保守或分支策略，就不存在状态失配。后验弥散与状态间排序翻转只表示任务歧义度；严重度应按系统相对信念最优基准的决策后悔衡量。
 
 **为什么重要**：它把修复目标定位到信念形成、更新、记忆、条件策略与状态权威。若改善必须依赖新增测量、工具反馈或更丰富表征，则上游诊断应是观测-表征失配，而不是状态失配。
 
@@ -144,7 +144,7 @@ showInNav: false
 
 - 理论背景：[价值保存结构理论](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/structural-theory-value-preservation-llm-systems.zh-CN.md)
 - 专题主文：[状态失配与状态治理](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-mismatch-state-governance-llm-systems.zh-CN.md)
-- 运行时主文：[状态治理智能体范式（SGAR）](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)
+- 运行时主文：[面向受治理 LLM 系统的状态治理智能体范式](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)
 
 **相关术语**：[SGAR](#sgar) · [六类原始失配](#six-primitive-mismatches)
 
@@ -187,9 +187,9 @@ showInNav: false
 
 **一句话定义**：可行干预本可取得或保留的决策信息，没有进入模型可操作表征。
 
-**完整解释**：模型可以很聪明地推理它看到的东西，但如果可行通道本可提供的关键变量在进入表示之前就被丢掉、压缩、混叠或遮蔽了，那么再长的推理链也只是围绕错误坐标工作。日志缺失、可接入的传感器或工具未接入、原始信号被摘要覆盖，都是实例。若任何可行测量与表征都无法消除不确定性，剩余差距是任务的不可约信息限制，不记作系统失配。
+**完整解释**：模型可以很聪明地推理它看到的东西，但如果可行通道本可提供的关键变量在进入表征之前就被丢掉、压缩、混叠或遮蔽了，那么再长的推理链也只是围绕错误坐标工作。日志缺失、可接入的传感器或工具未接入、原始信号被摘要覆盖，都是实例。若任何可行测量与表征都无法消除不确定性，剩余差距是任务的不可约信息限制，不记作系统失配。
 
-**为什么重要**：它把很多“推理还不够深”的误判，改正成“先修通道”的问题。补测量、读原始证据、接工具、查环境、改善表示，往往比继续推理更关键。
+**为什么重要**：它把很多“推理还不够深”的误判，改正成“先修通道”的问题。补测量、读原始证据、接工具、查环境、改善表征，往往比继续推理更关键。
 
 **出处链路**：
 
@@ -208,13 +208,13 @@ showInNav: false
 
 **一句话定义**：把任务特定、已验证、可复用的控制知识从生成里分离出来，作为独立对象治理。
 
-**完整解释**：知识治理关心的不是“让模型记住更多东西”，而是把真正影响任务成功的控制知识，从一次性的流畅输出中抽离出来，存成可验证、可撤销、可复用、可冲突处理的对象。这样，下游生成就不必每次都从默认概率重新猜一遍，而能从已经治理过的状态出发。
+**完整解释**：知识治理关心的不是“让模型记住更多东西”，而是把真正影响任务成功的控制知识，从一次性的流畅输出中抽离出来，存成可验证、可撤销、可复用、可处理冲突的对象。这样，下游生成就不必每次都从默认概率重新猜一遍，而能从已经治理过的状态出发。
 
 **为什么重要**：这是把局部对齐转成长期工程收益的关键动作。没有知识治理，系统只能一次次“重新想”；有了知识治理，系统才有机会积累那些已经在真实任务里证明有效的判断。
 
 **出处链路**：
 
-- 首次完整主文：[Knowledge Governance for Large Language Model Systems](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/knowledge-governance-llm-systems-local-alignment.zh-CN.md)
+- 首次完整主文：[大语言模型系统的知识治理](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/knowledge-governance-llm-systems-local-alignment.zh-CN.md)
 - 当前结构主文：[价值保存结构理论](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/structural-theory-value-preservation-llm-systems.zh-CN.md)
 - 实现规范：[受治理 LLM 对象模型与接口规范](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/governed-llm-object-model-interface-specification.zh-CN.md)
 
@@ -231,7 +231,7 @@ showInNav: false
 
 **出处链路**：
 
-- 理论起点：[Knowledge Governance for Large Language Model Systems](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/knowledge-governance-llm-systems-local-alignment.zh-CN.md)
+- 理论起点：[大语言模型系统的知识治理](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/knowledge-governance-llm-systems-local-alignment.zh-CN.md)
 - 当前规范主文：[受治理 LLM 对象模型与接口规范](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/governed-llm-object-model-interface-specification.zh-CN.md)
 - 站点综述：[治理](../engineering)
 
@@ -240,7 +240,7 @@ showInNav: false
 <a id="gexo"></a>
 ### 受治理执行对象（GExO）
 
-**一句话定义**：保存任务、计划、行动、交接或工作流项执行约束的治理对象。
+**一句话定义**：保存任务、计划、行动、交接或工作流项执行约束的受治理对象。
 
 **完整解释**：GExO 承载的是执行侧权威。它定义这个执行单元要完成什么、输入输出是什么、什么算成功或失败、谁可以行动、哪些动作被允许或禁止，以及提交进展前必须满足哪些 GKO、验证器或转移契约。它是 GKO 在执行层的对应物。
 
@@ -259,7 +259,7 @@ showInNav: false
 
 **一句话定义**：保存“什么时候该问人、问什么、问谁、等待期间还能做什么”的升级协议对象。
 
-**完整解释**：GEsO 负责治理“问”这个动作本身。它不是临时起意的提问，而是把触发条件、最小问题、默认值、人类角色、风险等级、等待期间的自治工作、撤销条件等一起对象化。这样，系统就不会在遇到不确定性时不是盲冲，就是把整个任务甩回给人。
+**完整解释**：GEsO 负责治理“问”这个动作本身。它不是临时起意的提问，而是把触发条件、最小问题、默认值、人类角色、风险等级、等待期间的自治工作、撤销条件等一起对象化。这样，系统遇到不确定性时，就不会要么盲冲，要么把整个任务甩回给人。
 
 **为什么重要**：它把人类接入从一次性打断，变成可复用、可审计、可演进的协议。对长程 agent 来说，GEsO 是恢复自治的工具，不是放弃自治的借口。
 
@@ -297,9 +297,9 @@ showInNav: false
 
 **一句话定义**：把审计当成独立工程层，用来定位失败、选择修复路由，并把结果写回控制对象。
 
-**完整解释**：审计工程不把 audit 理解为结果出来后的“打分”。它把失败定位、反例构造、证据沉淀、修复路由、控制增量和回归验证当成一套独立系统。生成器负责产出候选，审计负责回答“为什么失败、该改哪里、怎样防止复发”。这使得系统能从每次失败中积累可执行的修复，而不是只留下语言评论。
+**完整解释**：审计工程不把审计理解为结果出来后的“打分”。它把失败定位、反例构造、证据沉淀、修复路由、控制增量和回归验证当成一套独立系统。生成器负责产出候选，审计负责回答“为什么失败、该改哪里、怎样防止复发”。这使得系统能从每次失败中积累可执行的修复，而不是只留下语言评论。
 
-**为什么重要**：如果没有审计工程，失败最后只会变成下一轮 prompt 的情绪记忆；有了审计工程，失败才会变成可写回、可复放、可验证的控制增量。
+**为什么重要**：如果没有审计工程，失败最后只会变成下一轮 prompt 的情绪记忆；有了审计工程，失败才会变成可写回、可重放、可验证的控制增量。
 
 **出处链路**：
 

@@ -5,12 +5,12 @@ path: /science
 title: Why It Matters
 navTitle: Why It Matters
 kicker: Why this is not just a wait-for-the-next-model problem
-summary: "LLM mediocrity does not mean LLMs are useless. It means some failures will not disappear just because training continues. Once you see that, you know when to keep optimizing and when to redesign the task itself."
+summary: "LLM mediocrity does not mean LLMs are useless. It means some failures will not disappear just because training continues; they have already hit a structural ceiling. Once you see that, you know when to keep optimizing and when to redesign the task itself."
 order: 1
 heroPoints:
   - A model can improve surface quality while staying inside the same wrong abstraction.
   - Repeated refinement can make a mediocre answer more complete and persuasive without crossing the real bottleneck.
-  - Once you see the structural limit, you know when to keep prompting and when to restructure, use tools, or ask a human.
+  - Once you see the structural ceiling, you know when to keep prompting and when to restructure, use tools, or ask a human.
 ---
 
 ## Why This Matters
@@ -31,7 +31,7 @@ That feeling is often not about prose. It is about *task value*. The missing pie
 
 This is why fluent failure is hard to notice. The answer may be useful in several local ways: it compresses context, chooses a reasonable tone, fills in missing transitions, and produces a coherent structure. The failure appears only when those local improvements do not reach the variable that determines the task's real value.
 
-This page does the first step only: it breaks that vague sense of "still wrong" into diagnosable forms. The next page, "Cases," is the entry point to the case library, spanning Story Insight V4/V6 on control space and layered governance, Stock Rec V3 on financial production authority, and FW-Insight V3 on hard-experience extraction. The "Mechanism" page after that compresses those cases into more stable theoretical axes: whether probability and value point in the same direction, and which intervention follows from each primitive mismatch.
+This page does the first step only: it breaks that vague sense of "still wrong" into diagnosable forms. The "Cases" page is the entry point to the case library, spanning Story Insight V4/V6 on control space and layered governance, Stock Rec V3 on financial production authority, and FW-Insight V3 on hard-experience extraction. The "Mechanism" page compresses those cases into more stable theoretical axes: whether probability and value point in the same direction, and which intervention follows from each primitive mismatch.
 
 ## Why More Iteration Can Still Fail
 
@@ -88,10 +88,12 @@ The best answer may not be the most statistically natural answer. The system nee
 
 The model satisfies the stated proxy while failing the actual success condition. "Looks professional" is not the same as validated, authorized, reversible, or correct.
 
-### Local Binding → Fitting Boundary
+### Local Binding → Fitting-Boundary
 
 The model treats local support as if it were an invariant. Perturbing the scene, metric, audit path, or feedback source reveals whether the claim actually generalizes.
 ::::
+
+For a more structured derivation, read [Six Primitive Mismatches](/docs/six-primitive-mismatches-pipeline-derived-taxonomy-llm-systems.md) or its structural basis, the [Structural Theory of Value Preservation](/docs/structural-theory-value-preservation-llm-systems.md).
 
 ## A Simple Diagnostic
 
@@ -111,14 +113,14 @@ What control variable is missing from this task?
 
 The task may need state observation, missing-channel measurement, tool validation, source retrieval, counterexamples, a rubric, a decision matrix, a failure-mode list, or a human answer about preference, authorization, boundary, or responsibility.
 
-A useful check is to ask what kind of object would change the next generation:
+A useful check is to ask what kind of object would change what the model generates next:
 
 - A **state matrix** changes hidden assumptions into explicit cases.
 - A **measurement** or raw-signal request moves missing channel variables into representation.
 - A **rubric** changes vague quality into testable criteria.
 - A **failure-mode list** exposes how a plausible answer could fail.
 - A **query plan** moves missing facts out of imagination and into retrieval.
-- A **[minimal sufficient human question](/glossary#mshq)** isolates a value, authority, or responsibility variable.
+- A **[Minimal Sufficient Human Query (MSHQ)](/glossary#mshq)** isolates a value, authority, or responsibility variable.
 
 ## What This Understanding Prevents
 
@@ -129,15 +131,19 @@ If the model represented the task incorrectly, style improvements are dangerous.
 
 ### Do Not Confuse Missing State or Missing Channel With Missing Intelligence
 
-If the answer depends on real-world state or a variable absent from the current representation, the system should observe, measure, read files, run tests, check sources, inspect logs, or ask a minimal sufficient human question.
+If the answer depends on real-world state or a variable absent from the current representation, the system should observe, measure, read files, run tests, check sources, inspect logs, or ask an MSHQ.
 
 ### Do Not Vote Your Way Into the Default Answer
 
 When the best answer is rare, majority agreement is not reliable. You need tail search, perturbation, counterexamples, retrieval, or structural validation.
 
-### Do Not Ask Humans to Replace the Whole Task
+### Do Not Hand the Whole Task Back to a Human
 
-If the missing variable is human-governed, the right move is not "please redo this." The right move is a small question: confirm a fact, choose a priority, authorize a boundary, validate an assumption, or define a stopping criterion.
+If the missing variable is human-governed, the right move is not "please redo this." The right move is a small question: confirm a fact, choose a priority, authorize a boundary, validate an assumption, or define a stopping criterion. This project calls that kind of question a **[Minimal Sufficient Human Query (MSHQ)](/glossary#mshq)**; it comes from the working drafts [Governed Human-AI Collaboration](/docs/governed-human-ai-collaboration.md) and [Human-Assist Operational Mismatches](/docs/human-assist-operational-mismatches.md).
+
+### Do Not Leave the Agent Idle While Waiting
+
+After escalating to a human, a long-horizon agent can still do a great deal of reversible preparation: candidate matrices, low-cost experiments, style axes, contrastive examples, query plans, dependency graphs, and rollback paths. This is autonomy while waiting. A [Governed Escalation Object (GEsO)](/glossary#geso) specifies which reversible work is allowed during the wait, and the workflow in [Governed Human-AI Collaboration](/docs/governed-human-ai-collaboration.md) lists "continue reversible work while waiting" as a step of its own.
 :::
 
 ## Why This Becomes a Common Foundation for High-Value Work
@@ -149,7 +155,7 @@ In the near future, most high-value work will be related in one way or another t
 
 AI is restructuring the basic way information gets processed: retrieval, compression, comparison, drafting, recombination, analysis, candidate generation, and tool use increasingly pass through AI first. Large classes of work that do not organize information processing around AI will become less important, more marginal, or disappear altogether.
 
-That means that once a workflow starts using AI as its information engine, it will eventually face the same question: how do you stop the model's default continuation path from pulling the work toward fluent but mediocre answers? Put differently, **once AI becomes the engine of information processing, interaction with autoregressive gravity becomes unavoidable.**
+So once a workflow starts using AI as its information engine, it will eventually face the same question: how do you stop the model's default continuation path from pulling the work toward fluent but mediocre answers? Put differently, **once AI becomes the engine of information processing, interaction with autoregressive gravity becomes unavoidable.**
 
 ### What Falls Into Positive Probability-Value Alignment Gets Automated Fast
 
@@ -184,6 +190,6 @@ Because resisting LLM mediocrity is becoming a base capability for high-value wo
 
 ## What the Framework Offers
 
-This is not a universal prompt. It is a way to diagnose the task regime first, and only then decide whether to generate directly, create intermediate objects, verify with tools, or ask a human for the missing variable.
+The framework is not a universal prompt. It is a way to first diagnose which alignment regime the task is in, and only then decide whether to generate directly, create intermediate objects, verify with tools, or ask a human for the missing variable.
 
-The optimistic part is that the goal is not to make the model less generative. The goal is to put generation in the right task shape: use it directly where probability and value align, and govern the boundary where local fluency stops being a reliable proxy for task success.
+The optimistic part is that the goal is not to make the model less generative. The goal is to put generation in the right task shape: use it directly where probability and value align, and use control objects, validation, and human variables to govern the boundary where local fluency stops being a reliable proxy for task success.

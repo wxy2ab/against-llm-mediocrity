@@ -143,7 +143,7 @@ const infographicArticles: InfographicArticle[] = [
   {
     imageKey: "sgar",
     enTitle: "State-Governed Agent Regime for Governed LLM Systems",
-    zhTitle: "面向受治理 LLM 系统的状态治理型 Agent 体制",
+    zhTitle: "面向受治理 LLM 系统的状态治理智能体范式",
     enDoc: "state-governed-agent-regime-for-governed-llm-systems.md",
     zhDoc: "state-governed-agent-regime-for-governed-llm-systems.zh-CN.md",
   },

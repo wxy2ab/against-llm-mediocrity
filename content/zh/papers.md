@@ -5,7 +5,7 @@ path: /zh/papers
 title: 文章与工作稿
 navTitle: 工作稿
 kicker: 把这套框架正式写清楚
-summary: 这里收集与LLM 平庸、LLM卓越、六类原始失配的发现脉络、知识治理、硬状态 Agent 治理、治理式协作和 AI 认知纪律相关的当前工作稿与后续实证方向。
+summary: 这里收集与 LLM 平庸、LLM 卓越、六类原始失配的发现脉络、知识治理、硬状态 Agent 治理、治理式协作和 AI 认知纪律相关的当前工作稿与后续实证方向。
 order: 7
 heroPoints:
   - 当前总稿：价值保存结构理论、六类原始失配总图，以及六类失配如何被工程实践一步步逼出来的发现脉络稿。
@@ -17,7 +17,7 @@ heroPoints:
 
 ## 文档地图
 
-站点正文属于公开解释层，顺序是直觉、机制、实践。文章与工作稿则是形式化层：把概念定义、诊断分类、治理对象、运行时体制和研究议程写成可以引用、比较、继续扩展的文稿。
+站点正文属于公开解释层，顺序是直觉、机制、实践。文章与工作稿则是形式化层：把概念定义、诊断分类、治理对象、运行时范式和研究议程写成可以引用、比较、继续扩展的文稿。
 
 这页不只是“先读哪篇、后读哪篇”的阅读顺序，更像一张五层文档关系图：每份文稿在框架里负责什么，它和别的文稿怎么衔接，都放在这里看。
 
@@ -39,7 +39,7 @@ Tag: 把失败定位清楚
 ### 治理对象层
 Tag: 把控制写成对象
 
-**作用**：定义 GKO、GExO、GEsO、Audit Finding、Control Delta、Regression Guard、State Record 等对象，让治理从抽象原则变成可提交、可写回、可回归检查的实体。
+**作用**：定义受治理知识对象（GKO）、受治理执行对象（GExO）、受治理升级对象（GEsO），以及 Audit Finding、Control Delta、Regression Guard、State Record 等对象，让治理从抽象原则变成可提交、可写回、可回归检查的实体。
 
 **对应内容**：[对象模型与接口规范](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/governed-llm-object-model-interface-specification.zh-CN.md)、[审计工程](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/audit-engineering-failure-localization-control-space-writeback.zh-CN.md)
 
@@ -48,7 +48,7 @@ Tag: 把进展写入硬状态
 
 **作用**：说明 agent 的进展怎样进入硬状态，哪些动作算有效推进，哪些动作必须经过 gate、审计和状态转移才能被承认。
 
-**对应内容**：[Agent 不是更长的 Chat](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-is-not-a-longer-chat.zh-CN.md)、[SGAR](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)、[受治理委托](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/from-fixed-workflows-to-governed-delegation.zh-CN.md)、[Oracle / Audit / SGAR routing](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/oracle-classification-audit-agent-sgar-engine-routing.zh-CN.md)、[Agent Harness Framework](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-harness-framework.zh-CN.md)、[多尺度聚合失配](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-across-scales-from-single-call-reasoning-to-agent-trajectories.zh-CN.md)、[V1–V25 证据综合](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v1-v25-and-supplementary-experiments.zh-CN.md)、[Step 与 Stage 迭代证据](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v18-v19-step-vs-stage-iteration.zh-CN.md)
+**对应内容**：[Agent 不是更长的 Chat](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-is-not-a-longer-chat.zh-CN.md)、[状态治理智能体范式（SGAR）](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)、[受治理委托](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/from-fixed-workflows-to-governed-delegation.zh-CN.md)、[Oracle / Audit / SGAR routing](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/oracle-classification-audit-agent-sgar-engine-routing.zh-CN.md)、[Agent Harness Framework](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-harness-framework.zh-CN.md)、[多尺度聚合失配](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-across-scales-from-single-call-reasoning-to-agent-trajectories.zh-CN.md)、[V1–V25 证据综合](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v1-v25-and-supplementary-experiments.zh-CN.md)、[Step 与 Stage 迭代证据](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v18-v19-step-vs-stage-iteration.zh-CN.md)
 
 ### 人机协作层
 Tag: 只在人该管的地方问人
@@ -95,9 +95,30 @@ Tag: 发现脉络工作稿
 ### 潜在结构条件聚合失配
 Tag: 聚合失配高级子型
 
-这份双语工作稿把先前的“候选现象”收紧并放回聚合失配内部。它的核心主张是：有些高价值任务要求多个表层选择共同受一个完整潜在结构约束，这个结构对控制系统必须显式完整，但对最终交付只能部分显化。本文把它形式化为跨表征层的聚合问题，区分它与普通表层全局依赖，并把故事、教学提示、MSHQ 与语用表达作为优先验证场景。
+这份双语工作稿把先前的“候选现象”收紧并放回聚合失配内部。它的核心主张是：有些高价值任务要求多个表层选择共同受一个完整潜在结构约束，这个结构对控制系统必须显式完整，但对最终交付只能部分显化。本文把它形式化为跨表征层的聚合问题，区分它与普通表层全局依赖，并把故事、教学提示、最小充分人类问题（MSHQ）与语用表达作为优先验证场景。
 
-[阅读高级聚合子型工作稿：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/latent-conditioned-aggregation-mismatch.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/latent-conditioned-aggregation-mismatch.zh-CN.md)
+[阅读高级聚合子型工作稿：中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/latent-conditioned-aggregation-mismatch.zh-CN.md) / [English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/latent-conditioned-aggregation-mismatch.md)
+
+### 面向受治理 LLM 系统的形式化机制层
+Tag: 干预定位工作稿
+
+这份工作稿定义了受治理 LLM 系统的形式化机制层。它把修复定位拆成八条可干预轴，把诊断单位从单一标签改为机制画像，并说明机制级定位如何接入审计工程、控制增量、回归护栏、缺陷账本与 SGAR 硬状态转移。
+
+[阅读受治理系统版形式化机制层](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/formal-mechanism-layer-for-governed-llm-systems.zh-CN.md) / [English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/formal-mechanism-layer-for-governed-llm-systems.md)
+
+### 面向受治理 LLM 系统的诊断-机制桥接
+Tag: 诊断桥接工作稿
+
+这份工作稿把六类原始失配与八条机制轴接到同一诊断与修复链路里。它定义从价值失败诊断走向修复定位的桥：机制画像、修复层选择、审计写回、受治理对象、SGAR 提交，以及由机制驱动的训练提升。
+
+[阅读诊断-机制桥接](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/diagnostic-mechanism-bridge-for-governed-llm-systems.zh-CN.md) / [English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/diagnostic-mechanism-bridge-for-governed-llm-systems.md)
+
+### 面向受治理 LLM 系统的机制驱动训练
+Tag: 训练侧治理工作稿
+
+这份工作稿定义了运行时治理在训练侧的对应层。它说明哪些反复出现的失败不应长期停留在运行时补丁，而应被提升为机制特定的训练干预，例如表征训练、边界数据、grounding 数据、奖励纠偏和能力支持训练。
+
+[阅读机制驱动训练工作稿](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/mechanism-driven-training-for-governed-llm-systems.zh-CN.md) / [English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/mechanism-driven-training-for-governed-llm-systems.md)
 
 ### 受治理 LLM 对象模型与接口规范
 Tag: 实现规范工作稿
@@ -125,7 +146,7 @@ Tag: 面向从业者的 Agent 架构文章
 
 这份双语文章面向普通从业者解释 Chat、Bot 与 Agent 的任务权威边界。它把“LLM 不能成为一等对象”的过度表述修正为：LLM 可以继续是一等能力对象，但不能成为唯一的最高任务权威；随后给出按风险实施的设计原则、七对象最小治理栈和一个代码修复状态转移例子。
 
-[阅读文章：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-is-not-a-longer-chat.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-is-not-a-longer-chat.zh-CN.md)
+[阅读文章：中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-is-not-a-longer-chat.zh-CN.md) / [English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-is-not-a-longer-chat.md)
 
 ### 面向受治理 LLM 系统的状态治理智能体范式
 Tag: 运行时治理工作稿
@@ -139,61 +160,52 @@ Tag: 运行时科学工作稿
 
 这份工作稿把 Agent Engineering 从“经验上的 harness 配方”往“可量化的运行时科学”推进了一步。它区分模型条件能力前沿、Bridge 与 Action-Space Optimization，提出系统残差与执行残差的双重视角，并给出量化 Bridge 子机制、接口设计、组件交互与跨模型迁移的实验路线。
 
-[阅读 Agent Harness Framework：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-harness-framework.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-harness-framework.zh-CN.md)
+[阅读 Agent Harness Framework：中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-harness-framework.zh-CN.md) / [English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-harness-framework.md)
 
 ### 残差控制：Agent 中从测量、路由到目标有效修复的统一框架
 Tag: 残差治理工作稿
 
 这份双语工作稿把 residual 从“错误描述”推进为一套生产可执行的控制对象。它区分可观测任务残差、潜在内部机制与可通过干预测量的修复响应，把 Oracle-addressable residual、mismatch routing、repair locus、closure guards、goal-valid repair 与 evidence-carrying repair 接到同一条分层闭环里，用来回答 Agent 失败后究竟该先修什么、怎么修、何时算真的修好。
 
-[阅读残差控制工作稿：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/residual-control-agent-measurement-routing-target-effective-repair.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/residual-control-agent-measurement-routing-target-effective-repair.zh-CN.md)
+[阅读残差控制工作稿：中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/residual-control-agent-measurement-routing-target-effective-repair.zh-CN.md) / [English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/residual-control-agent-measurement-routing-target-effective-repair.md)
 
 ### 从 Agent Loop 到动态 Agent Graph：认知预算的视角
 Tag: 运行时编排工作稿
 
 这份双语工作稿从认知预算视角统一解释 Route、Workflow 与动态 Graph：Route 是认知投资决策，Workflow 是投资执行合同，Graph 是多次预算承诺之间的依赖结构与运行账本。它的核心主张是，Agent 从自由 Loop 演化出专用 Workflow、Fan-out / Fan-in、Recovery 与 Human Gate，并不是因为任务“长得像图”，而是因为复杂问题需要持续、受保护且带验收条件的认知投入。
 
-[阅读 Agent Graph 工作稿：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/from-agent-loop-to-dynamic-agent-graph-cognitive-budget-perspective.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/from-agent-loop-to-dynamic-agent-graph-cognitive-budget-perspective.zh-CN.md)
+[阅读 Agent Graph 工作稿：中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/from-agent-loop-to-dynamic-agent-graph-cognitive-budget-perspective.zh-CN.md) / [English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/from-agent-loop-to-dynamic-agent-graph-cognitive-budget-perspective.md)
 
 ### Agent 工程为什么必须重视受控实验
 Tag: 受控实验方法论工作稿
 
-这份双语报告综述 Agent 研究从模型中心 Benchmark 转向 Harness 与系统证据的前沿变化，解释现有发现为什么仍不足以形成可累积的因果知识，并把观测—表征、状态、拟合边界、支持、聚合和规格六类失配展开成可执行的受控实验纲领。其核心主张严格受限：模型升级移动失配边界，受控实验识别并重新校准边界上的治理机制。
+这份双语报告综述 Agent 研究从模型中心 Benchmark 转向 Harness 与系统证据的前沿变化，解释现有发现为什么仍不足以形成可累积的因果知识，并把观测-表征、状态、拟合边界、支持、聚合和规格六类失配展开成可执行的受控实验纲领。其核心主张严格受限：模型升级移动失配边界，受控实验识别并重新校准边界上的治理机制。
 
-[阅读受控实验报告：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/why-agent-engineering-needs-controlled-experiments.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/why-agent-engineering-needs-controlled-experiments.zh-CN.md) · [双语 Word 版](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/assets/agent-engineering-controlled-experiments-bilingual.docx)
+[阅读受控实验报告：中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/why-agent-engineering-needs-controlled-experiments.zh-CN.md) / [English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/why-agent-engineering-needs-controlled-experiments.md) / [双语 Word 版](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/assets/agent-engineering-controlled-experiments-bilingual.docx)
 
 ### 聚合失配：从单次推理到 Agent 轨迹的多尺度局部最优坍缩
 Tag: 运行时桥接工作稿
 
 这份工作稿把聚合失配从单次调用扩展到 Agent 轨迹，区分语义前缀锁定与因果路径锁定，并说明外部 Plan、Candidate、Audit、Hard State、Patch、Rollback 与 Replan 何时不再只是重复 reasoning，而成为跨阶段持续生效的控制面与搜索前沿。
 
-[阅读多尺度聚合失配工作稿：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-across-scales-from-single-call-reasoning-to-agent-trajectories.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-across-scales-from-single-call-reasoning-to-agent-trajectories.zh-CN.md)
+[阅读多尺度聚合失配工作稿：中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-across-scales-from-single-call-reasoning-to-agent-trajectories.zh-CN.md) / [English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-across-scales-from-single-call-reasoning-to-agent-trajectories.md)
 
 ### 聚合失配 Artifact-v18/v19：Step 迭代与 Stage 迭代
 Tag: 聚合失配 Agent 外循环证据
 
 这份双语证据报告在全局依赖 DAG 任务上比较局部 Step 修订与完整 Stage
 replan。在 3 次修订预算下，Stage 为 62.5%、Step 为 0%；换成共享最多 8 次
-provider turn 后，Stage 为 68.8%、Step 为 10.4%。由于所有预注册 primary 都预测了
-相反方向并未通过，本报告以 `share_with_caveats` 挂载重复出现的 Stage 优势，
-不把它升格为无条件默认。
+provider turn 后，Stage 为 68.8%、Step 为 10.4%。由于所有预注册 primary 都预测了相反方向并未通过，本报告以 `share_with_caveats` 挂载重复出现的 Stage 优势，不把它升格为无条件默认。
 
-[阅读 v18/v19 报告：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v18-v19-step-vs-stage-iteration.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v18-v19-step-vs-stage-iteration.zh-CN.md)
+[阅读 v18/v19 报告：中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v18-v19-step-vs-stage-iteration.zh-CN.md) / [English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v18-v19-step-vs-stage-iteration.md)
 
 ### 聚合失配 V1–V25 与后续补充实验
 Tag: 完整实验与证据综合
 
 这份双语综合对账完整编号实验，以及 Wave34、MiniMax、T1 和写作 follow-up。它把
-GF(2)/Agent 严格端点与自然写作质量分开，记录每一版的权威来源与 claim ceiling，并把
-证据转化为 runtime、交付、冲突治理、Ladder 与 Stage Repair 决策。核心结论是条件性的：
-外部化与 runtime ownership 是稳健工程方向；Patch、Ladder 和 Stage 必须经路由启用，
-不能作为普遍默认。
+GF(2)/Agent 严格端点与自然写作质量分开，记录每一版的权威来源与 claim ceiling，并把证据转化为 runtime、交付、冲突治理、Ladder 与 Stage Repair 决策。核心结论是条件性的：外部化与 runtime ownership 是稳健工程方向；Patch、Ladder 和 Stage 必须经路由启用，不能作为普遍默认。
 
-[阅读 V1–V25 总览：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v1-v25-and-supplementary-experiments.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v1-v25-and-supplementary-experiments.zh-CN.md)
-
-[阅读 V20–V25 写作/Stage 实验组：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v20-v25-writing-and-stage-repair.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v20-v25-writing-and-stage-repair.zh-CN.md)
-
-[阅读 Wave34/跨配置实验组：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-wave34-and-cross-configuration-probes.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-wave34-and-cross-configuration-probes.zh-CN.md)
+[阅读 V1–V25 总览：中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v1-v25-and-supplementary-experiments.zh-CN.md) / [English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v1-v25-and-supplementary-experiments.md) / [V20–V25 写作/Stage 实验组：中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v20-v25-writing-and-stage-repair.zh-CN.md) / [English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v20-v25-writing-and-stage-repair.md) / [Wave34/跨配置实验组：中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-wave34-and-cross-configuration-probes.zh-CN.md) / [English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-wave34-and-cross-configuration-probes.md)
 
 ### 从固定流程到受治理委托
 Tag: 软件架构工作稿
@@ -228,11 +240,9 @@ Tag: 路由可靠性研究证据
 
 这份双语证据综合汇总 RR1–RR7 与两轮 RR-v2 decisive 结果。A-EXT 把 typed abstain
 与 Top-5 shortlist 推进到独立受控 Skill 生态和真实 tempfile executor；B-XOVER 在可信
-runtime edit-scope hint 已给定时识别出明显 PATCH/EXACT crossover；C-BLIND 中机械签名
-优于当前 live LLM recovery 配置，同时明确保留 47/60 infra timeout 的解释限制。生产
-默认仍不变，Workflow、SGAR 与复杂编排继续排除在单路由 claim 之外。
+runtime edit-scope hint 已给定时识别出明显 PATCH/EXACT crossover；C-BLIND 中机械签名优于当前 live LLM recovery 配置，同时明确保留 47/60 infra timeout 的解释限制。生产默认仍不变，Workflow、SGAR 与复杂编排继续排除在单路由 claim 之外。
 
-[阅读单路由证据综合：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/single-route-decision-frozen-evidence-synthesis.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/single-route-decision-frozen-evidence-synthesis.zh-CN.md)
+[阅读单路由证据综合：中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/single-route-decision-frozen-evidence-synthesis.zh-CN.md) / [English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/single-route-decision-frozen-evidence-synthesis.md)
 
 ### LLM 系统中的支持失配与控制空间搜索
 Tag: 控制空间搜索技术报告
@@ -260,16 +270,14 @@ Tag: 聚合失配研究证据
 
 这份双语报告验证了 production-shaped 合成 JSON 配置上的 256 个 DeepSeek 交付 episode 与 1,024 个离线执行器案例。Relocation × (ID−INDEX) interaction 以 +21.875 个百分点通过，差异全部集中于 \(N=48\)。Patch 与 Rewrite 的可靠性均达到 ceiling，但 Patch 明显减少 token、延迟和响应字节。
 
-[阅读 artifact-v11 报告：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v11-config-delivery-transfer.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v11-config-delivery-transfer.zh-CN.md)
+[阅读 artifact-v11 报告：中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v11-config-delivery-transfer.zh-CN.md) / [English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v11-config-delivery-transfer.md)
 
 ### 聚合失配 Artifact-v12：漂移剂量与交付尺度路由
 Tag: 聚合失配研究证据
 
-这份双语报告验证 240 个 DeepSeek episodes 与 768 个离线执行器案例。预注册的漂移
-剂量交互未通过；稀疏 verified-plan Patch 相对 Full Rewrite 提高 300 秒预算内严格
-成功率 29.17 个百分点。Regional Rewrite 仍为探索性且表现异质。
+这份双语报告验证 240 个 DeepSeek episodes 与 768 个离线执行器案例。预注册的漂移剂量交互未通过；稀疏 verified-plan Patch 相对 Full Rewrite 提高 300 秒预算内严格成功率 29.17 个百分点。Regional Rewrite 仍为探索性且表现异质。
 
-[阅读 artifact-v12 报告：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v12-scale-routing-transfer.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v12-scale-routing-transfer.zh-CN.md)
+[阅读 artifact-v12 报告：中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v12-scale-routing-transfer.zh-CN.md) / [English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v12-scale-routing-transfer.md)
 
 ### 聚合失配 Artifact-v14：Post-Compile Drift 与 Exact Recovery
 Tag: 聚合失配研究证据
@@ -278,78 +286,69 @@ Tag: 聚合失配研究证据
 768 个离线执行器案例与 1,416 条可重建事件。Compatible Exact 24/24 被安全判 stale
 并恢复；+19.3% token interaction 为正，但未达到预注册 +20% 最小效应门。
 
-[阅读 artifact-v14 报告：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v14-post-compile-drift-recovery.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v14-post-compile-drift-recovery.zh-CN.md)
+[阅读 artifact-v14 报告：中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v14-post-compile-drift-recovery.zh-CN.md) / [English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v14-post-compile-drift-recovery.md)
 
 ### 聚合失配 Artifact-v15：Intent 冲突治理
 Tag: 聚合失配研究证据
 
-这份双语报告验证 96 个正式 DeepSeek episodes、768 个离线执行器案例和 1,594 条
-可重建事件。冲突首提交 0/72；受治理的 Intent/Exact Rebase 恢复 48/48，Naive
-终止 0/24。机器主检验通过，但冻结文字与可执行 Pilot Gate 不一致，整体裁决为
-`share_with_caveats`。
+这份双语报告验证 96 个正式 DeepSeek episodes、768 个离线执行器案例和 1,594 条可重建事件。冲突臂的 72 次首次提交全部被安全拒绝（提交成功 0/72）；受治理的
+Intent/Exact Rebase 恢复 48/48，被拒后即终止的 Naive 为 0/24。机器主检验通过，但冻结文字与可执行 Pilot Gate 不一致，整体裁决为 `share_with_caveats`。
 
-[阅读 artifact-v15 报告：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v15-intent-conflict-governance.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v15-intent-conflict-governance.zh-CN.md)
+[阅读 artifact-v15 报告：中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v15-intent-conflict-governance.zh-CN.md) / [English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v15-intent-conflict-governance.md)
 
 ### 聚合失配 Artifact-v16：匹配冲突恢复
 Tag: 聚合失配研究证据
 
-这份双语报告验证 96 个正式 DeepSeek episodes、768 个离线执行器案例和 1,752 条
-可重建事件。匹配第二 turn 后，Generic/Reread 仍锁定为 0/24，runtime
+这份双语报告验证 96 个正式 DeepSeek episodes、768 个离线执行器案例和 1,752 条可重建事件。匹配第二 turn 后，Generic/Reread 仍锁定为 0/24，runtime
 Unlock + Rebase 为 24/24。机器主检验通过；authority/state/info 组合与冻结
 manifest 的 Pilot 元数据偏差要求整体裁决为 `share_with_caveats`。
 
-[阅读 artifact-v16 报告：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v16-matched-conflict-recovery.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v16-matched-conflict-recovery.zh-CN.md)
+[阅读 artifact-v16 报告：中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v16-matched-conflict-recovery.zh-CN.md) / [English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v16-matched-conflict-recovery.md)
 
 ### 聚合失配 Artifact-v17：Unlock 信息与不可解除升级
 Tag: 聚合失配研究证据
 
-这份双语报告验证 192 个正式 DeepSeek episodes、1,536 个离线案例与 3,840 条可重建
-事件。四个 unlock 后信息臂均为 24/24，因此预注册 superiority claim 在 ceiling 下
-未通过；完整旧态比 receipt-only 多 74.9% 中位 token。不可解除锁下 typed Escalate
-达到 24/24 合法 non-commit 终态。后者是 endpoint 不同的治理终态对比，不是任务
-完成优势。
+这份双语报告验证 192 个正式 DeepSeek episodes、1,536 个离线案例与 3,840 条可重建事件。四个 unlock 后信息臂均为 24/24，因此预注册 superiority claim 在 ceiling 下未通过；完整旧态比 receipt-only 多 74.9% 中位 token。不可解除锁下 typed Escalate
+达到 24/24 合法 non-commit 终态。后者是 endpoint 不同的治理终态对比，不是任务完成优势。
 
-[阅读 artifact-v17 报告：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v17-unlock-info-escalate.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v17-unlock-info-escalate.zh-CN.md)
+[阅读 artifact-v17 报告：中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v17-unlock-info-escalate.zh-CN.md) / [English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v17-unlock-info-escalate.md)
 
 ### 聚合失配 V1–V12、V14–V17：历史细节与 Agent 工程
 Tag: 历史实验总览与工程指南
 
-这份历史双语总览把早期 artifact 映射到已支持、未支持和不可推广的 claim，并明确排除
-已归档 V13。工程经验文档把证据转化为参考架构、路由策略、telemetry、governed
+这份历史双语总览把早期 artifact 映射到已支持、未支持和不可推广的 claim，并明确排除已归档 V13。工程经验文档把证据转化为参考架构、路由策略、telemetry、governed
 commit、冲突治理、最小上下文披露、typed 终态、落地顺序和应用映射。上文 V1–V25
 总览是当前完整入口。
 
-[阅读实验总览：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v1-v12-v14-v17-experiment-summary.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v1-v12-v14-v17-experiment-summary.zh-CN.md)
-
-[阅读工程经验：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-agent-engineering-lessons-v1-v12-v14-v17.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-agent-engineering-lessons-v1-v12-v14-v17.zh-CN.md)
+[阅读实验总览：中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v1-v12-v14-v17-experiment-summary.zh-CN.md) / [English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v1-v12-v14-v17-experiment-summary.md) / [工程经验：中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-agent-engineering-lessons-v1-v12-v14-v17.zh-CN.md) / [English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-agent-engineering-lessons-v1-v12-v14-v17.md)
 
 ### 聚合失配 Artifact-v4：实验证据、理论差距与 Agent 工程含义
 Tag: 聚合失配研究证据
 
 这份双语报告裁决已完成的 756 次 DeepSeek 边界状态、候选/接口、独立 300/900/1800 秒预算与输出顺序实验；披露并修正 7 条 legacy evaluator 误评分，区分“足够答案信息恢复”与“结构 cut-set 位置特异性”，并把理论—证据差距转化为 Agent 路由、执行器、验证器和遥测要求。
 
-[阅读 artifact-v4 报告：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v4-claims-theory-gap.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v4-claims-theory-gap.zh-CN.md)
+[阅读 artifact-v4 报告：中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v4-claims-theory-gap.zh-CN.md) / [English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v4-claims-theory-gap.md)
 
 ### 聚合失配 Artifact-v5：稳定编辑 Agent 与规划瓶颈
 Tag: 聚合失配研究证据
 
 这份双语报告裁决已完成的 288-arm 原生工具 DeepSeek 实验。正确 oracle plan 给定后，batch Patch 为 46/48，完整对象 Rewrite 为 26/48，交付层优势为 +41.7 个百分点；推断计划下的端到端比较为 2/96 对 0/96，没有通过门槛。报告解释为什么最终裁决是 `delivery_only`、为什么 crossover 仍未裁决，以及为什么 Agent 必须在写接口路由之前增加 plan verification。
 
-[阅读 artifact-v5 报告：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v5-stable-editing-agent.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v5-stable-editing-agent.zh-CN.md)
+[阅读 artifact-v5 报告：中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v5-stable-editing-agent.zh-CN.md) / [English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v5-stable-editing-agent.md)
 
 ### Patch 与完整重写：稀疏修复交付接口的受控实验
 Tag: 聚合失配研究证据
 
 这份证据说明把 edit discovery 与 repair delivery 分开：在 160 个全新 holdout 和 1,920 条完整 DeepSeek 运行中，patch + 确定性执行相对完整重写提高了预算内严格可靠性；oracle-plan、纯复制、同次回答、长度、失败类型和独立预分配 900 秒对照共同限定了结论及其边界。
 
-[阅读受控实验：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/patch-vs-full-rewrite-controlled-experiment.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/patch-vs-full-rewrite-controlled-experiment.zh-CN.md)
+[阅读受控实验：中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/patch-vs-full-rewrite-controlled-experiment.zh-CN.md) / [English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/patch-vs-full-rewrite-controlled-experiment.md)
 
 ### 聚合失配：可推导命题、证明条件与 Agent 工程含义
 Tag: 理论—工程桥接
 
 这份工作稿区分三类结论：在明确假设下可证明的接口与状态性质、只能推出结构预测但仍需测量 LLM 的命题，以及完全依赖模型和任务分布的经验问题。它给出 patch 提交面、边界状态、依赖顺序、验证闸门、局部失效传播、无冲突并行、提交安全包络与可回放状态的推导，并把它们转换为可实施的 agent 架构。
 
-[阅读理论命题与 Agent 工程含义：English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-theoretical-claims-agent-engineering.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-theoretical-claims-agent-engineering.zh-CN.md)
+[阅读理论命题与 Agent 工程含义：中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-theoretical-claims-agent-engineering.zh-CN.md) / [English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-theoretical-claims-agent-engineering.md)
 
 ### LLM 系统中的规格失配与目标治理
 Tag: 目标治理技术报告
@@ -357,27 +356,6 @@ Tag: 目标治理技术报告
 这份技术报告把规格失配展开为目标保存失败：即使观测、状态、路由、支持和聚合都足够，可访问代理目标仍可能偏离真实任务效用。它定义 scoped objective objects、代理风险审计、优先级规则、验证器契约、规格审计、控制增量和回归护栏。
 
 [阅读目标治理技术报告](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/specification-mismatch-objective-governance-llm-systems.zh-CN.md)
-
-### 面向受治理 LLM 系统的形式化机制层
-Tag: 干预定位工作稿
-
-这份工作稿定义了受治理 LLM 系统的形式化机制层。它把修复定位拆成八条可干预轴，把诊断单位从单一标签改为机制画像，并说明机制级定位如何接入审计工程、控制增量、回归护栏、缺陷台账与 SGAR 硬状态转移。
-
-[阅读受治理系统版形式化机制层](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/formal-mechanism-layer-for-governed-llm-systems.zh-CN.md) / [English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/formal-mechanism-layer-for-governed-llm-systems.md)
-
-### 面向受治理 LLM 系统的诊断-机制桥接
-Tag: 诊断桥接工作稿
-
-这份工作稿把六类原始失配与八条机制轴接到同一诊断与修复链路里。它定义从价值失败诊断走向修复定位的桥：机制画像、修复层选择、审计写回、受治理对象、SGAR 提交，以及由机制驱动的训练提升。
-
-[阅读诊断-机制桥接](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/diagnostic-mechanism-bridge-for-governed-llm-systems.zh-CN.md) / [English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/diagnostic-mechanism-bridge-for-governed-llm-systems.md)
-
-### 面向受治理 LLM 系统的机制驱动训练
-Tag: 训练侧治理工作稿
-
-这份工作稿定义了运行时治理在训练侧的对应层。它说明哪些反复出现的失败不应长期停留在运行时补丁，而应被提升为机制特定的训练干预，例如表征训练、边界数据、grounding 数据、奖励纠偏和能力支持训练。
-
-[阅读机制驱动训练工作稿](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/mechanism-driven-training-for-governed-llm-systems.zh-CN.md) / [English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/mechanism-driven-training-for-governed-llm-systems.md)
 
 ### Human-Assist Operational Mismatches
 Tag: 协作补充稿

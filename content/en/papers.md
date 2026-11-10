@@ -39,7 +39,7 @@ Tag: localize what failed
 ### Governance-Object Layer
 Tag: write control as objects
 
-**Role**: define GKO, GExO, GEsO, Audit Finding, Control Delta, Regression Guard, State Record, and related objects so governance becomes a set of explicit, writeable, checkable entities rather than only principles.
+**Role**: define Governed Knowledge Objects (GKOs), Governed Execution Objects (GExOs), Governed Escalation Objects (GEsOs), Audit Findings, Control Deltas, Regression Guards, State Records, and related objects so governance becomes a set of explicit, writeable, checkable entities rather than only principles.
 
 **Corresponding documents**: [Object Model and Interface Specification](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/governed-llm-object-model-interface-specification.md), [Audit Engineering](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/audit-engineering-failure-localization-control-space-writeback.md)
 
@@ -48,7 +48,7 @@ Tag: commit progress into hard state
 
 **Role**: explain how agent progress enters hard state, and which actions count as real progress only after gating, audit, and verified state transition.
 
-**Corresponding documents**: [An Agent Is Not a Longer Chat](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-is-not-a-longer-chat.md), [SGAR](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime-for-governed-llm-systems.md), [Governed Delegation](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/from-fixed-workflows-to-governed-delegation.md), [Oracle / Audit / SGAR routing](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/oracle-classification-audit-agent-sgar-engine-routing.md), [Agent Harness Framework](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-harness-framework.md), [Aggregation mismatch across scales](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-across-scales-from-single-call-reasoning-to-agent-trajectories.md), [V1–V25 evidence synthesis](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v1-v25-and-supplementary-experiments.md), [Step versus Stage iteration evidence](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v18-v19-step-vs-stage-iteration.md)
+**Corresponding documents**: [An Agent Is Not a Longer Chat](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-is-not-a-longer-chat.md), [State-Governed Agent Regime (SGAR)](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime-for-governed-llm-systems.md), [Governed Delegation](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/from-fixed-workflows-to-governed-delegation.md), [Oracle / Audit / SGAR routing](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/oracle-classification-audit-agent-sgar-engine-routing.md), [Agent Harness Framework](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-harness-framework.md), [Aggregation mismatch across scales](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-across-scales-from-single-call-reasoning-to-agent-trajectories.md), [V1–V25 evidence synthesis](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v1-v25-and-supplementary-experiments.md), [Step versus Stage iteration evidence](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v18-v19-step-vs-stage-iteration.md)
 
 ### Human Collaboration Layer
 Tag: ask humans only where humans must govern
@@ -74,7 +74,7 @@ This bilingual working draft generalizes evidence organization, four-view audit,
 ### A Structural Theory of Value Preservation in LLM Systems
 Tag: structural theory working draft
 
-This working draft reframes the framework around value preservation across a world-to-output pipeline. It derives the six primitive mismatches from pipeline stations and explains repair-operator coupling and super-additive compound failure. It then unifies Knowledge Governance, Audit Engineering, and the State-Governed Agent Regime as mechanisms for preserving task value.
+This working draft reframes the framework around value preservation across a world-to-output pipeline: task value must survive observation, representation, state identification, capability routing, candidate support, aggregation, and evaluation. It derives the six primitive mismatches from pipeline stations and explains repair-operator coupling and super-additive compound failure. It then unifies Knowledge Governance, Audit Engineering, and the State-Governed Agent Regime as mechanisms for preserving task value.
 
 [Read the structural theory draft](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/structural-theory-value-preservation-llm-systems.md)
 
@@ -95,9 +95,9 @@ This working draft starts from the discovery path rather than the final definiti
 ### Latent-Conditioned Aggregation Mismatch
 Tag: advanced aggregation subtype
 
-This bilingual working draft tightens the earlier candidate-phenomenon framing and places the result back inside aggregation mismatch. Its claim is that some high-value tasks require multiple surface choices to be jointly constrained by one complete latent structure that stays explicit to the control system while remaining only partially realized in delivery. The paper formalizes this as a cross-layer aggregation problem, distinguishes it from ordinary surface-level global dependence, and uses stories, teaching hints, MSHQs, and pragmatics as the primary validation domains.
+This bilingual working draft tightens the earlier candidate-phenomenon framing and places the result back inside aggregation mismatch. Its claim is that some high-value tasks require multiple surface choices to be jointly constrained by one complete latent structure that stays explicit to the control system while remaining only partially realized in delivery. The paper formalizes this as a cross-layer aggregation problem, distinguishes it from ordinary surface-level global dependence, and uses stories, teaching hints, Minimal Sufficient Human Queries (MSHQs), and pragmatics as the primary validation domains.
 
-[Read the advanced aggregation draft: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/latent-conditioned-aggregation-mismatch.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/latent-conditioned-aggregation-mismatch.zh-CN.md)
+[Read the advanced aggregation draft: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/latent-conditioned-aggregation-mismatch.md) / [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/latent-conditioned-aggregation-mismatch.zh-CN.md)
 
 ### Formal Mechanism Layer for Governed LLM Systems
 Tag: intervention-localization working draft
@@ -146,7 +146,7 @@ Tag: practitioner-oriented agent architecture
 
 This bilingual article explains the authority boundary between Chat, Bot, and Agent systems for ordinary practitioners. It corrects the overly broad claim that an LLM cannot be first-class: the LLM can remain a first-class capability, but not the sole highest task authority. It then gives a risk-proportional design, a seven-object minimum governance stack, and a concrete code-repair transition.
 
-[Read the article: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-is-not-a-longer-chat.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-is-not-a-longer-chat.zh-CN.md)
+[Read the article: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-is-not-a-longer-chat.md) / [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-is-not-a-longer-chat.zh-CN.md)
 
 ### State-Governed Agent Regime for Governed LLM Systems
 Tag: runtime governance working draft
@@ -160,35 +160,35 @@ Tag: runtime science working draft
 
 This working draft pushes Agent Engineering from empirical harness recipes toward quantifiable runtime science. It separates the model-conditioned capability frontier, Bridge, and Action-Space Optimization; introduces a dual view of system residual and execution residual; and lays out an experimental program for measuring bridge submechanisms, interface design, component interaction, and cross-model transfer.
 
-[Read the Agent Harness Framework: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-harness-framework.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-harness-framework.zh-CN.md)
+[Read the Agent Harness Framework: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-harness-framework.md) / [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-harness-framework.zh-CN.md)
 
 ### Residual Control: A Unified Framework for Target-Effective Repair in Agents
 Tag: residual-governance working draft
 
 This bilingual working draft turns residuals from a loose error description into a production control object. It separates observable task residuals, latent internal mechanisms, and intervention-measurable repair response; then unifies Oracle-addressable residuals, mismatch routing, repair locus selection, closure guards, goal-valid repair, and evidence-carrying repair into one layered loop for deciding what to repair first, how to repair it, and when the system may honestly treat the repair as complete.
 
-[Read the residual-control draft: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/residual-control-agent-measurement-routing-target-effective-repair.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/residual-control-agent-measurement-routing-target-effective-repair.zh-CN.md)
+[Read the residual-control draft: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/residual-control-agent-measurement-routing-target-effective-repair.md) / [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/residual-control-agent-measurement-routing-target-effective-repair.zh-CN.md)
 
 ### From Agent Loop to Dynamic Agent Graph: A Cognitive-Budget Perspective
 Tag: runtime-orchestration working draft
 
 This bilingual working draft gives a unified cognitive-budget account of Route, Workflow, and dynamic Graph: Route is a cognitive investment decision, Workflow is the execution contract of that investment, and Graph is the dependency structure plus runtime ledger across many such commitments. Its central claim is that agents do not evolve from a free Loop into specialized Workflows, Fan-out / Fan-in, Recovery, and Human Gates merely because tasks "look like graphs," but because complex problems require persistent, protected, acceptance-bound cognitive investment.
 
-[Read the Agent Graph draft: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/from-agent-loop-to-dynamic-agent-graph-cognitive-budget-perspective.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/from-agent-loop-to-dynamic-agent-graph-cognitive-budget-perspective.zh-CN.md)
+[Read the Agent Graph draft: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/from-agent-loop-to-dynamic-agent-graph-cognitive-budget-perspective.md) / [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/from-agent-loop-to-dynamic-agent-graph-cognitive-budget-perspective.zh-CN.md)
 
 ### Why Agent Engineering Must Take Controlled Experiments Seriously
 Tag: controlled-experiment methodology working draft
 
 This bilingual report reviews the frontier shift from model-centric benchmarks to harness- and system-level evidence, explains why current findings still fall short of causal accumulation, and turns observation-representation, state, fitting-boundary, support, aggregation, and specification mismatch into a concrete controlled-experiment program. Its central claim is bounded: models move mismatch boundaries, while controlled experiments identify and recalibrate the governance mechanisms at those boundaries.
 
-[Read the controlled-experiment report: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/why-agent-engineering-needs-controlled-experiments.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/why-agent-engineering-needs-controlled-experiments.zh-CN.md) · [Bilingual Word edition](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/assets/agent-engineering-controlled-experiments-bilingual.docx)
+[Read the controlled-experiment report: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/why-agent-engineering-needs-controlled-experiments.md) / [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/why-agent-engineering-needs-controlled-experiments.zh-CN.md) / [Bilingual Word edition](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/assets/agent-engineering-controlled-experiments-bilingual.docx)
 
 ### Aggregation Mismatch Across Scales: From Single-Call Reasoning to Agent Trajectories
 Tag: runtime bridge working draft
 
 This working draft extends aggregation mismatch from single-call reasoning into agent trajectories. It separates semantic prefix lock-in from causal path lock-in, and explains when external Plan, Candidate, Audit, Hard State, Patch, Rollback, and Replan stop being duplicate reasoning and become a persistent control plane plus search frontier across stages.
 
-[Read the multi-scale aggregation mismatch draft: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-across-scales-from-single-call-reasoning-to-agent-trajectories.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-across-scales-from-single-call-reasoning-to-agent-trajectories.zh-CN.md)
+[Read the multi-scale aggregation mismatch draft: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-across-scales-from-single-call-reasoning-to-agent-trajectories.md) / [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-across-scales-from-single-call-reasoning-to-agent-trajectories.zh-CN.md)
 
 ### Aggregation Mismatch Artifacts v18/v19: Step versus Stage Iteration
 Tag: aggregation-mismatch agent-loop evidence
@@ -201,7 +201,7 @@ claims failed because they predicted the opposite direction, so the report
 mounts the repeated Stage advantage as `share_with_caveats` engineering evidence,
 not as a universal default law.
 
-[Read the v18/v19 report: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v18-v19-step-vs-stage-iteration.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v18-v19-step-vs-stage-iteration.zh-CN.md)
+[Read the v18/v19 report: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v18-v19-step-vs-stage-iteration.md) / [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v18-v19-step-vs-stage-iteration.zh-CN.md)
 
 ### Aggregation Mismatch V1–V25 and Supplementary Experiments
 Tag: complete evidence synthesis
@@ -215,11 +215,7 @@ is conditional: externalization and runtime ownership are robust engineering
 directions; Patch, Ladder, and Stage require routing rather than universal
 defaults.
 
-[Read the V1–V25 synthesis: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v1-v25-and-supplementary-experiments.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v1-v25-and-supplementary-experiments.zh-CN.md)
-
-[Read the V20–V25 writing/Stage group: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v20-v25-writing-and-stage-repair.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v20-v25-writing-and-stage-repair.zh-CN.md)
-
-[Read the Wave34/cross-configuration group: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-wave34-and-cross-configuration-probes.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-wave34-and-cross-configuration-probes.zh-CN.md)
+[Read the V1–V25 synthesis: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v1-v25-and-supplementary-experiments.md) / [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v1-v25-and-supplementary-experiments.zh-CN.md) / [V20–V25 writing/Stage group: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v20-v25-writing-and-stage-repair.md) / [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v20-v25-writing-and-stage-repair.zh-CN.md) / [Wave34/cross-configuration group: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-wave34-and-cross-configuration-probes.md) / [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-wave34-and-cross-configuration-probes.zh-CN.md)
 
 ### From Fixed Workflows to Governed Delegation
 Tag: software architecture working draft
@@ -257,10 +253,11 @@ rounds. A-EXT extends typed abstention and Top-5 shortlisting to an independent
 controlled Skill ecosystem with real tempfile executors; B-XOVER identifies a
 strong PATCH/EXACT crossover when a trusted runtime edit-scope hint is supplied;
 C-BLIND finds mechanical signatures outperforming the tested live-LLM recovery
-configuration, with an explicit infrastructure-timeout caveat. Production defaults
-remain unchanged, and Workflow, SGAR, and complex orchestration remain out of scope.
+configuration, with an explicit caveat for its 47/60 infrastructure timeouts.
+Production defaults remain unchanged, and Workflow, SGAR, and complex
+orchestration remain out of scope.
 
-[Read the single-route synthesis: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/single-route-decision-frozen-evidence-synthesis.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/single-route-decision-frozen-evidence-synthesis.zh-CN.md)
+[Read the single-route synthesis: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/single-route-decision-frozen-evidence-synthesis.md) / [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/single-route-decision-frozen-evidence-synthesis.zh-CN.md)
 
 ### Support Mismatch and Control-Space Search in LLM Systems
 Tag: control-space search technical report
@@ -276,12 +273,19 @@ This technical report develops aggregation mismatch as a local-to-global composi
 
 [Read the compositional governance report](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-compositional-governance-llm-systems.md)
 
+### Aggregation Mismatch and Generation–Verification Asymmetry: Controlled Evidence
+Tag: aggregation-mismatch research evidence
+
+This research note, available in Chinese only, skips the run-pipeline details and concentrates on which experiments were run and what they show. Under the same local XOR rule, open-boundary generation and periodic-closure generation diverge sharply. Full audit of a given complete candidate recovers substantially. Copy, local-check, length, and anchor controls then bound how far aggregation mismatch and generation–audit asymmetry can explain the result.
+
+[Read the controlled-evidence note (Chinese)](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-generation-verification-asymmetry-evidence.zh-CN.md)
+
 ### Aggregation Mismatch Artifact-v11: Address Drift and Configuration Delivery
 Tag: aggregation-mismatch research evidence
 
 This bilingual report validates 256 DeepSeek delivery episodes and 1,024 offline executor cases on production-shaped synthetic JSON configurations. The relocation × (ID−INDEX) interaction passes at +21.875 points, with all differences concentrated at \(N=48\). Patch and Rewrite both reach ceiling reliability, while Patch substantially reduces tokens, latency, and response bytes.
 
-[Read the artifact-v11 report: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v11-config-delivery-transfer.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v11-config-delivery-transfer.zh-CN.md)
+[Read the artifact-v11 report: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v11-config-delivery-transfer.md) / [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v11-config-delivery-transfer.zh-CN.md)
 
 ### Aggregation Mismatch Artifact-v12: Drift Dose and Delivery-Scale Routing
 Tag: aggregation-mismatch research evidence
@@ -291,7 +295,7 @@ cases. The preregistered drift-dose interaction fails, while sparse
 verified-plan Patch improves 300-second strict success over Full Rewrite by
 29.17 points. Regional Rewrite remains exploratory and heterogeneous.
 
-[Read the artifact-v12 report: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v12-scale-routing-transfer.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v12-scale-routing-transfer.zh-CN.md)
+[Read the artifact-v12 report: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v12-scale-routing-transfer.md) / [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v12-scale-routing-transfer.zh-CN.md)
 
 ### Aggregation Mismatch Artifact-v14: Post-Compile Drift and Exact Recovery
 Tag: aggregation-mismatch research evidence
@@ -302,18 +306,19 @@ seal-before-drift timing. Compatible Exact is safely rejected stale and
 recovered 24/24. Its +19.3% token interaction is positive but misses the
 preregistered +20% minimum-effect gate.
 
-[Read the artifact-v14 report: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v14-post-compile-drift-recovery.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v14-post-compile-drift-recovery.zh-CN.md)
+[Read the artifact-v14 report: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v14-post-compile-drift-recovery.md) / [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v14-post-compile-drift-recovery.zh-CN.md)
 
 ### Aggregation Mismatch Artifact-v15: Intent Conflict Governance
 Tag: aggregation-mismatch research evidence
 
 This bilingual report validates 96 formal DeepSeek episodes, 768 offline
-executor cases, and 1,594 reconstructable events. Conflict first commits are
-rejected 0/72; governed Intent/Exact Rebase recover 48/48, while Naive
-terminates 0/24. The machine primary passes, but a frozen-prose versus
-executable Pilot Gate deviation requires a `share_with_caveats` verdict.
+executor cases, and 1,594 reconstructable events. All 72 conflict-arm first
+commits are safely rejected (0/72 committed); governed Intent/Exact Rebase recover
+48/48, while Naive, which terminates after rejection, finishes 0/24. The machine
+primary passes, but a frozen-prose versus executable Pilot Gate deviation
+requires a `share_with_caveats` verdict.
 
-[Read the artifact-v15 report: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v15-intent-conflict-governance.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v15-intent-conflict-governance.zh-CN.md)
+[Read the artifact-v15 report: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v15-intent-conflict-governance.md) / [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v15-intent-conflict-governance.zh-CN.md)
 
 ### Aggregation Mismatch Artifact-v16: Matched Conflict Recovery
 Tag: aggregation-mismatch research evidence
@@ -325,7 +330,7 @@ reaches 24/24. The machine primary passes; bundled authority/state/information
 and a frozen-manifest Pilot metadata deviation require a
 `share_with_caveats` verdict.
 
-[Read the artifact-v16 report: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v16-matched-conflict-recovery.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v16-matched-conflict-recovery.zh-CN.md)
+[Read the artifact-v16 report: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v16-matched-conflict-recovery.md) / [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v16-matched-conflict-recovery.zh-CN.md)
 
 ### Aggregation Mismatch Artifact-v17: Unlock Information and Escalation
 Tag: aggregation-mismatch research evidence
@@ -338,7 +343,7 @@ unresolvable lock, typed Escalate reaches 24/24 accepted non-commit outcomes.
 The latter is a governance-terminal contrast with different endpoints, not a
 task-completion advantage.
 
-[Read the artifact-v17 report: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v17-unlock-info-escalate.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v17-unlock-info-escalate.zh-CN.md)
+[Read the artifact-v17 report: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v17-unlock-info-escalate.md) / [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v17-unlock-info-escalate.zh-CN.md)
 
 ### Aggregation Mismatch V1–V12 and V14–V17: Historical Detail and Agent Engineering
 Tag: historical experiment synthesis and engineering guide
@@ -350,37 +355,35 @@ routing policy, telemetry schema, governed-commit protocol, implementation
 sequence, conflict governor, minimum-context disclosure, typed terminal states,
 and application map. The V1–V25 synthesis above is the current complete entry.
 
-[Read the experiment summary: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v1-v12-v14-v17-experiment-summary.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v1-v12-v14-v17-experiment-summary.zh-CN.md)
-
-[Read the engineering lessons: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-agent-engineering-lessons-v1-v12-v14-v17.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-agent-engineering-lessons-v1-v12-v14-v17.zh-CN.md)
+[Read the experiment summary: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v1-v12-v14-v17-experiment-summary.md) / [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v1-v12-v14-v17-experiment-summary.zh-CN.md) / [Engineering lessons: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-agent-engineering-lessons-v1-v12-v14-v17.md) / [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-agent-engineering-lessons-v1-v12-v14-v17.zh-CN.md)
 
 ### Aggregation Mismatch Artifact-v4: Evidence, Theory Gaps, and Agent Implications
 Tag: aggregation-mismatch research evidence
 
 This bilingual evidence report adjudicates the completed 756-run DeepSeek matrix on boundary-state externalization, candidate/interface decomposition, independently allocated 300/900/1800-second budgets, and output order. It reports the deterministic correction of seven legacy-evaluator rows, distinguishes answer-information recovery from structural cut-set specificity, and translates the theory–evidence gap into agent routing, executor, verifier, and telemetry requirements.
 
-[Read the artifact-v4 report: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v4-claims-theory-gap.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v4-claims-theory-gap.zh-CN.md)
+[Read the artifact-v4 report: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v4-claims-theory-gap.md) / [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v4-claims-theory-gap.zh-CN.md)
 
 ### Aggregation Mismatch Artifact-v5: Stable Editing Agents and the Planning Bottleneck
 Tag: aggregation-mismatch research evidence
 
 This bilingual report adjudicates the completed 288-arm native-tool DeepSeek study. With a correct oracle plan, batch Patch succeeds on 46/48 versus 26/48 for full-object Rewrite, a +41.7-point delivery advantage. Under inferred plans, the end-to-end comparison is 2/96 versus 0/96 and fails its gate. The report explains why the verdict is `delivery_only`, why the crossover remains unadjudicated, and how plan verification must precede write-interface routing.
 
-[Read the artifact-v5 report: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v5-stable-editing-agent.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v5-stable-editing-agent.zh-CN.md)
+[Read the artifact-v5 report: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v5-stable-editing-agent.md) / [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v5-stable-editing-agent.zh-CN.md)
 
 ### Patch vs. Full Rewrite: A Controlled Sparse-Repair Experiment
 Tag: aggregation-mismatch research evidence
 
 This evidence note isolates repair delivery from edit discovery. Across 160 new holdouts and 1,920 completed DeepSeek runs, patch plus deterministic execution improves budgeted exact reliability over full rewrite. Oracle-plan, pure-copy, within-response, length, failure-class, and independently preallocated 900-second controls define both the result and its limits.
 
-[Read the controlled experiment: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/patch-vs-full-rewrite-controlled-experiment.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/patch-vs-full-rewrite-controlled-experiment.zh-CN.md)
+[Read the controlled experiment: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/patch-vs-full-rewrite-controlled-experiment.md) / [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/patch-vs-full-rewrite-controlled-experiment.zh-CN.md)
 
 ### Aggregation Mismatch: Derivable Claims, Proof Conditions, and Agent Engineering
 Tag: theory-to-engineering bridge
 
 This working draft separates three kinds of conclusions: interface and state properties that follow under explicit assumptions, structural predictions that still require LLM measurement, and empirical questions that depend entirely on the model and task distribution. It derives results for patch commitment surfaces, boundary state, dependency order, verifier gates, local invalidation, conflict-free parallelism, commit safety, and replayable state, then turns them into an implementable agent architecture.
 
-[Read the theoretical claims and agent-engineering implications: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-theoretical-claims-agent-engineering.md) · [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-theoretical-claims-agent-engineering.zh-CN.md)
+[Read the theoretical claims and agent-engineering implications: English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-theoretical-claims-agent-engineering.md) / [中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-theoretical-claims-agent-engineering.zh-CN.md)
 
 ### Specification Mismatch and Objective Governance in LLM Systems
 Tag: objective governance technical report
@@ -413,7 +416,7 @@ This draft turns AI use from a list of warnings into a discipline of cognition: 
 ### AI Collaborative Posture: Calibrated Friction and Constructive Firmness
 Tag: collaboration posture working draft
 
-This working draft develops the AI-side dual of cognitive discipline. Instead of maximizing compliance, AI should protect the human judgment loop through calibrated friction and constructive firmness: be firm where hard oracles exist, defer where human-governed variables dominate, install gates before irreversible actions, and preserve human generative labor in learning and judgment tasks.
+This working draft develops the AI-side dual of cognitive discipline. Instead of maximizing compliance, AI should protect the human judgment loop through calibrated friction and constructive firmness: be firm where hard oracles exist, defer and ask where human-governed variables dominate, install gates before irreversible actions, and preserve human generative labor in learning and judgment tasks.
 
 [Read the collaboration posture draft](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/ai-collaborative-posture-calibrated-friction-constructive-firmness.md)
 

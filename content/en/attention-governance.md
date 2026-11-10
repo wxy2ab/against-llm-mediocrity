@@ -5,11 +5,11 @@ path: /attention-governance
 title: Attention Governance
 navTitle: Attention
 kicker: Governing evidence, working sets, and commits without updating model parameters
-summary: Attention governance does not directly manipulate internal attention heads. It organizes evidence around the current decision, decomposes judgment tasks, coordinates cross-module constraints, and admits only validated modifications into official state.
+summary: Attention governance does not directly manipulate internal attention heads. It organizes evidence around the current decision, decomposes judgment tasks, coordinates cross-module constraints, and admits only validated modifications into official state. It is an implementable, testable scheme for inference-time control.
 order: 4.5
 showInNav: true
 heroPoints:
-  - Long materials and complex reasoning share one burden: the information and state required by the current decision can be lost, mixed, or become stale.
+  - "Long materials and complex reasoning share one burden: the information and state required by the current decision can be lost, mixed, or become stale."
   - The four audit views are complementary, not orthogonal; their value is measured by newly confirmed defects per incremental cost.
   - Chapter buckets organize tickets; shared constraints decide which edits must be validated and committed together.
   - For registered hard constraints with complete dependencies and reliable checking, controlled modification provides a conditional non-regression guarantee.
@@ -27,7 +27,7 @@ With long documents, the hard part is usually not "reading everything." It is th
 
 These failures are adjacent, but they are not the same problem. A million-row structured dataset may contain a great deal of material while imposing a low solving burden if the task is to fetch one record by primary key. A mathematical proposition of a few sentences may contain very little material while demanding a deep construction. The trigger for governance should therefore not be "more than N characters" or "thinking over N tokens." It should be:
 
-> Is the current solving process unable to maintain the working set required for a reliable decision, and are dependencies between decisions at risk of being lost?
+> Is the current solving process unable to reliably maintain the working set the decision requires, and are dependencies between decisions at risk of being lost?
 
 This article defines **attention governance** as a set of auditable controls over the information visible to the model and over the external process, under fixed model parameters, tools, and budget: organize evidence, decompose judgment tasks, coordinate cross-module constraints, and control modification and commit. It does not claim to change the model's internal attention distribution; directly steering attention heads is a separate route that requires internal access and its own calibration.
 
@@ -48,21 +48,21 @@ Chapter buckets organize tickets; they do not decide commit boundaries. Shared r
 
 ### Controlled modification and commit
 
-Generate a local patch by default: target ID, expected hash, exact source text, replacement text, and the ticket it addresses. Candidates pass structure, target, regression, and semantic validation; `UNKNOWN` does not count as a pass. Official state accepts only candidates that pass acceptance.
+Generate a local patch by default: target ID, expected hash, exact source text, replacement text, and the ticket it addresses. Each candidate goes through four validation layers: structure, target, regression, and semantic. `UNKNOWN` does not count as a pass. Official state accepts only candidates that pass acceptance.
 ::::
 
 ## Four Complementary Views
 
-| View | What it loads | What it checks | What it must not miss |
+| View | What it loads | What it checks | Omission to avoid |
 |---|---|---|---|
 | Module | Chapter or scene text, responsibility, entry and exit state | Local logic, fulfillment of responsibility, factual support | Checking only the chapter and missing cross-chapter conditions |
 | Mechanism | The source event chain of one rule, object, character knowledge, or causal line | Preconditions, exceptions, state changes, long-run consistency | Aliases, implicit consequences, dependencies never stated explicitly |
 | Operating condition | One explicit reading or operating situation and its checkable criteria | Whether the requirement is met in that situation | Replacing explicit criteria with a broad persona |
-| Interface and joint constraint | Both sides of a handoff, non-adjacent dependencies, shared resources | State transfer, mechanism collision, joint constraints | Checking only adjacent fragments and pairwise combinations |
+| Interface and joint constraint | Both sides of a handoff, non-adjacent dependencies, shared resources and the related mechanisms | State transfer, mechanism collision, joint constraints | Checking only adjacent fragments and pairwise combinations |
 
 Module, mechanism, operating condition, and interface share characters, rules, state, and resources. Without a representation space, inner product, and projection operator, they cannot be called strictly orthogonal subspaces. They are **complementary views**: they overlap, the same defect may be found more than once, and their value should be measured by "new confirmed defects / incremental cost," not by the neatness of the names.
 
-Local consistency is not global consistency. Three mechanisms each consume 4 units of a resource, and total resources are 10. Any two together pass; all three together violate the constraint. A pairwise interaction matrix can be retained, but joint conditions involving three or more parties and global aggregate constraints must also be checked.
+Local consistency is not global consistency. Suppose three mechanisms each consume 4 units of a resource, and the total is 10. Any two together pass; all three together violate the constraint. So a pairwise interaction matrix can be retained, but joint conditions involving three or more parties and global aggregate constraints must also be checked.
 
 ## Minimum Execution Loop
 
@@ -77,9 +77,9 @@ freeze goal, version, and rules
   -> atomic commit and stale-evidence invalidation
 ```
 
-Distinguish three sets: the **write set** is what this round may modify; the **read scope** is the material needed to understand and repair the problem; the **revalidation scope** is the constraints and spans that may be affected. Dependency closure determines reading and revalidation; it does not automatically authorize edits in every related chapter.
+Distinguish three sets: the **write set** is what this round may modify; the **read scope** is the material needed to understand and repair the problem; the **revalidation scope** is the constraints and spans that may be affected. Dependency closure mainly determines reading and revalidation; it does not automatically authorize edits in every related chapter.
 
-If changing chapter 8 alone satisfies all requirements, change only chapter 8 and revalidate chapter 19. If both places must change together, form a cross-chapter transaction. If the change touches a setting the author has not adjudicated, stop in an explicit conflict state. Hard requirements outrank soft preferences; when two hard requirements conflict, do not invent a compromise; the model may propose broadening the scope, but the formal scope is approved by a trusted coordinator.
+For example, a piece of foreshadowing in chapter 8 is related to a reveal in chapter 19. If changing chapter 8 alone satisfies all requirements, change only chapter 8 and revalidate chapter 19. If both places must change together, form a cross-chapter transaction. If the change touches a setting the author has not adjudicated, stop in an explicit conflict state. Hard requirements outrank soft preferences. When two hard requirements conflict, do not invent a compromise. The model may propose expanding the write scope, but the formal scope is approved by a trusted coordinator.
 
 ## The Boundary of the Non-Regression Guarantee
 
@@ -95,11 +95,11 @@ The reason is direct: affected constraints have been revalidated; unaffected con
 | A1 | Module slicing only, using the same tickets, patches, and acceptance flow where possible | What do multiple views add over chapter splitting alone? |
 | A2 | Four views + physical bucketing + per-bucket edits | How does the original proposal perform? |
 | A3 | Four views + dependency coordination + unified adjudication + controlled patches + regression checks | How much does commit governance add? |
-| A4 | Adaptive routing: choose the smallest intervention by bottleneck; allow no added processing | Is the routing policy itself worthwhile? |
+| A4 | Adaptive routing: choose the smallest intervention by bottleneck; adding no processing is an allowed choice | Is the routing policy itself worthwhile? |
 
 All arms should use the same model configuration, public specification, source permissions, outer budget, and retry policy, and should run in randomized interleaved order. Do not constrain A0 to a single call while giving A3 dozens of calls, and then attribute the difference to slicing.
 
-The primary endpoint is not "how many problems were found." It is the proportion of instances — predetermined to be information-sufficient, specification-consistent, equipped with target defects, and completable — in which the actually adopted final version repairs all target defects, preserves critical protection requirements, and introduces no new critical defect. Timeout, exhaustion, refusal, or absence of a final version on a completable task counts as incomplete; defect-free tasks are reported separately as correct preservation; information-insufficient or unresolvable-conflict tasks are reported separately as correct escalation; and the best unadopted candidate is not used as the final score.
+The primary endpoint is not "how many problems were found." It is the proportion of instances — predetermined to be information-sufficient, specification-consistent, equipped with target defects, and completable — in which the actually adopted final version repairs all target defects, preserves critical protection requirements, and introduces no new critical defect. Timeout, budget exhaustion, refusal, or absence of a final version on a completable task counts as incomplete. Defect-free tasks are reported separately as correct preservation, and information-insufficient or unresolvable-conflict tasks are reported separately as correct escalation. The best unadopted candidate is not used as the final score.
 
 ## Current Evidence Boundary
 
