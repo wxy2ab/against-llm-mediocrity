@@ -71,6 +71,8 @@ Tag: 只在人该管的地方问人
 :::
 
 :::paper-docs
+Group: 核心理论层
+
 ### LLM 系统中价值保存的结构理论
 Tag: 结构理论工作稿
 
@@ -99,6 +101,8 @@ Tag: 聚合失配高级子型
 
 [阅读高级聚合子型工作稿：中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/latent-conditioned-aggregation-mismatch.zh-CN.md) / [English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/latent-conditioned-aggregation-mismatch.md)
 
+Group: 诊断机制层
+
 ### 面向受治理 LLM 系统的形式化机制层
 Tag: 干预定位工作稿
 
@@ -120,6 +124,8 @@ Tag: 训练侧治理工作稿
 
 [阅读机制驱动训练工作稿](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/mechanism-driven-training-for-governed-llm-systems.zh-CN.md) / [English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/mechanism-driven-training-for-governed-llm-systems.md)
 
+Group: 治理对象层
+
 ### 受治理 LLM 对象模型与接口规范
 Tag: 实现规范工作稿
 
@@ -133,6 +139,8 @@ Tag: 技术报告工作稿
 这份技术报告把审计工程定义为把失败转化为持久控制改进的循环。它覆盖失败定位、审计发现、控制增量、回归护栏、缺陷账本、验证器权威、失配特定审计模式、反模式、风险分层审计强度和审计关闭标准。
 
 [阅读审计工程技术报告](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/audit-engineering-failure-localization-control-space-writeback.zh-CN.md)
+
+Group: 运行时层
 
 ### Oracle、Audit Agent 与 SGAR
 Tag: oracle 路由工作稿
@@ -214,6 +222,8 @@ Tag: 软件架构工作稿
 
 [阅读受治理委托工作稿](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/from-fixed-workflows-to-governed-delegation.zh-CN.md) / [English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/from-fixed-workflows-to-governed-delegation.md)
 
+Group: 原始失配技术报告与实验证据
+
 ### LLM 系统中的观测-表征失配与通道治理
 Tag: 通道治理技术报告
 
@@ -282,8 +292,7 @@ Tag: 聚合失配研究证据
 ### 聚合失配 Artifact-v14：Post-Compile Drift 与 Exact Recovery
 Tag: 聚合失配研究证据
 
-这份双语报告在严格 seal-before-drift 时序下验证 96 个正式 DeepSeek episodes、
-768 个离线执行器案例与 1,416 条可重建事件。Compatible Exact 24/24 被安全判 stale
+这份双语报告在严格 seal-before-drift 时序下验证 96 个正式 DeepSeek episodes、768 个离线执行器案例与 1,416 条可重建事件。Compatible Exact 24/24 被安全判 stale
 并恢复；+19.3% token interaction 为正，但未达到预注册 +20% 最小效应门。
 
 [阅读 artifact-v14 报告：中文](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v14-post-compile-drift-recovery.zh-CN.md) / [English](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v14-post-compile-drift-recovery.md)
@@ -357,6 +366,8 @@ Tag: 目标治理技术报告
 
 [阅读目标治理技术报告](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/specification-mismatch-objective-governance-llm-systems.zh-CN.md)
 
+Group: 人机协作层
+
 ### Human-Assist Operational Mismatches
 Tag: 协作补充稿
 
@@ -385,6 +396,8 @@ Tag: 协作姿态工作稿
 
 [阅读协作姿态工作稿](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/ai-collaborative-posture-calibrated-friction-constructive-firmness.zh-CN.md)
 
+Group: 经济学与定价
+
 ### 模型最高价格
 Tag: AI 经济学与定价工作稿
 
@@ -395,7 +408,7 @@ Tag: AI 经济学与定价工作稿
 
 ## 旧版本
 
-下面是保留下来供参考的早期稿。每一份都已经被上方当前工作稿中的某个文档承接，每张卡片也都指向它的替代版本。
+下面是保留下来供参考的早期稿。每一份都已经被上方当前工作稿中的某个文档承接，每一条也都指向它的替代版本。
 
 :::paper-docs
 ### LLM 失败的形式化机制层

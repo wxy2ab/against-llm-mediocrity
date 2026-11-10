@@ -2025,109 +2025,240 @@ h1 {
 }
 
 /* ------------------------------------------------------------------
-   Paper index (papers)
+   Paper index (papers) — a catalogue: contents, groups, ruled entries
    ------------------------------------------------------------------ */
 .paper-docs {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 36px clamp(24px, 3vw, 44px);
-  margin: 2.2em 0 0;
+  margin: 2.6em 0 0;
 }
 
-.paper-doc {
-  min-width: 0;
-  border-top: 1px solid var(--ink-900);
+/* Contents: one leader-dotted line per group, ending in its entry range */
+.paper-contents-label {
+  margin: 0 0 8px;
+  color: var(--ink-500);
+  font: 500 0.6875rem / 1.5 var(--font-mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
-.paper-doc-header {
-  padding: 14px 0;
-}
-
-.paper-doc-header h3 {
-  margin: 0;
-  color: var(--ink-900);
-  font: 700 1.25rem / 1.32 var(--font-serif);
-  text-wrap: balance;
-}
-
-/* Secondary links (other language, Word edition, companion reports): the
-   links of a card's link line after the first, which is the title link. */
-.paper-doc-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2px 0.55em;
+.paper-contents ol {
+  columns: 2;
+  column-gap: clamp(28px, 4.4vw, 60px);
   padding: 0;
-  margin: 8px 0 0;
-  color: var(--ink-400);
-  font-size: var(--step-small);
-  line-height: 1.7;
+  margin: 0;
   list-style: none;
 }
 
-.paper-doc-links li:not(:last-child)::after {
-  margin-left: 0.55em;
-  content: "·";
-  content: "·" / "";
+.paper-contents li {
+  break-inside: avoid;
 }
 
-.paper-doc-fields {
+.paper-docs .paper-contents a {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  padding: 6px 0;
+  color: var(--ink-800);
+  font-size: var(--step-body-sm);
+  line-height: 1.5;
+  text-decoration: none;
+}
+
+.paper-contents-leader {
+  flex: 1;
+  min-width: 20px;
+  border-bottom: 1px dotted var(--ink-400);
+  transform: translateY(-0.28em);
+}
+
+.paper-contents-range,
+.paper-group-range {
+  color: var(--ink-500);
+  font: 500 0.75rem / 1.5 var(--font-mono);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.paper-docs .paper-contents a:hover .paper-contents-name {
+  color: var(--ink-900);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.24em;
+}
+
+/* Groups */
+.paper-group {
+  margin-top: clamp(40px, 5vw, 60px);
+}
+
+.paper-group--plain {
+  margin-top: 0;
+  border-top: 1px solid var(--ink-900);
+}
+
+.paper-group-head {
+  display: flex;
+  gap: 16px;
+  align-items: baseline;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--ink-900);
+}
+
+.paper-group-head h3 {
+  margin: 0;
+  color: var(--ink-900);
+  font: 700 var(--step-h3) / 1.32 var(--font-serif);
+  letter-spacing: -0.005em;
+}
+
+:lang(zh) .paper-group-head h3 {
+  letter-spacing: 0.01em;
+}
+
+.paper-group-range {
+  margin: 0;
+}
+
+/* Entries: number and kind above; title and editions left, abstract right */
+.paper-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.paper-entry {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  column-gap: 24px;
+  grid-template-areas:
+    "meta meta"
+    "title body"
+    "links body";
+  grid-template-rows: auto auto 1fr;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 8fr);
+  column-gap: clamp(24px, 3.4vw, 44px);
+  padding: 18px 0 24px;
+}
+
+.paper-entry + .paper-entry {
   border-top: 1px solid var(--ink-line);
 }
 
-.paper-doc-field {
-  min-width: 0;
-  padding: 12px 0 14px;
-  border-bottom: 1px solid var(--ink-line);
-}
-
-.paper-doc-field h4 {
-  margin: 0 0 6px;
+.paper-entry-meta {
+  display: flex;
+  grid-area: meta;
+  gap: 12px;
+  margin: 0 0 7px;
   color: var(--ink-500);
   font: 500 0.6875rem / 1.5 var(--font-mono);
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
-.paper-doc-field p,
-.paper-doc-field ul {
+/* Chinese kinds mix in Latin terms (Agent, oracle): keep the author's case. */
+:lang(zh) .paper-entry-meta {
+  letter-spacing: 0.06em;
+  text-transform: none;
+}
+
+.paper-entry-num {
+  color: var(--ink-900);
+  letter-spacing: 0.08em;
+}
+
+.paper-entry-title {
+  grid-area: title;
+  align-self: first baseline;
   margin: 0;
+  color: var(--ink-900);
+  font: 700 1.1875rem / 1.36 var(--font-serif);
+  text-wrap: balance;
 }
 
-.paper-doc-field p,
-.paper-doc-field li {
+:lang(zh) .paper-entry-title {
+  line-height: 1.46;
+  letter-spacing: 0.01em;
+}
+
+.paper-entry-range {
+  white-space: nowrap;
+}
+
+.paper-docs .paper-entry-title a {
+  text-decoration-color: transparent;
+}
+
+.paper-docs .paper-entry-title a:hover {
+  text-decoration-color: var(--ink-900);
+}
+
+.paper-entry-body {
+  grid-area: body;
+  align-self: first baseline;
+  min-width: 0;
+}
+
+.paper-entry-body p {
+  margin: 0.7em 0 0;
   color: var(--ink-600);
-  font-size: var(--step-small);
-  line-height: 1.6;
-  text-align: left;
+  font-size: var(--step-body-sm);
+  line-height: 1.65;
+  text-wrap: pretty;
 }
 
-.paper-doc-field ul {
+.paper-entry-body > :first-child {
+  margin-top: 0;
+}
+
+:lang(zh) .paper-entry-body p {
+  line-height: 1.8;
+}
+
+/* Editions: one line per document, a link per language or format */
+.paper-docs .paper-entry-links {
   display: grid;
-  gap: 4px;
-  padding-left: 1.1em;
-}
-
-.paper-doc-field li::marker {
-  color: var(--ink-400);
-}
-
-.paper-doc-field--status ul {
+  grid-area: links;
+  gap: 5px;
+  align-self: start;
   padding: 0;
+  margin: 11px 0 0;
+  font-size: var(--step-small);
+  line-height: 1.55;
   list-style: none;
 }
 
-.paper-doc-field--status p,
-.paper-doc-field--status li {
-  display: inline-flex;
-  width: fit-content;
-  padding: 2px 8px;
-  color: var(--ink-800);
-  font: 500 0.75rem / 1.6 var(--font-mono);
-  border: 1px solid var(--ink-line-strong);
-  border-radius: var(--radius-sm);
+.paper-entry-links li {
+  display: flex;
+  gap: 14px;
+  align-items: baseline;
+}
+
+.paper-entry-editions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px 16px;
+}
+
+/* An entry with several documents: name left, its editions in a column right */
+.paper-entry-linklabel {
+  flex: 1;
+  min-width: 0;
+  color: var(--ink-500);
+}
+
+.paper-entry-linklabel + .paper-entry-editions {
+  flex: none;
+}
+
+.paper-entry-links a {
+  white-space: nowrap;
+}
+
+.paper-entry-links a::after {
+  display: inline-block;
+  margin-left: 0.3em;
+  content: "↗";
+  content: "↗" / "";
+  color: var(--ink-400);
+  font-size: 0.8em;
 }
 
 /* ------------------------------------------------------------------
@@ -2509,8 +2640,22 @@ h1 {
     padding-top: 0;
   }
 
-  .paper-docs {
+  .paper-entry {
+    grid-template-areas:
+      "meta"
+      "title"
+      "body"
+      "links";
+    grid-template-rows: auto;
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .paper-entry-body {
+    margin-top: 9px;
+  }
+
+  .paper-docs .paper-entry-links {
+    margin-top: 12px;
   }
 }
 
@@ -2563,8 +2708,8 @@ h1 {
     display: none;
   }
 
-  .paper-doc-fields {
-    grid-template-columns: minmax(0, 1fr);
+  .paper-contents ol {
+    columns: 1;
   }
 
   .flow-diagram {
