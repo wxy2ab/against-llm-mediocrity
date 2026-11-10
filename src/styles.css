@@ -2050,6 +2050,26 @@ h1 {
   text-wrap: balance;
 }
 
+/* Secondary links (other language, Word edition, companion reports): the
+   links of a card's link line after the first, which is the title link. */
+.paper-doc-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 0.55em;
+  padding: 0;
+  margin: 8px 0 0;
+  color: var(--ink-400);
+  font-size: var(--step-small);
+  line-height: 1.7;
+  list-style: none;
+}
+
+.paper-doc-links li:not(:last-child)::after {
+  margin-left: 0.55em;
+  content: "·";
+  content: "·" / "";
+}
+
 .paper-doc-fields {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
