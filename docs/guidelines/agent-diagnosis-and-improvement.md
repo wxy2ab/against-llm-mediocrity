@@ -172,7 +172,7 @@ More context is not a substitute for authoritative state.
 
 Use when different tasks, states, or failures require different capabilities.
 
-Router inputs should be observable and testable:
+Router inputs must be observable and testable:
 
 ```text
 task type

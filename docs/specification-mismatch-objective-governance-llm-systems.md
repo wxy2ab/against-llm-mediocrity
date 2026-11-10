@@ -651,7 +651,7 @@ transition-committed specification updates
 
 ## 7. Formal Model
 
-A minimal formalization separates four objects:
+A minimal formalization separates five objects:
 
 ```text
 S: world state

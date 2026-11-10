@@ -735,9 +735,6 @@ suppressor evidence
 priority / arbitration rules
 scope limits
 revocation triggers
-```
-
-有了这些工具，我们可以总结核心论点。
 regression guards
 state dependencies
 ```
@@ -815,7 +812,6 @@ Require state enumeration when the same observation supports multiple policies.
 ```
 
 这些增量在被编码为正式的受治理对象时最为有效。
-```
 
 ---
 
@@ -1526,7 +1522,6 @@ routing overhead exceeds expected gain
 ```
 
 每条路由规则和理论主张都应附带自我修订的条件。
-```
 
 ---
 
@@ -1562,7 +1557,6 @@ more precise routing rule supersedes the old rule
 ```
 
 以下清单总结了诊断和修复拟合边界失配的实用步骤。
-```
 
 ---
 
@@ -1600,7 +1594,6 @@ revocation triggers
 ```
 
 有了这些工具，我们可以总结核心论点。
-```
 
 ---
 

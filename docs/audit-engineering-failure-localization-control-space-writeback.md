@@ -1663,7 +1663,7 @@ E. D + independent evidence or model diversity
 
 Hold inference budget constant. Run replicates within each cell so within-condition noise can be separated from between-context effects. Evaluate familiar structured tasks, unfamiliar tasks supplied with sufficient domain material, and unfamiliar tasks without decisive knowledge as a negative control. Measure structural basin coverage, between- versus within-context diversity, cross-context error correlation, unique confirmed finding yield, false consensus, calibration, aggregation loss, and hidden-gold or human-grounded utility.
 
-Tier 3 should remain a coverage and robustness mechanism unless these experiments show that context-conditioned branches reduce correlated error and improve externally grounded outcomes after aggregation.
+Tier 3 should remain a coverage and robustness mechanism, not a calibrated truth oracle, unless these experiments show that context-conditioned branches reduce correlated error and improve externally grounded outcomes after aggregation.
 
 ---
 

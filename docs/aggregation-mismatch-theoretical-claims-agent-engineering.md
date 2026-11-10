@@ -968,7 +968,7 @@ the theory-to-engineering boundary: representation invariance supports the
 semantic-set interface as a sound substrate, but it cannot promise a large
 deployment gain unless order-only false rejects are common in the target workload.
 
-Artifact-v11 adds a paired relocation test on production-shaped synthetic JSON.
+Artifact-v11 adds a paired same-host relocation test on production-shaped synthetic JSON.
 The relocation × (semantic ID−physical index) interaction is +21.875 points and
 passes its preregistered gate, but all seven differences occur at \(N=48\);
 \(N=24\) is at ceiling. This is direct empirical support for the theoretical

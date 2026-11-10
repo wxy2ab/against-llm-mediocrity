@@ -359,7 +359,8 @@ Invariants:
 V9–V12 reconstruct episodes. V14 reconstructs 96 episodes from 1,416 events and
 120 provider turns with zero mismatch, explicitly recording seal-before-drift
 in all 96. V15 reconstructs 96 episodes from 1,594 events and 144 provider
-turns, keeping first rejection and recovery under one run key.
+turns with zero mismatch, keeping first rejection and recovery under one run
+key.
 
 ## 14. Principle twelve: Separate scientific gates from product defaults
 

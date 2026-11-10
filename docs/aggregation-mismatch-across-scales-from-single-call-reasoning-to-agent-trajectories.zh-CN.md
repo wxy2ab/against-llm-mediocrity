@@ -1,7 +1,7 @@
 # 聚合失配：从单次推理到 Agent 轨迹的多尺度局部最优坍缩
 
-**状态：工作稿 v0.1**
-**日期：2026-08-01**
+**状态：工作稿 v0.1**  
+**日期：2026-08-01**  
 **相关文档：**
 
 - [English version](./aggregation-mismatch-across-scales-from-single-call-reasoning-to-agent-trajectories.md)

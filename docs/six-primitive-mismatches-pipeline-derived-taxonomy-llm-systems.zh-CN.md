@@ -709,10 +709,12 @@ scope and non-goal declaration
 
 ## 12. 差异诊断表
 
+下表是这个 taxonomy 最短的实用诊断版本。
+
 | 如果失败在于... | 主要诊断为... | 问... | 修复方式... |
 |---|---|---|---|
 | 一个可行取得的决定性事实、变量、schema 元素、日志、值或测量缺失或被压缩掉。 | 观测-表征 | 可行变量进入 Z 了吗？ | 修通道或表征。 |
-| 固定同一表征后，信念被无依据塌缩、误排、遗忘或未更新。 | 状态 | 信念忠于证据吗？ | 校准、更新、保留假设、分支。 |
+| 固定同一表征后，信念被无依据塌缩、误排、陈旧化、遗忘或未更新。 | 状态 | 信念忠于证据吗？ | 校准、更新、保留假设、分支。 |
 | 模型有能力但在错误条件激活。 | 拟合边界 | 正确能力被路由了吗？ | 治理触发边界。 |
 | 正确结构很少作为候选出现。 | 支持 | 结构可达吗？ | 搜索控制空间；扩展候选。 |
 | 好的局部片段组合后失败。 | 聚合 | parts 能组合吗？ | 治理依赖和不变量。 |
@@ -1379,6 +1381,8 @@ profile 不是 benchmark score，而是 repair-planning artifact。
 
 高规格失配任务，需要目标治理和反例驱动 rubric 修复。
 
+失配画像可以指导架构选择：
+
 | Profile | Architecture implication |
 |---|---|
 | High observation-representation | Tool access, structured input, raw-data retrieval |
@@ -1392,7 +1396,7 @@ profile 不是 benchmark score，而是 repair-planning artifact。
 
 ## 29. 与局部对齐和 LLM 平庸的关系
 
-LLM 平庸不等同于任何一种失配。它是在固定预算和搜索流程下，由一种或多种失配产生的体制。
+LLM 平庸不等同于任何一种失配。它是在固定预算和搜索流程下，由一种或多种失配产生的区间。
 
 局部对齐意味着：
 
@@ -1484,7 +1488,7 @@ Compound failures can be decomposed into interactions among these stations.
 
 ```text
 1. 占据一个结构上不同的管线站点；
-2. 承认独立于当前六类的最小对；
+2. 能构造独立于当前六类的最小对；
 3. 要求一个不可再约化的不同修复目标；
 4. 若将其还原为现有站点，就会失去干预特异性。
 ```

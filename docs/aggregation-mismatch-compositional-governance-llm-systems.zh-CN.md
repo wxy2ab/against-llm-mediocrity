@@ -401,7 +401,7 @@ nonlocal reference binding
 global optimization
 ```
 
-现有受控结果也支持这一定位，而不支持把分解方式当成病因。V2 中，同一类模型的直接闭环构造为 `2/45`，而对给定无效候选的审计为 `176/180`；V4 中，在不改变自回归架构的情况下，外部化完整答案 bits 把周期构造从 `13/54` 提升到 `53/54`。这些比较分别受 candidate-conditioned auditing 与 ceiling 等限制，但共同表明：恢复来自可用全局信息、搜索负担与构造—验证分工的改变，而不是“变得不自回归”。详见[生成—验证不对称证据](./aggregation-mismatch-generation-verification-asymmetry-evidence.zh-CN.md)与 [Artifact-v4 理论差距](./aggregation-mismatch-v4-claims-theory-gap.zh-CN.md)。
+现有受控结果也支持这一定位，而不支持把分解方式当成病因。V2 中，同一类模型的直接周期构造为 `2/45`，而对给定无效候选的审计为 `176/180`；V4 中，在不改变自回归架构的情况下，外部化完整答案 bits 把周期构造从 `13/54` 提升到 `53/54`。这些比较分别受 candidate-conditioned auditing 与 ceiling 等限制，但共同表明：恢复来自可用全局信息、搜索负担与构造—验证分工的改变，而不是“变得不自回归”。详见[生成—验证不对称证据](./aggregation-mismatch-generation-verification-asymmetry-evidence.zh-CN.md)与 [Artifact-v4 理论差距](./aggregation-mismatch-v4-claims-theory-gap.zh-CN.md)。
 
 因此，“自回归平庸”不再作为聚合失配的子类或机制名使用。若当前模型与解码器的概率质量经验性地把生成拉回常见、流畅但低价值的区域，可非正式称为“自回归引力”，但该现象主要由支持失配描述。
 
@@ -1446,7 +1446,7 @@ semantic diff
 
 ## 15. 研究综合与论证组合
 
-研究综合对 LLM 来说局部很容易：模型能摘要论文、抽取 claims、比较 themes、写流畅 transitions。难点是保存 evidence 与 conclusion 的关系。
+研究综合对 LLM 来说往往显得局部很容易：模型能摘要论文、抽取 claims、比较 themes、写流畅 transitions。难点是保存 evidence 与 conclusion 的关系。
 
 ### 15.1 证据聚合失败
 

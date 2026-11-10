@@ -81,7 +81,7 @@
   - **Reread Only：** 锁拒绝后，在锁定 \(S_1\) 上给 receipt + 完整旧仓库；
   - **Rebase Once：** 锁拒绝后，runtime 解锁至 \(S_2\)，给 receipt + target slice；
 - 三个 conflict 臂都恰好获得一个第二 provider turn；
-- 原子 apply/rollback、global verification、append-only events 与 task-paired 统计。
+- 原子 apply/rollback、global verification、append-only events 与 exact task-paired 统计。
 
 实验匹配了调用机会，但没有匹配恢复权限与执行态：只有 Rebase 得到程序化 unlock。
 

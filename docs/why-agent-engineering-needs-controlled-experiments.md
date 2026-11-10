@@ -2,9 +2,9 @@
 
 ## From benchmark progress to a cumulative science of runtime mechanisms
 
-**Status:** Working Draft v0.1
-**Date:** 2026-08-12
-**Companion:** [中文版本](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/why-agent-engineering-needs-controlled-experiments.zh-CN.md)
+**Status:** Working Draft v0.1  
+**Date:** 2026-08-12  
+**Companion:** [中文版本](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/why-agent-engineering-needs-controlled-experiments.zh-CN.md)  
 **Related framework:** [Agent Harness Framework](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-harness-framework.md) · [Six Primitive Mismatches](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/six-primitive-mismatches-pipeline-derived-taxonomy-llm-systems.md)
 
 ---
@@ -228,7 +228,7 @@ A general measurement rule is to **manipulate and report task-side structural do
 
 ### 5.3 Fitting-boundary mismatch: measure routing calibration across a boundary grid
 
-**Question.** Does a capability fail because it is unavailable, or because it is activated in the wrong regime?
+**Question.** Does a capability fail because it is unavailable, or because it is activated or suppressed in the wrong regime?
 
 **Design.** Build a boundary grid with clear in-domain cases, clear out-of-domain cases, and graded near-boundary cases. Compare ungated activation, a learned router, evidence-conditioned routing, and typed abstention/escalation. Hold the underlying specialist capability fixed so the experiment tests routing rather than retraining.
 

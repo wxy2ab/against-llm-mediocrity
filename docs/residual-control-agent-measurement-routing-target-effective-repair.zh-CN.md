@@ -647,7 +647,7 @@ Mismatch residual 可以被操作性定义为：
 |---|---|---|---|
 | 规格失配 | 目标、约束和优先级不明确 | 建立目标契约、边界和反例 | contract checks、负例、优先级检查 |
 | 状态失配 | 观测不等于真实动态状态 | 状态刷新、硬状态、回放、状态机 | state invariant、transition check |
-| 观测—表征失配 | 关键信息没有进入有效表示 | 增加观测通道、结构化转导、降噪 | evidence checks、字段完整性 |
+| 观测-表征失配 | 关键信息没有进入有效表示 | 增加观测通道、结构化转导、降噪 | evidence checks、字段完整性 |
 | 支持失配 | 有效候选处于极低概率区域 | 扩大候选、变异重组、模型升级 | candidate verifier、候选覆盖 |
 | 聚合失配 | 局部正确不能组合成全局正确 | 分解、计划、候选比较、局部 patch | intermediate invariants、全局一致性 |
 | 拟合边界失配 | 修复当前区域损害邻域能力 | 隔离、路由、适用域、回归保护 | regression、canary、routing guards |

@@ -55,7 +55,7 @@ Therefore the two layers do not correspond one-to-one:
 
 ### 1.3 It Is Not a Mutually Exclusive Label Set
 
-The mechanism layer should be represented as a **mismatch profile**, not as a forced single-label classification.
+The mechanism layer should be represented as a **mechanism mismatch profile**, not as a forced single-label classification.
 
 Real systems often exhibit compound mismatches. For example, a wrong evaluation standard may push a router into conservative audit mode; conservative routing may narrow candidate search; the final symptom may look like "the model did not find the strategy." At the surface this looks like search failure, but the root cause includes specification, routing, and search.
 

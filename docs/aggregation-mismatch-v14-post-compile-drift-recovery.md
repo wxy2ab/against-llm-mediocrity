@@ -260,7 +260,8 @@ second provider turn creates the recovery increment.
    hash, pre-state hash, and a seal event. “The model answered” is not an
    adequate definition of a compiled operation.
 2. **Revalidate authoritative state at execution.** Check old value, version,
-   lock, and target identity immediately before atomic apply.
+   lock, and target identity immediately before atomic apply; do not rely on
+   the prompt-time snapshot.
 3. **Represent stale as a typed receipt.** Return failed target, observed value,
    current version, and permitted recovery actions instead of generic retry.
 4. **Keep recovery inside the original semantic episode.** Share run key,

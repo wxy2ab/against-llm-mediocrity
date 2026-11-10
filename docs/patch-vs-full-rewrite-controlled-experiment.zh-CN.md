@@ -317,7 +317,7 @@ I-PR 共 120 条：
 - 差异是纯粹的“语义能力”而不是预算内交付行为；
 - 单点 GF(2) 修复可直接外推代码、数据库、配置和文档修改；
 - patch 可以替代全局验证；
-- edit plan inference 与 delivery 已在 primary 中完全解耦。
+- edit plan inference 与 delivery 已在 primary 中完全解耦；
 - artifact-v5 已证明端到端 Agent-level Patch superiority；
 - edit-density crossover 已经识别。
 

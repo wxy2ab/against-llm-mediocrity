@@ -55,12 +55,14 @@
 (P_{\text{INTENT}}-P_{\text{EXACT}})_{\text{disjoint}}
 \]
 
-通过门：\(\Delta\ge +0.15\)；bootstrap CI 下界 \(>0\)；sign-flip \(p<0.05\)；
-四臂不同时 floor/ceiling；data/event/offline gates 通过。单一 primary，无 Holm。
+通过门：\(\Delta\ge +0.15\)；task-cluster bootstrap 95% CI 下界 \(>0\)；exact 双侧
+sign-flip \(p<0.05\)；四臂不同时处于 floor（≤0.10）或 ceiling（≥0.90）；
+data/event/offline gates 通过。单一 primary，无 Holm。
 
 ## 2. 实验
 
-- DeepSeek-v4-flash；thinking=False；T=0；max_tokens=32k；zh；300s；单轮；无 repair
+- DeepSeek-v4-flash；thinking=False；T=0；top_p=1；max_tokens=32k；zh；300s；单轮；
+  无 repair；单次 native tool call
 - 24 clusters；\(N\in\{72,96,144\}\)×8；\(k=N/12\)
 - Intent 仅 `apply_intent_operations`；Exact 仅 `apply_exact_patch`
 - Bootstrap seed=20260813；10,000 次
@@ -87,14 +89,15 @@ state=`not_adjudicated_floor_or_ceiling`（reason=`ceiling`）。
 ## 5. Secondary / failure / cost
 
 两漂移下 Intent−Exact 简单差均为 0（exploratory）。正式 96 终态皆 `success`。
-Offline 768 仍拒绝 stale Exact、locked、错误阈值与错目标。median wall ≈4.3–6.0s。
+Offline 768 仍拒绝 stale Exact、locked、错误阈值与错目标。median wall ≈4.3–6.0s；
+Exact 臂的 tokens/wall 略高于 Intent（exploratory）。
 
 ## 6. Claim 审计
 
 - **支持：** 冻结完整性；event 可重建；offline 安全合同；pilot 机械审计
 - **不支持：** V13-A1 通过；Intent 永远优于 Exact
 - **未裁决：** V13-A1（四臂 ceiling）
-- **不可推广：** 单 DeepSeek；合成仓库；外生 plan；offline 768≠生产 100%；不得删除
+- **不可推广：** 单 DeepSeek；合成仓库；外生 verified plan；offline 768≠生产 100%；不得删除
   precondition/lock/verifier；不否定 Full Rewrite；非真实生产验证
 
 ## 7. 工程含义

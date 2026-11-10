@@ -220,6 +220,8 @@ Reg_state(Bθ; Z≤t)
 
 where `a_hat` is selected under `b_hat_t`. A belief-optimal system can have high `δ_amb` and zero `Reg_state` at the same time.
 
+This mismatch is common in dialogue, planning, diagnosis, user modeling, market interpretation, code debugging, long-horizon agents, and dynamic environments. A system may see the same surface text under multiple hidden regimes and choose a policy that is locally plausible but state-inappropriate.
+
 Repair targets include:
 
 ```text
@@ -409,7 +411,7 @@ Equivalently, a proposed subdivision does not become a new primitive mismatch if
 For example:
 
 - Observation-representation can be perturbed by removing from the prompt a decisive database column that is obtainable through an authorized channel, while keeping the belief updater, objective, policy, and aggregation procedure unchanged.
-- State can be perturbed while holding `φ`, `ψ`, `Z`, and the objective fixed, by replacing an evidence-calibrated belief updater with one that misranks, goes stale, or collapses prematurely.
+- State can be perturbed while holding `φ`, `ψ`, `Z`, and the objective fixed, by replacing an evidence-calibrated belief updater with one that misranks, goes stale, or collapses prematurely; this perturbs only the state/belief station.
 - Fitting-boundary can be perturbed by changing trigger evidence so that the same capability is activated in the wrong domain.
 - Support can be perturbed by lowering the probability or reachability of the correct structure without changing its utility or the evaluator.
 - Aggregation can be perturbed by preserving local part quality while changing global composition dependencies.

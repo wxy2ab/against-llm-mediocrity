@@ -2,10 +2,10 @@
 
 ## From the Model-Conditioned Capability Frontier and Runtime Bridging to Quantifiable Action-Space Optimization
 
-**Status:** Working Draft v0.1
-**Date:** 2026-07-27
-**Abbreviation:** AHF
-**Chinese rendering:** Agent Harness Framework; more precisely, "an agent capability realization and runtime harness framework"
+**Status:** Working Draft v0.1  
+**Date:** 2026-07-27  
+**Abbreviation:** AHF  
+**Chinese rendering:** Agent Harness Framework; more precisely, "an agent capability realization and runtime harness framework"  
 **Related Documents:**
 
 - [中文版本](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-harness-framework.zh-CN.md)
@@ -39,7 +39,7 @@ The framework further proposes a dual residual perspective: the system level mea
 
 The central proposition of the Agent Harness Framework is:
 
-> **Under fixed task distribution, environment, tools, Oracle, budget and allowed runtime design space, the model determines the model-conditioned capability frontier; Agent Harness determines the probability, stability, cost and risk of this frontier being realized. **
+> **Under fixed task distribution, environment, tools, Oracle, budget and allowed runtime design space, the model determines the model-conditioned capability frontier; Agent Harness determines the probability, stability, cost and risk of this frontier being realized.**
 
 Its minimum structure is:
 
@@ -55,7 +55,7 @@ The multiplication sign here indicates complementarity, rather than simple numer
 
 More fully:
 
-> **Bridge makes progress possible; Action-Space Optimization makes worthwhile progress more likely to happen. **
+> **Bridge makes progress possible; Action-Space Optimization makes worthwhile progress more likely to happen.**
 
 ---
 
@@ -88,7 +88,7 @@ Agent Harness: through what basic mechanisms do those components change task suc
 Quantification: how much does each mechanism contribute under fixed conditions?
 ```
 
-### 2.2 Both "strong Harness can break through the upper limit of the model" and "the upper limit of model determination" need to be tightened
+### 2.2 Both "strong Harness can break through the upper limit of the model" and "the model determines the upper limit" need to be tightened
 
 If Harness adds a search engine, a compiler, a solver, a database, an outside expert, or a new Oracle, it may indeed allow the system to do things that the model alone cannot. Therefore, the absolute upper limit of the system cannot be attributed to the bare model.
 
@@ -112,7 +112,7 @@ The residual attribution of "Model + Harness" is identifiable only when the exte
 
 ### 2.3 The end-to-end score mixes different problems into one number
 
-Current Current Agent experiments often report:
+Current Agent experiments often report:
 
 ```text
 Agent A: 62%
@@ -121,10 +121,10 @@ Agent B: 68%
 
 But those 6 percentage points could come from an entirely different source:
 
--Models are stronger;
+- Models are stronger;
 - More tools;
 - The tool interface is more suitable for the model;
-- Status is not lost;
+- State is not lost;
 - The validator is more relaxed;
 - Easier output format;
 - Allow more tokens or longer wall-clock;
@@ -174,7 +174,7 @@ Therefore, Agent Harness should first be treated as a multidimensional runtime p
 
 ### 4.1 Basic objects
 
-set up:
+Let:
 
 - \(D\): task distribution;
 - \(X\): Fixed external capability base, including environment, tools, accessible data, Oracle and executors;
@@ -197,12 +197,12 @@ When fixing \(D,X,b\), the deployment system can be written as:
 =\pi_\theta\oplus\mathcal B\oplus\Omega
 \]
 
-### 4.2 Track status
+### 4.2 Trajectory state
 
 To avoid mistaking contextual narratives for world states, distinguish:
 
 - \(s_t\): real or potential environmental state;
-- \(o_t\): The environment is exposed to the observation of the system;
+- \(o_t\): The observation that the environment exposes to the system;
 - \(g_t\): governed hard state currently recognized by the system;
 - \(c_t\): the context actually presented to the model;
 - \(u_t\): model-facing operator selected by ASO;
@@ -221,7 +221,7 @@ The model then generates specific action parameters given the state and operator
 a_t\sim\pi_\theta\big(a\mid\phi(g_t,o_{\le t},u_t)\big)
 \]
 
-Bridge is responsible for connecting the proposal to the environment and returning observations, verification results, status submission and new control signals:
+Bridge is responsible for connecting the proposal to the environment and returning observations, verification results, state commits and new control signals:
 
 \[
 (o_{t+1},v_{t+1},g_{t+1},f_{t+1})
@@ -261,7 +261,7 @@ J(D;\theta,X,\mathcal H,b)
 
 It represents: the system frontier that can be achieved when the optimal Harness is selected under a given model and external capability base.
 
-Redefine the ideal system frontier based on this external capability base:
+Next, define the ideal system frontier on this external capability base:
 
 \[
 C^*(D,X,b,\mathfrak H)
@@ -282,8 +282,8 @@ C^*-J(\theta,\mathcal H)
 
 The point of this decomposition is not to claim that two quantities are directly observable, but to establish a clear attribution goal:
 
-- **Model Condition Capability Gap**: The part that cannot be eliminated even if the best allowed Harness is selected for the current model;
-- **Harness Capability Fulfillment Gap**: The model may have been able to do it, but there is no stable realization part during the current run.
+- **Model Conditional Capability Gap**: The part that cannot be eliminated even if the best allowed Harness is selected for the current model;
+- **Harness Capability Fulfillment Gap**: The part that the model might have been able to do, but that the current runtime does not stably realize.
 
 ### 5.2 Empirical frontier and lower bound
 
@@ -367,17 +367,17 @@ If a uniform scalar does not exist, use partial ordering:
 r_{t+1}\prec r_t
 \]
 
-Represents a new governed state that strictly reduces outstanding obligations subject to the protection constraints of non-regression.
+Represents a new governed state that strictly reduces outstanding obligations, provided that protected constraints do not regress.
 
 Bridge decides whether this residual drop is evidenced and can be submitted; ASO decides what operator should be selected for the next call to be more likely to produce this drop.
 
 ---
 
-## 6. Bridge: closed model, environment, verification and hard state
+## 6. Bridge: closing the loop between model, environment, verification and hard state
 
 ### 6.1 Definition
 
-**Bridge is a runtime mechanism that connects probabilistic model outputs to the external environment with states, consequences, and acceptance rules. **
+**Bridge is a runtime mechanism that connects probabilistic model outputs to the external environment with states, consequences, and acceptance rules.**
 
 It's not just an API adapter, nor just stringing together several model calls. It is responsible for two conversions in opposite directions:
 
@@ -426,7 +426,7 @@ Reverse Bridge needs to convert failures into:
 - where the failure occurred;
 - Which assumption or constraint is disproven by the evidence;
 - Should prompt, context, control space, data, tool, evaluator, renderer or human boundary be modified in the next round?
-- which return obligation must be added;
+- which regression obligation must be added;
 - Whether the current hard state, allowed actions and acceptance thresholds need to be updated.
 
 Audit Engineering forms the core mechanism of this direction:
@@ -449,11 +449,11 @@ If the audit only has comments but no control delta, no Bridge is formed; if no 
 
 | Functional dimensions | Core issues | Typical failures |
 |---|---|---|
-| **State Authority** | What does the system currently accept as true? | Status drift, false completion, plans treated as progress |
+| **State Authority** | What does the system currently accept as true? | State drift, false completion, plans treated as progress |
 | **Execution Fidelity** | Does the proposal change the environment according to the declaration semantics? | Parameter mistranslation, non-idempotent side effects, executor pollution |
 | **Observation and Evidence** | Do consequences enter a verifiable representation? | Key changes are not visible, logs are lost, and observations are insufficient |
 | **Verification and Gate** | What evidence is sufficient to allow submission? | False positives, false negatives, weak proxy targets, reward hacks |
-| **Failure Write-back** | How to change the next round of control space if it fails? | Retry only, no positioning, free text feedback is diluted |
+| **Failure Write-back** | How to change the next round of control space if it fails? | Retry only, no localization, free text feedback is diluted |
 | **Recovery and Replay** | Is it possible to recover after interruption, failure and revocation? | Repeated work, damaged state, unable to reproduce the path |
 
 ### 6.5 Bridge’s core indicators
@@ -465,19 +465,19 @@ If the audit only has comments but no control delta, no Bridge is formed; if no 
 | `transition_validity` | The proportion of submitted state transitions that meet the evidence and verification conditions |
 | `proposal_effect_fidelity` | The consistency between proposal declaration semantics and actual environment changes |
 | `failure_localization_rate` | The proportion of failures that can be localized to repairable objects |
-| `actionable_delta_rate` | Audit Finding the proportion of Audit Findings that become executable control deltas |
+| `actionable_delta_rate` | The proportion of Audit Findings that become executable control deltas |
 | `regression_recurrence` | How often a recorded failure reoccurs in subsequent rounds |
 | `recovery_success` | Can the operation be restored correctly based only on hard state and records |
 | `replayability` | Can other executors replay and interpret the source of the current state |
-| `bridge_cost` | The verification, storage and interaction costs required for each legal state transfer |
+| `bridge_cost` | The verification, storage and interaction costs required for each legal state transition |
 
 ---
 
-## 7. Action-Space Optimization: Optimize the problems faced by the model, not just the answers to the model
+## 7. Action-Space Optimization: Optimize the problems faced by the model, not just the model's answers
 
 ### 7.1 Definition
 
-**Action-Space Optimization is the optimization of model-facing operators, action representations, operation scopes, responsibility assignments, search neighborhoods, and submission structures under fixed model parameters, making model calls more likely to produce proven task residual reductions. **
+**Action-Space Optimization is the optimization of model-facing operators, action representations, operation scopes, responsibility assignments, search neighborhoods, and submission structures under fixed model parameters, making model calls more likely to produce proven task residual reductions.**
 
 It is not traditional Policy Optimization.
 
@@ -518,13 +518,13 @@ They changed:
 - Whether the correct area must be regenerated;
 - whether non-local dependencies become observable in the complete candidate;
 - Whether the output can be taken over by a deterministic executor;
-- Verify whether it is a complete solution or residual computation;
+- Whether verification is a complete solve or a residual computation;
 - Whether errors can be localized;
 - Whether the current search is restricted to an error basin.
 
 Therefore, the Agent Runtime does not just select actions from a fixed set of actions. It can also determine:
 
-> **Which problem will the next model call face? **
+> **Which problem will the next model call face?**
 
 ### 7.3 The goal of ASO is not to "maximize the correct rate of the current answer"
 
@@ -570,7 +570,7 @@ u_t^*
 |---|---|---|
 | **Representation** | In what form the action is submitted | Free text, typed arguments, patch, AST operation, plan |
 | **Scope** | How much area is covered by one action | token, span, function, module, chapter, full object |
-| **Responsibility Split** | Which part is determined by the model and which part is executed by the program | The model is given to the edit plan, and the executor keeps the unchanged area |
+| **Responsibility Split** | Which part is determined by the model and which part is executed by the program | The model gives the edit plan, and the executor keeps the unchanged area |
 | **Information Condition** | Under what completion and evidence conditions does the model work | No candidate, complete candidate, residual, boundary state, counterexample |
 | **Search Topology** | Single track, branching, auditing, backtracking or rebuilding | linear, branching, audit-repair, variable-neighborhood search |
 | **Dependency Order** | Actions occur according to what dependencies | topological order, frontier-based execution, deferred commit |
@@ -585,7 +585,7 @@ For example, in sparse repair:
 - full rewrite requires the model to re-assume the delivery of the complete object;
 - patch only requires the model to express local differences;
 - Deterministic executor can apply differences according to authoritative baseline and keep unmodified areas;
-- global verifier before deciding whether to submit.
+- global verifier then decides whether to submit.
 
 This is not simply "shorter output", but rewriting a complete object reconstruction problem into a partial operation submission problem.
 
@@ -594,14 +594,14 @@ This is not simply "shorter output", but rewriting a complete object reconstruct
 Theory can demonstrate that certain interfaces have structural advantages, such as:
 
 - The description length and commitment surface of sparse patches are smaller;
-- Unmodified areas can be maintained by the actuator by construction;
+- Unmodified areas can be maintained by the executor by construction;
 - Complete candidates enable verification to be converted into residual computation;
 - Enough boundary state can cut off some circular dependencies;
 - Topological ordering can reduce unresolved predecessors.
 
-But these facts do not follow automatically:
+But these facts do not automatically imply that:
 
-- The model must be easier to infer the correct patch plan;
+- The model must find it easier to infer the correct patch plan;
 - patch is better than rewrite under any edit density;
 - candidate must help full rewrite;
 - Audit must be easier than generation;
@@ -622,7 +622,7 @@ The task of ASO is not to formulate a dogma of "always patch" or "always audit" 
 | Indicator | Meaning |
 |---|---|
 | `plan_correct` | Whether the model identified the correct change or action plan |
-| `delivery_correct_given_plan` | Whether the interface can be delivered accurately when the correct plan is known |
+| `delivery_correct_given_plan` | Whether delivery through the interface is accurate when the correct plan is known |
 | `commitment_surface` | The number of fragile fields, positions, or references that the model must commit without errors |
 | `edit_density` | The proportion of actual changes to the complete object |
 | `collateral_regression` | How often local modifications cause degradation in untargeted areas |
@@ -654,12 +654,12 @@ This type of Agent may have:
 - Recoverable state;
 - All actions can be audited.
 
-But it still keeps asking for the model:
+But it still keeps asking the model to:
 
-- Complete rewrite of objects that are basically correct;
-- Work at error granularity;
+- Completely rewrite objects that are basically correct;
+- Work at the wrong granularity;
 - Redo what has been completed;
-- Repeated generation without new information;
+- Generate repeatedly without new information;
 - Use local optimization to solve global combinatorial problems.
 
 It becomes "reliably inefficient".
@@ -670,7 +670,7 @@ Such agents may enable the model to output correct patches, boundary states, or 
 
 - No authoritative baseline;
 - The execution results are not verified;
-- It is not known which changes have taken effect in the next round;
+- The next round does not know which changes have taken effect;
 - Failure is not written back;
 - Correct results may be overwritten by subsequent complete rewrites.
 
@@ -686,7 +686,7 @@ I_{B\times O}
 J(B_1,O_1)-J(B_1,O_0)-J(B_0,O_1)+J(B_0,O_0)
 \]
 
-If the interaction term is large, just reporting "how much Bridge improves" or "how much ASO improves" can be misleading. Quantification of Agent Harness must explicitly model interactions, rather than the default component effects being simply additive.
+If the interaction term is large, just reporting "how much Bridge improves" or "how much ASO improves" can be misleading. Quantification of Agent Harness must explicitly model interactions, rather than assuming by default that component effects are simply additive.
 
 ---
 
@@ -700,7 +700,7 @@ Suppose the structural state of an Agent iteration is:
 Z_t=(I_t,g_t,\mathcal A_t,\pi_t)
 \]
 
-in:
+where:
 
 - \(I_t\): available information, evidence and observations;
 - \(g_t\): authoritative hard state;
@@ -739,7 +739,7 @@ Definable:
 \vee\Delta\pi_t\neq0]
 \]
 
-- \(\chi_t=0\): Repeat the sampling round;
+- \(\chi_t=0\): A repeated-sampling round;
 - \(\chi_t=1\): At least one structure variable has changed.
 
 This does not mean that the iteration of \(\chi_t=1\) is necessarily valid, nor does it mean that \(\chi_t=0\) has no best-of-N gain at all. It only shows that without structural changes, the system does not acquire a new problem-solving mechanism.
@@ -773,23 +773,23 @@ A complete Agent Harness experiment should at least distinguish:
 7. Component interaction effects;
 8. Migration effects across models, tasks and budgets;
 9. Different impacts on mean, variance and tail risk;
-10. Improvement of the empirical frontier of model conditions.
+10. Improvement of the model-conditioned empirical frontier.
 
 ### 10.2 Freezing principle in experiments
 
-To quantify a certain Harness component, it must be as fixed as possible:
+To quantify a certain Harness component, the following must be held as fixed as possible:
 
 - Same task instance;
 - The same input information;
 - The same model and inference configuration;
-- Same external tool as Oracle;
-- Same candidate, wrong position or authoritative plan;
+- Same external tools and Oracle;
+- Same candidate, error position or authoritative plan;
 - Same budget;
 - Same strict success criteria;
-- The same pre-allocated sample will not be selected after the results;
-- Not using best-of selection masks single-shot system reliability.
+- The same pre-allocated samples, with no selection after the results;
+- No best-of selection that masks single-shot system reliability.
 
-Only changes in the operator, Bridge mechanism, or state rules under study can explain the differences as effects of the corresponding components.
+Only when the operator, Bridge mechanism, or state rules under study are the only things that change can the differences be explained as effects of the corresponding components.
 
 ### 10.3 First dismantle plan, delivery, execution and verification
 
@@ -807,7 +807,7 @@ P(\text{execution correct}\mid\cdots)
 P(\text{verification and commit correct}\mid\cdots)
 \]
 
-If you do not remove these four layers:
+If you do not separate these four layers:
 
 - The model did not find the correct solution;
 - The model found the solution but failed to deliver when completely rewritten;
@@ -818,7 +818,7 @@ will be confused as "Agent failed".
 
 ### 10.4 Two-factor experiment and Shapley attribution
 
-Do \(2\times2\) experiments on Bridge and ASO, remember:
+Do \(2\times2\) experiments on Bridge and ASO, and denote:
 
 \[
 J_{00}=J(B_0,O_0),\;
@@ -827,7 +827,7 @@ J_{01}=J(B_0,O_1),\;
 J_{11}=J(B_1,O_1)
 \]
 
-Then the mean order-independent Shapley imputation is:
+Then the mean order-independent Shapley attribution is:
 
 \[
 \phi_B
@@ -907,8 +907,8 @@ Agent Engineering moved from empirical engineering to scientific engineering not
 2. **Identifiable**: The intervention does not simultaneously change key confounding variables;
 3. **Measurability**: There are end-to-end and intermediate mechanism indicators;
 4. **Reproducibility**: Reproducible under pre-allocated samples and strict protocols;
-5. **Falvability**: Each claim has clear invalidation conditions;
-6. **Interactive Visibility**: Do not forcibly classify nonlinear combinations as additions;
+5. **Falsifiability**: Each claim has clear invalidation conditions;
+6. **Interaction Visibility**: Do not forcibly classify nonlinear combinations as additions;
 7. **Transferability**: Ability to explain or predict changes across models, tasks, and budgets;
 8. **Decision Value**: Measurement results can change the actual operator, bridge or training selection.
 
@@ -925,7 +925,7 @@ Agent Engineering moved from empirical engineering to scientific engineering not
 | Audit localization | Free text reflection vs structured finding | localization, repair success, recurrence | Information bandwidth given to the model |
 | Control write-back | Comment only vs update control object | Subsequent repetition failure rate | Whether the next round of prompts changes at the same time |
 | Rollback/replay | Overwriting updates vs revocable commits | recovery, corruption, time-to-repair | Storage and executor capabilities |
-| Observation shaping | Original log vs task-oriented evidence | Positioning rate, cost, omission rate | Whether the answer is leaked |
+| Observation shaping | Original log vs task-oriented evidence | Localization rate, cost, omission rate | Whether the answer is leaked |
 | Oracle routing | Single judge vs oracle ladder | false accept/reject, cost | Different Oracle goals are inconsistent |
 
 ### 11.2 ASO sub-mechanism
@@ -966,13 +966,13 @@ read the edit plan
 -> redeliver the full object exactly
 ```
 
-Forming an independent delivery burden.
+forms an independent delivery burden.
 
 This set of experiments supports a conditional interface law: when the correct plan is known, modifications are sparse, the executors are correct, and delivery risk increases with the number of fragile commitments, a patch's smaller commitment surface can improve on-budget system reliability.
 
 ### 12.2 Artifact-v4: Structural advantages are not automatically converted into model benefits
 
-Artifact-v4 shows up with shorter objects, five-bit fixes, and different operators:
+Artifact-v4 shows, under shorter objects, five-bit fixes, and different operators:
 
 - Complete construction without anchor: 13/54 (24.1%);
 - full cut-set correct information: 53/54 (98.1%);
@@ -1000,13 +1000,13 @@ audit > generation
 
 Instead:
 
-> **Model benefits depend on the match between information, operator, output responsibility, object length, edit density, dependency coupling and budget. **
+> **Model benefits depend on the match between information, operator, output responsibility, object length, edit density, dependency coupling and budget.**
 
 ### 12.3 What have these experiments shown?
 
 They at least demonstrate that a long-neglected object in Agent Engineering deserves independent study:
 
-> **The operation interface faced by the model itself is an experimental variable that can be manipulated, quantified, has huge effects, and is highly conditioned. **
+> **The operation interface faced by the model itself is an experimental variable that can be manipulated, quantified, has huge effects, and is highly conditioned.**
 
 The current job can therefore be viewed as:
 
@@ -1030,7 +1030,7 @@ It is the first step in the system, not the end.
 | Paradigm | Main control objects | Core issues | Relationship with AHF |
 |---|---|---|---|
 | Prompt Engineering | instruction surface | How to express tasks? | Possibly changing the representation of ASO, or just elicitation |
-| Context Engineering | model-visible information | What should the model see? | Bridge manages evidence entry and status writeback; ASO determines what information the current operator needs |
+| Context Engineering | model-visible information | What should the model see? | Bridge manages evidence entry and state writeback; ASO determines what information the current operator needs |
 | Harness Engineering | runtime component set | What workflows, tools, memories, and validations does the system include? | AHF performs functional and causal reparameterization of Harness |
 | Audit Engineering | failure localization and write-back | How does failure become control delta? | Reverse Bridge |
 | SGAR | hard-state authority | What states are recognized by the system? | Forward Bridge and State Commitment Layer |
@@ -1040,7 +1040,7 @@ It is the first step in the system, not the end.
 
 ### 13.1 Mapping of Harness component and runtime function
 
-| Harness component | When used as an external ability base | When used as runtime design |
+| Harness component | When used as an external capability base | When used as runtime design |
 |---|---|---|
 | Tools | Whether the tool exists and what it can do | Tool discovery, exposure, parameterization, authorization, execution and verification |
 | Context | Whether the information source exists | Information selection, compression, evidentiaryization, and operator-specific rendering |
@@ -1049,7 +1049,7 @@ It is the first step in the system, not the end.
 | Orchestration | Whether there are multiple execution principals | action-space decomposition, routing, parallelism, and aggregation strategies |
 | Verification | Check capability exists | Oracle selection, gating, failure localization and commit authority |
 
-This mapping illustrates that the same Harness component may contain both "Ability Base" and "runtime control" parts. Quantitative experiments must separate the two.
+This mapping illustrates that the same Harness component may contain both "capability base" and "runtime control" parts. Quantitative experiments must separate the two.
 
 ### 13.2 Relationship with six types of mismatch
 
@@ -1065,9 +1065,9 @@ Mismatch diagnosis
 In general:
 
 - observation-representation and state mismatch require Bridge more directly;
-- aggregation, support, and fitting-boundary are more commonly required for ASO;
+- aggregation, support, and fitting-boundary more commonly require ASO;
 - Specification mismatch will pollute both Bridge's verifier and ASO's target;
-- Either mismatch may be partially mitigated by a combination of both.
+- Any mismatch may be partially mitigated by a combination of both.
 
 Bridge and ASO are not Category 7 or 8 mismatches.
 
@@ -1086,12 +1086,12 @@ Agent Harness cannot produce truth out of thin air if the ability to distinguish
 - Prevent submission without evidence;
 - Let humans or external tools step in at the right place.
 
-But it does not guarantee the generation of new solutions beyond the base of models and external capabilities.
+But it does not guarantee the generation of new solutions beyond the model and the external capability base.
 
 ### 14.2 Poor Harness design can institutionalize mistakes
 
-- The error state schema will stably save the error abstraction;
-- Error verifier will make the system more stable in optimizing error targets;
+- A wrong state schema will stably save the wrong abstraction;
+- A wrong verifier will make the system more stable in optimizing the wrong targets;
 - Too narrow an action space will block high-value candidates;
 - Too strong local patch constraints will prevent necessary global reconstruction;
 - Excessive branching amplifies costs and provenance confusion;
@@ -1105,8 +1105,8 @@ Even if only the changes passed by verifier are submitted each time, it is possi
 
 - Stop at a non-zero local minimum;
 - Accept global errors due to incomplete verifier;
-- Monotonous progress in the wrong direction due to wrong specifications;
-- Impossible to continue improving because the status indicates the loss of key variables;
+- Monotonic progress in the wrong direction due to wrong specifications;
+- Impossible to continue improving because the state representation has lost key variables;
 - Unable to jump out of the current basin because the action space is too narrow.
 
 The safest proposition is:
@@ -1146,7 +1146,7 @@ The current work is mainly at this stage:
 
 The goal is to demonstrate that action spaces are not fuzzy engineering intuitions but system variables that can be independently manipulated and quantified.
 
-### Phase 2: Independent quantization of Bridge subcomponents
+### Phase 2: Independent quantification of Bridge subcomponents
 
 The next step can be to measure separately:
 
@@ -1180,13 +1180,13 @@ This stage can reveal:
 
 ### Phase 4: Establish conditional rules and prediction models
 
-Need to enter from static effect size:
+Need to move from static effect sizes to:
 
 - patch / regional rewrite / full rewrite crossover;
 - audit/generation crossover;
 - Budget rules for branch width and verifier quality;
 - state granularity and recovery cost law;
--The relationship between oracle bandwidth and audit value;
+- The relationship between oracle bandwidth and audit value;
 - Pareto frontier between success rate, cost, variance and risk.
 
 ### Phase 5: Adaptive Agent Harness Optimizer
@@ -1219,7 +1219,7 @@ External Harness and internal model optimization thus form a closed loop, but th
 
 ---
 
-## 16. Added admission criteria for a new Harness axis
+## 16. Admission criteria for adding a new Harness axis
 
 Bridge and ASO are the minimum functional cores currently proposed, and it is not claimed that they have exhausted all possible Agent Harness dimensions. If a third independent axis is proposed in the future, it should at least satisfy:
 
@@ -1230,7 +1230,7 @@ Bridge and ASO are the minimum functional cores currently proposed, and it is no
 5. **Stable Effect**: Show reproducible conditional rules on multiple tasks or models;
 6. **Non-implementation details**: It cannot be just the name of a specific tool, database, or multi-agent topology.
 
-Until these standards are adopted, it is more appropriate to think of new mechanisms as subclasses of Bridge or ASO, lateral constraints, or external capability bases.
+Until these criteria are met, it is more appropriate to think of new mechanisms as subclasses of Bridge or ASO, lateral constraints, or external capability bases.
 
 ---
 
@@ -1240,7 +1240,7 @@ This article follows three types of evidence levels:
 
 - **T: Conditional Theorem** — can be deduced from definitions, algebra, graph structures, or program semantics under explicit assumptions;
 - **S: Structural Prediction** — The task structure is clearly changed, but the size of the model benefit requires experimentation;
-- **E: Empirical Claim** — relies on specific models, tasks, budgets, and agreements.
+- **E: Empirical Claim** — relies on specific models, tasks, budgets, and protocols.
 
 ### Proposition 1: Model conditional frontier decomposition (T)
 
@@ -1254,7 +1254,7 @@ It is an identity decomposition by definition.
 
 **Does not mean:** \(C_\theta\) is already observable, or the internal contribution of the model and Harness is naturally additive.
 
-### Proposition 2: The empirical frontier only gives the lower bound (T) of the Harness gap
+### Proposition 2: The empirical frontier only gives the lower bound of the Harness gap (T)
 
 The maximum value of the tested configuration does not exceed the true reachability frontier, so the new Harness may still continue to improve performance.
 
@@ -1262,9 +1262,9 @@ The maximum value of the tested configuration does not exceed the true reachabil
 
 ### Proposition 3: Bridge and ASO are different functional bottlenecks (S)
 
-Bridge governs actions to states and failures to control increments; the ASO governance model faces operators and search geometry. The system can be strong in one axis and weak in another.
+Bridge governs actions to states and failures to control increments; ASO governs the operators the model faces and the search geometry. The system can be strong in one axis and weak in another.
 
-**Cancellation conditions:** If it is proven in the future that the two can always be completely restored to each other through the same single control object, the independent axis needs to be modified.
+**Revocation conditions:** If it is proven in the future that the two can always be completely reduced to each other through the same single control object, the independent axis needs to be modified.
 
 ### Proposition 4: Iterations without structural changes belong to identical distribution repeated sampling (T/S)
 
@@ -1276,7 +1276,7 @@ If the information, hard state, action space, and model strategy remain unchange
 
 v3/v4 results have shown that patch advantage depends on edit density, object length, budget and operation. Candidates also only produce stable returns when combined with matching operators.
 
-**Withdrawal condition:** This proposition can be tightened if one interface is found to strictly dominate other interfaces over a sufficiently broad range of models and task distributions.
+**Revocation conditions:** This proposition can be tightened if one interface is found to strictly dominate other interfaces over a sufficiently broad range of models and task distributions.
 
 ### Proposition 6: Component effects can be partially identified through controlled experiments (T/S)
 
@@ -1288,7 +1288,7 @@ Local causal effects can be obtained as long as components are manipulated, key 
 
 Agent design is no longer just an empirical recipe when component effects have repeatable estimates, interaction models, cross-domain condition regularities, and runtime decision-making value.
 
-**Cancellation conditions:** If the components are highly inseparable, the experiment cannot be stably reproduced, the effect changes arbitrarily with the task, and there is no predictable structure, then scientificization can only stay in the local field.
+**Revocation conditions:** If the components are highly inseparable, the experiment cannot be stably reproduced, the effect changes arbitrarily with the task, and there is no predictable structure, then scientificization can only stay in the local field.
 
 ---
 
@@ -1302,10 +1302,10 @@ A research project consistent with the Agent Harness Framework should at least a
 - Are there multiple objects changing at the same time?
 - Is it possible to construct a minimal comparison?
 
-### 18.2 Status and Residuals
+### 18.2 State and Residuals
 
 - What is the current governed state?
-- What evidence allows state transfer?
+- What evidence allows state transition?
 - How to express task residuals?
 - How is the progress of an action confirmed?
 
@@ -1400,12 +1400,12 @@ It will begin to take on the basic form of scientific engineering:
 - Have a clear target;
 - There are controllable variables;
 - There is an intermediate mechanism;
-- Effective magnitude and uncertainty;
+- There are effect sizes and uncertainty;
 - There is a falsifiable boundary;
 - There are cross-model and cross-task rules;
 - Able to predict and select the next system structure based on measurement results.
 
-> **The next era of Agent Engineering is not just about building more complex Harness, but about building measurable science about the relationship between models, runtime mechanisms, and task residuals. **
+> **The next era of Agent Engineering is not just about building more complex Harness, but about building measurable science about the relationship between models, runtime mechanisms, and task residuals.**
 
 ---
 
@@ -1419,7 +1419,7 @@ It will begin to take on the basic form of scientific engineering:
 | \(\pi_\theta\) | Basic model strategy |
 | \(\mathcal B\) | Bridge |
 | \(\Omega\) | Action-Space Optimizer |
-| \(\mathcal H\) | Agent Harness,\((\mathcal B,\Omega)\) |
+| \(\mathcal H\) | Agent Harness, \((\mathcal B,\Omega)\) |
 | \(s_t\) | Potential real environment state |
 | \(o_t\) | Environmental Observation |
 | \(g_t\) | governed hard state |
@@ -1429,7 +1429,7 @@ It will begin to take on the basic form of scientific engineering:
 | \(f_t\) | failure evidence / audit finding / unresolved obligation |
 | \(r_t\) | Current task residual |
 | \(J\) | System expected utility |
-| \(C_\theta\) | Model conditional capability frontier |
+| \(C_\theta\) | Model-conditioned capability frontier |
 | \(C^*\) | The ideal system frontier on a given external capability base |
 
 ---
@@ -1447,7 +1447,7 @@ It will begin to take on the basic form of scientific engineering:
 | \(M_1\) | \(B_0\) | \(O_1\) | ASO main effect on strong model |
 | \(M_1\) | \(B_1\) | \(O_1\) | Complete system and third-order interactions |
 
-For each cell, at least:
+For each cell, report at least:
 
 - strict success; 
 - cost / latency; 

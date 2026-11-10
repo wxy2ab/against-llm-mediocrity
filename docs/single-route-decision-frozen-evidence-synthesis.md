@@ -5,7 +5,7 @@
 **Scope:** routing from a task to one Skill, action path, DeliveryMode, recovery action,
 or a Top-1 / Rank-Pick / Abstain decision over a single candidate set
 
-**中文：** [单路由决策：RR1–RR7 与 RR-v2 冻结证据综合](./single-route-decision-frozen-evidence-synthesis.zh-CN.md)
+**中文：** [单路由决策：RR1–RR7 与 RR-v2 决定性冻结证据综合](./single-route-decision-frozen-evidence-synthesis.zh-CN.md)
 
 **Authoritative source:** This report is synchronized from the frozen Routing
 Reliability evidence line in `llm_dealer`. All raw numbers, denominators, and claim
@@ -116,8 +116,9 @@ When wording differs, this synthesis uses the following order:
 
 1. each stage's frozen result section, claim table, and Freeze section;
 2. machine-readable result JSON;
-3. post-hoc Decisive Evidence Audit revisions to round-1 extrapolation;
-4. the decisive round-2 roadmap;
+3. post-hoc [Decisive Evidence Audit](https://github.com/wxy2ab/llmdealer/blob/main/core/agent_runtime/docs/routing_reliability_v2/RRV2_DECISIVE_EVIDENCE_AUDIT.md)
+   revisions to round-1 extrapolation;
+4. the [decisive round-2 roadmap](https://github.com/wxy2ab/llmdealer/blob/main/core/agent_runtime/docs/routing_reliability_v2/RRV2_DECISIVE_ROADMAP.md);
 5. other roadmap and overview prose.
 
 The post-hoc audit does not alter frozen numbers. It lowers headline claims that
@@ -220,7 +221,8 @@ Top-5 shortlisting preserves recall while lowering picker cost.
 **Still not permitted:** an LLM is the optimal or necessary router; A1 beats
 non-LLM A2; or the result validates natural multi-organization registries,
 cross-model transfer, or a production default. A2 outperformed A1 in this fixture,
-and present cases were perfectly separable by token overlap.
+and present cases were perfectly separable by token overlap, so the evidence
+supports interface and candidate-existence modeling, not the necessity of an LLM.
 
 ## 4. Candidate Sort→Pick mainly improves cost, not reliability
 

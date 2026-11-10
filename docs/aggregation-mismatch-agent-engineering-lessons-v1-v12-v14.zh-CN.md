@@ -107,7 +107,7 @@ Runtime 至少持有：
 
 这些对象不能只存在对话文本中。V4 的外部正确 bits、V6/V8 的 scheduler/scaffold、
 V11/V12 的 semantic-ID，以及 V14 的 seal-before-drift 都说明硬状态所有权是 runtime
-责任。代价也必须测量：V8 scaffold 中位 token 约增加 7.04×。
+责任。代价也必须测量：V8 scaffold 中位 token 约增至 7.04×。
 
 ## 4. 原则二：模型输出 Semantic Plan
 
@@ -339,8 +339,8 @@ turns 零重建错配，并明确记录 96/96 seal-before-drift。
 
 - V8 scaffold 科学效应通过，但成本高；
 - V11 Patch/Rewrite reliability ceiling，但成本可用于路由；
-- V12 A1 simple effect 大而 interaction 未过；
-- V12 B1 通过，但差异来自预算内 timeout；
+- V12-A1 simple effect 大而 interaction 未过；
+- V12-B1 通过，但差异来自预算内 timeout；
 - V14 方向和精确检验都强，但未达到预注册最小效应。
 
 一个布尔 `experiment_passed` 不能同时控制论文措辞和生产策略。

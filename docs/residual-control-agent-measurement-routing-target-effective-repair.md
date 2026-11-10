@@ -1063,7 +1063,7 @@ Failure state
 
 But it is not ordinary from-scratch solution search.
 
-Residual repair must:
+Ordinary search looks for any correct solution; residual repair must:
 
 - preserve already-correct structure;
 - prefer local modification;
@@ -1085,7 +1085,7 @@ MCTS may become a useful algorithm later, but it cannot replace the following in
 
 ## Infinite budget does not guarantee success
 
-Search probability can approach 1 with growing budget only if:
+Search success probability can approach 1 with growing budget only if:
 
 - an effective repair is reachable in the action space;
 - a finite repair path exists;
@@ -1376,7 +1376,7 @@ P(\operatorname{Accept}(P)=1)
 
 ## Certified Repair@B
 
-Probability that the repair is not only target-valid but carries enough evidence for safe closure.
+Probability that, under budget \(B\), the repair is not only target-valid but carries enough evidence for safe closure.
 
 ## Shortcut Gap
 

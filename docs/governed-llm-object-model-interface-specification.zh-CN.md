@@ -206,13 +206,14 @@ Collaboration Layer
 1. Artifact is produced.
 2. Artifact is audited.
 3. Audit produces one or more findings.
-4. Findings are localized to mismatch types and repair targets.
-5. Each repair target produces a control delta.
-6. Control delta updates governed objects.
-7. A regression guard is created or updated.
-8. The defect ledger records the failure family and repair.
-9. A verifier determines whether state should be committed.
-10. Future routing, search, rendering, and audit use the updated governed state.
+4. Findings are localized to mismatch types and task-specific control objects.
+5. Mechanism attribution and repair-layer selection are added where operationalized.
+6. Each accepted finding produces a control delta against a governed object.
+7. Control delta updates governed objects.
+8. A regression guard is created or updated.
+9. The defect ledger records the failure family and repair.
+10. A verifier determines whether state should be committed.
+11. Future routing, search, rendering, and audit use the updated governed state.
 ```
 
 对象形式为：
@@ -1637,7 +1638,7 @@ Which deltas were applied without rollback plans?
 
 ```text
 [ ] Active GKOs include scope, support_scope, strength, and revocation_trigger.
-[ ] Audit Findings include mismatch_type and control_object_ref；若已可操作化，还应包含 mechanism_axis。
+[ ] Audit Findings include mismatch_type and control_object_ref, plus mechanism attribution when operationalized.
 [ ] Control Deltas reference findings or explicit rationales.
 [ ] Regression Guards include representative_defect and failure_predicate.
 [ ] Evidence Objects identify authority_level and limitations.

@@ -621,7 +621,7 @@ This is the Agent's core authoritative state.
 
 #### 4. Session-information mechanism
 
-Maintains the temporary context and working set for the current run.
+Maintains the temporary context, working set, and short-term interaction records for the current run.
 
 Session data can be compressed, discarded, or reconstructed. It should not be the only source of task facts.
 

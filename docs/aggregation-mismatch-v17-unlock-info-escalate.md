@@ -81,7 +81,8 @@ intelligence.
 
 The verified goal plan contains stable `service_id` values, fields, predicates,
 and absolute thresholds. For this idempotent operation with a predetermined
-target value, a candidate minimum recovery input is:
+target value, provided that \(S_2\) preserves the same semantic IDs and the
+runtime reseals the payload, a candidate minimum recovery input is:
 
 \[
 I_{\min}=\{\text{typed receipt},\ \text{unlock declaration},\
@@ -265,6 +266,8 @@ Escalate targets a valid escalation.
   Escalate arm exposes only the typed escalation tool;
 - transfer to real Git, databases, network partitions, multiple writers, or
   other models;
+- that the V17-A1 `[0, 0]` interval is a confidence bound for a zero population
+  effect;
 - a pure model-capability effect in V17-B1—the runtime lock and endpoint/tool
   contract structurally determine much of the contrast.
 

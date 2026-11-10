@@ -2,8 +2,8 @@
 
 ## From Single-Call Reasoning to Agent Trajectories
 
-**Status:** Working Draft v0.1
-**Date:** 2026-08-01
+**Status:** Working Draft v0.1  
+**Date:** 2026-08-01  
 **Related Documents:**
 
 - [Chinese version](./aggregation-mismatch-across-scales-from-single-call-reasoning-to-agent-trajectories.zh-CN.md)
@@ -18,7 +18,7 @@
 
 Aggregation mismatch appears in sequential decision systems whose deployed procedure commits one local decision at a time without exact access to global value-to-go, while task value is determined mainly by the completed structure. Early decisions form prefixes and change the reachable future, so a choice preferred by the local proxy need not belong to a globally high-value solution. Autoregressive chain factorization can itself encode global dependencies exactly; the mismatch lies in the proxy, search, or commitment policy diverging from global completion value.
 
-In LLM systems, aggregation mismatch appears at at least two scales:
+In LLM systems, aggregation mismatch appears on at least two scales:
 
 1. **Single-call reasoning aggregation mismatch**: the model generates token by token and step by step, but task value is determined by the completed output sequence. Internal reasoning uses planning, candidates, comparison, backtracking, and verification to make local generation serve whole-output value as much as possible.
 2. **Agent-trajectory aggregation mismatch**: an agent can execute only one action and complete one state transition at a time, but task value is determined by the full trajectory formed by repeated calls, tool execution, environment feedback, and state change. Plan, Candidate, Audit, Hard State, Patch, Rollback, and Replan are what keep local actions aligned with terminal value on a longer time horizon.
@@ -886,7 +886,7 @@ In RR4, adding extra route, compile, and repeated invoke steps increased the act
 
 In CSP-1, a Top-5 shortlist preserved task success on the current fixture while greatly reducing picker tokens; direct ranker Top-1 was clearly worse. That is consistent with the mechanism:
 
-> Preserve a minimally sufficient candidate frontier first, then select on the basis of complete candidates, rather than collapsing immediately under a weak local score.
+> Preserving a minimally sufficient candidate frontier first and then selecting on the basis of complete candidates can beat collapsing immediately to a single path under a weak local score.
 
 ### 10.3 Typed Abstain Prevents Forced Wrong Commitment
 
@@ -896,7 +896,7 @@ In `P0-A-ood`, allowing typed abstain greatly reduced execution of wrong-but-leg
 
 In `CSP-2` and `CSP-2R`, the BM25 score/margin Top-1 route did not pass its preregistered gate. Even if no errors were seen yet in some released samples, coverage and statistical boundaries still did not justify production gating.
 
-That is exactly what aggregation mismatch predicts:
+That is consistent with the core of aggregation mismatch:
 
 > A local retrieval score or margin need not equal full task-trajectory value.
 

@@ -56,7 +56,7 @@ necessary, remove physical address resolution from the model before deciding
 between Patch and Rewrite. Do not hard-code a density crossover from current data.**
 
 Artifact-v9 does not rerun Patch versus Rewrite. It adds a contract boundary:
-effort-matched ready/ledger arms all hit a strict ordered-submission floor, and
+all four effort-matched ready/ledger arms hit a strict ordered-submission floor, and
 located/causal recovery receipts show positive point estimates without passing
 their confirmatory gates. The Patch/Rewrite verdict is unchanged. The additional
 engineering lesson is to separate semantic edit-set correctness from serialization
@@ -325,7 +325,7 @@ This is not a single-call survival curve, and 300-second and 900-second outcomes
 - the effect is pure “semantic ability” rather than budgeted delivery behavior;
 - one-bit GF(2) repair transfers directly to code, databases, configuration, or documents;
 - patch removes the need for global verification;
-- plan inference and delivery are fully separated in the primary I-P/I-R comparison.
+- plan inference and delivery are fully separated in the primary I-P/I-R comparison;
 - artifact-v5 proves end-to-end Agent-level Patch superiority;
 - the edit-density crossover has been identified.
 

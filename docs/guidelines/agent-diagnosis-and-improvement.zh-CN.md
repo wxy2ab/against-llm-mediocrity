@@ -10,7 +10,7 @@ English：[Agent Diagnosis and Improvement](./agent-diagnosis-and-improvement.md
 
 相关理论：
 
-- [诊断—机制桥接](../diagnostic-mechanism-bridge-for-governed-llm-systems.zh-CN.md)
+- [诊断-机制桥接](../diagnostic-mechanism-bridge-for-governed-llm-systems.zh-CN.md)
 - [状态治理智能体范式](../state-governed-agent-regime-for-governed-llm-systems.zh-CN.md)
 - [聚合失配：可推导命题与 Agent 工程](../aggregation-mismatch-theoretical-claims-agent-engineering.zh-CN.md)
 

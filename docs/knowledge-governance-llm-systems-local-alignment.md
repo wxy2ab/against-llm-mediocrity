@@ -462,7 +462,7 @@ This includes several recurring subtypes:
 
 This axis is distinct from aggregation mismatch because it concerns capability routing rather than local-to-global composition. It is distinct from support mismatch because the relevant capability must already exist or be approximately available, but its activation boundary is wrong. It is distinct from specification and state mismatch because the target and state may already be sufficiently clear. The strict operational test is whether changing the capability router, trigger threshold, or boundary calibration can repair the failure without supplying fundamentally new knowledge, a new objective, or previously unavailable state.
 
-This class contains both an overfitting side and an underfitting side. The former includes capability-attractor spillover, evidence-chain overfitting, proxy-metric overfitting, scene-default overfitting, and path lock-in. The latter includes under-triggering of search, audit, mechanism translation, tool use, and conditioning capabilities. For a fuller treatment, see the supplement: [Fitting-Boundary Mismatch](fitting-boundary-mismatch.md).
+This class contains both an overfitting side and an underfitting side. The former includes capability-attractor spillover, evidence-chain overfitting, proxy-metric overfitting, scene-default overfitting, and path lock-in. The latter includes under-triggering of search, audit, mechanism translation, tool use, and conditioning capabilities. For a fuller treatment, see the supplement: [Fitting-Boundary Mismatch](fitting-boundary-mismatch.md). For translating the six primitive mismatches further into system components and intervention choices, see the supplement: [A Formal Mechanism Layer for LLM Failure](formal-mechanism-layer.md).
 
 #### 3.2.6 Observation-Representation Mismatch
 
@@ -637,8 +637,8 @@ This is best understood as **corpus-prior dominance** rather than an additional 
 - support mismatch: the less common but task-relevant frame is hard to reach;
 - specification mismatch: the model treats the mainstream narrative as the evaluation standard;
 - state mismatch: the correct evaluation depends on period, institutional role, development stage, or background condition;
-- aggregation mismatch: local costs or visible failures obscure system-level effects.
-- fitting-boundary mismatch: a high-frequency narrative or local explanatory template becomes over-bound and suppresses adjacent alternatives.
+- aggregation mismatch: local costs or visible failures obscure system-level effects;
+- fitting-boundary mismatch: a high-frequency narrative or local explanatory template becomes over-bound and suppresses adjacent alternatives;
 - observation-representation mismatch: the source channel or summary representation drops the primary evidence needed to distinguish narratives.
 
 The appropriate intervention is source-prior governance: separate dominant narrative, counter-narrative, evidence base, causal mechanism, evaluation metric, and counterfactual comparison.
@@ -1328,7 +1328,7 @@ The six methods align with the diagnostic theory as follows.
 |---|---|---|---|
 | 6.8.1 Decorrelated sampling and recombination | Support | Fragments, recombination candidates, induced invariants | Selection noise promoted as knowledge; correlated pool with no tail content |
 | 6.8.2 Control-space-first generation | Aggregation, specification | Beats, constraints, rubrics, acceptance criteria | Evaluator inherits the specification gap; rubric mistaken for the true objective |
-| 6.8.3 Control-space search | All five (general) | State matrices, dependency graphs, frames, decision tables | Overhead on low-mismatch tasks; renderer ignores the control state |
+| 6.8.3 Control-space search | All six (general) | State matrices, dependency graphs, frames, decision tables | Overhead on low-mismatch tasks; renderer ignores the control state |
 | 6.8.4 Hierarchical control | Capacity collapse (composite) | Layered constraints, rollback points, backtrack triggers | Premature coarse commitment hardened by the hierarchy |
 | 6.8.5 State enumeration and conditional rendering | State | Scenario matrices, if-then policies, revocation triggers | Spurious state proliferation; conditionality dropped at rendering |
 | 6.8.6 Contrastive value elicitation | Specification | Contrast pairs, refined rubrics, disqualifying failure modes | False rubrics raising confidence while lowering value |
@@ -1347,7 +1347,7 @@ The six-mismatch view, the local-alignment view, and the extraordinary-regime vi
 
 We use **Knowledge Governance** to mean the explicit acquisition, validation, deployment, weakening, and revocation of task-specific control knowledge during inference. The framework separates the layer that discovers and manages such knowledge from the layer that renders fluent final outputs.
 
-A crucial clarification is that the framework does not assume a single universal internal representation. What is universal is the governance cycle. The internal control space itself may differ radically across tasks: code modules and dataflow boundaries in one domain, story beats and payoff constraints in another, emotional states and policy transitions in another, physical affordances and role bindings in another, source-prior audits and evaluation metrics in another, regime indicators and risk filters in a fifth.
+A crucial clarification is that the framework does not assume a single universal internal representation. What is universal is the governance cycle. The internal control space itself may differ radically across tasks: code modules and dataflow boundaries in one domain, story beats and payoff constraints in another, emotional states and policy transitions in another, physical affordances and role bindings in another, source-prior audits and evaluation metrics in another, regime indicators and risk filters in a sixth.
 
 Knowledge Governance should not be interpreted as a rejection of autoregressive generation. Its purpose is to use autoregressive generation where it is strong. In locally aligned tasks, this means keeping the operations that the model already performs well while governing the parts where local value fails to compose. It converts difficult tasks into intermediate operations such as compression, taxonomy generation, failure-mode enumeration, rubric drafting, and semantic decompression. The final renderer remains an autoregressive model; the difference is that it renders from governed control knowledge rather than from an underspecified prompt.
 

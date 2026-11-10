@@ -251,7 +251,7 @@ address overhead, coupling, and timeout floor all affect the best interface.
 
 Artifact-v5 adds native tool execution and reproduces the theory-aligned split:
 oracle-plan patch is 46/48 versus 26/48 for rewrite, while inferred-plan patch is
-2/96 versus 0/96. The tool fixes delivery exposure; it does not guarantee correct
+2/96 versus 0/96. The tool reduces delivery exposure; it does not guarantee correct
 plan discovery. V5 does not locate the density crossover because five of six
 inferred-plan cells are at a joint zero floor and actual per-run payload telemetry
 was not retained.

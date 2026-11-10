@@ -262,7 +262,7 @@ scaffold 的证据。
 
 ### 未通过预注册门
 
-- causal receipt 相对 generic 至少提高 0.15，且区间与修正检验通过；
+- causal receipt 相对 generic 至少提高 0.15，且区间为正、修正后 \(p<0.05\)；
 - located receipt 相对 generic 至少提高 0.10，并满足同样统计条件。
 
 ### 未建立

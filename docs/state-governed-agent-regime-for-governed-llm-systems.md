@@ -1,6 +1,6 @@
 # State-Governed Agent Regime for Governed LLM Systems
 
-**Globally Conditioned Local Solving, Public Protocols, and Hard-State Authority**
+**Globally Conditioned Local Solving, Public Protocols, and Hard-State Authority**  
 **Working Draft v0.1**  
 
 ---
@@ -1127,7 +1127,7 @@ separate proposal, execution, verification, and commitment roles where risk requ
 
 ## 15. Authority Separation
 
-SGAR benefits from separating four roles:
+SGAR benefits from separating five roles:
 
 | Role | Function |
 |---|---|

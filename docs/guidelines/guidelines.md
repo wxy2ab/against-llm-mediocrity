@@ -439,8 +439,8 @@ that a complete specialized workflow already exists.
 
 ## 5. Add evidence by mismatch type
 
-When a task exhibits structural failure, add the relevant theory document. Do
-not substitute a theory label for local diagnosis.
+When a task exhibits structural failure, you may add the relevant theory
+document. Do not substitute a theory label for local diagnosis.
 
 | Observed failure | Additional reading | Common repair location |
 |---|---|---|

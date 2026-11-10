@@ -255,7 +255,7 @@ A reduced scaffold had to satisfy all of the following:
 3. it added no commit risk.
 
 TRANSCRIPT met the token rule but its success-difference CI was
-[−0.125, 0]. READY and LEDGER met neither combined rule. No reduced arm passed.
+[−0.125, 0]. Neither READY nor LEDGER met the combined rule. No reduced arm passed.
 Because all arms were at floor, this is not evidence to enable the full scaffold
 by default.
 

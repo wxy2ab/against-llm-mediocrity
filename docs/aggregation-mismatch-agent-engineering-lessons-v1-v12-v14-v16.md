@@ -330,7 +330,7 @@ V14 all four arms eventually succeed, but Exact recovery adds a second turn;
 its +19.3% point estimate misses the +20% gate. V15 recovery also adds a second
 turn: Intent-Rebase and Exact-Rebase use 48 turns per arm versus 24 in one-turn
 arms. V16 matches two turns across all three conflict arms; Reread uses a
-29,589 median tokens but remains 0/24 while runtime Rebase uses 17,439 and is
+median of 29,589 tokens but remains 0/24 while runtime Rebase uses 17,439 and is
 24/24. Never treat missing timeout
 usage as zero or splice independent budgets into one survival curve.
 
@@ -364,9 +364,10 @@ Invariants:
 V9–V12 reconstruct episodes. V14 reconstructs 96 episodes from 1,416 events and
 120 provider turns with zero mismatch, explicitly recording seal-before-drift
 in all 96. V15 reconstructs 96 episodes from 1,594 events and 144 provider
-turns, keeping first rejection and recovery under one run key. V16 reconstructs
-96 episodes from 1,752 events and 168 provider turns; all conflict arms retain
-their matched second turn within the original episode.
+turns with zero mismatch, keeping first rejection and recovery under one run
+key. V16 reconstructs 96 episodes from 1,752 events and 168 provider turns,
+also with zero mismatch; all conflict arms retain their matched second turn
+within the original episode.
 
 ## 14. Principle twelve: Separate scientific gates from product defaults
 

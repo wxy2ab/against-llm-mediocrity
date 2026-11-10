@@ -28,15 +28,15 @@ V13 继续作为方法开发 artifact 归档，不进入证据合成。V17 承�
 V17 的最稳妥结论不是“恢复信息没有用”，而是：
 
 1. **对本实验的绝对值、幂等 semantic goal plan，只要 runtime 已解除锁并把执行态迁移
-   到同一 \(S_2\)，receipt + 完整 goal plan 已足够。**四个信息臂都为 24/24；
+   到同一 \(S_2\)，receipt + 完整 goal plan 已足够。** 四个信息臂都为 24/24；
    TARGET-SLICE−RECEIPT 的观察差为 0，未通过预注册 +0.25 优势门。该天花板结果不构成
    等价性证明，也不能推广到相对编辑、非单调变换或必须读取 \(S_2\) 才能重算的任务。
-2. **有效硬锁未解除时，重复同一写入不会成为恢复。**Force Intent 与 Generic Retry
+2. **有效硬锁未解除时，重复同一写入不会成为恢复。** Force Intent 与 Generic Retry
    都是 0/24 commit；程序化 unlock 的阳性对照为 24/24 commit。
-3. **不可解除冲突需要合法的非 commit 终态。**Typed Escalate 为 24/24 合法升级且
+3. **不可解除冲突需要合法的非 commit 终态。** Typed Escalate 为 24/24 合法升级且
    0/24 commit。V17-B1 通过，但比较的是 `escalate_success` 与 `final_success` 两种不同
    endpoint；它证明治理路由按设计工作，不证明“升级比完成任务更强”。
-4. **多给完整旧状态只增加成本，没有改变本任务的输出。**OLDSTATE 的中位总 token
+4. **多给完整旧状态只增加成本，没有改变本任务的输出。** OLDSTATE 的中位总 token
    为 29,689，RECEIPT 为 16,979，约高 74.9%；事件审计显示四个 Module A 臂在
    24/24 任务上提交了完全相同的 recovery operations。
 

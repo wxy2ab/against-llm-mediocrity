@@ -7,7 +7,7 @@
 
 ## 概览
 
-本文主张：对一个自我改进的系统来说，关键问题不是“要不要做 audit agent”，而是“某个任务暴露了什么样的 oracle”，进而决定应该路由到哪种修复引擎。文章给出三种引擎（Audit、SGAR、No-Go），一套 fidelity source（保真度来源）分类，一套按 oracle 质量把任务分成 A/B/C 三层的方法，以及这套框架对 ccx 系统的架构含义。全文反复出现两个角色：一是 audit agent，它用识别去定位失败的原因；二是 状态治理智能体范式（State-Governed Agent Regime / SGAR），它只把识别当作对候选的“过/不过”关卡。
+本文主张：对一个自我改进的系统来说，关键问题不是“要不要做 audit agent”，而是“某个任务暴露了什么样的 oracle”，进而决定应该路由到哪种修复引擎。文章给出三种引擎（Audit、SGAR、No-Go），一套 fidelity source（保真度来源）分类，一套按 oracle 质量把任务分成 A/B/C 三层的方法，以及这套框架对 ccx 系统的架构含义。全文反复出现两个角色：一是 audit agent，它用识别去定位失败的原因；二是状态治理智能体范式（State-Governed Agent Regime / SGAR），它只把识别当作对候选的“过/不过”关卡。
 
 ## 目录
 
@@ -707,7 +707,7 @@ SGAR 不需要 why，但极度依赖 boundary fidelity。gate 不硬，ratchet �
 >
 > 它不问原因，只靠高保真边界与棘轮状态管理，把无梯度搜索变成可积累的单调逼近。
 >
-> 当 neither locator nor boundary oracle exists，诚实答案是 No-Go：去拿新的数据、实验或 fidelity source。
+> 当定位 oracle 和边界 oracle 都不存在时，诚实答案是 No-Go：去拿新的数据、实验或 fidelity source。
 
 这套框架把 audit、text2sql、文本逻辑审计、quant/ML gate、SGAR 和 No-Go 放进同一个决策系统：
 

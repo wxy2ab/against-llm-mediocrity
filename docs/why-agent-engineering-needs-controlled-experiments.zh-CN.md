@@ -2,9 +2,9 @@
 
 ## 从 Benchmark 进步走向可累积的 Runtime 机制科学
 
-**状态：** Working Draft v0.1
-**日期：** 2026-08-12
-**配套版本：** [English version](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/why-agent-engineering-needs-controlled-experiments.md)
+**状态：** Working Draft v0.1  
+**日期：** 2026-08-12  
+**配套版本：** [English version](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/why-agent-engineering-needs-controlled-experiments.md)  
 **相关框架：** [Agent Harness Framework](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-harness-framework.zh-CN.md) · [六类原始失配](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/six-primitive-mismatches-pipeline-derived-taxonomy-llm-systems.zh-CN.md)
 
 ---
@@ -230,7 +230,7 @@ H_{\mathrm{persist}}:
 
 ### 5.3 拟合边界失配：在边界网格上测量路由校准
 
-**问题。** 能力失败是因为能力不存在，还是因为能力在错误体制下被激活或压制？
+**问题。** 能力失败是因为能力不存在，还是因为能力在错误区间下被激活或压制？
 
 **设计。** 建立边界网格：明确域内、明确域外和渐进式近边界样本。比较无门控激活、学习路由器、证据条件化路由和类型化弃权/升级。固定底层 specialist，使实验研究路由而不是重新训练能力。
 
@@ -238,7 +238,7 @@ H_{\mathrm{persist}}:
 
 **证伪。** 如果 specialist 在目标域内本身就没有能力，路由干预不能获得功劳。Router 实验之前必须先做 Oracle capability test。
 
-**诊断边界。** 拟合边界失配要求能力在 Oracle route 下能够在目标体制内成功。如果正确路由已经选中，高价值候选却仍很少出现，剩余瓶颈是支持而不是路由。
+**诊断边界。** 拟合边界失配要求能力在 Oracle route 下能够在目标区间内成功。如果正确路由已经选中，高价值候选却仍很少出现，剩余瓶颈是支持而不是路由。
 
 **迁移。** 在新任务族和新模型上重复。科学对象是触发证据、能力边界与错误成本之间的关系，而不是一个永久阈值。
 

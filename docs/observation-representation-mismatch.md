@@ -8,7 +8,7 @@
 
 ## Abstract
 
-**Observation-representation mismatch** occurs when task-relevant information that a feasible intervention could have acquired or preserved is lost, compressed, aliased, or made operationally inaccessible by the observation, encoding, tokenization, embedding, context-compression, or control-representation channel through which the world reaches an LLM system.
+**Observation-representation mismatch** occurs when task-relevant information that a feasible intervention could have acquired or preserved is lost, compressed, aliased, or made operationally inaccessible by the observation, encoding, tokenization, embedding, context-compression, memory, or control-representation channel through which the world reaches an LLM system.
 
 It is not merely that the current latent state is unknown. More precisely, the available representation is not a task-sufficient representation of the world state. The system may reason well over the variables it has, yet still be capped by the variables that never entered its controllable representation.
 

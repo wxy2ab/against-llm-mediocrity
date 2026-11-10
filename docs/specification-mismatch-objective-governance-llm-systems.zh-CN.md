@@ -23,7 +23,7 @@
 
 它直接连接审计工程：失败不应只是降低分数，而应更新规格、创建控制增量、添加回归护栏，并修订目标适用条件。
 
-在统一的受治理 LLM 架构中，观测治理确保任务相关变量进入表征；状态治理区分潜在体制；路由治理激活正确能力；支持治理让高价值候选可达；组合治理保存全局结构。
+在统一的受治理 LLM 架构中，观测治理确保任务相关变量进入表征；状态治理区分潜在区间；路由治理激活正确能力；支持治理让高价值候选可达；组合治理保存全局结构。
 
 目标治理决定什么算成功，并防止整个系统优化错误目标。
 
@@ -297,6 +297,12 @@ At fixed representation, is the maintained belief warranted by the evidence?
 What should count as success in this situation?
 ```
 
+例子：
+
+```text
+Task: decide whether a failing test indicates a real bug or flaky infrastructure.
+```
+
 如果日志已经进入表征，但系统无依据地塌缩、误排或忘记“真实 bug / flaky infrastructure”的证据信念，那是状态失配。若任何可行证据都不能区分二者，而系统正确保留后验并选择风险有界行动，则不是失配；若本可取得的日志缺失，则是观测-表征失配。
 
 如果它知道环境 flaky，却把 “make all tests pass” 当唯一目标，忽略 reproducibility 和 root-cause isolation，那是规格失配。
@@ -313,6 +319,12 @@ Was the right capability triggered?
 
 ```text
 Was the triggered capability evaluated against the right success condition?
+```
+
+例子：
+
+```text
+Task: audit a financial strategy.
 ```
 
 如果金融策略审计中模型触发通用风险评论而非机制级策略分析，那是拟合边界失配。
@@ -333,6 +345,12 @@ Is the high-value structure reachable as a candidate?
 If the high-value candidate appears, will the system prefer it?
 ```
 
+例子：
+
+```text
+Task: generate a correct text-to-SQL query.
+```
+
 如果正确 join path 从未生成，是支持失配。
 
 如果正确 join path 已生成，却因 evaluator 过度偏好语法简单或 exact-match 外观而被拒绝，那是规格失配。
@@ -349,6 +367,12 @@ Do locally good parts compose into global value?
 
 ```text
 Is the system judging the global artifact by the right value function?
+```
+
+例子：
+
+```text
+Task: write a legal argument.
 ```
 
 如果法律论证每段都强但整体自相矛盾，是聚合失配。
@@ -479,7 +503,7 @@ verifier 奖励 test passing；人类想要 maintainable code。
 style rubric 奖励 brevity；法律上下文要求 nuance。
 ```
 
-系统可能振荡、hedge，或满足最显著/最容易满足的标准。
+系统可能振荡、hedge，或满足最显著/最容易满足的标准，而不是解决偏好冲突。
 
 修复目标：
 
@@ -608,7 +632,7 @@ transition-committed specification updates
 
 ## 7. 形式模型
 
-最小形式化区分四个对象：
+最小形式化区分五个对象：
 
 ```text
 S: world state
@@ -1193,7 +1217,7 @@ S': current task objective = "produce minimal safe patch preserving public API"
 模型可以建议目标更新，但只有有效转移才能提交它。
 ```
 
-否则目标会漂移。agent 可能在任务变化后继续优化旧阶段，或在未经授权时静默改变目标。
+否则目标会漂移。agent 可能在任务变化后继续优化旧阶段，或在未经用户授权时静默改变目标。
 
 SGAR 因此需要：
 

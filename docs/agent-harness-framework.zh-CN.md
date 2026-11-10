@@ -5,16 +5,16 @@
 **状态：** Working Draft v0.1  
 **日期：** 2026-07-27  
 **缩写：** AHF  
-**中文暂译：** Agent Harness Framework；更精确的解释是“Agent 能力兑现与运行时 harness 框架”
+**中文暂译：** Agent Harness Framework；更精确的解释是“Agent 能力兑现与运行时 harness 框架”  
 **相关文档：**
 
 - [English version](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/agent-harness-framework.md)
-- [Audit Engineering](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/audit-engineering.md)
-- [State-Governed Agent Regime](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime.md)
-- [Aggregation Mismatch and Compositional Governance in LLM Systems](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-compositional-governance-llm-systems.md)
-- [Aggregation Mismatch: Derivable Claims, Proof Conditions, and Implications for Agent Engineering](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-theoretical-claims-agent-engineering.md)
-- [Aggregation Mismatch Artifact-v4: Experimental Evidence, Theory Gaps, and Agent Implications](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v4-claims-theory-gap.md)
-- [Patch vs. Full Rewrite: A Controlled Experiment on Sparse Repair Delivery](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/patch-vs-full-rewrite-controlled-experiment.md)
+- [Audit Engineering](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/audit-engineering.zh-CN.md)
+- [State-Governed Agent Regime](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime.zh-CN.md)
+- [Aggregation Mismatch and Compositional Governance in LLM Systems](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-compositional-governance-llm-systems.zh-CN.md)
+- [Aggregation Mismatch: Derivable Claims, Proof Conditions, and Implications for Agent Engineering](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-theoretical-claims-agent-engineering.zh-CN.md)
+- [Aggregation Mismatch Artifact-v4: Experimental Evidence, Theory Gaps, and Agent Implications](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v4-claims-theory-gap.zh-CN.md)
+- [Patch vs. Full Rewrite: A Controlled Experiment on Sparse Repair Delivery](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/patch-vs-full-rewrite-controlled-experiment.zh-CN.md)
 - [Agent 工程为什么必须重视受控实验](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/why-agent-engineering-needs-controlled-experiments.zh-CN.md)
 - *Towards Long-Horizon Agents: A Survey — Foundation, Evolution, Harness, Optimization, Application, and Frontier*
 
@@ -1505,9 +1505,9 @@ Agent Engineering 从“提出一个有效框架”
 ## References
 
 1. Dong, Guanting, et al. *Towards Long-Horizon Agents: A Survey — Foundation, Evolution, Harness, Optimization, Application, and Frontier*. 2026.
-2. Wang, Xinyun. [Audit Engineering: From Generation–Verification Asymmetry to General Agent Governance](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/audit-engineering.md).
-3. Wang, Xinyun. [State-Governed Agent Regime](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime.md).
-4. Wang, Xinyun. [Aggregation Mismatch and Compositional Governance in LLM Systems](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-compositional-governance-llm-systems.md).
-5. Wang, Xinyun. [Aggregation Mismatch: Derivable Claims, Proof Conditions, and Implications for Agent Engineering](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-theoretical-claims-agent-engineering.md).
-6. Wang, Xinyun. [Aggregation Mismatch Artifact-v4: Experimental Evidence, Theory Gaps, and Agent Implications](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v4-claims-theory-gap.md).
-7. Wang, Xinyun. [Patch vs. Full Rewrite: A Controlled Experiment on Sparse Repair Delivery](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/patch-vs-full-rewrite-controlled-experiment.md).
+2. Wang, Xinyun. [Audit Engineering: From Generation–Verification Asymmetry to General Agent Governance](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/audit-engineering.zh-CN.md).
+3. Wang, Xinyun. [State-Governed Agent Regime](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/state-governed-agent-regime.zh-CN.md).
+4. Wang, Xinyun. [Aggregation Mismatch and Compositional Governance in LLM Systems](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-compositional-governance-llm-systems.zh-CN.md).
+5. Wang, Xinyun. [Aggregation Mismatch: Derivable Claims, Proof Conditions, and Implications for Agent Engineering](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-theoretical-claims-agent-engineering.zh-CN.md).
+6. Wang, Xinyun. [Aggregation Mismatch Artifact-v4: Experimental Evidence, Theory Gaps, and Agent Implications](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-v4-claims-theory-gap.zh-CN.md).
+7. Wang, Xinyun. [Patch vs. Full Rewrite: A Controlled Experiment on Sparse Repair Delivery](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/patch-vs-full-rewrite-controlled-experiment.zh-CN.md).
