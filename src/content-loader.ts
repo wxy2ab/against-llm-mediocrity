@@ -133,12 +133,15 @@ function parseMarkdownFile(raw: string): { frontmatter: PageFrontmatter; body: s
   return { frontmatter, body: match[2] };
 }
 
-// Keys the three home "regime" cards to a color block by their unique Tag copy.
-// NOTE: coupled to the exact tag strings in content/{en,zh}/home.md — keep in sync.
+// Keys the three "regime" cards to a color block by their unique Tag copy.
+// NOTE: coupled to the exact tag strings in content/{en,zh}/home.md and
+// content/{en,zh}/framework.md — keep in sync.
 function regimeClass(tag: string): string {
-  if (/probability-value mismatch|概率与价值错位/i.test(tag)) return " regime-mediocre";
-  if (/common real-world regime|最常见的现实区间/i.test(tag)) return " regime-local";
-  if (/probability and value align|概率与价值同向/i.test(tag)) return " regime-extraordinary";
+  if (/probability-value mismatch|probability peak misses value peak|概率与价值错位|概率峰值偏离价值峰值/i.test(tag))
+    return " regime-mediocre";
+  if (/common real-world regime|common practical state|最常见的现实区间|最常见的实际状态/i.test(tag)) return " regime-local";
+  if (/probability and value align|probability and value rise together|概率与价值同向/i.test(tag))
+    return " regime-extraordinary";
   return "";
 }
 
