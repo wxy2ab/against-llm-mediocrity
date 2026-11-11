@@ -226,13 +226,13 @@ Multiple plausible states are an information property of the task, not a system 
 
 ### Condition 2: Policy sensitivity
 
-Latent state matters to action value. Equivalently, using the system belief and using the warranted belief produce different choices:
+Latent state matters to action value: no single action is optimal under every plausible state.
 
 ```text
-argmax_a E_{h ~ b_hat_t}[U(a | h)]
-  ≠
-argmax_a E_{h ~ b*t}[U(a | h)]
+⋂_{h ∈ H_plausible(Z≤t)} Argmax_a U(a | h) = ∅
 ```
+
+This is a property of the task and does not involve the system's belief; whether the system's belief diverges and changes the choice is Condition 3.
 
 ### Condition 3: Belief Formation, Preservation, or Update Failure
 

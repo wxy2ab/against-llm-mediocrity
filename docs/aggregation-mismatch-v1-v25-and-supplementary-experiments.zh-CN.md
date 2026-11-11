@@ -31,7 +31,7 @@ English version: [Aggregation Mismatch V1–V25 and Supplementary Experiments](.
 | V1 | 探索性比较；3 配置 × 500 prompts | 暴露构造、审计和修复之间的大差距，但多个格子受 ceiling 或 timeout 主导 | 仅作先导；V2 才是确认性权威 |
 | V2 | 1,596 条确认性结果，另有独立同期 C+B 540 条 | 15 个匹配实例上，DeepSeek A/B 为 `45/45 vs 2/45`，MiniMax 为 `37/45 vs 0/45`；四类无效候选审计 C 为 `176/180`、`164/180`，同期 B 为 `1/45`、`0/45` | 建立强预算内构造差距；C−B 是 candidate-conditioned auditing，不是纯验证效应 |
 | V3 | 160 个新稀疏修复 holdout、1,920 次 DeepSeek 运行 | 300 秒 Patch−Rewrite 为 `+0.217 [0.165, 0.269]`；oracle-plan 为 `+0.408`；独立分配的 900 秒子集仍为正 | Patch+确定性执行在该稀疏、长对象、单配置窗口胜出；不是普遍编辑定律 |
-| V4 | 756 次 DeepSeek；V4B 另有 54 个 audit/output 案例 | 完整答案 bits 把周期构造从 `13/54` 提升到 `53/54`；等量随机正确 bits 为 `54/54`；V4B audit 职责对比 `+0.815` | 正确信息外部化有效；结构 cut-set 位置没有已建立的额外优势；审计/输出解混仍部分受 ceiling 限制 |
+| V4 | 756 次 DeepSeek；V4B 另有 54 个 audit/output 案例 | 完整 cut-set 的正确 bits 把周期构造从 `13/54` 提升到 `53/54`；等量随机正确 bits 为 `54/54`；V4B audit 职责对比 `+0.815` | 正确信息外部化有效；结构 cut-set 位置没有已建立的额外优势；审计/输出解混仍部分受 ceiling 限制 |
 | V5 | 288 个原生 tool Agent 臂；后续 event-stream 复现 | 自推计划 Patch/Rewrite 为 `2/96 vs 0/96`；历史 oracle-plan 为 `46/48 vs 26/48`，但 event-stream 复现提升了 oracle Rewrite，削弱旧 delivery-only 叙事 | 只有计划质量先过关，缩小交付面才有意义；planning floor 会抹掉端到端优势；历史 V5 必须带事件账本 caveat |
 | V6 | 624 个 model-call keys + 10,000 个离线 commit 案例 | scheduler package `+0.438`；stage-aware routing `+0.313`，全部来自 plan-error；governed commit 通过；delivery-error recovery 仍为零 | runtime 调度、typed failure routing、commit 治理有价值，但路由收益取决于失败层 |
 | V7 | 240 次调用 + 48 个离线 compiler 案例 | 指定顺序和 localized receipt 未过门；verified-plan 确定性编译 `48/48` 通过 | 已验证计划应直接编译；不能推成「提示顺序」或单一回执就足够 |

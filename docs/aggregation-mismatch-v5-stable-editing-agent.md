@@ -7,6 +7,8 @@
 **中文：** [聚合失配 Artifact-v5：稳定编辑 Agent、Patch 交付与规划瓶颈](./aggregation-mismatch-v5-stable-editing-agent.zh-CN.md)<br>
 **Bilingual synchronization rule:** Keep condition names, sample sizes, statistical results, evidence-quality limits, and claim boundaries aligned across both versions.
 
+> **Later replication note (added November 2026):** The oracle-plan delivery result in this report (Patch 46/48 versus Rewrite 26/48) was not reproduced at the same magnitude in later runs. Wave34's V5b (the harder oracle-delivery grid) gave Patch 48/48 and Rewrite 45/48, which is ceiling-limited and cannot adjudicate (see [Wave34 and cross-configuration probes](./aggregation-mismatch-wave34-and-cross-configuration-probes.md)); the [V1–V25 overview](./aggregation-mismatch-v1-v25-and-supplementary-experiments.md) also notes that the event-stream replication raised oracle Rewrite and weakened the old delivery-only narrative. Together with the loss of this generation's original formal data (see Section 7), V5-C2 should be cited as a historical result rather than an established conclusion.
+
 ---
 
 ## Technical Summary

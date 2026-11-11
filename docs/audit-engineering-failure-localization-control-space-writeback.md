@@ -18,7 +18,7 @@ These four parts are not fully coequal layers: the first is a first principle, t
 
 An audit is not a score, a preference judgment, or a generic critique. A useful audit identifies a localized defect, grounds it in evidence, maps it to a mismatch type, and identifies the task-specific control object that should change. It also records mechanism attribution when operationalized, produces a control delta, and creates a regression guard that will fail if the defect family recurs.
 
-Audit Engineering is built on two asymmetries. First, excellent generation is often harder than defect identification. Second, complete upfront specification is often harder than counterexample-driven specification repair.
+Audit Engineering is built on a set of asymmetries (see Section 4), two of which are the most basic. First, excellent generation is often harder than defect identification. Second, complete upfront specification is often harder than counterexample-driven specification repair.
 
 High-value systems should exploit these asymmetries by turning candidate failures into improvements in task representation, capability routing, support search, aggregation constraints, specification, verification, and hard state.
 
@@ -333,7 +333,7 @@ A minimal Audit Finding schema is:
   "operationalization_status": "direct | derived | partial | not_operationalized",
   "repair_layer": "agent | training | hybrid | unknown",
   "mechanism_role": "primary | amplifier | downstream | unknown",
-  "repair_object": "gko | geo | verifier | transition_contract | state_record | regression_guard | unknown",
+  "repair_object": "gko | gexo | geso | verifier | transition_contract | state_record | regression_guard | unknown",
   "control_delta": "proposed change to governed control space",
   "regression_guard": "test or condition that should fail if the defect recurs",
   "authority": "proposed | accepted | rejected | superseded",
@@ -1769,7 +1769,7 @@ In governed LLM systems, failure is not only an error. It is one of the primary 
   "operationalization_status": "direct | derived | partial | not_operationalized",
   "repair_layer": "agent | training | hybrid | unknown",
   "mechanism_role": "primary | amplifier | downstream | unknown",
-  "repair_object": "gko | geo | verifier | transition_contract | state_record | regression_guard | unknown",
+  "repair_object": "gko | gexo | geso | verifier | transition_contract | state_record | regression_guard | unknown",
   "control_delta": "proposed change",
   "regression_guard": "future recurrence check",
   "authority": "proposed | accepted | rejected | superseded",

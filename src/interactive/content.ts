@@ -222,14 +222,14 @@ const zh: LabContent = {
       state: {
         index: "02",
         name: "状态失配",
-        station: "Z → 潜在状态",
-        question: "给定表征，我们是否知道自己处于哪个隐藏状态？",
+        station: "Z → 信念 b",
+        question: "给定固定表征，系统维护的状态信念是否忠于证据？",
         definition:
-          "正确策略依赖某个潜在状态，而该状态不能从当前表征识别。P(h|Z) 歧义，且不同状态要求不同最优动作。",
+          "正确策略依赖某个潜在状态，而系统在固定表征下形成或更新的信念偏离了证据所支持的信念，并因此选错动作：无依据地塌缩到单一状态、误排、遗忘证据或沿用过期状态。P(h|Z) 有歧义本身不是失配。",
         symptom:
           "同一个答案在一种隐藏解释下合理、在另一种下错误；一点点澄清信息就翻转正确策略；多轮对话因状态过期而失败。",
-        repair: "状态判别 / 分支：枚举状态、构造判别器、澄清问题、条件策略。",
-        aha: "同输入同答案，价值随隐藏状态翻转。修的不是更好的答案，而是先确认自己在哪个世界。",
+        repair: "信念校准 / 分支：枚举状态、保留有证据支持的假设、条件策略、状态更新；必须补新证据才能判别时，上游是观测-表征失配。",
+        aha: "同输入同答案，价值随隐藏状态翻转。修的不是更好的答案，而是让信念跟上证据，别提前认定自己在哪个世界。",
       },
       fitting: {
         index: "03",
@@ -261,7 +261,7 @@ const zh: LabContent = {
         station: "K → Y",
         question: "局部好的 parts 能否组合成全局有价值的产物？",
         definition:
-          "局部合理、局部正确的组件无法组合成全局有价值的 artifact。这正是自回归平庸的精确结构位置：局部价值没有组合式忠于全局价值。",
+          "局部合理、局部正确的组件无法组合成全局有价值的 artifact。病因不在自回归分解本身，而在部署中的局部代理、有限搜索或不可逆提交没有组合式忠于全局价值。",
         symptom:
           "每段都合理，整篇论证失败；每条 SQL 子句都说得通，整条查询语义错误；答案越来越流畅却失去结构正确性；跨部件依赖维持不住。",
         repair: "组合治理：依赖图、全局不变量、约束传播、跨部件验证、集成测试。",
@@ -471,14 +471,14 @@ const en: LabContent = {
       state: {
         index: "02",
         name: "State",
-        station: "Z → latent state",
-        question: "Given the representation, do we know which latent state we are in?",
+        station: "Z → belief b",
+        question: "Given the fixed representation, is the maintained state belief faithful to the evidence?",
         definition:
-          "The correct policy depends on a latent state that is not identifiable from the current representation. P(h|Z) is ambiguous, and different states require different optimal actions.",
+          "The correct policy depends on a latent state, and the belief the system forms or updates from the fixed representation diverges from the evidence-warranted belief, so it picks the wrong action: unsupported collapse to one state, misranking, forgotten evidence, or a stale state. Ambiguity in P(h|Z) alone is not a mismatch.",
         symptom:
           "The same answer is reasonable under one hidden interpretation and wrong under another; small clarifying info flips the correct policy; multi-turn settings fail on stale state.",
-        repair: "State discrimination / branching: enumerate states, build discriminators, ask clarifying questions, conditional policies.",
-        aha: "Same input, same answer — yet its value flips with a hidden state. The fix isn't a better answer, it's resolving which world you're in.",
+        repair: "Belief calibration / branching: enumerate states, keep the hypotheses the evidence supports, conditional policies, state updates; when telling states apart needs new evidence, the upstream problem is observation-representation mismatch.",
+        aha: "Same input, same answer — yet its value flips with a hidden state. The fix isn't a better answer, it's keeping the belief in step with the evidence instead of assuming which world you're in.",
       },
       fitting: {
         index: "03",
@@ -510,7 +510,7 @@ const en: LabContent = {
         station: "K → Y",
         question: "Do the locally good parts compose into a globally valuable whole?",
         definition:
-          "Locally plausible, locally correct components fail to compose into a globally valuable artifact. This is the exact structural location of autoregressive mediocrity: local value is not compositionally faithful to global value.",
+          "Locally plausible, locally correct components fail to compose into a globally valuable artifact. The cause is not autoregressive factorization itself: deployed local proxies, bounded search, or irreversible commitments are not compositionally faithful to global value.",
         symptom:
           "Every section looks reasonable but the whole argument fails; every SQL clause is plausible but the query is semantically wrong; fluency rises while structural correctness is lost; cross-part dependencies break.",
         repair: "Composition governance: dependency graphs, global invariants, constraint propagation, cross-part validators, integration tests.",

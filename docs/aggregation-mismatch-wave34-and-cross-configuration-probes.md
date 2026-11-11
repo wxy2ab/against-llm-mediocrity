@@ -17,7 +17,7 @@ The writing blind pack did not create independent human confirmation: its same-f
 
 | Package | Design | Coverage | Main result | Evidence status |
 |---|---|---:|---|---|
-| V4 MiniMax X1 | A0 no anchors vs A2 full answer bits vs A3 equal-count random correct bits | 162/162 | A2−A0 `+0.852 [0.722,0.963]`; A2−A3 `+0.074 [−0.074,0.241]` | Answer externalization same direction; cut-set specificity inconclusive |
+| V4 MiniMax X1 | A0 no anchors vs A2 full cut-set vs A3 equal-count random correct bits | 162/162 | A2−A0 `+0.852 [0.722,0.963]`; A2−A3 `+0.074 [−0.074,0.241]` | Answer externalization same direction; cut-set specificity inconclusive |
 | V5b DeepSeek | Hard oracle Patch vs Rewrite | 96/96 | Patch `48/48`; Rewrite `45/48` | `inconclusive_ceiling` |
 | V5b MiniMax X2 | Same frozen V5b specifications | 96/96 | Patch `48/48`; Rewrite `44/48` | `inconclusive_ceiling`; same direction only |
 | V3 MiniMax X2 | Infer Patch vs Infer Rewrite, thinking disabled | 96/96 | Delta `0.0 [0,0]` over 16 holdouts | Minimal probe only; not a complete V3 replication |

@@ -410,15 +410,15 @@ Let `q` be the probability that a single sample lands in `Y*τ`. Independent sam
 P(hit) = 1 - (1 - q)^n
 ```
 
-If `q` is moderately low, increasing `n` helps. But in many LLM systems, `q` is not the right variable. Samples are not independent structural draws from the task space. They are correlated continuations from the same prompt, same representation, same routing state, same learned priors, same hidden assumptions, and often the same evaluator.
+If `q` is moderately low, increasing `n` helps. But in many LLM systems the bottleneck is not `n` but `q` itself. Repeated samples from a fixed prompt are independent and identically distributed once those conditions are given, so the formula above holds exactly; the problem is that every sample shares the same prompt, same representation, same routing state, same learned priors, same hidden assumptions, and often the same evaluator, and these shared conditions can push `q` to a tiny value or truncate it to zero.
 
-The effective hit rate is closer to:
+Decomposing `q` by structure makes this easier to see:
 
 ```text
-P(hit structural basin) × P(hit high-value variant inside basin)
+q = P(hit structural basin) × P(hit high-value variant inside basin)
 ```
 
-If the system repeatedly samples from the wrong structural basin, increasing `n` mostly gives surface variation.
+If the first factor is near zero, the system is repeatedly sampling from the wrong structural basin, and increasing `n` mostly gives surface variation. Even when `q` is not zero, a hit still has to be recognized by the selection procedure; otherwise more samples only buy more candidates.
 
 ### 5.1 Pseudo-Diversity
 

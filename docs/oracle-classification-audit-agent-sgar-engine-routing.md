@@ -130,7 +130,7 @@ Whether a task is suitable for audit should not be judged by task name, but by t
 
 | Dimension | Question | What a high value means |
 |---|---|---|
-| Cost | Is a single oracle query expensive? | You can afford multiple probing rounds without fearing iteration |
+| Cost | Is a single oracle query expensive? | Queries are expensive and probes must be rationed; only when cost is low can you afford multiple probing rounds without fearing iteration |
 | Bandwidth | How much localization information does the oracle provide? | It does not just say fail, but indicates where the issue may be |
 | Fidelity | How close is the oracle to truth? | It is not a proxy story, but something reproducible / recomputable / reviewable |
 

@@ -40,6 +40,8 @@ target-state information, and model replanning.
 | Unsafe / over-budget success | 0 / 0 |
 | V16 tests | **29 passed** |
 
+> **Reading note (added November 2026):** `[1.0, 1.0]` is the bootstrap interval of a zero-variance paired difference. It is degenerate and should not be read as a population interval; the exact binomial 95% interval is [0.858, 1] for 24/24 and [0, 0.142] for 0/24. The Generic Retry and Reread Only arms remain locked after the second turn, so their terminal 0/24 is fixed by the runtime rule and the sign-flip p-value only shows that the implementation matches the design. The empirical content is that, once the runtime unlocks, the model completed the rebase on 24/24 tasks.
+
 ## 1. Theory
 
 A conflict receipt is evidence that the sealed operation cannot commit against

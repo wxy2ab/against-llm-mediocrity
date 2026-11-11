@@ -9,7 +9,7 @@ summary: "Stock Rec V3 is a daily stock-strategy system. Its core design is not 
 order: 2.6
 showInNav: false
 heroPoints:
-  - "Financial strategy is a canonical state-mismatch domain: market regime, data coverage, position state, and validation windows change the correct action."
+  - "Financial strategy is a canonical state-dependent domain where state mismatch is easy to hit: market regime, data coverage, position state, and validation windows change the correct action."
   - "The system's central rule is to never directly trust LLM analysis; the model may only provide candidates, hints, explanations, or sidecar observations."
   - Production impact requires the nightly cycle, shadow observation, champion-challenger promotion, and activation into the active state.
 ---

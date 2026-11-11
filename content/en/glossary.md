@@ -38,7 +38,7 @@ If you arrived here from another page, it usually makes sense to jump straight t
 
 - First full statement: [Knowledge Governance for Large Language Model Systems](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/knowledge-governance-llm-systems-local-alignment.md)
 - Current structural statement: [Structural Theory of Value Preservation](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/structural-theory-value-preservation-llm-systems.md)
-- Site-side overview: [Mechanism](../framework)
+- Site-side overview: [Mechanism](/framework)
 
 **Related terms**: [local alignment](#local-alignment) · [LLM excellence](#llm-excellence) · [six primitive mismatches](#six-primitive-mismatches)
 
@@ -55,7 +55,7 @@ If you arrived here from another page, it usually makes sense to jump straight t
 
 - First full statement: [Knowledge Governance for Large Language Model Systems](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/knowledge-governance-llm-systems-local-alignment.md)
 - Current structural statement: [Structural Theory of Value Preservation](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/structural-theory-value-preservation-llm-systems.md)
-- Site-side overview: [Home](../) · [Mechanism](../framework)
+- Site-side overview: [Home](/) · [Mechanism](/framework)
 
 **Related terms**: [LLM mediocrity](#llm-mediocrity) · [LLM excellence](#llm-excellence) · [knowledge governance](#knowledge-governance)
 
@@ -72,7 +72,7 @@ If you arrived here from another page, it usually makes sense to jump straight t
 
 - Theoretical background: [Knowledge Governance for Large Language Model Systems](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/knowledge-governance-llm-systems-local-alignment.md)
 - Current structural statement: [Structural Theory of Value Preservation](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/structural-theory-value-preservation-llm-systems.md)
-- Site-side overview: [Home](../) · [Why It Matters](../science)
+- Site-side overview: [Home](/) · [Why It Matters](/science)
 
 **Related terms**: [LLM mediocrity](#llm-mediocrity) · [local alignment](#local-alignment)
 
@@ -110,7 +110,7 @@ If you arrived here from another page, it usually makes sense to jump straight t
 
 - Theoretical background: [Structural Theory of Value Preservation](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/structural-theory-value-preservation-llm-systems.md)
 - Dedicated report: [Aggregation Mismatch and Compositional Governance](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-compositional-governance-llm-systems.md)
-- Site-side overview: [Mechanism](../framework)
+- Site-side overview: [Mechanism](/framework)
 
 **Related terms**: [six primitive mismatches](#six-primitive-mismatches) · [LLM mediocrity](#llm-mediocrity)
 
@@ -233,7 +233,7 @@ If you arrived here from another page, it usually makes sense to jump straight t
 
 - Theoretical origin: [Knowledge Governance for Large Language Model Systems](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/knowledge-governance-llm-systems-local-alignment.md)
 - Current specification: [Governed LLM Object Model and Interface Specification](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/governed-llm-object-model-interface-specification.md)
-- Site-side overview: [Governance](../engineering)
+- Site-side overview: [Governance](/engineering)
 
 **Related terms**: [knowledge governance](#knowledge-governance) · [GExO](#gexo) · [GEsO](#geo) · [MSHQ](#mshq)
 
@@ -249,7 +249,7 @@ If you arrived here from another page, it usually makes sense to jump straight t
 **Source chain**:
 
 - Current specification: [Governed LLM Object Model and Interface Specification](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/governed-llm-object-model-interface-specification.md)
-- Site-side overview: [Governance](../engineering)
+- Site-side overview: [Governance](/engineering)
 
 **Related terms**: [GKO](#gko) · [GEsO](#geo) · [SGAR](#sgar)
 
@@ -267,7 +267,7 @@ If you arrived here from another page, it usually makes sense to jump straight t
 
 - Collaboration origin: [Governed Human-AI Collaboration](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/governed-human-ai-collaboration.md)
 - Technical supplement: [Human-Assist Operational Mismatches](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/human-assist-operational-mismatches.md)
-- Site-side overview: [Collaboration](../collaboration)
+- Site-side overview: [Collaboration](/collaboration)
 
 **Related terms**: [MSHQ](#mshq) · [GKO](#gko) · [GExO](#gexo) · [SGAR](#sgar)
 
@@ -284,7 +284,7 @@ If you arrived here from another page, it usually makes sense to jump straight t
 
 - Collaboration origin: [Governed Human-AI Collaboration](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/governed-human-ai-collaboration.md)
 - Technical supplement: [Human-Assist Operational Mismatches](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/human-assist-operational-mismatches.md)
-- Site-side overview: [Collaboration](../collaboration)
+- Site-side overview: [Collaboration](/collaboration)
 
 **Related terms**: [GEsO](#geo) · [SGAR](#sgar) · [governed human-AI collaboration](#governed-human-ai-collaboration)
 
@@ -339,6 +339,6 @@ If you arrived here from another page, it usually makes sense to jump straight t
 
 - Main collaboration statement: [Governed Human-AI Collaboration](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/governed-human-ai-collaboration.md)
 - Technical supplement: [Human-Assist Operational Mismatches](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/human-assist-operational-mismatches.md)
-- Site-side overview: [Collaboration](../collaboration)
+- Site-side overview: [Collaboration](/collaboration)
 
 **Related terms**: [GEsO](#geo) · [MSHQ](#mshq) · [SGAR](#sgar)

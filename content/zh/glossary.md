@@ -38,7 +38,7 @@ showInNav: false
 
 - 首次完整主文：[大语言模型系统的知识治理](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/knowledge-governance-llm-systems-local-alignment.zh-CN.md)
 - 当前结构主文：[价值保存结构理论](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/structural-theory-value-preservation-llm-systems.zh-CN.md)
-- 站点综述：[机制](../framework)
+- 站点综述：[机制](/zh/framework)
 
 **相关术语**：[局部对齐](#local-alignment) · [LLM 卓越](#llm-excellence) · [六类原始失配](#six-primitive-mismatches)
 
@@ -55,7 +55,7 @@ showInNav: false
 
 - 首次完整主文：[大语言模型系统的知识治理](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/knowledge-governance-llm-systems-local-alignment.zh-CN.md)
 - 当前结构主文：[价值保存结构理论](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/structural-theory-value-preservation-llm-systems.zh-CN.md)
-- 站点综述：[首页](../) · [机制](../framework)
+- 站点综述：[首页](/zh/) · [机制](/zh/framework)
 
 **相关术语**：[LLM 平庸](#llm-mediocrity) · [LLM 卓越](#llm-excellence) · [知识治理](#knowledge-governance)
 
@@ -72,7 +72,7 @@ showInNav: false
 
 - 理论背景：[大语言模型系统的知识治理](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/knowledge-governance-llm-systems-local-alignment.zh-CN.md)
 - 当前结构主文：[价值保存结构理论](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/structural-theory-value-preservation-llm-systems.zh-CN.md)
-- 站点综述：[首页](../) · [为什么重要](../science)
+- 站点综述：[首页](/zh/) · [为什么重要](/zh/science)
 
 **相关术语**：[LLM 平庸](#llm-mediocrity) · [局部对齐](#local-alignment)
 
@@ -110,7 +110,7 @@ showInNav: false
 
 - 理论背景：[价值保存结构理论](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/structural-theory-value-preservation-llm-systems.zh-CN.md)
 - 专题主文：[聚合失配与组合治理](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/aggregation-mismatch-compositional-governance-llm-systems.zh-CN.md)
-- 站点综述：[机制](../framework)
+- 站点综述：[机制](/zh/framework)
 
 **相关术语**：[六类原始失配](#six-primitive-mismatches) · [LLM 平庸](#llm-mediocrity)
 
@@ -233,7 +233,7 @@ showInNav: false
 
 - 理论起点：[大语言模型系统的知识治理](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/knowledge-governance-llm-systems-local-alignment.zh-CN.md)
 - 当前规范主文：[受治理 LLM 对象模型与接口规范](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/governed-llm-object-model-interface-specification.zh-CN.md)
-- 站点综述：[治理](../engineering)
+- 站点综述：[治理](/zh/engineering)
 
 **相关术语**：[知识治理](#knowledge-governance) · [GExO](#gexo) · [GEsO](#geo) · [MSHQ](#mshq)
 
@@ -249,7 +249,7 @@ showInNav: false
 **出处链路**：
 
 - 当前规范主文：[受治理 LLM 对象模型与接口规范](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/governed-llm-object-model-interface-specification.zh-CN.md)
-- 站点综述：[治理](../engineering)
+- 站点综述：[治理](/zh/engineering)
 
 **相关术语**：[GKO](#gko) · [GEsO](#geo) · [SGAR](#sgar)
 
@@ -267,7 +267,7 @@ showInNav: false
 
 - 协作起点：[治理式人机协作](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/governed-human-ai-collaboration.zh-CN.md)
 - 技术补充：[人类协助型操作失配](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/human-assist-operational-mismatches.zh-CN.md)
-- 站点综述：[协作](../collaboration)
+- 站点综述：[协作](/zh/collaboration)
 
 **相关术语**：[MSHQ](#mshq) · [GKO](#gko) · [GExO](#gexo) · [SGAR](#sgar)
 
@@ -284,7 +284,7 @@ showInNav: false
 
 - 协作起点：[治理式人机协作](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/governed-human-ai-collaboration.zh-CN.md)
 - 技术补充：[人类协助型操作失配](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/human-assist-operational-mismatches.zh-CN.md)
-- 站点综述：[协作](../collaboration)
+- 站点综述：[协作](/zh/collaboration)
 
 **相关术语**：[GEsO](#geo) · [SGAR](#sgar) · [治理式人机协作](#governed-human-ai-collaboration)
 
@@ -339,6 +339,6 @@ showInNav: false
 
 - 协作主文：[治理式人机协作](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/governed-human-ai-collaboration.zh-CN.md)
 - 技术补充：[人类协助型操作失配](https://github.com/wxy2ab/against-llm-mediocrity/blob/main/docs/human-assist-operational-mismatches.zh-CN.md)
-- 站点综述：[协作](../collaboration)
+- 站点综述：[协作](/zh/collaboration)
 
 **相关术语**：[GEsO](#geo) · [MSHQ](#mshq) · [SGAR](#sgar)

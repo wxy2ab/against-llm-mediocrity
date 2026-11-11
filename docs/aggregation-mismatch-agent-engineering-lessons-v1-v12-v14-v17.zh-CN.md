@@ -78,8 +78,8 @@ Observe authoritative state
 - 稀疏到稠密的固定路由阈值：U；
 - V14 recovery 成本至少 +20%：U，虽然方向为正。
 - V15 中授权 rebase 优于冲突后终止：E，但只针对该策略对比，不是模型通用能力定律。
-- V17 四个信息臂均为 24/24：对信息 superiority/等价属于 U；对 receipt-only 足以
-  完成本绝对 plan 任务属于 E。
+- V17 四个信息臂均为 24/24：对信息 superiority/等价属于 U；receipt-only 足以
+  完成本绝对 plan 任务只是触顶条件下的描述性观察，没有经过预注册门检验，不记为 E。
 - V17 typed escalation 24/24 且 commit=0：对冻结治理合同属于 E，不证明升级提高
   任务完成率。
 

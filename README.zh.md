@@ -68,7 +68,7 @@ LLM 已经很擅长写代码、写邮件、做总结、解释概念、起草方�
 
 - **聚合失配**：局部好片段组合不出全局价值。
 - **支持失配**：高价值结构位于低概率或低支持区域。
-- **状态失配**：真实价值依赖隐藏、动态或部分可观测的状态。
+- **状态失配**：在固定的可访问表征下，系统形成或更新的状态信念偏离证据所支持的信念，并改变行动排序；状态难以确知本身不算失配。
 - **规格失配**：系统能优化的代理目标偏离真实目标。
 - **拟合边界失配**：模型已学能力的隐式触发边界与它的真实适用边界不一致，因而同时出现过触发与欠触发。
 - **观测-表征失配**：决定性世界变量没有通过观测、编码、上下文、工具或控制表征通道进入模型可操作表征。
@@ -175,7 +175,7 @@ against-llm-mediocrity/
 - [LLM 系统中的聚合失配与组合治理](./docs/aggregation-mismatch-compositional-governance-llm-systems.zh-CN.md)：局部价值、全局失败与组合关系治理的配套技术报告。
 - [聚合失配与生成—验证不对称：受控实验证据](./docs/aggregation-mismatch-generation-verification-asymmetry-evidence.zh-CN.md)：用边界拓扑、候选审计、长度与排除性对照说明局部规则能力为何不自动组成全局构造能力。
 - 聚合失配 artifact-v4 裁决：[English](./docs/aggregation-mismatch-v4-claims-theory-gap.md) · [中文](./docs/aggregation-mismatch-v4-claims-theory-gap.zh-CN.md)：汇总已完成 756 次边界状态、候选/接口、独立预算与顺序实验，区分实验能证明的结论、尚未兑现的理论预测，以及对应的 Agent 调整。
-- 聚合失配 artifact-v5 稳定编辑 Agent：[English](./docs/aggregation-mismatch-v5-stable-editing-agent.md) · [中文](./docs/aggregation-mismatch-v5-stable-editing-agent.zh-CN.md)：汇总 288-arm 原生工具实验；正确计划后的 Patch 交付优势成立，端到端 Agent claim 因 planning floor 未通过，crossover 仍未裁决。
+- 聚合失配 artifact-v5 稳定编辑 Agent：[English](./docs/aggregation-mismatch-v5-stable-editing-agent.md) · [中文](./docs/aggregation-mismatch-v5-stable-editing-agent.zh-CN.md)：汇总 288-arm 原生工具实验；正确计划后的 Patch 交付优势在本代通过确认门，但后续 V5b 受 ceiling 限制、未能重现该差距，应作为历史结果引用；端到端 Agent claim 因 planning floor 未通过，crossover 仍未裁决。
 - 聚合失配 artifact-v7 机制恢复：[English](./docs/aggregation-mismatch-v7-mechanism-recovery.md) · [中文](./docs/aggregation-mismatch-v7-mechanism-recovery.zh-CN.md)：汇总 240 次模型调用与 48 个编译器案例；顺序和定位回执未通过确认门，确定性 plan 编译通过采用门。
 - 聚合失配 artifact-v8 运行时所有权与语义路由：[English](./docs/aggregation-mismatch-v8-runtime-ownership-routing.md) · [中文](./docs/aggregation-mismatch-v8-runtime-ownership-routing.zh-CN.md)：汇总 288 个 semantic episodes 与 64 个离线案例；runtime readiness/ledger 与 semantic-ID 接口通过，局部验证受 ceiling 限制，density crossover 未通过，scaffold 成本仍然显著。
 - 聚合失配 artifact-v9 最小 scaffold 与 verifier receipt：[English](./docs/aggregation-mismatch-v9-minimal-scaffold-recovery.md) · [中文](./docs/aggregation-mismatch-v9-minimal-scaffold-recovery.zh-CN.md)：汇总 192 个 effort-matched episodes；ready/ledger 主效应因 strict-order floor 未裁决，located/causal receipt 正点估计未通过确认门。

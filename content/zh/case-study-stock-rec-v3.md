@@ -9,7 +9,7 @@ summary: Stock Rec V3 是一个日频股票策略系统案例。它的核心不�
 order: 2.6
 showInNav: false
 heroPoints:
-  - 金融策略是典型状态失配任务：市场状态、数据覆盖、持仓状态和验证窗口变化都会改变正确动作。
+  - 金融策略是典型的高状态依赖任务，容易出现状态失配：市场状态、数据覆盖、持仓状态和验证窗口变化都会改变正确动作。
   - 系统的关键原则是绝不直接相信 LLM 分析；LLM 只能提供候选、提示、解释或旁路观察。
   - 真正进入生产的内容必须经过 nightly cycle、shadow 观察、champion-challenger 晋升和 active 激活。
 ---

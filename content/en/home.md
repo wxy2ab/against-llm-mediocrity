@@ -75,7 +75,7 @@ Suppose you ask for a strategic recommendation. The model quickly produces a pol
 The useful move is to leave the final text alone for now and answer a sequence of narrower questions:
 
 1. **What regime are we in?** The model is locally aligned: it can write and compare options well, but direct generation cannot guarantee the right recommendation.
-2. **Why does local quality stop predicting success?** The main causes are state mismatch and specification mismatch: the budget state is unknown, and the dominant tradeoff was never made explicit.
+2. **Why does local quality stop predicting success?** The main causes are observation-representation mismatch and specification mismatch: the budget ceiling, a decisive variable, never entered the representation the model can access, and the dominant tradeoff was never made explicit.
 3. **What structure must be made explicit before writing again?** Build an option matrix covering cost, speed, risk, and expected return.
 4. **Which variables can the model still not supply by itself?** Verify the factual estimates in the matrix first, then ask the human to confirm the budget limit and the dominant objective.
 5. **What should the model do once those variables are settled?** Write the final memo from the verified option matrix and the confirmed tradeoff.
@@ -108,7 +108,7 @@ The valuable answer is hard to reach with the current model, search method, and 
 
 ### State
 
-The right answer depends on hidden or changing state: market regime, production environment, user emotion, authority boundary, time window, or policy context.
+The system's belief about the current state, formed or updated from the evidence it already has, goes wrong and changes the answer or action: it defaults market regime, production environment, user emotion, authority boundary, time window, or policy context to the most common case, or keeps acting on a stale state. State that is merely hard to know is not a mismatch; if judging it requires new information, the upstream problem is observation-representation mismatch.
 
 ### Specification
 
@@ -116,7 +116,7 @@ The proxy objective the system can optimize diverges from the real objective. Th
 
 ### Fitting Boundary
 
-The model binds too tightly to a local evidence chain, proxy metric, role template, or feedback signal. The answer looks reasonable in one scenario but fails once the scenario, audit protocol, mechanism, or preference shifts to a neighboring one.
+The activation boundary of a learned capability does not match where that capability truly applies. The model may treat a local evidence chain, proxy metric, role template, or feedback signal as a general rule and keep applying it once the scenario, audit protocol, mechanism, or preference shifts to a neighboring one (over-triggering); or it can do something when asked explicitly yet fail to do it unprompted when it is needed (under-triggering).
 
 ### Observation-Representation
 
