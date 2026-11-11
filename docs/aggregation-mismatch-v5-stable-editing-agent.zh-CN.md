@@ -7,6 +7,8 @@
 **English:** [Aggregation Mismatch Artifact-v5: Stable Editing Agents, Patch Delivery, and the Planning Bottleneck](./aggregation-mismatch-v5-stable-editing-agent.md)<br>
 **双语同步规则：** 两个版本的条件名称、样本量、统计结果、证据质量限制与结论边界必须同步。
 
+> **后续复现提示（2026 年 11 月补注）**：本报告的 oracle-plan 交付结果（Patch 46/48 对 Rewrite 26/48）在后续运行中没有以同等幅度重现。Wave34 的 V5b（更难的 oracle-delivery 格）为 Patch 48/48、Rewrite 45/48，受 ceiling 限制，无法裁决（见 [Wave34 与跨配置探针](./aggregation-mismatch-wave34-and-cross-configuration-probes.zh-CN.md)）；[V1–V25 总览](./aggregation-mismatch-v1-v25-and-supplementary-experiments.zh-CN.md)也指出，event-stream 复现提升了 oracle Rewrite，削弱了旧的 delivery-only 叙事。再加上本代原始正式数据已丢失（见第 7 节），V5-C2 应作为历史结果引用，而不是已经确立的结论。
+
 ---
 
 ## 技术摘要

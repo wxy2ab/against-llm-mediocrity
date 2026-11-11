@@ -515,8 +515,10 @@ Effect(R_i) = f_i(c_i; c_j, c_k, ...)
 and in strong coupling cases:
 
 ```text
-∂Reachability / ∂R_i → 0 as c_j → 0
+∂c_i / ∂R_i → 0 as c_j → 0
 ```
+
+This differs from the product model. In the product model the marginal effect of `c_i` on `Reachability` also shrinks with `c_j`, but `c_i` itself can still be repaired independently; coupling says that `c_i` itself cannot be moved. "Superadditive" should therefore be read on the scale of log success or repair cost: the joint loss exceeds what the product model composes from the individual station losses. On the linear scale of success probability, failure probabilities under the product model are in fact subadditive.
 
 Examples:
 
@@ -804,7 +806,7 @@ Each primitive mismatch has a clear role:
 | Mismatch | Text-to-SQL manifestation |
 |---|---|
 | Observation-representation | Relevant schema, foreign keys, sample values, or database content fail to enter the operational representation. |
-| State | The query depends on database contents, implicit value distributions, or latent intent not identifiable from surface question alone. |
+| State | Evidence about intent or values is already in the representation, yet the system collapses several plausible readings into one without support, misranks candidate intents, or fails to update its belief after execution feedback. |
 | Fitting-boundary | The model over-triggers template SQL generation and under-triggers schema audit, value grounding, or join search. |
 | Support | Rare join patterns, nested queries, or implicit aggregation structures are low-support under direct generation. |
 | Aggregation | SELECT, JOIN, WHERE, GROUP BY, HAVING, and ORDER BY clauses may be locally plausible but globally inconsistent. |

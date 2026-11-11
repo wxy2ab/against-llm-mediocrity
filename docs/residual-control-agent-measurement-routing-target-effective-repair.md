@@ -654,7 +654,7 @@ The six primitive mismatches should not be treated only as an error taxonomy. Th
 | Observation-representation mismatch | Key information never enters the effective representation | add channels, structured transduction, denoising | evidence checks, field completeness |
 | Support mismatch | Useful candidates sit in an extremely low-probability region | candidate expansion, mutation/recombination, model upgrade | candidate verifier, candidate coverage |
 | Aggregation mismatch | Locally correct pieces fail to compose globally | decomposition, planning, candidate comparison, local patching | intermediate invariants, global consistency |
-| Fitting-boundary mismatch | Repair here damages capability nearby | isolation, routing, domain-of-validity control, regression protection | regression tests, canaries, routing guards |
+| Fitting-boundary mismatch | A capability's activation boundary differs from its true applicability boundary (over- or under-triggering) | trigger-condition audit, routing rules, domain-of-validity tests, regression protection | boundary cases, regression tests, routing guards |
 
 The common objective of mismatch routing is:
 

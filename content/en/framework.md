@@ -98,7 +98,7 @@ The accessible proxy objective diverges from the true objective. An answer may s
 
 ### Fitting-Boundary
 
-The system binds too tightly to a local evidence chain, metric, scene default, role template, or feedback signal. The answer is locally reasonable but does not survive neighboring contexts.
+The activation boundary of a learned capability does not match its true applicability boundary. When it over-triggers, the system treats a local evidence chain, metric, scene default, role template, or feedback signal as a general rule, so the answer is locally reasonable but does not survive neighboring contexts; when it under-triggers, the model can perform the needed operation but does not activate it when it is needed.
 
 ### Observation-Representation
 

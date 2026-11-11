@@ -650,7 +650,7 @@ Mismatch residual 可以被操作性定义为：
 | 观测-表征失配 | 关键信息没有进入有效表示 | 增加观测通道、结构化转导、降噪 | evidence checks、字段完整性 |
 | 支持失配 | 有效候选处于极低概率区域 | 扩大候选、变异重组、模型升级 | candidate verifier、候选覆盖 |
 | 聚合失配 | 局部正确不能组合成全局正确 | 分解、计划、候选比较、局部 patch | intermediate invariants、全局一致性 |
-| 拟合边界失配 | 修复当前区域损害邻域能力 | 隔离、路由、适用域、回归保护 | regression、canary、routing guards |
+| 拟合边界失配 | 能力的触发边界与真实适用边界不一致（过触发或欠触发） | 触发条件审计、路由规则、适用域测试、回归保护 | boundary cases、regression、routing guards |
 
 Mismatch 路由的共同目标可以概括为：
 

@@ -18,7 +18,7 @@ LLM 系统越来越多地围绕迭代生成、批判、检索、工具使用、�
 
 审计不是分数、偏好判断或通用批评。有用的审计会识别局部缺陷，用证据支撑它，把它映射到失配类型，并识别真正要改变的任务特定控制对象。它还会在已可操作化时记录机制归因，产生控制增量，并创建一个在该缺陷家族复发时会失败的回归护栏。
 
-审计工程建立在两个不对称性之上。第一，生成卓越产物往往比识别具体缺陷更难。第二，提前写出完整规格往往比通过反例修复规格更难。
+审计工程建立在一组不对称性之上（见第 4 节），其中最基础的有两个。第一，生成卓越产物往往比识别具体缺陷更难。第二，提前写出完整规格往往比通过反例修复规格更难。
 
 高价值系统应利用这些不对称性，把候选失败转换为任务表征、能力路由、支持搜索、聚合约束、规格、验证和硬状态中的改进。
 
@@ -331,7 +331,7 @@ S_world
   "operationalization_status": "direct | derived | partial | not_operationalized",
   "repair_layer": "agent | training | hybrid | unknown",
   "mechanism_role": "primary | amplifier | downstream | unknown",
-  "repair_object": "gko | geo | verifier | transition_contract | state_record | regression_guard | unknown",
+  "repair_object": "gko | gexo | geso | verifier | transition_contract | state_record | regression_guard | unknown",
   "control_delta": "proposed change to governed control space",
   "regression_guard": "test or condition that should fail if the defect recurs",
   "authority": "proposed | accepted | rejected | superseded",
@@ -1498,7 +1498,7 @@ defect-ledger entry
   "operationalization_status": "direct | derived | partial | not_operationalized",
   "repair_layer": "agent | training | hybrid | unknown",
   "mechanism_role": "primary | amplifier | downstream | unknown",
-  "repair_object": "gko | geo | verifier | transition_contract | state_record | regression_guard | unknown",
+  "repair_object": "gko | gexo | geso | verifier | transition_contract | state_record | regression_guard | unknown",
   "control_delta": "proposed change",
   "regression_guard": "future recurrence check",
   "authority": "proposed | accepted | rejected | superseded",

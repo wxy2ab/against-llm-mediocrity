@@ -977,8 +977,10 @@ Effect(R_i) = f_i(c_i; c_j, c_k, ...)
 In strong cases:
 
 ```text
-d Success / d R_i -> 0 as c_j -> 0
+d c_i / d R_i -> 0 as c_j -> 0
 ```
+
+This differs from the bottleneck model: there the marginal effect of `c_i` on `Success` also shrinks with `c_j`, but `c_i` itself can still be repaired independently; coupling says that `c_i` itself cannot be moved. "Superadditive" should therefore be read on the scale of log success or repair cost.
 
 Examples:
 
@@ -1019,13 +1021,13 @@ Was the information required to distinguish good from bad present in Z?
 
 If no, diagnose observation-representation mismatch first.
 
-### 17.3 Step 3: Ask Whether the Correct State Was Identified
+### 17.3 Step 3: Ask Whether the State Belief Is Faithful to the Evidence
 
 ```text
-Could the same representation correspond to multiple states requiring different actions?
+Given the fixed representation, did the system collapse, misrank, forget, or fail to update its belief over latent states in a way that changed the action?
 ```
 
-If yes, diagnose state mismatch.
+If yes, diagnose state mismatch. A representation that is compatible with several states requiring different actions only shows that the task is state-ambiguous; as long as the system preserves that uncertainty and branches, clarifies, or gives a bounded output accordingly, there is no mismatch.
 
 ### 17.4 Step 4: Ask Whether the Right Capability Was Activated
 
@@ -1226,7 +1228,7 @@ column description normalization
 
 ### 23.2 State
 
-The natural language question may depend on a latent intent or on database contents. A term may refer to a column value, a category, a metric, or a derived relation.
+The natural language question may depend on a latent intent: a term may refer to a column value, a category, a metric, or a derived relation. State mismatch occurs when the relevant evidence is already in the representation and the system collapses these readings into one without support, or fails to update after execution feedback; database contents that never entered the representation belong to the observation-representation mismatch in 23.1.
 
 Repair:
 
@@ -1654,7 +1656,7 @@ Use the following checklist during failure review.
 [ ] What was the actual low-value outcome?
 [ ] What true utility criterion did it fail?
 [ ] Was the decisive variable present in the operational representation?
-[ ] Were multiple latent states plausible?
+[ ] Was the maintained state belief warranted by the fixed evidence (no unsupported collapse, staleness, or missed update)?
 [ ] Did the system activate the appropriate capability?
 [ ] Did the correct structure appear among candidates?
 [ ] Were local components globally consistent?
@@ -1727,7 +1729,7 @@ The six primitive mismatches provide a structural basis for diagnosing LLM syste
 
 ```text
 observation / representation
-state identification
+belief formation / update
 capability routing
 candidate support
 local-to-global aggregation

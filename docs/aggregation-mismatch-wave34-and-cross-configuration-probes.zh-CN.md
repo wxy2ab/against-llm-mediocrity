@@ -17,7 +17,7 @@ English version: [Aggregation Mismatch: Wave34 and Cross-Configuration Probes](.
 
 | 包 | 设计 | 覆盖 | 主要结果 | 证据状态 |
 |---|---|---:|---|---|
-| V4 MiniMax X1 | A0 无锚点 vs A2 完整答案 bits vs A3 等量随机正确 bits | 162/162 | A2−A0 `+0.852 [0.722,0.963]`；A2−A3 `+0.074 [−0.074,0.241]` | 答案外部化同号；cut-set 特异性未裁决 |
+| V4 MiniMax X1 | A0 无锚点 vs A2 完整 cut-set vs A3 等量随机正确 bits | 162/162 | A2−A0 `+0.852 [0.722,0.963]`；A2−A3 `+0.074 [−0.074,0.241]` | 答案外部化同号；cut-set 特异性未裁决 |
 | V5b DeepSeek | Hard oracle Patch vs Rewrite | 96/96 | Patch `48/48`；Rewrite `45/48` | `inconclusive_ceiling` |
 | V5b MiniMax X2 | 相同冻结 V5b specs | 96/96 | Patch `48/48`；Rewrite `44/48` | `inconclusive_ceiling`；只能说同号 |
 | V3 MiniMax X2 | Infer Patch vs Infer Rewrite，thinking disabled | 96/96 | 16 个 holdout 上差 `0.0 [0,0]` | 仅最小探针；不是完整 V3 复现 |

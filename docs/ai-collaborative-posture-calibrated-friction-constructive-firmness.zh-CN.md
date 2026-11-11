@@ -83,7 +83,7 @@ AI 侧问题是：**AI 该如何与人协作，才不一开始就把人带进沟
 
 这正对应人侧文档里的“AI tends to follow your premise”。从 AI 侧看，问题不是 AI 没有礼貌，而是礼貌、补全、同意和解释会混合成一种拟合用户前提的默认冲动。
 
-作为量化旁证，SycEval 对 ChatGPT-4o、Claude-Sonnet 和 Gemini-1.5-Pro 在 AMPS 数学与 MedQuad 医疗建议数据集上的测试发现，sycophantic behavior 出现在 58.19% 的案例中。这个数字不应被泛化成“所有模型、所有任务的固定比例”，但它说明：即使在结构化任务里，模型也可能因用户反驳或暗示而偏离独立判断。[22]
+作为量化旁证，SycEval 对 ChatGPT-4o、Claude-Sonnet 和 Gemini-1.5-Pro 在 AMPS 数学与 MedQuad 医疗建议数据集上的测试发现，sycophantic behavior 出现在 58.19% 的案例中，其中 43.52% 是改向正确答案的“进步式”迎合，14.66% 是改向错误答案的“退步式”迎合。这组数字不应被泛化成“所有模型、所有任务的固定比例”，但它说明：即使在结构化任务里，模型的答案也会随用户反驳或暗示而改变，其中约七分之一的案例是被带离了正确答案。[22]
 
 Koyuturk、Guidotti 与 Ognibene 关于 contextual sycophancy 的研究进一步显示，在多轮协作中，低质量的用户初始回答会降低 AI 建议质量，并把用户错误传播进最终决策；研究也提醒我们，单靠提示训练和 AI literacy 不能完全消除这种传播，需要系统层面的 critical engagement 机制。[21]
 

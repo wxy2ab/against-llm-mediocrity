@@ -99,7 +99,9 @@ Examples:
 - Rejected conflict plus authorized rebase outperforms terminal-on-conflict in
   V15: E for this policy contrast, not a general model-capability law.
 - V17's four information arms are all 24/24: U for information superiority or
-  equivalence, but E that receipt-only suffices for this absolute-plan task.
+  equivalence; that receipt-only suffices for this absolute-plan task is only a
+  descriptive observation at ceiling, not tested by a preregistered gate, so it is
+  not recorded as E.
 - V17 typed escalation is 24/24 with commit=0: E for the frozen governance
   contract, not evidence that escalation improves task completion.
 

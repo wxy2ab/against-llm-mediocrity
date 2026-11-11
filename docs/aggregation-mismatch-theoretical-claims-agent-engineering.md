@@ -23,7 +23,7 @@ Under explicit conditions, the following conclusions are derivable:
 2. **Given a candidate, verification can be rewritten as residual computation; it no longer carries the responsibility of searching for a complete object from scratch.**
 3. **Given sufficient boundary state, cyclic dependency can be cut into deterministic expansion; the minimum sufficient boundary depends on the rank or dependency structure of the particular system.**
 4. **Executing in dependency-topological order avoids unresolved predecessors; reverse dependency order requires additional intermediate state, delayed commitment, or symbolic solving.**
-5. **If a repair loop accepts only strict reductions in a well-founded violation measure, it must terminate and cannot accept a regressive step, although it may stop at a nonzero local minimum.**
+5. **If a repair loop accepts only strict reductions in a well-founded violation measure, the number of accepted repair steps is bounded and it cannot accept a regressive step; termination of the loop itself still needs an attempt budget, and it may stop at a nonzero local minimum.**
 6. **If an executor preserves the required semantics, verifier acceptance is sound, and only verified states may commit, every committed state satisfies the protected invariants.**
 7. **A local change can invalidate only constraints whose dependency sets intersect the change; on a bounded-degree dependency graph, incremental verification grows with edit size rather than total object length.**
 8. **Patches with conflict-free read and write sets commute and may be merged in any order; conflicting patches require serialization, recomputation, or escalation.**
@@ -176,7 +176,7 @@ Selecting one such target requires at least:
 \log_2\binom Nk+k\log_2(|\Sigma|-1)
 ```
 
-bits. A literal arbitrary full object requires $N\log_2|\Sigma|$ bits. The sparse-delta description is substantially smaller when $k\ll N$. When $k$ approaches $N$, address and operation overhead can eliminate the patch advantage.
+bits. Writing out a literal arbitrary full object requires emitting $N\log_2|\Sigma|$ bits of symbols. Given the current object, both interfaces convey the same task information; a full rewrite adds copied symbols that carry no information, yet each one is a commitment that must be emitted and can go wrong. The submitted surface of the sparse-delta description is substantially smaller when $k\ll N$. When $k$ approaches $N$, address and operation overhead can eliminate the patch advantage.
 
 ### 3.2 The Unchanged-Region Invariant
 
@@ -534,9 +534,14 @@ reliability.
 Artifact-v8 extends that boundary to semantic addressing. Both index and ID
 compilers pass 64/64 frozen cases with zero protected violations. When the model
 must deliver the same verified semantic plan, ID Patch succeeds on 63/64 cases
-versus 43/64 for physical-index Patch, a +31.25-point base-cluster effect. This
-supports runtime-owned physical address resolution in the tested object family. It
-does not prove a universal ID advantage or identify relocation as the cause.
+versus 43/64 for physical-index Patch, a +31.25-point base-cluster effect; Full
+Rewrite succeeds on 64/64 in the same experiment. This supports runtime-owned
+physical address resolution in the tested object family. It does not prove a
+universal ID advantage or identify relocation as the cause. Full Rewrite
+outperforming physical-index Patch also shows that delivery reliability here depends
+on the type of commitment (whether the model must resolve physical addresses), not
+only on the number of commitments; premise 3 of Proposition One (Section 3.3) cannot
+be used without regard to commitment type.
 
 ---
 

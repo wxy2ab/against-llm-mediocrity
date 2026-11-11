@@ -46,7 +46,7 @@ The model answers a related-looking problem that is not the real one. It may tur
 
 ### Missing State
 
-The right answer depends on the current market, user emotion, legal boundary, production environment, time window, or organizational authority. If that state is absent, the model defaults to an assumed situation.
+The right answer depends on the current market, user emotion, legal boundary, production environment, time window, or organizational authority. If the model does not keep up with that state, it defaults the answer to the most common situation.
 
 ### Missing Channel Variable
 
@@ -74,7 +74,7 @@ The model improves pieces of the answer while missing the global structure or th
 
 ### Missing State → State
 
-The model answers as if the world were stable and known. But a refund policy, deployment plan, or market recommendation can reverse depending on current state.
+The model answers as if the world were stable and known. But a refund policy, deployment plan, or market recommendation can reverse depending on current state. If the state information never entered the context at all, the upstream problem is the observation-representation mismatch below.
 
 ### Missing Channel Variable → Observation-Representation
 

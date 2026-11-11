@@ -403,15 +403,15 @@ cross-object propagation, GKO injection, state commitment, rendering contracts.
 P(hit) = 1 - (1 - q)^n
 ```
 
-如果 `q` 只是中等偏低，增加 `n` 有帮助。但在许多 LLM 系统中，`q` 不是正确变量。样本不是从任务空间中独立抽取的结构样本。它们是来自同一 prompt、同一表征、同一路由状态、同一已学先验、同一隐藏假设，且经常受同一评价器影响的相关 continuation。
+如果 `q` 只是中等偏低，增加 `n` 有帮助。但在许多 LLM 系统中，瓶颈不在 `n`，而在 `q` 本身。固定 prompt 下的重复采样，在给定这些条件之后是独立同分布的，上式精确成立；问题在于所有样本共享同一 prompt、同一表征、同一路由状态、同一已学先验、同一隐藏假设，且经常受同一评价器影响，这些共同条件可以把 `q` 压到极小，甚至截断为零。
 
-有效命中率更接近：
+把 `q` 按结构分解，更容易看清这一点：
 
 ```text
-P(hit structural basin) × P(hit high-value variant inside basin)
+q = P(hit structural basin) × P(hit high-value variant inside basin)
 ```
 
-如果系统反复从错误结构盆地采样，增加 `n` 主要只会得到表面变化。
+如果第一项接近零，系统就是在反复从错误结构盆地采样，增加 `n` 主要只会得到表面变化。即使 `q` 不为零，命中的样本还要能被选择流程认出来，否则多采样换来的只是更多候选。
 
 ### 5.1 伪多样性
 

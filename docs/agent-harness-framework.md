@@ -1439,13 +1439,13 @@ It will begin to take on the basic form of scientific engineering:
 | Model | Bridge | ASO | Usage |
 |---|---|---|---|
 | $M_0$ | $B_0$ | $O_0$ | Full baseline |
-| $M_0$ | $B_1$ | $O_0$ | Bridge main effect on weak model |
-| $M_0$ | $B_0$ | $O_1$ | ASO main effect on weak model |
+| $M_0$ | $B_1$ | $O_0$ | Bridge simple effect on weak model |
+| $M_0$ | $B_0$ | $O_1$ | ASO simple effect on weak model |
 | $M_0$ | $B_1$ | $O_1$ | Combination effects on weak models |
 | $M_1$ | $B_0$ | $O_0$ | Model improvement baseline |
-| $M_1$ | $B_1$ | $O_0$ | Bridge main effect on strong model |
-| $M_1$ | $B_0$ | $O_1$ | ASO main effect on strong model |
-| $M_1$ | $B_1$ | $O_1$ | Complete system and third-order interactions |
+| $M_1$ | $B_1$ | $O_0$ | Bridge simple effect on strong model |
+| $M_1$ | $B_0$ | $O_1$ | ASO simple effect on strong model |
+| $M_1$ | $B_1$ | $O_1$ | Complete system (the third-order interaction needs all 8 cells) |
 
 For each cell, report at least:
 

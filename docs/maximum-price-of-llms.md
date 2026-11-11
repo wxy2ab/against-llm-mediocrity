@@ -137,9 +137,9 @@ L_i^eff(G) = L_irreducible + L_transformable * exp(-phi_i * G)
 
 Three implications follow:
 
-1. `r_max` is not 1; pure direct generation is structurally capped.
+1. `r_max` is not 1; under a finite budget, pure direct generation is capped by effective mismatch. This is an assumption of the model rather than a derived result: it takes `L_irreducible` to be independent of model capability `C`. For mismatches that move with the model (support, fitting-boundary, aggregation), the assumption holds only approximately, within one model generation.
 2. Governance `G` works by **moving transformable mismatch out of the model**, not by magically making the model smarter.
-3. Search budget enters through `log(1+B)`, so token returns naturally diminish.
+3. Search budget enters through `log(1+B)`, so token returns eventually diminish. `B` is itself budget-constrained, and a task the candidate distribution does not cover does not become covered because `B` grows.
 
 ### 2.3 Willingness to Pay
 
@@ -177,7 +177,7 @@ then price is capped too:
 lim_{C->inf} P_i^* = max[ 0, (H_i - K_i) + (r_bar_i - r_i^H) * (V_i + F_i) ]
 ```
 
-The way out is not a bigger `C`, but stronger `G` that reduces `L_i^eff`. This is the line between selling a model and selling a system.
+Under that assumption, the way out is not a bigger `C`, but stronger `G` that reduces `L_i^eff`. This is the line between selling a model and selling a system.
 
 ---
 
@@ -190,6 +190,8 @@ S_i(C, m_i) = exp[ -lambda_i * a_i(C) * m_i ]
 V_i(C, m_i) = V_i^0 * S_i(C, m_i)
 ```
 
+This decay applies to tasks whose output value comes from relative scarcity (alpha, content, competitive products). For tasks that purely save internal cost, the value of completing the task does not fall because others can do it too; `lambda_i ≈ 0`, and commoditization acts only through baseline drift.
+
 Competition also shifts the customer's baseline:
 
 ```text
@@ -201,7 +203,7 @@ So commoditization works through two channels:
 - scarcity decay destroys premium;
 - baseline drift destroys the substitute-cost anchor.
 
-The result is a hump curve:
+For tasks where `r_i > r_i^H` and `lambda_i > 0`, the result is a hump curve:
 
 ```text
 cannot do it -> just became doable and not yet widespread -> everyone can do it

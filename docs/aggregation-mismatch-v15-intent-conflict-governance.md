@@ -48,6 +48,8 @@ and the frozen Pilot Gate text differs from the implemented gate.
 | Unsafe / leak / over-budget success | 0 / 0 / 0 |
 | V15 tests | **27 passed** |
 
+> **Reading note (added November 2026):** `[1.0, 1.0]` is the bootstrap interval of a zero-variance paired difference. It is degenerate and should not be read as a population interval; the exact binomial 95% interval is [0.858, 1] for 24/24 and [0, 0.142] for 0/24. The Naive arm's 0/24 is fixed by the runtime rule (recovery is forbidden in that arm), so the sign-flip p-value only shows that the implementation matches the design. The empirical content is that, when recovery is allowed, the model completed it on 24/24 tasks.
+
 ## 1. Theory
 
 ### 1.1 Conflict safety and conflict recovery are separate decisions

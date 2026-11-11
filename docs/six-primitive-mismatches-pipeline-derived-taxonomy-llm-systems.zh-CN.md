@@ -948,8 +948,10 @@ Effect(R_i) = f_i(c_i; c_j, c_k, ...)
 强情形中：
 
 ```text
-d Success / d R_i -> 0 as c_j -> 0
+d c_i / d R_i -> 0 as c_j -> 0
 ```
+
+这与瓶颈模型不同：瓶颈模型里 `Success` 对 `c_i` 的边际效应同样随 `c_j` 缩小，但 `c_i` 本身仍可以被独立修好；耦合说的是 `c_i` 本身修不动。“超加性”因此应在对数成功率或修复成本的尺度上理解。
 
 例子：
 
@@ -990,13 +992,13 @@ Was the information required to distinguish good from bad present in Z?
 
 如果否，先诊断观测-表征失配。
 
-### 17.3 第三步：问正确状态是否被识别
+### 17.3 第三步：问状态信念是否忠于证据
 
 ```text
-Could the same representation correspond to multiple states requiring different actions?
+Given the fixed representation, did the system collapse, misrank, forget, or fail to update its belief over latent states in a way that changed the action?
 ```
 
-如果是，诊断状态失配。
+如果是，诊断状态失配。同一表征对应多个状态、且这些状态要求不同行动，只说明任务有状态歧义；只要系统保留了这种不确定性，并据此分支、澄清或给出有界输出，就不构成失配。
 
 ### 17.4 第四步：问正确能力是否被激活
 
@@ -1197,7 +1199,7 @@ column description normalization
 
 ### 23.2 状态
 
-自然语言问题可能依赖潜在 intent 或数据库内容。一个术语可能指 column value、category、metric 或 derived relation。
+自然语言问题可能依赖潜在 intent：一个术语可能指 column value、category、metric 或 derived relation。相关证据已在表征中时，系统把这些解读无依据地塌缩成一种，或在执行反馈后不更新，才是状态失配；数据库内容没有进入表征属于 23.1 的观测-表征失配。
 
 修复：
 
@@ -1627,7 +1629,7 @@ SGAR state: Objective update committed with revocation trigger.
 [ ] What was the actual low-value outcome?
 [ ] What true utility criterion did it fail?
 [ ] Was the decisive variable present in the operational representation?
-[ ] Were multiple latent states plausible?
+[ ] Was the maintained state belief warranted by the fixed evidence (no unsupported collapse, staleness, or missed update)?
 [ ] Did the system activate the appropriate capability?
 [ ] Did the correct structure appear among candidates?
 [ ] Were local components globally consistent?
@@ -1700,7 +1702,7 @@ SGAR state: Objective update committed with revocation trigger.
 
 ```text
 observation / representation
-state identification
+belief formation / update
 capability routing
 candidate support
 local-to-global aggregation
